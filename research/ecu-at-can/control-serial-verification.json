@@ -1,0 +1,68 @@
+{
+  "ecu_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "initialization_cases": 256,
+  "exchange_cases": 120,
+  "monitor_cases": 48,
+  "expected_rejections": 4,
+  "timeout_recovery": [
+    {
+      "byte_callbacks": 0,
+      "abort_service_call": 5,
+      "recovery": true
+    },
+    {
+      "byte_callbacks": 1,
+      "abort_service_call": 5,
+      "recovery": true
+    },
+    {
+      "byte_callbacks": 20,
+      "abort_service_call": 5,
+      "recovery": true
+    },
+    {
+      "byte_callbacks": 39,
+      "abort_service_call": 5,
+      "recovery": true
+    },
+    {
+      "byte_callbacks": 40,
+      "abort_service_call": 5,
+      "recovery": true
+    }
+  ],
+  "paired_sequence": [
+    {
+      "active": 0,
+      "word": 578,
+      "tx_frame": "000000000242024201580168018928000000000000000000000000000000000000000000000058a9",
+      "reply_valid": true
+    },
+    {
+      "active": 1,
+      "word": 569,
+      "tx_frame": "000000000239023901580168018928000000000000000000000000000000000000000000000058bb",
+      "reply_valid": true
+    },
+    {
+      "active": 1,
+      "word": 569,
+      "tx_frame": "000000000239023901580168018928000000000000000000000000000000000000000000000058bb",
+      "reply_valid": false
+    },
+    {
+      "active": 1,
+      "word": 569,
+      "tx_frame": "000000000239023901580168018928000000000000000000000000000000000000000000000058bb",
+      "reply_valid": true
+    },
+    {
+      "active": 0,
+      "word": 578,
+      "tx_frame": "000000000242024201580168018928000000000000000000000000000000000000000000000058a9",
+      "reply_valid": true
+    }
+  ],
+  "limits": "Sampled MMIO, explicit callbacks and arbitrary synthetic replies; no wire, interrupt timing or external receiver model."
+}

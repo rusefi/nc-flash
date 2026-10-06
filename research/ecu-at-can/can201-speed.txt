@@ -1,0 +1,132 @@
+CAN4B0 and CAN216 to ECU CAN201 speed candidate — 2026-10-05
+===========================================================
+
+Result and limits
+
+Original ECU instructions execute a two-input CAN4B0 selection/average into
+CAN201 bytes4-5. CAN216 bytes5-6 supply the AT fallback and an independent
+invalidity gate: a live CAN4B0 value does not prevent CAN201 from becoming
+FFFF when the CAN216-derived fallback is invalid. This is a concrete
+PCM-speed candidate for roof research, not proof of PRHT reception. Physical
+units, which wheels (if any) the two CAN4B0 words represent, DSC ownership,
+and the exact roof field remain unverified. No vehicle/CAN capture was run.
+
+Inputs are unchanged examples/LFFEEE-stock.bin and examples/LFG1TF000.bin;
+exact SHA256 identities are asserted by verify_can201_speed.py and saved in
+can201-speed-verification.json. No ROM, application, hardware or index change.
+
+Executed ECU path
+
+Descriptor379FC: ID4B0, DLC8, RXbufferFFFF6AF0. 35FA6 unpacks big-endian
+bytes4-5 ->6B08 and6-7 ->6B0A. Addresses without a prefix below are FFFF RAM.
+35EBA copies through6AFC/6AFE into6AF8/6AFA. With7353==1, a rawFFFF sets
+6B01 for the first word or6B02 for the second; otherwise each flag is0.
+6B03=(both flags)||(6B00==1 &&7353==1). Tests vary6B00 independently;
+3A05E does not directly use6B03. This does not prove global freshness is
+irrelevant: configuration/fault producers and complete scheduling remain open.
+35FD8 initializes all six word locations to10000;35FCE reloads6B04 from
+B8248=20. Neither twenty ticks nor twenty calls are assigned physical time.
+
+3A05E calls20A8 for each word: binary32 multiply by0x3C23D70A (near0.01),
+then add-100, clamping negative results to0. SH-2E rounding matters: the
+coefficient is not the exact rational1/100. Selection is:
+  8EC6==1: publish65537 marker to6D58.
+  Else7353==1 and neither input invalid: arithmetic average of both values.
+  Else7353==1 and exactly one invalid: use the other decoded value.
+  Else:734A bit40 set ->6D64; clear ->6E18.
+6D64 is always refreshed by calling D504 first. Tests execute D504's real
+4564==0 branch, reading cached float452C. Its hardware-counter branch is
+outside the test; no helper return is mocked. Mode40 is the known MT branch,
+mode80 the AT branch. Synthetic fallback inputs17/23 distinguish them.
+
+CAN216 fallback
+
+Actual TCU setter1C666 packs its argument BE into216 bytes5-6 at8EFD+5.
+ECU35034 unpacks to6A50. 34CEC accepts this into6A52 when734A bit40 clear
+and734C==1; otherwise6A52 becomes10000. If receipt counter6A5D is nonzero,
+it copies6A52 to6A56; if zero,6A56 becomesFFFF.
+3B7CE converts6A56 ->6E18:
+  MT(bit40):0 regardless of raw word.
+  Non-MT rawFFFF:65537.
+  Otherwise:max(0, round(raw*binary32(0.01))-100), rounded at each operation.
+The paired test starts at the TCU setter with explicit numeric arguments;
+it does not establish the upstream TCU producer or physical sensor/scaling.
+
+Encoder3679C calls20E8 with6D58, coefficient0.01 and offset-100. It subtracts
+the offset, divides by the coefficient, adds0.5, truncates to integer, then
+clamps to0..65535. The caller clamps the result to10000..40000, except
+8EC6==1 OR6E18>65536 forcesFFFF. The latter checks the AT fallback itself,
+even when the selected value came from CAN4B0. Encoder boundary fixtures
+distinguish65536 from65537 and selected-value bounds from fallback validity.
+
+Descriptor378DC: ID201,DLC8, TXbuffer6B2C. Complete packer365D0 runs with its
+real interrupt-mask helpers; if734A has bit40 or80, payload is:
+  bytes0-1=6B3C,2-3=6B3E,4-5=6B38,6=6B40,7=6B41.
+Both mode bits clear leaves the preexisting buffer unchanged. The tests use
+contrasting non-speed bytes to verify the exact offset and byte order.
+
+Examples from original-code execution
+
+CAN4B0 words12345/14567 -> selected34.55998992919922 -> CAN201 word13456.
+One invalidFFFF and other14567 -> word14567. Both invalid, AT fallback23
+->12300. Both65534 -> selected555.3399658203125, output capped40000.
+With healthy4B0 words14567/14567 and AT216 rawFFFF, selected stays about45.67
+but CAN201 word becomesFFFF. Expired216 receipt produces the same result.
+These decimals describe firmware arithmetic, not verified km/h.
+
+Verification and arithmetic scope
+
+Run from repository root:
+  python research/ecu-at-can/verify_rtz_float.py
+  python research/ecu-at-can/verify_can201_speed.py
+Compare stdout with rtz-float-verification.json / can201-speed-verification.json.
+Passed:581 rational/boundary rounding cases,306 basic FPU instruction cases,
+732 FMAC cases (including register aliasing and fused-versus-separate
+distinction),8 expected unsupported-input rejections;1600 complete4B0 paths,
+66 encoder boundary cases,96 paired TCU216 paths,4 pack-mode cases, plus
+initialization and receipt reload. All calls explicitly scheduled, RAM
+synthetic, no CAN-controller acceptance or real timing implied.
+
+New sh_rtz_float.py is separate from unchanged sh_exact_float.py/sh_subset.py.
+It supports normal/zero FADD/FSUB/FMUL/FDIV/FMAC with round toward zero.
+FMAC rounds the product before adding; FLOAT remains exact-only. Nonfinite,
+subnormal, underflow, overflow and divide-by-zero cases fail rather than
+silently use host arithmetic. FPSCR exception state is not emulated.
+Independent reference in verify_rtz_float.py binary-searches binary32 values
+using exact rational comparisons; it is safe to import without running tests.
+Existing thirteen verifier results remain from their previous checkpoints;
+they were not rerun because their shared harness and inputs did not change.
+
+Primary arithmetic source (retrieved2026-10-05):
+Renesas SH-2E Software Manual REJ09B0316-0200, p14 (PDF27) RM configuration,
+p185 (PDF198) FMAC operation expressed as FMUL then FADD:
+https://www.renesas.com/en/document/mas/sh-2e-software-manual
+The actual hardware flushes denormals; this bounded harness rejects them.
+The previous exact-only run stopped at20B0 on inexact FMAC. This was resolved
+by the separately tested rounding implementation, not a firmware change.
+
+Static leads for continuation; not yet new executed conclusions
+
+7353 is assigned at42844 using calibrationB8299 and hardware-derived9710.
+The full configuration and freshness effects need following through callers.
+TCU filter map5C8D8 maps index10 to application8; length5C8E4[8]=7;
+buffer pointer5C910=8F39. Dispatch table5CA30 ->1C264 marks receipt bits30
+in8F87/8F8D and calls1ACD8. Its listed helpers171CC,17070,18158 use first
+word or byte6. Speed bytes4-5 lie within the copied buffer, but no new read
+audit or global computed-address exclusion has been performed. Do not state
+that the TCU never uses the speed field. Existing paired word0 work remains.
+
+Aligned MOV.L references to ECU6E18 include367C0,3A13A,3B814; candidate
+3A22A is inside a literal pool, not automatically executable code. Literal
+scans can miss MOV.W, GBR and computed accesses. GNU SH objdump2.42 excerpts
+and Ghidra annotations preserve the principal functions for independent review.
+
+Next: trace TCU216 word5 production and its invalid modes, execute CAN201
+receive/dispatch with byte-read auditing, trace7353/freshness and selected
+speed consumers. Then correlate factory roof prerequisites with a PRHT
+receiver/capture. Continue the distinct CAN211 traction actuation and fault
+work in parallel scope; this speed trace does not complete those objectives.
+
+Subsequent checkpoint: tcu-speed.txt now executes the TCU216 numeric producer,
+limiter/fault recovery and CAN201 copy/dispatch audit. The remaining source,
+fault and downstream control leads are maintained there and in CHECKPOINT.txt.

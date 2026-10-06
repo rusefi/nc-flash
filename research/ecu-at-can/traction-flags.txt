@@ -1,0 +1,131 @@
+CAN211 flag arbitration: CAN21A values and retained control state
+2026-10-06. Original LFFEEE ECU and LFG1TF000 TCU instructions executed.
+
+Result
+------
+The five decoded CAN211 request flags also gate a separate CAN21A numeric
+input. CAN211 flag6A20 can set protected ECU latch7978; loss of that flag
+alone does not clear the latch. A second potential input comes from CAN216
+byte7 bit7, but stock ECU calibration B81B2=1 disables its producer6E57.
+This proves additional ECU arbitration, not the physical meaning of7978,
+CAN21A's sender, a throttle/fuel actuator response, or complete DSC behavior.
+
+Identity/reproduction
+---------------------
+ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+Run from repo root:
+  python research/ecu-at-can/verify_traction_flags.py
+Saved output: traction-flags-verification.json.
+Shared interpreters and ROMs unchanged. Original full functions/helpers run
+under SHExactFloat/SHSoftwareArithmetic with explicit synthetic RAM and call
+order. This is not a full task, interrupt, peripheral or hardware simulation.
+
+CAN21A acquisition and conversion
+--------------------------------
+Descriptor3792C is 0000021a01070800ffff6aa801000000: RX21A, mailbox7,
+DLC8, bufferFFFF6AA8. This is distinct from TCU CAN218. The existing TCU
+application TX inventory contains no21A (README.txt); its sender is unproved.
+Static receive wrapper35542 admits mode734A bit40 OR80, polls6906 using
+3792C, then348E2/3572A/35750 on successful receipt. The peripheral wrapper
+is not executed here. Executed3572A copies BE bytes0..1 ->6AB6, bytes2..3
+->6AB8; remaining payload bytes have no effect in this unpacker.35750 reloads
+6AB4=ROM B8247=20.35538 initializes via3575A and reloads receipt; both
+float outputs start at-10000, with duplicate checksums for protected6AA0.
+
+Executed full3558E always copies6AB6/6AB8 into6AB0/6AB2, then:
+  6A9C = -10000 if word0==FFFF or receipt6AB4==0;
+          otherwise max(unsigned(word0)-10000, ROM B826C=-1000).
+  6AA0 = -10000 if word1 in{FFFF,FFFE}, receipt==0,7190==1,
+          or all of6A20/6A21/6A23/6A25/6A26 are zero;
+          otherwise min(unsigned(word1)-10000, ROM B8270=10000).
+The flags are tested nonzero;7190 is tested exactly1. Word0 FFFE is numeric
+55534, unlike word1 FFFE. Valid raw word1=0 also produces-10000, so the
+numeric value alone cannot distinguish that input from an invalid path.
+Helper20A8 executes unsigned conversion with scale1 and offset-10000;
+15522 writes6AA0 plus duplicate complement checksums6AA4/6AA6.
+
+Upstream349CA request flags from CAN211 bytes4..5 BE word:
+  request bit13/inhibit12 ->6A20; bit10/inhibit9 ->6A21;
+  bit5/inhibit4 ->6A23; bit2/inhibit0 ->6A25; bit1/inhibit0 ->6A26.
+Stock B8243=1. Any nonzero69E1 suppresses every request. Flag decoding does
+not directly test211 freshness; this distinction is preserved in2048 combined
+211 unpack/normalize ->21A normalize ->7978 cases. See network-verification
+and freshness.txt for other inhibit producers; tests here control7190.
+
+Expiry, grouped fault and recovery
+----------------------------------
+35674 reloads6AB4 to20 if69E0 nonzero OR735A bit7; otherwise decrements
+positive values, saturating at0. Helpers3880/3894 save/restore only SR's
+interrupt mask bitsF0. Initial test expected whole-SR preservation and failed;
+instruction inspection corrected the test, not firmware/interpreter behavior.
+The verifier sets3894's context byte to1 to avoid its optional3D78 scheduler
+tail. This is an explicit fixture gate, not proof of actual task scheduling.
+
+Explicit23-point lifecycle keeps211 and grouped counter6B04 fresh while
+21A decays. With protected722A=1 and7353=1,347B8 sets69E1 when any of
+6B04/6A1E/6AB4 are zero. At call20,21A reaches0, fault becomes1, CAN211
+flags become0, both21A values become-10000. A new21A receipt at call22
+restores20, clears fault on the next347B8 call, and restores request/value
+outputs. Already-set7978 stays1 throughout this loss and recovery; disabling
+722E then clears it. These are function-call counts, not milliseconds.
+
+Protected retained control latch7978
+-----------------------------------
+4E7F4 copies protected722E to7984 and clears7978 using154C0.
+Full4E80C has the following independent branch model:
+  if protected722E==0 OR u16[7974]==0: clear7978;
+  else if6E57==1 OR6A20==1 OR797A==1: set7978;
+  else if (previous7987 bit7 OR75B0>0) AND previous7985==0
+          AND current797B==1 AND protectedfloat6DB4<ROM CDDB8(900): set7978;
+  else retain7978, with no write to that protected pair.
+Always afterwards7985=current797B and7987bit7=current73C4bit4, preserving
+the other seven bits. Thus current73C4 cannot satisfy the historical bit
+predicate during the same pass. Boundary tests include899.5/900/900.5,
+nonBoolean state/request values and held/set/cleared histories.
+154B0 reads a protected byte's first byte;154C0 writes value then complement.
+A preliminary probe incorrectly seeded722E as word0001 (first byte zero);
+the durable tests seed valid byte/complement pairs. That probe is not evidence
+for a disabled latch when722E is actually1.
+
+AT input: present code path, disabled stock calibration
+------------------------------------------------------
+TCU18F8C takes98A0bit0 into CAN216 byte7bit7. ECU35034/34CEC decode it
+into6A5F. Original3B450 sets6E57 iff B81B2==0 AND6A5F nonzero; otherwise
+it writes0. Stock B81B2=1 therefore disables this branch, even when the TCU
+publishesbit7=1. This result uses the unchanged stock images, no ROM patch.
+1024 paired cases cover all256 TCU source bytes, CAN211 request present/
+absent and CAN216 receipt0/20. The ECU's6A5F bit survives expiry in this
+controlled mode/configuration;6E57 remains0. CAN211 can still set7978.
+Upstream98A0 physical meaning and alternate calibrations remain unproved.
+
+Verification coverage
+---------------------
+3072 numeric/sentinel/receipt/inhibit cases;2048 integrated flag cases;
+20 nonBoolean flag cases;180 countdown/reset/SR cases;1152 direct latch
+cases;972 history/threshold cases;4 latch initializer cases;1024 paired AT
+cases;4-call history/retain/clear sequence;23 receipt lifecycle points and
+final disable/clear. CAN21A initialization and all protected writes checked.
+
+Next work: static leads, not executed conclusions
+------------------------------------------------
+CAN21A6AA0 literal pools29DD4/356FC/35790/A6AB4/F418C; detected literal
+users29C1C/35642/35662/35764/A69A8. A69A8 lies inside a larger function:
+protected6AA0 is divided by a saved float, combined with a stack candidate
+and ROM C5678 floor, then protected71C4 is added intoA710; later scaling
+reachesA700. CAN211714C and21A6A9C are also read nearby atA6A76/A6A8E.
+Determine the full function entry, model inputs and downstream physical
+consumers before assigning throttle/fuel or torque units. Saved disassembly
+includes A6970..A6AF0 as a continuation aid, not a tested function boundary.
+
+7978 literal users:298F8,2F7CC,2FB5A,36CBA,3E2DC,3E6F0,43250,43BB6,
+449EC,47402,4741C,47710,4E800,4E83C,4E8AE,51648,59166,5AD68,
+5BB60,5BBEE. Trace these plus7974/722E/797A producers and4E8DA next.
+Literal scans omit non-literal/GBR references; this is not exhaustive.
+
+Continue ECU/AT request/task/physical-source work in tcu-reference-policy.txt.
+Roof remains separate: factory documents and sender candidates do not prove
+OEM roof CAN reception, fold/unfold commands, reversal, timeout or recovery.
+Follow CHECKPOINT.txt and traction-roof.txt; none of the three goals is complete.

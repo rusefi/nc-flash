@@ -1,0 +1,205 @@
+2026-10-06: magnitude-selected baseline and correction retrigger holdoff
+
+Verified result and limits
+--------------------------
+Original six-function local group59504,595D0,59626,593C4,59402,593DE now
+produces80FC and8100 in the retained ECU/TCU integration. The baseline chooses
+the larger of two magnitude-derived amounts. A separate activation correction
+has a12-call holdoff, so a rapid reactivation can reload the timer while
+producing no new pulse. Raw gate2 can pulse but does not reload that timer.
+
+72B4/72BC are input values with a verified protected zero initializer41A34.
+A subsequent production writer or CAN mapping has not been established.
+The opening investigation assumption that these were CAN-derived inputs is
+therefore not retained as a finding. Later nonzero values in this test are
+explicit fixtures, not received CAN values or evidence of a vehicle source.
+
+All this executes alongside the previous CAN211 latch/contribution path and
+actual TCU packers/ECU CAN decoders. It extends the shared command calculation;
+it does not prove every source is a traction or transmission signal, nor does
+it prove a physical actuator response. The broader three goals remain open.
+
+Reproduction and validation
+---------------------------
+  python research/ecu-at-can/verify_control_magnitude.py \
+    > research/ecu-at-can/control-magnitude-verification.json
+
+The JSON preserves both ROM SHA256 identities, calibration constants, the
+stock curve, counts and retained checkpoints. The unchanged binaries are
+examples/LFFEEE-stock.bin and examples/LFG1TF000.bin. Full original helpers
+execute; independent finite RTZ/state oracles check outputs, stack and
+interrupt-mask restoration. There were no test failures in this pass.
+
+2,565 direct checks pass:
+     9 protected initializer cases, including checksums
+   252 first-magnitude gate/mode/signed-threshold cases
+    19 second-magnitude signed threshold boundaries
+    11 stock scaling boundaries
+    33 factor-curve knots/interpolation/clamps
+    81 baseline-combination cases
+ 2,160 activation-pulse/holdoff/raw-state cases
+
+The integration additionally passes320 serial cycles,36 paired CAN updates
+and320 CAN211/latch updates. TCU18F10/191A8 packers, ECU decoding/fullA477E,
+command packing and serial/application checks remain in the executed path.
+CAN upstream values and the serial peer are fixtures; the task schedule is
+explicit rather than inferred to be production timing.
+
+To reuse that pipeline, verify_control_contributions.py now exposes lifecycle()
+with optional prepare/upstream/checkpoint callbacks. The new producer group
+runs before its59250 contribution group. Running the previous verifier after
+the refactor gives byte-identical JSON to its saved2375-check/320-cycle result.
+This preserves the default chain while avoiding another integration-loop copy.
+Existing shared interpreter code was unchanged.
+
+Conventions
+-----------
+Short RAM addresses have FFFF prefix. R denotes binary32 rounding towardzero
+after each operation. Printed decimal constants describe the stored binary32
+values; exact values are in the JSON. Input units and physical roles remain
+unassigned. Counts are routine invocations, not milliseconds.
+
+Protected initialization and provenance
+---------------------------------------
+41A34 calls15522 to write protected72B4=0 and72BC=0, then clears byte72C4.
+Aligned function references place callers at169C8 and199C8. The direct tests
+check both protected records and72C4, starting with differing old values and
+nonzero interrupt masks. This is not a complete boot or reset-task execution.
+
+Aligned references to72B4 include29D00,3E07E,3EF1C,41A38,5950C;
+72BC includes29D0C,3E126,3EF2C,41A42,595D4. Inspection identifies the41A34
+zero writer and the shown3Exxx reads through154BC. Descriptor-like addresses
+F41D8/F41DC also contain the literals. Base-relative or indirect writers may
+not appear in this search; these references do not establish constant-zero
+production behavior, a physical source, or a CAN producer.
+
+First amount:59504 ->810C
+-------------------------
+If7242 != 1, outputzero. Otherwise take abs(72B4), classify it at9999, and
+select a constant using exact-one predicates on67AC and7012:
+
+  67AC     abs72B4     7012=1     7012!=1
+    1       >=9999       .03        .05
+    1        <9999       .05        .05
+   !=1      >=9999       .08        .08
+   !=1       <9999       .062       .08
+
+The corresponding constants areDA6D8..DA6F4. Both positive and negative
+9999 enter the >= branch. The value9999 is an observed threshold; an invalid
+sentinel interpretation has not been established. Raw7242=2 disables this
+amount even though it can activate the independent pulse routine below.
+
+Second amount:595D0 ->8108
+--------------------------
+Letm=abs(72BC). Strict comparisons choose:
+  m >200: approximately.04
+  m >100: approximately.037
+  m > 50: approximately.035
+  otherwise0.
+Exact50 yields0, exact100 yields.035, exact200 yields.037. Negative values
+are classified by magnitude. This routine does not check7242; its amount can
+keep the later baseline nonzero after the first amount is disabled.
+
+Scales and factor:59626,593C4
+----------------------------
+Stock DA710=0, DA714=7 give widthR(0-7)=-7, outside the nearzero-width guard.
+  x = R(R(6D5C - 7) / -7)
+  80F4 = clamp(x, .5, 1)
+  80F8 = clamp(x, 1, 1) = 1
+The original207C clamp calls execute. The first scale falls from1 to.5 as
+6D5C rises from0 to3.5, then stays.5. Inputs below0 clamp at1. The alternate
+nearzero-width calibration branch would set both outputs1, but no altered
+calibration was executed. The stock branch alone is covered here.
+
+593C4 writes8110 = A36A0(6D28), with axis[-40,-20,0,20,40,60,80,100] and
+values[0,0,0,0,.1,.4,1,1]. Original lookup interpolation executes.
+8110 scales the baseline and newly formed pulses. An existing pulse is later
+decayed from its retained value; it is not recomputed whenever8110 changes.
+
+Baseline combination:593DE
+-------------------------
+  80FC = R(R(80F4 * 8110) * max(8108,810C))
+Original58F10 includes80FC in baseline80BC. Original51286 also includes it
+in sum7BB8 feeding the ratio factor. Thus disabling7242 alone need not remove
+this baseline contribution:8108 can remain selected. The separate correction
+8100 goes through58A7A's current-input correction sum, not the baseline sum.
+
+Activation correction and holdoff:59402
+--------------------------------------
+Read currentraw7242, previousraw8114 and oldbyte8104 before updating them.
+
+  If7242 ==0:8100=0.
+  Else if8114 ==0 AND8104 ==0:
+    s = DA700 (~.9) if8040 ==1, otherwise1
+    8100 = R(R(R(80F8 * DA6F8 (~.1)) * 8110) * s).
+  Else:8100 = max(0, R(old8100 - DA6FC (~.005))).
+
+Then update the timer independently:
+  If7242 ==1 AND old8114 ==0:8104 = byteDA6C8 =12.
+  Otherwise:8104 = max(0, old8104 -1).
+Finally8114 = raw7242.
+
+The reload predicate does not require old8104==0. Therefore a0->1 transition
+inside the holdoff takes the decay branch, but restarts the holdoff at12.
+Repeated rapid toggles can defer another pulse. Raw2 can meet the nonzero
+pulse predicate without meeting the exact-one reload predicate. Values2/255
+are tested to preserve the actual byte comparisons, not to claim normal
+production reachability of noncanonical states.
+
+Retained examples
+-----------------
+The shared lifecycle starts with original41A34 zero inputs. It runs the new
+local group before59250/59154 and the previous retained baseline/history/
+ratio/serial chain. It does not directly inject80FC,8100,8104,8114 or the
+new map/scaling outputs in that lifecycle; upstream input changes remain
+fixtures. Sparse initial RAM is not a complete production initialization.
+
+  Call1:7242=1 gives pulse~.1 and timer12.
+  Call2:gate0 clears pulse, timer11.
+  Call3:gate1 gives no new pulse; timer reloads12 despite the blocked pulse.
+  By call16, continued gate0 calls have exhausted the timer.
+  Call17:gate1 pulses again.
+  Call41:rawgate2 pulses~.1 withtimer0; first magnitude amount iszero.
+  Call43:after a clearing call42, rawgate1 pulses and reloads12.
+  Call61:gate0 with72BC=201 retains baseline~.04 through the second amount.
+  Call81:6D5C=7 halves baseline scaling while pulse scaling stays1;
+    8040=1 gives a new pulse~.09. Baseline is~.025 in this fixture.
+  Call101:72B4=-9999 selects~.03; second amount~.04 wins, giving baseline~.02
+    after the.5 scale.
+  Call121:6D28=20 gives factor0 and baseline0.
+  Call141:6D28=60 gives factor~.4 and baseline~.008.
+
+The older CAN211 latch sequence still executes and verifies suppression of
+80DC independently. The existing paired helper's CAN211/A3A4 fixture writes
+are unchanged and documented in control-contributions.txt. Nothing here
+attributes72B4/72BC to that CAN211 path.
+
+Scheduling and next evidence
+----------------------------
+Observed1A5C2..1A5E4 calls59504,595D0,59626,593C4,59402,593DE in that order.
+The tests execute this local order. Earlier59720 and the full task entry
+remain unexecuted. Relative task rates/publication timing remain unresolved.
+
+Next trace baseline8118 at59720 (aligned write candidate597AA), its source
+maps/retained state, and gate67AC/7242/7012/7016/A3A4 producers. Pursue indirect
+72B4/72BC writers without assuming CAN provenance. Preserve nonzero2310
+restoration,240xx stage/enable,protectedRAM/5354,20A8 reset/57CD consumers,
+A720 binding history and real task timing.
+
+The previous goal turn made verified progress and this pass adds executed
+evidence. All three objectives remain incomplete. TCU capture timing/group7
+numeric/overlap/composite/2->1 behavior, traction sender attribution/further
+7978/fuel consumers/physical outputs, and OEM PRHT matching reception and
+both fold/unfold state machines remain open. Roof interruption/reversal/
+timeouts/synchronization/recovery retain separate next actions in CHECKPOINT.txt.
+
+Persistence verification
+------------------------
+Ghidra apply and live readback passed. Independent extraction/reopening then
+verified11 project hashes,1095 annotations (570 ECU,525 TCU) and581 matching
+exports (579 functions plus2 readback reports). Archive SHA256:
+152eb6d1727a592ce348a278aeddd6a2b58175e696946e7fb94194617d05c4cc
+Exact inventory and restore result: ghidra/snapshot.json and
+ghidra/restore-verification.json. Both.gpr and.rep are included.
+New evidence is Git-eligible. py_compile and git diff --check pass.
+Saved locally; no staging, commit or push.

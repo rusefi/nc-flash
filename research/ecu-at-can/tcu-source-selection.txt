@@ -1,0 +1,254 @@
+Follow-up: tcu-transition-progress.txt executes the original paired startup
+48BC0 ->32140 after cached-state setup. The zero progress inputs used in the
+older traces below are an explicit fixture, not the paired startup result for
+cached state1. The new produced code6/operation8 replacement retires normally
+while4C880 suppresses its managed spark-request group. Earlier evidence and
+results remain unchanged within their original fixture scope.
+
+2026-10-06: filtered input and complete source-selection policy
+=============================================================
+
+Result
+------
+The source10/17 path used by qualification-mode producer49260 has an original
+input chain: filtered digital channel25 -> publisher17D60 -> getter22CFE ->
+application22416 ->9316 bit0 -> admission498D2 -> source policy495C0.
+The physical switch name remains unproved. These are original firmware paths,
+not an inference that a particular CAN request or driver's switch owns them.
+
+495C0 executes a complete proposal-adjustment policy496F0 and stock threshold
+lookups. Admission changes9B40 to17 only when its previous value was6, otherwise
+to10. It does not write accepted8081. The larger44CFE/48C08 selection sequence
+does publish a proposal and update accepted state, create phase/request records,
+and produce qualification mode8086. Both levels are tested separately.
+
+Artifacts and reproduction
+---------------------------
+  python research/ecu-at-can/verify_tcu_source_selection.py \
+    > research/ecu-at-can/tcu-source-selection-verification.json
+
+Original excerpts are in tcu-source-selection-disassembly.txt. Firmware:
+  examples/LFG1TF000.bin (TCU), SHA256
+  8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+  examples/LFFEEE-stock.bin (ECU), SHA256
+  7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+All RAM addresses below have the FFFF prefix. Addresses are hexadecimal;
+unprefixed source values and comparison thresholds are decimal.
+
+Input acquisition and validity
+------------------------------
+Channel25 descriptor5F774 (5F648+25*12) contains assert/release counts2/2,
+hardware descriptor pointer5C518 and ADC mask2. Descriptor5C518 names word
+FFFFF778, bit11, polarity1: a high sampled bit is asserted. This contrasts
+with the active-low channel3 selector sample, which is held asserted in the
+retained comparison. The register and ADC values are explicit read-only
+fixtures; no physical GPIO, ADC conversion or interrupt timing is emulated.
+
+Original17250 filters all inputs. 173CE(25) returns8818+5*25=8895.
+17D60 calls that getter, copies its result to89A4 and unconditionally writes
+status89A5=2. 17D54 initializes both bytes to0. Getter22CFE returns89A4;
+22416 maps any nonzero low-byte value to9316 bit0. This is not an exact1 test.
+Other application outputs, including class8080, are also executed by22416.
+
+The input25 ADC mask uses the second gate threshold5FCF6=373. In the saved
+eleven-call input trace, assertion takes two valid samples. Three invalid
+samples at ADC372 retain an already asserted input while filter status8897=3.
+The published89A4 and9316 bit0 remain1, and89A5 remains2. After ADC recovery,
+two valid deasserted samples clear the enable bit. This proves the publisher
+does not forward that filter-status byte. It does not prove the complete
+diagnostic system ignores an ADC fault; other fault producers remain separate.
+
+Admission and source production
+--------------------------------
+498D2 returns1 iff its low-byte argument is exactly1, class8080 is6, and
+916D bit3 is clear. 495C0 passes9316 bit0, so the normal argument is boolean.
+The direct tests additionally cover every argument byte and gate boundaries.
+
+495C0 always stores9C96=u16(2*809C), including wraparound, and remembers
+current enable in9C94. If admitted:
+  replace source9B40 with17 if its old value was6, otherwise10;
+  begin from current proposed8084 and secondary9B3D;
+  if prior9C94 is0, clear9C92 and9C93, then optionally decrement the proposal
+    when proposal>0,9C96<ROMword7532C[proposal-1], and unsigned80EA is below
+    threshold49960(proposal). This sets state9C91 candidate1/secondary10;
+  execute496F0, including its threshold, latch, edge and fallback policies;
+  return the resulting pair through the caller's pointers.
+If not admitted, preserve the caller's incoming pair and source9B40.
+
+Finally publish9C91 (0 when not admitted),9C94=current enable, and9AEA bits:
+bit1=admitted; bit3=admitted with previous source6. Preserve other9AEA bits.
+9C94 remembers enable, not admission. Therefore an enable held high while a
+different gate blocks admission can suppress the entry-only reset on a later
+admitted call. Source retention in this one function is not proof of retention
+through the larger caller, which contains other9B40 writers.
+
+Stock threshold wrappers and indexing
+--------------------------------------
+Six wrappers call original108E6 word-table interpolation. Each family contains
+five48-byte records: u16 count11, u16 shift0, eleven u16 axes, eleven u16
+values. Repeated axes and endpoint clamps are exercised. No lookup is stubbed.
+
+Function  Index input       First family / second family
+498F6     current proposal  7533C /7542C
+49960     proposal minus1   7551C /7560C
+499A4     proposal minus1   756FC /757EC
+499E2     proposal minus1   758DC /759CC
+49A20     current proposal  75ABC /75BAC
+49A8C     proposal minus1   75C9C /75D8C
+
+49ACA performs byte decrement when requested, then clamps the unsigned byte
+to[0,4]. Decrementing byte0 wraps to255 and therefore chooses bank4. Other
+out-of-range byte values likewise clamp4; the policy normally bounds states.
+49960 chooses its first family when916F bit2 is set. Other wrappers choose
+their first family when9B40==17. The paired families contain identical stock
+bytes, so this ROM's branch selection does not by itself change the numbers.
+Axis input is9C96, the wrapped doubled809C value.
+
+In stock rows,49960 is constant by bank:3259,7449,10895,15271,23279.
+499A4 and499E2 have constants1117,1397,1861,3538,4376.
+49A20 constants are4191,7729,11361,16015,23744.
+49A8C constants are0,4657,7263,11638,17692.
+498F6 is axis-dependent; exact rows remain reproducible from the unchanged ROM.
+These are raw firmware values. No RPM, speed, throttle or physical gear unit
+is assigned by this pass.
+
+Complete proposal adjustment496F0
+---------------------------------
+Measurement is unsigned80EA, proposal initially a byte. Preserve incoming state
+and secondary unless a rule changes them. Rules execute in the following order;
+later rules can change a proposal already adjusted by an earlier rule.
+
+1. Control8083==1: if proposal<5 and measurement>=498F6(proposal), increment,
+   set state1/secondary10; set9C92=1 if below499A4(new proposal).
+   Control8083==2: if proposal>0 and below49960(proposal), decrement, set
+   state1/secondary10 and clear9C92. Otherwise, if the threshold rejects that
+   decrement, set9C90=1. All other cases write9C90=0.
+2. If9C92 is exactly1 and proposal>0, below499A4 resets timer82AD; at/above
+   that threshold, timer82AD strictly greater than75336[proposal-1] clears
+   the latch. If9C92 is not1 and proposal>0 and below499E2, decrement and
+   set state2/secondary10. Clearing the latch in the first branch does not
+   enter the second branch during the same call.
+3. If proposal<5, measurement>=49A20(proposal),92D2 bit0 set, and either
+   calibration7736D==1 or92C5 bit1 set, increment and set state2/secondary10.
+   Stock7736D=1.
+4. If stock7736C==1 and92C5 bit1 is asserted but differs from remembered9C93,
+   repeatedly decrement while proposal>0 and below49A8C(proposal), up to five
+   times; each decrement sets state2/secondary10. Then copy that bit to9C93.
+5. If92C7 bit6 is set OR byte cache index116h (6277) is exactly1, and
+   measurement<=ROMword7736E=1920 and proposal>=1, force proposal0,
+   state2/secondary10 and clear9C92. Return proposal clamped to[0,5].
+
+495A4 initializes9C90..94,9C96 and associated state. The independent models
+check final pair outputs and all newly analyzed retained-state side effects.
+The original body executes its cache getter, clamp and arithmetic helpers.
+
+Fixture corrections and interpretation limits
+----------------------------------------------
+The first direct lookup run used the older SHRelativeBranch interpreter and
+stopped explicitly at ROTL4204 in5B32A. Switched to the existing tested SHRotate
+extension; no opcode implementation, ROM instruction or return value changed.
+
+The first full-caller probe reused the single-record lifecycle's reference set
+and expected retirement after192 calls. It instead created a second code0
+record and retained it: its target reference921C was0 while measurement stayed
+positive. An attempted cache consistency setup (index12h=2) did not prevent
+this. Instruction observation located proposal2->1 before44D5A, after4508A;
+9AE8 bit7 was clear, so the proposed cache explanation was rejected.
+The final comparison preserves that second original transition, supplies its
+target reference6500 explicitly and extends the measurement/observation window.
+No phase, mode, source or final result is written to force completion.
+
+Retained complete-caller comparison
+------------------------------------
+Two320-call traces use the original creation fixture, then execute17250,
+174A0,17D60,22416,44CFE and48C08 each cycle before timer11014, event2 and
+two event4 services. Both contain original code1 and newly created code0
+records. The target references are5000 and6500; all other fixture limitations
+from the earlier ascending-map and phase reports still apply. Input25 low
+keeps source/mode0; input25 high produces source10/mode1 after the second
+filtered sample. Proposed and accepted state become1 through original code.
+
+The shared measured80EE profile starts1000; call80=5000,81=6000,84=5900,
+86=5750,88=5500,90=5250,92=5100,94=5051,96=5050,98=5000; then150=6500,
+151=7000,160=6750,162=6600,164=6551,166=6550,168 onward=6500. Source-policy
+measurement80EA remains4672; these are distinct inputs with different roles.
+
+Milestones (call counts, not physical elapsed time):
+  Record / event             input25 low        input25 high
+  code1 phase1                   70                 70
+  code1 phase2                   80                111
+  code1 retirement              110                142
+  code0 phase1                  150                261
+  code0 phase2                  186                262
+  code0 retirement              218                294
+
+Both records retire and the original manager returns idle by the end. The
+code0 mode1 path waits for100 consecutive in-band samples at calls162..261,
+then its retained counter qualifies phase2 on the next call. In mode0 it
+qualifies phase1 at150 and phase2 after25 below-upper samples162..186.
+
+The first record's CAN216 request briefly appears at70, withdraws71, returns
+at81 and releases through measured approach92/94/96 in both input cases.
+Its calculated ECU spark follows26->21->26->21->22->23->26 under the saved
+coefficients. Thus this larger trace's first request timing differs from the
+single-record tcu-phase-mode.txt trace; its references and caller scope differ.
+The second record produces its request at150 in mode0, releasing through162,
+164 and166 (calculated spark21->21.75->23->26). Mode1 delays it until261 and
+withdraws at262 (21->26). Actual network scheduling and physical actuation
+are not demonstrated by paired packer/ECU calculation checkpoints.
+
+Verification totals
+--------------------
+18736 direct cases:7168 admission gates,5120 complete22416 enable mappings,
+3184 original word-curve wrapper cases,2112 complete496F0 policies and1152
+complete495C0 policies. Eleven retained input samples cover assertion,
+ADC-invalid retention and recovery. The640 manager calls independently check
+640 source updates,642 mode updates (including the two original creations),
+551 initial-delay decisions,637 qualifier updates and182 release updates.
+There are37 paired ECU checkpoints tracking both phase records and30 additional
+paired checkpoints retained by the reused single-record observer (67 total).
+
+The shared lifecycle gained only an optional post-service observer. Earlier
+ascending-map and phase-mode verifier outputs remain byte-for-byte identical.
+No firmware, interpreter opcode implementation or application code changed.
+
+The larger caller also changes accepted8081 from2 to1. The resulting code0
+record must not be labeled a mechanical 2->1 shift merely from those bytes;
+the transition classifier and pending-record context still require explanation.
+This trace adds complete caller/overlap coverage for its explicit input set,
+not coverage of all overlapping or composite transitions.
+
+Next steps across the full scope
+---------------------------------
+ECU/AT: explain4508A proposal production and the resulting code0 classification;
+exercise shared971A consumption with both records active, inhibition/withdrawal,
+and full task order. Trace remaining9BFC/9ACD/9C00 producers, control8083 and
+physical input25 wiring/diagnostic identity before naming the source mode.
+Traction:59720->8118,72B4/72BC writers and mode/gate/task provenance; preserve
+CAN211/21A sender attribution,7978/fuel consumers and physical actuator proof.
+Roof: PCM transmission-type publication and matching OEM PRHT receiver; preserve
+both directions, interlocks, pause/resume, reversal, timeout, synchronization
+and fault recovery. No OEM CAN folding/unfolding command is established.
+All three research goals remain incomplete; the previous and current turns
+made verified progress. No recurring external blocker is claimed.
+
+Persistence verification
+------------------------
+Ghidra12.1.3 PUBLIC / Java21, SuperH:BE:32:SH-2A compatibility language,
+not chip identification. Added42 annotations (15 functions,10 RAM fields,
+17 calibrations/families), updated two prior function comments, and explicitly
+typed twelve five-row word-curve families and entry/timer tables. The closed
+.gpr plus .rep archive was independently extracted; all11 project hashes
+checked, both programs reopened read-only,1192 annotations verified
+(570 ECU/622 TCU), and all620 export/report files matched byte-for-byte.
+No incomplete decompilations were reported.
+Archive nc-at-can.tar.gz:10,832,684 bytes; SHA256
+28921db462210078d9256a3ad4139786a9a7574e25842a949bedbfdd58163959
+The complete new verifier exited0. Its manager results also match the earlier
+separate manager execution exactly. All counts and retirement milestones were
+checked from the saved JSON. Older ascending-map and phase-mode outputs remain
+byte-identical; both new/changed Python files pass py_compile and git diff
+--check passes. New durable artifacts are Git-eligible. Live database copies,
+restore scratch and transient logs remain ignored by design. Checkpoint,
+README, traction-roof index, notes and archive manifests are current.
+Saved locally; no staging, commit, push, reset or index cleanup performed.

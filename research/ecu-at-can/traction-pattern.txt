@@ -1,0 +1,151 @@
+CAN211 request, rotating event pattern and cylinder inhibition — 2026-10-06
+
+RESULT AND REPRODUCTION
+
+The original ECU instructions connect CAN211 request conversion to model-based
+thresholds, hysteresis, pattern selection and a shared per-cylinder inhibition
+mask. The eight pattern bits describe event positions across four cylinders,
+not eight physical cylinders. This complements the verified spark path in
+can211-spark.txt and spark-interaction.txt. Final hardware output, DSC sender
+identity and physical torque/timing units remain unproved.
+
+Input: examples/LFFEEE-stock.bin, unchanged SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Run from repository root:
+  python research/ecu-at-can/verify_traction_pattern.py
+Saved output: traction-pattern-verification.json.
+Uses the previously verified SHModelFloat/RTZ interpreter and stock lookup
+bodies without new opcodes, helper mocks or edits to older verifiers.
+Addresses below are hexadecimal; RAM omits FFFF. Counts are decimal.
+
+REQUEST CLASSIFICATION
+
+3F35C reads 6DB4,6F20,7A84 and protected auxiliary terms71D0/71D8.
+It evaluates three stock quadratic models at the same command7A84:
+  map group1 (model-sources.txt) ->719C; addD0,D8 ->7124
+  map group0 ->7194; addD0,D8 ->protected711C
+  group3 if657E==1, otherwise group2 ->71A0; addD0,D8 ->7128.
+Each uses c-a*(b-command)^2, rounding every floating operation toward zero.
+It then produces712C=7128*3/4,7130=7128*2/4,7134=7128/4, preserving the
+instruction operation order.81 complete producer cases match an independent
+ROM lookup/quadratic reference, including bounds and off-node interpolation.
+
+3FAFC compares converted request715C with those three thresholds. For each:
+  request>=threshold: corresponding flag7188/7189/718A=1
+  request<threshold-ROM C11F0: flag=0
+  otherwise: preserve previous flag.
+Stock hysteresis C11F0=5. Exact equality at the lower boundary holds history.
+Fourth flag718B is1 only when request exceeds C11F4=0.75 by more than the
+float deadband at3FC3C=1/128.567 cases include equality/deadband and history.
+Flags other than0/1 can survive the hysteresis band; downstream priority
+checks exactly1, not arbitrary nonzero.
+
+3FD4C selects7181=0 if7188==1, else1 if7189==1, else2 if718A==1,
+else3 if718B==1, otherwise4.3FD9C normally copies that index to7182 when
+6590 is nonzero, otherwise writes0. Its calibration override C11E6/C11E7
+is statically visible but disabled in this unchanged ROM (both0); no patched
+ROM execution is claimed.243 priority/enable cases pass.
+
+The existing CAN211 receive/normalization/conversion chain supplies715C.
+In the AT fixture it becomes max(714C,7148)+produced71C4. Example stock model
+inputs6DB4=2000,6F20=0.5,7A84=25,6D20=80 produce offset23.4375 and
+thresholds approximately58.187508,38.791672,19.395836. With fresh flags:
+  CAN211 word0  converted715C  index7182  phase0 pattern  bit count
+  10000         23.4375       2          55              4
+  10010         33.4375       2          55              4
+  10020         43.4375       1          11              2
+  10040         63.4375       0          00              0
+  10100        123.4375       0          00              0
+Wire numbers/converted values/count are decimal; pattern bytes are hex.
+These are explicit model/admission fixtures, not a measured vehicle trace.
+
+PATTERN TABLES, COUNT AND ROTATION
+
+40660 calls46284.4632A maps7182 (clamped at stock E2630=4) through one of
+two tables:6542==0 uses C4FD4 bytes02,04,06,07; other values use C4FD8
+bytes00,00,00,07. Index0 returns0.46284 stores74F4, gates74F0 to0 when
+718C==0, otherwise caps it at7, and calls4639C to produce74F1.
+With stock override C4FB8=0, mask selection is:
+  level74F0    phase0 phase1 phase2 phase3
+  0            00     00     00     00
+  1 or2        11     22     44     88
+  3 or4        55     AA     55     AA
+  5 or6        77     BB     DD     EE
+  7            FF     FF     FF     FF
+For a nonzero level and phase>3, the stock fallback isFF.324 cases verify
+phase, selector, index clamp and active values0/1/2. Count71F0 is popcount
+only if718C==1 (or forced8 by the separate gates already in model-sources.txt).
+Thus malformed active value2 can generate a mask while this count stays0;
+do not simplify all these exact-one tests into nonzero tests.
+
+462CA maintains countdown74F3 and phase74F2:
+  level outside1..6: countdown=0
+  eligible level with old countdown0: reload stock C4FC8=40
+  otherwise, if event position7492==7: decrement countdown
+  otherwise hold countdown.
+If the resulting countdown is0, advance phase;3 wraps to0.2160 cases cover
+all event positions, relevant level/count boundaries and malformed phases.
+Under the explicit test schedule (one phase update per event, active index1),
+1280 successive event calls rotate phase at calls320,640,960,1280, ending at0.
+This is a call-count result, not milliseconds or verified real task frequency.
+
+EVENT CONSUMERS AND SHARED INHIBITION
+
+45D60, gated by6DFE==1, maps event6DF2 to cylinder7493:
+  2->1,0->2,4->3,6->4; other events->0.
+It independently maps7494:0->1,6->2,2->3,4->4; other events->0.
+Both fields hold when the gate is not exactly1.
+45E18 also needs gate1 and nonzero7493. Entry into active718C==1 with old
+749B==0 resets position7492 to0; otherwise it advances through0..7 and wraps.
+1152 cases execute event mapping, gates, old activity and position boundaries.
+
+45E74, gated by6DFE==1, samples (74F1 >>7492)&1 into749A. For nonzero
+cylinder7493 it records (718C==1) in749B and clears the old mask40 bit at
+749E+cylinder. It also records7534 in74EE; a1->0 transition loads7498=10,
+otherwise a nonzero7498 decrements. The latter counter does not change the
+mask40 decision in this body. With cylinder0 it still samples the pattern
+and updates history, but leaves per-cylinder status/749B unchanged.
+4603C then sets that cylinder's mask40 only when gate6DFE==1, cylinder!=0
+and749A==1; it always tail-calls42EA8.
+
+42EA8 (previous actuation verification) combines these local mask40 bits
+with the separate TCU mask80 bits at78CF+cylinder. It applies its admission
+and diagnostic overlay and writes word736A plus nonzero flag7368.
+8192 cases cover every pattern byte, position and cylinder with unrelated
+bits preserved and a concurrent TCU mask bit.243 more cases cover sampling
+gates and the7534 transition history.120 complete CAN211/model/selection
+cases execute eight events each and compare the evolving aggregate with
+independently calculated local flags OR a seeded TCU mask. The TCU flags
+are fixtures here; their actual CAN216 path is separately verified in
+actuation-verification.json and can201-cut-loop.txt.
+
+1F864 returns word736A; every integrated event executes this getter too.
+The local pattern's mask40 does not itself prove that44E50 zeros its command:
+that previously verified zeroing branch checks TCU flags at78CF+cylinder.
+Do not conflate those status arrays or claim final injector-pin behavior.
+
+STATIC CONTINUATION LEADS AND LIMITS
+
+Saved disassembly44C1C..44C4A supports the relative event ordering:
+45D60,45DE8,45E18,45E74,45CFA,45F70,45FC0,4603C. The test executes the
+pattern-relevant subset, not the entire enclosing caller.45CFA copies an
+alternate cylinder's mask40 into its mask80 in the749E array;45F70/45FC0
+maintain consecutive-event/recovery counters. These neighboring bodies are
+statically inspected, not newly exhaustively executed in this verifier.
+462CA has a literal caller at1D13A. Its actual frequency and ordering versus
+CAN/model/event tasks remain open. The1280-event schedule is a hypothesis
+fixture, despite the verified individual state transitions.
+
+The next output lead is getter1F864 at callers1FCD4,1FEBA,20070. At1FCDA
+the mask is compared with cached5486; on change20290 is called and the
+cache updated.1FD3E..1FD5A maps cached bits through ROM2F370 into byte1 of
+records beginning53DC, stride40 decimal. Trace20290 and the complete record
+consumer before naming a hardware actuator or claiming actual fuel cut.
+Other mask consumer487F0 chooses maps A23DC/A23F0/A2404 from718C/6590,
+74F1 and657E, writes7678, and has a consumer near47800. This is another
+static lead; its physical role and complete execution remain open.
+
+All three research requirements remain active: ECU/AT integration, deep
+traction logic and NC PRHT folding/unfolding CAN. This work adds no roof
+identifier or remote-controller behavior. Roof speed/neutral attribution,
+timeout/reversal and controller firmware remain open in traction-roof.txt.

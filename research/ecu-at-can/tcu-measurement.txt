@@ -1,0 +1,135 @@
+TCU capture measurement -> shift lifecycle and CAN216
+Evidence checkpoint: 2026-10-06
+
+REPRODUCTION AND SCOPE
+
+Run: python research/ecu-at-can/verify_tcu_measurement.py
+Saved passing output: tcu-measurement-verification.json.
+Original unchanged TCU LFG1TF000 and ECU LFFEEE-stock identities are asserted
+by the script and saved in its JSON. SHRotate executes original helpers;
+no ROM, shared interpreter, peripheral model or application code changed.
+This advances the80EE acquisition lead in tcu-acquisition-leads.txt;80EC
+production in209B4, called by2086C, remains separate and incomplete.
+
+Verified175 multiply/shift,49 guarded division,5 initialization,540 capture
+ingestion,288 timestamp,1536 freshness,726 history,392 substitution and625
+derivative cases.32 acquisition/recovery checkpoints and two full code9 shift
+lifecycles include86 measurement CAN216/ECU checks and22 request CAN216/ECU
+checks. Capture timestamps, age values, task order, reference-source80EC,
+other input states and the paired ECU model/gates are explicit fixtures.
+No physical speed units or durations follow from these tests.
+
+TIMESTAMP AND HISTORY PRODUCTION (EXECUTED)
+
+17A58, already identified in speed-fault.txt as the capture0B callback,
+computes unsigned32(current_r4 - old890C)/10 ->8908 and saves current890C.
+The apparent7FFFFFFF cap cannot bind after unsigned32 division by10.
+It calls211DC, clears88F0 and saturating-increments8900/8902/8904 atFFFF.
+New boundary tests include timestamp wraparound and zero/sub-ten deltas.
+The timestamp callback's output cannot be negative; negative raw8908 cases
+below deliberately test abnormal RAM states, not normal acquisition.
+
+211DC reads old810C and8908. If age>=130 or signed capture>7FFFF, it
+selects7FFFF, then upper-caps to214B6()=u8(ROM76DE0)<<12=73728.
+It increments800D modulo24 and stores the capture at9248+4*new_head,
+saturating-increments800C atFF, saves old age to9244 and clears810C.
+Negative injected captures survive its signed upper caps.
+
+211C4 initializes810C=9244=FF, resets history through21482, and sets
+9238=7FFFFFFF.21482 fills24 words with73728 and resets800D=0 inside
+an SR critical section. Tests check the other SR bits, not preservation ofT.
+
+MEASUREMENT, STALENESS AND RECOVERY (EXECUTED)
+
+2124C calls212F4 with signed ROM76DE2=360 and stores its result at80EE.
+212F4 requires BOTH810C and9244 < ROM76DE0=18. Signed byte loads followed
+by unsigned compares reject128..255 too. Rejection returns0, clears800C,
+resets history/head and sets9238=7FFFFFFF. Age bytes themselves are retained.
+
+Healthy computation, with integer divisions truncating toward zero:
+  count = signed16-clamped(param*24/360)
+  sum = signed32-wrapped sum of count history entries, starting AT head,
+        walking backwards with24-entry wrap; nonpositive count sums zero
+  product = signed32-saturate(sum*24)
+  period = guarded_signed_divide(product,count) ->9238
+  measurement = clamp(guarded_signed_divide(153600000,period),0,32767)
+10C4C implements saturating signed32(a*b/2^shift), tested shifts0/1/8/16/31.
+10DA4 guards zero divisor:0/0 ->0, positive/0 ->7FFFFFFF,
+negative/0 ->80000000. The original signed overflow result is retained.
+The stock parameter360 selects all24 entries. Alternative parameters test
+ring traversal, zero/nonpositive counts and multiple wraps; they do not
+claim those values are used by the stock caller. MACL is preserved.
+
+Example:24 captures30000 -> period720000 -> measurement213.
+After staleness, the first capture saves the stale old age, so the next
+calculation still rejects and resets the ring. A second qualifying capture
+can resume calculation. With30000 inserted into the reset history, the
+first recovered value is89, then91,93,... as history is replaced. It does
+not immediately return to213. Both initialization and recovery are executed.
+
+SUBSTITUTION AND DERIVATIVE (EXECUTED)
+
+2124C normally copies80EE into9234. If92C6 bit4 orAC86 is nonzero,9234
+instead takes signed32reference9218[index], upper-capped to32767 then stored
+as a word. Index is8081, except8080==FF selects6. There is no lower cap:
+negative synthetic references can wrap at the word store. This affects9234;
+80EE and9236 still receive the actual measurement. Full2124C executes its
+tail50D88 too, but that tail's additional outputs are not separately asserted.
+
+2140C uses signed16 current9234 and prior history923E/9240/9242:
+  delta = floor((old923E-old9240-old9242+current9234)/4) ->80F0
+  clamp(trunc(delta*6103/256),-32768,32767) ->923C
+History shifts to[current9234,old923E,old9240].625 signed boundary
+combinations and MACL preservation pass. This closes the arithmetic source
+lead for80F0 in request predicates; real scheduling remains open.
+
+CAN AND COMPLETE SHIFT LIFECYCLES (EXECUTED)
+
+Normal18F8C sends min(254,measurement/96) inCAN216 byte4;92C6 bit5
+instead sendsFF. The actual ECU35034 unpacker receives that byte at6A58.
+An acquisition stale reset therefore sends0 when that separate CAN fault bit
+is clear. No full-system fault-policy conclusion follows: these tests set
+the CAN fault bit explicitly, without executing its diagnostic producer.
+This byte is distinct from the CAN216 bytes5..6 vehicle-speed fallback.
+No OEM roof reception or physical unit is established by either field.
+
+Two complete code9 fixtures, ring heads0/15, use expanded original group
+initialization and timestamp callbacks. No direct80EE,9218 or80D8 writes.
+Reference input80EC=7014 produces target5000.24 callback intervals10660
+produce capture1066 andmeasurement6003; at service call80 intervals change
+to12800, producing capture1280. Original timer11014, measurement2124C,
+reference2117C, error30B9E, phase event2 and periodic group service execute.
+Synthetic scheduling forces a fresh capture age for each callback.
+
+  call   measured filtered_error phase request
+  0      6003     1003           0     2 (created)
+  22     6003     1003           1     3
+  23     6003     1003           1     4 (hold)
+  80     5953      978           1     4 (first changed interval)
+  102    5035       52           1     5 (hold ends below64)
+  103    5000       17           1     5
+  104    5000        0           1     5
+  131    5000        0           2     5
+  137    5000        0           2     0 (request released)
+  162    5000        0           3     0 (ten-group ring retirement)
+
+Both ring positions match. Measurement wire byte moves62 ->52; request
+checks reuse the actual CAN216/ECU spark path from earlier research. That
+helper uses a clone with byte4 deliberately invalid, so separate measurement
+checks above verify the valid byte4 path without mutating the shift fixture.
+Code9's stock request map iszero as previously shown; these lifecycles prove
+acquisition-driven phase/hold/release, not a new nonzero torque request.
+
+STATIC HARDWARE BOUNDARY AND NEXT ACTIONS
+
+The existing capture0B ISR lead16B44 testsFFFFF42C bit1, clears it, reads
+FFFFF438 and calls17A58; it ends inRTE. This turn does not execute that ISR
+or identify the physical sensor/pin, timer clock, pulse count or interrupts.
+Application1E652 calls2124C. Full-task/peripheral scheduling remains open.
+
+Next verify80EC209B4 including fault/history and reference fallback, then
+combine both produced inputs with active nonzero request maps. Trace the
+capture0B physical identity and92C6 bit5 producer without conflating byte4
+with the vehicle-speed field. Preserve ascending/overlap/composite and2->1
+classifier requirements. Traction throttle/fuel/arbitration and OEM PRHT
+type/speed/neutral reception, fold/unfold reversal/timeouts remain active.

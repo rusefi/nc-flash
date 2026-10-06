@@ -1,0 +1,205 @@
+2026-10-06: ascending phase qualification and initial-delay policy
+================================================================
+
+Result
+------
+Original ascending phase qualification has two routes with separate per-record
+counters and a shared lower-threshold crossing flag. For codes0/1, mode8086=0
+counts samples below the upper threshold, including samples below the lower
+threshold. Completion additionally requires a remembered lower crossing.
+Mode8086=1 instead counts samples inside the band. Codes2/3/4 use the band
+regardless of mode. Other mode values admit neither route for codes0/1.
+
+This explains the retained code1 trace:79 samples accumulate before the first
+lower crossing; call80 immediately qualifies phase0 through its target route.
+The rebound above the upper bound resets the counter but sets the crossing
+flag. After20 subsequent below-upper samples, phase2 is reached at111, well
+after numeric request withdrawal96. Final retirement remains142.
+
+Initial-delay317E4 is also verified for ascending records, including neighbor
+and preceding-slot branches. The ordinary stock delay is18 signed timer ticks;
+it is not an unconditional requirement because target qualification provides
+a separate phase0 admission route. Counts/ticks are not physical time units.
+
+Reproduce and scope
+--------------------
+  python research/ecu-at-can/verify_tcu_ascending_phase.py \
+    > research/ecu-at-can/tcu-ascending-phase-verification.json
+
+33015 direct cases:6480 initial-delay/neighbor cases,1575 departure cases,
+22400 qualifier cases,2560 wrapper/inhibit cases. Additional retained probes:
+46 crossing-history calls,3 interleaved-record calls and21 mode-change calls.
+The160-call manager lifecycle independently checks80 initial-timer decisions,
+111 qualifier updates and52 release calculations, plus10 paired ECU checkpoints.
+All original firmware helpers execute; no return values/callbacks are stubbed.
+
+Original inputs remain examples/LFG1TF000.bin, SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6,
+and examples/LFFEEE-stock.bin, SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Disassembly excerpts are saved in tcu-ascending-phase-disassembly.txt.
+No ROM, shared interpreter, existing verifier or application implementation
+changed. Upstream measurements, references, task calls and ECU coefficients
+are explicit fixtures. No sensor units, mechanical gear attainment, complete
+hardware/task simulation or OEM remote-controller behavior is inferred.
+
+Ascending initial timer317E4
+----------------------------
+For record index i, code0..4 and captured selector808D:
+  delay =ROMbyte[70A6C +6*code +u8(808D)]
+Stock five rows each have six entries, all9. The final comparison is signed
+timer8380[i] >=2*delay. Negative timer values reject even if delay becomes0.
+
+The routine reads preceding/following physical ring slots with modulo16 wrap.
+Let position=(i-head96C4) modulo16 and following=(i+1) modulo16.
+Delay becomes0 if position+1<count96C5 AND following code is ascending AND
+signed timer8380[following] >=2*its own calibrated delay using the same808D.
+It does not examine that following record's phase byte in this decision.
+
+Another zero-delay route: current operation byte+11 is nonzero AND the
+preceding physical slot's code is classified descending (code not0..4).
+There is no check that the preceding slot is currently an active predecessor.
+At the ring head, including a single-record ring, retained preceding-slot
+code can therefore affect this branch. This is a verified memory dependency,
+not proof of a firmware bug or a reachable unsafe overlap.
+
+Tests cover allfive codes/six selector slots, single/head/tail positions,
+indices0/15, ascending/descending neighbor codes, next-timer17/18 boundaries,
+nonzero operation and signed current timers. When the following slot lies
+outside the active count, its readiness does not bypass the delay. The
+preceding-slot operation route has no corresponding active-count condition.
+Original arithmetic helper converts+0.5 to integer0 on those bypass branches.
+
+Departure predicate3241C
+------------------------
+92C6 bit1 ORbit4 returns-1. Otherwise, once317E4 admits the timer:
+  ascending returns1 only when s16(80EE) < from-reference -128;
+  descending's previously verified route uses >=from-reference +128.
+Ascending equality at from-reference-128 is NOT admitted.1575 cases check
+signed reference/measured values, timer17/18/19 and independent flag bits.
+The from index comes from ROM5D428; target qualification uses5D446 instead.
+321AE can call target qualification after a failed phase0 departure and map
+its success tophase1. The full manager trace below exercises that route.
+
+Target wrapper324CE
+--------------------
+92C6 bits1/4 return-1 without changing bounds, either counter or971A flags.
+Otherwise produce upper9700=target-reference+128, lower9704=reference-128
+through the original software arithmetic; ascending calls32614, whose success
+maps to return2. Descending clears971Abit1 before its own327B0 qualifier.
+2560 cases cover every inhibit-byte value forfive ascending codes/indices0,15,
+including preservation on inhibition and exact bounds/counter/flag updates.
+
+Ascending qualifier32614(index, code, operation)
+------------------------------------------------
+Measurement is signed16(80EE); bounds are signed32(9704/9700).
+First, if measured>=lower, set shared971A bit1. This happens even above the
+upper threshold, and even when the selected mode permits neither route.
+
+Band route eligibility:
+  codes2/3/4, OR codes0/1 with8086 exactly1;
+  lower<=measured<upper.
+Eligible calls increment byte96CF[index] with saturation255; others reset it0.
+Counter threshold pairs in70B06, selected by9410 bit0:
+  code       bit0 clear    bit0 set
+    0           30          100
+    1           20           20
+    2           30           20
+    3           10           10
+    4           20           20
+Operation argument0x12 or0x13 substitutes ROMbyte770BE=20 for this route.
+This is the function argument, unlike the global9C88 override in the older
+descending qualifier. Other9410 bits do not affect the selected column.
+
+Below-upper route eligibility:
+  codes0/1,8086 exactly0, measured<upper.
+Eligible calls increment byte96DF[index] with saturation255; others reset it0.
+Threshold pairs70B10 are code0:20/25, code1:20/20, again selected by9410bit0.
+There is no operation12/13 override here. Counter completion also requires
+971A bit1, whether set this call or remembered from an earlier one.
+
+Return1 if either route completes, else0. Success clears971A bit1 but leaves
+both counters at their resulting values. Other971A bits are preserved.
+Equality atlower is eligible; equality atupper rejects both measurement routes
+but can set/retain the crossing flag. Neither counters nor the flag represent
+a fixed time duration without the actual task scheduling context.
+
+Retained behavior and shared state
+----------------------------------
+Direct code0/mode0/bit0clear probe starts lower872/upper1128, flagclear:
+22 calls at800 accumulate counter22 without completing. One call at1200
+sets the crossing flag and resets the below counter.20 more calls at800
+complete at call43 despite all20 being below the lower threshold. Success
+clears the flag; another800 call does not complete, a1000 sample sets it and
+completes again at45, and a final800 sample again cannot complete.
+
+The crossing flag is global, while96CF/96DF are indexed. A three-call probe:
+  index0/code0/mode0 belowlower reaches count20 with flagclear -> no success;
+  index15/code2/mode1 aboveupper sets globalflag, its own counters0 -> no success;
+  index0/code0/mode0 still belowlower increments to21 -> success, consumesflag.
+This proves interaction between interleaved original qualifier calls, not a
+complete two-transition ring/dispatcher lifecycle. That broader overlap test
+and the flag's other producers/clearers remain open.
+
+Mode2/code1 can set the flag while resetting both ineligible counters. Switching
+to mode0 then permits completion after20 below-lower samples using that remembered
+crossing. Thus a mode change does not itself clear crossing history in32614.
+
+Retained manager -> CAN216 -> ECU
+---------------------------------
+Reuses the original creation and measured approach from tcu-ascending-release.txt:
+code1, natural acceptedstate2, mode8086=0, permission9410bit0set, reference5000,
+lower4872/upper5128. Each cycle runs11014, event2 and two event4 services.
+No phase/counter/latch state is injected after creation; observers assert results
+without changing them. Numeric records/captures also come from original callbacks.
+
+Qualifier history:
+  calls1..79 measured1000: below counter1..79, flagclear, no qualification;
+  call80 measured5000: lowercrossing setsflag, count80 completes, clearsflag;
+    phase0 advances to1 and group7 activates its1280 map request;
+  call81 measured6000: belowcounter0, crossingflagset;
+  calls90/91 measured5250 remainaboveupper, counter0 despite request release entry;
+  call92 measured5100 starts belowcounter1;
+  call96 numeric request reaches0, qualifier counter only5;
+  call110 counter19; call111 counter20 completes and clearsflag ->phase2;
+  call142 phase3 and full retirement; ringempty/manageridle at end.
+
+All111 qualifier invocations match the independent model. The separate release
+oracle still verifies52 updates:1280->510->260->0 maps via CAN216 to the ECU's
+fixture-calculated spark21->22->23->26. Phase qualification therefore explains
+the gap between numeric withdrawal and logical transition completion rather
+than treating those as the same event. This is not physical spark/torque proof.
+
+Continuation
+-------------
+Next trace the producer of8086 and extend to complete overlapping/composite
+ring lifecycles, including shared971A state and retained preceding-slot codes.
+An aligned GBR byte-store scan of ROM10000..end found candidate492D2 for8086.
+Static excerpt shows a body ending492DC, using9C82/9C83 and4925C; locate its
+entry/callers and execute it before assigning a physical name or claiming
+normal mode reachability. A byte-pattern candidate scan is not an exhaustive
+writer proof (indirect stores and non-GBR addressing remain possible).
+Preserve2->1 classification, full task/capture timing, outer cancellation/fault
+recovery and80F8/80D2/80D4/808D upstream production/physical attribution.
+Traction next:59720->8118,72B4/72BC writers, mode/gate provenance and task order;
+CAN211/21A sender attribution,7978/fuel consumers and physical confirmation.
+Roof next: PCM transmission-type publication and matching OEM PRHT receiver;
+no OEM CAN fold/unfold command proven. Preserve both directions, pause/resume,
+reversal, communication timeout, motor synchronization and fault recovery.
+Allthree complete research goals remain open. This and preceding turns made
+verified progress; no recurring external blocker is being claimed.
+
+Persistence verification
+------------------------
+Ghidra12.1.3 PUBLIC / Java21, SuperH:BE:32:SH-2A compatibility language
+(not chip identification). One function and eight RAM/calibration annotations
+added, three prior function comments updated, known tables typed. Closed.gpr
+and.rep archive independently extracted; all11 project hashes checked, both
+programs reopened read-only,1133 annotations verified (570 ECU/563 TCU) and
+all596 export/report files matched byte-for-byte.
+Archive nc-at-can.tar.gz:10,822,643 bytes; SHA256
+4286911ca1a699aac5e5d67343bfd124cd911ec4fbd90b3e83dd1bcd90fead34
+Manifest/checkpoint/Ghidra README current. New verifier passed py_compile and
+git diff --check passed; all new evidence files Git-eligible. Existing verifiers
+and shared interpreters unchanged. Saved locally; no staging, commit, push or
+index cleanup performed.

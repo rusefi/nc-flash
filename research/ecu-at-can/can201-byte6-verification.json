@@ -1,0 +1,391 @@
+{
+  "scope": "Original ECU CAN201 byte6 publication, TCU scaling/history and fault policy.\n\nExplicit source, timer and scheduling fixtures. Physical source identities,\nabsolute tick duration and complete transmission actuator logic are unproved.",
+  "ecu_tcu_encoder_cases": 392,
+  "raw_conversion_cases": 1536,
+  "fault_mapping_cases": 146,
+  "aggregate_flag_cases": 1024,
+  "paired_selection": [
+    {
+      "ecu_source": 45,
+      "change": -1280,
+      "injected_flag20": 0,
+      "selection": 0
+    },
+    {
+      "ecu_source": 45,
+      "change": -1280,
+      "injected_flag20": 1,
+      "selection": 3
+    },
+    {
+      "ecu_source": 55,
+      "change": 1280,
+      "injected_flag20": 0,
+      "selection": 0
+    },
+    {
+      "ecu_source": 55,
+      "change": 1280,
+      "injected_flag20": 1,
+      "selection": 0
+    }
+  ],
+  "history_cases": 600,
+  "timer_cases": 6,
+  "jump_recovery": [
+    {
+      "timer_service_calls": 1,
+      "timer": 1,
+      "jump_latch": 1,
+      "change": 0
+    },
+    {
+      "timer_service_calls": 2,
+      "timer": 2,
+      "jump_latch": 1,
+      "change": 0
+    },
+    {
+      "timer_service_calls": 3,
+      "timer": 3,
+      "jump_latch": 1,
+      "change": 0
+    },
+    {
+      "timer_service_calls": 4,
+      "timer": 4,
+      "jump_latch": 1,
+      "change": 0
+    },
+    {
+      "timer_service_calls": 5,
+      "timer": 5,
+      "jump_latch": 1,
+      "change": 0
+    },
+    {
+      "timer_service_calls": 6,
+      "timer": 6,
+      "jump_latch": 0,
+      "change": 0
+    }
+  ],
+  "downstream_selection_cases": 108,
+  "ecu_tcu_fault_lifecycles": [
+    {
+      "healthy_recovery_gate": 0,
+      "timeline": [
+        {
+          "tick": 0,
+          "ecu_payload": "3e 80 00 00 00 00 64 00",
+          "held_value": 500,
+          "validity": 2,
+          "active_group3c": 0,
+          "aggregate_a98d": 1,
+          "scaled_8098": 12800,
+          "status_a4d6": 1,
+          "history_change": 12800,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 100,
+          "ecu_payload": "3e 80 00 00 00 00 ff 00",
+          "held_value": 500,
+          "validity": 1,
+          "active_group3c": 1,
+          "aggregate_a98d": 1,
+          "scaled_8098": 12800,
+          "status_a4d6": 2,
+          "history_change": 12800,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 599,
+          "ecu_payload": "3e 80 00 00 00 00 ff 00",
+          "held_value": 500,
+          "validity": 1,
+          "active_group3c": 1,
+          "aggregate_a98d": 1,
+          "scaled_8098": 12800,
+          "status_a4d6": 2,
+          "history_change": 12800,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 600,
+          "ecu_payload": "3e 80 00 00 00 00 ff 00",
+          "held_value": 500,
+          "validity": 1,
+          "active_group3c": 5,
+          "aggregate_a98d": 28,
+          "scaled_8098": 0,
+          "status_a4d6": 4,
+          "history_change": 0,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 601,
+          "ecu_payload": "3e 80 00 00 00 00 5a 00",
+          "held_value": 450,
+          "validity": 2,
+          "active_group3c": 68,
+          "aggregate_a98d": 28,
+          "scaled_8098": 0,
+          "status_a4d6": 4,
+          "history_change": 52736,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 1100,
+          "ecu_payload": "3e 80 00 00 00 00 5a 00",
+          "held_value": 450,
+          "validity": 2,
+          "active_group3c": 68,
+          "aggregate_a98d": 28,
+          "scaled_8098": 0,
+          "status_a4d6": 4,
+          "history_change": 52736,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 1101,
+          "ecu_payload": "3e 80 00 00 00 00 5a 00",
+          "held_value": 450,
+          "validity": 2,
+          "active_group3c": 68,
+          "aggregate_a98d": 28,
+          "scaled_8098": 0,
+          "status_a4d6": 4,
+          "history_change": 52736,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 1101,
+          "ecu_payload": "3e 80 00 00 00 00 5a 00",
+          "held_value": 450,
+          "validity": 2,
+          "active_group3c": 0,
+          "aggregate_a98d": 17,
+          "scaled_8098": 11520,
+          "status_a4d6": 1,
+          "history_change": 11520,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        }
+      ]
+    },
+    {
+      "healthy_recovery_gate": 1,
+      "timeline": [
+        {
+          "tick": 0,
+          "ecu_payload": "3e 80 00 00 00 00 64 00",
+          "held_value": 500,
+          "validity": 2,
+          "active_group3c": 0,
+          "aggregate_a98d": 1,
+          "scaled_8098": 12800,
+          "status_a4d6": 1,
+          "history_change": 12800,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 100,
+          "ecu_payload": "3e 80 00 00 00 00 ff 00",
+          "held_value": 500,
+          "validity": 1,
+          "active_group3c": 1,
+          "aggregate_a98d": 1,
+          "scaled_8098": 12800,
+          "status_a4d6": 2,
+          "history_change": 12800,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 599,
+          "ecu_payload": "3e 80 00 00 00 00 ff 00",
+          "held_value": 500,
+          "validity": 1,
+          "active_group3c": 1,
+          "aggregate_a98d": 1,
+          "scaled_8098": 12800,
+          "status_a4d6": 2,
+          "history_change": 12800,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 600,
+          "ecu_payload": "3e 80 00 00 00 00 ff 00",
+          "held_value": 500,
+          "validity": 1,
+          "active_group3c": 5,
+          "aggregate_a98d": 28,
+          "scaled_8098": 0,
+          "status_a4d6": 4,
+          "history_change": 0,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 601,
+          "ecu_payload": "3e 80 00 00 00 00 5a 00",
+          "held_value": 450,
+          "validity": 2,
+          "active_group3c": 68,
+          "aggregate_a98d": 28,
+          "scaled_8098": 0,
+          "status_a4d6": 4,
+          "history_change": 52736,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 1100,
+          "ecu_payload": "3e 80 00 00 00 00 5a 00",
+          "held_value": 450,
+          "validity": 2,
+          "active_group3c": 68,
+          "aggregate_a98d": 28,
+          "scaled_8098": 0,
+          "status_a4d6": 4,
+          "history_change": 52736,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 1101,
+          "ecu_payload": "3e 80 00 00 00 00 5a 00",
+          "held_value": 450,
+          "validity": 2,
+          "active_group3c": 68,
+          "aggregate_a98d": 28,
+          "scaled_8098": 0,
+          "status_a4d6": 4,
+          "history_change": 52736,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        },
+        {
+          "tick": 1101,
+          "ecu_payload": "3e 80 00 00 00 00 5a 00",
+          "held_value": 450,
+          "validity": 2,
+          "active_group3c": 196,
+          "aggregate_a98d": 28,
+          "scaled_8098": 0,
+          "status_a4d6": 4,
+          "history_change": 0,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "serialized_dtc_count": 0
+        }
+      ]
+    }
+  ],
+  "limits": "Source physical identities and units unproved.46CC8 pointer/state fixtures establish a selection rule, not mechanical gear changes. Timer service/task order explicit; no vehicle or actuator tests."
+}

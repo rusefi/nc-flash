@@ -1,0 +1,87 @@
+Selector acceptance and request creation: bounded continuation, 2026-10-06
+
+SCOPE AND VERIFIED RESULT
+
+verify_selection_creation.py joins the previously separate selector and
+request fixtures. Unlike verify_selection_reporting.py, it initializes the
+31524 dispatcher with event0, and uses the original heap, queue, request
+manager and group8 initialization from verify_tcu_request_dispatch.fixture.
+No shared interpreter, ROM, application or Ghidra project was changed.
+
+Three adjacent descending accepted-state cases are executed: 3->2, 4->3,
+5->4. With 9545 bit2 set, 48C08 retains the accepted state and pending bit;
+no phase or managed request is created. Clearing that bit and rerunning
+48C08 accepts the next state and calls the transition creation path. Result:
+transition codes 7/8/9 respectively, operation0, third parameter0, one phase
+record and one group8 managed request at 9F40 in state2. Captured map inputs
+are9344/18688. Six CAN231 publication/ECU decode checks pass.
+
+Four event2 passes, each followed by two event4 calls and request aggregation,
+leave phase0 and request state2 under the explicit source/reference fixtures.
+The CAN216 request remains withdrawn (915A=7FFF; wire word0=FFFE), with zero
+AT spark correction in all12 paired checks. Thus acceptance and allocation
+alone do not establish activation or a torque/spark reduction. This differs
+from the operation17 fixture in tcu-request-admission.txt; do not transfer
+that fixture's phase advance or reduction576 to normal operation0.
+
+Source fixtures: 80EA=4672,80F6=4224,809C=20000,80EE=1000,92D0=4,A93A=1;
+other unset RAM, including references9218 and timer8380, remains zero.
+paired_snapshot clones RAM before its CAN/ECU fixture changes. Its byte4
+invalid marker, ECU coefficients, gates and CAN211 inputs are synthetic.
+Call counts are not milliseconds. Accepted state is not mechanical gear.
+
+Reproduce from repo root:
+  python research/ecu-at-can/verify_selection_creation.py > research/ecu-at-can/selection-creation-verification.json
+The JSON includes the TCU SHA256 and complete paired outputs.
+
+UNFINISHED EXPLORATION TO RETAIN (NOT ADDITIONAL VERIFIED COVERAGE)
+
+These leads were obtained while inspecting original code; they are not
+asserted by the bounded verifier above. Reinspect before using as final
+semantics. Original bytes and existing disassembler permit reproduction.
+
+48C08 captures8080, calls488F4 candidate,47B3C next,4740C operation,
+4744C transition,4905C/48174/49260 admission. When pending and admitted it
+stores9C87/88, moves old8081 to9C80, updates8081 and, unless captured8080
+isFF, calls48D84 then48F20. It caches accepted state via244FA(index13).
+
+48F20 uses from/to maps5D428/5D446. Codes<12 create a six-byte message
+[u16 code,u16 operation,u16 third] via4C100 and call31524 event1. Composite
+codes>=12 appear to split from/to movement into adjacent steps using the
+6x6 transition matrix5E188, submitting a separate event1 for each step.
+Composite path needs execution, including capacity/partial-admission cases.
+
+48D84 classifies third parameter using9B4C slots0..9. Upward code groups:
+0->slot0;1/12->1;2/13/16->2;3/14/17/19->3;4/15/18/20/21->4.
+Downward:5/22/24/26/29->5;6/23/25/28->6;7/10/27->7;8/11->8;9->9.
+Default appears3 for descending/equal direction with92D5bit0, otherwise0.
+Value1 selects third1. Value2 selects third2 only for slots2/3/4/7/8/9.
+Verify these groups and defaults directly before adopting a physical name.
+
+4740C returns operation0 when31720 returns0; otherwise it dispatches using
+5DEB8 +24*previous_transition +4*next. 4744C calls474C4,475DC,47670 and
+overrides transition for operations14->0B,15/16->0A,19->09,1A->03 (hex).
+Explore phase occupancy and9C50/9C54 sources before assuming a simple
+selection-to-transition matrix. An earlier zero-RAM 2->1 probe yielded code0,
+not matrix entry6; its classifier context is not yet explained.
+
+An ascending0->1 exploratory probe allocated a manager entry for group7,
+but fixture() initializes group8 only. The target record remained zero.
+This is an incomplete fixture, not proof of a functioning group7 request.
+Initialize its descriptor/callbacks before extending coverage to that path.
+
+Phase dispatch321AE uses5D474[3*code+state] and callbacks5D464:
+3241C,324CE,325DA,325F2. In state0 it may also consult the state1 callback.
+3241C appears to compare signed80EE against from-reference9218 plus/minus
+threshold70AEE, with92C6 bits1/4 and317E4 gates. 324CE uses to-reference9218
+and software arithmetic before32614/327B0. Execute predicates, thresholds,
+timer dependencies and cancellation across the full phase lifecycle next.
+Do not assign physical units from these comparisons or floating constants.
+
+BROADER REQUIREMENTS
+
+This trace advances ECU/AT integration only. Deep traction-control sender,
+arbitration and remaining throttle/fuel/physical-output evidence, and OEM
+PRHT type/speed/neutral reception, fold/unfold reversal and timeout behavior
+remain required. See traction-roof.txt for goals, sources and completion
+criteria; CHECKPOINT.txt is the continuation index. Allthree remain incomplete.

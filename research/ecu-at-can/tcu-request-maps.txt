@@ -1,0 +1,166 @@
+TCU first-list request maps, construction and decay
+2026-10-06
+
+Follow-up: tcu-request-admission.txt now executes original upstream creation,
+80EA/80EE captured-axis sources,9410 hysteresis and916F cancellation-source
+aggregation. Physical identities/full scheduling and remaining phase policy
+are still open; earlier results below retain their original fixture scope.
+
+Follow-up: tcu-request-dispatch.txt now executes the original queue/heap/state
+lifecycle and proves3138A index0..4. The15-byte groups below contain three
+sets of five parameters. Earlier direct indices5..14 are synthetic inputs,
+not normal output of that producer; zero-duration edge results are bounded
+callee behavior. Full dispatch now replaces the earlier direct-call limit.
+
+Scope and reproduction
+----------------------
+Extends tcu-slot2.txt and tcu-spark-requests.txt using the unchanged paired
+ECU/TCU images identified there. Run:
+  python research/ecu-at-can/verify_tcu_request_maps.py
+Saved output: tcu-request-maps-verification.json.
+Passed:36 constructor,9 clamp,1352 two-axis lookup,720 duration-selection,
+3456 map-producer,4844 ramp and48 ramp-gate cases, plus12 paired paths.
+This executes original
+instructions, including software floating-point and division helpers; no
+helper stubs, ROM changes or interpreter changes. The callback record at
+FFFFA900 is isolated test storage, not an identified firmware record address.
+Timers, dispatcher queue entries, gate states and ECU coefficients are
+explicit fixtures. Real scheduling and physical units remain unresolved.
+All addresses are hexadecimal unless stated otherwise; RAM has FFFF prefix.
+
+Constructor and callback linkage
+--------------------------------
+Full4CBA8 takes r4=event, r5=code, r6=operation, r7=record. It writes code to
+record+1 and operation to+8, zeros words+4/+6 through real5BBEC(0.5), calls
+2FBA4(A2B8,5E3F8,event) for byte+12, snapshots byte808C to+13 and words80C2/
+80C4 to+14/+16, allocates priority1 through4C6C2 and saves handle at+2.
+It returns2 and preserves previously initialized flags at+18. Thirty-six
+fixtures cover all12 ring indices with three different head positions.
+The ring is12 entries atA2BC with12-byte stride, matching event at entry+6;
+2FBA4 returns the matching physical index. These tests do not establish who
+created those queue entries. Missing-event returnFF and failed allocation
+handling in outer callers are not verified; do not use synthetic bad handles.
+
+Static ROM callback table5E418..5E463 contains constructor4CBA8, ramp-entry
+4CEF2, completion predicate4CF08, clear4CF6A, two4D010 pointers at5E458/
+5E45C and ramp update4D142 at5E460. This establishes table association, not
+execution order or real-world entry conditions. Other entries include4CD18,
+4CDF2,4CE5E,4CE7A and4CEC6; these complete dispatch paths remain open.
+
+Further static leads, not executed here:4CC5A sets record+18 mask40, calls
+315BE(code), arithmetic-shifts its signedword result byone, and writes+10
+as shifted<<8 when unsigned shifted<=255, otherwiseFFFF.4CC90 tests916F
+bit0.4CD18 reads signed80EE,80F0, a code-indexed pointer/value at9218 via
+ROM5D446, and3159A(code), then combines thresholds from4D2D0/4D6F0.4CE7A
+clears81F2[slot], calls4D3D8/4D7CC and may capture+4 to+6/reset8115[slot]
+when entering return-state5.4CEC6 uses the current81F2[slot] with those same
+helpers. These are useful entry/transition leads, not yet physical policies.
+
+Stock two-axis maps and offset curves
+-------------------------------------
+4D554 writes two int32 outputs. Base-map selection by record+1:
+  code6       7659E
+  code7       765D0, or76698 when record+18 mask20 is set
+  code8/11    76602
+  code9       76634
+  code10      766CA
+  other       7656C
+Operation byte+8 overrides:18 ->76666;17 ->76698. Additionally code7 with
+operation18 forces the base output tozero without evaluating the base map.
+The X argument is low16(2*s16(80F6)+1900); Y is low16(record+16), captured
+from80C4 by the constructor. Both map lookup axes are unsigned16. Physical
+identities and units of these source words remain open.
+
+Eight maps7656C..766FB have50-byte records: two count bytes6,6, six X-axis
+bytes, then six rows each containing one Y-axis byte and six value bytes.
+1078A evaluates byte axes/values scaled256, interpolates each X row then Y,
+with endpoint clamping and truncation towardzero of signed increments at
+each stage. The caller takes unsigned low16 result >>2. Independent integer
+interpolation agrees at all knots, interval midpoints and exterior endpoints
+for all eight maps; integrated tests add seeded arbitrary axis samples.
+This bounded verification does not validate arbitrary software-double inputs.
+
+Offset-curve selection is6->766FC,8/11->76705,9->7670E,7->76717,10->76720;
+other codes have no curve. It runs only when record+18 mask40 is set. Codes7/
+10 use word96CC as axis; other selected curves use record+10. Each lookup
+also takes unsigned low16 >>2. All five stock curves have four zero values,
+so the offset is alwayszero in the tested stock ROM, including enabled paths.
+Default code9 base-map values are allzero too; operation overrides can still
+select a different, nonzero map. Do not generalize code9 suppression across
+all operation states.
+
+Active update and shared gates
+------------------------------
+Full4D010 computes base-minus-offset, calls4D274, and zeroes the result if
+92D5 mask04 is set OR9410 mask02 is clear.4D274 compares signed low16 with
+zero; if nonnegative it returns the original32-bit argument, otherwisezero.
+4D010 stores word+4, sets record+18 mask80 iff the value is positive, and
+calls real4C6DA(handle,+value,positive-mode). Other flag bits are preserved.
+No-request/allocation/list selection is verified through4C7AC and1FB8C.
+Previous selection-pipeline.txt executes21A16 producing92D5 mask04 from
+A57E!=0; this links the gate to that local source but does not name its
+physical meaning.9410 mask02 producer/admission still needs tracing.
+
+Ramp capture, duration and completion
+--------------------------------------
+Full4CEF2 copies current word+4 to saved word+6, zeros byte8115[record+12]
+and returns5. Full4D142 reads this timer byte and calls4D4CC for duration.
+The duration table is selected by code:
+  other763FC,6=7640B,7=7641A,8/11=76429,9=76438,10=76465.
+Code7 with flag20 uses76447. Operation18 overrides76456;17 overrides76447.
+Index is unsigned byte record+13. Tests cover indices0..14 in each15-byte
+stock table; the runtime producer/bounds of808C are still open. Durations
+range0..85 decimal in the selected stock tables. These are timer counts,
+not milliseconds. Several indices producezero, which skips division.
+
+For timer<duration, raw=u16(saved+6)*(duration-timer)//duration, with unsigned
+word multiply and actual10CE4 division. Otherwise raw=0. The routine takes
+signed16(raw), clamps belowzero, then applies the same92D5/9410 gates and
+publishes through4C6DA. It does not increment the timer itself.4CF08 returns
+1 iff timer>=duration, including immediate completion for durationzero.
+Tested negative/sentinel boundary saved values are synthetic robustness
+fixtures, not proof normal stock maps generate those values. Saved8000/FFFF
+can initially clampzero and later become positive as the unsigned quotient
+falls below8000. A positive7FFF result sets the record's active flag but is
+withdrawn by the downstream list sentinel rule, producing slot2 modeFF.
+
+Full4CF6A clears record+18 mask80, writes word+4=0 and sets the allocated
+list entry tozero/mode0. This retains the allocation; it does not release it.
+
+Paired lifecycle and interaction with traction
+----------------------------------------------
+Stock code6 map point X=63*256,Y=44*256 produces reduction1024 decimal.
+4CEF2 captures it and resets timer. Stock duration49 at index0 produces:
+  timer sample       0    12    24    48    49    50
+  reduction       1024   773   522    20     0     0
+  TCU915A            0    27   278   780  7FFF  7FFF
+Here TCU base92E4=800 comes from original216D8 with input80B4=250. The
+same TCU instance executes real18F10/18F8C CAN216 packing, and the resulting
+bytes enter the ECU unpack/normalize/spark functions. Simultaneous CAN211
+word0=10016 is processed too. Each point runs with cylinder-cut clear/set,
+checking additive spark correction and the separate cut path. ECU model
+coefficients are explicit fixtures as in spark-interaction.txt. No DSC sender,
+physical ignition output, mechanical shift or bus timing is invented.
+
+Corrections, evidence and continuation
+--------------------------------------
+The first verifier run failed because its new oracle treated7FFF as ordinary
+positive data after list selection. The existing firmware/list interpretation
+was correct:4C7AC withdraws this sentinel. The expectation was corrected to
+slot2=(7FFF,FF), aggregate915A=7FFF. No ROM/interpreter change was needed.
+The corrected run passed; constructor ring-wrap and ramp-gate cases were then
+added and the final full result is saved beside this record.
+
+Ghidra annotations, typed tables, original-instruction excerpts and function
+exports accompany these findings; archive identity/restore results are in
+CHECKPOINT.txt and ghidra/snapshot.json. Next concrete work: execute table
+state dispatch and entry4CD18/4CE7A/4CEC6, resolve9410 mask02,80F6/80C4/
+808C producers and8115 timer service. First-list4E producers and second-list
+active callbacks, record1 phases1/2 and92E6 consumers remain open.
+
+Retain the other two user goals: traction-control sender attribution, full
+scheduling/pin routing and remaining control paths; OEM PRHT CAN reception,
+transmission-type/speed/neutral fields, fold/unfold interruption, reversal
+and timeout behavior. Local ECU6D5C activity source/reset and MT diagnostic
+mask comparison remain useful roof-related leads. All three goals remain
+incomplete. Saved locally; no staging, commit, push or hardware test.

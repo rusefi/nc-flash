@@ -1,0 +1,595 @@
+2026-10-06: ECU/AT progress producers and request-group suppression are now
+verified in tcu-transition-progress.txt. This does not establish DSC sender
+identity or OEM roof reception. Traction and both PRHT directions, including
+interruption/recovery, retain separate status/next actions in CHECKPOINT.txt.
+
+2026-10-06 scope continuation: deep traction integration and NC PRHT folding
+AND unfolding, including interruption/recovery, remain independent goals.
+The ECU/AT transition-classification result is in tcu-transition-classification.txt;
+it does not establish DSC sender identity or OEM roof reception. Current
+traction and roof evidence/next actions remain separately listed at the top
+of CHECKPOINT.txt; completion criteria remain below.
+
+2026-10-06: Latest source selection: tcu-source-selection.txt connects filtered input25
+through17D60/22416, original495C0 proposal policy and full44CFE/48C08 to
+CAN216/ECU.18736 direct cases,11 input samples,640 manager calls and67 paired
+ECU checks pass. Two original phase records retire at110/218 withinputlow,
+142/294 withinputhigh. ADC-invalid input retention is distinct from published
+status2. Prior map/mode JSON regressions remain byte-identical. Next4508A
+proposal/code0 classification, shared971A overlap, remaining source flags and
+physical input25 identity/task order. All three research goals remain open.
+
+2026-10-06: Latest phase-mode production: tcu-phase-mode.txt verifies original49260 and
+its source/history helpers:9271 direct cases,7 retained hysteresis samples,
+384 manager calls,386 mode/191 initial/223 qualifier/82 release checks and
+17 paired ECU checkpoints. Produced modes0/1 shift the request start from
+call80 to111 and withdrawal96 to112; both retire142. Source inputs and cadence
+remain fixtures. Earlier map/release JSON regressions are byte-identical.
+Next source9B40/9C91/9BFC/9ACD/9C00 production and full task/overlap/composite/
+2->1 behavior. Traction and roof remain separate incomplete goals below.
+
+2026-10-06: Latest ascending phase: tcu-ascending-phase.txt verifies initial-delay neighbor
+branches, strict departure andtwo qualification routes:33015 direct cases,
+70 retained probe calls,160 manager calls with80 initial/111 qualifier/52 release
+oracles and10 paired ECU checks. Shared971A crossing flag canbe consumed by
+anotherindex; fullring overlap remainsopen. Next8086 producer (staticstore
+candidate492D2), fulloverlap/composite/2->1 and task timing. Allthree goals
+remainincomplete; distincttraction/roof steps are preserved.
+
+2026-10-06: Latest ascending predicates: tcu-ascending-predicates.txt verifies release
+admission andreactivation:7762 direct cases,384 manager calls,327 predicate
+oracles,124 release oracles and25 paired ECU checkpoints. Natural accepted
+8081=2 reselects live map768 afterrebound; forced0 retainsrelease1280. Second
+release capturesnew768 despitebit40. Both retire154. Prior map/release outputs
+remainbyte-identical. Next32614/317E4 ascendingphase/overlap policy and input
+provenance. Allthree goals remain incomplete; separate traction/roof steps stay.
+
+2026-10-06: Latest ascending release: tcu-ascending-release.txt verifies4E0EE and its
+bounds/capture/ratio helpers:5256 direct cases,12 gate combinations,12 retained
+numeric updates,160 manager calls/52 checked release updates and34 paired ECU
+checks. Stock release can restore a request after zero; activation9410/92D5
+bits are not rechecked inside this callback. Original manager releases1280
+through510/260/0, then retires142. Prior map verifier remains byte-identical.
+Next4DF3C/4E314/4DDA0,32614 phase qualification and upstream inputs. Allthree
+goals remain incomplete; separate traction and roof actions are preserved.
+
+2026-10-06: Latest ascending TCU result: tcu-ascending-map.txt verifies the group7 map,
+constructor and bit0 permission path:2908 direct cases,5 produced permission
+updates,222 retained manager calls and29 paired ECU checkpoints pass. Original
+creation enables9410bit0 from upstream inputs; code1 produces1280 through
+CAN216 and changes calculated ECU spark under explicit coefficients. Earlier
+zero fixtures had a closed permission gate and zero live map axis. Next4E0EE
+release policy,4E314/predicates and upstream map inputs. All three goals remain
+incomplete; distinct traction and roof next actions remain below.
+
+2026-10-06: Latest magnitude group: control-magnitude.txt verifies six local producers
+plus protected input initialization. 2565 direct checks and320 serialcycles/
+36 pairedCAN updates pass. Fast0->1 retrigger reloads12-call holdoff without
+newpulse; raw2 canpulse withoutreload. Secondmagnitude canpreservebaseline
+withfirstgateoff. 72B4/72BC productionwriter/CANmapping isunproved. Prior
+contribution pipeline isnowreusable; defaultJSON regression isbyte-identical.
+Next59720->8118,72B4/72BC indirectwriters and67AC/7242/modegate provenance,
+fulltask order. Preserve allthreegoals; nonecomplete.
+
+2026-10-06: Latest contributions: control-contributions.txt executes nine original
+baseline map/average,7978-gated80DC and independent80E0 correction bodies.
+2375 direct/state checks,320 serialcycles,36 paired CAN updates and320
+CAN211/latch updates pass. Request withdrawal retains7978/80DC suppression;
+explicit admission-count reset restores contribution. Otherphysicalroles and
+real timing remainopen. Next80FC/8100 producers593DE/59402 andsource maps,
+67AC/7012/7016/A3A4 provenance andcross-task order. Allthree goals incomplete.
+
+2026-10-06: Latest baseline source: control-baseline-source.txt executes six original
+809C/8098 target, retention and decay producers. 4997 direct cases and140
+serial cycles/22 paired CAN updates pass. Mode bit40/7EEE select distinct
+maps; stock scale1 and countdown reload0. Target clear via7346 can retain
+809C until the separate decay task. Publication helper resetsA3A4 as a fixture,
+not a firmware writer. Next5903C/5904C/59070 baseline contributions,7012/7016/
+A3A4 writers and cross-task publication order. All three goals remain incomplete.
+
+2026-10-06: control-input-history.txt executes the full local baseline/history
+calculation group 58F10 through58A7A and original protected publication.
+1547 direct cases and140 serial cycles/21pairedCAN updates pass. Mode2 can
+compute corrected8048 while downstream selector usesbaseline. History lag
+can briefly raise the reconstructed input; local caps remain executed.
+Next8098/contribution/mode producers and cross-task publication order; all
+three goals remain active. Physical traction and OEM roof behavior stay open.
+
+2026-10-06: control-ratio-inputs.txt verifies numerator producers and both
+ratio factors, including full lookup/helper side effects. 767 direct cases,
+two expected division-by-zero model stops, and 140 serial cycles with 21
+paired CAN updates pass. Stock map factor is 1; the other factor uses shared
+6DC4/6D40 inputs. Next 58A7A/8048, 80BC and protected input histories,
+full task order and nonzero2310 restoration. All three goals remain active;
+OEM PRHT receiver/commands and physical traction outputs remain unverified.
+
+2026-10-06: control-history.txt verifies retainedratio/remainder,
+hysteresis,countdown/holdoff andprotected2310 decay.1692 directcases and
+220 serialcycles/23pairedCAN updates pass. Near-zero numeratorclearsratio;
+near-zero denominatorholds it. Timer113 plusrepeating3/2/1/0 holdoff gates
+~0.05decay. Cross-tasktiming/nonzero2310 originremainunverified. Nextratio
+inputproducers583B8..5855A andrecordrestoration. Allthreegoalscontinue;
+OEMPRHT receiver/commands andphysicaltraction outputs remainopen.
+
+2026-10-06: control-sources.txt verifies override lookup input selection,
+stock maps/bounds and8248->6D00 normal-command coupling.1028 directcases
+and180 serialcycles with21 pairedCAN updates pass; no source/outputinjection
+inthenewlifecycle. Absolute ramp canignore8248 changeswhile normalcandidate
+stilltracksit. Next8018 producer58280 andretained2310/801C/8028 state,
+240xx stage/enable,fulltask/protectedRAM/recovery. Allthreegoalsremainactive;
+OEM PRHT receiver/commands andphysicaltraction outputs remainunverified.
+
+2026-10-06: control-overrides.txt verifies original5620/5650/565C numeric
+producers and initializers. 2904 direct cases and2578 retained serial cycles
+with27 paired CAN updates pass. Relative override captures feedback atcount50
+then ramps; absolute override follows source throughtimer63 then ramps,
+with exactly0->1 reset atstage>=3. No numericoutput injection innewloops.
+Next source8248 writer5C56C/bounds and39D24->6D00 coupling,stage/enable
+240xx,fulltask andprotectedRAM/recovery. Allthree goals remainactive;
+OEM PRHT receiver/fold-unfold andphysicaltraction outputs remainunverified.
+
+2026-10-06: control-timers.txt verifies original timer/enable producers,
+PDDRbit11 output and filtered536C source.1458 timer cases,432 GPIO cases,
+1600 filter checks and2514 retained serial cycles pass, plus38 pairedfault/
+clear cycles andthree valid-record comparisons. SparseinvalidprotectedRAM
+sets5354 andchangesmode1 admission;it isseparatefromserialfault20A8.
+Nextfulltask/earlierinputs,numeric5620/5650 andprotectedinitialization.
+Allthree goals remainactive throughCHECKPOINT.txt;no commit/push.
+
+2026-10-06: control-admission.txt verifies full24910 override priority and
+24C88/24DCE/24E06 local feedback/monitor enables.4991 cases, six retained
+checkpoints,126 countdown calls and32 paired TCU/CAN/serial paths pass.
+Feedback fault rejects that override; local priority can return to normal
+candidate. Fullvehicle reaction remains open. Next earlier timer/input
+producers and complete task/recovery order. All three goals remain active.
+
+2026-10-06: control-policy.txt verifies feedback-driven command override and
+full missing-feedback admission. 1800 direct cases, 224 SHLL16 vectors,
+eight paired checkpoints and 30 serial loss/recovery calls pass. Fault20A8
+inhibits its own monitor on the next call; valid replies alone do not restore
+counting. Explicit clear plus251 enabled monitor calls sets recovery57CD.
+Local enable producers, recovery consumers and physical effects remain open.
+All three goals continue through CHECKPOINT.txt; saved locally, no commit/push.
+
+2026-10-06: control-reply.txt verifies application reply acceptance, retained
+feedback, request sequencing and missing-feedback fault behavior. 1746 cases,
+five paired checkpoints and 28 loss/recovery points pass. Full monitor gate
+policy and physical recipient remain open. Continue all three goals through
+CHECKPOINT.txt.
+
+2026-10-06: control-serial.txt verifies SCI1 command/reply framing, checksum,
+timeout/recovery and actual pairedCAN-to-TDR propagation with sampledMMIO.
+Externalrecipient,pins,timing andphysicalactuation remainunproved. Next
+applicationreply admission/feedback;allthreegoals continue viaCHECKPOINT.txt.
+
+2026-10-06: throttle-candidate.txt connects sharedCAN calculation to
+stock angleconversion,prioritized command and outgoingwordbuffer.1227 direct
+cases and6 paired retained checkpoints pass. Saveddefinition supports throttle
+labels;transport,physical actuator andOEM roofreceiver remain unproved.
+Continue allthree goals via CHECKPOINT.txt.
+
+2026-10-06 update: see control-conversion.txt for verified numeric map
+inversion/blending through72FC,324 direct/180 selection/12 paired cases.
+Physical actuator identity and upstream A720/history remain open. Preserve
+ECU/AT, deep traction and OEM roof fold/unfold including interruption/recovery.
+Current continuation and Ghidra archive identity: CHECKPOINT.txt.
+
+Traction control and roof integration: active investigation
+Evidence checkpoint: 2026-10-06
+
+Continuation index: the current per-goal evidence status and next actions are
+at the top of CHECKPOINT.txt. For traction, read model-sources.txt,
+traction-pattern.txt and output-inhibition.txt together: these advance the
+older spark/timer leads below through executed ECU register writes, while
+sender attribution, physical units, throttle/fuel paths and real timing remain
+open. For roof, combine the factory sequence below with mt-can231.txt,
+can201-speed.txt and roof-aftermarket.txt; sender candidates do not establish
+OEM PRHT reception. Both goals remain incomplete and independently required.
+
+Numeric arbitration follow-up: numeric-arbitration.txt now executes fullA6490
+includingA69A8. Four outputs are independently verified from211/21A/216/218;
+stock bypass and grouped218 fault effects are covered. RemainingA720/history
+branches andA4FF8/B6960 consumers are next; physical throttle/fuel identity
+is unproved. Roof CAN reception and state-machine requirements remain open.
+
+Traction flag follow-up: traction-flags.txt advances readers35608/4E854
+through fullCAN21A normalization and protected7978 latch lifecycle. Any of
+five211 flags enables21A word1;7978 retains after request withdrawal.
+Paired TCU216bit7 reception is verified but stockB81B2 disables its6E57
+latch input. Next fullA69A8-containing arbitration and7978 physical consumers;
+these are not yet proven throttle/fuel outputs. Roof work remains independent.
+
+Measurement follow-up: tcu-measurement.txt verifies the TCU capture0B history
+through80EE andCAN216 byte4, including stale reset/recovery and complete shift
+lifecycles. This field is separate fromCAN216 bytes5..6 vehicle-speed fallback.
+It establishes neither a PRHT speed input nor a DSC sender/physical unit.
+Keep traction arbitration and OEM roof attribution/state-machine work active.
+
+Local fault follow-up: local-input-faults.txt verifies clutch P0704 / neutral
+P0850 event counters and MT231 byte1bit0, with original caller order and
+serial fault/recovery sequences. The AT image's zero dispatch masks prevent
+these reports reaching the tested downstream path; active CAN flags and
+stored DTCs must remain distinct. OEM PRHT interpretation is still open.
+
+Local-input follow-up: local-inputs.txt executes SCI0 bank1 acquisition and
+two-sample filtering into MT231 bits2/1. Isolated sample changes are rejected;
+physical switch wiring and OEM PRHT reception remain unproved. Static
+8EBC/8EBE fault-counter leads are preserved for lifecycle verification.
+
+MT sender follow-up: mt-can231.txt executes the ECU's MT231 payload:
+FF,flags,FF,FF,0,0,0,0 with neutral-candidate723A in byte1 bit2.
+Actual TCU comparison and every mode/configuration pack gate are verified.
+This provides a specific MT sender candidate; PRHT reception and any type
+field remain unproved. Configuration0 alone does not produce MT fields.
+
+Roof follow-up: roof-aftermarket.txt preserves public NC converter firmware
+and executes its selector builder. Independent menu labels1=Park,3=Neutral
+corroborate the ECU/TCU CAN231 grouping; they do not prove OEM PRHT use.
+Public1.01 predates advertised1.02 roof support. Its201 speed field gives
+an unexecuted units lead. MX5Things NC guides describe aftermarket modes,
+including opposite-button pause; do not transfer them to factory behavior.
+All artifact identities, source contradictions and next steps are saved there.
+
+OBJECTIVES AND COMPLETION CRITERIA
+
+The user explicitly added deep understanding of traction-control integration
+and logic, and folding/unfolding roof CAN integration. These supplement the
+ECU/TCU objective in README.txt. Assume the NC factory retractable hardtop
+(PRHT) from the project context; do not substitute ND RF behavior.
+
+Traction: identify message senders, payload fields, units, validity, timing,
+DSC requests and ECU responses; trace arbitration with driver/TCU requests
+through throttle, ignition and fuel actuation; explain enable/disable,
+traction versus stability intervention, stale data and recovery.
+
+Roof: identify CAN inputs/outputs, physical wiring boundaries, MT/AT variant
+dependencies, operating interlocks, opening/closing sequence, interruption,
+reversal, fault/recovery behavior, and coordination with windows, trunk,
+keyless module and cluster. A CAN identifier or operational description
+alone does not satisfy either objective.
+
+No DSC or roof-controller firmware has been identified among the current
+research inputs. ECU/TCU binaries can establish their own ends of these
+interfaces, but cannot establish every remote controller's internal logic.
+Do not assign a frame sender or physical unit from a suggestive ECU consumer.
+
+TRACTION LEAD: ECU CAN211 (ORIGINAL CODE VERIFIED)
+
+All addresses below refer to LFFEEE-stock.bin, identified in README.txt.
+Descriptor378EC: RX ID211, mailbox3, DLC8, bufferFFFF6A10. Receive3491C
+admits mode734A bit40 OR bit80 and polls6906; success calls348E2,34B8C,
+34BB2. The peripheral receive step has not been emulated.
+
+Unpack34B8C:
+  payload BE word bytes0..1 -> FFFF6A2A
+  payload BE word bytes4..5 -> FFFF6A2C
+Normalize349CA:
+  snapshots ->6A18/6A1A; working word6A1C is6A18 while counter6A1E>0,
+  otherwiseFFFF. B8246=20 reloads that counter at34BB2;34968 decrements.
+  Bits below are numbered within the BE word at bytes4..5:
+    bit12 ->6A1F raw; bit13 ->6A20 if !69E1 && !6A1F && B8243==1
+    bit9  ->6A22 raw; bit10 ->6A21 if !69E1 && !6A22
+    bit4  ->6A24 raw; bit5  ->6A23 if !69E1 && !6A24
+    bit0  ->6A27 raw; bit2  ->6A25 if !69E1 && !6A27
+                     bit1  ->6A26 if !69E1 && !6A27
+  Stock B8243=1. Flags do not directly test receipt counter6A1E.
+
+Receipt fault347B8 updates69E1 only while protected722A==1. If any of
+6B04/6A1E/6AB4 is zero and7353==1, it sets1; otherwise0. With722A!=1,
+it preserves the prior fault. This links211 expiry to request-flag suppression
+when the enabled/configured fault monitor runs. Scheduling remains unknown.
+
+Numeric consumer3FF2C writes protected float714C through real helper15522:
+  Stock overrideC11E9=0. If nonzero, code selectsC11FC (stock65537).
+  If718E==1: if7346==1 OR old714C>7140, output65537; else
+    min(old714C + C11F8,65537). StockC11F8=16 per function call.
+  Otherwise,7190==1 OR7191==1 selects65537.
+  With those two bytes not1, output u16[6A1C]-10000.
+Thus receipt expiry with numeric gates held zero yields55535, not65537.
+FFFF andFFFE have no special numeric branch here. Other code can change
+those gates; this result is not a conclusion about full-system fault output.
+The writer stores duplicate complement checksums at7150/7152.
+
+verify_network.py executes the actual instructions, no mocked helpers:
+  2,048 flag cases (all combinations of nine relevant bits, fault and freshness)
+  18 numeric word/freshness cases including signed boundary and sentinels
+  32 numeric gate cases and three ramp saturation boundaries
+  128 AT receipt-fault cases and64 other-receipt-fault cases
+  22 scheduled211 countdown/normalization/consumer steps and recovery.
+Outputs are saved in network-verification.json. Original integer/exact FPU
+harness limits apply. This does not identify the211 sender or torque units.
+
+Follow-up can211-spark.txt now executes714C through model inversion and
+per-cylinder spark outputs (twenty synthetic examples plus component tests).
+This establishes one spark path; it does not identify211 sender/units,
+throttle/fuel response, complete DSC behavior or ignition timer hardware.
+
+Static follow-up addresses (some now advanced in can211-spark.txt):
+  6A20 readers35608/4E854;6A25/26 readers35626/35630.
+  714C references29BEC,3640A,3F318,3F9B2,3FCFE,3FDEC,A6A76.
+  7190/7191/718E producers and718C are now executed; see freshness.txt.
+  Their physical gate identities and full downstream arbitration remain open.
+  TCU receives211 into8F34 but copies only five bytes (README RX table).
+  Prior MT research in sibling miata-nc-ghidra/docs/ecu_re/evidence/
+  torque_model.md supplies the211 lead. Its addresses and predicates must
+  not be transferred to AT: actual3FF2C inhibits its numeric decode when
+  either7190/7191 equals1. Older traction_control.md is not completion proof.
+  Prior4B0 wheel/DSC naming is unproven; do not use it as a sender/field map.
+
+FACTORY DOCUMENT EVIDENCE (PARAPHRASES, ACCESSED 2026-10-05)
+
+[A] Mazda MX-5 Miata New Model Training, Dynamic Stability Control, SG-135:
+https://www.miata.net/faq/Mazda%20MX-5%20Miata%20New%20Model%20Training%20USA.pdf
+The factory description assigns brake-pressure control and torque-reduction
+requests to DSC HU/CM. PCM controls engine output in response. DSC receives
+engine information from PCM and gear/selector information from TCM; steering
+angle arrives over CAN. The search-indexed factory passage was accessible;
+direct PDF open failed. It provides architecture, not identifiers or bit maps.
+
+[B] Mazda 2007 MX-5 Service Highlights, MX-5 pages09-40-2/3 and09-16-12:
+https://mazda.manymanuals.fr/cars/speed6-2007/specifications-17571/71
+https://mazda.manymanuals.fr/cars/speed6-2007/specifications-17571/72
+https://mazda.manymanuals.fr/cars/speed6-2007/specifications-17571/57
+The host incorrectly labels the book SPEED6; the actual pages identify MX-5.
+The signal chart sends PCM vehicle speed and transmission type to PRHT;
+TCM supplies AT selector/gear information, while PCM supplies MT neutral.
+PRHT sends alarm requests to the cluster and roof/trunk/deck status to the
+keyless module. Its CAN fault policy inhibits operation for local CAN failure,
+lost PCM/TCM communication or a vehicle-speed signal error, recovering when
+communication returns. These pages do not supply CAN IDs, payloads or timeout
+durations. Printed09-16-12 is the communication-fault page, not09-16-11.
+
+[C] Mazda 2008 NC workshop manual, PRHT control-module inspection:
+https://ncmiata-servicemanual.com/src/g5w09/html/id091600809600.html
+CAN-H/L are1S/1U in this inspection table. Operating switch1H distinguishes
+open/close/rest by approximately2.5/3.4/5V. Lock, trunk and roof/deck position
+switches, motor Hall sensors and motor outputs have direct connections.
+Window feedback1C and window-opening request1E are also wired directly.
+The earlier highlights diagram labels PRHT CAN3S/3U; that conflicts with this
+table. Resolve connector numbering/year before treating either as a pinout.
+
+[D] Mazda PRHT Job Aid, revised2006-10-03, normal-operation requirements:
+https://manualzz.com/doc/23987725/mazda-mx-5-power-retractable-hardtop-prht-technical-training
+Lists ignition on, unlocked/unlatched top, closed trunk, battery9.5..16.5V,
+speed below1.8mph and holding the operation switch. This service procedure
+is not a complete interlock/state-machine definition. Transmission conditions are now corroborated by the2008 workshop procedures
+in[F]; the complete sequencing/interrupt state machine remains unresolved.
+
+[E] Mazda 2008 NC workshop manual, multiplex fault localization:
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902e6830500.html
+PRHT diagnostics includeU0100/U0101/U2197, with PCM/TCM dependencies in the
+network chart. Follow-up2026-10-05: the factory2008 multiplex DTC table explicitly
+identifies U2197 as invalid vehicle-speed data, output by the PRHT module.
+It also lists PRHT among U0100/U0101 reporting modules. This resolves the
+prior code-meaning uncertainty, not the speed CAN identifier/encoding.
+https://ncmiata-servicemanual.com/src/g5w09/html/id0902e6800300.html
+
+[F] Mazda2008 workshop no-open / no-close troubleshooting (accessed2026-10-05):
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0903j2851200.html
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0903j2851300.html
+Both identify MT neutral or AT P/N as permission conditions. The close
+procedure checks PCM VSS,PNP/CPP,CPP; TCM TR; and PRHT VSS. This makes
+speed and transmission-position fields concrete tracing targets, without
+assigning their CAN identifiers. The open procedure also says that fully
+closed-and-locked or already fully open conditions invalidate the open switch.
+It separately checks top-lock release, roof/deck position switches and faults.
+
+[G] Mazda2008 PRHT U0030/U0031 diagnostic procedure:
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902j2860600.html
+U0030 means missing window-open notification during roof operation; U0031
+means continuous notification for30 seconds or more outside operation. The
+procedure tests direct continuity PRHT1E to window-switch1A, and PRHT1C to
+switch1H. This is evidence of a local window handshake, not a CAN message ID.
+Pin labels need variant review: see[H] before using them for hardware wiring.
+
+[H] Mazda2008 PRHT power-window main-switch inspection:
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0912008020i8.html
+The exterior-open variant lists2B completion and2C request, both active low.
+Without exterior-open, the table labelsA completion andH request, but its
+operating-condition descriptions and the waveform-referenceH suggest the
+opposite assignment; [G]'s continuity pairs agree with PRHT1E->A and1C->H.
+Preserve this source inconsistency. Do not resolve it by silently swapping
+wires or claim a validated pinout. The window interface is directly wired;
+exact connector/variant mapping needs matching wiring diagrams or measurement.
+The earlier1S/1U versus3S/3U CAN-label conflict is still separate and open.
+
+[I] Mazda2008 SJ6A-EL PID/data monitor inspection:
+https://www.ncmiata-servicemanual.com/src/g5w05/html/id050208805600.html
+TR denotes R/N/D/P switch position; PNP_TCM distinguishes P/N (Neutral) from
+D/M/R (Drive); GEAR_SEL is the calculated1..6 gear. Thus roof permission
+must distinguish selector/neutral state from current forward gear. These
+are semantic references for tracing TCU231 inputs, not proof of their bytes.
+TR switch terminals are2K/2M/2N/2O; D and R monitors correspond to2K and2M.
+
+RESEARCH IMPLICATIONS AND NEXT ACTIONS
+
+The documented roof architecture needs both CAN-derived vehicle conditions
+and local wired inputs. No roof open/close CAN command has been demonstrated.
+Trace known ECU speed/config/neutral transmitters and TCU selector signals
+to candidate roof inputs; compare captures or PRHT firmware before declaring
+exact identifiers or encodings. Keep CAN-borne status distinct from switch,
+sensor and motor wiring. Resolve the connector-label discrepancy explicitly.
+
+For traction, use the new gate evidence in freshness.txt to trace714C
+other arbitration consumers and correlate with factory DSC requests. The
+spark path now reaches7A9C/A0/A4/A8; trace ignition timers next. Continue
+throttle/ignition/fuel paths and DSC-off/fault behavior before naming211 as
+a confirmed DSC torque request. Inspect TCU211 consumers independently.
+
+Useful but failed source retrievals: foxed.ca/rx7manual/manuals/ lists
+2007 MX-5 Service Highlights+PRHT.pdf and MX-5 PRHT Technical Training+DTCs
+2007~.pdf. Web download returned404; direct urllib with literal+ returned403.
+The readable mirrors above preserve the useful conclusions and provenance.
+ManyManuals page72 initially failed direct open but worked via page71's link.
+Full copyrighted manuals are not copied into this repository.
+
+TCU211 follow-up (2026-10-05): tcu-can211.txt now distinguishes the TCU's
+five-byte receive copy and deadline tracking from the ECU spark path.
+The real TCU callback is a receipt marker plus empty stub;67 executed
+payload lifecycles read no payload in dispatch/watchdog. Other computed
+consumers remain unexcluded. Do not infer a TCU traction command solely
+from its receiving the same identifier as the ECU.
+
+Selector follow-up (2026-10-05): selector-inputs.txt executes sampled PKDR
+bits2..5 through TCU filtering, CAN231 and ECU combined723A/7244. Codes1/3
+produce the combined ECU state under normal gates; both modules group the
+same channels. This supports a P/N candidate for roof permission research,
+not proof that PRHT consumes231 or a particular field. MCU-to-connector
+mapping and exact physical P/N names remain open. Failed ADC validity gates
+hold filtered input; full diagnostic propagation is the next trace.
+
+Selector diagnostics follow-up (2026-10-05): selector-faults.txt now traces
+multiple asserted inputs through timed0707 qualification, summary92CD and
+CAN231 into ECU state decoding. A failed selector is a concrete roof-interlock
+research case; neither the roof receiver nor its reaction is proved. The
+no-input0708 producer has separate countdown and raw80BA threshold gates.
+Physical timing, recovery, MCU/connector mapping and PRHT consumption remain
+open. Factory P0707 MIL descriptions conflict; the new record preserves this.
+
+Selector recovery follow-up: selector-recovery.txt proves different active
+fault versus confirmed-report behavior and input-dependent recovery in the
+TCU. A missing-input fault can force231 invalid before a confirmed0708 report.
+The roof receiver/reaction remains unproved; test stale/invalid and recovery
+separately when PRHT evidence becomes available. Timer calls are not yet ms.
+
+Threshold provenance: selector-threshold.txt follows the TCU selector-fault
+speed candidate back toward local timer capture0A, with exact downstream
+scaling verified. This is not proof of the PCM-sourced PRHT speed field;
+trace that independently. Full upstream arithmetic, sensor/pulse identity
+and physical units remain unverified.
+
+PCM speed follow-up: can201-speed.txt now executes CAN4B0 bytes4-7 through
+two-input selection/average and CAN201 bytes4-5 encoding. AT216 bytes5-6
+supply a fallback whose invalidity independently forces201FFFF even with
+healthy4B0 inputs.96 paired cases confirm that edge. Physical speed units,
+DSC wheel ownership and PRHT receiver remain unknown. A roof-interlock test
+must distinguish raw speed value from the sender's invalid marker; no actual
+roof behavior is yet established. Traction CAN211 endpoints remain separate.
+
+TCU speed producer follow-up: tcu-speed.txt executes52B10 source calculation
+and18F8C cap/limiter/fault modes through ECU201. Speed fault clears limiter,
+so first recovered valid value bypasses the per-call change limit. The
+TCU201 receive callback, in1225 audited cases, uses bytes0/1/6 and does not
+read speed bytes4/5; this does not exclude other consumers. Physical timing,
+units, fault producer and PRHT reaction remain unresolved. These are sender
+and TCU callback facts, not completion of traction/roof internals.
+
+Speed fault/recovery follow-up: speed-fault.txt executes group13/code0722
+through CAN216 invalidity into ECU201FFFF despite healthy alternate4B0
+inputs. Capture-counter thresholds and recovery are verified in original
+code with synthetic scheduling; stored0722 persists after valid transmission
+returns. This gives a precise invalid/recovered sender case to compare with
+PRHT U2197, but does not prove the roof consumes201 or establish its reaction.
+Traction source/units and roof sequence/interlocks remain active next work.
+
+ROOF SEQUENCE AND INTERRUPTION EVIDENCE (2026-10-05)
+
+[J] Mazda USA,2008 MX-5 owner's manual, printed3-54..3-58 (PDF pages114..118):
+https://www.mazdausa.com/siteassets/pdf/owners-optimized/2008/mx5-miata-power-rh/2008-mx-5-owners-manual.pdf
+Document8X49-EA-07F,Edition5. Opening after unlatching: hold open, deck
+opens, closed windows lower partially, roof folds beneath deck, deck closes.
+Completion sounds a beep and extinguishes the indicator. Closing: hold close,
+deck opens with partial window lowering, roof emerges and closes, deck closes;
+the driver then locks the latch. The indicator remains lit until latching;
+windows do not automatically close. Releasing either operation button stops
+motion; pressing it again resumes that direction. Operation conditions list
+ignitionON, closed trunk, AT P/N or MT neutral, and parked/parking-brake
+precautions. The step-by-step procedure recommends engine running and AT P.
+These are documented user procedures, not proof that every precaution is a
+software interlock. Opposite-button reversal, interruption at every boundary
+and automatic recovery following each fault are not specified here.
+
+[K] Mazda2008 workshop, roof stops during operation, alternate readable mirror:
+https://www.nocnik.org/miata/manual/mazda/2008/miata/g5/books/g5w09/html/id0903j2851400.html
+The procedure distinguishes deck opening/closing and roof opening/closing,
+and checks PIDs DECK_OP,DECK_CL,RHT_OP,RHT_CL at the stopped position.
+Other branches inspect motor/Hall signals, switch interruption and controller
+DTCs. Thus a roof-state model needs distinct stage/endpoint feedback, not
+only a single CAN speed gate. Some continuity instructions conflict with[C]:
+the close-deck branch repeats3F (inspection table uses3O), and the close-roof
+branch names1F (inspection table uses1R). Treat those as unresolved source
+inconsistencies, not validated wiring instructions.
+
+[L] Mazda2008 workshop, B294D/B294E:
+https://ncmiata-servicemanual.com/src/g5w09/html/id0902j2861600.html
+These faults concern unequal left/right pulse counts for roof and deck
+motors, respectively. The page gives no numerical mismatch threshold and
+does not establish retry or reversal behavior. Its diagnostic action table
+contains apparent yes/no inconsistencies; use the fault description as
+evidence of paired-motion monitoring without adopting its repair branches.
+
+Working state sequence from[J] is now documented, not firmware-executed:
+  latched closed -> unlatched -> deck opening -> roof retracting
+  -> deck closing -> stowed
+  stowed -> deck opening -> roof extending -> deck closing
+  -> closed/unlatched -> manually latched
+Button release introduces a paused state; same-direction resume is documented.
+The exact window-handshake ordering relative to deck motion, reversal rules,
+communication-timeout transitions and motor-synchronization thresholds still
+need matching PRHT firmware/captures or further factory logic documentation.
+No new CAN ID, command, timing constant or validated pinout follows from this.
+
+ECU/TCU closed-loop follow-up: can201-cut-loop.txt now executes201word0
+through TCU hysteresis into216bit5 and ECU cylinder commands. This is a TCU
+request path, distinct from211 traction arbitration and201speed bytes4/5.
+Invalid-held numbers differ from diagnostic substitution; future traction
+and roof fault comparisons must retain that distinction. Physical units,
+full lookup interpolation, timeout policy and remote-controller internals
+remain open; this narrower success does not complete the broader objectives.
+
+Lookup follow-up: software-lookup.txt closes the stock TCU cut-curve
+interpolation gap (65536 inputs), with30 axis-source/fault cases reaching
+ECU cylinder commands. The request depends on an additional89A8-derived
+axis whose sensor identity remains open. This is still TCU control evidence;
+CAN211 DSC attribution and the PRHT message/state map remain unresolved.
+
+Simultaneous-request follow-up (2026-10-06): spark-interaction.txt executes
+TCU216word0 and CAN211 together through per-cylinder spark.4FD9C adds the
+two corrections;216bit5 can concurrently zero separate cylinder commands.
+480 paired paths and8 fault examples pass, with bounded ordinary output
+branch and synthetic coefficients/gates. This advances AT/traction
+arbitration without proving CAN211 sender, physical units or roof CAN IDs.
+
+CAN215 feedback follow-up (2026-10-06): can215-feedback.txt executes ECU
+publication, TCU base conversion/diagnostic selection and CAN216 return to
+the same ECU spark model with concurrent CAN211. Shared71C4 can change the
+CAN211 correction even with an unchanged returned AT request.72 paired
+cases and6 invalid/hold/substitute/recovery checkpoints pass using explicit
+model/admission fixtures. CAN211 sender, upstream model meaning and complete
+traction arbitration remain unproved. PRHT speed/neutral frame attribution,
+fold/unfold remote transitions and timeout/reversal behavior remain required;
+this feedback trace establishes no new roof CAN identifier or command.
+
+Shared-invalidity follow-up (2026-10-06): can215-invalid.txt closesgroup3B
+qualification/recovery through CAN216 into simultaneous ECU spark handling.
+Invalidity of one215 difference can force substitution of both values.
+Groups3A/3B/3C use500 healthy ticks plus the next producer pass; older5000
+claims were based on sparse samples and are corrected. This software timing
+must not be assigned physical units or reused as a PRHT timeout. Traction
+source/model and roof signal/state identification remain open requirements.
+
+Stock-model follow-up (2026-10-06): model-sources.txt executes coefficient
+selection, auxiliary offsets and pattern-count production shared by CAN215
+publication and CAN211/216 inversion.198 paired paths use produced model
+values;54 also use the actual mask/count producer.74F1 pattern identity,
+7182/74F2 producers, full traction actuation and real task order remain open.
+No roof signal identifier or state transition follows from this model trace;
+PRHT speed/neutral attribution and folding/unfolding/fault logic stay required.
+
+Traction event-pattern follow-up (2026-10-06): traction-pattern.txt executes
+CAN211 conversion, stock model thresholds and hysteresis, rotating masks and
+per-cylinder inhibition through shared736A.120 integrated paths and1280
+stateful rotation events pass. Eight event positions span four cylinders;
+local pattern inhibition and TCU cuts occupy separate arrays before merging.
+Final output hardware, DSC sender and real scheduling remain unproved. This
+adds no PRHT CAN attribution: roof speed/neutral message identification,
+fold/unfold controller transitions and timeout/reversal remain active goals.
+
+Output-boundary follow-up (2026-10-06): output-inhibition.txt executes shared
+CAN211/TCU216 inhibition through full1FB5A and20290 to timer-register writes.
+A cached mask change can remain unapplied until a cycle boundary. Tests use
+fixed register samples; neither physical injector shutdown nor DSC sender
+identity is proved. This adds no PRHT message attribution. Roof speed/neutral
+CAN mapping, folding/unfolding and timeout/reversal remain required alongside
+traction and ECU/AT integration; no controller timing is inferred from these
+unrelated ECU scheduling constants.

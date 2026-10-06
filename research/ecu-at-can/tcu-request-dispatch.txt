@@ -1,0 +1,198 @@
+TCU managed request lifecycle: event queue, states and CAN216
+2026-10-06
+
+Follow-up: tcu-request-admission.txt now executes original upstream creation,
+80EA/80EE captured-axis sources,9410 hysteresis and916F cancellation-source
+aggregation. Physical identities/full scheduling and remaining phase policy
+are still open; earlier results below retain their original fixture scope.
+
+Scope and reproducibility
+--------------------------
+Extends tcu-request-maps.txt and tcu-slot2.txt using the same unchanged ROMs:
+ECU7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08;
+TCU8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Run python research/ecu-at-can/verify_tcu_request_dispatch.py.
+Saved result: tcu-request-dispatch-verification.json. Passed65536 index,
+1502 activation-predicate,384 hold-gate and1080 parameter-selection cases,
+28 paired CAN216/ECU paths and8 full abort lifecycles.
+
+No instruction replacement or helper stubs. Uses the existing SHRelativeBranch
+interpreter; observer subclass only records function entries. This time the
+callback records are created by the real allocator/manager, rather than being
+placed at syntheticA900. Independent predicate tests still useA900 explicitly.
+Application phase records, measurements, input code/event, timers and ECU
+model coefficients are fixtures. No complete task scheduler/hardware model.
+All addresses hexadecimal; counts and example values decimal unless marked.
+
+Startup and actual event delivery
+---------------------------------
+15D04 copies B038 descriptor from ROM as part of the verified startup data.
+Its seven words are:
+  B038=5E418 common callbacks       B03C=5E450 preliminary callbacks
+  B040=5E428 global guard/action    B044=5E430 state predicate/action pairs
+  B048=5E454 state handlers         B04C=FFFFA34C global state pointer
+  B050=06010100 (state upper bound6, one guard, one preliminary slot).
+4CB9C is a wrapper for generic2FEF8 using this descriptor, not merely an
+initializer. Calling event0 invokes4CBA4 and initializes globalA34C to1.
+4C3C0 separately wraps manager2F5FC withA2B8/ROM5E3F8. Event0 initializes
+manager state1 and clears its ring head/count. Static initialization caller
+1E178..1E19A calls list initialization and both manager/state initializers.
+The full enclosing boot task is not executed here.
+
+Original4BEF8 creates one free heap block at9F3C (007FFFFF:127 units of four
+bytes, no neighbors).4C0F8 initializes message-buffer indexA13C=FF;4C100
+rotates ten8-byte buffers atA140.4C288(0) initializes queue0 count/head/tail
+atA1AC/A1AD/A1AE.4C2A0 enqueues group,operation,payloadpointer in8-byte entries
+atA1B0, capacity10.4C316 drains entries through ROM5E20C[group], and also
+processes entries enqueued during callbacks before returning. General queue
+saturation, heap fragmentation and competing concurrent requests remain open.
+
+Creation uses an actual message [event42,code6/7,operation,0], enqueued as
+group5/operation1, then complete4C316. Manager1->2 calls4C3CA, which selects
+group8 via4C880 for the tested codes/operations.2FBEE allocates20 bytes via
+4BF12, queues group8 constructor operation1, and2FAA2 appends a12-byte
+manager-ring entry atA2BC (capacity12). The first real record is9F40.
+The constructor4CBA8 captures inputs, finds its ring index, allocates the
+first-list handle and returns state2. Dispatcher2FEF8 immediately executes
+state2 handler4CF6A, so the new allocated list entry publisheszero/mode0.
+
+Correction from exploratory execution: calling4C3CA directly bypasses the
+manager's state1->2 update. That incomplete probe left a completed ring entry
+in place. The final verifier enters through group5/operation1 and drains all
+original messages, proving ring removal and heap release too. No firmware or
+interpreter change was required. Do not describe a direct constructor/helper
+call as a complete managed lifecycle.
+
+State machine, verified under stock descriptors
+------------------------------------------------
+Manager group5/operation2 visits active ring entries and queues group8/
+operation4 updates. Generic2FEF8 checks the global guard first, then the
+current state's predicate/action, then the selected state's update handler.
+It stores a returned new state after the handler call. Only one state-specific
+transition is selected per call; it does not immediately re-test the next
+state's predicate. A transition can run its new numeric handler that same call.
+
+  state2: no active reduction; handler4CF6A writeszero/mode0.
+          Predicate4CD18 true ->4CDF2 ->state3.
+  state3: handler4D010 publishes stock map reduction.
+          Predicate4CE5E true ->4CE7A ->state4 orstate5.
+  state4: handler4D010 keeps calculating the map request.
+          Predicate4CEC6 true ->4CEF2 capture/reset ->state5.
+  state5: handler4D142 calculates decay from captured request.
+          Predicate4CF08 true ->4CF3A release ->state1/cleanup.
+
+4CDF2 snapshots95AE bit0 into record+18 bit20 through4D7EC, then returns3.
+Its manager-state3 operation-change notification branch remains untested;
+these full lifecycles use manager-state2. Constructor snapshots80C2/80C4
+and808C; current80F6 remains a live map input as proved in the preceding work.
+
+Activation predicate4CD18, independently checked
+------------------------------------------------
+Let code=record+1 and operation=record+8. ref is signed32 RAM
+9218+4*ROM[5D446+code]; measured=s16(80EE); derivative=s16(80F0).
+3159A(code) calls3206E, which searches the separate15-byte application-phase
+ring95D4 using head96C4/count96C5 and code at entry+10. A matching entry's
+phase is signedbyte95E1+15*index. Missing returnsFF. Its producer is not yet
+executed; tests use an explicit matching entry and phase boundary values.
+
+4D6F0 selects two5-knot curves in76474..76523, using u16(record+14),
+captured80C2, as axis. Both results are shifted right2; call them A andB.
+4D2D0 selects a4-knot curve in76524..7656B, uses
+4*clamp(s16(80EA),0,3FFF) as axis and shifts result right8; call itF.
+Family bycode: other0,6->1,7->2,8/11->3,9->4,10->7.
+Code7 with current95AE bit0 usesfamily5. Operation18 overridesfamily6;
+operation17 overridesfamily5. This uses the current95AE source, before its
+snapshot at state3 entry; later map/duration selection uses captured flag20.
+
+The exact checked predicate is:
+  signed phase >=1 AND
+  (measured >=ref-A OR (measured >=ref-B AND measured >=ref-derivative*F)).
+Stock software lookup/division executes in full and agrees with independent
+integer interpolation across the saved boundary/randomized cases. No physical
+name is assigned to the phase, ref or measurement merely from this formula.
+The same80EE feeds CAN216 byte4 via /96, already verified in tcu-speed.txt.
+Static source leads:2124C calls212F4(calibration76DE2) then stores80EE;
+21460 stores80F0;208CC stores80EA. Their full inputs/units remain open.
+
+Five-way index and three parameter columns
+-------------------------------------------
+Full3138A reads byte800B and takes its code argument through316A8 to select
+one of seven5-byte threshold rows70A20. Codes0..4/5..9 selectrows0..4,
+code10 selects5 and other bytecodes select6. Output808C is the number of
+first-four thresholds that are <=800B, hence0..4 for all65536 bytecode/input
+pairs. The fifth byte isFF and the top input is handled explicitly.
+Physical meaning of800B and caller code is still open.
+
+This resolves the earlier broad15-index table tests: each15-byte group at
+763FC..76473 is three arrays of five parameters. With normal produced index
+0..4:4D4CC selects group+0+index (ramp duration);4D350 selects group+5+index
+(advance margin);4D3D8 selects group+10+index (hold duration). Family selection
+matches the preceding record-code/operation/captured-flag rules. The prior
+indices5..14 were direct synthetic caller fixtures, not normal3138A outputs.
+Their observed arithmetic remains true, but zero-duration and sentinel-edge
+examples must not be claimed as normal stock entry behavior.
+
+State3 advancement is s16(80EE)>=ref-64*advance_margin via4D7A2.
+4CE7A clears81F2[record+12], then evaluates the hold with elapsedzero. If true,
+it captures current request to+6, resets8115[slot] and returns5; else returns4.
+State4 uses the current81F2[slot] with the same hold predicate4D7CC:
+  elapsed>=hold_duration AND(code!=9 OR s16(80D8)<stock773E0=64).
+State4 success calls4CEF2 to capture/reset and returns5. These timers are
+samples, not elapsed milliseconds; timer service remains an open task.
+
+Full paired lifecycles and termination
+---------------------------------------
+Code6/operation0,index0,ref1000,phase1,captured80C2=0 has activation boundary
+872 and advance boundary872. Its stock map point produces reduction1024:
+  measurement871 ->state2, no request;
+  measurement872 ->state3, reduction1024;
+  next update872 ->state5, reduction1024, timer reset;
+  decay24 ->reduction522; decay48 ->20; decay49 ->release.
+The empty first list then withdraws record2 and915A becomes7FFF.
+
+Code7/operation17,index0,ref1000,phase1 has activation boundary488, advance
+boundary1000, hold3, decay18. Captured map point produces576:
+  487 ->state2;488 ->state3;999 holds3;
+  1000 ->state4; hold2 keeps4; hold3 enters5;
+  decay17 ->reduction32; decay18 ->release.
+All record fields come from the original creation path in the final test.
+
+Each of14 lifecycle checkpoints runs twice through actual TCU18F10/18F8C
+and the ECU spark/cut consumers, with CAN211word0=10016 and cut clear/set.
+Same-instance915A is checked against the independently expected base800 minus
+reduction. This executes simultaneous TCU and traction-related ECU control;
+it does not identify the actual DSC sender, hardware waveform or task timing.
+
+At completion, predicate4CF08 runs before4D142.4CF3A releases the allocated
+list handle and returns1, so the last positive numeric value need not be
+replaced byzero in the record. The manager's queued completion event5 removes
+the ring entry and calls4BFDA. The heap payload is then zeroed and the free
+block coalesces back to007FFFFF. List count, manager count and event queue
+count all reachzero. Inspecting a freed record's zero state is not evidence
+of another active state transition.
+
+Global916F bit0 is checked before state-specific predicates. It invokes4CCA4
+and completes the same release/cleanup fromstates2/3/4/5. Manager cancel
+operation3 queues the group's common operation2 callback4CC2A and also
+releases fromallfour states. Eight abort cases verify no map/ramp callback
+runs after cancellation is selected. Producer of916F and external cancel
+events remains open; these results establish software behavior, not a named
+physical fault or driver command.
+
+Static scheduling lead and next actions
+---------------------------------------
+31E20 is an actual queue-service caller. It walks ten4-byte records at5D3BC,
+checks period flags against96C6/ROM5D420, enqueues group operation2 and calls
+4C316 immediately per admitted entry. First entry00050102 selects manager
+5 with periodclass2; other groups are6,20,B,2,25,14,1A,26,29(hex).
+Full31E20, its outer task and timer increments have not been executed.
+3204C is another4C316 callsite. These are the next task-order/timing leads.
+
+Continue9410/916F gate sources, application-phase lifecycle, actual caller
+creation/cancel conditions,80EA/80EE/80F0/ref and80F6/80C4 physical sources,
+8115/81F2 service, other request families4E/second-list andrecord1 phases1/2.
+Keep traction sender/remaining control paths/scheduler/pins and OEM PRHT
+CAN speed/type/neutral reception, fold/unfold interruption/reversal/timeouts
+active. All three user goals remain incomplete. Previous/current turns made
+verified progress; no blocker audit applies. All artifacts and Ghidra work
+saved locally; no new staging, commit, push or hardware work.

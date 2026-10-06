@@ -1,0 +1,1238 @@
+{
+  "scope": "Original transition progress initialization, rate selection and accumulation.\n\nNo physical progress units or scheduler cadence are inferred. Original startup\ncall order is executed as a bounded instruction segment, not a complete boot.\n",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "direct_cases": {
+    "initial": 256,
+    "integrator": 378,
+    "helpers": 1296,
+    "rates": 16384,
+    "progress": 832,
+    "startup_segment": 7,
+    "request_group": 5632
+  },
+  "retained_traces": [
+    {
+      "input25": 0,
+      "source_rows": [
+        {
+          "call": 1,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            105
+          ],
+          "rates": [
+            105,
+            0,
+            105
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 2,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 80,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 81,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 100,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 150,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 200,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 320,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        }
+      ],
+      "checkpoints": [
+        {
+          "call": 1,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 0
+            }
+          ],
+          "source915a": 32767,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 1
+            }
+          ],
+          "source915a": 32767,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 130,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 2
+            }
+          ],
+          "source915a": 32767,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 162,
+          "subcall": 0,
+          "head": 2,
+          "count": 0,
+          "records": [],
+          "source915a": 32767,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "ascending_trace": {
+        "measured_a": 25000,
+        "numeric_entry": null,
+        "independently_calculated_candidate": null,
+        "checkpoints": [
+          {
+            "call": 1,
+            "subcall": 0,
+            "state": 2,
+            "flags": 3,
+            "request": 65282,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 162,
+            "subcall": 0,
+            "state": 0,
+            "flags": 0,
+            "request": 0,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      },
+      "classification_rows": [
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 0,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            105
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            105
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        }
+      ],
+      "progress_checks": 320,
+      "classification_checks": 323,
+      "descending_entries": [],
+      "group_calls": [
+        {
+          "code": 1,
+          "operation": 0,
+          "group": 7
+        },
+        {
+          "code": 6,
+          "operation": 8,
+          "group": 65535
+        }
+      ],
+      "acks": [
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          32
+        ],
+        [
+          0,
+          11
+        ],
+        [
+          0,
+          20
+        ],
+        [
+          0,
+          26
+        ],
+        [
+          0,
+          41
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          32
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          37
+        ],
+        [
+          1,
+          37
+        ],
+        [
+          1,
+          20
+        ],
+        [
+          1,
+          26
+        ],
+        [
+          0,
+          38
+        ],
+        [
+          1,
+          38
+        ],
+        [
+          1,
+          41
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "retired": [
+        [
+          199554,
+          1
+        ],
+        [
+          199326,
+          1
+        ],
+        [
+          201064,
+          1
+        ],
+        [
+          199554,
+          6
+        ],
+        [
+          199326,
+          6
+        ],
+        [
+          201064,
+          6
+        ]
+      ]
+    },
+    {
+      "input25": 1,
+      "source_rows": [
+        {
+          "call": 1,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            105
+          ],
+          "rates": [
+            105,
+            0,
+            105
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 2,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 80,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 81,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 100,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 150,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 200,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        },
+        {
+          "call": 320,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "rates": [
+            105,
+            -256,
+            -177
+          ],
+          "flags": 1,
+          "gate": 4
+        }
+      ],
+      "checkpoints": [
+        {
+          "call": 1,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 0
+            }
+          ],
+          "source915a": 32767,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 1
+            }
+          ],
+          "source915a": 32767,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 130,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 2
+            }
+          ],
+          "source915a": 32767,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 162,
+          "subcall": 0,
+          "head": 2,
+          "count": 0,
+          "records": [],
+          "source915a": 32767,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "ascending_trace": {
+        "measured_a": 25000,
+        "numeric_entry": null,
+        "independently_calculated_candidate": null,
+        "checkpoints": [
+          {
+            "call": 1,
+            "subcall": 0,
+            "state": 2,
+            "flags": 3,
+            "request": 65282,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 162,
+            "subcall": 0,
+            "state": 0,
+            "flags": 0,
+            "request": 0,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      },
+      "classification_rows": [
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 0,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            105
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            105
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        }
+      ],
+      "progress_checks": 320,
+      "classification_checks": 323,
+      "descending_entries": [],
+      "group_calls": [
+        {
+          "code": 1,
+          "operation": 0,
+          "group": 7
+        },
+        {
+          "code": 6,
+          "operation": 8,
+          "group": 65535
+        }
+      ],
+      "acks": [
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          32
+        ],
+        [
+          0,
+          11
+        ],
+        [
+          0,
+          20
+        ],
+        [
+          0,
+          26
+        ],
+        [
+          0,
+          41
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          32
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          37
+        ],
+        [
+          1,
+          37
+        ],
+        [
+          1,
+          20
+        ],
+        [
+          1,
+          26
+        ],
+        [
+          0,
+          38
+        ],
+        [
+          1,
+          38
+        ],
+        [
+          1,
+          41
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "retired": [
+        [
+          199554,
+          1
+        ],
+        [
+          199326,
+          1
+        ],
+        [
+          201064,
+          1
+        ],
+        [
+          199554,
+          6
+        ],
+        [
+          199326,
+          6
+        ],
+        [
+          201064,
+          6
+        ]
+      ]
+    }
+  ],
+  "limits": "Startup segment and progress body execute; surrounding scheduler/peripherals and source units remain fixtures.939E production remains outside these traces."
+}

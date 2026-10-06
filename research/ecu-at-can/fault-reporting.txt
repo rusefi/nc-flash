@@ -1,0 +1,126 @@
+PCM receive loss -> TCU diagnostic reporting -> ECU status
+Evidence checkpoint: 2026-10-05
+
+RESULT AND LIMITS
+
+Original-code execution now connects each enabled class0 receive record to
+the TCU's C100 diagnostic entry (U0100 encoding), CAN216 byte7 bit1, and ECU
+status6E53/24EE. The active group fault and transmitted bit recover differently.
+verify_fault_reporting.py saves14 lifecycles (seven missing IDs x two recovery
+gate values) and32 independent ECU gate cases in fault-reporting-verification.json.
+
+The target images remain the unchanged LFG1TF000.bin and LFFEEE-stock.bin with
+the SHA256 identities in README.txt. No firmware patch, peripheral simulation,
+vehicle test, full scheduler or nonvolatile-write verification is involved.
+Hexadecimal: addresses, CAN IDs, masks, action/group numbers and raw bytes.
+Decimal: record byte offsets/strides, durations, case counts and tick values.
+
+DIAGNOSTIC IDENTITY AND STATUS PUBLICATION
+
+TCU table5EB78 has16-byte group records. Group36 at5EED8:
+  01 00 00 00 00 01 11 C7 C1 00 00 00 21 00 20 00
+Offset0 selects processing callback1; offset7 flagsC7; offset8 BE16=C100;
+offset12 maps qualification status to21; offset14 maps aggregate status to20.
+Groups37/38 have flags/code0 and map to22/23. Do not invent U0121/U0155 for
+those entries: their stock codes are zero and qualifier records are skipped.
+
+56658 requiresA936==1, loops groups1..48(hex), chooses callback5EB5C[record0].
+Callback1 is56908. Direct original56908(group36) executes the same selected
+group without running every unrelated diagnostic producer. StatusA76C bit04
+causes569EA(group36,4): setA722 bit04, clear02; call57374 to update reporting
+state, then5701A recomputes an aggregate. The test runs the actual helpers.
+
+57374 ->5752E sets status bits10/40 at61D3+2*group (group36:623F).
+578E0 tests existing bit01 and record flags02/80 (or status20). StockC7 allows
+57964 on the first failure: sets stored status01, modifies the second byte
+toE8 under initially zero RAM, and setsA99B=1 because record flags04 is set.
+5743C inserts group36 into first free slot in list6188;57A32 updates associated
+record data. These are firmware-maintained memory structures; retention
+across reset or an actual EEPROM commit has NOT been verified.
+
+558CC serializes this list using the actual table code at5EB80+16*group and
+filter58398. Executed output changes from no entries to one three-byte record
+  C1 00 FF
+and remains there after tested active-fault recovery. The helper builds a
+diagnostic list; CAN/ISO-TP diagnostic transport was not executed here. C100
+maps to U0100 under the standard two-byte DTC encoding. Factory corroboration:
+the2008 Mazda SJ6A-EL DTC table describes U0100 as loss of PCM signals at TCM.
+Source (factory text on static mirror, accessed2026-10-05):
+https://ncmiata-servicemanual.com/src/g5w05/html/id050208800500.html
+This is consistent with class0 PCM attribution; not proof that the two ROMs
+are an OEM-matched software pair or that every frame sender is now resolved.
+
+5701A scans groups1..48. AnyA6EC+group bit04 plus record flags01 and either
+flags40 or stored status80 makes aggregate1;532C8 stores it atA666. For group36
+flagsC7, activeA722 bit04 suffices. This aggregate clears when active state
+clears even thoughA99B remains1. Neither output is given a final lamp-driver
+or mechanical fallback name without its remaining downstream trace.
+
+HEALTHY RECOVERY IS ANOTHER TIMED PATH
+
+After receive recovery resets the qualification timers,1A598 publishes mapped
+status3 atA9FD.57F50 calls57F96 (58034 then580B4) and57FA0.58034 uses8-byte
+records at5F008; index27/group-mapped21 record5F0E0 is:
+  21 00 01 00 13 88 00 01
+This supplies5000 ticks and threshold1 to helpers581AA/58200/58274.581AA tests
+mapped statusA9DC+index bit02. Healthy startsAA0F+index bit01 with a timer,
+then sets bit02 at expiry.58034 adds80;57FA0 marksAA42+group bit01 and calls
+5756A, which adds stored-status bits02/08. A subsequent1A598 sees the healthy
+indication and currentA722 bit04, publishesA76C=81, and5662A setsA722 bit80.
+
+56908 then consults56A4A. Stock group36 flags6 bit01 requires word80A4==0
+before clearing active04. If80A4!=0, A722 holds84 instead of clearing; the
+80 health indication remains alongside04. Physical meaning of80A4 is open.
+Earlier exploratory expectation04-only was corrected to84 and is asserted.
+
+Example isolated200 with80A4=0; other enabled records recovered each step:
+ tick100: qualification armed; no report; A99B/A6660.
+ tick600: qualified; A72204; diagnosticC100; A99B/A6661.
+ tick601: receipt recovery; active04 and stored report remain; healthy timer arms.
+ tick5600: one tick before healthy expiry; still active04.
+ tick5601: healthy timer expires, AA30=83, AA78=1; active04 remains this call.
+ tick5602: next qualifier/processor call clearsA722 andA666; A99B andC100 remain.
+ With80A4=1, finalA72284/A6661; A99B andC100 still remain.
+The one-call offset follows the selected task order, not a proven absolute
+one-millisecond delay. Task56F80 orders group processing56658 before57F50;
+tests preserve this relative order but omit unrelated diagnostic producers.
+Fresh receipt calls are explicit19DC0 events; they are not a complete bus.
+
+PAIRED ECU DELIVERY
+
+TCU18F10/18F8C produce the frame at8EFD. A99B maps to216 byte7 bit1, observed
+clear before qualification and set afterward, including after active recovery.
+For test execution only, unrelated byte4 is marked unavailable via92C6 bit20
+to avoid the unsupported integer divider. Flag instructions execute normally.
+
+ECU35034 unpacks,34CEC normalizes and writes that bit through1529C into
+protected state2184. Mode734A bit40 and configuration734C!=1 reject it.
+3B282 in AT mode reads2184 through15146 and sets6E53 from equality to1;
+MT mode clears6E53.775CA combines local protected24EC OR6E53, inhibits when
+protected9462==1, and writes protected24EE using1529C. All32 combinations
+of incoming bit, MT flag, configuration, local request and inhibit execute.
+
+The14 paired lifecycles transfer actual TCU bytes to ECU RAM and execute
+these full routines. Under enabled AT configuration, bit1 ->2184 ->6E53
+->24EE becomes1 and persists through tested TCU active-fault recovery.
+The bit is linked to stored diagnostic reporting, distinct from byte7 bit5's
+previously proven cylinder-command cut path. Physical MIL interpretation is
+plausible but remains an inference until downstream output mapping is traced.
+
+NEXT WORK
+
+Trace ECU24EE to outward status/physical lamp path and TCUA666 to its consumers.
+ECU24EE MOV.L candidates:77600 writer,7774C/7778E/777A0 readers. TCUA666
+MOV.W candidates:5327C,532C8 writer,532D8 getter. TCUA99B MOV.W candidates:
+190C0 packer,5435A,54552,57430 clear,576B4,578C4,579AC set. These are static
+literal candidates, not all confirmed access roles. disassemble.py refs only
+finds MOV.L; MOV.W requires sign-extending the halfword atPC+4+2*disp8.
+Trace real diagnostic-list clear/aging and nonvolatile persistence separately
+from active-fault recovery.80A4 andA939 physical provenance remain unresolved.
+Mechanical gear/pressure fallback is still unproven. Traction211 arbitration
+and roof CAN mappings remain active alongside this fault-reporting work.
+
+Follow-up: warning-status.txt and the extended verifier now connectA99B to
+PID01 MIL status and ECU CAN420 byte5 bit6, and activeA666 to CAN231 byte1
+bit6 with startup/override gates. Earlier physical-output uncertainty is
+narrowed to those software endpoints; actual cluster hardware remains open.

@@ -1,0 +1,101 @@
+TCU acceptance-gate provenance (2026-10-06)
+=========================================
+
+Scope and evidence
+------------------
+This extends selection-reporting.txt: the unconditional acceptance block at
+FFFF9545 mask04 has an identified writer, TCU 2D1BC, called by 2C7B0 at
+2C854. The complete original functions execute in verify_transition_gate.py,
+including their called helpers. Inputs remain explicit RAM fixtures; this
+does not establish physical gear attainment, mode names or scheduler timing.
+Both unchanged ROM identities are included in transition-gate-verification.json.
+
+Exact isolated gate behavior
+---------------------------
+Use unsigned bytes: q = argument r4, p = FFFF954D, a = FFFF9594,
+b = FFFF959C, and old = FFFF9545. The resulting mask04 is set exactly when:
+
+  ((old & 4) != 0 OR q in {0, 5})
+  AND (q == p OR q == 255)
+  AND (a == 2 OR b == 2).
+
+All other bits of 9545 are preserved. The function does not update 954D.
+The temporary arming for mode0/5 can be cleared within the same call: a
+changed mode that is not FF clears the latch, even if a source equals2.
+Conversely, FF can retain an already armed latch but cannot arm it alone.
+Getter2F0BC reads9594; getter2F4BC reads959C. These sign-extend their bytes,
+but 2D1BC compares them after unsigned-byte conversion.
+
+Source-state writers
+--------------------
+2F008 initializes9594 to1. 2F010 calls2F0C2: if either9564 or9558 equals2,
+it sets9594 to2 and resets81CE. Otherwise it leaves both unchanged.
+2F0B0 resets9594 to1 and calls2D354(index4).
+
+2F214 initializes959C to1 and81D7 toFF. 2F222 calls2F4F4: if9564 equals2,
+it sets959C to2, snapshots signed word80F2 into959E and resets81D7. It also
+calculates95A0bit0 from92C5bit2,9546 and80F2 against stock ROM thresholds
+7709E/770A0/770A2. The verifier executes this entire function, but its
+independent assertions cover959C and81D7 only; it does not claim exhaustive
+coverage of95A0. 2F4A8 resets959C to1, clears95A0bit0 and calls2D354(index4).
+Getter2DB4C supplies9564 and2D6D6 supplies9558. Their upstream producers
+and the physical meaning of these state values remain open.
+
+Whole caller and ECU consequence
+-------------------------------
+2C7B0 reads8080 and prior954C, selects a local mode via2C892, calls several
+policy helpers and can replace the result withFF after2CC70. It sets9545
+mask02 forFF; otherwise clears02 and resets81C8. It then calls2D1BC using
+the proposed local mode, before storing8080 in954C and the new mode in954D.
+This ordering means the gate compares against the previous mode, not against
+the value about to be stored. The complete caller executes in paired tests.
+Other helper effects and all possible mode-selection conditions are not
+independently characterized by this verifier.
+
+The paired path is:
+  2C7B0 -> 2D1BC -> 48C08/48174 -> accepted8081/cache606F
+  -> 19414(mode1) CAN231 -> ECU35BB8/3585C -> one-hot6ACB..6AD0.
+
+Fixtures set application class8080=6, accepted state0/3/5, requested index
+8084=5 and representative previous local modes, source states and old gates.
+For these fixtures, an asserted gate retains the old accepted state; clearing
+it permits one step toward5. The local mode954D and selection index8081 are
+separate variables: matching numeric values do not establish matching roles.
+
+A seven-call lifecycle uses original initializers and2F010/2F222 to set the
+two source states from9564=2, then runs the complete caller, acceptance and
+CAN reporting. The first two calls hold accepted0 and CAN high nibble1.
+Explicitly invoking2F0B0/2F4A8 resets the source states and releases the gate;
+five further calls accept1..5 and report CAN high nibbles2..6. Reset invocation
+is a fixture, not proof of the scheduler's real recovery condition or timing.
+
+Reproduction
+------------
+  python research/ecu-at-can/verify_transition_gate.py > research/ecu-at-can/transition-gate-verification.json
+
+The script independently asserts the Boolean gate formula, preservation of
+other flags and adjacent bytes, source-state admissions, complete-caller gate
+and previous-mode ordering, and the paired CAN/ECU outcomes. No shared SH
+interpreter is changed. Passed:65536 gate cases,3072 byte sweeps,1280 source-producer cases,
+192 paired caller cases and7 lifecycle checkpoints. All paired rows are
+in the JSON.
+Original disassembly ranges are retained by disassemble.py excerpts; use the
+GNU SH objdump setup documented in README.txt.
+
+Failed leads and continuation
+-----------------------------
+The writer uses baseFFFF9544 plus1, so searching only aligned longword
+references toFFFF9545 misses it. MOV.W pools also matter for9594/959C.
+2D090 writes9545mask20, 2D146 writesmask01, 2CB90 writesmask08 and2CC70
+touchesmask80; these are not substitutes for the mask04 writer.
+24DFC/2522E are readers, not the producer previously sought.
+
+Static leads for engine-request coordination:24DF8 reads9545mask04 and
+resets82A4 while blocked. Its surrounding caller chooses1F038(index1) or
+1F044(index1). Around2A260 another reader suppresses calculations before
+publishing/clearing source6 via1F170/1F17C. These are unexecuted leads; their
+connection to specific engine CAN fields has not been established here.
+Next trace the producers/scheduling of9564/9558 and the source-state reset
+conditions, then connect transition work48F20/31524 to concrete consumers.
+Full44CFE candidate calculation remains unexecuted. Traction CAN211
+arbitration and PRHT CAN speed/neutral attribution remain required goals.

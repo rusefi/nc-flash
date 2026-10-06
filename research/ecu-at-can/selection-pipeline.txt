@@ -1,0 +1,105 @@
+TCU selection pipeline and CAN201 change-rule reachability
+2026-10-06
+
+This extends can201-byte6.txt using the same unchanged paired ROMs and strict
+interpreters. Previous goal turn made verified progress (paired byte6 trace,
+durable evidence and independently restored Ghidra archive). Overall ECU/AT,
+traction-control and PRHT requirements remain active and incomplete.
+Reproduce: python research/ecu-at-can/verify_selection_pipeline.py
+Results: selection-pipeline-verification.json. No instruction replacement,
+ROM mutation or simulated call return values; observer subclass only records
+original instruction entries and writes. RAM addresses have FFFF prefix.
+
+Key correction to activation claims
+----------------------------------
+The earlier injected92D5 bit5 fixture proves the behavior of46CC8, not normal
+activation. 21A16 unconditionally clears92D5 mask20 at21B14..21B18. 21734
+calls21A16 at21746 as part of a larger default-input update. Static task code
+at1E91A calls21C1C, then21734 at1E920, then21500 at1E932 (with other calls
+between). 21C1C preserves mask20; it does not produce this enabling bit.
+A complete21734 call clears it regardless of all256 starting flag values.
+This is evidence against assuming normal activation. It is not proof that no
+other writer, alternate call order or intervening routine can set the flag.
+The whole scheduler and all computed writes have not been emulated/audited.
+
+Executed default-input behavior
+-------------------------------
+For21A16 and the tested21734 call:
+new92D5=(old92D5 &88) | (A57C!=0 ?01:0) | (A57D!=0 ?02:0)
+        | (A57E!=0 ?04:0) | ((A598 &01)<<6).
+Mask10 and20 clear. 9304/9306/9308 are also initialized by21A16.512 fixtures
+combine all old bytes with zero and seeded-random source states. 1536 further
+cases verify mask20 preservation through570F6/57258/21C1C for no fault and
+active35/36/3A/3C/3D. Configuration-field physical roles remain unproved.
+
+Caller chain and stock calibration
+---------------------------------
+46CC8 is called by4662C at46664. 4662C applies seven routines in this order:
+46DB6,46D34,46DE4,46CC8,46D30,46A34,46B00, operating on local copies of
+the two caller-provided bytes, then writes both final values back.
+452DC dispatches a pointer table at5DEA0 with signed word count at7744C.
+Stock count=3 and the entries are44664,466B8,4662C. Thus the stock table does
+include this path.44664 resets auxiliary9ACC..9AD4 state and timers. The
+second and later routines have additional selection gates; their complete
+physical meanings are not established by this trace.
+
+720 fixtures execute the complete452DC call, covering signed delta negative/
+zero/positive, flag20 clear/set, prior/requested indices0..5 and8080 valid/FF.
+Other RAM branch controls are explicitly zero-initialized by the interpreter.
+Under these fixtures the complete pipeline preserves the request pair unless
+negative92B8 AND flag20 AND8080!=FF AND requested<previous. Then the final
+pair is[previous,FF]. Entry-order observation proves all three table entries
+and all seven4662C children execute; floor-write observation locates the
+actual modifications at46D24 and46D28. No other branch outcomes are claimed.
+
+Six paired ECU paths encode source50 ->45/50/55, then receive201, calculate
+byte6 history and run this pipeline. With21C1C ->21734 ->21500, a seeded
+flag20 is cleared and the negative-change floor stays inactive. Omitting
+21734 deliberately preserves the injected bit and activates the floor only
+for the falling input. This comparison separates conditional code behavior
+from the default-input sequence. It does not establish a real vehicle trace.
+
+Outer application state (static, not executed as a whole)
+---------------------------------------------------------
+44CFE starts from byte8084 and secondary9B3D. At44D3A..44D40 it copies the
+old8084 to9B3C (the floor's previous index). It invokes preceding candidate
+calculations, then452DC at44D70, and applies more checks afterwards:
+9AE8 mask80 may replace the request through24532(0x12);8080==FF zeros the
+request/secondary and9B40;45160 may modify the pair; indices above5 clamp5.
+It stores the final index to8084 at44DB2 and the secondary to9B3D, compares
+old/new through454C0, and calls244FA with identifier0x12 and final index.
+1EAB8 invokes44CFE before tailcalling48200. The earlier pipeline result is
+therefore not sufficient to claim the final index or physical gear change.
+8084 is distinct from8081, the already-proven CAN231 high-nibble source.
+Next trace244FA/24532 index0x12 and8084 consumers to resolve command versus
+reported state, then actuators and CAN feedback. Do not conflate them.
+
+Search bounds, failed leads and continuation
+-------------------------------------------
+MOV.L literal searches found the4662C pointer in a table, not a direct call;
+following5DEA0 and stock7744C resolved the caller. MOV.W searches for92D5
+also produced a false candidate2B49A inside a literal pool; not executable
+writer evidence.23380/23406 and39D8C direct references are consumers on the
+inspected paths, not the missing flag20 producer.21C1C one-hot summary trials
+never set mask20 and preserved a seeded value. These searches alone do not
+exclude computed aliases or all writers.3BB32 is another real92B8 consumer:
+static code doubles/clamps positive change and uses curve7261C; its complete
+actuation role and execution remain open, as does the396E4 consumer.
+
+Continue CAN211 traction arbitration, model coefficients and sender
+attribution, plus PRHT CAN speed/neutral IDs and remote state transitions.
+The new selection evidence does not complete or replace either requirement.
+See traction-roof.txt and CHECKPOINT.txt. No application/flash changes,
+hardware tests, new staging, commits or pushes were authorized/performed.
+
+Final static continuation lead:244FA/24532 select byte arrays605C (index less
+than010D) or626E (index minus010D). Therefore index0x12 reads/writes606E.
+This is a RAM byte access, not yet evidence of EEPROM persistence. Trace
+8084 consumers and this cache's lifecycle rather than assuming record12 is
+a structured transmission-state record. No additional dynamic claim made.
+
+Persistence check: all new evidence, verifier and JSON are Git-eligible.
+Ghidra archive independently restored with11 verified project files,309
+annotations(111 ECU/198 TCU) and189 matching exports/reports. Exact archive
+hash lives in ghidra/snapshot.json and restore-verification.json. No new
+staging, commit or push; pre-existing staged work is preserved.

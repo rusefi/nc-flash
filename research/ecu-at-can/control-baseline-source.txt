@@ -1,0 +1,177 @@
+2026-10-06: retained baseline source, transmission-mode maps and decay
+
+Evidence and reproduction
+-------------------------
+verify_control_baseline_source.py executes six complete original ECU bodies:
+58B9C,58BD0,58D44,58B78,58DD8,58E68. Independent finite RTZ/state oracles check
+their outputs, held state, stack and interrupt-mask restoration. Original
+lookup helpers execute; maps are decoded independently for expected values.
+
+  python research/ecu-at-can/verify_control_baseline_source.py \
+    > research/ecu-at-can/control-baseline-source-verification.json
+
+Inputs remain examples/LFFEEE-stock.bin and examples/LFG1TF000.bin, with
+their SHA256 identities recorded in the JSON. No firmware bytes or shared
+interpreter/older verifier scripts were changed. Disassembly excerpts include
+all six bodies and their local callers. The saved JSON includes every map.
+
+The suite passes 4,997 direct cases:
+  1,024 countdown cases (all 256 old bytes, four raw input flags)
+    324 target gate combinations, including noncanonical raw values
+    570 target map cases (all knots, interior midpoints and endpoint clamps)
+    288 retained-source rise/clear cases
+    145 source scaling cases
+  2,214 selected decay-map cases
+    432 retained-source decay cases
+It also passes 140 complete synthetic serial cycles with 22 paired TCU CAN
+updates. TCU 18F10/191A8 packers, ECU decoders, full A477E calculation and
+the existing command/serial/application path execute in those updates.
+TCU upstream values, serial replies and cross-task cadence remain fixtures.
+
+One first-run failure was fixture encoding: sample_points can return an exact
+rational endpoint offset that is not exactly representable as binary32.
+The 6D5C fixture now explicitly rounds that input with q() before encoding.
+The ROM oracle and shared interpreter were unchanged. Subsequent runs pass.
+
+Conventions
+-----------
+All short RAM addresses have FFFF prefix. R(x) denotes binary32 rounding
+toward zero after each operation. Values and counts have no assigned physical
+units or milliseconds. Mode734A bit40 is the established MT configuration
+bit; its absence alone does not prove a functioning AT system.
+
+Source countdown: 58B9C
+----------------------
+  if raw7010 == 1: 80A8 = byte[DA03C]
+  else:           80A8 = max(0, old80A8 - 1)
+
+Stock DA03C is zero. Starting at zero, this producer never makes the counter
+nonzero. Direct nonzero-count tests exercise its consumer branches; they do
+not establish a normal production route into those branches.
+
+Target production: 58BD0
+------------------------
+The target 80A0 clears to zero if any of these is true:
+  raw7346 == 1; rawA3A4 == 1; both raw80A8 == 0 and raw7012 == 0.
+The disabled branch holds 80AC,80B0 and80B8; it does not clear them.
+
+Otherwise select a 7-by-9 map:
+  A3628 when 734A bit40 is set OR raw7EEE > 0;
+  A363C when the bit is clear and raw7EEE == 0.
+Both use x=6DB4 and y=6CD4. x knots are 1000..4000 by500; y knots are
+0..50 by6.25. A3628 values are approximately .005..017; A363C values are
+0..approximately .05. These are actual stock tables, not substituted maps.
+80AC stores the bilinear result.
+
+6D28 selects a lower interval index from [-40,-20,0,20,40,60,80,100], clamped
+to0..7. Exact knots select their new interval. The byte index goes to80B8;
+80B0 receives the corresponding DA1DC value. This is a stepped selection,
+not interpolation through descriptor A361C. Every stock factor is100.
+
+  80A0 = R(R(80AC * 80B0) / 100)
+
+Keep both rounded operations even with stock factor100: the resulting float
+need not equal80AC bit-for-bit. The tests check side outputs as well as80A0.
+
+Retained rise and scaling: 58D44 and58B78
+---------------------------------------
+58D44 clears809C when A3A4 == 1 or both7012 and80A8 arezero. Otherwise:
+  809C = max(old809C, 80A0)
+
+This routine does not test7346. Consequently7346 == 1 clears the target in
+58BD0 while the rise routine can retain a previously larger809C. Separate
+decay then controls its decline. Raw7012 == 2 enables this path, whereas the
+previously verified 587A2 limit producer requires exactly1.
+
+58B78 computes80B4 = A35E0(6D5C), then8098 = R(809C * 80B4). The seven stock
+knots span0..approximately22.608, with every value1. The complete lookup
+still executes. Thus finite stock inputs pass809C through to8098.
+
+Previously verified58F10 consumes8098 in:
+  80C0 = max(813C, R(R(8098 * 6DB4) / 7020))
+and includes80C0 in the baseline sum80BC. Its near-zero7020 hold still applies.
+The baseline then feeds the history, ratio and command paths already recorded
+in control-input-history.txt and control-ratio-inputs.txt.
+
+Decay selection and application: 58DD8 and58E68
+----------------------------------------------
+58DD8 chooses the first applicable speed-indexed curve, writing80A4:
+  80A8 > 0 AND7010 == 0: A35EC, every value approximately15.999.
+  Otherwise7EEE != 0: A35F8, approximately.002 through2500, .03 at3000,
+    .05 from3500 onward.
+  Otherwise75DC == 1: A3610, approximately.001 at500/1000, 1 from1500.
+  Otherwise: A3604, approximately.00168 at500, .002 at1000..2500,
+    1 from3000 onward.
+All four curves have ten x knots500..5000 by500 and interpolate between them.
+The large first curve requires a nonzero countdown that the stock countdown
+producer does not create fromzero; reachability remains distinct from execution.
+
+58E68 first clears809C when bit40 is clear and old809C < stock DA040 = 0.
+Otherwise:
+  floor = 0 if7346 == 1, else80A0
+  809C = max(R(old809C - 80A4), floor)
+
+The subtraction can lower a retained overshoot but cannot cross the current
+floor. With7346 == 1, it can return towardzero despite an old nonzero target
+fixture. In stock production58BD0 also clears the target under that flag.
+
+Local caller order and integration limits
+-----------------------------------------
+Caller1A604..1A618 runs countdown -> target -> rise -> scale. Five other calls
+at1A61C..1A638 intervene before baseline58F10 at1A63A. Those bodies remain
+outside this test. Caller1B862..1B86A runs decay-step selection -> decay.
+The relative rate/phase of the two tasks remains unverified.
+
+The retained lifecycle initializes809C through its original clear branch;
+it does not directly inject809C,8098 or the target after initialization.
+Other baseline contributions and input/status values remain explicit fixtures.
+The source group runs before the previous baseline/history/ratio chain; decay
+and protected history publication run once at the end of each synthetic cycle.
+This chosen scheduling is not a claim about real task frequencies.
+
+The lifecycle raises the AT-map target, lowers it with changed inputs, clears
+the target with7346 while allowing decay, selects the alternate map through
+7EEE, exercisesA3A4 and7012 clear branches, and admits raw7012 == 2. Produced
+8098 feeds the original baseline calculation and subsequent paired path.
+At call11 the target rises from approximately.02 to.05. At call21 it falls
+to approximately.04 while the used source remains.05, then decays to.048.
+At call31 the target clears tozero while the used source remains.04, then
+decays to.038. These are invocation counts in the synthetic schedule.
+The selected command is capped at16.5 in this fixture; the trace does not
+demonstrate varying physical actuation from these source changes.
+
+Important fixture boundary: publish() in verify_control_conversion.py writes
+A3A4 = 0 on each paired CAN update. The call61 injectedA3A4 == 1 therefore
+clears the source for that pass, then the helper resets the gate. Saved rows
+record source_gate_before/after. This is a test action, not evidence that CAN
+firmware writes or clearsA3A4. Earlier exploratory interpretation of that
+change as firmware behavior was rejected after inspecting the helper.
+
+Next evidence
+-------------
+Trace the remaining baseline contributors and the upstream7012/7016/A3A4
+writers, plus real task publication order. Concrete static lead:5903C writes
+80C4 = R(80C8 + 80CC);5904C writes80C8 = A365C(6D38,6D30). These bodies are
+saved in disassembly excerpts but are not included in this pass's test count.
+80CC producer59070 and80DC writers5918E/59194 are further static leads.
+
+Nonzero2310 restoration,240xx stage/enable,protectedRAM/5354,20A8 clear and
+57CD consumers,A720 binding history and full scheduling remain unresolved.
+Retain TCU capture timing,group7 numeric/overlap/composite/2->1 behavior.
+Traction sender attribution,7978/fuel consumers and physical outputs remain
+required; this shared source trace alone does not establish DSC behavior.
+OEM PRHT speed/type/neutral/selector reception, both folding and unfolding,
+pause/resume,reversal,timeouts,synchronization and recovery remain independent
+open requirements. No roof command or physical movement is proved here.
+
+Persistence verification
+------------------------
+Ghidra application and live readback passed. The refreshed archive was then
+extracted independently: all11 project hashes,1048 annotations (523 ECU,
+525 TCU) and565 exports (563 functions plus2 readbacks) matched. Archive
+SHA256: 7a9681808dde2e812d61fd6f9640ea1d0f938dc14849ff6cac7bb949ecddad89
+Exact manifest and restore report: ghidra/snapshot.json and
+ghidra/restore-verification.json. Both.gpr and.rep are included.
+New evidence files are Git-eligible; git diff --check and py_compile pass.
+Saved locally; no staging, commit or push. All three research goals remain
+incomplete; this turn made verified progress.

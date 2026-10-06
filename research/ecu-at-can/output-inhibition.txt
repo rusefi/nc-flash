@@ -1,0 +1,164 @@
+Shared CAN211/216 inhibition at the output scheduler — 2026-10-06
+
+RESULT AND REPRODUCTION
+
+The shared ECU cylinder mask now executes through its complete scheduler
+caller and cancellation helper to explicit timer-register writes. This joins
+the traction pattern and actual TCU CAN216 sender at a lower output boundary.
+Cancellation is conditional: a cached request can differ from applied record
+state until a later scheduler boundary. This is not a measured injector-pin
+shutdown, a complete peripheral simulation, or proof of real-time latency.
+
+Reproduce: python research/ecu-at-can/verify_output_inhibition.py
+Result: output-inhibition-verification.json. RAM addresses omit FFFF; other
+addresses are hexadecimal, counts decimal. Both inputs remain unchanged:
+  examples/LFFEEE-stock.bin SHA256
+  7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+  examples/LFG1TF000.bin SHA256
+  8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+
+INITIALIZATION AND MASK ADMISSION
+
+1FA8C initializes four records at53DC, stride40 decimal. Relevant offsets:
+  +0 mode; +1 applied inhibition; +2 state; +8 event deadline;
+  +12 cylinder index0..3; +16 output-channel index; +17 child state;
+  +24 child duration/input; +28 child scheduling boundary;
+  +32 child limit; +36 child condition.
+The original initializer selects channel0/1/2/3 from ROM2F3C4, deadlines
+021C0000/01680000/00000000/00B40000 from2F3B4, and initializes +28/+32
+to02D00000. It also clears cached mode5485/mask5486 and sets5489=1.
+No full physical-angle interpretation follows from these integer constants.
+
+20290 takes current position inR4 and new mask inR5. For each record it tests
+ROM2F370[cylinder] (one bit per cylinder), then acts only on transitions:
+old applied flag1 -> desired0, or old flag0 -> desired nonzero. Other old
+flag values hold.20128 computes deadline-current; if nonpositive it adds
+02D00000. The result is interpreted as signed32;20290 holds for a negative
+result. Tested inputs include equality and a deadline more than one cycle
+behind, rather than treating this as unrestricted modular arithmetic.
+
+For a newly requested inhibition:
+  state0: set applied flag1, no low-level cancellation.
+  state1: child state2 defers; child state1 with hardware record byte
+    41FB+24*channel==0 also defers. Other tested child/hardware combinations
+    cancel via96F4 and clear pending duration via2F2A0, then state=0, flag=1.
+  other state values: hold.
+The names state/child/hardware remain conservative software names. Tests
+cover inconsistent fixtures too; execution alone does not prove that every
+combination is reachable during normal operation.
+
+For release of an applied inhibition:
+  state1: clear flag, preserve state.
+  state0: call the mode-specific admission callback; if accepted clear flag,
+    otherwise retain flag1 and set state2.
+  other state values: hold.
+Mode0 callback20712 admits when distance>=record+32. Mode1 callback20510
+requires distance>record+32 and distance>=20584's calculated boundary.
+20584 evaluates signed Q16 division2138 of
+  (41E4 + record+24 + trunc(ROM CC1E4/0.25)) / 410C,
+multiplies the Q16 result by180, adds record+28 and wraps signed32.
+The verifier calculates this independently and tests the exact release
+thresholds and adjacent values for both modes. No wall-clock unit is assigned.
+
+LOW-LEVEL CANCELLATION
+
+96F4 takes output-channel index0..3. Its software record starts41E8+24*index.
+If byte+19 is nonzero, it performs no peripheral access and just clears that
+byte. If byte+19 is zero, it executes the interrupt-protected register branch:
+  byte+20==1: clear this channel's bit in FFFFF66C; clear byte+20.
+  otherwise: write (sample at FFFFF440 -1) modulo65536 to the compare
+    register selected by ROM11228. Read FFFFF666. If this channel's bit is
+    clear, write zero twice to the selected down-counter via11070.
+Finally clear software byte+19 and restore saved SR. The duplicate writes
+are original instructions, not an artifact of the test logger.
+In particular, the DSTR-bit-set branch does not write zero to the down-counter;
+it only changes the compare register. Thus this body does not demonstrate
+zero-shortening of a currently running down-count. The alternate branch only
+clears an interrupt-enable bit. Treating every cancellation as an immediate
+active-pulse cutoff would contradict the executed branches.
+
+ROM11228 contains four12-byte records:
+  index  down-counter  compare       mask
+  0      FFFFF640      FFFFF444      0001
+  1      FFFFF642      FFFFF446      0002
+  2      FFFFF644      FFFFF448      0004
+  3      FFFFF646      FFFFF44A      0008
+2F2A0 independently clears pending word6784+4*index under protected access.
+Other channels and unrelated timer-enable bits are preserved in the tests.
+
+Hardware interpretation, from Renesas SH7058 hardware manual Rev3.0,
+REJ09B0046-0300H, table11.3, sections11.2.16/11.4, printed pages
+334-335,418 (PDF index460 for page418):
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+F440 is TCNT1A; F444..F44A are GR1A..D; F640..F646 are DCNT8A..D;
+F666 is DSTR and F66C is TIER8. These are ATU-II registers. Writing zero
+to a down-counter halts it at the subsequent underflow, not immediately at
+the CPU write. The manual describes output effects conditional on timer
+configuration. The test observes writes without simulating underflow, clock
+progress, output polarity, pin routing or electrical drivers. Consequently
+this establishes a timer-register boundary, not injector wiring or waveform.
+
+COMPLETE CALLER AND PAIRED NETWORK PATHS
+
+1FB5A is the complete scheduler caller (not a jumped-into instruction slice).
+It obtains736A through1F864, compares it with cached5486, calls20290 on a
+change, then caches the new mask even if an individual record deferred it.
+It continues through the rest of the record-processing loop.16 complete-caller
+cases cover every four-cylinder mask with controlled pending-record fixtures.
+For an admitted selected record in this fixture,20290 sets state0; the
+remaining caller changes it to state2 because its distance is below the
+stock scheduling-window threshold. This distinction is asserted in tests.
+
+Three persistent calls demonstrate the deferred/cached distinction:
+  1. New mask000F, record state1, child1, hardware byte19=0:
+     cache becomes000F, all applied flags remain0, all states remain1.
+  2. Hardware bytes changed to2, same mask and caller position:
+     cache match bypasses20290; applied flags still0, states still1.
+  3. Record deadlines reach the tested cycle boundary (deadline=current=0):
+     caller's record-reset path imports cached bits into applied flags1 and
+     resets states0. No peripheral cancellation write occurs in these steps.
+This is an explicit software lifecycle, not proof of how long an actual
+running pulse continues or of all scheduler/interrupt interleavings.
+
+Six paired paths execute stock model-produced CAN211 conversion, thresholds,
+patterns and four events alongside the actual TCU18F10/18F8C CAN216 sender.
+ECU35034/34CEC/3AE52/3B4D4/3AD04/3AC14/4D716 decode the TCU bit5 request.
+The aggregate736A then reaches original1FB5A ->20290 ->96F4/2F2A0.
+With CAN211 words10000/10020/10040 the local masks are0005/0001/0000;
+TCU9454=1 produces CAN216 bit5 and makes the aggregate000F in each case.
+The output records/register samples are fixtures. TCU9454's upstream CAN201
+control is separately executed in can201-cut-loop.txt; no new claim of a
+full ECU/TCU time-domain simulation is made here.
+
+The downloaded hardware PDF SHA256 is
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+Fetch the official URL above; pdftotext -layout extracts searchable text.
+The repo preserves the relevant conclusions/provenance, not the entire manual.
+
+HARNESS, VERIFICATION AND CONTINUATION
+
+TimerSamples composes the existing SHModelFloat and SHSoftwareArithmetic
+implementations without changing them. The only added opcode is SHAL.
+Renesas SH-2E Software Manual REJ09B0316-0200, printed143, defines the
+one-bit shift and transfer of outgoing bit31 toT (same result as SHLL):
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+384 SHAL vectors cover all registers, overflow and SR preservation.77 signed
+Q16 division cases execute the original2138 helper with saturation and zero
+denominator boundaries, exercising the composed arithmetic dispatch.
+Four expected rejections confirm strict peripheral address/width restrictions.
+720 low-level cancellation cases cover channels, hardware states, alternate
+branch, DSTR bits and counter wrap.2268 complete20290 cases cover assertion,
+deferral, release, timing and both modes;16 mixed masks,6 release boundaries,
+16 whole-caller cases,3 lifecycle checkpoints and6 paired paths also pass.
+Initial probes stopped on4124 at215E (ROTCL) with the float-only harness,
+then4720 at2208 (SHAL) after composing integer support. They were incomplete
+executions, resolved by reuse of verified arithmetic and the tested SHAL
+extension; no skipped instructions or mocked firmware helpers were used.
+
+Next: prove the actual acquisition/interrupt schedule of1FB5A,41E8 byte19/20
+producers and timer configuration/pin route. Connect the command calculation
+4514C/741C/78B0 to these duration records and verify normal launch/cancel/
+completion sequences, not only their controlled pending-state fixtures.
+Also retain TCU slot2/phase1/2 policy, CAN211 sender identification and PRHT
+speed/neutral CAN attribution,fold/unfold and timeout/reversal behavior.
+All three research objectives remain active and incomplete.

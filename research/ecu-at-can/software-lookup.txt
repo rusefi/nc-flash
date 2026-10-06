@@ -1,0 +1,70 @@
+TCU cut-request lookup interpolation — 2026-10-05
+
+The prior CAN201 round-trip test stopped on software-arithmetic instructions
+inside lookup10764/10922. New sh_software_arithmetic.py subclasses the
+previous integer harness and adds ROTCR,ROTR,SWAP.W,CLRT. Original software
+arithmetic helpers execute; there are no Python-float or helper substitutions.
+The prior base/integer/FPU classes remain unchanged.
+
+Primary ISA source, retrieved2026-10-05:
+https://www.renesas.com/en/document/mas/sh-2e-software-manual
+Renesas REJ09B0316-0200: CLRT p77,ROTCR p135,ROTR p137,SWAP p159.
+ROTCR shifts through incomingT; ROTR wraps the outgoing low bit. Both setT
+from that low bit. SWAP.W exchanges sixteen-bit halves without changingT.
+CLRT clears onlyT. Tests use independent bit-string/byte rearrangements,
+including source/destination aliasing, all single-bit inputs and register15.
+
+Stock curve703C0 contains four byte-axis/value points, scaled by256:
+  axis2560,10240,15360,25600
+  value8960,7680,7168,7168
+For unsigned inputx, the verified integer formula is:
+  x<2560:8960
+  2560<=x<10240:8960-floor(1280*(x-2560)/7680)
+  10240<=x<15360:7680-floor(512*(x-10240)/5120)
+  x>=15360:7168
+The descending interpolation truncates the signed delta toward zero before
+adding the segment origin. Thus input5000 yields8554, whereas flooring the
+entire rational result would give8553. This detail affects exact thresholds.
+
+Verification commands (run with assertions enabled):
+  python research/ecu-at-can/verify_software_lookup.py
+  python research/ecu-at-can/verify_can201_cut_loop.py
+Results are software-lookup-verification.json and can201-cut-loop-verification.json.
+The first checks new ISA semantics and all65536 stock inputs against the
+integer formula. The second now uses the new subclass and includes interior
+axis inputs in800 control/paired-actuation cases. It retains the84 numeric,
+512 fault mapping and11 stateful ECU-TCU-ECU cases from the earlier test.
+All1115 new ISA cases and65536 stock curve inputs passed. Output bytes
+(BE16, ascending input order) SHA256:
+a7b0d193cc9aa44cf282e1ad4de57a9e9f407d70e04058edbb753ee8cd23cb7d.
+
+Resolved stops: ROTCR4025 at5BD52;ROTR4105 at5BEA8; then SWAP.W6D49 at
+5BF2C andCLRT0008 at5BAF6. Prior can201-cut-loop.txt failures described the
+old harness, not a firmware error. Do not skip or mock those helpers.
+
+Scope remains bounded: this stock curve uses a small range of operands;
+it does not validate arbitrary software-double arithmetic, nonfinite values,
+all calibration tables or hardware timing. Request set/clear separation
+remains1280 in80E8 internal units;9334 source/units, diagnosticA98E and
+timer provenance are still open. See can201-cut-loop.txt for full gates.
+ECU/TCU,traction andPRHT research all remain active and incomplete.
+
+AXIS PRODUCER FOLLOW-UP
+
+Full22ECC now executes in30 source/fault cases, then the actual lookup,
+request producer and ECU cylinder path. It reads word89A8 and shifts left7;
+92C6bit6 substitutes ROM76DF4=10240. Letv be the resulting low16 bits.
+It storesv to80F2 and9336;9334=((signed16(v)+5120)*2) modulo65536.
+This is a word-width conversion, not a saturation operation. Arbitrary raw
+fixtures can wrap: source255 ->axis9984;source256 ->10240. The physical
+source's reachable range is not established. Fault substitution gives30720,
+which selects the low endpoint threshold7168, with requestset threshold8448.
+
+Static upstream17D9C calls17BD2(channel4), converts with17E08's table5F818/
+5F832 helpers, and stores89A8;17BF6(channel4) supplies validity used for
+89AC/89AD. No source sensor or physical temperature identity is asserted.
+Next execute this acquisition/conversion and trace its hardware descriptor.
+
+The new ISA also lets21628 run on exploratory8808 values0/5/100/1270,
+returning0/128/2560/25600. Those four observations are not a full converter
+verification; keep its diagnostic branches and downstream control as leads.

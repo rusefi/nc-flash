@@ -1,0 +1,142 @@
+TCU request selection and ramp to ECU spark (2026-10-06)
+======================================================
+
+Follow-up: tcu-slot2.txt now executes initialized slot2 list mechanics and
+merge through ECU spark. The uninitialized-descriptor lead below is historical.
+CAN215 base provenance was subsequently executed in can215-feedback.txt;
+remaining physical policy entry/phase1/2 and92E6 consumers stay active.
+
+Result and scope
+----------------
+The numeric source915A for CAN216word0 is now executed from its original
+record aggregation and one complete policy caller. With stock configuration,
+only records1 and2 participate. The selected reduction is subtracted from
+base92E4 when the selected mode byte equals1. An active phase3 ramp in
+2C234 decreases record1's reduction, then withdraws the request. Original
+TCU sender and ECU spark functions execute after each lifecycle sample,
+with a simultaneous CAN211 request. This extends spark-interaction.txt.
+
+All RAM addresses below omitFFFF; code/table addresses are hexadecimal.
+Examples/case counts are decimal. Both ROMs are unchanged; hashes appear
+in tcu-spark-requests-verification.json. Phase3 begins active by fixture;
+this is not proof of its physical meaning, entry condition or real timing.
+
+Records and aggregation
+-----------------------
+1FB18 initializes five signed-word slots915C..9164 to7FFF, five byte slots
+9166..916A toFF,915A to7FFF and80BE to0. Original5BBEC converts software
+double0.5 to integer0 on this path; no helper is replaced.
+1FB4A(index,value,mode) stores a word and byte in those arrays.1FB6E(index)
+resets both to their sentinels. Tests use only valid indices0..4; the simple
+underlying indexed writers30652/3064C do not establish general bounds safety.
+
+1FB8C performs these steps:
+  1. Stock table5CD0C is00 01 01 00 00. Disabled slots0/3/4 are reset in
+     RAM on every call. Slots1/2 are copied to local working arrays.
+  2. If slot2 value is0 and slot1 is not7FFF, ignore slot2's value AND mode
+     in those local arrays. The actual slot2 RAM is unchanged by this rule.
+  3. Helper30686 selects the last non7FFF word, default0. Separately,
+     helper3065A selects the last nonFF byte, default0. These are ordered
+     overwrite selections, not min/max. Value and mode can come from different
+     records when their sentinels disagree; tests explicitly cover this.
+  4. If selected mode==1, candidate=base92E4-selected signed word. It tests
+     the signed LOW16 bits and clamps a negative result to0. Output915A is
+     that nonnegative low word. Other mode values produce7FFF instead.
+  5. Inside15A46/15A30 interrupt-mask protection,9158bit0 reflects whether
+     selected mode is NONZERO (not specifically1),80BE=-selected word modulo
+     65536, and915A gets the result. Other9158 bits and SR mask bits survive.
+
+Signed-word wrap occurs before the lower clamp; this is not a mathematical
+unbounded subtraction or an upper saturation. Boundary tests distinguish it.
+By contrast, the base conversion described below uses signed saturation.
+
+Examples with both mode bytes1 and base800:
+  slot1  slot2  selected reduction 915A
+    320      0          320         480  (special zero-slot2 exception)
+    320    640          640         160  (later slot wins)
+    640    320          320         480  (later slot wins, despite smaller value)
+    320  32767          320         480  (word sentinel skipped)
+
+Base conversion
+---------------
+216D8 writes both92E2 and92E4 from signed80B4*32/10, truncating division
+toward zero and saturating to[-32768,32767] via10D0C. It also converts80B2
+into92E6 and updates a92D2 bit fromA528; new assertions cover92E2/92E4.
+The paired phase fixtures set80B4=250 and execute216D8 to obtain base800.
+Boundary probes corrected an initial assumption of low-word wrapping here:
+10D0C clamps explicitly at10D6E..10D7A. No firmware change was required.
+
+Record1 producer and phase3 ramp
+-------------------------------
+2C234 calls admission2C30C. With class=8080, accepted=8081, code=9B40,
+it admits only when class is neither0 norFF,916Fbit0 is clear, code is
+neither0A nor11, and either:
+  accepted==0 AND class!=1; or
+  accepted==1 AND class is neither1 nor2.
+512 combinations cover this rule, including high-bit classes. The accepted
+index is the already traced CAN231 software state, not physical gear proof.
+
+If admission succeeds and9530bit0 was already set, the caller executes
+2C43A, saves its result to953A, then checks continuation in2C400. Otherwise
+it may attempt entry through2C370 (entry success remains untested here).
+For phase953F==3,2C43A computes signed953C*(953E-8170)/953E via10D0C.
+Tests use positive duration10 and elapsed0..10, so this is a nonnegative
+truncated ramp. 2C400 ends the request when8171 >= ROM76FF6=122 or when
+phase3's result <=0. All900 complete-caller cases include accepted/class,
+start-value and timer boundaries. The threshold's wall-clock unit is unknown.
+
+When retained,2C234 calls1FB4A(index1,953A,9542bit0). When withdrawn it
+zeros953A/953F, clears9542bit0, calls1FB6E(index1), and clears9530bit0.
+It also advances history9532..9538 from80EE. Phase1/2 calculations and the
+history/entry conditions are not fully characterized by these tests.
+
+Five sequential phase samples, start320/duration10/base800, preserve TCU
+state between calls. Each then uses the SAME TCU instance to execute18F10
+and18F8C and feeds a fresh synthetic ECU with CAN211word0=10016:
+  timer8170  slot1  915A  CAN216decoded  four-cylinder spark
+       0       320   480       15              20
+       1       288   512       16              20
+       5       160   640       20              21
+       9        32   768       24              22
+      10     32767 32767    65022              23
+The last value is TCU senderFFFE decoded as65022; its AT spark contribution
+is inactive, while the separate CAN211 correction remains3. These are model
+fixtures, not measured angles/timing. Four additional cases insert competing
+slot2 values through1FB4A, execute aggregation, then pair spark and bit5 cuts.
+
+Reproduction and verification
+-----------------------------
+  python research/ecu-at-can/verify_tcu_spark_requests.py > research/ecu-at-can/tcu-spark-requests-verification.json
+
+Saved results include 269 base-scaling cases,175 setter/reset cases,4900
+aggregation cases,512 admission cases,900 complete ramp-caller cases,5
+paired lifecycle samples and4 paired competition cases. Expected values are
+computed independently from the signed arithmetic and selection rules.
+verify_spark_interaction.paired now optionally accepts an existing TCU state
+and checks its915A instead of replacing it. Its original480-path verifier
+and8 fault cases were rerun and exactly match the prior saved JSON.
+No shared SH interpreter changes or helper stubs were introduced.
+
+Static leads / remaining work
+-----------------------------
+Only aligned literal references have been searched for the record setters.
+The identified slot1 caller is2C234 and slot2 caller is4C7AC. The latter
+merges two candidate sets from4C75E and4CAF8, records A204/A206/A208/A209,
+then calls1FB4A(index2) or1FB6E(index2). A zero-RAM probe executed it but
+produced value0/mode0 from uninitialized descriptors; it is not an active
+policy characterization. Trace its descriptor initialization and candidate
+set producers next. Helpers3054E and buffersA20A/A25A,B028/B02C are leads.
+
+Upstream base lead:516D8 initializes80B4;516E6 selects88E8 when88EA==2 and
+diagnostic summary permits, otherwise holds/substitutes and clamps against
+5FD54/5FD56.17854 produces88E8 from getter1C812's CAN215 word0, converting
+via10F38/table5C822 and subtracting88E4 when88E6==2. CAN215 buffer8F2C
+is already identified in the repository receive table. These new upstream
+links are STATIC, not yet executed as a complete CAN215-to-CAN216 round trip.
+Searches for a direct80B4 literal missed its GBR storesC15A at516DC/51770.
+
+Next: execute CAN215 conversion/base/fault chain, characterize slot2's
+candidate policy and phase1/2 entry, then relate them to transition work.
+Physical units, real scheduling, complete traction/other ECU arbitration and
+the PRHT folding/unfolding CAN map remain unresolved. All three user research
+requirements remain active; see CHECKPOINT.txt and traction-roof.txt.

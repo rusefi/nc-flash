@@ -1,0 +1,108 @@
+Selector diagnostic threshold: application scaling and upstream capture trace
+Evidence checkpoint: 2026-10-05
+
+Reproduce: python research/ecu-at-can/verify_selector_threshold.py
+Saved results: selector-threshold-verification.json. Unchanged LFG1TF000 TCU
+and LFFEEE ECU hashes are asserted. Shared instruction interpreter unchanged.
+This extends selector-recovery.txt. Physical sensor identity remains open.
+
+EXECUTED SCALING AND PAIRED CAN PATH
+
+Function50F26 reads u16[932C] and u16[932E], independently computes
+floor(10*x/256), and stores words80A4 and80BA respectively. Copies byteA4FA
+toA4FC. The verifier runs all65536 input values, with complementary values
+in the two channels and all byte values for the status copy. This verifies
+the u16 function domain; it does not prove all inputs occur in normal service.
+
+The selector producer's80BA>=300 test is exactly raw932E>=7680. Eighteen
+paired examples cover raw0,7678,7679,7680,7681,32767,32768,65280,65535 and
+two second-timer fixtures (FFFF and0), with first timer843E already expired.
+Original50F26 ->58548 ->56908(group16) ->570F6 ->21C1C ->22416 ->19414
+executes, followed by ECU35BB8 ->3585C ->411F0. All helpers are original ROM.
+
+Below7680,8440 resetsFFFF even if previously0. At/above7680,FFFF arms28000,
+while0 qualifies activegroup16. CAN231 byte0 is10 while pending andFF when
+qualified in these synthetic application fixtures. ECU723A remains0 with
+valid complementFF. No physical units are asserted by the scaling test.
+The actual30000-call countdown was established separately in selector-recovery.
+
+UPSTREAM TRACE: STATIC, NOT END-TO-END EXECUTION
+
+22DDC writes932C/932E and tail-calls50F26. It constructs a coefficient from
+ROM76E78(299),76E7A(4100), literal9651 and a denominator selected by9330 bit0:
+default1000 or76E7C(stock1000). It calls10D0C and10CE4 during construction.
+Then10B74 converts word80EA into932C and word91A2 into932E, each capped at
+FF00 before storing.10B74 uses software floating-point helpers at5C0B0,
+5BEBC,5BA6C and5BC74; its complete rounding/clipping behavior is unexecuted.
+Do not replace it with a guessed integer expression and call it verified.
+
+2086C calls20DF8 and stores the return in91A2.20DF8 tests age bytes810D and
+9195 against ROM76E46=14. If either is at least14 it returns0; otherwise it
+calls207DE with calibration76E44=360 and uses arithmetic helpers, finally
+clamping0..7FFF.207DE sums a ring buffer at91CC; ROM77444=18 controls its
+length.20678 updates the ring from88F8, with additional gating, cap and
+outlier/hold logic that are not fully reconstructed or executed here.
+
+179A8 receives a captured count inR4, subtracts previous88FC using32-bit
+arithmetic, saves the current count, calls unsigned division5AF44 with10,
+caps the result to7FFFFFFF and stores88F8 before calling20678. It also
+updates three word counters88F0/88F2/88F4 with saturation. This upstream
+source is a local capture-count path, not a demonstrated CAN receive buffer.
+That does not exclude other influences, alternate writers or CAN fallback.
+
+ISR16C7C tests TSR0 atFFFFF42C bit0; when set it clears the bit, reads the
+32-bit capture atFFFFF434 and passes it to179A8. Actual interrupt timing,
+register behavior, electrical pulses and ISR execution are not emulated.
+
+CAPTURE CONFIGURATION: EXECUTED WITH EXPLICIT REGISTER FIXTURES
+
+16C5C performs read-modify-write on exactly three peripheral registers:
+  FFFFF42A bits1:0 ->01, preserving other bits;
+  FFFFF42E bit0 ->1;
+  FFFFF401 bit0 ->1.
+256 fixtures vary every initial mode byte and assert the resulting three
+register values. The local test subclass permits only these addresses/sizes;
+all other peripheral accesses still fail. This is instruction execution with
+synthetic register storage, not a simulated timer or physical capture test.
+
+Renesas SH7055S hardware manual rev2.00, accessed2026-10-05:
+https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual
+Printed201/202 (PDF240/241): F434 is32-bit ICR0A, F42A TIOR0, F42C TSR0,
+F42E TIER0, F401 TSTR1. Printed239 gives TIOR0 mode01 as rising-edge capture
+onTI0A. Printed331/332 describes dedicated32-bit capture registers. The
+register map supports this interpretation; it does not establish exact chip
+part number, board pin routing or physical sensor identity for this TCU.
+
+STRICT EXECUTION LIMITS AND FAILED LEADS
+
+Attempted complete22DDC stops at unsupported MULS.W opcode212F at22DFE.
+Attempted divide5AF44 with numerator100/denominator10 stops at DIV0U0019
+at5AF4C. Both expected stops are asserted in the verifier. No mocked helper
+results, interpreter arithmetic extensions or ROM patches were substituted.
+Software floating-point conversion would require further validated support.
+
+Aligned literal searches:932E has candidate writer22E50 and reader50F38;
+91A2 writer20878 leads to20DF8;88F8 writer179C6 leads to capture179A8;
+179A8 literal caller16CAC is the interrupt path. Such searches miss computed
+and GBR accesses; do not use them to prove global uniqueness. GNU objdump
+excerpts are saved in disassembly.txt, regenerated by disassemble.py.
+
+Primary PDF searches forF434 initially failed because extracted address text
+is separated from register names. A fresh curl download to temporary storage
+and pdftotext -layout exposed table11.3; web ICR0AH search corroborated it.
+The source URL, page numbers and conclusions above are durable; the full
+manual is not copied into the repository. Reproduce the text lookup with
+curl -L --fail URL -o /tmp/sh7055s.pdf; pdftotext -layout /tmp/sh7055s.pdf
+/tmp/sh7055s.txt, then rg 'F434|F42C|TIOR0' /tmp/sh7055s.txt.
+
+NEXT ACTIONS / FULL GOAL STILL ACTIVE
+
+Resolve physical TI0A sensor wiring and its pulse/clock scaling against the
+matching factory diagram. Trace group13/code0722 producer and any fallback
+path. Validate upstream arithmetic before asserting captured-pulse-to-CAN
+numeric units. The roof's speed interlock cannot be assigned this TCU signal
+merely because the selector diagnostic uses it; PRHT sources indicate PCM
+speed, so independently trace the ECU speed transmitter. Keep traction/DSC
+arbitration, ignition endpoints, actual/target gear8081 and remaining ECU/TCU
+CAN fields active alongside this work. Prior and current turns made concrete
+evidence progress; no repeated no-progress blocker exists.

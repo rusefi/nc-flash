@@ -1,0 +1,1308 @@
+{
+  "ecu_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "direct_cases": 486,
+  "varied_cases": 1800,
+  "hysteresis_cases": 384,
+  "conditional_feedback_cases": 521,
+  "local_gate_cases": 1800,
+  "countdown_calls": 126,
+  "branch_counts": {
+    "bypass": 994,
+    "feedback": 15,
+    "relative": 97,
+    "absolute": 656,
+    "normal": 524
+  },
+  "retained_history": [
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      }
+    },
+    {
+      "branch": "normal",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 0,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 1,
+        "0x5675": 0
+      }
+    },
+    {
+      "branch": "bypass",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 1,
+        "0x566c": 0,
+        "0x566e": 0,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      }
+    }
+  ],
+  "paired_lifecycle": [
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 1,
+      "valid_reply": true,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 1,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 11.0,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 2,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 1,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 11.0,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 3,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 2,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 11.0,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 4,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 3,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.949999809265137,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 5,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 4,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.949999809265137,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 6,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 5,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.899999618530273,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 7,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 6,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.899999618530273,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 8,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 7,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.84999942779541,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 9,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 8,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.84999942779541,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 10,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 9,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.799999237060547,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 11,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 10,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.799999237060547,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 12,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 11,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.749999046325684,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 13,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 12,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.749999046325684,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 14,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 13,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.69999885559082,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 15,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 14,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.69999885559082,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 16,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 15,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.649998664855957,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 17,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 16,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.649998664855957,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 18,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 17,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.599998474121094,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 19,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 18,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.599998474121094,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 20,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 19,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.54999828338623,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 21,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 20,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.54999828338623,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 22,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 21,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.499998092651367,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 23,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 22,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.499998092651367,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 24,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 23,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.449997901916504,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 25,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 24,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.449997901916504,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "feedback",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 1,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 0,
+        "0x5675": 0
+      },
+      "call": 26,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 25,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "selection": "566e",
+      "feedback": 12.20703125,
+      "command": 10.39999771118164,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "normal",
+      "mode": 0,
+      "old_feedback_enable": 1,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 0,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 1,
+        "0x5675": 0
+      },
+      "call": 27,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 26,
+        "good_count": 0,
+        "fault": 1,
+        "recovery": 0
+      },
+      "selection": "normal",
+      "feedback": 12.20703125,
+      "command": 13.68271541595459,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "normal",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 0,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 1,
+        "0x5675": 0
+      },
+      "call": 28,
+      "valid_reply": false,
+      "monitor": {
+        "gate": 0,
+        "bad_count": 0,
+        "good_count": 0,
+        "fault": 1,
+        "recovery": 0
+      },
+      "selection": "normal",
+      "feedback": 12.20703125,
+      "command": 13.468295097351074,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "normal",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 0,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 1,
+        "0x5675": 0
+      },
+      "call": 29,
+      "valid_reply": true,
+      "monitor": {
+        "gate": 0,
+        "bad_count": 0,
+        "good_count": 0,
+        "fault": 1,
+        "recovery": 0
+      },
+      "selection": "normal",
+      "feedback": 12.20703125,
+      "command": 13.68271541595459,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "normal",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 0,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 1,
+        "0x5675": 0
+      },
+      "call": 30,
+      "valid_reply": true,
+      "monitor": {
+        "gate": 0,
+        "bad_count": 0,
+        "good_count": 0,
+        "fault": 1,
+        "recovery": 0
+      },
+      "selection": "normal",
+      "feedback": 12.20703125,
+      "command": 13.468295097351074,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "normal",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 0,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 1,
+        "0x5675": 0
+      },
+      "call": 31,
+      "valid_reply": true,
+      "monitor": {
+        "gate": 0,
+        "bad_count": 0,
+        "good_count": 0,
+        "fault": 1,
+        "recovery": 0
+      },
+      "selection": "normal",
+      "feedback": 12.20703125,
+      "command": 13.68271541595459,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    },
+    {
+      "branch": "normal",
+      "mode": 0,
+      "old_feedback_enable": 0,
+      "states": {
+        "0x568a": 1,
+        "0x568b": 1,
+        "0x568c": 0,
+        "0x568d": 0,
+        "0x568e": 0,
+        "0x566b": 0,
+        "0x566c": 0,
+        "0x566e": 0,
+        "0x5670": 0,
+        "0x5672": 0,
+        "0x5674": 1,
+        "0x5675": 0
+      },
+      "call": 32,
+      "valid_reply": true,
+      "monitor": {
+        "gate": 0,
+        "bad_count": 0,
+        "good_count": 0,
+        "fault": 1,
+        "recovery": 0
+      },
+      "selection": "normal",
+      "feedback": 12.20703125,
+      "command": 13.468295097351074,
+      "local_gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      }
+    }
+  ],
+  "explicit_clear": {
+    "branch": "feedback",
+    "mode": 0,
+    "old_feedback_enable": 0,
+    "states": {
+      "0x568a": 1,
+      "0x568b": 1,
+      "0x568c": 0,
+      "0x568d": 0,
+      "0x568e": 0,
+      "0x566b": 0,
+      "0x566c": 0,
+      "0x566e": 1,
+      "0x5670": 0,
+      "0x5672": 0,
+      "0x5674": 0,
+      "0x5675": 0
+    },
+    "command": 11.0
+  },
+  "limits": "Full24910 and24C88/24DCE/24E06 executed under stock calibration. Earlier local sources, complete task order, recovery consumers and physical effects remain open. Serial peer is synthetic."
+}

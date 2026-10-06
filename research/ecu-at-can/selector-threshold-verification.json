@@ -1,0 +1,180 @@
+{
+  "scope": "Execute TCU diagnostic scaling and the resulting selector fault CAN path.\n\nStarts at application words932C/932E, not at capture hardware. Upstream\narithmetic remains a static trace; unsupported instructions fail explicitly.",
+  "capture_initialization_cases": 256,
+  "exhaustive_scaling_cases": 65536,
+  "paired_threshold_examples": [
+    {
+      "raw_932e": 0,
+      "scaled_80ba": 0,
+      "timer_fixture_expired": false,
+      "timer_8440": 65535,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 0,
+      "scaled_80ba": 0,
+      "timer_fixture_expired": true,
+      "timer_8440": 65535,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 7678,
+      "scaled_80ba": 299,
+      "timer_fixture_expired": false,
+      "timer_8440": 65535,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 7678,
+      "scaled_80ba": 299,
+      "timer_fixture_expired": true,
+      "timer_8440": 65535,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 7679,
+      "scaled_80ba": 299,
+      "timer_fixture_expired": false,
+      "timer_8440": 65535,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 7679,
+      "scaled_80ba": 299,
+      "timer_fixture_expired": true,
+      "timer_8440": 65535,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 7680,
+      "scaled_80ba": 300,
+      "timer_fixture_expired": false,
+      "timer_8440": 28000,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 7680,
+      "scaled_80ba": 300,
+      "timer_fixture_expired": true,
+      "timer_8440": 0,
+      "group16_active": 4,
+      "can231_byte0": 255,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 7681,
+      "scaled_80ba": 300,
+      "timer_fixture_expired": false,
+      "timer_8440": 28000,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 7681,
+      "scaled_80ba": 300,
+      "timer_fixture_expired": true,
+      "timer_8440": 0,
+      "group16_active": 4,
+      "can231_byte0": 255,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 32767,
+      "scaled_80ba": 1279,
+      "timer_fixture_expired": false,
+      "timer_8440": 28000,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 32767,
+      "scaled_80ba": 1279,
+      "timer_fixture_expired": true,
+      "timer_8440": 0,
+      "group16_active": 4,
+      "can231_byte0": 255,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 32768,
+      "scaled_80ba": 1280,
+      "timer_fixture_expired": false,
+      "timer_8440": 28000,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 32768,
+      "scaled_80ba": 1280,
+      "timer_fixture_expired": true,
+      "timer_8440": 0,
+      "group16_active": 4,
+      "can231_byte0": 255,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 65280,
+      "scaled_80ba": 2550,
+      "timer_fixture_expired": false,
+      "timer_8440": 28000,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 65280,
+      "scaled_80ba": 2550,
+      "timer_fixture_expired": true,
+      "timer_8440": 0,
+      "group16_active": 4,
+      "can231_byte0": 255,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 65535,
+      "scaled_80ba": 2559,
+      "timer_fixture_expired": false,
+      "timer_8440": 28000,
+      "group16_active": 2,
+      "can231_byte0": 16,
+      "ecu_combined_flag": 0
+    },
+    {
+      "raw_932e": 65535,
+      "scaled_80ba": 2559,
+      "timer_fixture_expired": true,
+      "timer_8440": 0,
+      "group16_active": 4,
+      "can231_byte0": 255,
+      "ecu_combined_flag": 0
+    }
+  ],
+  "unsupported_upstream": [
+    {
+      "start": "0x22ddc",
+      "stop": "Opcode 212F at 00022DFE"
+    },
+    {
+      "start": "0x5af44",
+      "stop": "Opcode 0019 at 0005AF4C"
+    }
+  ],
+  "limits": "No full capture-to-CAN execution, physical units, pin naming, timer clocks, or PRHT/DSC controller interpretation."
+}

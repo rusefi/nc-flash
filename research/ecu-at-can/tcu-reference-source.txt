@@ -1,0 +1,163 @@
+TCU reference acquisition and paired capture-driven requests
+Evidence checkpoint: 2026-10-06
+
+Follow-up: tcu-reference-policy.txt now supplies independent20FAC active/
+cached/stale and20EAA models,91AC counter/task verification and two capture-
+driven control/recovery sequences. Historical remaining-policy statements
+below describe the boundary of this earlier verifier.
+
+REPRODUCTION AND LIMITS
+
+Run: python research/ecu-at-can/verify_tcu_reference_source.py
+Passing output: tcu-reference-source-verification.json.
+Uses unchanged LFG1TF000.bin and LFFEEE-stock.bin, with identities checked
+by imported verifiers. No ROM, application or shared interpreter changes.
+Original bodies execute, including all helpers. The Observed class only
+records RAM/registers after the gate producers; it never skips instructions.
+
+Scope: 18-entry reference acquisition, input filtering, source-policy gates,
+full2086C publication and both-capture shift lifecycles. Timestamp arguments,
+capture ages and call order are synthetic, as are other selection inputs and
+the paired ECU model/gates. Physical units, wiring, clocks and real tasks
+remain unproved. The full producer branch oracle uses observed gate outputs;
+separate tests assert gate behavior for their stated fixture domains. This
+is not exhaustive verification of every gate state or every source consumer.
+
+CAPTURE0A INPUT AND HISTORY
+
+179A8 uses unsigned32(current timestamp - old88FC)/10 ->88F8, saves88FC,
+calls20678, clears8900 and saturating-increments88F0/88F2/88F4 atFFFF.
+This previously known callback is now connected to reference production.
+63 boundary cases cover sub-ten deltas, wraparound and counter saturation.
+Its nonnegative output differs from capture0B/8908 used for measured80EE.
+No physical sensor name follows solely from the callback label.
+
+20658 initializes810D,8196,9195 toFF, resets the18-entry ring91CC through
+20DB4, and sets9198/919C toFFFFFFFF. Reset period20DE8 is14<<12=57344;
+91B4 is the current ring head. Stock ROM77444=18 and77445=3.
+
+20678 first saves old810D to9195. If8080==0, signed80E8>=7680 and
+91A6 bit2 is set, it returns without ingesting or clearing the age.
+Otherwise it caps unsigned88F8 at57344 and calculates the full ring sum.
+With sum<=91643, it can clear the bit1 fault latch. It compares the new
+capture to the current head through unsigned ratio=(capture<<8)/old_period:
+  sum<=91643 and (ratio<128 or ratio>538): outlier candidate
+  candidate with bit3 clear: insert previous period instead, set bit3
+  otherwise: accept the new capped capture and clear bit3
+Thus an initial sharp change can be replaced once; a following candidate
+with bit3 already set is accepted. The inclusive128..538 band is accepted.
+After insertion: advance head modulo18, advance91AA modulo3, clear810D
+and91AC.320 cross-product cases cover cap, filter, bypass and flag behavior.
+
+207DE sums backwards from the CURRENT head for trunc(param*18/360) entries,
+wrapping18 and signed32 accumulation.162 angle/head tests include zero,
+negative count and repeated wraps, with MACL preservation. Stock360 uses18.
+
+20DF8 requires BOTH810D and9195<14. Healthy normalized period is
+signed32-saturate(sum*18)/count; its result is clamp(153600000/period,0,32767).
+Stale returns0.36 current/previous age boundary pairs pass; full2086C stores
+this raw result at91A2 before executing the source-policy producer209B4.
+
+POLICY PRODUCERS BEFORE REFERENCE SELECTION
+
+20CBC recalculates91A6 bit0 from full history sum<=91643 AND
+unsigned((u16[91AC]<<16)/(u32 current_period>>2))>538. If false it also
+clears timer8158. Timer>=244 sets bits1/2 and resets history. Signed809A<2560,
+nonzero8080 and8081==0 clears bit1. Summary9194 bit0 becomes the OR of
+91A6 bit1,92C6 bit1 and nonzeroAC87.402 cases cover these gates, timer reset,
+history reset, flag preservation and the low-axis/index0 clearing condition.
+The timer producer and its real elapsed-time meaning remain open.
+
+20FAC shifts six raw91A2 samples at91B8..91C2. A decrease of at least998
+from the oldest sample sets91A6 bit4 and resets counter91C6. Separately it
+converts a measured/cached value through4096/coefficient70000[index]. If
+converted-raw is >=128 AND >=trunc(converted*5/100), it resets91C6;
+otherwise it saturating-increments that counter. When9194 bit0 and92C6 bit4
+are clear and counter>=7, it clears the bit4 latch.
+480 tests assert this policy with inactive phase, fresh measured input,
+index3 (coefficient4096), signed-positive samples and inhibit combinations.
+Other indices, stale-source and active-phase caching execute inside the
+900 producer cases and integrated shifts, but do not have an independent
+exhaustive20FAC state oracle. Keep that distinction for follow-up.
+
+209B4 REFERENCE SELECTION
+
+The actual writer of80EC is20C84 in209B4, called by2086C. The former
+description that placed the store directly in2086C has been corrected.
+After20CBC/20FAC,31720 indicates active phase work. Active work clears8196.
+Without active work, once4*u8[8196]>=37,209B4 refreshes cached91A8 from
+signed80EE and saved index91C7 from8081. If810C>=5, refreshed91A8 iszero.
+Otherwise the prior cached measurement/index remain available for fallback.
+
+Selection, in priority order:
+1.9194 bit0 OR91A6 bit4: fallback. Class8080==0 returnszero; otherwise
+  divide cached measurement*4096 by the selected70000 coefficient, with
+  signed16 saturation via10D0C followed by nonnegative clamp. Index6 is
+  the classFF choice when a fresh value is used; cached mode uses91C7.
+  Both return value and80EC take this value;9198 becomesFFFFFFFF.
+2.91A6 bit0: hold prior80EA and80EC separately, retaining9198.
+3.Either810D or9195>=14: reset ring, set91A6 bit2, return/storezero and
+  set9198=FFFFFFFF.
+4.Healthy history: clear bit2; calculate full18-entry normalized period
+  and speed. Store period9198 and return the full-window speed. For80EC,
+  normally also calculate a selected-window value as described below.
+  If92C6 bit4 is set,80EC instead takes the full-window result.
+Finally copy91A6 bit2 into9194 bit1.209B4 preserves MACL.
+
+Selected window for80EC: walk all18 entries backwards, accumulating total.
+While total < measured-source period9238 OR selected_count<5, increment
+selected_count and save the current total as selected_sum. Normalize
+selected_sum*18/selected_count, then invert153600000/period and clamp.
+At least five entries are selected in normal positive histories. For
+nonnegative captures, selection stops extending once the cumulative period
+reaches9238 after the first five. The loop itself continues through18.
+This is why80EC may differ from209B4's returned value, later published80EA.
+Do not simplify it to always using five or all18 entries.
+
+900 full producer cases pass:548 fallback,113 stale,211 history,28 hold.
+450 call the complete2086C wrapper;450 call209B4. Assertions include80EC,
+returned/published80EA,9198, flags and MACL. Valid ring indices are tested;
+invalid index behavior is not claimed. Examples in JSON demonstrate unequal
+80EA and80EC.2086C's other outputs (800B,91A0/91A4,scaled tail outputs)
+execute but are not all independently asserted.
+
+BOTH CAPTURES THROUGH NONZERO REQUESTS AND ECU
+
+Three fixtures use full original group initialization,20658/211C4, timestamp
+callbacks179A8/17A58 and full producers2124C/2086C/2117C. There are NO direct
+writes to80EA,80EC,80EE,9218 or80D8 in these lifecycle tests. A32-capture
+settling period accounts for reset history and the outlier filter.
+Reference intervals12160 produce capture1216 ->80EA=80EC=7017 and references
+[24826,14455,9859,7017,5002,4084,22229]. These are software units.
+
+Code7, accepted index3->2, tested ring heads0/15:
+  measured intervals5890 -> capture589 -> measurement10865
+  at service call80 intervals become6490; measurement reaches9861 at103
+  phase1/request3 at46; hold4 at47; ramp5 at68
+  request released111; phase2 at149; ten-group retirement178
+  returned request915A includes nonzero739,678,...,6,0, then7FFF on release
+Both ring positions match. Actual CAN216 packing/ECU spark checks include
+the active numeric path with concurrent CAN211 fixture inputs.
+
+Code9, index5->4, head0: measured intervals10660 change to12790 at80;
+measurement6003 settles to5003 against target5002. Hold ends102 with filtered
+error54; request released137, ten-group retirement162. Returned915A remains
+7FFF in this fixture, consistent with the stock zero map and request policy.
+35 paired checkpoints assert measurement CAN216byte4/ECU unpack and, on a
+separate snapshot, request CAN216/ECU spark. The request snapshot deliberately
+invalidates byte4; its mutations do not affect the live fixture.
+
+The explicit scheduler calls original11014, both source producers,30B9E,
+phase event2 and periodic service. Ages are refreshed synthetically. These
+call numbers are not milliseconds or proof of the real interrupt/task ratio.
+
+CONTINUATION
+
+This closes the earlier missing80EC source in these paired lifecycles, not
+the complete ECU/TCU investigation. Next trace physical capture0A/0B identity,
+clock/task order and elapsed counter91AC/8158; independently model the full
+20FAC cached/stale/active-phase policy and20EAA fallback consumer. Extend
+paired work to ascendinggroup7 numeric policy, overlap/composite transitions
+and the2->1 classifier context. Traction throttle/fuel/enable arbitration and
+OEM PRHT transmission-type/speed/neutral reception, fold/unfold reversal and
+timeouts remain independent required goals in CHECKPOINT.txt.

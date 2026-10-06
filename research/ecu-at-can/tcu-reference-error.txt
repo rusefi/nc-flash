@@ -1,0 +1,136 @@
+TCU produced references and error-driven request release, 2026-10-06
+
+RESULT
+
+The code9 hold found in tcu-phase-retirement.txt now releases through its
+original source producer. Integrated tests write neither80D8 nor9218:
+2117C produces the seven reference words,30B28 captures the initial error,
+and30B9E updates the error before actual phase/request service. Eight complete
+lifecycles, including codes7/8 with numeric CAN216 requests, pass73 paired
+CAN216/ECU checks. Sensor samples and the call schedule remain explicit inputs.
+
+Reproduce from repo root:
+  python research/ecu-at-can/verify_tcu_reference_error.py > research/ecu-at-can/tcu-reference-error-verification.json
+
+Verification totals:
+  526 reference inputs /3682 produced reference-word comparisons
+  658 clipped-difference boundary/index cases
+  1032 enabled/disabled creation-capture cases
+  280 two-sample filter cases;1020 inactive-state reset cases
+  8 stateful filter samples;8 full lifecycles /73 paired CAN216/ECU checks
+Existing interpreters, earlier verifier fixtures and original ROMs unchanged.
+
+REFERENCE PRODUCTION (2117C)
+
+For i=0..6:
+  reference9218[i] = floor(s16[80EC] * s16(ROM70000[i]) /4096)
+The result is signed32. Original MULS.W produces the signed product;
+5B5C6 performs twelve arithmetic right shifts including the return delay
+slot, so negative results round toward minus infinity.2117C saves/restores
+MACL; tests explicitly verify that preservation.
+
+Stock coefficients:14492,8438,5755,4096,2920,2384,12976.
+Input7014 produces24816,14449,9854,7014,5000,4082,22220.
+This establishes Q12 arithmetic and reference indices, not physical units,
+sensor identity, or a mechanically measured gear ratio.
+
+RAW DIFFERENCE (30C20)
+
+Select reference by u8[95C6]. Compute the signed32 wrapped difference
+s16[80EE] - s32[9218+4*index], then clamp to[-16319,16319]. All seven valid
+indices and signed/clamp boundaries are tested. Extreme signed32 reference
+fixtures expose the subtraction's wrap before comparison; the actual2117C
+producer has a much narrower range. Invalid reference indices are not tested.
+
+CAPTURE AND FILTER
+
+30B20 sets95C2=1 during initialization.30B28(code) acts only when95C2 is
+nonzero and code is3/4/8/9/11. It stores state2/code95C4 and selects95C6:
+  codes3/8/11 -> reference index3
+  codes4/9    -> reference index4
+It calls30C20 and writes that initial raw difference to both95C0 and80D8.
+Disabled or ineligible cases retain their previous capture fields.
+
+30B9E periodic update:
+  if95C2==2:
+    raw =30C20()
+    output80D8 = floor((s16[old95C0] + raw)/2)
+    history95C0 = raw
+  otherwise:
+    history95C0=0;output80D8=0
+The inactive branch executes the original +0.5 conversion helper and obtains
+integer0. It does not change95C2. The history is the previous raw sample,
+not the previous filtered output: starting history3000, two raw1000 samples
+produce2000 then1000. Negative odd sums also round down (e.g. -1+0 ->-1).
+
+Retirement callback30B82 restores matching capture state to1. The next
+30B9E pass clears history/output; integrated cases check this reset after
+the original ten-group acknowledgement and retirement path completes.
+
+PRODUCER-DRIVEN REQUEST LIFECYCLES
+
+Use the62-function initialized fixture from tcu-phase-retirement.txt. Before
+creation, input80EC=7014 feeds2117C;80EE starts at the produced target
+reference plus an explicit error. Other inputs are80EA=4672,80F6=4224,
+809C=20000,92D0=4,A93A=1. At call80, measured80EE changes to the target.
+Each cycle runs11014,2117C,30B9E,31524 event2, two event4 calls and final
+request aggregation. No direct reference, filtered-error, phase, request-state
+or timer write is used to force release after creation.
+
+Code9 selected5->4 uses target5000. For initial errors1000 and128, tested
+at ring heads0/15:
+  phase1/request3 at22, hold4 at23
+  call80 raw error0, filtered500 or64: request remains held
+  call81 filtered0: request enters ramp5
+  phase2 at111, request releases117, phase3/retirement at142
+
+Initial error127 has two separate effects:
+  The target qualification band is upper-exclusive target+128, so127 is
+  already inside it. Phase2 occurs33 and phase3 occurs62 while request holds.
+  At call80 the error filter produces floor(127/2)=63, satisfying the strict
+  hold condition<64 one call earlier. Request release/retirement occur115.
+This separates target-band qualification from filtered-error hold release.
+All counts are tied to the explicit schedule, not milliseconds.
+
+Code7 selected3->2 uses produced target9854 with initial error1000. It
+produces CAN216 source224 and later sampled416/448 before withdrawal,
+releases its request103 and retires phase158. Code8 selected4->3 uses
+target7014, source468 before withdrawal, release53 and phase retirement138.
+The original ECU receive/spark path verifies these numeric requests under
+the saved synthetic ECU model. Code9's stock zero map keeps source7FFF.
+
+At completion all ten internal request groups have acknowledged; dispatcher
+is idle, managed request count0 and915A=7FFF (wire word0 FFFE). The helper
+clones live RAM before its CAN/ECU fixtures, so the forced byte4-invalid flag
+cannot contaminate continuing TCU source/phase state. CAN211 inputs, ECU
+model/gates and byte4 invalidity are fixtures; physical torque/ignition
+units and actual CAN transmission timing are not established.
+
+CALLERS AND NEXT SOURCE BOUNDARIES (STATIC LEADS)
+
+Application code at1E956 calls2086C, then1E95C calls2117C. The aligned GBR
+word-store scan finds80EC writer20C84 in209B4, called by2086C. Its branches
+select a clamped value, including a division using70000. Execute the full
+2086C producer next; its acquisition, fault gates and sensor identity remain
+open. A coefficient table alone is not sufficient to name physical signals.
+
+The scan finds80EE writer21254 in2124C. That producer invokes212F4 over
+counter/history RAM and then diagnostics/other helpers. Its full acquisition
+and validity semantics have not been tested here. Existing tcu-speed.txt
+already establishes80EE as CAN216 byte4's numeric source; this test's byte4
+fixture does not newly validate that publication or its physical units.
+
+Task1E5F6 calls2124C at1E652, then30B9E at1E664, and periodic event4 at1E6A0.
+These call sites establish local ordering in the disassembly. They do not
+establish the cross-task schedule used by these tests or a physical timebase.
+The earlier full-task1412A/FFFFF810 peripheral rejection still applies.
+
+Continue2086C/80EC and2124C/80EE acquisition, ascendinggroup7 numeric policy,
+overlapping/composite transitions and the2->1 classifier. Deep traction
+sender/units/remaining actuator paths and OEM PRHT reception/fold/unfold/
+reversal/timeouts remain required alongside the broader ECU/AT objective.
+
+Ghidra functions/data, disassembly and paired project snapshot are updated;
+independent restore identity is in CHECKPOINT.txt and the Ghidra manifests.
+This and the previous retirement turn made verified progress. Saved locally,
+Git-eligible; no staging, commit or push.

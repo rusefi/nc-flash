@@ -1,0 +1,953 @@
+{
+  "scope": "Execute TCU HCAN error-handler body and recovery task with explicit registers.\n\nRegister samples are fixtures, not a CAN peripheral simulation. Original\ninstructions execute through the error-handler body up to (excluding) RTE.\nHardware reset acknowledgement, timer ticks and task order are supplied.",
+  "register_helper_cases": 1024,
+  "error_handler_cases": 128,
+  "unmapped_access_rejections": 3,
+  "deadline_and_retry_cases": 240,
+  "reset_acknowledgement_cases": 8,
+  "diagnostic_producer_cases": 1024,
+  "receive_monitor_gate_cases": 16,
+  "timeline": [
+    {
+      "tick": 0,
+      "gsr_sample": 0,
+      "state": 1,
+      "retry_count": 0,
+      "recovery_active": 0,
+      "deadline": 0,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 100,
+      "gsr_sample": 1,
+      "state": 2,
+      "retry_count": 0,
+      "recovery_active": 1,
+      "deadline": 140,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 2,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 140,
+      "gsr_sample": 1,
+      "state": 3,
+      "retry_count": 1,
+      "recovery_active": 1,
+      "deadline": 140,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 141,
+      "gsr_sample": 8,
+      "state": 4,
+      "retry_count": 1,
+      "recovery_active": 1,
+      "deadline": 140,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 142,
+      "gsr_sample": 0,
+      "state": 0,
+      "retry_count": 1,
+      "recovery_active": 1,
+      "deadline": 180,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 143,
+      "gsr_sample": 0,
+      "state": 2,
+      "retry_count": 1,
+      "recovery_active": 1,
+      "deadline": 180,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 180,
+      "gsr_sample": 1,
+      "state": 3,
+      "retry_count": 2,
+      "recovery_active": 1,
+      "deadline": 180,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 181,
+      "gsr_sample": 8,
+      "state": 4,
+      "retry_count": 2,
+      "recovery_active": 1,
+      "deadline": 180,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 182,
+      "gsr_sample": 0,
+      "state": 0,
+      "retry_count": 2,
+      "recovery_active": 1,
+      "deadline": 220,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 183,
+      "gsr_sample": 0,
+      "state": 2,
+      "retry_count": 2,
+      "recovery_active": 1,
+      "deadline": 220,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 220,
+      "gsr_sample": 1,
+      "state": 3,
+      "retry_count": 3,
+      "recovery_active": 1,
+      "deadline": 220,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 221,
+      "gsr_sample": 8,
+      "state": 4,
+      "retry_count": 3,
+      "recovery_active": 1,
+      "deadline": 220,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 222,
+      "gsr_sample": 0,
+      "state": 0,
+      "retry_count": 3,
+      "recovery_active": 1,
+      "deadline": 260,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 223,
+      "gsr_sample": 0,
+      "state": 2,
+      "retry_count": 3,
+      "recovery_active": 1,
+      "deadline": 260,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 260,
+      "gsr_sample": 1,
+      "state": 3,
+      "retry_count": 4,
+      "recovery_active": 1,
+      "deadline": 260,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 261,
+      "gsr_sample": 8,
+      "state": 4,
+      "retry_count": 4,
+      "recovery_active": 1,
+      "deadline": 260,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 262,
+      "gsr_sample": 0,
+      "state": 0,
+      "retry_count": 4,
+      "recovery_active": 1,
+      "deadline": 300,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 263,
+      "gsr_sample": 0,
+      "state": 2,
+      "retry_count": 4,
+      "recovery_active": 1,
+      "deadline": 300,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 300,
+      "gsr_sample": 1,
+      "state": 3,
+      "retry_count": 5,
+      "recovery_active": 1,
+      "deadline": 300,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 301,
+      "gsr_sample": 8,
+      "state": 4,
+      "retry_count": 5,
+      "recovery_active": 1,
+      "deadline": 300,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 302,
+      "gsr_sample": 0,
+      "state": 0,
+      "retry_count": 5,
+      "recovery_active": 1,
+      "deadline": 340,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 303,
+      "gsr_sample": 0,
+      "state": 2,
+      "retry_count": 5,
+      "recovery_active": 1,
+      "deadline": 340,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 340,
+      "gsr_sample": 1,
+      "state": 3,
+      "retry_count": 6,
+      "recovery_active": 1,
+      "deadline": 340,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 341,
+      "gsr_sample": 8,
+      "state": 4,
+      "retry_count": 6,
+      "recovery_active": 1,
+      "deadline": 340,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 342,
+      "gsr_sample": 0,
+      "state": 0,
+      "retry_count": 6,
+      "recovery_active": 1,
+      "deadline": 380,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 343,
+      "gsr_sample": 0,
+      "state": 2,
+      "retry_count": 6,
+      "recovery_active": 1,
+      "deadline": 380,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 380,
+      "gsr_sample": 1,
+      "state": 3,
+      "retry_count": 7,
+      "recovery_active": 1,
+      "deadline": 380,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 381,
+      "gsr_sample": 8,
+      "state": 4,
+      "retry_count": 7,
+      "recovery_active": 1,
+      "deadline": 380,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 382,
+      "gsr_sample": 0,
+      "state": 0,
+      "retry_count": 7,
+      "recovery_active": 1,
+      "deadline": 420,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 383,
+      "gsr_sample": 0,
+      "state": 2,
+      "retry_count": 7,
+      "recovery_active": 1,
+      "deadline": 420,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 420,
+      "gsr_sample": 1,
+      "state": 3,
+      "retry_count": 8,
+      "recovery_active": 1,
+      "deadline": 420,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 421,
+      "gsr_sample": 8,
+      "state": 4,
+      "retry_count": 8,
+      "recovery_active": 1,
+      "deadline": 420,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 422,
+      "gsr_sample": 0,
+      "state": 0,
+      "retry_count": 8,
+      "recovery_active": 1,
+      "deadline": 460,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 423,
+      "gsr_sample": 0,
+      "state": 2,
+      "retry_count": 8,
+      "recovery_active": 1,
+      "deadline": 460,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 460,
+      "gsr_sample": 1,
+      "state": 3,
+      "retry_count": 9,
+      "recovery_active": 1,
+      "deadline": 460,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 461,
+      "gsr_sample": 8,
+      "state": 4,
+      "retry_count": 9,
+      "recovery_active": 1,
+      "deadline": 460,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 462,
+      "gsr_sample": 0,
+      "state": 0,
+      "retry_count": 9,
+      "recovery_active": 1,
+      "deadline": 500,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 463,
+      "gsr_sample": 0,
+      "state": 2,
+      "retry_count": 9,
+      "recovery_active": 1,
+      "deadline": 500,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 1,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": ""
+    },
+    {
+      "tick": 500,
+      "gsr_sample": 1,
+      "state": 3,
+      "retry_count": 10,
+      "recovery_active": 1,
+      "deadline": 500,
+      "raw_group35": 7,
+      "active_group35": 4,
+      "aggregate": 28,
+      "mcr": 1,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "report": "c0 73 ff"
+    },
+    {
+      "tick": 501,
+      "gsr_sample": 8,
+      "state": 4,
+      "retry_count": 10,
+      "recovery_active": 1,
+      "deadline": 500,
+      "raw_group35": 7,
+      "active_group35": 4,
+      "aggregate": 28,
+      "mcr": 0,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "report": "c0 73 ff"
+    },
+    {
+      "tick": 502,
+      "gsr_sample": 0,
+      "state": 0,
+      "retry_count": 10,
+      "recovery_active": 1,
+      "deadline": 1500,
+      "raw_group35": 7,
+      "active_group35": 4,
+      "aggregate": 28,
+      "mcr": 0,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "report": "c0 73 ff"
+    },
+    {
+      "tick": 503,
+      "gsr_sample": 0,
+      "state": 2,
+      "retry_count": 10,
+      "recovery_active": 1,
+      "deadline": 1500,
+      "raw_group35": 7,
+      "active_group35": 4,
+      "aggregate": 28,
+      "mcr": 0,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "report": "c0 73 ff"
+    },
+    {
+      "tick": 1500,
+      "gsr_sample": 0,
+      "state": 1,
+      "retry_count": 0,
+      "recovery_active": 0,
+      "deadline": 0,
+      "raw_group35": 1,
+      "active_group35": 4,
+      "aggregate": 28,
+      "mcr": 0,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "report": "c0 73 ff"
+    },
+    {
+      "tick": 1501,
+      "gsr_sample": 0,
+      "state": 1,
+      "retry_count": 0,
+      "recovery_active": 0,
+      "deadline": 0,
+      "raw_group35": 1,
+      "active_group35": 4,
+      "aggregate": 28,
+      "mcr": 0,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "report": "c0 73 ff"
+    },
+    {
+      "tick": 6500,
+      "gsr_sample": 0,
+      "state": 1,
+      "retry_count": 0,
+      "recovery_active": 0,
+      "deadline": 0,
+      "raw_group35": 1,
+      "active_group35": 4,
+      "aggregate": 28,
+      "mcr": 0,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "report": "c0 73 ff"
+    },
+    {
+      "tick": 6501,
+      "gsr_sample": 0,
+      "state": 1,
+      "retry_count": 0,
+      "recovery_active": 0,
+      "deadline": 0,
+      "raw_group35": 129,
+      "active_group35": 0,
+      "aggregate": 17,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": "c0 73 ff"
+    },
+    {
+      "tick": 6502,
+      "gsr_sample": 0,
+      "state": 1,
+      "retry_count": 0,
+      "recovery_active": 0,
+      "deadline": 0,
+      "raw_group35": 1,
+      "active_group35": 0,
+      "aggregate": 17,
+      "mcr": 0,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "report": "c0 73 ff"
+    }
+  ],
+  "limits": "Explicit MCR/GSR samples and task/tick schedule; RTE excluded, no interrupt or CAN electrical model. ECU command fixtures restart at each checkpoint. Group3A, physical timer units, traction and roof internals remain unresolved."
+}

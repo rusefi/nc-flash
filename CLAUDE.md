@@ -27,6 +27,14 @@ Layering: utils ← core ← {ecu, ui, api, mcp}; main.py composes ui.
 
 ## Session Notes
 
+`AGENTS.md` defines the shared durable-memory policy. All relevant project
+memory must be saved in Git-eligible repository files, incrementally and before
+handoff. Chat history, private agent memory, ignored scratch, temporary files,
+and sibling repositories must not be the sole continuation record. Preserve
+evidence, decisions, user constraints, uncertainties, reproducible commands,
+verification status and next actions. Ghidra progress requires a refreshed,
+verified archive of both `.gpr` and `.rep`, plus useful annotations/exports.
+
 Check `.claude/notes.md` at the start of each session for:
 - Pending tasks from previous sessions
 - Important context and decisions

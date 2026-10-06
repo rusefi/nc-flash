@@ -1,0 +1,179 @@
+{
+  "ecu_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "source_cases": 12288,
+  "mt_producer_cases": 1024,
+  "pack_gate_cases": 65536,
+  "tx_admission_cases": 6144,
+  "initialization_cases": 16,
+  "countdown_lifecycles": [
+    {
+      "mode": 64,
+      "configuration": 0,
+      "service_calls": 25,
+      "driver_reached": true,
+      "counter": 25
+    },
+    {
+      "mode": 128,
+      "configuration": 1,
+      "service_calls": 25,
+      "driver_reached": false,
+      "counter": 0
+    }
+  ],
+  "paired_tcu_ecu_cases": 768,
+  "samples": [
+    {
+      "tcu_input_mask": 1,
+      "mode": 64,
+      "configuration": 0,
+      "tcu231": "0100ffff00000000",
+      "ecu_combined": 0,
+      "ecu231_buffer": "ff00ffff00000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 1,
+      "mode": 64,
+      "configuration": 1,
+      "tcu231": "0100ffff00000000",
+      "ecu_combined": 0,
+      "ecu231_buffer": "ff00ffff00000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 1,
+      "mode": 128,
+      "configuration": 0,
+      "tcu231": "0100ffff00000000",
+      "ecu_combined": 0,
+      "ecu231_buffer": "a55a123400000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 1,
+      "mode": 128,
+      "configuration": 1,
+      "tcu231": "0100ffff00000000",
+      "ecu_combined": 1,
+      "ecu231_buffer": "8081828384858687",
+      "ecu_publish_gate": false
+    },
+    {
+      "tcu_input_mask": 2,
+      "mode": 64,
+      "configuration": 0,
+      "tcu231": "e200000a0000000e",
+      "ecu_combined": 0,
+      "ecu231_buffer": "ff00ffff00000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 2,
+      "mode": 64,
+      "configuration": 1,
+      "tcu231": "e200000a0000000e",
+      "ecu_combined": 0,
+      "ecu231_buffer": "ff00ffff00000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 2,
+      "mode": 128,
+      "configuration": 0,
+      "tcu231": "e200000a0000000e",
+      "ecu_combined": 0,
+      "ecu231_buffer": "a55a123400000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 2,
+      "mode": 128,
+      "configuration": 1,
+      "tcu231": "e200000a0000000e",
+      "ecu_combined": 0,
+      "ecu231_buffer": "8081828384858687",
+      "ecu_publish_gate": false
+    },
+    {
+      "tcu_input_mask": 4,
+      "mode": 64,
+      "configuration": 0,
+      "tcu231": "0300ffff00000000",
+      "ecu_combined": 0,
+      "ecu231_buffer": "ff00ffff00000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 4,
+      "mode": 64,
+      "configuration": 1,
+      "tcu231": "0300ffff00000000",
+      "ecu_combined": 0,
+      "ecu231_buffer": "ff00ffff00000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 4,
+      "mode": 128,
+      "configuration": 0,
+      "tcu231": "0300ffff00000000",
+      "ecu_combined": 0,
+      "ecu231_buffer": "a55a123400000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 4,
+      "mode": 128,
+      "configuration": 1,
+      "tcu231": "0300ffff00000000",
+      "ecu_combined": 1,
+      "ecu231_buffer": "8081828384858687",
+      "ecu_publish_gate": false
+    },
+    {
+      "tcu_input_mask": 8,
+      "mode": 64,
+      "configuration": 0,
+      "tcu231": "1400000a00000001",
+      "ecu_combined": 0,
+      "ecu231_buffer": "ff00ffff00000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 8,
+      "mode": 64,
+      "configuration": 1,
+      "tcu231": "1400000a00000001",
+      "ecu_combined": 0,
+      "ecu231_buffer": "ff00ffff00000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 8,
+      "mode": 128,
+      "configuration": 0,
+      "tcu231": "1400000a00000001",
+      "ecu_combined": 0,
+      "ecu231_buffer": "a55a123400000000",
+      "ecu_publish_gate": true
+    },
+    {
+      "tcu_input_mask": 8,
+      "mode": 128,
+      "configuration": 1,
+      "tcu231": "1400000a00000001",
+      "ecu_combined": 0,
+      "ecu231_buffer": "8081828384858687",
+      "ecu_publish_gate": false
+    }
+  ],
+  "limits": [
+    "Explicit scheduling and RAM fixtures",
+    "No physical switch sampling",
+    "TX admission stops before driver6A48",
+    "No PRHT receiver/capture",
+    "Physical transmission-type signal remains unproved"
+  ]
+}

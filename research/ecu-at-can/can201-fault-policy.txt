@@ -1,0 +1,110 @@
+CAN201 substitution and CAN216 cut-request diagnostic policy
+Evidence checkpoint: 2026-10-05
+
+Follow-up: can201-invalid.txt now executes the group3A producer,500-tick
+qualification and healthy recovery. Earlier open3A statements below are historical.
+
+Follow-up: hcan-recovery.txt resolves group35 through the bus-off handler
+and retry state machine, and locates the group3A producer583DC statically.
+Group3A timed qualification remains unverified. The statements below
+about group35 being untraced describe this earlier checkpoint.
+
+Scope and identities
+--------------------
+Continues can201-cut-loop.txt and software-lookup.txt. Original instructions
+from LFG1TF000.bin (SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6)
+and LFFEEE-stock.bin (SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08)
+execute in the bounded research harness. Hex addresses below; low RAM offsets
+mean FFFFxxxx. Numeric counts and tick values are decimal unless prefixed.
+No ROM patches, physical CAN traffic or vehicle/actuator tests.
+
+Verified aggregation
+--------------------
+570F6 builds 51 mapped summary bytes A958..A98A. It does not itself write
+A98E. Separate routine 57258 builds ten aggregates A98B..A994 using ten
+four-byte, zero-terminated index lists at 5FCBC. A98E's list at 5FCC8 is
+1F 20 24 00, selecting A977, A978, A97C. Their diagnostic groups are 35,
+36, 3A, respectively. The records at 5EB78+16*group contain report codes
+C073, C100 and 0000; group3A has no established standard DTC identity.
+
+57258 ORs contributor bits 1,2,4 (masks 02,04,10). If either mask02 or04
+is present, it sets aggregate mask08 and clears mask01; otherwise mask01
+is set. Stored history mask10 alone does not assert mask08. Both provisional
+and confirmed active states can assert it.
+
+57258 -> A98E mask08 -> 21C1C -> 92C9 mask40 has two verified effects:
+  2055C substitutes ROM76DDE=20480 for the normal CAN201-derived80E8;
+  2513E inhibits24FA0, clearing9454 and CAN216 byte7 mask20.
+50C9A publishes A4E4=4 during substitution. In the admitted engine fixture,
+the cleared request releases the four cylinder commands from zero to one.
+These are software command values; physical actuation is not established.
+
+146 group-mapping cases cover each of73 groups with raw active02 or04.
+Only35,36,3A assert this aggregate.512 combinations of the three mapped
+summary bytes execute aggregation, conversion, TCU request generation,
+CAN216 packing and the existing ECU command chain. History-only values
+retain normal conversion/request operation. CAN201 raw16000 gives8814=4000,
+normal80E8=10240 and fixture cut request1; substitution gives20480 and
+request0 because the diagnostic inhibit takes precedence over hysteresis.
+
+Verified communication loss and recovery
+----------------------------------------
+Fourteen persistent-TCU-state lifecycles cover loss of each enabled class0
+record (IDs200,201,215,240,420,4EC,4F1) with80A4=0 and1. Original helpers
+19D44/19E10/19DC0 set/check/recover record deadlines;1A598 producesgroup36;
+56908 processes it;57F50 handles healthy recovery;570F6/57258/21C1C publish
+the policy.2055C/24FA0 and the paired CAN216/ECU chain verify its effects.
+Static56F80 task ordering corroborates group processing ->57F50 ->570F6
+->57258, but the complete task/scheduler is not emulated.
+
+Qualification durations from each receive record+22:
+  200,201,215,4EC:500 ticks;240,420:2000 ticks;4F1:5000 ticks.
+Loss of any of these frames can substitute CAN201 and inhibit the request,
+including when CAN201 itself continues to arrive. Initial receipt expiry is
+distinct from the qualified diagnostic transition. Restored receipt alone
+does not immediately clear active policy. With80A4=0 it clears strictly after
+5000 healthy ticks;80A4=1 retains active policy in these fixtures.
+
+Example missing201, timer initialized at100,80A4=0:
+  tick100: normal;110: expiry bit set, still normal;599: still normal;
+  600: qualified active04, A98E=1C, substitution20480, cut request0;
+  601: receipt restored, policy remains active;
+  5601: exactly5000 healthy ticks, still active;
+  5602: active clears, A98E=11, normal10240 and request1 return.
+Serialized C1 00 FF remains stored after active policy clears. This stored
+history is independently distinguishable from the active control inhibit.
+
+Reproduce and limits
+--------------------
+  python research/ecu-at-can/verify_can201_fault_policy.py
+Saved result: can201-fault-policy-verification.json.
+verify_can201_cut_loop.py now has a main guard so shared receive/engine
+fixtures can be imported without executing its full test suite. Its direct
+output was rerun and byte-compared with its prior saved JSON: identical.
+The new verifier passes146 mapping cases,512 paired summary cases and14
+loss/recovery lifecycles. Shared base interpreter unchanged.
+
+Tick units, interrupt scheduling and physical identities of groups35/3A
+remain unproved. Other frames use the original record recovery helper; their
+payload callbacks are not simulated. ECU command evaluation starts with a
+fresh admitted fixture at each checkpoint, so this is not a continuous ECU
+countdown/actuator simulation. It does not establish traction sender identity,
+DSC brake behavior, PRHT CAN IDs or roof-controller internal transitions.
+All ECU/TCU, traction-control and roof requirements remain active.
+
+Static leads and searches retained for continuation
+--------------------------------------------------
+1A4E4 producesgroup35: action1,23E7C/9415 andA939 gates;8BCE threshold10,
+8BCD-dependent recovery,5662A(group35) and57F00(index20). Hardware causes
+of these counters are unverified; follow their writers before naming a fault.
+An exact E43A opcode scan found14CA0 in a data-like sequence: this is not
+evidence of a valid group3A producer. Aligned MOV.L references to5662A miss
+computed/MOV.W/GBR accesses. Candidate5A604 uses table5F20C (45 06 46 07
+48 09 47 08) and therefore groups45/46/48/47, not3A.25C0C,5983C and59F80
+also did not identify3A. Reinspect generic producers near286xx and the
+remaining callers in56F80 rather than treating a raw opcode hit as a function.
+57B9C's following history/counter logic is not evidence for a3A producer.
+Other open work:17D9C axis acquisition, timer service scheduling,21628 CAN201
+byte6 consumer, CAN211 traction arbitration and PRHT speed/neutral attribution.

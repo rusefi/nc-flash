@@ -1,0 +1,119 @@
+CAN201 byte6: publication, TCU change history and diagnostic fallback
+2026-10-06
+
+Follow-up: selection-pipeline.txt resolves the callers and shows21734 clears
+the enablingflag20. The injected tests below prove conditional behavior,
+not activation during the traced default-input update.
+
+Scope and identities
+--------------------
+Original instructions executed from ECU LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+and TCU LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Reproduce: python research/ecu-at-can/verify_can201_byte6.py
+Saved output: can201-byte6-verification.json. Uses existing bounded RTZ FPU
+and software-arithmetic interpreters, no new ISA implementations or ROM edits.
+RAM addresses below have FFFF prefix. Explicit calls and injected source/gate
+states establish software behavior; they do not establish vehicle timing.
+
+ECU publication (executed)
+--------------------------
+366D4 encodes float6CF8 into byte6B3A with scale0.5 and offset0 via20B8:
+Q(x)=clamp(floor(2*x+0.5),0,255) for the tested normal finite inputs.
+368A2 decodes6B3A*0.5 via2098, takes MAX with float6718 via23E8,
+re-encodes, then caps at200. A3A4==1 overrides this with FF.
+365D0 places6B40 at CAN201 byte6. Tested source/alternate combinations include
+negative values, rounding boundaries, cap boundaries, and explicit invalidity.
+The 14x14x2 encoder fixtures keep word0 at16000 for downstream independence.
+
+Static source lead: 2DA5A copies float5238 to6718 and separately compares
+522A/5310 to set673C. Local sources/lffeee.xml calls6CF8 TP_6CF8 on axes:
+this suggests throttle position but does not prove the source, units or full
+upstream acquisition. Exact literal references alone miss computed writes.
+
+TCU numeric path (executed)
+---------------------------
+1ACD8 ->17070 reads raw byte6: FF keeps old8808 and sets880A=1;
+0..254 stores raw*5 and880A=2. The receive buffer contains seven bytes at8F39;
+8F40 belongs to CAN200 and must not be overwritten by an eighth payload byte.
+21628 computes floor(8808*256/10), with a signed16 intermediate, caps25600,
+and substitutes zero if92D5 mask08 is set. 21500 stores the result at8098.
+For admitted valid raw bytes, the intermediate is0..32512 and does not wrap.
+Do not extrapolate this formula to arbitrary held u16 values outside that range.
+50A5C publishes A4D4=floor(8098*10/256), A4D6=4 if faultmask08,
+otherwise1 if880A==2, otherwise2. Normal ECU output is0..200; TCU also caps
+received201..254. Invalidity alone initially retains the old numeric value.
+
+Fault mapping and qualification (executed)
+------------------------------------------
+570F6 ->57258 ->21C1C produces byte6 fallback for active groups35,36,3C,3D.
+A98D bit3 OR A98F bit3 yields92D5 masks08 and80. A98D combines35/36/3C;
+A98F includes3D. The initial three-group expectation omitted3D and failed;
+all73 groups with each active bit2/4 and all256 values of four aggregates
+are now independently checked. One-hot A98D also sets92CD mask01.
+583DC maps byte6 validity880A to raw group3C/A772. Group3C active state is
+A728 and mapped summary A97E. Its type0 interval500/count1 record has report
+code0000. Full56658/57F50 lifecycle keeps the held value until500 invalid
+ticks qualify, then substitutes zero/status4. Healthy recovery needs500 ticks
+plus the next producer pass and80A4==0. Nonzero80A4 retains the active fault.
+Two eight-step lifecycles test this through ECU publication and return CAN216:
+word0 remains16000, application80E8=10240, cutrequest9454=1 and the admitted
+ECU fixture produces four zero cylinder command values throughout. No stored
+DTC serializes through558CC. This does not claim all byte6 consumers ignore
+faults, nor that groups35/36 have no word0 effects (they do; see fault-policy).
+
+History and jump suppression (executed)
+---------------------------------------
+21500 shifts old8098 ->92BA ->92BC ->92BE ->92C0 before updating8098.
+Let short=current-old8098 and long=current-old92BE (new92C0).
+If abs(short)>=15360, reset8197=0; if also abs(long)>=2560, set92C2 bit0.
+If abs(long)<2560 and8197>=6, clear that bit; upper bits are preserved.
+92B8 stores signed long delta unless the latch is set, then zero. The latch
+suppresses the change signal, not the current numeric value at8098.
+600 independent histories include threshold-adjacent and signed-change cases.
+110B4 advances8197 with saturation255 via1127E, within the8188..8280 byte
+range described by ROM76CCC/76CD0. A steady raw200 after an initial jump from
+zero clears the latch on the sixth explicit110B4 call. Tick units remain open.
+Failed timer lead:11AEC and11A64/11A94/11AC0 service other ranges; they do
+not advance8197. ROM76DE8=2560 and76DEA=15360 are the jump thresholds.
+
+Downstream selection (executed, physical role unproved)
+-------------------------------------------------------
+46CC8 receives pointers inr4/r5. It reads candidate floor9B3C and92D5 mask20.
+When that flag is set it resets82C5=0. It admits a floor when signed92B8 is
+below signed ROM77334 and (flag set OR82C5 below byte ROM77336), provided
+8080!=FF. Both stock calibrations are zero, so admission requires negative
+change AND flag20. If requested byte <9B3C, writes9B3C throughr4 and FF
+throughr5; otherwise preserves both. 108 fixtures cover sign, flag, validity,
+request and timer. Four paired ECU-source changes50->45/55 pass through
+CAN201 and21500 into this rule with flag20 explicitly injected.
+The caller, flag20 producer, pointer meanings and physical actuator effect
+are not yet established. Do not label this a proven gear-change rule.
+Other static92B8 consumers include396E4 and3BB32; not executed here.
+
+Continuation and broader scope
+-------------------------------
+Trace flag20/callers of46CC8 and upstream6CF8/6718/A3A4; investigate the
+additional group3D source880E. Then continue CAN211 traction arbitration,
+coefficient provenance, sender attribution and simultaneous AT requests.
+PRHT CAN speed/neutral attribution, frame identities and remote controller
+state transitions remain open; traction-roof.txt records factory evidence.
+No DSC or PRHT firmware has been identified. These requirements, along with
+ECU/automatic integration, remain active and incomplete. No hardware test,
+application change, staging, commit or push was performed for this finding.
+
+Persistence verification
+------------------------
+At the byte6 checkpoint, Ghidra was refreshed and independently restored:
+300 annotations
+(111 ECU/189 TCU),11 project file hashes,184 matching exports/reports.
+Current archive identity and restoration record are in ghidra/snapshot.json
+and ghidra/restore-verification.json. Both original ROM hashes unchanged.
+New notes, verifier, JSON, annotations and exports are Git-eligible.
+
+Recovery correction (2026-10-06): healthy index28 at5F118 is500 ticks.
+The old601/5601 samples missed the true boundary. Updated lifecycles test
+1100,1101 and a second pass at1101: readiness at500 ticks, fault cleared by
+the next pass without advancing time.16 lifecycle checkpoints now pass.
+See can215-invalid.txt for corrected3A/3B/3C evidence and task-order limits.

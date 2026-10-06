@@ -1,0 +1,1413 @@
+{
+  "ecu_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "cases": {
+    "factor": 580,
+    "environment": 42,
+    "numerator_pairs": 49,
+    "numerator_selection": 96
+  },
+  "expected_model_rejections": [
+    {
+      "input": 0,
+      "error": "RTZ division by zero unsupported"
+    },
+    {
+      "input": 100,
+      "error": "RTZ division by zero unsupported"
+    }
+  ],
+  "serial_cycles": 140,
+  "paired_can_updates": 21,
+  "tables": {
+    "0xa261c": {
+      "axis_address": "0xc89a4",
+      "values_address": "0xc89b4",
+      "kind": 0,
+      "axis": [
+        0.125,
+        0.375,
+        0.625,
+        0.875
+      ],
+      "values": [
+        25.0,
+        57.0,
+        89.0,
+        121.0
+      ]
+    },
+    "0xa35b0": {
+      "axis_address": "0xd9ed0",
+      "values_address": "0xd9ef0",
+      "kind": 0,
+      "axis": [
+        7.866000175476074,
+        15.864999771118164,
+        23.731000900268555,
+        31.731000900268555,
+        39.59700012207031,
+        47.4630012512207,
+        55.46200180053711,
+        63.327999114990234
+      ],
+      "values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "lifecycle": [
+    {
+      "call": 1,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        1,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 0,
+        "bad_count": 0,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.040949821472168,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.040949821472168,
+      "absolute_timer": 0,
+      "source": 0.5409500002861023,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        20.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0011891372269019485
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1260.1572265625,
+      "remainder": 578.6572265625,
+      "mapped_difference": 75.0,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 2,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        2,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 1,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.040949821472168,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.040949821472168,
+      "absolute_timer": 1,
+      "source": 0.5409500002861023,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        20.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0011891372269019485
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1260.1572265625,
+      "remainder": 578.6572265625,
+      "mapped_difference": 75.0,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 10,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        10,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 9,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.040949821472168,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.040949821472168,
+      "absolute_timer": 9,
+      "source": 0.5409500002861023,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        20.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0011891372269019485
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1260.1572265625,
+      "remainder": 578.6572265625,
+      "mapped_difference": 75.0,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 11,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        11,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 10,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 10,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": 68.17405700683594,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 20,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        20,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 19,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 19,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": 68.17405700683594,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 21,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        21,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 20,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": false,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 20,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "hold",
+      "environment": [
+        0.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": -31.825937271118164,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 22,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        22,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 21,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": false,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 21,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "hold",
+      "environment": [
+        0.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": -31.825937271118164,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 24,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        24,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 23,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": false,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 23,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "hold",
+      "environment": [
+        0.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": -31.825937271118164,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 25,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        25,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 24,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 24,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": 68.17405700683594,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 26,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        26,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 25,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 25,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": 68.17405700683594,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 40,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        40,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 39,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 39,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": 68.17405700683594,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 41,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        41,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 40,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.500934600830078,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.500934600830078,
+      "absolute_timer": 40,
+      "source": 0.0009348366875201464,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "clear",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        0.0,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        0.0
+      ],
+      "ratio": 0.0,
+      "remainder": 0.0,
+      "mapped_difference": 68.17405700683594,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 112
+    },
+    {
+      "call": 60,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        60,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 59,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.500934600830078,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.500934600830078,
+      "absolute_timer": 59,
+      "source": 0.0009348366875201464,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "clear",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        0.0,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        0.0
+      ],
+      "ratio": 0.0,
+      "remainder": 0.0,
+      "mapped_difference": 68.17405700683594,
+      "sum": 0.125,
+      "retained": 1.0,
+      "decay_timer": 93
+    },
+    {
+      "call": 61,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        61,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 60,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 60,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": -54.03753662109375,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 64,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        64,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 63,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 63,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": -54.03753662109375,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 65,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        65,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 64,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.36264419555664,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.36264419555664,
+      "absolute_timer": 64,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": -54.03753662109375,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 66,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        66,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 65,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.370643615722656,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.370643615722656,
+      "absolute_timer": 64,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": -54.03753662109375,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 80,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        80,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 79,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.482635498046875,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.482635498046875,
+      "absolute_timer": 64,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        1.4984999895095825,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": -54.03753662109375,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 81,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        81,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 80,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.49063491821289,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.49063491821289,
+      "absolute_timer": 64,
+      "source": 7.843676567077637,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        10.998499870300293,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        29.969999313354492,
+        1.4984999895095825
+      ],
+      "ratio": 11774.505859375,
+      "remainder": 11093.005859375,
+      "mapped_difference": -54.03753662109375,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 100,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        100,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 99,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.642623901367188,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.642623901367188,
+      "absolute_timer": 64,
+      "source": 7.843676567077637,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        10.998499870300293,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        29.969999313354492,
+        1.4984999895095825
+      ],
+      "ratio": 11774.505859375,
+      "remainder": 11093.005859375,
+      "mapped_difference": -54.03753662109375,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 101,
+      "mode": 1,
+      "branch": "normal",
+      "selection": "normal",
+      "counters": [
+        0,
+        101,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 100,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 13.468295097351074,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.650623321533203,
+      "absolute_timer": 64,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 0,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        29.969999313354492,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": -54.03753662109375,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 120,
+      "mode": 1,
+      "branch": "normal",
+      "selection": "normal",
+      "counters": [
+        0,
+        120,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 119,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 13.68271541595459,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.8026123046875,
+      "absolute_timer": 64,
+      "source": 0.8626446723937988,
+      "source_stage": 3,
+      "source_enable": 0,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        100.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0009340943652205169
+      ],
+      "numerator_pair": [
+        29.969999313354492,
+        1.4984999895095825
+      ],
+      "ratio": 1604.2275390625,
+      "remainder": 922.7275390625,
+      "mapped_difference": -54.03753662109375,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 121,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        121,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 120,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.040949821472168,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.040949821472168,
+      "absolute_timer": 0,
+      "source": 0.5409500002861023,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        20.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0011891372269019485
+      ],
+      "numerator_pair": [
+        29.969999313354492,
+        1.4984999895095825
+      ],
+      "ratio": 1260.1572265625,
+      "remainder": 578.6572265625,
+      "mapped_difference": -21.0,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    },
+    {
+      "call": 140,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        140,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 139,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.040949821472168,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.040949821472168,
+      "absolute_timer": 19,
+      "source": 0.5409500002861023,
+      "source_stage": 3,
+      "source_enable": 1,
+      "ratio_branch": "update",
+      "environment": [
+        100.0,
+        20.0
+      ],
+      "ratio_inputs": [
+        1.4984999895095825,
+        1.0,
+        0.0011891372269019485
+      ],
+      "numerator_pair": [
+        29.969999313354492,
+        1.4984999895095825
+      ],
+      "ratio": 1260.1572265625,
+      "remainder": 578.6572265625,
+      "mapped_difference": -21.0,
+      "sum": 1.0,
+      "retained": 1.0,
+      "decay_timer": 113
+    }
+  ],
+  "limits": "Finite normal/zero arithmetic; no FPSCR exception emulation. Synthetic cross-task schedule and serial peer. 8048/80BC/contributions/environment/statuses remain fixtures. CAN model updates deliberately held during6DC4zero; physical units/outputs unproved."
+}

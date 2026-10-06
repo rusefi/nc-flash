@@ -1,0 +1,480 @@
+{
+  "scope": "Bounded selector acceptance -> original phase/request creation -> CAN.\n\nOnly descending adjacent selections 3->2, 4->3 and 5->4 are covered.\nSource RAM and call order are fixtures; physical gear and timing are unproved.",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "acceptance_can231_checks": 6,
+  "periodic_can216_ecu_checks": 12,
+  "cases": [
+    {
+      "old": 3,
+      "requested": 2,
+      "transition_code": 7,
+      "acceptance": [
+        {
+          "blocked": true,
+          "accepted": 3,
+          "candidate": 2,
+          "next": 2,
+          "transition_code": 255,
+          "pending": 1,
+          "cached": 3,
+          "can231": "40 00 00 0a 00 00 00 01",
+          "ecu_flags": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "phase_count": 0,
+          "request_count": 0
+        },
+        {
+          "blocked": false,
+          "accepted": 2,
+          "candidate": 2,
+          "next": 2,
+          "transition_code": 7,
+          "pending": 0,
+          "cached": 2,
+          "can231": "30 00 00 0a 00 00 00 01",
+          "ecu_flags": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "phase_count": 1,
+          "request_count": 1
+        }
+      ],
+      "periodic": [
+        {
+          "event2_calls": 1,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "event2_calls": 2,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "event2_calls": 3,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "event2_calls": 4,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 4,
+      "requested": 3,
+      "transition_code": 8,
+      "acceptance": [
+        {
+          "blocked": true,
+          "accepted": 4,
+          "candidate": 3,
+          "next": 3,
+          "transition_code": 255,
+          "pending": 1,
+          "cached": 4,
+          "can231": "50 00 00 0a 00 00 00 01",
+          "ecu_flags": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "phase_count": 0,
+          "request_count": 0
+        },
+        {
+          "blocked": false,
+          "accepted": 3,
+          "candidate": 3,
+          "next": 3,
+          "transition_code": 8,
+          "pending": 0,
+          "cached": 3,
+          "can231": "40 00 00 0a 00 00 00 01",
+          "ecu_flags": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "phase_count": 1,
+          "request_count": 1
+        }
+      ],
+      "periodic": [
+        {
+          "event2_calls": 1,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "event2_calls": 2,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "event2_calls": 3,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "event2_calls": 4,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 5,
+      "requested": 4,
+      "transition_code": 9,
+      "acceptance": [
+        {
+          "blocked": true,
+          "accepted": 5,
+          "candidate": 4,
+          "next": 4,
+          "transition_code": 255,
+          "pending": 1,
+          "cached": 5,
+          "can231": "60 00 00 0a 00 00 00 01",
+          "ecu_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "phase_count": 0,
+          "request_count": 0
+        },
+        {
+          "blocked": false,
+          "accepted": 4,
+          "candidate": 4,
+          "next": 4,
+          "transition_code": 9,
+          "pending": 0,
+          "cached": 4,
+          "can231": "50 00 00 0a 00 00 00 01",
+          "ecu_flags": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "phase_count": 1,
+          "request_count": 1
+        }
+      ],
+      "periodic": [
+        {
+          "event2_calls": 1,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "event2_calls": 2,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "event2_calls": 3,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "event2_calls": 4,
+          "phase_state": 0,
+          "request_state": 2,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "Zero reference/timer RAM remains explicit. Acceptance creates a request but does not prove phase activation. Only group8 is initialized for these cases. CAN216 snapshot helper forces byte4 invalid; ECU model/gates and CAN211 are fixtures. No physical timing, DSC attribution or OEM roof reception is established."
+}

@@ -1,0 +1,121 @@
+Follow-up: control-reply.txt executes the application receipt/admission
+leads below and verifies numeric feedback retention and a missing-feedback
+monitor. Remaining gate policy and physical receiver are still open.
+
+ECU SCI1 command/reply transfer, 2026-10-06
+=========================================
+Reproduce: python research/ecu-at-can/verify_control_serial.py
+Original ECU/TCU identities incontrol-serial-verification.json.256 register
+configuration,120 full exchange,48 monitor cases and4 expected unsupported
+access rejections pass;five interrupted-transfer/recovery lifecycles andfive
+pairedTCU/ECU command-to-TDR sequences pass. All firmware helpers execute;
+existing interpreters/ROMs unchanged. Previous/current turns made progress.
+
+Interface corroboration and limits
+----------------------------------
+Register addresses match SCI1 in Renesas SH-2E SH7058 hardware manual
+REJ09B0046-0300H Rev3.0 Sep2004, section15/table15.2 and section22.5:
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+Rechecked2026-10-06; PDF SHA256
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+F008..F00E name SMR1,BRR1,SCR1,TDR1,SSR1,RDR1,SDCR1; F746 isPDDR.
+SMR=80 selects synchronous operation. ED1A is interrupt status. This names
+registers; it does not establish board routing, remotechip, pins or clockrate.
+The search for NC-specific main/subCPU attribution did not identify the SCI1
+peer. Other-model P2107 descriptions must not be used as NC hardware proof.
+
+Bounded ControlSerial harness
+-----------------------------
+ExtendsSHControlFloat locally in the verifier. Allows only byteF008..F00E,
+wordF746/ED1A, allwithFFFF prefix. Config/port accesses are fixtures plus
+logged writes; SSR reads return an explicit sample, status writes are logged
+rather than treated as RAM. Each RDR read consumes one supplied byte and
+fails if absent. Wrongwidth/unknownaccess/RDRwrite fail. TDRwrites are captured.
+No clock, electrical transfer, peripheral interrupt generation or external
+controller is simulated. Calls to E86E are explicit, not a complete ISR run.
+SRmaskF0 avoids unrelated scheduler tail. No unbounded or MMIO-wide allowance.
+
+Configuration/start
+-------------------
+BE92 ensures SMR1=80,BRR1=4,clearsSCR1 low2bits, writesSDCR1=F2 only if
+itsbit3 was set. All256 initialbyte patterns tested.
+C00A branchesC350: masksSCR1 with0B; logsSSRstatusupdate; writesED1A=BF;
+sets43A9=1 (active),zeroes TXsum43A2/RXsum43A4,byteindex43A6,stale43A8 and
+completion43A7. ThenSCR1=(SCR1&0B)|30 and clearsPDDRbit0 throughE744.
+Start writes noTDRbyte. OtherPDDRbits survive. No packet admission or physical
+chip-select claim. The first callback supplies the first transmitbyte.
+
+Forty-byte exchange
+-------------------
+E86E readsED1A,writesBF,tailcallsBFB4. Original wrapper executes in the full
+exchange and paired tests. BFB4 returns immediately when43A9==0. Otherwise
+it resets43A8 and usesbyteindex43A6:
+ 0: sendTXbyte0, incrementindex.
+ 1..39: readreplybyte(index-1), then sendTXbyte(index), incrementindex.
+ 40: readreplybyte39, finish/checksum, incrementindex to41.
+Thus one exchange uses41 explicit callbacks,40TDRwrites and40RDRsamples.
+The completion path43A9=0 makes later callbacks inert.
+
+C3F8 sends from437A. Bytes0..37 addunsignedbyte values into16-bit43A2.
+Atindex38 it writes (5AA5-sum) modulo65536 as aBEword at43A0, then sends
+its highbyte;index39 sendslowbyte. TDR1=F00B receives every byte. SSRwrite
+follows eachbyte; the harness verifies data propagation, not hardware timing.
+C49C readsRDR1 into4352+index; accumulates bytes0..37 in43A4.
+C4EA setsPDDRbit0, clearsactive43A9 and tests
+ (sum(replybytes0..37)+BEword(replybytes38..39)) modulo65536 ==5AA5.
+Completion43A7=1 meansvalid,2 meanschecksumfailure. C200 readsindexed BEwords
+from4352;all19 payloadwords are checked afterevery exchange.
+C20A returns43A7 andclearsit; secondreadreturns0. Checksumfailures retain
+rawreplybytes in4352: validation status is separate from rawbuffer retention.
+
+Tests coverzero,allFF and18 seededrandom payloads,valid/badchecksum and0/1/4
+servicecalls between bytecallbacks. Replies are arbitrary fixtures. They are
+NOT inferred responses from the missing physical receiver.
+
+Timeout and recovery
+--------------------
+BF38 whenactive==1: if43A8>=4 callC536,elseincrement43A8. Therefore five
+consecutive servicecalls fromzero withoutcallback abort. C536 disablesSCR
+transferbits,logsSSR/ED1A updates,setsPDDRbit0,43A7=2 and43A9=0. It doesnot
+clearpartial RX/TX buffers or byteindex; the next C350 resets sums/index/status.
+Tests interrupt after0,1,20,39,40 bytecallbacks; allabortatservicecall5 and
+complete a freshvalid exchange afterward. Fourservicecalls between every
+callback remain belowabort because eachcallback resets43A8. Timeunits and
+actual callback/service scheduling are not proved.
+BF38 also monitors43ABnonzero: compareold43AA to4351,setting4350=1 when
+threshold reached,then increment43AA saturating255. Otherwise4350 isretained.
+48 tests coverenable0/1/2 andboundarycounter/threshold values. BEFE clears
+43AA, and E886 statically callsit; resetstub was not part of these lifecycles.
+
+CAN-to-TDR sequence
+------------------
+SameECU retained;actualTCU216/218 packers,ECUreceivers/fullA477E and verified
+publication/candidateangle/selection/recordpackers feed437A. ThenC00A starts,
+E86E/BFB4 transfers andchecks40bytes;C20A consumescompletion. Two duplicated
+commandwords in transmittedbytes4..7 are578 with718C0 and569 with718C1.
+Fivecheckpoints use active0,1,1,1,0 withsynthetic replyvaliditytrue,true,false,
+true,true. Invalidreply isdetected andnextstart succeeds; no claim yet that
+higher-levelECUfault policy reacts,or thatmissingreceiver actuates anything.
+Complete transmittedframes are saved incontrol-serial-verification.json.
+
+Application reply/admission leads, still static
+-----------------------------------------------
+BF38 poolE35C/userE29A is a servicecaller. E86E is the bytecallbackstub.
+222FA consumesC20A. At22312 status1 permits C200 readsinto55B8: firsttwo
+words must be complements before copyingwords2..18. Header9001..9080 or8000
+calls2291A andsets5578;9001..9080 also calls228F0;23748 followsaccepted
+complement path. Transportchecksum success alone is not application acceptance.
+223EA checksC230 (F75Ebit2);224DE copies19outgoingwords viaC1F6 then224F6
+callsC00A. 2242A admitsheader/default logic; this fullsurrounding function
+was notexecuted. Next identifyits entry andverify receipt/admission,header
+sequence,feedbackfields andfaultpolicy beforeasserting a closedactuatorloop.
+
+Persistence and full scope
+--------------------------
+Evidence/script/JSON/annotation/disassembly andcompleteGhidraproject saved
+locally; independentrestore identity underCHECKPOINT.txt. No staging/commit/push.
+Stillrequired: ECU/AT fulltask/capturetiming,group7numeric/overlap/composite/
+2->1/faultlifecycles; tractionbindingA720/history,priorityflag producers,
+CAN211/21Asender,7978/fuel/physicalactuation; OEMPRHT foldANDunfold reception,
+pause/resume,reversal,timeouts,synchronization/recovery. Allthreegoals remain
+incomplete. This serialbranch doesnotreplace CAN orroofintegration scope.

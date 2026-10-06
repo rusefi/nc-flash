@@ -1,0 +1,1903 @@
+{
+  "scope": "TCU diagnostic aggregation and communication loss -> CAN201 fallback/cut policy.\n\nExplicit synthetic task/tick schedule and admitted engine gates. Other frames\nare recovered via original record helpers; no bus or complete scheduler model.\nActive faults, recovery and stored history are tested separately.",
+  "group_mapping_cases": 146,
+  "contributing_groups": [
+    "0x35",
+    "0x36",
+    "0x3a"
+  ],
+  "summary_and_paired_control_cases": 512,
+  "loss_recovery_lifecycles": [
+    {
+      "missing_id": "0x200",
+      "healthy_recovery_gate_80a4": 0,
+      "qualification_ticks": 500,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 110,
+          "expiry_bitmap": 1,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "expiry_bitmap": 1,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "expiry_bitmap": 1,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5600,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5602,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 17,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x200",
+      "healthy_recovery_gate_80a4": 1,
+      "qualification_ticks": 500,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 110,
+          "expiry_bitmap": 1,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "expiry_bitmap": 1,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "expiry_bitmap": 1,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5600,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5602,
+          "expiry_bitmap": 0,
+          "active_group36": 132,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x201",
+      "healthy_recovery_gate_80a4": 0,
+      "qualification_ticks": 500,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 110,
+          "expiry_bitmap": 2,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "expiry_bitmap": 2,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "expiry_bitmap": 2,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5600,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5602,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 17,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x201",
+      "healthy_recovery_gate_80a4": 1,
+      "qualification_ticks": 500,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 110,
+          "expiry_bitmap": 2,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "expiry_bitmap": 2,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "expiry_bitmap": 2,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5600,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5602,
+          "expiry_bitmap": 0,
+          "active_group36": 132,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x215",
+      "healthy_recovery_gate_80a4": 0,
+      "qualification_ticks": 500,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 110,
+          "expiry_bitmap": 8,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "expiry_bitmap": 8,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "expiry_bitmap": 8,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5600,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5602,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 17,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x215",
+      "healthy_recovery_gate_80a4": 1,
+      "qualification_ticks": 500,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 110,
+          "expiry_bitmap": 8,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "expiry_bitmap": 8,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "expiry_bitmap": 8,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5600,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5602,
+          "expiry_bitmap": 0,
+          "active_group36": 132,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x240",
+      "healthy_recovery_gate_80a4": 0,
+      "qualification_ticks": 2000,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 200,
+          "expiry_bitmap": 128,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 2099,
+          "expiry_bitmap": 128,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 2100,
+          "expiry_bitmap": 128,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 2101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7100,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7102,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 17,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x240",
+      "healthy_recovery_gate_80a4": 1,
+      "qualification_ticks": 2000,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 200,
+          "expiry_bitmap": 128,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 2099,
+          "expiry_bitmap": 128,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 2100,
+          "expiry_bitmap": 128,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 2101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7100,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7102,
+          "expiry_bitmap": 0,
+          "active_group36": 132,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x420",
+      "healthy_recovery_gate_80a4": 0,
+      "qualification_ticks": 2000,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 200,
+          "expiry_bitmap": 256,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 2099,
+          "expiry_bitmap": 256,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 2100,
+          "expiry_bitmap": 256,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 2101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7100,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7102,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 17,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x420",
+      "healthy_recovery_gate_80a4": 1,
+      "qualification_ticks": 2000,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 200,
+          "expiry_bitmap": 256,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 2099,
+          "expiry_bitmap": 256,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 2100,
+          "expiry_bitmap": 256,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 2101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7100,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 7102,
+          "expiry_bitmap": 0,
+          "active_group36": 132,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x4ec",
+      "healthy_recovery_gate_80a4": 0,
+      "qualification_ticks": 500,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 125,
+          "expiry_bitmap": 4096,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "expiry_bitmap": 4096,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "expiry_bitmap": 4096,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5600,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5602,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 17,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x4ec",
+      "healthy_recovery_gate_80a4": 1,
+      "qualification_ticks": 500,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 125,
+          "expiry_bitmap": 4096,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "expiry_bitmap": 4096,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "expiry_bitmap": 4096,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5600,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5601,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5602,
+          "expiry_bitmap": 0,
+          "active_group36": 132,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x4f1",
+      "healthy_recovery_gate_80a4": 0,
+      "qualification_ticks": 5000,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 1100,
+          "expiry_bitmap": 8192,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 5099,
+          "expiry_bitmap": 8192,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 5100,
+          "expiry_bitmap": 8192,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 10100,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 10101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 10102,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 17,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    },
+    {
+      "missing_id": "0x4f1",
+      "healthy_recovery_gate_80a4": 1,
+      "qualification_ticks": 5000,
+      "timeline": [
+        {
+          "tick": 100,
+          "expiry_bitmap": 0,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 1100,
+          "expiry_bitmap": 8192,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 5099,
+          "expiry_bitmap": 8192,
+          "active_group36": 0,
+          "aggregate_a98e": 1,
+          "substitution_flag": false,
+          "scaled_value": 10240,
+          "cut_request": 1,
+          "ecu_commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stored_report": ""
+        },
+        {
+          "tick": 5100,
+          "expiry_bitmap": 8192,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 5101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 10100,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 10101,
+          "expiry_bitmap": 0,
+          "active_group36": 4,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        },
+        {
+          "tick": 10102,
+          "expiry_bitmap": 0,
+          "active_group36": 132,
+          "aggregate_a98e": 28,
+          "substitution_flag": true,
+          "scaled_value": 20480,
+          "cut_request": 0,
+          "ecu_commands": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "stored_report": "c1 00 ff"
+        }
+      ]
+    }
+  ],
+  "limits": "Tick units and full scheduler unknown; physical causes of groups35 and3A not established. No actuator timers or vehicle tests."
+}

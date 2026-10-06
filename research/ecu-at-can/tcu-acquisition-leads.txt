@@ -1,0 +1,85 @@
+TCU acquisition continuation leads -- 2026-10-06
+
+Follow-up: tcu-measurement.txt and verify_tcu_measurement.py supersede the
+80EE provisional leads below with original-instruction verification, including
+the17A58 timestamp callback, recovery and integrated request lifecycles.
+tcu-reference-source.txt now advances80EC/209B4 through full callers and
+both-capture shifts. Remaining active/cached20FAC,20EAA and hardware/task
+questions are listed there. Historical leads below are superseded where
+verified;10D0C already saturates signed16 before its caller sign-extends,
+so the fallback quotient does not simply wrap from out-of-range positive.
+
+Status: provisional exploratory notes preserved from the preceding analysis.
+No standalone verifier, complete branch coverage or refreshed Ghidra annotation
+has been produced for these findings. Recheck against the original instructions
+before promoting them into verified conclusions. Existing reference/error
+verification remains authoritative for its downstream scope.
+
+Input: examples/LFG1TF000.bin
+SHA256: 8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+Addresses use ROM offsets or low halves of FFFFxxxx RAM addresses.
+
+Writer attribution to check/correct in the reference record and Ghidra:
+80EC direct store20C84 belongs to209B4, called by2086C. The earlier phrase
+"within2086C" describes the transitive path, not the function boundary.
+2086C ends208EE;209B4 ends20CBA. Do not rename exports without refreshing
+and independently restoring the Ghidra archive.
+
+80EE acquisition:
+- 2124C calls212F4 with word76DE2=360, stores its result at80EE.
+  ROM byte76DE0=18 is a freshness threshold; byte77448=24 history length.
+  One exploratory full2124C execution using SHRotate, all24 history words
+  at9248 set to30000 and otherwise zero RAM, produced80EE=213,
+  9238=720000,9234=213,9236=213. Initial SR F0 became F1; do not assert
+  whole-SR preservation. This probe needs a saved reproducible verifier.
+- 212F4 rejects if either810C or9244 is at least18 (signed byte loads
+  followed by unsigned comparisons also reject128..255). Rejection clears
+  800C in a critical section, calls21482, sets9238=7FFFFFFF and returns0.
+- Healthy path derives a signed-word count from trunc(param*24/360), sums
+  signed32 history entries backwards from800D with ring wrap and low32
+  accumulation, then uses10C4C and10DA4 arithmetic helpers. Constant213FC
+  is153600000. Hypothesis pending helper verification: normalized period
+  is saturating(sum*24)/count, then speed is153600000/period, clamped0..32767.
+  Verify saturation, signed overflow, division-by-zero and count boundaries;
+  do not substitute this hypothesis for an executed oracle.
+- 10DA4 appears to implement signed division with zero-divisor saturation:
+  zero numerator ->0, positive ->7FFFFFFF, negative ->80000000.
+  10C4C likely saturates signed32(a*b/2^shift); inspect its full helper chain.
+- 21482 fills24 history words with214B6()=18<<12=73728, resets800D=0
+  under SR critical section.211C4 sets810C=9244=FF, resets history and
+  sets9238=7FFFFFFF. Startup may therefore require two fresh captures.
+- 211DC appears to ingest8908, cap by7FFFF when age>=130 or capture too
+  large, then cap at73728; increment/wrap ring head, store capture,
+  saturating-increment800C, save old810C to9244 and reset810C=0.
+  Signed negative captures and upstream8908 peripheral ownership remain open.
+- 2124C normally copies80EE to9234. With92C6 bit4 or nonzeroAC86 it
+  substitutes9218[index], index8081 except8080==FF selects6, upper-capped
+  to32767.9236 still follows80EE via214F0. Tail50D88 effects need review.
+- 2140C derivative lead: (old923E-old9240-old9242+current9234)>>2
+  feeds80F0; multiply by6103 with truncation /256 and signed16 saturation
+  feeds923C, then history shifts. Execute before relying on this formula.
+
+80EC acquisition:
+- 2086C calls20DF8 ->91A2;209B4 return ->80EA and upper-capped shifted
+  800B;207DE(60), history91AE/91B0/91B2 and delta91A0;20EAA ->91A4;
+  tail50EA4.209B4 may write a different value to80EC than its return.
+- 209B4 dependencies include20CBC,20FAC,31720, accepted index8081,
+  class8080, saved index91C7 and91A8. In one static branch, no active
+  phase plus8196*4>=ROM76E47 selects80EE, but810C>=76E48 forces zero.
+- Fault flags9194 bit0,91A6 bits0/4 and ages810D/9195 versus76E46
+  select history reset/fallback branches. Healthy history path20B20 onward
+  and20CBC/20DF8/20FAC/207DE still need full inspection.
+- Fallback20C40 divides r9<<12 by signed coefficient70000[index], then
+  sign-extends the low16 quotient BEFORE clamping. Saved9198 receives
+  normalized period. Store20C84 selects clamped r12 when stack flag is1,
+  otherwise clamped r14; stores91C7 and copies91A6 bit2 to9194 bit1.
+  These are partial static notes, not a complete producer model.
+
+Next: save a verifier for2124C/212F4/211DC initialization, valid, stale and
+recovery paths; verify arithmetic helpers independently, then finish209B4.
+Use SHRotate and fail on unsupported hardware/opcodes rather than stubbing.
+See verify_tcu_reference_error.py for downstream integration and
+verify_tcu_phase_retirement.py full_fixture() for expanded initialization.
+After verified annotations change, follow ghidra/README.txt snapshot and
+independent restore procedure. Keep traction and PRHT next steps active in
+CHECKPOINT.txt; this acquisition work does not complete either added goal.

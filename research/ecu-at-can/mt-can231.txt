@@ -1,0 +1,136 @@
+ECU MT CAN231 publication versus actual TCU selector traffic, 2026-10-06
+
+RESULT
+
+The AT-capable LFFEEE ECU contains a distinct MT-mode CAN231 producer:
+  byte0=FF;byte1=discrete flags;bytes2/3=FFFF;bytes4..7=0.
+Byte1 bit2 carries its protected combined neutral-candidate state723A.
+The actual TCU uses byte0 low-nibble1/3 for its paired P/N candidate states,
+independently corroborated by the aftermarket converter in roof-aftermarket.txt.
+Do not apply the AT byte0 selector convention to this ECU's MT payload.
+These are original sender/ECU-consumer code results, not proof of the OEM
+PRHT receiver's interpretation or its transmission-type signal.
+
+Original ECU and TCU binaries are unchanged. Their SHA256 identities are
+asserted in verify_mt_can231.py and saved in mt-can231-verification.json.
+No application, ROM, hardware or shared-interpreter edits. All functions
+below run their original instructions and helpers unless explicitly described
+as a stop at the transmit-driver entry. Inputs and task order are fixtures.
+
+LOCAL STATE TO MT PAYLOAD
+
+ECU411F0 writes protected723A and its copy7244:
+  protected7002==1 ->1;
+  else protected734C==1 ->(6AD2==1 OR6AD4==1);
+  else ->(44A4 bit0 clear).
+The CAN-derived one-hot flags6AD2/6AD4 represent low-nibble1/3 in active
+AT normalization. This function checks734C, not the mode40 bit itself.
+Thus an inconsistent MT+configuration1 fixture can read retained selector
+flags even though the MT mode prevented the CAN normalizer from updating.
+Do not invent automatic correction for an inconsistent configuration.
+
+ECU412A2 writes protected723E=(44A4 bit6 clear OR protected7002==1).
+12288 source cases exhaust every44A4 byte, override0/1/2,configuration0/1/2/FF
+and four selector fixtures. Protected values retain their complement bytes.
+44A4 is sampled RAM here; its GPIO/filter origin and the physical identity of
+bit6 remain open. The common override can assert both output flags.
+
+Full35BAA invokes three builders, each gated ONLY by734A bit40:
+  35C1C:6AC6=FF.
+  35C38:6AC7=(723A==1 ?4:0)|(723E==1 ?2:0)|
+                    (8EBC==1 OR8EBE==1 ?1:0).
+  35C9A:6AC4=FFFF.
+With mode40 clear, all three fields retain their previous values.
+Nonboolean values2/FF do not count as1.1024 producer/packer cases cover
+all four representative mode combinations and four values of each flag.
+8EBC/8EBE source identities and whether PRHT treats bit0 as invalidity are
+unproved; do not label it a roof-disable command.
+
+Complete36DB0 packs6AC6,6AC7,BE6AC4,then four zero bytes to6B64 ONLY if
+mode40 set OR protected734C==0. Otherwise the entire TX buffer is retained.
+65536 cases exhaust all possible mode/configuration bytes. Real3880/3894
+interrupt-mask helpers execute. The source producers can update the SH T
+condition flag; tests check preserved upper SR bits, not an unchanged T.
+The initial test incorrectly expected identical T after the source functions;
+correcting that assertion required no interpreter or firmware change.
+
+Important distinction: configuration0 without mode40 permits packing and
+transmission but DOES NOT run the MT-specific field updates. Contrasting
+seeded working fields A5/5A/1234 therefore pack as A5 5A 12 34 00 00 00 00.
+This prevents falsely calling every non-AT transmit path an MT conversion.
+It is a demonstrated retained-state case, not proof that a stock vehicle
+can switch configurations dynamically or normally enters this combination.
+
+TRANSMISSION ADMISSION AND INITIALIZATION
+
+Descriptor3793C defines ECU CAN231 TX.36D52 increments u16 counter6B6C,
+then compares the incremented value against25. Due calls reach driver6A48
+only with mode40 set OR protected734C==0. Other due calls clear the counter
+and execute348F2; calls below25 retain the incremented counter and return.
+6144 admission cases cover every mode byte, four configuration values and
+counter0/23/24/25/FFFE/FFFF. In particularFFFF wraps0 and is not due.
+
+The verifier stops by exception at the REAL driver entry6A48, asserts its
+descriptor argument3793C, and records admission. It does not skip driver
+instructions and resume the caller, nor invent a successful CAN send.
+Consequently the post-transmit counter reset is static evidence, not part
+of the executed admitted path. Nonadmitted paths execute to normal return.
+
+Initializer36D40 seedsFFFE, calls35BAA and36DB0, restores its PR and falls
+through36D52. The increment toFFFF permits an immediate initial attempt;
+the first request need not wait25 calls.16 complete initializer cases
+verify either driver entry with counterFFFF or a suppressed return with
+counter0.36DA8 explicitly clears the counter. Two stateful25-call sequences
+then verify ordinary admitted and inhibited behavior from that cleared state.
+No wall-clock period or real scheduler order is assigned to these counts.
+
+ACTUAL TCU END AND COMPARISON
+
+768 paired cases start at the actual TCU22416 with explicit four-channel
+filtered input flags88B4..B7, then execute its full19414 packer. The actual
+TCU231 bytes are copied to ECU6ABC and processed by35BB8/3585C/411F0/
+412A2/35BAA/36DB0. This incorporates both real binaries; it does not replace
+the TCU output with a manually invented frame. Physical input filtering was
+verified separately in selector-inputs.txt and is not repeated here.
+
+Active AT (mode80,configuration1) accepts the TCU frame and groups byte0
+low-nibble1/3, while suppressing ECU publication. MT (mode40,configuration0)
+ignores AT normalization and publishes the local-state MT payload. Examples
+and inconsistent/configuration-disabled cases are preserved in the JSON.
+The copied TCU payload is a fixture for the software receive boundary;
+neither peripheral acceptance nor the roof controller is emulated.
+
+ROOF IMPLICATIONS AND REMAINING SCOPE
+
+Factory sources in traction-roof.txt establish PCM speed/type/MT-neutral
+and TCM AT-selector dependencies. This trace supplies a concrete MT-neutral
+sender candidate alongside the already-executed AT selector and201 speed.
+It does not locate a separately documented transmission-type bit. FF in
+MT byte0 is a distinguishing marker, but calling it the roof's type selector
+requires actual PRHT receive evidence. MT byte1 bit2 likewise remains a
+roof-input candidate until correlated with receiver code or captures.
+
+Next:44A4 source sampling/filtering;8EBC/8EBE producers near6C11E..6C228;
+PCM type encoding and OEM PRHT receive/timeout/reversal behavior. Aligned
+literal references are only leads and do not exclude computed accesses.
+Preliminary inspection of200/420/4EC field builders did not establish the
+type field; this was not an exhaustive transmitter/read audit. Converter201
+float-helper/unit work remains separately open in roof-aftermarket.txt.
+
+Keep the full goal active: ECU/AT feedback/arbitration and TCU slot2/phase1/2,
+deep traction source/actuation/scheduling, and complete PRHT folding/unfolding
+CAN integration. This trace resolves one sender branch, not those broader
+requirements. Previous and current goal turns made concrete verified progress.
+
+REPRODUCTION AND SAVED ANALYSIS
+
+From repository root:
+  python research/ecu-at-can/verify_mt_can231.py
+Compare stdout with mt-can231-verification.json. Existing SH integer harness
+is unchanged. No new opcode emulation or peripheral fixtures were introduced.
+Disassemble.py excerpts now include35C1C..35CDC,411F0..41336 and36D40.
+GNU SH objdump2.42 reproduction/setup remains in the task README/CHECKPOINT.
+New labels/comments and function exports are saved in the paired ECU/TCU
+Ghidra project; final archive/independent restore identities are recorded in
+CHECKPOINT.txt and ghidra/snapshot.json/restore-verification.json.
+Saved locally, Git-eligible; no new staging, commit or push.

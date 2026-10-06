@@ -1,0 +1,222 @@
+TCU transition progress, startup order and request-group suppression
+==================================================================
+2026-10-06. Continues tcu-transition-classification.txt.
+
+Result and scope
+----------------
+Original startup calls48BC0 immediately followed by32140 at1E15C..1E166.
+32140 initializes three retained accumulators from accepted8081. Executing
+that original call segment after supplying cached state1 produces25600/0/0
+at96C8/96CA/96CC. Original32348 then updates these inputs from retained rates.
+Original474C4 produces qualification bit0; full44CFE/48C08 selects code6/
+operation8 for the subsequent accepted2->1 change. No accumulator, flag,
+transition-code or managed-request output is injected in the new trace.
+
+The old code1 phase is acknowledged and retired during code6 creation.
+The replacement completes phase0->1->2 and retires as well. Its numeric
+CAN216 request stays withdrawn. Original4C880 explains the absence of a
+numeric request: code6/operation8 returnsFFFF, suppressing this managed
+spark-request group. A phase transition does not imply a torque/spark request.
+
+This advances ECU/AT integration. It does not establish physical accumulator
+units, full vehicle/task timing, DSC sender identity or OEM roof reception.
+Traction and NC PRHT fold/unfold goals remain independently required; see
+the separate evidence and next actions at the top of CHECKPOINT.txt.
+
+Artifacts and reproduction
+--------------------------
+  python research/ecu-at-can/verify_tcu_transition_progress.py
+Writes tcu-transition-progress-verification.json. Original-byte excerpts are
+in tcu-transition-progress-disassembly.txt. Existing strict SHRotate executes
+all helper bodies, including original interpolation/division/multiply code.
+Independent Python arithmetic observes outputs; it does not replace firmware.
+
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+All RAM addresses below have FFFF prefix. Numeric examples are decimal.
+
+Initialization and correction of fixture scope
+---------------------------------------------
+32140 reads accepted8081 and initializes A/B/C =96C8/96CA/96CC:
+  accepted0: 0,0,0
+  accepted1: 25600,0,0
+  accepted2: 25600,0,25600
+  accepted3/4: 25600,25600,25600
+  all other bytes, including5/FF: 25600,25600,0.
+All256 accepted bytes are executed. Seven cached-state cases execute the
+original two-call startup segment1E15C..1E166 and stop at the next instruction
+1E168 with balanced stack. The surrounding startup is not executed here.
+
+The preceding ascending/source/classification fixtures initialize the larger
+state and then change cache606F to1 and call48BC0 alone. They leave A/B/C at
+their previously initialized zero values. Their code0 and two-record traces
+remain valid under that explicit setup; they are not representative of the
+original paired startup initialization for cached state1. The new lifecycle
+executes the paired startup segment after the cache change. Older defaults
+and saved results are preserved for comparison rather than silently rewritten.
+
+The periodic32348 caller is statically visible at1EC16..1EC1A, between1F2AA
+and2C73E calls. This establishes a real caller, not its relative scheduling
+against44CFE/48C08 or the timer/event service. The new trace's once-per-cycle
+32348-before-selection order remains an explicit fixture.
+
+Complete32348 progress producer
+------------------------------
+Three signed32 rates are retained at970C/9710/9714. The previous progress
+words are sign-extended from16 bits for accumulation.
+
+If9315 bit0 OR bit1 is set: clear all three progress words and rates, clear
+971A bit0, and retain9718 and9708. Other bits of971A are preserved.
+
+Otherwise clear971A bit0; compute factor9718=curve70B39(unsigned9334)>>8;
+execute328FC to update selected rates; integrate each old progress plus its
+new/retained rate through32C2C. Stock factor ranges64..128. A/B always use
+the normal cap25600. C uses cap3840 when328FC produced971A bit0, otherwise
+25600. The producer preserves the shared qualification-crossing flag bit1.
+
+32C2C adds full32-bit operands with wrap, compares the signed result to the
+selected signed cap, then clamps below0. Its argument low byte must equal1
+to choose ROM770C4=3840. Other nonzero argument bytes choose25600. Tests
+include signed overflow, negative inputs and cap boundaries.
+
+Rate selection328FC
+-------------------
+Uses last phase-creation code8089, which is distinct from accepted8081 and
+the persisted selection classifier9C87. Each case updates only the listed
+rates; omitted rates retain their old value. It does not clear the cap flag
+itself; the enclosing32348 does that before calling it.
+
+  code0: A=positiveA
+  code1: C=positiveC; A=positiveA
+  code2/3: B=positiveB
+  code4: C=negativeConstantC
+  code5: A=negativeConstantA; C=negativeMixedC; B=negativeConstantB
+  code6: B=negativeConstantB; C=negativeMixedC
+  code7: B=negativeConstantB; C=positiveC
+  code10: B=negativeConstantB; C=positiveC
+  code11: C=positiveC; if9410 bit1, replace with alternatePositiveC and
+          set cap bit0 when99DC bit0 is set
+  code9: C=alternatePositiveC; set cap bit0 if
+         (99C4 bit2 AND95C9 bit1) OR (99B0 bit1 AND95C9 bit1 clear)
+  code8 and all other bytes: retain all rates.
+
+For codes5/6/7,95AE bit0 replaces B with alternateNegativeConstantB. Stock
+base and alternate constants both equal256; the distinct branches still
+execute and are preserved in the model. All256 code bytes and64 combinations
+of the six relevant flags are covered with varied prior rates and scale.
+
+Rate arithmetic and stock calibration
+------------------------------------
+All helper products use signed16 multiplication by signed9718 followed by
+arithmetic shift right6. Negative helpers negate AFTER this shift. The
+four curve helpers first take unsigned lookup result>>8 as the other factor:
+  positiveA32A54: curve70B40, axis u16(2*80FE)
+  positiveB32AA6: curve70B49, axis u16(2*80FE)
+  positiveC32B3C: curve70B24, axis u16(2*80FE)
+  alternatePositiveC32BDA: curve70B34, axis u16(2*80FA).
+The stock A/B curves are byte-identical; this is not physical-unit evidence.
+Negative constants:32A86/770CC,32B1C/770CE,32AFC/770D0,32C0C/770C6,
+all stock256. Direct helpers cover negative factors and doubling wrap even
+though normal32348 produces the nonnegative factor64..128.
+
+Mixed helper32B6E forms an unsigned weighted input:
+  axis=min(u32((u16(2*80FE)*100 + u16(2*80FA)*96)//100 +5018),65535).
+Weights are ROM bytes770C8/C9; signed offset is word770CA. It stores axis
+to9708, then returns -((curve70B2D(axis)>>8)*signed9718 >>6).
+9708 is retained whenever this helper is not selected. The original unsigned
+division10D82 and lookup10764 execute; no arithmetic helper is stubbed.
+
+Request-group selector4C880
+--------------------------
+The code argument is truncated to8 bits; operation is truncated to16 bits.
+  codes0..4 ->group7, except operation18decimal ->FFFF
+  codes5..11 ->group8, except operations6/8/10/12/16/17decimal ->FFFF
+  other code bytes ->FFFF.
+The result is a software callback group, not a CAN identifier. Original
+4C3CA uses it when constructing managed spark-request work. The full trace
+observes code1/operation0 ->group7 and code6/operation8 ->FFFF. Thus no
+descending numeric callback4D010 is entered in this replacement trace.
+5632 direct cases cover every code byte and relevant operation boundaries,
+including high-byte/low-word distinctions; do not truncate operation to8 bits.
+
+Retained paired lifecycle
+------------------------
+Shared lifecycle now accepts an optional preparation hook and can validate
+a trace without requiring an ascending numeric-map entry. Retirement remains
+mandatory. The new verifier additionally asserts both original creations,
+the code1-then-code6 retirement callbacks, selector outcomes, no descending
+numeric entry, and the withdrawn CAN216 request at every saved checkpoint.
+The old ascending-only observer now uses the existing descending timer model
+when317E4 receives codes5..11; this adds checks instead of skipping firmware.
+
+Fixture: cached accepted1; proposed2; sources80EA4672,80F64224,809C20000,
+809A25000,80EE1000,80F814080; valid92D0 bit2/A93A. Targets:9218[index2]
+5000 and[index1]6500. At primary call80,80EE changes to6500. Every cycle
+samples original digital/ADC inputs, calls32348,44CFE,48C08,11014,event2,
+then two event4/aggregation services. No later progress/rate/state injection.
+Both input25 levels are tested for320 cycles each.
+
+Initial A/B/C25600/0/0 produces flagbit0 during initial code1 creation.
+At call1, code1 rates105/0/105 produce A/B/C25600/0/105. The full selection
+caller chooses code6/operation8 and retires code1. At call2, code6 retains
+A-rate105 and sets B/C rates-256/-177; progress becomes25600/0/0. It stays
+there under this fixture, including after phase retirement.
+
+Verified low-input milestones: replacement phase1 at80, phase2 at130,
+retirement/head2/count0 at162. CAN216 word0 remainsFFFE; paired fixture
+ECU AT correction stays0 and calculated spark stays26. Absolute timing,
+physical gear movement and real actuator behavior are not established.
+Both input25 levels produce the same phase milestones80/130/162 in this
+fixture. The prior source-selection trace's different retirements218/294
+belong to its code1+code0 context; they must not be transferred to code6.
+The shared lifecycle also records two legacy first-record memory snapshots
+per run. That record is freed during replacement: subsequent RAM values at
+its old address are not evidence of a still-active ascending request.
+
+Verification totals
+-------------------
+24,785 direct cases:256 initialization,378 accumulation/clamp,1296 rate
+helpers,16384 rate selection,832 complete producer,7 original startup
+segments and5632 request-group selection. Two320-call retained traces add
+640 producer checks,646 classification checks,640 proposal checks and
+four observed request-group selections. Eight active-ring paired snapshots
+and four legacy paired snapshots execute original TCU CAN216 and ECU logic.
+No code6 numeric map callback is entered; both phase rings retire completely.
+
+Existing ascending-map and descending-phase-policy verifier JSON outputs
+remain byte-identical. The preceding transition-classification verifier also
+passes and asserts equality with both saved source-selection manager traces,
+including their67 paired ECU outcomes. No shared instruction interpreter,
+ROM binary or application flashing code changed.
+
+Ghidra persistence:36 added annotations, one corrected shared971A comment,
+14 functions and six explicit curve tables. The closed.gpr+.rep archive was
+independently extracted, all11 project hashes checked, both programs reopened
+read-only, and1,247 annotations/643 export files matched. Archive SHA256:
+  d5ac1fe64ded79c5230ab89ec24b4ffe68868b58af2aaf4990f0a5e49a0224d7
+Size10,845,055 bytes. Snapshot/restore manifests, annotations, scripts and
+exports are saved in the repo. No staging/commit/push; pre-existing mixed
+index/worktree changes are preserved. All three broad research goals remain
+incomplete; this turn and the preceding turn made verified progress.
+
+Failed exploratory lead retained
+-------------------------------
+The first retained run stopped in the older ascending-only observer when
+317E4 received code6. This was an observer scope assertion, not a firmware
+failure. Reusing the independently verified descending timer model resolved
+it; no instruction was replaced and no check was silently bypassed.
+
+Open work
+---------
+939E:23766 is a verified static store;239B2 reads it into93F6 whenits second
+argument iszero. Trace the full producer containing23766 and its upstream
+CAN/input path. Source80FE/80FA/9334 and9315/95AE/95C9/99xx writers and
+actual cross-task ordering still need provenance. Progress values resembling
+a normalized range do not identify a clutch, pressure or mechanical state.
+Preserve full overlapping/composite transition policy, shared971A crossing
+consumption, other operation families and physical transmission outputs.
+Traction:59720/8118,72B4/72BC, gate/task provenance and DSC/fuel/actuator proof.
+Roof:PCM transmission-type publication and OEM PRHT reception; folding and
+unfolding, interruption/resume/reversal, timeouts and fault recovery remain.

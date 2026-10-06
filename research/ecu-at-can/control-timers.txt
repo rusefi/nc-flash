@@ -1,0 +1,134 @@
+ECU retained timer producers and serial-enable GPIO, 2026-10-06
+=============================================================
+Reproduce: python research/ecu-at-can/verify_control_timers.py
+Evidence: control-timers-verification.json; original ECU/TCU hashes there.
+1458 timer-input cases,432 timer/GPIO cases and1600 finite filter checks pass.
+The long lifecycle runs2514 complete synthetic serial exchanges with28 actual
+paired TCU/CAN boundary updates, plus38 paired fault/clear cycles and a
+three-cycle valid-record comparison. No ROM or shared interpreter changes.
+
+This extends control-admission.txt by executing247B6,24B82,24BAE and the536C
+initializer/filter, rather than setting5664/5666/5668/566A/5676 directly in
+retained scenarios. The dispatcher, local-gate, feedback-override and numeric
+selection bodies still execute. Input722A,93C3/92CB/932A,6CB4 and other earlier
+sources remain fixtures. The full scheduler and physical recipient are open.
+Previous and current turns made verified progress; all three goals stay open.
+
+Earlier timer producer247B6
+--------------------------
+All RAM addresses have FFFF prefix. Let M=722A and C=word5664.
+- M!=0 clears C.
+- M==0 increments C, saturating65535, when prior566E==1 OR93C3==1 OR both
+  92CB/932A are0. Otherwise C HOLDS; it is not cleared by the status inhibit.
+- After that update,566A=(M==0 AND C>=stockBAE48=6).
+- Word5666 increments saturating65535 only when M is exactly1; otherwise0.
+Thus non-Boolean mode2 clears both timers and eligibility. Non-Boolean prior
+566E/93C3 do not satisfy their exact1 checks. Tests include both counters at
+65534/65535, the5->6 threshold and every0/1/2 combination of five input bytes.
+
+Later timer and output:24B82 ->24BAE
+---------------------------------
+24B82 runs after24910. It increments word5668, saturating65535, only when
+new5670 is exactly1; otherwise clears it.24BAE then sets
+  5676 = (566B==0 AND updated5668<stockBAE58=201).
+Original22E4/E744/22F4 writes this Boolean to bit11 of wordFFFFF746 (PDDR),
+preserving every other bit and restoring the caller's interrupt mask. Tests
+cover multiple port patterns and interrupt-mask values; the condition flag
+can change before the SR-saving helper and is not claimed preserved.
+This shares the modeled PDDR with SCI1's bit0 transfer control. Both masks
+execute in the retained serial tests. No physical wire/actuator identity is
+assigned to bit11; a register write is not a measured hardware response.
+
+536C source initialization and filter
+------------------------------------
+1DED8 copies6CB4 to536C.1DEE2 calls original2508 with source6CB4, old536C,
+stockBAE28=.5 and epsilon1DF08~0.00001. For finite normal/zero operands:
+ D=R(old-source), W=R(1-.5), B=R(source+R(W*D));
+ output=source if abs(R(source-B))<epsilon, otherwise B.
+R is round-toward-zero binary32. FMAC is the SH-2E two-rounded-step operation,
+not fused arithmetic.64 input pairs each run25 retained filter calls. Nonfinite
+and exception behavior are outside this interpreter/test scope.
+
+Static callers:1E8E4 uses1DED8;1EA16 uses1DEE2. Their scheduling relative to the
+command task remains open; the test explicitly chooses one filter call per
+control cycle. It initializes from6CB4=11 and does not inject536C thereafter.
+Aligned6CB4 references30512,3127E and7AAF8 are READERS, not its producer.
+The earlier6CB4 acquisition/publication and its physical units remain open;
+search base-relative or table-driven writers rather than repeating those leads.
+
+Retained original-body sequence
+------------------------------
+Observed command-task order supports247B6 before24910, then24B82/24BAE,
+then24C88/24DCE/24E06, and later angle conversion,21D18 and25682. The test
+executes those bodies in this order. It omits intervening task functions and
+holds numeric5620/5650 at explicit fixtures; their producers remain required.
+SCI1 callbacks,22224 and285A4 run on a chosen per-cycle schedule, not a claimed
+real interrupt/task timing model. All40 TX bytes and next outgoing quantized
+command are checked on every cycle. TCU216/218 packers and ECU/fullA477E run
+at28 specified boundaries; those CAN-derived values retain between updates.
+
+With M=0 and zero counters, valid replies and selected local inputs:
+ cycles1..5: normal candidate;566A is0;
+ cycle6: updatedC=6 permits feedback override;
+ cycle625: C=625 rejects feedback and admits relative override;5668 becomes1;
+ relative count38..49: reply qualification5677 is0;
+ relative count50..124: qualification returns1;
+ relative count125+: qualification is0;
+ cycle825: relative count201 clears5676 and PDDRbit11;
+ cycle1876: C>1875 activates bypass;relative timer resets0 but5676 remains0
+            because bypass is active. Numeric selection falls back to normal.
+These facts describe this selected-body fixture, not autonomous vehicle modes.
+The relative branch uses fixed5620=3; it does not prove that command value in
+a live ECU. No time units are assigned to counts.
+
+Mode1 then clears5664 and increments5666. With admission satisfied, feedback
+lasts only while5666<625; at625 normal selection resumes. Returning to mode0
+resets5666 and repeats the six-count entry delay. Boundary checks and recorded
+transitions cover these values without injecting the counters.
+
+Protected RAM side condition discovered during the long test
+------------------------------------------------------------
+The first mode-transition expectation was too broad: mode1 remained rejected
+because5354 was1 and protected2110 was0. Tracing original15146 ->157F0 showed
+5354 is set by invalid protected-byte reads. In the sparse fixture, uninitialized
+210C,2076,2088,208A are00/00 instead of valid00/FF. The read uses its supplied
+default, records the offending address at534C and sets5354. That side effect
+is separate from SCI1 missing-feedback fault20A8 and must not be attributed
+to real serial loss. The full RAM-initialization/diagnostic task is unmodeled.
+
+The retained mode1 test now CHECKS three rejected calls with5354=1/2110=0,
+then explicitly supplies valid protected2110=1 at step4 to exercise the known
+conditional-admission path through counter624. A separate comparison supplies
+valid zero records at the four addresses before mode1:5354 stays0,2110 stays0,
+and selection is normal,feedback,feedback across three actual paired cycles.
+No diagnostic flag is patched or cleared in either comparison. This correction
+preserves the observed failure and identifies its fixture cause instead of
+presenting it as a vehicle mode-transition requirement.
+
+Missing-feedback lifecycle with produced timers/enables
+-------------------------------------------------------
+A fresh38-cycle test executes actual TCU packers/fullECU pipeline each cycle.
+Six valid replies allow the timer-produced feedback override to begin at6.
+Next27 replies pass transport checksum but fail the application complement.
+Call32 is the26th rejected reply:20A8 latches and feedback override rejects;
+call33 closes monitor admission. Calls34..37 are valid but fault remains.
+Original28552 clear beforecall38 restores monitor admission and feedback
+selection, with counters/enables still generated by original bodies.
+Earlier mode/status/numeric sources and clear-entry admission remain fixtures;
+this does not establish physical fail-safe action or complete vehicle recovery.
+
+Next actions and persistence
+----------------------------
+Execute the omitted task bodies and numeric relative/absolute override
+producers, trace6CB4 and722A sources, and model reset/57CD recovery consumers.
+Keep2BE4A/21E8C scheduling and A720 history/bindingCAN limits open. Generic
+protected-record initialization and5354 servicing15800..15C44/160xx are new
+concrete dependencies for extending full-task execution; avoid assuming sparse
+zero RAM is valid protected state.
+
+All original scope remains: paired ECU/AT CAN behavior,TCU full task/capture
+timing/group7/overlap/composite/2->1; traction CAN sender/7978/fuel/physical
+outputs; OEM PRHT fold AND unfold CAN reception,pause/resume,reversal,timeouts,
+motor synchronization/recovery. Roof status and next steps remain separately
+in traction-roof.txt/CHECKPOINT.txt. Ghidra annotations and closed archive are
+saved and independently restored per Latest save verification. No commit/push.

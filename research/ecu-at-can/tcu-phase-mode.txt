@@ -1,0 +1,162 @@
+2026-10-06: source production of ascending qualification mode
+===========================================================
+
+Result
+------
+TCU function 49260 produces byte FFFF8086 from the accepted or proposed
+software state, source byte 9B40, and local request/history flags. Its original
+helpers produce the intermediate flags; no mode output is injected in the new
+retained traces. The function writes only 0 or 1. Earlier mode 2/255 qualifier
+tests remain boundary tests, not demonstrated normal production states.
+
+For the same code1 transition and measurement profile, source 0 produces mode0
+and starts the CAN216 numeric request at call80. Source10 produces mode1 and
+delays that request until call111, then withdraws it at112. Both records retire
+at142. These are fixture call counts, not measured vehicle timing. The physical
+meaning and upstream production of source9B40 remain unresolved.
+
+Reproduce and evidence
+----------------------
+  python research/ecu-at-can/verify_tcu_phase_mode.py \
+    > research/ecu-at-can/tcu-phase-mode-verification.json
+
+9271 direct cases:19 transition classifications,6048 source-latch cases,
+3024 complete mode-producer cases and180 accepted/proposed-state selections.
+Seven retained calls verify the hysteresis. Two192-call manager traces verify
+386 mode updates (including original creation),191 initial-delay decisions,
+223 phase-qualifier updates and82 release updates. Their17 paired checkpoints
+execute the original TCU CAN216 packer and ECU request/spark calculation.
+
+The older ascending-map and ascending-release verifiers were rerun after adding
+an optional upstream callback to the shared lifecycle fixture. Both outputs
+remain byte-for-byte identical to their saved JSON. The callback defaults to
+None, executes before the manager call, and introduces no interpreter changes.
+
+Disassembly excerpts: tcu-phase-mode-disassembly.txt (48C08..48D84 and
+4905C..4935C). TCU input examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+ECU input examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+All RAM addresses below have the FFFF prefix; constants are hexadecimal
+addresses, while unprefixed source values and thresholds are decimal.
+
+Accepted versus proposed state
+-------------------------------
+49260 uses current8081 when the low byte of r4 is zero; otherwise it uses the
+low byte of r5. It snapshots source9B40, calls48D70(selected), calls4925C
+(the original stock helper returns1), then writes8086 at492D2:
+  selected0: mode1 iff9C82 is exactly1;
+  selected1: mode1 iff source9B40 is10 or17;
+  selected2: mode1 iff the newly produced9C83 is exactly1;
+  any other selected value: mode0.
+
+The original48C08 caller first calls4905C with transition classification input,
+then48174 for admission, then49260 with the admission result and proposed9C86.
+This occurs before publishing an accepted next state into8081. The caller's
+later acceptance branch requires return exactly1, whereas49260 itself treats
+any nonzero low byte as selecting the proposal. The broad selector boundary
+cases do not establish that48174 normally returns values other than0/1.
+See selection-reporting.txt for the accepted-state/CAN231 publication path.
+
+Local request, hysteresis and inhibition
+---------------------------------------
+48D70 executes492DE,49162,491C4, then49212. Their complete bodies execute in
+the verifier; the independently calculated oracle does not replace them.
+
+492DE sets9C84 bit0 iff selected state is2 AND at least one condition holds:
+  source9B40 in{10,17,13,14}; 9ACD bit4 set; or9C00 bit4 set.
+Other9C84 bits are preserved.
+
+49162 updates9C8A bit1 using signed16 measurement80EA:
+  set below2793 when request9C84 bit0 is set;
+  clear at/above2980 or whenever the request is absent;
+  retain within[2793,2980) while requested.
+The thresholds are ROM words773C0/773C2. Seven retained samples
+3000,2793,2792,2793,2979,2980,2793 produce modes1,1,0,0,0,1,1.
+
+491C4 sets9C8A bit2 iff request is set AND9BFC bit5 is set AND
+(signed80EA >=12198 OR source is neither10 nor17). Otherwise it clears bit2.
+The threshold is ROM word773C4. Other9C8A bits, including pending bit0, survive.
+
+49212 overwrites9C83 with boolean(request AND neither9C8A bit1 norbit2).
+Thus selected state2 uses both retained hysteresis and immediate inhibition.
+These address-based names avoid inferring sensor units or a mechanical gear.
+
+Source latch for selected state0
+--------------------------------
+4905C updates9C82 and records current9B40 in9C89. Its49110 helper classifies
+the low16 argument:0..4 ->1,5..11 ->2,other ->0. For source10/17:
+  first clear9C82 if9C91==2 and classification==2;
+  then set9C82 if previous9C89 was outside{10,17}, or signed80EA>=1211,
+    or signed80EA<558, or9C91==1.
+If source is outside{10,17}, clear9C82. Otherwise retain its old value when
+neither rule applies. The set rule follows the clear rule and can supersede it.
+Thresholds are ROM words773BC=1211 and773BE=558. Retained arbitrary value2
+is possible in boundary fixtures; selected state0's exact1 check rejects it.
+Upstream production and physical interpretation of9C91/9B40 are still open.
+
+Retained manager and ECU comparison
+-----------------------------------
+Both traces use the existing original creation sequence, accepted8081=2,
+code1, target reference5000, permission9410 bit0 set and map request1280.
+Each cycle runs the source latch4905C and complete49260 before11014, then
+event2 and two event4 services. Source9B40 is explicitly sampled as0 or10.
+The creation call precedes this sampling; its mode is independently checked
+but excluded from the subsequent constant-mode assertion. Other source fields,
+reference and ECU coefficients remain explicit fixtures.
+
+Measured80EE profile:1000 initially; call80=5000,81=6000,84=5900,86=5750,
+88=5500,90=5250,92=5100,94=5051,96=5050,98 onward=5000.
+Mode hysteresis instead uses80EA, held at4672 in this fixture.
+
+source0/mode0:
+  call80 target qualification advances phase0->1; numeric callback starts1280;
+  call90 enters release; calls92/94/96 yield requests510/260/0;
+  call111 phase1->2; call142 phase3 and record retirement.
+  ECU calculated spark:26 ->21 ->22 ->23 ->26 under the saved coefficients.
+
+source10/mode1:
+  initial in-band sample80 is interrupted by the rebound81;
+  calls92..111 supply20 consecutive in-band samples, completing phase0->1;
+  call111 numeric callback starts1280 and calculated ECU spark becomes21;
+  call112 retained band counter21 qualifies again, advancing phase1->2;
+    release produces0 that call and calculated ECU spark returns26;
+  call142 phase3 and record retirement.
+
+The band counter survives successful qualification, explaining the consecutive
+phase changes111/112. The mode0 below-upper route additionally needs the shared
+crossing flag; see tcu-ascending-phase.txt. A CAN frame at every observation
+point is a paired software check, not proof of actual CAN scheduling or receipt
+of a one-call request on the vehicle. No physical torque/spark change is claimed.
+
+Continuation across all three goals
+-----------------------------------
+ECU/AT: trace9B40/9C91/9BFC/9ACD/9C00 production and actual task order;
+extend complete overlapping/composite/2->1 transition lifecycles, shared971A,
+outer cancellation/fault recovery, and sensor/reference physical provenance.
+Traction: execute59720->8118, trace72B4/72BC writers and67AC/7242/7012/7016/
+A3A4 gates/task order; retain CAN211/21A sender attribution,7978/fuel consumers
+and physical actuator confirmation as separate open requirements.
+Roof: establish PCM transmission-type publication and matching OEM PRHT
+receiver. Factory sequence/window evidence and candidate speed/neutral/selector
+signals do not establish an OEM CAN folding/unfolding command. Preserve both
+directions, pause/resume, reversal, timeout, motor synchronization and recovery.
+All three research goals remain incomplete. This pass made verified progress.
+
+Persistence verification
+------------------------
+Ghidra12.1.3 PUBLIC / Java21, SuperH:BE:32:SH-2A compatibility language,
+not chip identification. Added nine function and eight RAM/calibration
+annotations; updated the existing8086 and9C8A evidence comments. Five ROM
+threshold words are explicitly typed. The closed .gpr plus .rep archive was
+independently extracted, all11 file hashes checked, and both programs reopened
+read-only. All1150 annotations (570 ECU/580 TCU) and605 export/report files
+matched the live project. No incomplete decompilations were reported.
+Archive nc-at-can.tar.gz:10,828,017 bytes; SHA256
+6cb90b3c6fd1badd391ef8ffacb194acd9bee8fe3acfb6a99c2363fe7e460fb5
+Both new/changed Python verifiers passed py_compile. The new result counts and
+both firmware hashes were checked; old map/release results remain byte-identical.
+Git diff --check passed. Report, disassembly, verifier and result are Git-eligible;
+archive, annotations, exports, manifests and continuation indexes are also saved
+in the repository. Transient logs/live/restore-check remain ignored by design.
+Saved locally; no staging, commit, push or index cleanup was performed.

@@ -1,0 +1,178 @@
+ECU model sources, stock maps and paired CAN feedback (2026-10-06)
+===============================================================
+
+Result and limits
+-----------------
+The ECU's actual stock model maps and source producers now execute before
+CAN215 publication and the TCU's returned CAN216 request. The same model
+coefficients and offsets also feed the CAN211 inversion/spark path. Earlier
+feedback tests seeded these model values directly; this follow-up resolves
+those immediate writers and calibration selection, including a count producer.
+Raw sensor/state inputs, TCU active phase3 and task order remain fixtures.
+It is not a complete ECU scheduler or physical vehicle simulation. Physical
+wire units, CAN211 sender, the upstream pattern-index policy, complete traction
+actuation, and PRHT signal/state integration remain unresolved requirements.
+
+Input ROMs and hashes are recorded in model-sources-verification.json. Both
+original images remain unchanged. All addresses/masks are hexadecimal; case
+counts and numeric formulas use decimal. RAM addresses omitFFFF.
+Reproduce: python research/ecu-at-can/verify_model_sources.py
+
+Stock coefficient producer40560
+------------------------------
+Inputs are protected6DB4 and6F20; denote them x/y without assigning units.
+The first map axis is1000..7500 for most branches, the second0..1 in1/16
+steps. One branch uses13 first-axis entries. These ranges suggest physical
+interpretations but do not by themselves establish them.
+Three outputs:71A8=a,71AC=b,71B0=c. Selection reads protected718C, byte74F1,
+and657E; it selects one triplet of float-table descriptors:
+  718C==0:                   A223C /A2250 /A2264
+  718C!=0 and74F1==0:         A22A0 /A22DC /A2318
+  718C!=0,74F1!=0,657E!=1:    A228C /A22C8 /A2304
+  718C!=0,74F1!=0,657E==1:    A2278 /A22B4 /A22F0
+For each triplet, original236C interpolation executes. Then:
+  71F4 = c - a*(b-7A74)*(b-7A74)
+  71F8 = c - a*(b-7A80)*(b-7A80).
+Each binary32 operation rounds toward zero in instruction order; these are
+algebraic descriptions, not permission to reorder floating-point operations.
+243 complete producer cases cover27 flag combinations,3 x/y points and3
+command/baseline pairs. The independent expectations read ROM tables and
+apply the quadratic equations; no firmware lookup is replaced in execution.
+
+Lookup helper236C reads a20-byte descriptor: dimensions at+0/+2, axis pointers
+at+4/+8, values pointer+12, encoding byte+16. All13 tested2D maps use float
+encoding0. Values have x varying fastest.2714 clamps each axis and computes
+its fractional position;2748 obtains both coordinates;262C/2594 interpolate
+in x and then y.5508 cases cover every node and every cell midpoint of the
+12 coefficient maps plus auxiliary mapA232C, and four out-of-range corners
+per map. All results match the separate table/interpolation reference.
+Curve helper22F8 and the3 auxiliary1D maps pass71 knot/midpoint/bounds cases.
+This is evidence for these maps and encoding0, not all lookup formats.
+
+Offsets and model publication
+-----------------------------
+407B4 uses the same x=6DB4 with protected6D20 and6CD4:
+  71CC = map2(A232C,x,6D20)
+  protected71D0 = map2(A232C,x,80)
+  7204 = curve(A2218,x)
+  7208 = curve(A2224,6CD4)
+  protected71D8 = max(7204-71D0,0)*7208.
+MapA232C's second axis is -40,-20,0,20,40,60,80,100.48 producer cases vary
+both source values and x, beyond the single80/0 source pair in feedback.
+
+40916 calculates7200=(6828/6814)*curve(A2230,67DC) only when abs(6814)
+is outside deadband ROM40A30=0.48828125; inside/on the band it holds7200.
+It always sets71E0=7200 plus ROMC1428 (13.671899795532227) if protected67AC
+is exactly1, otherwise71E0=7200.162 cases exercise positive/negative/zero
+inputs, hold/update, curve positions and gate0/1/2. These are raw values.
+
+4097E writes protected71C4 =71CC+71D8+71E0+protected7258.
+40888 reads count71F0 and writes:
+  71FC =71F4+71D0+71D8
+  71EC =71F8+71D0+71D8
+  71B4 =71FC*max(8-count,0)/8 (count is read as unsigned8).
+409AC then subtracts protected71C4:
+  71B8 =71B4-71C4;71BC =71FC-71C4;71C0 =71EC-71C4.
+2304 cases cover every count byte with multiple positive/negative sources.
+The entire functions and original protected-value read/write helpers execute.
+
+Thus CAN215 bytes0/1 publish71EC, bytes2/3 publish71B4, and bytes4/5 publish
+71C4 using the previously verified offset512/rounding/sentinel encoding.
+TCU17854/178FC subtract the third converted word from the first two. Their
+results relate to the ECU's71C0/71B8, with wire quantization and saturation;
+they are not exact unquantized copies. The offset71D8 algebraically cancels
+from the first difference; finite rounding and word encoding still matter.
+Count changes only71B4 directly, while the pattern also changes the chosen
+coefficient map and hence both outgoing values.
+
+Count provenance40660
+---------------------
+The complete40660 first calls46284, which maps7182 through4632A, uses6542
+to choose an index table, gates/caps74F0, and calls4639C to produce74F1 using
+stock pattern tables and74F2.40660 then publishes71F0:
+  73C4 has either20/40, or protected73B8==1:8
+  otherwise protected718C==1:popcount(74F1)
+  otherwise:0.
+2160 cases execute the complete caller with varied force flags,718C,7182,
+74F2 and6542. These compare the count against an independent bit count;
+they do not exhaustively prove the physical meaning or every index/mask map.
+The producer's bounded count0..8 explains the domain used by the previously
+verified CAN2113F9EC:7170=715C*8/(8-count) for count<8, zero for count8.
+
+In the stock74F2=0,6542=0,718C=1 fixture, input7182=0..5 yields:
+  index:  0   1   2   3   4   5
+  mask:  00  11  55  77  FF  FF
+  count:  0   2   4   6   8   8
+These masks are hex. They are software patterns, not evidence of eight
+physical cylinders.74F2 scheduling and7182 production remain next traces.
+
+Original call-site ordering
+---------------------------
+Static main-task instructions19A88..19B10 call407B4,40916,4097E, then several
+traction conversion/state helpers,40660,40560,40888;19C9C calls409AC. The
+verifier executes the listed source functions in their relative order but
+omits intervening work and later replays the network consumers explicitly.
+It does not claim one complete normal task iteration. Coefficient selection
+uses the input718C/mask state; the later received CAN211 can change718C.
+Full scheduling/old-versus-new state relationships remain open.
+
+Paired stock-model feedback
+---------------------------
+144 cases vary all4 map branches,count0/2/4/8,CAN211 request0/16/50 and
+TCU phase3 timer0/5/10.54 more cases run40660 from input7182=0..5 before
+40560 and use its actual mask/count in the complete downstream sequence:
+  model producers ->ECU369D6/36A28 ->CAN215 ->TCU1ACF0/583DC/570F6/57258
+  ->516E6/517B2/216D8 ->2C234/1FB8C ->18F10/18F8C ->same ECU
+  CAN216 andCAN211 normalization/model inversion ->4FD9C/4FBDA/4FB4E.
+No pending faults are seeded. Count/mask-derived and seeded-count cases
+are distinguished in the JSON; TCU phase3 admission remains synthetic.
+
+Original71C0 now drives the AT comparison gate3AE82; it is no longer replaced
+by the old constant50 fixture. Expected model inversion, corrections, summed
+correction and bounded four-cylinder spark outputs are independently checked.
+The ordinary spark lower bound can be reached by these synthetic requests;
+raw summed corrections are not always equal to a change in final command.
+For count-producer index0..5,CAN211request50 (inactive),phase3timer0:
+  CAN215:026D026C02170002 forindex0;024E023902170002 forindex1;
+         024E022602170002 forindex2;024E021302170002 forindex3;
+         024E020002170002 forindex4/5.
+  ordinary spark:10.329999923706055 forindex0;
+                 11.632600784301758 forindex1..5.
+These are model-fixture results, not measured torque or physical spark units.
+
+Interpreter support and verification
+------------------------------------
+sh_model_float.py is separate from all earlier interpreters. It adds MACH
+stack save/restore, signed16 multiply and finite FNEG to bounded normal RTZ
+FPU support.320 transfer,1280 multiply and96 negation vectors pass;4 deliberate
+subnormal/nonfinite negations are rejected. SR and unaffected registers are
+checked. Full FPSCR exception/interrupt behavior remains outside scope.
+The initial stock lookup failed at unsupported STS.L MACH2372; after adding
+save/restore and MULS.W, stock-model final output reached unsupported FNEG
+at8B3B2. Neither helper was mocked or bypassed; both now execute and pass.
+Reference consulted2026-10-06: Renesas SH-2E Software Manual REJ09B0316-0200,
+LDS printed102..103,STS154..155,MULS.W126,FNEG194:
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+These define register transfers, signed16 multiplication and finite sign
+negation. Existing RTZ limits and arithmetic verification remain unchanged.
+No older verifier or shared interpreter was modified; no redundant full
+research-suite rerun was needed. New evidence tests pass with unchanged ROMs.
+
+Next work
+---------
+Trace7182/74F2 producers,74F1 physical consumers and source6542/657E identity;
+reconcile source-model tasks with received requests over real task history.
+Trace6DB4/6F20/6D20/6CD4/6814/6828/67DC/7258 before assigning physical units.
+Continue TCU slot2 policy4C7AC,phase1/2 admission,92E6 work-record consumers,
+complete traction actuation and PRHT CAN speed/neutral attribution and roof
+fold/unfold/fault transitions. All three investigation objectives remain open.
+
+Persistence verification
+------------------------
+Ghidra now includes the source/lookup functions, model RAM values and typed
+13 map/3 curve descriptors with axes/values. Saved archive independently
+restored:11 project hashes,460 annotations and255 identical function/readback
+exports verified. Current archive identity/inventory and restore results are
+in ghidra/snapshot.json and restore-verification.json. New files and exports
+are Git-eligible; git diff --check passes. Saved locally, no new staging,
+commit or push. The overall goal remains active; both recent turns progressed.

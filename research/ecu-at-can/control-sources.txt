@@ -1,0 +1,134 @@
+ECU override source maps, selection and normal-command coupling
+2026-10-06
+
+Executed scope
+--------------
+verify_control_sources.py executes full58092,580AC,5C500,5C53A,5C54E,39D24
+and their original helpers, then reuses the prior override/timer/CAN/serial
+pipeline. Both original ROM hashes, complete table values and retained
+checkpoints are in control-sources-verification.json. No ROM or shared
+interpreter changes; earlier verifiers remain unchanged this turn.
+
+Passed191 map cases (each knot, +/-0.125, interval midpoint and outside ends),
+720 selector cases,108 clamp cases,9 coupling cases:1028 direct cases total.
+Also180 full synthetic-peer serial cycles,21 actual paired TCU216/218->ECU
+CAN updates, original numeric override producers and original normal offset.
+No direct8248/8250/8254/825C/8010/8014/6D00 injection in that lifecycle.
+Earlier2310/8018/6D28/6D20/status/mode/stage/enable remain explicit fixtures.
+
+Reproduce from repository root:
+  python research/ecu-at-can/verify_control_sources.py >
+    research/ecu-at-can/control-sources-verification.json
+  python -m py_compile research/ecu-at-can/verify_control_sources.py
+
+Lookup input:58092 and580AC
+--------------------------
+58092 runs float lookup22F8 using descriptorA35A4 and raw6D28, writes8010.
+Seven knots: -20,0,20,40,60,80,100 ->18500,18500,8000,8000,8000,4000,4000.
+Axes D9E94; valuesD9EB0. Endpoints clamp; interpolation follows separately
+rounded subtraction/division/multiply/add, not fused FMAC.
+
+580AC selects8014 by priority:
+  735A bit7 set ->ROM D9E8C bits3E4CCCCD (~0.2).
+  Otherwise6536 zero ->8010.
+  Otherwise ->min(ROM D9E90=23819,max(protected2310,raw8018)).
+Protected2310 defaults toD9E84=0 on invalid checksum. This branch has no
+additional zero floor, so explicit negative operands can produce negative
+selected input; the downstream map clamps to its first knot. All nonzero
+6536 values take this branch. Other735A bits do not matter here.
+No physical meaning is assigned to735A bit7 or6536 by this trace.
+
+Numeric source:5C500 ->5C53A ->5C54E
+---------------------------------
+5C500 indexes two tables by raw6D20 and writes protected records:
+  lower8254:descriptorA1A0C,16 knots,axisBB3A0,valuesBB3E0.
+  upper825C:descriptorA1A00,16 knots,axisBB320,valuesBB360.
+Both axes -30..120 by10. Lower decreases4.5 at-30 to0 at60,then stays0.
+Upper decreases60 at-30 to37.5 at60,then30 at70 andabove.
+
+5C53A indexes descriptorA19F4 by8014, writes unprotected8250.
+24floatknots,axisBB260,valuesBB2C0. Axis0..23819;values0..12.765740394592285.
+Full nonuniform axes and values are retained in the JSON, not inferred from
+an approximate formula. Both end clamps and every interval were exercised.
+
+5C54E reads825C and8254 with unchecked/raw154BC and clamps8250 using207C,
+then writes protected8248 through15522. Independent oracle:
+  if source<=lower:lower;else if source>=upper:upper;else source.
+The108 direct cases include inverted bounds to distinguish comparison order;
+those are synthetic inputs, not stock table outputs. With these stock maps,
+the upper bound is nonbinding:the source maximum~12.766 is below minimum
+upper30. The lower bound can bind. Do not infer upper-bound irrelevance for
+other writers/calibrations or the complete vehicle.
+
+Coupling to normal command:39D24
+-------------------------------
+39D24 tests BACA8 against zero within epsilon39E0C (~1e-5). StockBACA8
+bits3F59999A (~0.85) passes, so6D00=R(8248/BACA8), where R=RTZ binary32.
+If that constant were within tolerance, the body would retain old6D00;
+only the stock nonzero branch is executed here, without patched ROM.
+255C8 then computes clamp(R(R(72FC+6D00)*BACA8),0,85).
+Do not simplify to0.85*72FC+8248:intermediate RTZ operations are observable.
+
+8248 also supplies245FC's absolute command before its timer exceeds63.
+Afterward245FC ramps its oldoutput,ignoring changes in8248 until the qualifying
+stage>=3,previousenable0/currentenable1 reset. 39D24 continues updating6D00
+when explicitly called,so normal command tracks the source while the absolute
+numeric path can retain its own progression. Selection still follows24910/
+25682; a computed candidate is not proof of selected or physical output.
+
+Retained paired lifecycle
+-------------------------
+Mode1, filtered local source8 and explicit stage3/enable1 admit5672 initially.
+The source chain runs each iteration before reused control/serial bodies:
+  call1:6D28=80,6D20=90 ->8014=4000,8248~3.469566;absolute~13.969565.
+  call21:6D28=0 ->8014=18500,8248~11.121128;absolute caps16.5.
+  call41:735A bit7 ->8014~0.2,8248~0.000187;absolute~10.500187.
+  call65:timer reaches64,still follows source on that call.
+  call66:6D20=-30 ->lower4.5 binds8248;absolute instead ramps~10.508186,
+    whilenormaloffset immediately becomes~5.294117.
+  call81:enable0 ->normal selection~15;absolute numeric state stillupdates.
+  call101:clearbit7,set6536=1,8018=23819 ->8248~12.765740;normal~23.265739.
+  call121:enable1 ->entryreset;absolute caps16.5.
+  call141:6D20=120 and2310/8018=0 ->8248/6D00 zero;absolute10.5.
+  call161:enable0 ->normal,including currentpairedCAN-derived72FC.
+The next queued serial command is checked against the preceding selected
+value; all40 actual transmitted bytes and original reply processing execute.
+Synthetic replies and sampled registers remain,not a remote ECU emulator.
+
+Scheduling evidence and limits
+------------------------------
+Static1CC68 task calls5C500 at1CC98,5C53A at1CC9E,5C54E at1CCA4,then
+commandtask21876 at1CCAA,then2BE4A. This establishes that relative ordering.
+Initialization caller16E70/76/7C also references these three functions.
+A separate caller1A830 executes58280,1A836 executes58092,1A83C executes
+582BC,1A842 executes580AC. 39D24 is called at18572. Fullcross-task chronology,
+rate andomitted work are not established by running each once per testcycle.
+No milliseconds or physical actuator response follows from this fixture.
+Finite normal/zero floats only;exceptions/NaNs not modeled.
+
+Next concrete trace
+-------------------
+58280 writes8018=max(0,R(R(8028-801C)-R(6C20/60))) by static58284..582AA;
+execute fullbody and trace8028/801C/6C20 next. 582BC reads8018/protected2310
+to update8023;58102 and58338 participate in retained state and are candidate
+next bodies. Reader38628 is not a producer. Inspect their real caller order
+before claiming fully initialized/history-correct8014 selection.
+6D28/6D20 acquisition, protected2310 initialization and maintenance,735A/6536
+sources and240xx stage/enable/table2F520 remain open. Saved romdrop XML has no
+matches for the new table-axis/value/constant addresses searched this turn;
+no semantic label is borrowed from a different calibration.
+
+Continuation requirements
+-------------------------
+Preserve fullECU/TCU scheduler/capturetiming,remainingTCU group7/overlap/
+composite/2->1 behavior,257D8/fullcommand task,protectedRAM initialization/
+5354 servicing,20A8 clear/57CD consumers,A720 bindinghistory. Traction still
+requires CAN211/21A sender attribution,7978/fuel consumers andphysical outputs.
+Roof still requires OEM type/status reception andbothfold/unfold,pause/resume,
+reversal,timeouts,synchronization andfault recovery. No OEM roof CAN command
+or receiver evidence is added by this ECU source analysis.
+
+Persistence: refreshed closed Ghidra project independently reopened and
+verified:11 project hashes,953 annotations,527 identical exports. Exact
+archive identity in ghidra/snapshot.json and CHECKPOINT.txt. Git-eligible
+working files saved locally; no staging, commit or push.

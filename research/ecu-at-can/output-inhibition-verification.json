@@ -1,0 +1,409 @@
+{
+  "ecu_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "counts": {
+    "shal_vectors": 384,
+    "signed_q16_division": 77,
+    "expected_register_rejections": 4,
+    "low_level_cancellation": 720,
+    "complete_admission_and_release": 2268,
+    "all_cylinder_masks": 16,
+    "release_boundary_cases": 6,
+    "whole_scheduler_caller": 16,
+    "deferred_cache_lifecycle": 3,
+    "paired_can_to_registers": 6
+  },
+  "paired_cases": [
+    {
+      "can211_word0": 10000,
+      "tcu_cut": 0,
+      "can216": "02 00 02 00 ff 27 10 00",
+      "pattern": 85,
+      "shared_mask": 5,
+      "register_writes": [
+        [
+          "0xfffff444",
+          99,
+          2
+        ],
+        [
+          "0xfffff640",
+          0,
+          2
+        ],
+        [
+          "0xfffff640",
+          0,
+          2
+        ],
+        [
+          "0xfffff448",
+          99,
+          2
+        ],
+        [
+          "0xfffff644",
+          0,
+          2
+        ],
+        [
+          "0xfffff644",
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "can211_word0": 10000,
+      "tcu_cut": 1,
+      "can216": "02 00 02 00 ff 27 10 20",
+      "pattern": 85,
+      "shared_mask": 15,
+      "register_writes": [
+        [
+          "0xfffff444",
+          99,
+          2
+        ],
+        [
+          "0xfffff640",
+          0,
+          2
+        ],
+        [
+          "0xfffff640",
+          0,
+          2
+        ],
+        [
+          "0xfffff446",
+          99,
+          2
+        ],
+        [
+          "0xfffff642",
+          0,
+          2
+        ],
+        [
+          "0xfffff642",
+          0,
+          2
+        ],
+        [
+          "0xfffff448",
+          99,
+          2
+        ],
+        [
+          "0xfffff644",
+          0,
+          2
+        ],
+        [
+          "0xfffff644",
+          0,
+          2
+        ],
+        [
+          "0xfffff44a",
+          99,
+          2
+        ],
+        [
+          "0xfffff646",
+          0,
+          2
+        ],
+        [
+          "0xfffff646",
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "can211_word0": 10020,
+      "tcu_cut": 0,
+      "can216": "02 00 02 00 ff 27 10 00",
+      "pattern": 17,
+      "shared_mask": 1,
+      "register_writes": [
+        [
+          "0xfffff444",
+          99,
+          2
+        ],
+        [
+          "0xfffff640",
+          0,
+          2
+        ],
+        [
+          "0xfffff640",
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "can211_word0": 10020,
+      "tcu_cut": 1,
+      "can216": "02 00 02 00 ff 27 10 20",
+      "pattern": 17,
+      "shared_mask": 15,
+      "register_writes": [
+        [
+          "0xfffff444",
+          99,
+          2
+        ],
+        [
+          "0xfffff640",
+          0,
+          2
+        ],
+        [
+          "0xfffff640",
+          0,
+          2
+        ],
+        [
+          "0xfffff446",
+          99,
+          2
+        ],
+        [
+          "0xfffff642",
+          0,
+          2
+        ],
+        [
+          "0xfffff642",
+          0,
+          2
+        ],
+        [
+          "0xfffff448",
+          99,
+          2
+        ],
+        [
+          "0xfffff644",
+          0,
+          2
+        ],
+        [
+          "0xfffff644",
+          0,
+          2
+        ],
+        [
+          "0xfffff44a",
+          99,
+          2
+        ],
+        [
+          "0xfffff646",
+          0,
+          2
+        ],
+        [
+          "0xfffff646",
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "can211_word0": 10040,
+      "tcu_cut": 0,
+      "can216": "02 00 02 00 ff 27 10 00",
+      "pattern": 0,
+      "shared_mask": 0,
+      "register_writes": []
+    },
+    {
+      "can211_word0": 10040,
+      "tcu_cut": 1,
+      "can216": "02 00 02 00 ff 27 10 20",
+      "pattern": 0,
+      "shared_mask": 15,
+      "register_writes": [
+        [
+          "0xfffff444",
+          99,
+          2
+        ],
+        [
+          "0xfffff640",
+          0,
+          2
+        ],
+        [
+          "0xfffff640",
+          0,
+          2
+        ],
+        [
+          "0xfffff446",
+          99,
+          2
+        ],
+        [
+          "0xfffff642",
+          0,
+          2
+        ],
+        [
+          "0xfffff642",
+          0,
+          2
+        ],
+        [
+          "0xfffff448",
+          99,
+          2
+        ],
+        [
+          "0xfffff644",
+          0,
+          2
+        ],
+        [
+          "0xfffff644",
+          0,
+          2
+        ],
+        [
+          "0xfffff44a",
+          99,
+          2
+        ],
+        [
+          "0xfffff646",
+          0,
+          2
+        ],
+        [
+          "0xfffff646",
+          0,
+          2
+        ]
+      ]
+    }
+  ],
+  "release_boundaries": [
+    {
+      "mode": 0,
+      "distance": 499,
+      "release_threshold": 500,
+      "inhibited": 1,
+      "state": 2
+    },
+    {
+      "mode": 0,
+      "distance": 500,
+      "release_threshold": 500,
+      "inhibited": 0,
+      "state": 0
+    },
+    {
+      "mode": 0,
+      "distance": 501,
+      "release_threshold": 500,
+      "inhibited": 0,
+      "state": 0
+    },
+    {
+      "mode": 1,
+      "distance": 9099,
+      "release_threshold": 9100,
+      "inhibited": 1,
+      "state": 2
+    },
+    {
+      "mode": 1,
+      "distance": 9100,
+      "release_threshold": 9100,
+      "inhibited": 0,
+      "state": 0
+    },
+    {
+      "mode": 1,
+      "distance": 9101,
+      "release_threshold": 9100,
+      "inhibited": 0,
+      "state": 0
+    }
+  ],
+  "deferred_lifecycle": [
+    {
+      "step": 0,
+      "cached_mask": 15,
+      "records": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "step": 1,
+      "cached_mask": 15,
+      "records": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "step": 2,
+      "cached_mask": 15,
+      "records": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    }
+  ],
+  "limits": "Fixed register samples, explicit model/record scheduling. No timer clock, pin polarity, ECU wiring or physical injector behavior simulated."
+}

@@ -1,0 +1,162 @@
+ECU ratio input producers and shared CAN-model environment values
+2026-10-06
+
+Result and scope
+----------------
+The command-source ratio now has executed producers for its numerator and
+both denominator factors. One factor uses a stock table containing only 1.0;
+the other uses 6DC4 and 6D40, which also feed the previously executed CAN
+models. The table's caller still updates other RAM values, so its full body
+is retained in the tests despite the constant final factor.
+
+verify_control_ratio_inputs.py executes 5844E (including 51286/39FB4 and
+lookups), 58528, 583EE, 58422 and 583B8. Independent finite RTZ oracles verify
+values, original helper execution, stack balance and protected checksums.
+Passed 767 direct cases: 580 full factor-caller cases, 42 environment-factor
+cases, 49 cases covering both numerator producers, 96 numerator selections.
+Two expected interpreter stops delimit unsupported division-by-zero behavior.
+A further 140 serial cycles include 21 actual paired TCU216/218 -> ECU CAN
+updates. Original ROMs, shared interpreter and earlier verifiers are unchanged.
+
+The JSON stores both ROM SHA256 identities, the two tables and checkpoints.
+Run from repository root:
+  python research/ecu-at-can/verify_control_ratio_inputs.py >
+    research/ecu-at-can/control-ratio-inputs-verification.json
+
+R below means round toward zero to binary32 after each indicated operation.
+All addresses are hexadecimal. Tests cover finite normal/zero operands;
+physical units and a complete vehicle model are not established.
+
+Map factor 8038: full 5844E
+--------------------------
+First, 51286 calculates 7BB8 by ordered additions:
+  R(80C4 + 80DC), then add 80FC, 8118, 813C and 822C,
+  rounding after each addition.
+Cancellation-sensitive cases distinguish this from reordered or exact sums.
+The six contribution producers remain inputs to this test.
+
+Next, 39FB4 uses descriptor A261C to map 7BB8 into 6D54. Four axis values
+at C89A4 are .125, .375, .625, .875; values at C89B4 are 25, 57, 89, 121.
+It then computes:
+  correction = R(R(6D54 * R(6D40 + 273)) / 293).
+Stock byte C89A0 is zero, selecting raw 6DC4 as the base:
+  protected 6D4C = R(6DC4 - correction).
+The alternative calibration branch selects constant 3A034 (~101.32);
+that branch was inspected statically but not executed with patched ROM.
+
+Finally, 5844E reads 6D4C and runs descriptor A35B0 to produce 8038.
+Its eight axes at D9ED0 span about 7.866..63.328; all eight values at D9EF0
+are exactly 1.0. Every finite input in the modeled lookup therefore produces
+8038 = 1.0. The full axis and exact binary-derived values are in the JSON.
+This stock map cannot exercise 58338's near-zero check on 8038. That check
+remains real firmware behavior, previously tested with explicit inputs.
+No claim extends this constant-factor result to other calibrations/writers.
+
+Environment factor 803C: 58528
+-----------------------------
+The original arithmetic is:
+  numerator   = R(6DC4 * 353.01629638671875);
+  denominator = R(R(6D40 + 273) * 101319.9921875);
+  803C        = R(numerator / denominator).
+Constants are at 585F8, 58600 and 58604. These are not algebraically merged
+in the oracle because intermediate rounding matters.
+
+Zero 6DC4 with a nonzero denominator produces zero 803C. In 58338, a
+non-negligible numerator then preserves the preceding ratio. This is executed
+in the lifecycle, with the denominator produced by 58528.
+
+At 6D40 = -273, the denominator is zero. For both 6DC4 = 0 and 100, the
+existing bounded interpreter raises "RTZ division by zero unsupported" before
+writing 803C. The test preserves these two expected stops. It does not claim
+that the ECU returns a value, retains its output, aborts, or handles the fault
+in the same way: FPSCR flags/traps and hardware continuation are unmodeled.
+Other finite tests include negative values and values near this boundary.
+
+Numerator pair and selection
+----------------------------
+Define S(a,b), using constants 585A8 = 60, CC028 ~0.0012 and CA974 = 1998:
+  v = R(a*b);
+  v = R(v/60);
+  v = R(v*CC028);
+  v = R(v*CA974);
+  result = R(v/2).
+583EE writes 8030 = S(8048,6DB4).
+58422 writes 8034 = S(80BC,7020).
+These are numeric roles, not physical-unit assignments.
+
+583B8 publishes numerator 802C:
+  7016 == 1: clamp 8030 to [8034, R(8034 + 9.5)] (constant at D9ECC).
+  otherwise: use 8034 directly.
+The clamp tests the lower bound first. Raw 7016 values 2 and 255 take the
+baseline branch. Downstream 58338 then applies its verified numerator and
+denominator tolerance checks, ratio update/hold/clear and status outputs.
+
+Retained paired lifecycle
+-------------------------
+Original history/source/override initializers execute; protected 2310 is
+explicitly seeded to 1 as prior valid history. Upstream contributions,
+8048/80BC, environmental inputs and mode/status bytes remain fixtures.
+The lifecycle does not inject 802C, 8030, 8034, 8038 or 803C.
+
+  Call 1: 6DC4 = 100, 6D40 = 20; numerator ~1.4985, factors 1 and ~.001189.
+    Ratio ~1260.1572, remainder ~578.6572, selected command ~11.04095.
+  Call 11: 6D40 = 100 changes the environment factor and the shared CAN model
+    input. Ratio ~1604.2275; selected command ~11.36264.
+  Calls 21..24: 6DC4 = 0 produces 803C = 0; ratio ~1604.2275 holds.
+  Call 25: restore 6DC4 = 100; division and ratio updates resume.
+  Call 41: baseline input 80BC = 0 produces numerator zero and clears ratio.
+    The original decay timer begins counting down from 113.
+  Call 61: restore baseline input; ratio returns and timer reloads 113.
+    A changed contribution alters 6D4C while stock factor 8038 remains 1.
+  Call 81: 7016 = 1 and larger current input 8048 select the capped numerator
+    ~10.9985. Ratio rises, but absolute command follows its already verified
+    timer-controlled ramp rather than immediately following the source.
+  Call 101: raw 7016 = 2 selects baseline; absolute enable zero selects the
+    normal command, still influenced by the paired CAN calculations.
+  Call 121: restoring 6D40 = 20 and enable 0 -> 1 resets the absolute branch;
+    selected command returns to ~11.04095.
+
+Every cycle executes the original source/history/timer/numeric command path,
+SCI1 framing and application handling. The outgoing bytes and next queued
+command are checked. Replies remain a synthetic peer.
+
+CAN model updates are deliberately held during the four 6DC4-zero calls;
+those cycles test the ratio guard with retained earlier CAN results. They do
+not establish full CAN-model behavior at zero 6DC4. Actual paired updates
+resume at call 25. Other environmental changes propagate through both chains.
+
+Scheduling evidence and gaps
+----------------------------
+The saved caller executes 5844E at 1A80C, then 58486 at 1A812 (omitted here),
+583EE at 1A818, 58422 at 1A81E, 583B8 at 1A824, 58338 at 1A82A, and the
+previous remainder/selection bodies afterward. 58528 has a separate caller
+at 1B89E. Initialization also calls these producers at 16E40..16E58.
+The tests choose one invocation per synthetic cycle; full cross-task order,
+rates and effects of omitted work remain unverified.
+
+Next concrete actions
+---------------------
+Trace 8048 and 80BC producers and their input histories. Static 58A7A reads
+6DB4 and 7016: mode zero copies 80BC to 8048; nonzero mode with a sufficiently
+nonzero 6DB4 computes from protected 804C plus summed corrections scaled by
+7020/6DB4; near-zero 6DB4 preserves 8048. Execute the full body and inspect
+its callers before connecting it to this lifecycle. Unlike 583B8's exact-one
+selection, this earlier body uses a nonzero mode test.
+
+58608 initializes several related records from 80BC/zero; 58652 and later
+bodies handle protected histories. These are continuation leads, not executed
+results. Sources of the six contribution values, 80BC, 804C, 6DC4/6D40 and
+physical meaning remain open. Full initialization/restoration of nonzero
+2310, 240xx enable/stage policy and omitted task work are still required.
+
+Retain protected RAM/5354 servicing, 20A8 reset/57CD consumers and A720 history
+with binding limits. ECU/TCU capture timing and remaining group7/overlap/
+composite/2->1 behavior remain open. Traction sender attribution, 7978/fuel
+consumers and physical outputs remain open. OEM PRHT folding/unfolding,
+pause/resume, reversal, timeouts, synchronization and recovery remain active;
+this work adds no OEM roof receiver or CAN command evidence.
+
+Persistence: refreshed Ghidra archive independently restored with 11 matching
+project hashes, 989 annotations and 545 identical exports. Exact identity is
+in ghidra/snapshot.json and CHECKPOINT.txt. Git-eligible work saved locally;
+no staging, commit or push.

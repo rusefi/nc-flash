@@ -1,0 +1,55 @@
+{
+  "serial_cases": 2048,
+  "initialization_cases": 1024,
+  "full_filter_cases": 256,
+  "input_to_can231_trace": [
+    {
+      "serial_byte": 255,
+      "filtered_byte": 255,
+      "can231": "ff00ffff00000000"
+    },
+    {
+      "serial_byte": 254,
+      "filtered_byte": 255,
+      "can231": "ff00ffff00000000"
+    },
+    {
+      "serial_byte": 255,
+      "filtered_byte": 255,
+      "can231": "ff00ffff00000000"
+    },
+    {
+      "serial_byte": 254,
+      "filtered_byte": 255,
+      "can231": "ff00ffff00000000"
+    },
+    {
+      "serial_byte": 254,
+      "filtered_byte": 254,
+      "can231": "ff04ffff00000000"
+    },
+    {
+      "serial_byte": 190,
+      "filtered_byte": 254,
+      "can231": "ff04ffff00000000"
+    },
+    {
+      "serial_byte": 190,
+      "filtered_byte": 190,
+      "can231": "ff06ffff00000000"
+    },
+    {
+      "serial_byte": 255,
+      "filtered_byte": 190,
+      "can231": "ff06ffff00000000"
+    },
+    {
+      "serial_byte": 255,
+      "filtered_byte": 255,
+      "can231": "ff00ffff00000000"
+    }
+  ],
+  "rejected_accesses": 4,
+  "not_ready_stays_in_poll_loop": true,
+  "scope": "Original ROM code with sampled peripheral inputs; no hardware timing or OEM PRHT receiver proof."
+}

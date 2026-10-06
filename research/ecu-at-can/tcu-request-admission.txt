@@ -1,0 +1,200 @@
+TCU upstream request creation, enable hysteresis and cancellation
+2026-10-06; follows tcu-request-dispatch.txt and tcu-request-timing.txt
+
+RESULT
+
+Original31524 event1 now creates both the application phase record and the
+managed request. Its eight initialization callbacks produce captured map
+axes and9410 enable flags before the request constructor runs. For the tested
+code7/op17 path, original event2 advances application phase0 to1 and periodic
+event4 then advances request state2 to3, producing reduction576.
+
+The9410 bit1 gate suppresses numeric output while retaining the active
+request. It uses stock curves and hysteresis. The916F bit0 guard instead
+releases the request and drains list/ring/heap cleanup. Original1FD24 produces
+that cancellation flag from nine source conditions. Clearing the source does
+not recreate the freed request during the tested subsequent periodic service.
+
+These are explicit application-input/call-order fixtures, not a full boot,
+hardware timebase, mechanical-shift or physical-unit claim. Traction/roof
+requirements remain active; no DSC or OEM PRHT receiver code is established.
+
+REPRODUCTION AND INPUTS
+
+  python research/ecu-at-can/verify_tcu_request_admission.py
+
+Saved output:tcu-request-admission-verification.json. Original ROM code and
+calibrations run with unchanged SHRelativeBranch and shared helpers. No ROM,
+shared-interpreter or application changes. Input identities:
+examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+
+Passed2940 full enable-producer cases,144 captured-axis boundary pairs,
+1280 cancellation-aggregate cases,152 individual source-bit perturbations,
+8 upstream creation cases,9 gate/cancel/recovery lifecycles with45 paired
+CAN216/ECU spark checks alongside CAN211. Three full-task probes fail closed
+at the same unsupported hardware read; they are retained as explicit limits.
+
+UPSTREAM CREATION (EXECUTED)
+
+31524(event0) calls319A6: clears phase-ring head/count96C4/96C5 via31E9A,
+sets8089=FF via31F5E, clears period phase96C6, returns dispatcher state1.
+Event1 payload contains three16-bit words:code,operation,third parameter.
+For dispatcher states1/2,319BC checks16-entry phase-ring capacity and calls
+31EC4 to append a15-byte record at95D4+15*((head+count)&15).
+Record+10/+11/+12 receive the low bytes of those parameters; +13/+14 start0;
+first10 bytes are cleared, and timer slot8380+2*index is initialized.
+8089/808A receive code/operation low bytes.
+
+319BC invokes exactly eight callback pointers at5D3F4, in this order:
+30B28,239B2,30A88,310F8,312E8,23BF6,30710,30C54.
+Then321A6(index),31F64(kind0,index); returns2 while the ring remains nonempty.
+31F64 uses the same ten group records5D3BC as periodic service. Kind0 selects
+both metadata classes0/1, allocates a message containing index/code/operation/
+third parameter, queues group operation1 and immediately drains queue0.
+Group5 thereby reaches the previously verified managed creation/constructor.
+
+Executed code6/7, operation0/17, empty-ring head0/15: exact callback order,
+one phase record, dispatcher state2, one group5 record at real heap9F40,
+captured axes, active request state2 and empty queue all checked. These tests
+do not prove multi-entry/capacity/overlap behavior of the entire phase ring.
+The third parameter is0 in these upstream cases.
+
+CORRECTION: event table5D3E4 has five3-byte rows for events0..4 before the
+callback table starts at5D3F4. The previous Ghidra byte-array length18
+overlapped the first callback pointer. It is now15; eight callback pointers
+are typed separately. No event5 semantics were verified. The earlier timer
+verifier only tested event4, whose results remain unchanged.
+
+CAPTURED AXIS SOURCES (EXECUTED)
+
+312E8 reads signed16 source80EA and80EE. For EACH raw16 inputv:
+  captured_raw = min((2*v) modulo65536,40960)
+  captured_scaled = min(2*captured_raw,65535) through314C4.
+80EA produces80C2/80C4;80EE produces80C6/80C8. The modulo step precedes
+clamping: synthetic negative inputs must not be treated as simply zero or
+monotonically saturated. Normal physical source domain remains unproved.
+It also captures809A->80CC and809C->80CE, updates index branches and other
+snapshots. All callees execute; only the listed outputs have new assertions.
+
+The integrated creation fixture supplies80EA=4672, resulting80C2=9344 and
+80C4=18688 (73*256);80EE=1000 produces80C6=2000/80C8=4000. Constructor
+copies80C2/80C4 into request+14/+16. Supplying80C4 directly before the full
+upstream creation fails to preserve it:312E8 recomputes it from80EA. This
+explained an exploratory zero-request result and is fixed in the final test.
+
+ENABLE FLAGS9410 (FULL23BF6 EXECUTED)
+
+Stock76E26=0. The nonzero alternative reference-array branch remains untested.
+Let curve(a,x) mean original10764 interpolation of byte knots expanded*256;
+L(a,x)=curve(a,x)>>1. All comparisons below use unsigned16 measured words.
+A=809A, B=809C, C=80C8, X=80C4, S=min(u8[8081],4).
+First lookup axisD=min(u32(4*s16[80EE]),65535). Negative80EE gives large
+unsignedD and therefore65535, as verified at the tested boundaries.
+
+With916D bit0 clear:
+  bit2: clear if B<L(700C8,D); set if B>=u16(L(700C8,D)+512); else retain.
+  bit0: clear if B<L(700D3,C) AND A<L(700C8,C);
+        otherwise set if A>=u16(L(700C8,C)+512); else retain.
+  bit1: clear if B<L(700DE+11*S,X);
+        set if B>=u16(L+u16[70116+2*S]); else retain.
+The five bit1 upper gaps are768,512,512,256,256. Other flag bits survive.
+Curve700C8 and700D3 each have five knots;700DE has five11-byte curves.
+
+With916D bit0 set: force9410 bits2/0 on; bit1 is set for s16[80F6]>=1920,
+cleared below1600, and retained in between. Constants76E22/76E24 are1600/
+1920;76E20 is512. This is a distinct fallback hysteresis branch. The physical
+meaning and complete producer chain of916D bit0 remain open.
+
+Integrated code7/op17 uses selector0 andX=18688: lower4224, upper4992.
+After original phase/event activation, the fixture raises its reference word
+to5000 to keep request state3 during the gate test; this is an explicit input.
+B sequence4223,4991,4992,4224 yields enable0,0,1,1 and reduction0,0,576,576.
+The request stays allocated throughout. Values run through original4C7AC,
+1FB8C, CAN216 packing and ECU spark computation alongside CAN21110016.
+
+CANCELLATION SOURCE AGGREGATION (FULL1FD24 EXECUTED)
+
+1FD24 rebuilds several summary words/bytes, including916F. For its bit0:
+  set if (u32[9174]&00000014)!=0 OR (u32[9178]&0004030F)!=0.
+The relevant original source copies yield these nine OR conditions:
+  92C6 bit2 or bit5;
+  92CA bit0 or bit1;
+  92CC bit1 or bit2;
+  92CD bit3 or bit4;
+  92D0 bit2 CLEAR (inverted contributor).
+All512 combinations with both previous flag0/FF and256 randomized source
+vectors pass; each bit of92C4..92D6 is independently perturbed from a healthy
+baseline to distinguish contributors. A93A=1 is held in these fixtures.
+
+Initial exploratory all-zero RAM already cancelled because92D0 bit2 was
+clear. A naive list of nonzero outputs therefore falsely included unrelated
+bits. Final source perturbations begin with92D0=4 and verify the baseline.
+This is an input fixture, not proof of real startup health.
+
+Each contributor is then toggled in its own active request lifecycle.
+Original1FD24 sets916F bit0; next admitted group5 service runs4CC90/4CCA4,
+releases the request, drains cleanup, restores free heap007FFFFF and removes
+the list/ring entries. Clearing the contributor recomputes916F bit0 clear,
+but subsequent periodic service leaves the request absent. Full policy-driven
+re-creation requires an upstream event and remains to be traced.
+
+Connection to earlier evidence: speed-fault.txt already verifies P0722/group13
+->A962 bit2->92C6 bit2 and CAN216 speed invalidation. The newly established
+92C6 bit2->916F bit0 path also reaches request cancellation. This is a
+composition of two verified paths; no new complete sensor-to-cancellation
+hardware run or clock-unit claim is made here.
+
+PAIRED-HELPER FIXTURE CORRECTION
+
+verify_spark_interaction.paired deliberately sets92C6=20 to force CAN216
+byte4 invalid while checking first-word/cut/spark behavior. Reusing the same
+TCU object and subsequently executing1FD24 correctly triggers cancellation.
+The new test initially failed for that reason. Final paired_snapshot copies
+the TCU RAM before invoking the existing helper; the ongoing lifecycle keeps
+its actual source flags. Shared helper and old verifiers are unchanged.
+Paired outputs still carry the helper's explicit invalid-byte4 fixture; they
+must not be claimed as a full healthy physical CAN216 payload.
+
+SCHEDULER LEADS AND FAIL-CLOSED LIMITS
+
+STATIC:16A3C stops bit3 atFFFFF401, clearsFFFFF442, initializesFFFFF454=0A00,
+then starts bit3. ISR16A58 tests bit0 ofFFFFF460; when set, clears it,
+adds0A00 toFFFFF454 and calls1220A. Timing/instrumentation15B80/15BF0 also
+executes around it. This is distinct from prior CMT1-side16CF4 timer service.
+Hardware register identities, dividers/clock and absolute cadence remain open.
+
+1220A promotes8007 from1 to3 only when84A0/84D8/84EC all equal3, calling
+126DA first; always tail-calls126EC.126EC dispatches12726 when8007==3;
+12726 calls1E5F6 when84F5==2, using84F4&7 as application phase.
+The explicit full-task probes at1E5F6,126EC,1220A all stop at1412A on
+unmapped readFFFFF810. Do not stub that read and claim full task completion.
+
+Other static caller leads:1E79C calls31524(event2);1E986 calls1FD24 and
+1E99E calls23BF0, which falls through23BF6. Their enclosing task scheduling
+and relation to event4 still need proof. 1E0A0 supplies event0
+initialization.48F20 loads31524 at48F3C; its downstream event construction/
+admission decisions are not covered by the new direct event1 fixture.
+
+CONTINUATION
+
+Next connect the saved selection-reporting.txt full48C08 acceptance path
+through48D84/48F20 to event1 creation and returned CAN216 requests. This
+reuses the executed selector path rather than restarting its analysis.
+Trace actual event1 admission/cancellation and the full phase0/1/2/3 lifecycle;
+remaining producer paths for80EA/80EE/809A/809C/80F6,916D and all nine source
+conditions; alternate requests and full task input setup/timebase. Keep
+record1 phases1/2,92E6,other4E and second-list policy work active.
+Also retain deep traction sender/units/real scheduling/physical outputs and
+remaining throttle/fuel responses, and OEM PRHT speed/type/neutral reception,
+fold/unfold interlocks, reversal, timeout and recovery. Allthree goals remain
+incomplete; prior and current turns made verified progress. Saved locally;
+no staging,commit orpush.
+
+Ghidra save:690 annotations,413 exports; independently restored11 project
+files and matched every hash, annotation and export. Archive SHA256:
+4651ec80291efe9c2ed17c5a3425b2e236c0f54847e14000ae9492d9f7058543
+Size10,746,328 bytes; manifests in ghidra/snapshot.json and
+ghidra/restore-verification.json. Live database/restore scratch remain ignored.

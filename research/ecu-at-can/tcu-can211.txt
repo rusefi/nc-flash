@@ -1,0 +1,59 @@
+TCU CAN211 payload versus receipt monitoring, 2026-10-05
+
+Result: LFG1TF000 copies five bytes of CAN211 but its application callback
+marks receipt and calls an empty function. The explicitly executed dispatch
+and watchdog paths do not read the payload buffer. This establishes receipt
+monitoring on these paths, not a payload-driven traction or shift command.
+It does not establish global non-use of CAN211 elsewhere in the program.
+The ECU's separate numeric211-to-spark path remains supported; see
+can211-spark.txt. Do not transfer that ECU interpretation to the TCU.
+
+Original-code evidence (ROM offsets; RAM addresses have FFFF prefix):
+  5C8C0 hardware filter table index9 contains2042 in HCAN register encoding,
+  not a plain CAN identifier. 5C8D8 maps that index to logical receive7.
+  Logical7: length5 at5C8E4+7, buffer8F34 at5C8F0+7*4,
+  pre-copy validation callback NULL at5C920+7*4.
+  1B630..1B796 checks DLC >=5 and admission1BF38 (8F6C&0C), copies
+  exactly five bytes, and sets8F4E bit80. DLC0..4 rejects before admission.
+  Extra bytes in DLC6..8 are not copied; adjacent buffer bytes stay intact.
+  Interrupt-mask bits are restored by this slice.
+  1BD10 dispatches logical7 to1C242 through5CA10. 1C242 sets0C in
+  8F87/8F8D and calls1ACEC. 1ACEC is exactly RTS; NOP (000B0009).
+  19AF0 consumes field43 (8F87 bit08), updating record2's deadline8B48.
+  At expiry19E10 refreshes the deadline and sets8EE2 bit2; gated receipt
+  recovery clears it when868C is nonzero. Payload bytes remain unchanged.
+  Tick100 receipt -> deadline110/fault0; tick109 ->110/0;
+  tick110 expiry ->120/4; tick111 receipt ->121/0. Units remain unresolved.
+  Stock class1 qualification exclusions are separate; see diagnostics.txt.
+
+Reproduce with assertions enabled:
+  python research/ecu-at-can/verify_tcu_can211.py
+Output is saved in tcu-can211-verification.json, including original ROM SHA.
+432 mode/DLC/interrupt-mask combinations passed;144 accepted the five-byte
+copy.67 payloads (zero, FF, contrasting pattern and64 basis bits) each ran
+copy, dispatch, before-expiry, expiry and recovery. A read-access guard
+covering all five buffer bytes observed no reads during dispatch/watchdog.
+No helpers were replaced. The shared interpreter required no changes.
+
+Execution boundary: the copy slice starts at1B630 with synthetic packet
+RAM, stack and already-matched hardware filter index9. It stops BEFORE
+1B798 controller acknowledgement. This does not execute hardware filtering,
+the complete ISR, interrupts, a complete scheduler or physical CAN traffic.
+Zero-initialized synthetic RAM and explicit calls are not a vehicle model.
+
+Static search: aligned MOV.L literal users were scanned across the ROM;
+sign-extended MOV.W PC-relative literal users across10000..7FFFF. Neither
+found direct references to8F34..8F38. The8F34 literal exists at5C90C as the
+receive-buffer table entry. This is not a computed-pointer/alias analysis;
+table walks, GBR-relative and derived pointers may evade these searches.
+Do not broaden the bounded read-access result into a global absence claim.
+
+Test correction: an initial expected expiry deadline110 was wrong. The
+existing19E10 disassembly/decompilation already shows refreshing it to120.
+The verifier now checks that behavior explicitly; no firmware was changed.
+
+Next: trace actual payload consumers of the other PCM-to-TCU frames and
+CAN231's selector-source bits. Keep physical P/R/N/D mapping unassigned
+until corroborated. Roof documents establish P/N and speed interlocks but
+not their exact CAN fields or a CAN open/close command. DSC/PRHT firmware,
+wire units, full task timing and actuator endpoints remain unresolved.

@@ -1,0 +1,326 @@
+{
+  "scope": "Execute selector diagnostic producer, qualification and CAN231 publication.\n\nUnchanged ROMs, synthetic application inputs and ticks, isolated task calls.\nNo GPIO, ADC hardware, complete scheduler, physical switch naming or PRHT.",
+  "rom_records": [
+    {
+      "group": "0x15",
+      "rom_record": "00 01 07 d0 00 05 10 c7 07 07 00 00 0c 00 0c 00"
+    },
+    {
+      "group": "0x16",
+      "rom_record": "01 00 00 00 00 01 10 07 07 08 00 00 0c 00 0c 00"
+    }
+  ],
+  "producer_cases": 384,
+  "timer_helper_cases": 7,
+  "missing_input_boundaries": [
+    {
+      "raw_80ba": 299,
+      "before": [
+        65535,
+        65535
+      ],
+      "after": [
+        2000,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 299,
+      "before": [
+        65535,
+        1
+      ],
+      "after": [
+        2000,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 299,
+      "before": [
+        65535,
+        0
+      ],
+      "after": [
+        2000,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 299,
+      "before": [
+        1,
+        65535
+      ],
+      "after": [
+        1,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 299,
+      "before": [
+        1,
+        1
+      ],
+      "after": [
+        1,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 299,
+      "before": [
+        1,
+        0
+      ],
+      "after": [
+        1,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 299,
+      "before": [
+        0,
+        65535
+      ],
+      "after": [
+        0,
+        65535
+      ],
+      "status": 3
+    },
+    {
+      "raw_80ba": 299,
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        65535
+      ],
+      "status": 3
+    },
+    {
+      "raw_80ba": 299,
+      "before": [
+        0,
+        0
+      ],
+      "after": [
+        0,
+        65535
+      ],
+      "status": 3
+    },
+    {
+      "raw_80ba": 300,
+      "before": [
+        65535,
+        65535
+      ],
+      "after": [
+        2000,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 300,
+      "before": [
+        65535,
+        1
+      ],
+      "after": [
+        2000,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 300,
+      "before": [
+        65535,
+        0
+      ],
+      "after": [
+        2000,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 300,
+      "before": [
+        1,
+        65535
+      ],
+      "after": [
+        1,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 300,
+      "before": [
+        1,
+        1
+      ],
+      "after": [
+        1,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 300,
+      "before": [
+        1,
+        0
+      ],
+      "after": [
+        1,
+        65535
+      ],
+      "status": 1
+    },
+    {
+      "raw_80ba": 300,
+      "before": [
+        0,
+        65535
+      ],
+      "after": [
+        0,
+        28000
+      ],
+      "status": 3
+    },
+    {
+      "raw_80ba": 300,
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        1
+      ],
+      "status": 3
+    },
+    {
+      "raw_80ba": 300,
+      "before": [
+        0,
+        0
+      ],
+      "after": [
+        0,
+        0
+      ],
+      "status": 7
+    }
+  ],
+  "multiple_input_timeline": [
+    {
+      "tick": 100,
+      "group_flags": 1,
+      "summary_a964": 1,
+      "flags_92cd": 0,
+      "can231_byte0": "0xef",
+      "stored_list": "",
+      "report_a99b": 0,
+      "ecu_combined_flag": 0
+    },
+    {
+      "tick": 2099,
+      "group_flags": 1,
+      "summary_a964": 1,
+      "flags_92cd": 0,
+      "can231_byte0": "0xef",
+      "stored_list": "",
+      "report_a99b": 0,
+      "ecu_combined_flag": 0
+    },
+    {
+      "tick": 2100,
+      "group_flags": 3,
+      "summary_a964": 10,
+      "flags_92cd": 32,
+      "can231_byte0": "0xef",
+      "stored_list": "",
+      "report_a99b": 0,
+      "ecu_combined_flag": 0
+    },
+    {
+      "tick": 4100,
+      "group_flags": 3,
+      "summary_a964": 10,
+      "flags_92cd": 32,
+      "can231_byte0": "0xef",
+      "stored_list": "",
+      "report_a99b": 0,
+      "ecu_combined_flag": 0
+    },
+    {
+      "tick": 6100,
+      "group_flags": 3,
+      "summary_a964": 10,
+      "flags_92cd": 32,
+      "can231_byte0": "0xef",
+      "stored_list": "",
+      "report_a99b": 0,
+      "ecu_combined_flag": 0
+    },
+    {
+      "tick": 8100,
+      "group_flags": 3,
+      "summary_a964": 10,
+      "flags_92cd": 32,
+      "can231_byte0": "0xef",
+      "stored_list": "",
+      "report_a99b": 0,
+      "ecu_combined_flag": 0
+    },
+    {
+      "tick": 10099,
+      "group_flags": 3,
+      "summary_a964": 10,
+      "flags_92cd": 32,
+      "can231_byte0": "0xef",
+      "stored_list": "",
+      "report_a99b": 0,
+      "ecu_combined_flag": 0
+    },
+    {
+      "tick": 10100,
+      "group_flags": 5,
+      "summary_a964": 28,
+      "flags_92cd": 96,
+      "can231_byte0": "0xff",
+      "stored_list": "07 07 ff",
+      "report_a99b": 1,
+      "ecu_combined_flag": 0
+    },
+    {
+      "tick": 10101,
+      "group_flags": 5,
+      "summary_a964": 28,
+      "flags_92cd": 96,
+      "can231_byte0": "0xff",
+      "stored_list": "07 07 ff",
+      "report_a99b": 1,
+      "ecu_combined_flag": 0
+    }
+  ],
+  "limits": "Timer boundaries are fixtures; recovery and full scheduler remain unexecuted. Varying 88BD proves no influence only on this isolated producer path. PRHT consumption and absolute time units remain unknown."
+}

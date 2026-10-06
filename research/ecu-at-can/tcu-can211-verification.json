@@ -1,0 +1,74 @@
+{
+  "scope": "TCU CAN211 copy slice, dispatch and receipt monitoring with synthetic RAM.\n\nThe slice starts after hardware filter matching and ends before controller\nacknowledgement. No full interrupt, peripheral, scheduler or vehicle is run.\nPayload-read absence applies only to explicitly executed paths and states.",
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "copy_slice": "0x1b630 through before 0x1b798; filter index9 already matched",
+  "mode_dlc_interrupt_mask_cases": 432,
+  "accepted_copy_cases": 144,
+  "payload_lifecycles": 67,
+  "audited_payload_reads": 0,
+  "lifecycle": [
+    {
+      "tick": 100,
+      "received": true,
+      "deadline": 110,
+      "fault_bitmap": 0,
+      "field_bits_8f87": 4
+    },
+    {
+      "tick": 109,
+      "received": false,
+      "deadline": 110,
+      "fault_bitmap": 0,
+      "field_bits_8f87": 4
+    },
+    {
+      "tick": 110,
+      "received": false,
+      "deadline": 120,
+      "fault_bitmap": 4,
+      "field_bits_8f87": 4
+    },
+    {
+      "tick": 111,
+      "received": true,
+      "deadline": 121,
+      "fault_bitmap": 0,
+      "field_bits_8f87": 4
+    }
+  ],
+  "literal_scan": [
+    {
+      "target": "0xffff8f34",
+      "aligned_long_pools": [
+        "0x5c90c"
+      ],
+      "mov_l_users": [],
+      "application_mov_w_users": []
+    },
+    {
+      "target": "0xffff8f35",
+      "aligned_long_pools": [],
+      "mov_l_users": [],
+      "application_mov_w_users": []
+    },
+    {
+      "target": "0xffff8f36",
+      "aligned_long_pools": [],
+      "mov_l_users": [],
+      "application_mov_w_users": []
+    },
+    {
+      "target": "0xffff8f37",
+      "aligned_long_pools": [],
+      "mov_l_users": [],
+      "application_mov_w_users": []
+    },
+    {
+      "target": "0xffff8f38",
+      "aligned_long_pools": [],
+      "mov_l_users": [],
+      "application_mov_w_users": []
+    }
+  ],
+  "limits": "No claim of global non-use: computed addresses, other tasks and untested states remain outside this audit."
+}

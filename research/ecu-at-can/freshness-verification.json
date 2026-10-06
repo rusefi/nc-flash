@@ -1,0 +1,361 @@
+{
+  "scope": "Original TCU receipt deadlines and ECU CAN211 inhibition/recovery logic.\n\nExplicitly called ROM functions with synthetic RAM. No hardware, full task\nscheduler, physical torque units or remote DSC/roof firmware is simulated.",
+  "isa_vectors": 16,
+  "tcu_table": [
+    {
+      "index": 0,
+      "id": "0x200",
+      "ticks": 10,
+      "class": 0
+    },
+    {
+      "index": 1,
+      "id": "0x201",
+      "ticks": 10,
+      "class": 0
+    },
+    {
+      "index": 2,
+      "id": "0x211",
+      "ticks": 10,
+      "class": 1
+    },
+    {
+      "index": 3,
+      "id": "0x215",
+      "ticks": 10,
+      "class": 0
+    },
+    {
+      "index": 4,
+      "id": "0x216",
+      "ticks": 10,
+      "class": 3
+    },
+    {
+      "index": 5,
+      "id": "0x218",
+      "ticks": 20,
+      "class": 3
+    },
+    {
+      "index": 6,
+      "id": "0x231",
+      "ticks": 25,
+      "class": 3
+    },
+    {
+      "index": 7,
+      "id": "0x240",
+      "ticks": 100,
+      "class": 0
+    },
+    {
+      "index": 8,
+      "id": "0x420",
+      "ticks": 100,
+      "class": 0
+    },
+    {
+      "index": 9,
+      "id": "0x430",
+      "ticks": 100,
+      "class": 2
+    },
+    {
+      "index": 10,
+      "id": "0x4b0",
+      "ticks": 10,
+      "class": 1
+    },
+    {
+      "index": 11,
+      "id": "0x4c1",
+      "ticks": 100,
+      "class": 3
+    },
+    {
+      "index": 12,
+      "id": "0x4ec",
+      "ticks": 25,
+      "class": 0
+    },
+    {
+      "index": 13,
+      "id": "0x4f1",
+      "ticks": 1000,
+      "class": 0
+    },
+    {
+      "index": 14,
+      "id": "0x6e0",
+      "ticks": 100,
+      "class": 4
+    },
+    {
+      "index": 15,
+      "id": "0x6e1",
+      "ticks": 100,
+      "class": 4
+    },
+    {
+      "index": 16,
+      "id": "0x6e2",
+      "ticks": 100,
+      "class": 3
+    },
+    {
+      "index": 17,
+      "id": "0x6e3",
+      "ticks": 100,
+      "class": 3
+    }
+  ],
+  "deadline_boundary_cases": 108,
+  "tcu_admission_cases": 48,
+  "ecu_configuration_cases": 6,
+  "tcu_record_lifecycles": [
+    {
+      "id": "0x200",
+      "clear_enabled_868c": 0,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "0x200",
+      "clear_enabled_868c": 1,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": "0x201",
+      "clear_enabled_868c": 0,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        2,
+        2
+      ]
+    },
+    {
+      "id": "0x201",
+      "clear_enabled_868c": 1,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "id": "0x211",
+      "clear_enabled_868c": 0,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "0x211",
+      "clear_enabled_868c": 1,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "id": "0x215",
+      "clear_enabled_868c": 0,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        8,
+        8
+      ]
+    },
+    {
+      "id": "0x215",
+      "clear_enabled_868c": 1,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        8,
+        0
+      ]
+    },
+    {
+      "id": "0x240",
+      "clear_enabled_868c": 0,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    {
+      "id": "0x240",
+      "clear_enabled_868c": 1,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        128,
+        0
+      ]
+    },
+    {
+      "id": "0x420",
+      "clear_enabled_868c": 0,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "0x420",
+      "clear_enabled_868c": 1,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        256,
+        0
+      ]
+    },
+    {
+      "id": "0x430",
+      "clear_enabled_868c": 0,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        512,
+        512
+      ]
+    },
+    {
+      "id": "0x430",
+      "clear_enabled_868c": 1,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        512,
+        0
+      ]
+    },
+    {
+      "id": "0x4b0",
+      "clear_enabled_868c": 0,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "0x4b0",
+      "clear_enabled_868c": 1,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        1024,
+        0
+      ]
+    },
+    {
+      "id": "0x4ec",
+      "clear_enabled_868c": 0,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        4096,
+        4096
+      ]
+    },
+    {
+      "id": "0x4ec",
+      "clear_enabled_868c": 1,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        4096,
+        0
+      ]
+    },
+    {
+      "id": "0x4f1",
+      "clear_enabled_868c": 0,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        8192,
+        8192
+      ]
+    },
+    {
+      "id": "0x4f1",
+      "clear_enabled_868c": 1,
+      "fault_bitmap_sequence": [
+        0,
+        0,
+        8192,
+        0
+      ]
+    }
+  ],
+  "tcu_211_dispatch_lifecycle": [
+    {
+      "tick": 100,
+      "received": true,
+      "deadline": 110,
+      "fault_bitmap": 0
+    },
+    {
+      "tick": 109,
+      "received": false,
+      "deadline": 110,
+      "fault_bitmap": 0
+    },
+    {
+      "tick": 110,
+      "received": false,
+      "deadline": 120,
+      "fault_bitmap": 4
+    },
+    {
+      "tick": 111,
+      "received": true,
+      "deadline": 121,
+      "fault_bitmap": 0
+    }
+  ],
+  "ecu_fault_gate_cases": 24,
+  "ecu_local_gate_cases": 2048,
+  "ecu_ramp_gate_cases": 64,
+  "ecu_active_latch_cases": 2048,
+  "ecu_expiry_examples": [
+    {
+      "prior_active_718c": 0,
+      "ramp_718e": 0,
+      "output_714c": 65537
+    },
+    {
+      "prior_active_718c": 1,
+      "ramp_718e": 1,
+      "output_714c": 516
+    }
+  ]
+}

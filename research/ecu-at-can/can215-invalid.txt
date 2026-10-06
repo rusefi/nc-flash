@@ -1,0 +1,142 @@
+CAN215 shared invalid-data policy and corrected recovery timing (2026-10-06)
+==========================================================================
+
+Result
+------
+A received invalid value in either CAN215 difference field qualifies group3B
+and can substitute BOTH application values, even if the other field remains
+valid. Before qualification, each invalid field retains its own old number.
+The healthy field can still update until the shared diagnostic matures.
+The substituted request base reaches CAN216 and the ECU spark path together
+with CAN211. This advances the ECU/AT feedback model; it does not establish
+physical units, normal phase admission, CAN211 sender or PRHT CAN IDs.
+
+Correction to earlier CAN201 recovery claims
+--------------------------------------------
+Groups3A,3B,3C use500 healthy diagnostic ticks, not5000. Earlier CAN201
+verifiers sampled601 then5601 and therefore missed the actual deadline;
+their passing checks did not prove a5000-tick threshold. Those verifiers,
+results and authoritative notes have now been corrected. Do not transfer
+this correction to other groups: intervals are selected per ROM record.
+The CAN communication group36 uses a different configuration.
+
+The healthy helper executes after group processing in the tested task order.
+At healthy-start601, the helper marks readiness at1101 (exactly500 ticks).
+The NEXT producer/qualifier pass clears the fault; a second pass at the SAME
+1101 timestamp succeeds. A claim of strictly more than500 clock ticks is
+also too strong.80A4 must be zero for active recovery in these fixtures.
+
+Original binary evidence
+------------------------
+Images and SHA256 identities are in can215-invalid-verification.json and
+can215-feedback.txt. Addresses/masks below are hexadecimal; numeric values,
+intervals and example timestamps are decimal. Unchanged ROM instructions
+execute under the repository's bounded SH interpreters. No interpreter or
+application changes were made for this follow-up.
+
+TCU178FC reads BE CAN215 bytes2/3 through1C83C. If that word is notFFFF and
+offset validity88E6==2, it computes:
+  88EC = clip_signed16(10*(word2-512) - signed88E4), validity88EE=2.
+The offset88E4 was already clipped by177DC. Otherwise the number is held;
+validity becomes1 for aFFFF word or offset-validity1, and3 for other unready
+offset states.400 complete1ACF0 callback and20 dependency cases cover the
+formula, negative/upper saturation and invalid retention. Calibration5C81E
+is01 01 FE 00;5C5BC is01 0A 00 00, matching the first difference converter.
+178EC initializes88EC=9240 and88EE=0; this initializer is now executed.
+
+517B2 selects this second field into signed80B2 with statusA53C. Its policy
+matches516E6 for the first field: fresh if own validity2 andA98Cbit0, otherwise
+A98Cbit2 selects9240/status4, bit1 selects9240/status3, otherwise retain/status2.
+All selected values clamp to[-1000,9240].517A4 initializes80B2=9240/status0.
+4096 policy cases also execute216D8, which scales80B2*32/10, truncates toward
+zero and saturates signed16 into92E6. The first value separately feeds92E4.
+These are distinct numeric channels; their physical meanings remain open.
+
+583DC invokes58504: validity88EA (bytes0/1 difference) and88EE (bytes2/3
+ difference) yieldAC7A=1 if either is1,2 if both are2,otherwise3. Table5F1A0
+pointsAC7A to diagnostic group3B. Producer admission requiresA939==1 and
+previous group35/36 mapped summariesA977/A978 to lackmask08. The global
+configured-group dispatcher56658 additionally requiresA936==1.
+
+Group3B record5EF28:
+  00 01 01 F4 00 01 11 00 00 00 00 00 25 00 25 00
+It selects type0 helper566E0,500-tick invalid qualification/count1, healthy
+index25 and summary index25. Healthy record5F100:
+  25 00 01 00 01 F4 00 01
+It selects500 healthy ticks/count1. Distinguish healthy and summary indexes:
+group3A uses healthy27 (5F110) and summary24; group3C uses healthy28 (5F118)
+and summary26. Those healthy records also have interval01F4 (500).
+
+Group3B RAM: rawA771, activeA727, qualification deadlineA86C, countA91A,
+mapped summaryA97D.570F6/57258 combine this with groups35/36 intoA98C.
+Stored history alone leaves the normal numeric selection available.
+
+Executed feedback and diagnostic lifecycles
+-------------------------------------------
+The main sequence runs ECU369D6/36A28, transfers its CAN215 buffer, executes
+TCU1ACF0,583DC,56658,57F50,570F6,57258,516E6,517B2,216D8,2C234,1FB8C,
+then packs CAN216 and executes the same ECU instance's CAN216/CAN211 spark
+paths. Each checkpoint constructs a fresh ECU fixture; TCU state persists.
+Active phase3, reduction320 and timer0 are explicit fixtures, not a simulated
+vehicle scheduler. The diagnostic summary is produced, not injected.
+
+Eight lifecycles vary invalid field0,2,4 or all fields and80A4=0/1.
+Only the all-fields case uses the ECU's original6E2E invalid flag; isolated
+field cases overwrite a word in the transferred buffer to test the receiver.
+They are not claims that the stock ECU publishes isolatedFFFF numeric words.
+The normal fixture is word0=537,word2=542,word4=512:
+  tick0: first/second250/300, statuses1/1, returned216 numeric15, spark20.
+  tick100: first invalid sample; qualification deadline600, active01.
+  tick599: no substitution. Isolated invalid word2 has statuses1/2.
+  tick600: active05, summary1C; both values9240/status4,216 numeric914,spark23.
+  tick601: numeric conversions recover, active44 and substitution remain.
+  tick1101:500 healthy ticks; helper readiness set, active44 in that pass.
+  next producer pass: active0, summary11(history), values250/300,spark20.
+CAN211 correction remains3 in these model fixtures. The change in ordinary
+spark is the AT correction dropping from3 to0 under the substituted request.
+No physical spark-angle or torque-unit assertion follows from these numbers.
+
+Alternating invalid word0 ->word2 ->offset keeps combined validity1 and does
+not restart the pending deadline. A fully valid sample cancels qualification.
+An invalid or injected-unready second dependency during recovery resets the
+healthy period. Dependency group35/36 inhibition cancels pending qualification
+and re-arms a fresh500-tick interval when producer admission returns.
+
+Serializer558CC produces no reports in these isolated group3B lifecycles.
+CAN216 reportbit1 andCAN231 byte1bit6 remainclear, despite control substitution.
+Internal history persists after recovery; report absence is not proof of a
+healthy control path. Other diagnostic services and concurrent faults are
+outside these fixtures.
+
+Verification and continuation
+-----------------------------
+  python research/ecu-at-can/verify_can215_invalid.py
+New checks:2 initializers,400 conversion,20 dependency,4096 policy/scaling;
+72 base lifecycle checkpoints,5 switched-field,6 interrupted qualification,
+16 interrupted recovery,7 same-tick recovery,9 processing-gate and10
+producer-dependency gate checkpoints. Results saved beside this record.
+Corrected verify_can201_invalid.py and verify_can201_byte6.py are rerun;
+see their updated saved JSON for500-tick and same-tick recovery evidence.
+The initial sparse5000-tick new CAN215 test also passed; it was replaced by
+these boundary tests before acceptance. That passing result was insufficient.
+
+Next upstream leads remain ECU71EC/71C4 near40896/409A0. New second-channel
+92E6 literal users23604,4FB40,4FC64 are static downstream leads;4FB3C copies
+it into a work record. Their full callers and physical control role remain
+unexecuted. Continue slot2 policy4C7AC, phase1/2 entry and scheduling, deep
+traction source/model/arbitration, and PRHT speed/neutral frame attribution
+and folding/unfolding controller state transitions. All three goals remain
+active and incomplete. This turn and the previous turn made verified progress.
+
+Persistence verification
+------------------------
+Ghidra saved and independently restored: all11 project hashes,419 annotations
+and245 identical function/readback exports verified. Archive SHA/inventory
+and independent readback result are in ghidra/snapshot.json and
+restore-verification.json. New records/exports are Git-eligible. ROM hashes
+unchanged; git diff --check passes. No new staging, commit or push.
+
+Stock-source follow-up (2026-10-06): model-sources.txt now executes the
+immediate coefficient/offset/count producers and198 paired feedback cases.
+This closes the earlier immediate model-source lead; raw sensor/state
+identities, upstream pattern policy and real task history remain unproved.

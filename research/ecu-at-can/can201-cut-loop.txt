@@ -1,0 +1,127 @@
+ECU CAN201 -> TCU request calculation -> CAN216 -> ECU cylinder commands
+Evidence checkpoint: 2026-10-05
+
+WHAT IS NOW PROVEN
+
+verify_can201_cut_loop.py executes a complete software round trip in the
+unchanged LFFEEE ECU and LFG1TF000 TCU images (hash assertions in script).
+ECU source6DB4 ->CAN201word0 ->TCU8814/80E8 ->request9454 ->CAN216byte7bit5
+->ECU countdown/cut selection ->four zeroed cylinder commands740C..7418.
+Physical engine-speed units, CAN peripherals, real scheduling, timer outputs
+and vehicle response are not proved. CAN201's first word is distinct from
+the speed candidate at bytes4..5 studied in can201-speed.txt.
+
+Run: python research/ecu-at-can/verify_can201_cut_loop.py
+Saved output: can201-cut-loop-verification.json.
+84 conversion cases,512 diagnostic mapping cases,7 lookup endpoints,
+800 request-control/paired-cylinder cases and11 round-trip steps pass.
+Follow-up software-lookup.txt verifies all65536 curve inputs and adds30
+axis-producer/paired cases; interior software arithmetic now executes.
+The original interpreter classes remain unchanged; this verifier now uses
+the independently tested SHSoftwareArithmetic subclass. This is a
+synthetic admitted-state execution, not a complete firmware scheduler.
+
+OUTBOUND ECU WORD AND TCU APPLICATION CONVERSION
+
+ECU3663E reads protected float6DB4 and selects/filters into6B34. The new
+round trip executes its direct-copy path (6536=0); its alternate smoothing
+path and source6DB4 acquisition are not newly tested.366EC emitsFFFF when
+6B4F==1 or6DFB==1, zero when70F0==1, otherwise encodes6B34/.25 with real
+20E8 and capsFFFE. Tested round-trip source values3499..4000 encode*4;
+6B4F invalidation is executed. Other gates are static observations here.
+365D0 packs6B3C into201 bytes0..1 in admitted AT mode80.
+
+TCU application1ACD8 calls171CC: validraw ->floor(raw/4) at8814,8816=2;
+FFFF holds8814 and sets8816=1.2055C calculates floor(u16[8814]*256/100),
+unless92C9bit6 selects signed calibration76DDE=20480. Result clamps0..32767
+and stores80E8. Its tailcall50C9A stores floor(80E8*100/256) ->809E and
+sets A4E4=4 for diagnostic substitution, else1 if8816==2, else2.
+Conversion truncation is visible: raw15999 ->8814=3999 ->80E8=10237 ->809E=3998.
+Status2 retains a number; it is not synonymous with substitution status4.
+
+REQUEST PRODUCER24FA0 (STOCK LOOKUP INTERPOLATION NOW EXECUTED)
+
+2513E enables the producer only when92C9bit6,9317bit0 and92C6bit1 are clear.
+Otherwise9454 is cleared.512 one-hot fixtures overA958..A997 in21C1C map
+92C9bit6 to A98Ebit3 alone. The complete A98E producer remains a next lead;
+do not assign it a diagnostic group solely from an array offset.
+
+First the routine detects falling edges using prior9455 bits0/1/2 for
+9317bit2,9316bit2,94F4bit0 respectively. A falling edge resets corresponding
+byte82A5/82A6/82A7. It later copies these three current bits into9455,
+preserving higher bits. These bytes' real timer services/units remain open.
+
+Let x=signed16[80E8] (reachable conversion range0..32767), p=u8[828B],
+a/b/c=bytes82A5/82A6/82A7 AFTER falling-edge reset, f=94F4bit0,
+and k=lookup10764(u16[9334],table703C0). Stock table bytes are:
+  count4; axis0A,28,3C,64; values23,1E,1C,1C (bytes scaled256 by lookup).
+Endpoint branches: input<2560 ->k8960; input>=25600 ->k7168.
+All65536 inputs, including interpolation, are now verified in software-lookup.txt.
+The800 control fixtures now include interior inputs and segment boundaries.
+
+Starting with previous9454, if enabled, SET request1 when all hold:
+  not(p>31 and c>31)
+  x>=k+1280
+  (u8[800E]<11 or a<=31 or b<=31)
+  f==0
+Then CLEAR request0 if any hold (clear wins over set):
+  p>=61 and c>=61
+  9317bit3 set
+  x<k
+Otherwise retain the previous request. The constants are ROM76EB8..76EBE:
+31,61,1280,11,31,31. Signed loads followed by unsigned comparisons in the
+byte timer gates are preserved in the interpreter; fixtures include255.
+800 deterministic mixed fixtures test output, history and edge-reset bytes,
+then send216 through the actual ECU cut path with admitted local gates.
+
+ROUND-TRIP HYSTERESIS AND INVALID-INPUT LIFECYCLE
+
+With9334=0 and all timing/override gates admitted, eleven steps execute:
+  ECU6DB4 3499 ->request0
+          3500 ->0
+          3999 ->0
+          4000 ->1
+          3999 ->1 (retained)
+          3500 ->1 (at lower threshold)
+          3499 ->0
+          4000 ->1
+  ECUinvalidFFFF, TCUfault clear ->held numeric4000/status2/request1
+  ECUinvalidFFFF, TCU92C9bit6 set ->substitute20480/status4/request0
+  ECUvalid4000, fault clear ->request1
+
+Each request travels through18F8C ->CAN216byte7bit5 ->ECU35034/34CEC,
+3AE52/3B4D4/3AD04/3AC14, each real cylinder event at4D716, then44E50.
+Nonzero alternative commands prevent zero-filled fixtures from falsely
+proving a cut. Request1 yields four0 commands; request0 yields four1
+commands in the selected fixture. The ECU instance used for each return
+step is fresh; the TCU retains hysteresis across steps. This establishes
+request production/propagation, not a continuous ECU countdown lifecycle;
+verify_actuation.py contains separate stateful countdown tests.
+
+The rawFFFF observation applies to the explicitly held-clear diagnostic
+gate. It is NOT a claim that a real vehicle continues requests indefinitely
+after invalid/lost CAN. Trace receipt/invalid qualification into A98E/92C9,
+with real task ordering, to establish complete fail-safe behavior.
+
+FAILED LEADS, COVERAGE BOUNDARIES AND NEXT ACTIONS
+
+Historical harness limitation, resolved in software-lookup.txt:
+Interior lookup10764 enters software-double helpers. Inputs2560,2561,5000,
+10240 stop at ROTCR opcode4025 at5BD52;15360 stops at ROTR4105 at5BEA8.
+Those stops were resolved by a separate tested ISA extension. No helpers
+were mocked; the entire stock curve now matches an independent integer formula.
+The raw opcode search for GBR+E8 included189D6, but disassembly reveals
+that occurrence is part of a ROM literal5C574, not a code read. Treat raw
+opcode and aligned-literal searches as candidates needing disassembly.
+
+Other confirmed static consumers of80E8 include2059A history,205D4/205FA
+filters and many shift-control routines. A4E4 reaches51E48,524AC,57C2E;
+this turn does not complete those consumers. CAN201byte6 consumer21628
+still enters unexecuted software-double arithmetic.
+
+Next trace A98E provenance and the timing gates, identify9334/89A8 and6DB4
+physical sources, and connect remaining control outputs.22ECC axis conversion
+is now executed; acquisition upstream17D9C remains static.
+All ECU/TCU, traction and PRHT objectives remain active. This TCU-generated
+cut request is separate from CAN211's traction/spark lead; do not infer DSC
+ownership or a roof command from this completed software round trip.

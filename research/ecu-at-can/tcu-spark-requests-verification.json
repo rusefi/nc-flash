@@ -1,0 +1,302 @@
+{
+  "scope": "TCU request records -> original aggregation -> CAN216 -> ECU spark.\n\nUses the unchanged ROM and complete original helpers. Record values, local\nphase and timer samples are fixtures; no physical units or scheduler model.",
+  "rom_sha256": {
+    "ECU": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+    "TCU": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+  },
+  "base_scaling_cases": 269,
+  "setter_reset_cases": 175,
+  "aggregate_cases": 4900,
+  "admission_cases": 512,
+  "complete_ramp_caller_cases": 900,
+  "priority_examples": [
+    {
+      "record1": 320,
+      "record2": 0,
+      "selected": 320,
+      "source915a": 480
+    },
+    {
+      "record1": 320,
+      "record2": 320,
+      "selected": 320,
+      "source915a": 480
+    },
+    {
+      "record1": 320,
+      "record2": 640,
+      "selected": 640,
+      "source915a": 160
+    },
+    {
+      "record1": 320,
+      "record2": 32767,
+      "selected": 320,
+      "source915a": 480
+    },
+    {
+      "record1": 640,
+      "record2": 0,
+      "selected": 640,
+      "source915a": 160
+    },
+    {
+      "record1": 640,
+      "record2": 320,
+      "selected": 320,
+      "source915a": 480
+    },
+    {
+      "record1": 640,
+      "record2": 640,
+      "selected": 640,
+      "source915a": 160
+    },
+    {
+      "record1": 640,
+      "record2": 32767,
+      "selected": 640,
+      "source915a": 160
+    }
+  ],
+  "producer_to_ecu_lifecycle": [
+    {
+      "timer8170": 0,
+      "record1_value": 320,
+      "record1_flag": 1,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "timer8170": 1,
+      "record1_value": 288,
+      "record1_flag": 1,
+      "tcu_source915a": 512,
+      "can216": "02 10 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 16,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "timer8170": 5,
+      "record1_value": 160,
+      "record1_flag": 1,
+      "tcu_source915a": 640,
+      "can216": "02 14 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 20,
+      "at_correction": 2.0,
+      "traction_correction": 3.0,
+      "spark": [
+        21.0,
+        21.0,
+        21.0,
+        21.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "timer8170": 9,
+      "record1_value": 32,
+      "record1_flag": 1,
+      "tcu_source915a": 768,
+      "can216": "02 18 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 24,
+      "at_correction": 1.0,
+      "traction_correction": 3.0,
+      "spark": [
+        22.0,
+        22.0,
+        22.0,
+        22.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "timer8170": 10,
+      "record1_value": 32767,
+      "record1_flag": 255,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "competing_record_to_ecu_cases": [
+    {
+      "record2": 0,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "record2": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "record2": 640,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "record2": 32767,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "limits": "Phase3 starts active by fixture; phase1/2 entry, upstream source80B4, record2 policy4C7AC, timer scheduling and physical roles remain open."
+}

@@ -1,0 +1,156 @@
+TCU phase acknowledgement, retirement and expanded initialization, 2026-10-06
+
+RESULT
+
+Original request-group initialization closes the phase-retirement gap left
+by tcu-phase-policy.txt. Ten selector-created lifecycles now execute through
+all ten group acknowledgements, retirement callbacks, empty phase ring and
+idle dispatch state. These cover codes7/8/9 descending and codes0/1 ascending,
+each with head0 and head15 (wrap to0).64 paired CAN216/ECU checkpoints pass.
+
+One important fixture difference is retained: code9 no longer releases
+automatically under the old unchanged inputs. Proper creation initialization
+produces80D8=1000, causing its separately verified hold predicate to wait for
+signed80D8<64. Its phase can finish while the request remains in hold. Explicit
+source inputs64 then63 demonstrate that boundary and eventual retirement.
+The older minimal-initialization fixture left this source zero; its results
+were conditional and must not be treated as full initialization behavior.
+
+Reproduce from repository root:
+  python research/ecu-at-can/verify_rotate.py > research/ecu-at-can/rotate-verification.json
+  python research/ecu-at-can/verify_tcu_phase_retirement.py > research/ecu-at-can/tcu-phase-retirement-verification.json
+
+Tests:4096 acknowledgement bitmaps,975 stateful acknowledgement deliveries
+across15 rings of lengths1/2/3/8/16 and heads0/7/15,62 actual initializer
+calls,10 integrated lifecycles and64 paired CAN216/ECU checkpoints.
+The new instruction extension passes6592 independent bit-string cases,
+two delay-slot programs and two expected unsupported-instruction rejections.
+
+ACKNOWLEDGEMENT CONTRACT (ORIGINAL31524 EVENT3 ->31C18)
+
+Event3 payload contains a big-endian u16 internal group ID, followed by a
+byte phase-ring index. These group IDs are application dispatch identifiers;
+they are not CAN arbitration IDs.31524 dispatches event3 in state2 only.
+Late duplicate event3 payloads while idle state1 are ignored in the tests.
+
+ROM5D3BC lists ten group records, with metadata and periodic class:
+  record byte   group(hex)   metadata   period class
+       0            05          1            2
+       1            06          0            2
+       2            20          0            4
+       3            0B          0            4
+       4            02          0            4
+       5            25          0            4
+       6            14          0            4
+       7            1A          0            4
+       8            26          1            2
+       9            29          1            2
+
+31C18 marks the matching record byte1 (record base95D4+15*index), when a
+matching group is found and index<16. Unknown group IDs add no mark but still
+run the completion/retirement scan. The tests use valid indices; this pass
+does not claim that arbitrary invalid indices are safely rejected throughout
+the function, because later reads use the supplied index too.
+
+If record+14 is zero and all metadata0 groups (bytes1..7) are acknowledged,
+31C18 latches+14 to1. This latch alone does not retire the record. Head and
+tail retirement also require all ten acknowledgement bytes to be nonzero.
+Tests exhaust every0/1 bitmap. No direct check of phase+13 is needed in this
+retirement function: synthetic complete acknowledgements retire even phase0.
+Actual group lifecycle rules must supply appropriate completion timing.
+
+Retirement order:
+  1. Remove consecutive eligible head records, advancing96C4 modulo16.
+  2. Remove consecutive eligible tail records without advancing96C4.
+  3. A completed interior record waits until it reaches an eligible edge.
+Each removal decrements96C5 and calls three5D414 callbacks in order, passing
+the record's transition code:30B82,30A9E,31168. Empty count resets periodic
+phase96C6 and returns1, updating dispatcher8088 to idle. Nonempty returns-1
+and retains the dispatch state. Original record bytes are not erased at
+retirement; ring membership/count and dispatch state govern their use.
+
+The callbacks restore capture state:30B82 conditionally sets95C2 to1 for a
+matching95C4 code;30A9E conditionally sets95BE to1 for matching95BF;31168 sets
+nonzero95D0 to1. Their full bodies run in the tests; no callback is stubbed.
+
+31F64 creation(kind0) notifies all ten groups. Phase completion(kind3)
+notifies unacknowledged metadata0 groups. Original generic manager cleanup
+also sends group1/event3 acknowledgement messages after managed-request
+release. This provides the missing original-code path from group8 release
+and the remaining phase-controlled groups to final retirement.
+
+EXPANDED INITIALIZATION AND REAL GROUP LIFECYCLES
+
+The fixture first executes the established data-copy, heap, queue and request
+initializers from verify_tcu_request_dispatch.fixture(). It then executes
+62 individual original initializer functions in the order of literal entries
+1E2B4..1E3A8 inclusive. These are the calls in the inspected application
+initialization sequence, beginning30A80/30B20/310F0/31524 and ending34290.
+Each is called with explicit r4=0,r5=0. This covers the additional managers,
+group7 descriptorB08C via4DC98/2FEF8, and capture states previously left zero.
+It does not execute the whole boot caller, interrupts or hardware setup.
+
+Initial exploration stopped at opcode4404 at5B81E inside initializer380B0.
+The saved sh_rotate.py extension adds ROTL/ROTR (4004/4005 patterns) to a
+subclass of the existing interpreter. Outgoing MSB/LSB returns to the opposite
+end and copies to T; incoming T does not enter the rotation. Other SR bits
+remain intact. Unsupported instructions still fail closed. Existing shared
+interpreters and older verifier fixtures are unchanged.
+
+Instruction reference, accessed2026-10-06:
+Renesas SH-2E software manual, sections7.2.46/47 (ROTL/ROTR), RJJ09B0344-0200:
+https://www.renesas.com/ja/document/mah/sh-2e-software-manual
+The Renesas SH-2A/SH2A-FPU instruction table also marks both SH2E-compatible:
+https://www.renesas.com/en/document/mah/sh-2a-sh2a-fpu-software-manual
+These are instruction references, not identification of the physical MCU.
+
+Integrated schedule matches the prior fixture: source80EE starts1000 and
+changes to5000 at primary call80; target reference9218 is5000, from-reference
+zero. Each cycle runs11014,31524 event2, two event4 calls, then request
+aggregation. Other sources are80EA=4672,80F6=4224,809C=20000,92D0=4,A93A=1.
+Actual acknowledgement messages are observed at31C18; no synthetic group
+acknowledgements are injected into these integrated lifecycles.
+
+Results at both head positions, in primary-call counts for this schedule:
+  selected3->2/code7/group8: retire158, CAN216 source224 then704 then7FFF.
+  selected4->3/code8/group8: retire138, CAN216 source468 then778 then7FFF.
+  selected5->4/code9/group8: phase3 while request remainsstate4; source80D8
+    initially1000. At call400, explicit80D8=64 still holds; call401 sets63,
+    allowing ramp/release and retirement437. CAN216 source remains7FFF.
+  selected0->1/code0/group7 and1->2/code1/group7: retire110; CAN216 source
+    remains7FFF under these fixtures. Real initialized group7 records execute;
+    their map/gate policy is not yet independently modeled.
+
+At retirement all ten acknowledgements are present; head advances, count0,
+8088=1,96C6=0, managed ring/list counts0, and output915A=7FFF. Lookup3159A
+reports no active record and31720 reports no active phase work. Additional
+periodic calls and duplicate acknowledgements while idle do not recreate
+requests. CAN2167FFF packs asFFFE and produces zero AT correction under the
+saved ECU model. The snapshot helper's byte4 invalid fixture and non-intervening
+CAN211/model/gate inputs remain explicit; these are not physical measurements.
+
+The code9 difference is traced to the enabled creation callback30B28, which
+captures80D8 after30B20 initializes95C2. Existing4D7CC hold semantics require
+both elapsed duration and code9 signed80D8<stock773E0(64). The periodic source
+update30B9E/30C20 and physical meaning remain next work. Do not replace that
+unresolved source production with an assumed sensor name or timer duration.
+
+NEXT AND PERSISTENCE
+
+Next investigate actual ascending group7 numeric request production, full
+ascending/composite/overlapping transitions and80D8 update/reference sources.
+Retirement testing uses synthetic ring contents for its independent oracle;
+simultaneous multi-request creation and sensor-driven completion remain open.
+The exploratory2->1 selection still produced code0 in expanded initialization;
+its9C50/4744C classifier context is not explained by the adjacent matrix alone.
+
+The prior1412A/FFFFF810 full-task hardware rejection is not solved by the two
+new rotation instructions. Real task timing, units, complete ECU/AT policy,
+deep traction integration and OEM PRHT fold/unfold CAN reception, reversal
+and timeout behavior remain required. See CHECKPOINT.txt and traction-roof.txt.
+
+Ghidra labels, callback-table types, disassembly and paired project archive
+are refreshed and independently restored. Snapshot identity and counts are
+recorded in CHECKPOINT.txt and ghidra manifests. Original ROMs are unchanged.
+This and the preceding phase-policy turn made verified progress. Saved
+locally; no staging, commit or push.

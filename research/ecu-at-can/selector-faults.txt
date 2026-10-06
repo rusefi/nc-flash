@@ -1,0 +1,123 @@
+Selector faults: producer -> diagnostic summary -> CAN231 -> ECU
+Evidence checkpoint: 2026-10-05
+
+Scope: unchanged LFG1TF000 TCU and LFFEEE ECU, hashes pinned by
+verify_selector_faults.py. Run from repo root:
+  python research/ecu-at-can/verify_selector_faults.py
+Saved output: selector-faults-verification.json. This extends selector-inputs.txt.
+
+Follow-up: selector-recovery.txt now executes the full30000-call countdown,
+64 recovery cases, confirmed-history gate and mapped0722 dependency. Earlier
+limitations below describe this original verifier; use the follow-up for the
+latest scope. Physical scheduling, history promotion and PRHT remain open.
+
+EXECUTED EVIDENCE
+
+5853C initializes word timers843E/8440 to FFFF. Producer58548 is admitted
+only when A938==1 and A735==0. Otherwise it writes zero diagnostic statuses
+and resets both timers to FFFF. 5866E adds input bytes88B4..88B7.
+For two or more asserted inputs, group15 raw status(A74B) becomes3.
+Group16 status(A74C) starts with bit0 taken from A962 bit0. Both timers reset
+except for the no-input branch with that dependency bit set.
+
+ROM records at5EB78+16*group:
+  group15: 00 01 07 d0 00 05 10 c7 07 07 00 00 0c 00 0c 00
+  group16: 01 00 00 00 00 01 10 07 07 08 00 00 0c 00 0c 00
+Callback table5EB5C selects566E0 for15,56908 for16. Both records map to
+summary index0C (A964). Codes0707/0708 align with factory range-switch
+diagnostics, but actual connector identity and voltage conditioning are open.
+
+384 producer fixtures cover all16 input masks, two enable/inhibit/dependency
+values and88BD values0/2/3. Changing88BD has no influence on this isolated
+producer. This does NOT prove ADC failure is globally ignored: the input
+filter can hold previous state, other tasks/global gates are not simulated.
+
+No-input branch: FFFF843E loads2000; once it reaches0 and u16[80BA]>=300,
+FFFF8440 loads28000. Otherwise8440 resetsFFFF. Expired843E sets group16
+status bit1; expired8440 also sets bit2. Eighteen timer-boundary fixtures
+verify threshold299/300 and FFFF/1/0 values for both timers. These fixtures
+do NOT run a complete elapsed-time lifecycle or qualify/store group16.
+11DB4 decrements a supplied word unless zero or FFFF; seven vectors pass.
+Absolute time units and80BA physical units remain unproven.
+
+Multi-input lifecycle (inputs0+1 held, synthetic counter84D0 starts100):
+  tick100: group15 active flags1; A964=01;92CD bits5/6=0; CAN231 byte0=EF.
+  tick2100: flags3;A964=0A;92CD bit5 set; byte0 stillEF; stored list empty.
+  ticks4100/6100/8100: successive qualification counts2/3/4; same output.
+  tick10100: count5,flags5;A964=1C;92CD bits5/6 set; byte0=FF;
+             serializer558CC returns07 07 FF; A99B=1.
+  tick10101: qualified state remains. Boundary2099/10099 also checked.
+
+566E0 drives the real timed diagnostic helpers. 570F6 builds the mapped
+summary: group active bit4 contributes summary04|08; active bit2 contributes
+02|08, clearing summary bit0. Stored history contributes10. 21C1C publishes
+A964 bit3 to92CD bit5 and A964 bit2 to92CD bit6. The latter forces both
+CAN231 byte0 nibbles toF. Prior to qualification the low nibble is alreadyF
+because the input-count check rejects multiple assertions independently.
+The upperE in this fixture follows the synthetic application's classFF;
+it is not a general representation of a healthy gear.
+
+Real ECU35BB8/3585C/411F0 consume each built frame: no upper/lower state
+one-hot is selected for either EF or FF, and combined723A/7244 remain0 with
+valid complementFF. Normal AT gates734A=80,734C=1 are explicit fixtures.
+No peripherals, interrupts, scheduler, motors, or roof controller are run.
+
+STATIC CONTINUATION LEADS (NOT FULLY EXECUTED BY THIS VERIFIER)
+
+Qualification566E0 uses567C0 deadline setup,56814 count/deadline processing
+and56896 healthy recovery. At the first failure it sets group statebit0,
+then starts a2000-tick deadline. Record+4=5 is the qualification count.
+Recovery details and persistence under repaired selector input remain open;
+do not transplant the prior CAN-loss group's recovery result automatically.
+
+For a single input,58688 requires input3 alone and88BA/88BC zero. In this
+state58548 sets secondary mapped status3 via57F00(group0C), adds80 to
+group16 status if that group is active, and sets group15 status81 if active.
+This special physical selector position is not yet proven from wiring.
+
+11AEC loops timer ranges from ROM76D24 onward;76D3C/40 delimit8420..844E
+(exclusive end), covering843E/8440 and calling11DB4 per word. Execute the
+full timer service and establish scheduling relative to84D0 before converting
+the2000/28000 counts to time. Initialization must use5853C: zero-filled RAM
+would falsely start at expired timers.
+
+Global enable A938:56AE8 initializesA938/39/3A zero and A93C/A944/A94C state2.
+56B06 calls23E7C,56B78 and56C3A.56B78 conditions include A518,GBR+6==3,
+u16[GBR+9E]>ROM5EB70,A98E bit0 and ROM5EB68/6A/6C/6E thresholds.
+Physical gate meanings and whether ADC invalidity reaches them are unproven.
+Aligned literal searches for88BD found1749A/1752E, with no MOV.W hits;
+computed/GBR accesses mean this is not proof of global absence of consumers.
+
+FACTORY CROSS-CHECKS AND CONFLICTS
+
+2008 SJ6A-EL factory DTC table, accessed2026-10-05:
+https://ncmiata-servicemanual.com/src/g5w05/html/id050208800500.html
+Lists P0707 as range-switch low/short-ground and P0708 as high/open. Both
+have MIL/AT-warning availability; drive-cycle columns are1 and2 respectively.
+
+Factory P0707 detail (earlier retrieval succeeded; latest direct web reopen
+failed, so preserve this source with that retrieval caveat):
+https://ncmiata-servicemanual.com/src/g5w05/html/id050208801000.html
+Describes low voltage below0.127V with ignition on; AT warning on first cycle,
+stored diagnosis, no pending code, and no MIL illumination. This conflicts
+with the DTC table's MIL column and the ROM's executed A99B=1 report path.
+Do not silently resolve a possible calibration/variant/document discrepancy.
+Its connector table assigns2O=P,2M=R,2N=N,2K=D, each B+ when selected;
+switchB/C/H/D map respectively, withE supplied fromIG1. MCU inputs are
+active low in the sampled-code test; board conditioning is not established.
+
+Factory P0708 detail (same latest direct-reopen limitation):
+https://ncmiata-servicemanual.com/src/g5w05/html/id050208801100.html
+Describes no range signal at speed>=30km/h, pending diagnosis and MIL after
+two consecutive drive cycles; checking procedure includes>=30km/h for>=2s.
+This supports a speed-gate hypothesis for80BA>=300, not its proven units,
+clock conversion, or a match to this exact calibration's complete lifecycle.
+
+NEXT ACTIONS AND CONNECTION TO EXPANDED GOALS
+
+Run actual timer service and group16 qualification/recovery; trace A962 and
+global enable producers. Follow actual versus target gear source8081 and
+ECU speed/neutral transmitters. The roof's documented P/N permission makes
+these useful candidates, but PRHT consumption of231 is still unproved.
+Traction sender attribution, full torque arbitration and ignition timing
+remain separate active work in traction-roof.txt and can211-spark.txt.

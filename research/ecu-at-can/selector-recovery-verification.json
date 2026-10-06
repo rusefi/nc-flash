@@ -1,0 +1,2697 @@
+{
+  "scope": "Execute TCU missing-selector countdown, qualification and selector recovery.\n\nSynthetic constant inputs and explicit task schedule; original unchanged ROM\ninstructions throughout. No physical timing, ignition cycles, peripherals or\nroof-controller execution. The diagnostic producer runs at listed checkpoints.",
+  "timer_service_ranges": [
+    "0xffff8410",
+    "0xffff8411",
+    "0xffff8414",
+    "0xffff841c",
+    "0xffff841c",
+    "0xffff841d",
+    "0xffff8420",
+    "0xffff844e"
+  ],
+  "timer_service_calls": 30000,
+  "missing_input_timeline": [
+    {
+      "timer_service_calls": 0,
+      "timers": [
+        2000,
+        65535
+      ],
+      "raw_status": 1,
+      "active_status": 0,
+      "summary_a964": 1,
+      "flags_92cd": 0,
+      "can231_byte0": 16,
+      "ecu_combined_723a": 0,
+      "serialized_list": "",
+      "report_a99b": 0
+    },
+    {
+      "timer_service_calls": 1999,
+      "timers": [
+        1,
+        65535
+      ],
+      "raw_status": 1,
+      "active_status": 0,
+      "summary_a964": 1,
+      "flags_92cd": 0,
+      "can231_byte0": 16,
+      "ecu_combined_723a": 0,
+      "serialized_list": "",
+      "report_a99b": 0
+    },
+    {
+      "timer_service_calls": 2000,
+      "timers": [
+        0,
+        28000
+      ],
+      "raw_status": 3,
+      "active_status": 2,
+      "summary_a964": 10,
+      "flags_92cd": 32,
+      "can231_byte0": 16,
+      "ecu_combined_723a": 0,
+      "serialized_list": "",
+      "report_a99b": 0
+    },
+    {
+      "timer_service_calls": 29999,
+      "timers": [
+        0,
+        1
+      ],
+      "raw_status": 3,
+      "active_status": 2,
+      "summary_a964": 10,
+      "flags_92cd": 32,
+      "can231_byte0": 16,
+      "ecu_combined_723a": 0,
+      "serialized_list": "",
+      "report_a99b": 0
+    },
+    {
+      "timer_service_calls": 30000,
+      "timers": [
+        0,
+        0
+      ],
+      "raw_status": 7,
+      "active_status": 4,
+      "summary_a964": 28,
+      "flags_92cd": 96,
+      "can231_byte0": 255,
+      "ecu_combined_723a": 0,
+      "serialized_list": "",
+      "report_a99b": 0
+    }
+  ],
+  "recovery_cases": 64,
+  "recovery": [
+    {
+      "group": "0x15",
+      "input_mask": 1,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 1,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 1,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 1,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 1,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 1,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 1,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 1,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 2,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 2,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 2,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 2,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 2,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 2,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 2,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 2,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 4,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 4,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 4,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 4,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 4,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 4,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 4,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 4,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 8,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": true,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 8,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": true,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 8,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 8,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 8,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 8,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 8,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x15",
+      "input_mask": 8,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 31001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        },
+        {
+          "tick": 61001,
+          "group_flags": 68,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "07 07 ff",
+          "report_a99b": 1
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 1,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 1,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 1,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 1,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 1,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 1,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 1,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 1,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 2,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 2,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 2,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 2,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 2,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 2,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 2,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 2,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 4,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 4,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 4,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 4,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 4,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 4,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 4,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 4,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 8,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": true,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 8,
+      "extra_88ba": 0,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": true,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 0,
+          "summary_a964": 17,
+          "flags_92cd": 0,
+          "can231_byte0": 20,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 8,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 8,
+      "extra_88ba": 0,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 8,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 8,
+      "extra_88ba": 1,
+      "extra_88bc": 0,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 8,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 0,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    },
+    {
+      "group": "0x16",
+      "input_mask": 8,
+      "extra_88ba": 1,
+      "extra_88bc": 1,
+      "gate_80a4": 1,
+      "recovered": false,
+      "steps": [
+        {
+          "tick": 31000,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 31001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        },
+        {
+          "tick": 61001,
+          "group_flags": 4,
+          "summary_a964": 28,
+          "flags_92cd": 96,
+          "can231_byte0": 255,
+          "ecu_combined_723a": 0,
+          "serialized_list": "",
+          "report_a99b": 0
+        }
+      ]
+    }
+  ],
+  "history_gate_cases": [
+    {
+      "seeded_history": 0,
+      "summary_a964": 28,
+      "flags_92cd": 96,
+      "can231_byte0": 255,
+      "ecu_combined_723a": 0,
+      "serialized_list": "",
+      "report_a99b": 0
+    },
+    {
+      "seeded_history": 32,
+      "summary_a964": 28,
+      "flags_92cd": 96,
+      "can231_byte0": 255,
+      "ecu_combined_723a": 0,
+      "serialized_list": "07 08 ff",
+      "report_a99b": 1
+    }
+  ],
+  "dependency_cases": [
+    {
+      "group13_active": 0,
+      "summary_a962": 1,
+      "group16_raw_status": 1
+    },
+    {
+      "group13_active": 2,
+      "summary_a962": 10,
+      "group16_raw_status": 0
+    },
+    {
+      "group13_active": 4,
+      "summary_a962": 12,
+      "group16_raw_status": 0
+    },
+    {
+      "group13_active": 6,
+      "summary_a962": 14,
+      "group16_raw_status": 0
+    }
+  ],
+  "limits": "Physical units, MCU-to-selector wiring, actual ignition cycles/EEPROM persistence, global gates and PRHT receiver remain unverified."
+}

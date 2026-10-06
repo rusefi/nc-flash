@@ -1,0 +1,720 @@
+{
+  "scope": "Original descending phase gates, qualification and selector-to-ECU lifecycle.\n\nAll firmware bodies execute. Sources, references and interleaving are explicit\nfixtures; call counts are not physical time. Other group acknowledgements and\nascending/composite phase policy are outside this verifier.",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "checks": {
+    "descending_timer_gate": 1260,
+    "initial_phase_predicate": 1470,
+    "target_band_and_counter": 4200,
+    "code11_counter_bypass": 20,
+    "initial_target_route_and_state_dispatch": 28,
+    "completion_timer": 112,
+    "selector_to_phase_completion_lifecycles": 3,
+    "paired_can216_ecu_checks": 22
+  },
+  "lifecycles": [
+    {
+      "old": 3,
+      "requested": 2,
+      "transition_code": 7,
+      "checkpoints": [
+        {
+          "primary_timer_calls": 0,
+          "phase": 0,
+          "request": 2,
+          "phase_timer": 0,
+          "completion_timer": 0,
+          "qualification_count": 0,
+          "managed_request_count": 1,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 46,
+          "phase": 1,
+          "request": 2,
+          "phase_timer": 12,
+          "completion_timer": 12,
+          "qualification_count": 0,
+          "managed_request_count": 1,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 80,
+          "phase": 1,
+          "request": 3,
+          "phase_timer": 20,
+          "completion_timer": 20,
+          "qualification_count": 1,
+          "managed_request_count": 1,
+          "tcu_source915a": 224,
+          "can216": "02 07 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 7,
+          "at_correction": 4.0,
+          "traction_correction": 0.0,
+          "spark": [
+            22.0,
+            22.0,
+            22.0,
+            22.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 81,
+          "phase": 1,
+          "request": 4,
+          "phase_timer": 20,
+          "completion_timer": 20,
+          "qualification_count": 2,
+          "managed_request_count": 1,
+          "tcu_source915a": 224,
+          "can216": "02 07 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 7,
+          "at_correction": 4.0,
+          "traction_correction": 0.0,
+          "spark": [
+            22.0,
+            22.0,
+            22.0,
+            22.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 100,
+          "phase": 1,
+          "request": 5,
+          "phase_timer": 25,
+          "completion_timer": 25,
+          "qualification_count": 21,
+          "managed_request_count": 1,
+          "tcu_source915a": 224,
+          "can216": "02 07 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 7,
+          "at_correction": 4.0,
+          "traction_correction": 0.0,
+          "spark": [
+            22.0,
+            22.0,
+            22.0,
+            22.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 129,
+          "phase": 2,
+          "request": 5,
+          "phase_timer": 32,
+          "completion_timer": 0,
+          "qualification_count": 50,
+          "managed_request_count": 1,
+          "tcu_source915a": 704,
+          "can216": "02 16 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 22,
+          "at_correction": 1.5,
+          "traction_correction": 0.0,
+          "spark": [
+            24.5,
+            24.5,
+            24.5,
+            24.5
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 135,
+          "phase": 2,
+          "request": 0,
+          "phase_timer": 34,
+          "completion_timer": 2,
+          "qualification_count": 50,
+          "managed_request_count": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 158,
+          "phase": 3,
+          "request": 0,
+          "phase_timer": 40,
+          "completion_timer": 8,
+          "qualification_count": 50,
+          "managed_request_count": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 4,
+      "requested": 3,
+      "transition_code": 8,
+      "checkpoints": [
+        {
+          "primary_timer_calls": 0,
+          "phase": 0,
+          "request": 2,
+          "phase_timer": 0,
+          "completion_timer": 0,
+          "qualification_count": 0,
+          "managed_request_count": 1,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 22,
+          "phase": 1,
+          "request": 2,
+          "phase_timer": 6,
+          "completion_timer": 6,
+          "qualification_count": 0,
+          "managed_request_count": 1,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 80,
+          "phase": 1,
+          "request": 3,
+          "phase_timer": 20,
+          "completion_timer": 20,
+          "qualification_count": 1,
+          "managed_request_count": 1,
+          "tcu_source915a": 468,
+          "can216": "02 0e 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 14,
+          "at_correction": 3.25,
+          "traction_correction": 0.0,
+          "spark": [
+            22.75,
+            22.75,
+            22.75,
+            22.75
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 81,
+          "phase": 1,
+          "request": 5,
+          "phase_timer": 20,
+          "completion_timer": 20,
+          "qualification_count": 2,
+          "managed_request_count": 1,
+          "tcu_source915a": 468,
+          "can216": "02 0e 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 14,
+          "at_correction": 3.25,
+          "traction_correction": 0.0,
+          "spark": [
+            22.75,
+            22.75,
+            22.75,
+            22.75
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 109,
+          "phase": 2,
+          "request": 5,
+          "phase_timer": 27,
+          "completion_timer": 0,
+          "qualification_count": 30,
+          "managed_request_count": 1,
+          "tcu_source915a": 778,
+          "can216": "02 18 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 24,
+          "at_correction": 1.0,
+          "traction_correction": 0.0,
+          "spark": [
+            25.0,
+            25.0,
+            25.0,
+            25.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 111,
+          "phase": 2,
+          "request": 0,
+          "phase_timer": 28,
+          "completion_timer": 1,
+          "qualification_count": 30,
+          "managed_request_count": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 138,
+          "phase": 3,
+          "request": 0,
+          "phase_timer": 35,
+          "completion_timer": 8,
+          "qualification_count": 30,
+          "managed_request_count": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 5,
+      "requested": 4,
+      "transition_code": 9,
+      "checkpoints": [
+        {
+          "primary_timer_calls": 0,
+          "phase": 0,
+          "request": 2,
+          "phase_timer": 0,
+          "completion_timer": 0,
+          "qualification_count": 0,
+          "managed_request_count": 1,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 22,
+          "phase": 1,
+          "request": 2,
+          "phase_timer": 6,
+          "completion_timer": 6,
+          "qualification_count": 0,
+          "managed_request_count": 1,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 80,
+          "phase": 1,
+          "request": 3,
+          "phase_timer": 20,
+          "completion_timer": 20,
+          "qualification_count": 1,
+          "managed_request_count": 1,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 81,
+          "phase": 1,
+          "request": 5,
+          "phase_timer": 20,
+          "completion_timer": 20,
+          "qualification_count": 2,
+          "managed_request_count": 1,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 111,
+          "phase": 2,
+          "request": 5,
+          "phase_timer": 28,
+          "completion_timer": 0,
+          "qualification_count": 32,
+          "managed_request_count": 1,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 117,
+          "phase": 2,
+          "request": 0,
+          "phase_timer": 29,
+          "completion_timer": 1,
+          "qualification_count": 32,
+          "managed_request_count": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "primary_timer_calls": 142,
+          "phase": 3,
+          "request": 0,
+          "phase_timer": 36,
+          "completion_timer": 8,
+          "qualification_count": 32,
+          "managed_request_count": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "Original code with synthetic source/reference changes and interleaving. Phase completion is not ring retirement: other request groups are not initialized or acknowledged. Upward/overlapping/composite policy, source identities, units, actual task timebase, DSC and OEM PRHT reception remain open."
+}

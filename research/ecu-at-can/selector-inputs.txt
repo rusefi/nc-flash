@@ -1,0 +1,95 @@
+Selector input chain to CAN231 and paired ECU, 2026-10-05
+
+Static trace and original-code execution:
+TCU5F648 has30 input descriptors,12 bytes each. Channels0..3 use2/2
+assert/release thresholds, ADC-gate mask3, pointers5C530/538/540/548.
+Those point to16-bit hardware registerFFFFF778, bits2/3/4/5, polarity0.
+142F8/1432C treat a zero bit as asserted1. 17250 filters the input,
+173CE returns8818+5*channel, and174A0 copies channels0..8 into88B4..BC.
+22416 translates88B4..B7 to9314 bit0,9317 bit2,9314 bit1,9316 bit2.
+19414 emits low-nibble1/2/3/4 respectively,0 if none, F for multiple
+assertions or92CD bit6. ECU35BB8/3585C decode to6AD2/3/4/5.
+
+ECU411F0: if7002==1,723A=1; otherwise if734C==1,723A is the OR of
+6AD2==1 and6AD4==1 (CAN low-nibble1 or3); otherwise uses inverted44A4
+bit0. It copies723A to7244. Both are value/complement protected pairs.
+This is a strong park/neutral candidate, but physical labels remain
+interpretations, not verified wiring or PRHT protocol assignments.
+TCU22C9A and diagnostic getter555B0 likewise combine88B4 and88B6.
+555D8 packs88B7 to bit0 and88B5 to bit3. Static diagnostic table entries
+5E980/98C link these getters with identifiers1704/1709; service/semantic
+naming not yet proven. Do not label these diagnostic IDs from memory.
+
+ADC gate14368 readsFFFFF810 andFFFFF812 through14128 (u16>>6 &3FF).
+With mask3 it rejects if the counts are below375 or373 respectively,
+from5FCF4/6. 17250 then sets input status3, resets the transition counter
+and initialization marker, and retains the filtered state. This is not a
+complete diagnostic failure policy: code that promotes status3 to92CD or
+other fault outputs is outside the current executed chain.
+
+Source: Renesas SH-2E SH7055S hardware manual, Rev2.0 July2003,
+printed pages729-730, PDF pages768-769 (one-based), retrieved2026-10-05:
+https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual
+It identifiesFFFFF778 as Port K data register; bits2..5 correspond to
+PK2..PK5. Register-map agreement does not identify the exact physical MCU
+or connect its pins to TCM connector2K/2M/2N/2O. A preliminary search for
+Port F was rejected: FFFFF778 is Port K in this primary manual.
+
+Factory semantic reference, Mazda2008 SJ6A-EL PID/data monitor:
+https://www.ncmiata-servicemanual.com/src/g5w05/html/id050208805600.html
+PNP_TCM groups P/N versus D/M/R; TR reports four selector positions and
+GEAR_SEL reports calculated1..6. D monitor uses terminal2K, R uses2M.
+The four ordered firmware inputs suggest P/R/N/D, and class8080 becomes
+0 for inputs0/2,FF for input1,6 for input3 in synthetic startup states.
+Treat individual physical names as hypotheses until a connector-to-MCU
+mapping, diagnostic-ID definition or an observed capture corroborates them.
+https://www.ncmiata-servicemanual.com/src/g5w05/html/id051311251300.html
+The TR inspection independently specifies starting only in P/N and reverse
+lights in R; it does not establish binary fields or MCU input pin mapping.
+
+Execution uses read-only constant samples at exactly five peripheral word
+addresses: FFFFF778 (four active-low input bits), FFFFF810/812 (ADC500),
+FFFFF76C andFFFFF746 (zero for unrelated digital channels). This is a test
+fixture, not hardware emulation or a measurement. ROM and helpers are
+unchanged. Other peripheral accesses still fail; no instruction is skipped
+or replaced. Functions run in explicit order, not a full task scheduler.
+Absolute sample duration, complete diagnostics, physical motion and PRHT
+consumption remain unresolved. Full goals remain active.
+
+Verification: python research/ecu-at-can/verify_selector.py
+Saved selector-verification.json:256 four-bit transitions,9 ADC threshold
+boundaries,12 gate-failure/held-state/recovery lifecycles,32 selector/fault
+combinations and128 ECU override/config/local-input cases pass.120 independent
+MOV.B/W/L R0,@(disp,GBR) vectors verify the new integer-harness instructions.
+Each four-bit transition holds the old value on the first sampled change
+and reaches the new value on the second; this is a call-count result.
+All real helpers and full17250/174A0/22416/19414 bodies run. Paired ECU runs
+35BB8/3585C/411F0 after copying the actual eight-byte TCU output.
+
+Single asserted channel0/1/2/3 yields wire byte0 01/E2/03/14 in the
+explicit startup fixtures (8081 remains0). None asserted yields10, so the
+high nibble alone is not a reliable selector-validity check. Low nibble F
+clears all ECU selector flags and produces combined flag0 under normal gates.
+The two zero-class inputs are grouped by both modules, supporting the P/N
+hypothesis; it does not yet distinguish physical P from N.
+
+Next concrete trace: diagnostic consumers of88BD/input status3 and92CD bit6,
+and class/gear8081 origins. The high-nibble1..6 current-versus-target question
+remains. Diagnostic getters555B0 and555D8 have table IDs1704 and1709; resolve
+against a primary diagnostic specification if available. Connectors-to-PK
+wiring and independent CAN captures would settle physical input names.
+
+Next gear-source lead (static, not yet executed): scanning application words
+for C081 (MOV.B R0,@(129,GBR)) yields48BE8/48CCE/48CEC. Inspection confirms
+48BC0 initializes8081 from24532(selector13h). Function48C08 updates it from
+9C86 when9C8A bit0 and48174 result1 allow, saves old8081 to9C80, and clamps
+8081 to5. It copies9C86 to8085 at the end. Continue488F4,47B3C,4740C,4744C,
+48174 and49260 to distinguish committed versus requested gear. Byte0 upper
+nibble uses8081; these writes are not proof of actual mechanical gear.
+
+Final persistence check: all nine earlier verifier outputs match saved JSON
+with the shared interpreter extension. Ghidra has181 verified annotations
+(89 ECU/92 TCU); independent archive restore matches120 export/report files.
+Working-tree whitespace checks pass. New records are Git-eligible. Index
+contains older staged work and was left untouched; no commit/push, firmware
+patch, application change or physical hardware test was performed.

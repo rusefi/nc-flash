@@ -1,0 +1,24 @@
+{
+  "scope": "TCU CAN201 copy and complete application dispatch with payload read audit.\n\nCopy slice begins after filter matching and ends before controller ack.\nAbsence of speed-byte reads applies only to these executed callback paths.\nNo claim of global non-use, physical units, scheduler or hardware behavior.",
+  "copy_mode_dlc_irq_cases": 432,
+  "accepted_copy_cases": 72,
+  "audited_dispatch_cases": 1225,
+  "payload_read_sites": [
+    {
+      "pc": "0x17078",
+      "byte_offset": 6
+    },
+    {
+      "pc": "0x1c8a0",
+      "byte_offset": 0
+    },
+    {
+      "pc": "0x1c8aa",
+      "byte_offset": 1
+    }
+  ],
+  "word0": "floor(raw/4);FFFF holds old numeric value, validity1; valid=2",
+  "byte6": "raw*5;FF holds old numeric value, validity1; valid=2",
+  "speed_bytes4_5_reads_in_audited_dispatch": 0,
+  "limits": "Full callback for listed fixtures only; other tasks/computed consumers and vehicle meaning remain open."
+}

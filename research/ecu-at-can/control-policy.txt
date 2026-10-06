@@ -1,0 +1,145 @@
+Follow-up: control-admission.txt verifies24910/566E and24E06/567A producers,
+including paired serial fault effects. Earlier input/timer producers and
+complete task/recovery consumers remain open.
+
+ECU serial feedback override and missing-feedback admission, 2026-10-06
+====================================================================
+Reproduce: python research/ecu-at-can/verify_control_policy.py
+Evidence: control-policy-verification.json; original ROM hashes are recorded
+there. 810 override cases, 18 protected-default cases, 972 full admission/
+monitor cases and 224 SHLL16 vectors pass. Eight paired TCU/CAN/serial/control
+checkpoints, 30 transport-produced loss/recovery calls, an explicit reset and
+251 subsequent enabled monitor calls also pass. No ROM modification.
+
+This extends control-reply.txt and throttle-candidate.txt. It executes original
+firmware bodies; local enables, mode word, replies and call schedule are
+fixtures. Full scheduler, remote controller and physical actuation are open.
+Previous and current goal turns made verified progress; no repeated blocker.
+
+Feedback-driven override: full 21D18
+-----------------------------------
+FFFF prefixes below identify ECU RAM. R(x) is round-toward-zero binary32.
+Input C is protected closed value 2114 read with 15246, falling back to stock
+BADD8=10.5 on invalid checksums. F is feedback 5534, A is candidate angle569C,
+M is byte566E, P is previous mode552C, O is protected output5520.
+The 154BC reads of F and O do not validate their protected checksums here.
+
+High threshold H=R(C+BB188); low threshold L=R(H-BB18C).
+552D becomes1 when F>=H, becomes0 when F<L, otherwise retains its value.
+Stock BB188=.5 and BB18C=0 make both thresholds equal: this stock image has
+no nonzero hysteresis band. Equality takes the high branch.
+
+If M!=1: O=0 and both counters5528/552A clear.
+If M==1 and P==0 (entry):
+  I=R(C+BB17C), stock BB17C=.5.
+  O=I when F>=I; otherwise O=min(L,R(A+C)).
+  Both counters retain their previous values on this entry path.
+If M==1 and P!=0 (retained mode):
+  Select counter5528 when 552D==1, otherwise552A.
+  If its OLD value>=its stock threshold2, subtract a rounded step from O
+  and clear that counter, then increment it. Clear the opposite counter.
+  Both step constants BB184/BB190 are binary32 approximately .05.
+  O=max(stock BB180=5, resulting O).
+Finally 15522 writes O with both checksum words, and 552C=M.
+
+With zero entry counters, the third retained-mode call makes the first
+reduction; reductions then occur every two calls while that side persists.
+Switching threshold sides resets the opposite counter. These are calls, not
+milliseconds. Entry has no floor5; that floor applies to the retained branch.
+A non-Boolean previous mode also counts as retained, but only current M==1
+admits this override. Tests cover mode/history0/1/2, equality, floor, timing
+edges and high-bit counter values, plus protected closed-value fallback.
+
+Previously verified25682 selects5520 only when566C!=1 and566E==1, then clamps
+it to0..protected2124. That priority matters: this is not the unconditional
+normal traction command. The separate candidate569C still derives from CAN
+arbitration in the paired tests. We do not identify566E's complete producer
+policy or assign this mode a physical safety/limp function yet.
+
+Full missing-feedback admission: 285A4 ->285AE ->285F0
+----------------------------------------------------
+285AE calls9A244 with indexB4. Stock mask atE1E00 is00800000, so only bit23 of
+the computed high-word policy contributes; the global9CD8 low-word mask is0.
+Original9A2D0 calls all constituent helpers. Its bit23 is9A43A's result.
+9A43A checks two bytes of91728's mode source99D8 against stock AC2B0=8000,
+returning1 when NO bit matches. Therefore the inhibitor is set unless
+99D8bit15 is set. All helper bodies execute, with no high-level substitution.
+
+57CC = (99D8 bit15 set) AND (567A exactly1) AND (protected20A8 reads zero).
+15146 reads20A8 with default0, so an invalid value/complement also appears
+clear to admission. Tests cover valid0/1/2, corrupt complements, local
+567A0/1/2, reset9462 and receipt5578 values0/1/2, and mode bit boundaries.
+An invalid record being admitted is an observed local reader behavior, not a
+claim that corruption is safe or undetected elsewhere.
+
+285A4 runs admission BEFORE285F0. With mode8000,567A1 and fault initially0,
+27 actual SCI1 replies with valid transport checksums but bad application
+complements give:
+ call25: gate1, bad counter25, fault0;
+ call26: gate1, bad counter26, fault1;
+ call27: gate0, both counters0, fault1.
+Calls28..30 use accepted replies. Feedback refreshes, but gate stays0 and
+both counters remain0. Thus valid replies alone cannot reach57CD's recovery
+threshold while this fault continues inhibiting admission.
+
+Original28552 clears protected20A8 to00FF. The next call admits monitoring
+again with unchanged local mode/gate inputs. Holding the last accepted5578=1,
+251 subsequent enabled MONITOR calls from good counter0 set57CD on call251
+(old counter250), with fault0. These are not 251 newly received replies: the
+fixture deliberately retains5578 between monitor calls. The task-rate/receipt
+ratio is unresolved. The explicit clear entry's actual caller/admission and
+57CD consumers remain open, so this is not automatic vehicle recovery proof.
+Reset9462==1 also clears monitor state in the tested full wrapper, but gate57CC
+is still computed before that reset: its value reflects the pre-reset fault.
+
+Paired original TCU/ECU execution
+--------------------------------
+Eight checkpoints execute real TCU216/218 packers, ECU receipt and fullA477E,
+publication, angle conversion,21D18 and25682, alongside originalSCI1 callbacks
+and22224 application service. Reply word4=400 decodes to12.20703125.
+The service sends the previous selected command before the test computes the
+following selection. We independently check this next-cycle outgoing word
+with the stock round-and-clamp quantizer. Synthetic replies, local566E enable
+and chosen call order remain explicit fixtures.
+
+With566E off, selected values are17.6359158/17.3541832 as the shared request
+changes. With566E1, selection is11 initially, holds11 through two rejected
+replies, and then decreases to10.9499998. Releasing566E restores the normal
+candidate. This connects retained received feedback to subsequent outgoing
+commands without identifying or emulating a physical remote throttle unit.
+
+Harness / corrected probe
+-------------------------
+ControlPolicy extends ControlApplication only with SHLL16, already modeled in
+sh_integer_arithmetic.py for TCU work. It changes no shared interpreter or
+prior verifier. 224 vectors cover all registers, high-bit truncation and SR/T
+preservation. Initial full-gate probing rejected opcode4228 at9A396; this
+bounded extension lets the original policy execute without a helper stub.
+The first integrated assertion omitted the existing packer's +.5 rounding;
+it was corrected to its established rounded/clamped quantizer. Firmware and
+prior tests were unchanged. The final complete verifier passes.
+
+Next concrete actions / full scope
+----------------------------------
+Static full24910..24B80 writes566E from252C4's result at24B50 after other priority
+helpers.252C4 reads stack arguments plus2138/2110,568C/D/E,5628/29,5354 and
+calibration gates. Full24910 and its caller must be modeled before assigning
+this override's admission or purpose.246E8 instead prepares565C for the higher
+priority566C path; it is not the566E producer.21954 calls21D18 between246E8
+and23A24;
+21970 later calls25682. We execute selected bodies, not the whole task.
+567A is produced around24E94 under local thresholds/timers; that producer is
+still unmodeled.57CD users include2436C,736C6,73DD6;20A8 has many additional
+consumers. Trace these,28552's caller and2BE4A/21E8C before claiming a complete
+feedback/fault lifecycle. Keep A720 history/binding CAN limits as a priority.
+
+All original goals remain: comprehensive ECU/AT CAN behavior using both bins;
+TCU task/capture timing, group7/overlap/composite/2->1 fault lifecycles; deep
+traction sender attribution,7978 consumers,fuel and physical output paths;
+OEM PRHT fold AND unfold reception, pause/resume, reversal, timeouts, motor
+synchronization and recovery. Roof progress/status is separate in
+traction-roof.txt and CHECKPOINT.txt; no OEM fold/unfold CAN command proved.
+
+Saved locally in Git-eligible files. Ghidra annotations and closed project
+archive are refreshed with independent restoration recorded in CHECKPOINT.txt.
+No staging, commit or push.

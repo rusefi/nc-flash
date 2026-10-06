@@ -1,0 +1,106 @@
+Selector missing-input countdown and recovery
+Evidence checkpoint: 2026-10-05
+
+Reproduction: python research/ecu-at-can/verify_selector_recovery.py
+Saved output: selector-recovery-verification.json. Unchanged ECU/TCU images,
+SHA256-pinned in the verifier. Extends selector-faults.txt, without changing
+the instruction interpreter, firmware, application, or physical hardware.
+
+MISSING-INPUT PATH: ACTUAL TIMER EXECUTION
+
+Full function11AEC executes four ROM-defined ranges from76D24..76D40:
+  8410..8411 byte increment;8414..841C word increment;
+  841C..841D byte countdown;8420..844E word countdown (exclusive ends).
+All addresses here are low16 bits of FFFFxxxx RAM. Word countdown includes
+843E and8440. Initializer5853C sets both toFFFF, the inactive sentinel.
+
+The verifier runs the entire11AEC body30000 times. Constant fixtures:
+no asserted input88B4..B7, enableA938=1,inhibitA735=0,raw80BA=300,
+mapped dependencyA962 bit0=1. Diagnostic producer58548, processor56908(16),
+healthy updater57F50 and publication run at service-call checkpoints:
+
+  calls      843E   8440   rawA74C  activeA702  A964  CAN231 byte0
+      0      2000   FFFF      01       00       01       10
+   1999         1   FFFF      01       00       01       10
+   2000         0  28000      03       02       0A       10
+  29999         0      1      03       02       0A       10
+  30000         0      0      07       04       1C       FF
+
+Synthetic84D0 equals service-call count only in this explicit test schedule.
+Real scheduler frequency/relative task phase and physical units are not
+established. Producer calls between checkpoints are omitted; the constant
+input fixture preserves the tested branch. No elapsed timer is bulk-skipped.
+The ECU's real unpack/normalizer/combined-state path runs at each checkpoint.
+ECU723A is0 throughout: low nibble0 and invalidF do not match codes1/3.
+
+ACTIVE FAULT VERSUS CONFIRMED DIAGNOSTIC REPORT
+
+At30000 calls group16 is active and CAN231 byte0=FF, but A99B remains0 and
+558CC emits no confirmed-list entry with initially zero diagnostic history.
+Internal list6188 DOES contain group16, and history61D3+2*16 becomes50.
+Therefore an empty serialized list is not absence of an active selector fault.
+
+Two independent history fixtures execute producer/qualification/publication:
+  initial history00 -> active fault, FF on231, no confirmed code, A99B=0;
+  initial history20 -> active fault, FF on231, serialized07 08 FF, A99B=1.
+578E0 tests existing history01 or record flags02 plus flags80/history20;
+group16 record flags07 lack the first-failure80 bit present in group15'sC7.
+57964 sets confirmed history01 and A99B under the report flag. The new test
+seeds20 explicitly; it does not simulate two drive cycles, ignition/reset,
+nonvolatile storage or the task that promotes history to20. Trace those next.
+
+RECOVERY DEPENDS ON THE SELECTED INPUT
+
+64 cases start from copies of states actually qualified by the original
+code: groups15/16 x single-input masks1/2/4/8 x88BA0/1 x88BC0/1 x80A40/1.
+Each runs at three synthetic ticks31000,31001,61001. Expected outcome:
+
+  Input3 alone,88BA=88BC=0: first producer publishes raw81;5662A sets
+  active bit80; processor566E0 or56908 clears active fault. SummaryA964=11
+  retains history,92CD fault bits clear, CAN231 byte0=14. The next call's
+  raw status returns1. This recovery is immediate at the tested task calls.
+
+  Input0,1,2 alone, or input3 with either extra input set: active fault
+  remains at all three checkpoints. Group15 flags44 include recovery-wait
+  bit40; group16 flags04. A964=1C and CAN231 byte0 staysFF. This demonstrates
+  retention on these isolated paths, not an unconditional never-recover claim.
+
+Both groups' record+6=10 does not require80A4==0 for recovery (unlike the
+previous group36 CAN-loss path). The two80A4 fixtures give the same outcome.
+Timers843E/8440 resetFFFF when valid single input returns. Group15's stored
+0707/A99B=1 persist through recovery; group16 with fresh history still has
+no confirmed-list output/A99B=0. All cases execute paired ECU normalization;
+combined723A remains0 for both invalidF and recovered input3/code4.
+
+58548 calls58688 for this special input combination. This is a software
+input identity; physical D/P/N/R assignment and MCU-to-connector conditioning
+are still unproven. Do not infer that switching physical gear clears a live
+vehicle fault from this synthetic test alone.
+
+DEPENDENCY SUMMARY NOW TRACED
+
+ROM5EB86+16*g maps only group13 to summary index0A ->A962. Its record code
+is0722. Four executed fixtures set group13 active flags0/2/4/6, run real570F6
+then58548, and get A962=01/0A/0C/0E respectively. Only activeflags0 permits
+the no-input timer to arm at2000 and rawgroup16 status1; other cases produce
+raw0 and both timersFFFF. Group13's own producer and physical source remain
+unexecuted. The factory DTC table linked in selector-faults.txt is a semantic
+cross-check; code correlation alone is not a fully traced speed-sensor chain.
+
+CONTINUATION / BROADER SCOPE
+
+Concrete next work: trace group13/code0722 source and raw80BA provenance;
+establish timer scheduling; follow history20 promotion and reset persistence.
+GlobalA938/A735 and ADC-failure integration are still open. Roof research
+needs actual PRHT consumption/captures/firmware to identify its response to
+these selector statuses; no roof command or permission byte is proved here.
+Traction/DSC sender attribution and full actuator/arbitration logic remain
+active in traction-roof.txt and can211-spark.txt. This turn adds concrete
+executable evidence; it does not complete the overall investigation.
+
+New static provenance lead (not executed by this verifier): aligned opcode
+C15D (MOV.W R0,@(186,GBR)) occurs at50F48. Function50F26 reads u16[932C]
+and u16[932E], multiplies each by10, shifts right8 and stores80A4/80BA
+respectively. It also copiesA4FA toA4FC. Thus80BA is a scaled application
+value; follow932E producers before calling it vehicle speed. This scan does
+not exclude computed pointer writers. Continue from original50F26..50F66.

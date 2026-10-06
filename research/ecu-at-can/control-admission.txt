@@ -1,0 +1,149 @@
+Follow-up: control-timers.txt executes247B6/24B82/24BAE and536Cfilter,
+replacing timer/enable fixtures in retainedserialscenarios. It also isolates
+5354 sideeffects frominvalidprotectedfixture records;fullinitializationopen.
+
+Stock ECU command priority and local feedback admission, 2026-10-06
+================================================================
+Reproduce: python research/ecu-at-can/verify_control_admission.py
+Evidence: control-admission-verification.json, original ECU/TCU hashes there.
+486 priority cases also run21D18/25682;1800 varied cases,384 threshold cases,
+521 conditional feedback cases and1800 local-gate cases pass (4991 direct
+cases). Six retained-priority checkpoints,126 countdown calls and32 paired
+TCU/CAN/serial/ECU checkpoints
+plus explicit fault clear pass. No ROM or shared interpreter changes.
+
+This extends control-policy.txt. Full24910 and all helpers execute under
+stock calibration. Independent formulas check all five threshold states,
+priority outputs, retained tag and helper reachability. Original24C88,24DCE
+and24E06 execute in their observed order. Local upstream values and the task
+schedule remain fixtures; this is not a physical remote-controller model.
+Previous and current goal turns made verified progress. All goals remain open.
+
+Dispatcher24910: threshold state before priority
+------------------------------------------------
+All RAM addresses below have FFFF prefix. Let X=536C, Y=6D20, Z=6DB4.
+Hysteresis sets1 at or above the upper threshold, clears0 strictly below the
+lower threshold, and retains its old value between (including lower equality):
+ RAM    source  upper   lower    stock calibration
+ 568A   X       10      9.5      BAE70/74
+ 568B   X       6.5     6        BAE8C/88
+ 568C   Z       300     200      BAE80/84
+ 568D   Y       100     98       BAE78 and literal24A18=-2
+ 568E   Y       100     98       BAE7C and literal24A18=-2
+All update before bypass or priority evaluation. Non-Boolean old values can
+persist inside a band; tests check exact1 versus nonzero behavior downstream.
+Physical meanings of these inputs are not inferred from these thresholds.
+
+Define M=722A, C=word5664, D=word5666, R=93C3, status flags92CB/932A.
+The verifier's internal name "remote" refers to this pair only; their source
+and physical meaning are unassigned.
+Protected byte reads use value/complement15146; default0, except2110 default1.
+A corrupt protected record therefore follows that specific reader default.
+
+251B4 bypass is true if ANY:
+- old566E==0 and R==0 and either status flag is exactly1;
+- M==0 and C>1875 (stock BAE4A);
+- 5633==1;
+- 6642==0 and6643==0 and protected213A==0.
+Bypass publishes566B=1 and clears all four priority flags and5674. This does
+not itself disable numeric command output:25682 falls back to normal candidate
+when no priority flag is exactly1. The old566E read creates retained policy.
+
+Without bypass, helpers run in order and stop at the first nonzero result:
+1.25242 ->566C. Stock BAE40=1 makes this branch ALWAYS0. No alternate-ROM
+  behavior claim is made; it still executes when reached.
+2.252C4 ->566E (feedback override). Requires568A==1,5677==1 and20A8==0.
+  It then admits either:
+  a) M==0,C<625,566A==1,2136==0 and568C==0. Sets retained tag5675=0.
+  b) M==1,D<625, plus the following conditional restrictions. If ANY of
+     2138,5628,5629,5354 is nonzero, also require(568D==0 OR568E==1),
+     2134==0,2110==1 and568C==0. With all four zero, these extra restrictions
+     are skipped. Sets5675=1. Stock BAE41=BAE42=0.
+  Rejection does not clear5675; skipped helper also leaves it unchanged.
+3.2543A ->5670 (relative override). With stock BAE43=1, requires568B==1,
+  M==0, and either both status flags zero or R==1. Also requires
+  (2136==1 AND566A==1) OR C>=625. A separate M==1 branch is disabled by stock
+  BAE43. Note625 boundary differs from1875 bypass and from D<625 above.
+4.25512 ->5672: raw byte5635, including non-Boolean values. Any nonzero
+  stops dispatcher and leaves5674=0, but25682 recognizes only EXACT1 as
+  an absolute override. Thus raw2 suppresses5674 while numeric selection can
+  still take normal candidate. Dispatch result is not sufficient to name
+  the numeric selection;486 cases check both.
+If all four helpers return0,5674=1. All other priority flags are reset each
+call, not accumulated. These are stock predicates, not safety-mode labels.
+
+Retained test: same status input can have different admission
+-----------------------------------------------------------
+A six-call sequence yields feedback,feedback,normal,bypass,feedback,feedback.
+The second call introduces92CB=1 while prior566E=1, so that bypass term does
+not fire. Fault20A8 then rejects feedback; subsequent old566E=0 with92CB=1
+triggers bypass. Clearing that status flag admits feedback again. This uses
+actual24910 outputs across calls, not re-injected566E fixtures.
+
+Local source of5677 and567A:24C88 ->24DCE ->24E06
+------------------------------------------------
+24C88 uses word5668 as a counter. Stock BAE44=1 gives567F=(counter<=37).
+568F is hysteresis(X,6.5,6);5690 is hysteresis(reply5550,6.5,6).
+5677=5676 exactly1 AND(counter<=37 OR50<=counter<125)
+     AND568F exactly1 AND5690 exactly1.
+Thus38..49 and125+ are excluded in stock, not one continuous timeout range.
+
+24DCE reloads timer5680=125 when X<6 and6600 exactly1; otherwise decrements
+nonzero timer by1. X==6 does not reload.24E06 then computes, under stock
+BAE45=BAE46=0,BAE5E=0 andDCE1D..1F all0:
+ 5678 = X>=6.5;
+ 5679 = M==1 AND5677==1;
+ 567A = X>=6.5 AND updated timer5680==0;
+ 567B = X>=6.5.
+126-call test: first reload, then125 countdown calls at X=11.567A remains0
+through updated timer1, becomes1 on the call that reaches0. All units are
+calls; physical duration and complete scheduler rates remain unresolved.
+This replaces the previously forced567A fixture in the new paired lifecycle.
+
+Paired fault effect, original TCU and ECU bodies
+-----------------------------------------------
+32 checkpoints execute TCU216/218 packers, ECU receipt/fullA477E, publication,
+angle conversion,24910/local gates,21D18 and25682; originalSCI1 callbacks and
+22224 process each synthetic reply and start the next command. The test checks
+all40 transmitted bytes and the next outgoing quantized command against the
+previous selected value. No direct566E,5677 or567A writes occur in this loop:
+5677/567A are primed by original local-gate bodies before its first call.
+
+Reply word4=400 yields5534=12.20703125; reply byte14=128 yields5550=10 via the
+original decoder. First reply is accepted, next27 have valid transport checksum
+but invalid application complement, final4 are accepted. Calls alternate the
+shared CAN request input. Local M=0,566A=1,5676=1,6642=1 and mode99D8=8000 are
+fixtures.5664/5668 remain zero; upstream timer tasks are not yet executed.
+
+At call26, loss counter25 and fault0 still permit feedback override, selected
+command10.3999977. Call27 is the26th missing-feedback call:20A8 becomes1 and
+24910 rejects feedback. With other priority branches unselected, normal shared
+candidate returns (13.6827154/13.4682951 in this fixture). At call28 the monitor
+gate closes; later accepted replies leave fault1 and normal selection. Original
+28552 explicit clear permits feedback selection again. This LOCAL fallback is
+not a claim that the vehicle opens its throttle after a fault: other tasks,
+fault reactions, output inhibition and the physical receiver are unmodeled.
+
+Static task order and next action
+---------------------------------
+218D0 calls24910;218D6 calls24B82;218DC calls24BAE;218E2 calls24C88;
+218E8 calls24DCE;218EE calls24E06. Thus24910 consumes prior5677; the later
+local-gate bodies produce the next value.21954 later calls21D18,21970 calls
+25682. Our selected-body sequence preserves this relative order, but does not
+execute every intervening function or the full task.247B6 earlier at2188A
+produces5664/5666 counters;24B82/24BAE may change subsequent gating.
+Next execute these producers with full retained task order, trace5676/566A,
+20A8 reset admission and57CD recovery consumers2436C/736C6/73DD6. Then preserve
+2BE4A/21E8C service scheduling, A720 history and binding CAN-limit lifecycles.
+
+A test-fixture correction: decimal boundary inputs5.99/6.49 etc initially
+failed the exact-value writer before firmware execution; explicit RTZbinary32
+conversion now supplies representable inputs. No interpreter/firmware change.
+Final complete verifier passes. Ghidra annotations/exports and full closed
+project are persisted and independently restored per CHECKPOINT.txt.
+
+All original scope remains: ECU/AT CAN with actual binaries; TCU full task/
+capture timing,group7/overlap/composite/2->1; deep traction sender attribution,
+7978/fuel/physical outputs; OEM roof fold/unfold reception, pause/resume,
+reversal,timeouts,motor synchronization and recovery. Roof evidence and next
+steps remain separately in traction-roof.txt/CHECKPOINT.txt. No commit or push.

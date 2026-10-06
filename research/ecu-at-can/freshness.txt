@@ -1,0 +1,170 @@
+ECU/TCU receipt faults and CAN211 control gates
+Evidence checkpoint: 2026-10-05
+
+RESULT AND LIMITS
+
+Original-code execution now establishes a TCU receive-deadline path and the
+ECU CAN211 inhibition/recovery gates. verify_freshness.py reproduces the saved
+freshness-verification.json. ROM identities match README.txt; no ROM patching,
+CAN hardware, complete scheduler or vehicle simulation is involved.
+
+The prior turn was progress: it saved CAN211 tests, factory roof evidence and
+a verified Ghidra snapshot. This turn follows the open receipt/gate traces.
+The comprehensive ECU/AT, traction and roof objectives remain incomplete.
+
+TCU: APPLICATION RECEIPT TO DEADLINE AND FAULT BITMAP
+
+All addresses in this section refer to LFG1TF000.bin. RAM has FFFF prefix;
+ROM values/addresses are hexadecimal except explicitly decimal tick counts.
+
+Admission1BF38 accepts application indices0..9 only when8F6C has bit04 or08
+set; it then sets pending byte8F71. Diagnostic indices10/11 are accepted
+without that application gate and do not set8F71. Tested48 combinations.
+
+The RX path1B768 sets a receipt bit at8F4E plus ROM5C950[index], using mask
+5C95C[index]. Offsets are0 for indices0..7 and1 for8..9; masks are successive
+bits. The controller ISR itself has not been emulated.
+
+Dispatcher1BD10 requires8F71!=0, clears it, checks8F6C bits0C, consumes each
+pending bit, and calls table5CA10[index]. This is dispatch, not a timeout.
+CAN211 logical index7 invokes1C242: sets0C in both8F87 and8F8D, then1ACEC.
+The complete211 callback executes in the harness. Other callbacks include
+conversion helpers not yet executable in the integer subset; do not claim
+all ten payload-processing callbacks have run end-to-end.
+
+Receive watchdog19AF0 requires8F6C bit08. For each monitored record, it calls
+1C018 with a field number. That helper reads and clears one bit from8F82,
+using offset table5C9A0 and mask table5C9CF. On receipt, watchdog19AF0 calls
+19D44(record,slot0) to refresh the deadline, then19DC0(record) for recovery.
+With no receipt, it calls19E10(record), which checks expiry via19D04.
+
+TCU table5C610 has eighteen28-byte records, distinct from hardware mailbox
+indices and the logical receive-copy indices. Record+0 is ID; +8 and+10 are
+two u16 intervals; +13 is a classification byte. Both interval slots are
+executed, but receive watchdog19AF0 specifically uses slot0.
+
+ID    Table index  Watched field  Slot0 interval (decimal ticks)  Class
+200       0            46                     10                   0
+201       1            44                     10                   0
+211       2            43                     10                   1
+215       3            31                     10                   0
+240       7            24                    100                   0
+420       8            23                    100                   0
+430       9            22                    100                   2
+4B0      10            18                     10                   1
+4EC      12             6                     25                   0
+4F1      13             0                   1000                   0
+
+19D44 stores tick84D0 + interval at8B38 + 8*record + 4*slot.
+19D04 returns1 for unsigned current_tick >= stored_deadline, including
+equality. Boundary tests cover18 records x2 slots x3 times =108 checks.
+No conversion from ticks to milliseconds is established. The direct unsigned
+comparison has not been assessed against the global tick-reset/wrap policy.
+
+On expiry19E10 refreshes the deadline and invokes1A454 with action7,6,5 for
+classes0,1,2 respectively. 1A454 routes to1A598 action15 and group36,37,38;
+that branch ORs 1<<record into shared word8EE2. This is a software fault
+bitmap, not by itself a final DTC, transmission fallback or torque action.
+
+On receipt19DC0 performs recovery only while byte868C!=0. It chooses actions
+4,3,2 by class, reaching1A598 action14. That clears the corresponding8EE2
+bit and resets additional per-record diagnostic state. If868C==0, receipt
+still refreshes its deadline, but this path preserves the fault bit.
+Static initialization trace:15574 clears868C at15582 and sets it1 at15710
+after initialization, alongside868D. This supports an initialization gate;
+the initialization routine itself is not emulated. MOV.W sign-extended
+literal references at15578/1570C/19DC8 locate these accesses; searching only
+32-bit address literals misses them. Later DTC qualification remains open.
+
+All ten monitored records were exercised at receipt, one tick before expiry,
+exact expiry and subsequent receipt, with recovery gate0 and1:20 lifecycles.
+For211, admission -> receipt dispatch -> watchdog -> expiry -> recovery was
+also executed, using real helpers and only a synthetic ISR receipt bit:
+  tick100 receipt: deadline110, bitmap0000
+  tick109 no receipt: deadline110, bitmap0000
+  tick110 no receipt: deadline120, bitmap0004
+  tick111 receipt: deadline121, bitmap0000 (868C=1).
+
+Failed lead corrected:1BDDC/1BE94 and8F6D..8F79 handle transmission completion
+and retransmission scheduling. Their table5C988 maps1..4 to TCU transmit
+indices4C1/231/218/216. They are not receive-frame freshness counters.
+1C0CE clears pending application receipt bits, not the watchdog deadlines.
+
+ECU: CAN211 INHIBITION, RAMP AND ACTIVE LATCH
+
+All addresses in this section refer to LFFEEE-stock.bin. It supplements the
+wire decode and initial numeric tests in traction-roof.txt.
+
+3FB78 computes7191:
+  config734E==0: inhibit iff69E1==1.
+  config734E==1: inhibit iff7265==1 OR7266==1.
+  other config values:0.
+This is executed for24 combinations including configuration2. Full stock
+initializer42728 was also executed in six cases:9708 values0/31/FF crossed
+with9710 values0/1. Stock B8298=0 yields734E=0; B8299=FF selects9710 for
+7353, the receipt-fault monitor configuration. Thus the stock ROM alone
+does not force7353=1. Its runtime option meaning remains unresolved.
+
+3FC58 computes7190. It sets1 if any byte in
+  A3A4,8F4B,8EF8,8F30,6DFB,8FB6,8EC6,8CF4 equals1,
+or protected byteA38C is greater than0,
+or either float6A38/6A3C is greater than65536; otherwise0.
+All2048 Boolean combinations across the nine byte/two float gates pass.
+Individual byte identities are not yet assigned physical names. In
+particular, do not identify one as DSC OFF just from this function.
+
+3FCFC updates ramp latch718E:
+  if old714C>65535: clear0;
+  else if protected active718C==1 and(7190==1 OR7191==1): set1;
+  else retain prior value.
+Executed64 combinations including65535/65536/65537 boundaries.
+
+3FDCA updates active latch718C under stockC11E9=0:
+  set1 when7140 - protected7258*protected7154 > protected714C,
+    provided7346,7191,7190,718F are all0;
+  also set1 when718E==1;
+  otherwise clear0 if(8EF9==0 &&8EFA==0) OR8EF8==1;
+  otherwise preserve old718C.
+It separately sets7192 if72DC==1 OR7190==1. Executed2048 combinations with
+exact integer-valued floats; this does not cover non-finite FPU behavior.
+
+The ECU task sequence at19AA0..19AEA calls3FB78,3FC58,3FCFC before3FF2C,
+then3F97C and3FDCA. Other model calculations occur between these calls.
+The harness preserves the relative gate/ramp/numeric order but explicitly
+seeds inputs of those intervening calculations; it is not the whole task.
+
+Two expiry examples now include actual receipt monitor347B8 and inhibit gate
+3FB78 with734E=0, permitted local gates and old714C=500:
+  inactive718C=0 ->7191=1,718E=0 ->numeric714C=65537;
+  active718C=1 ->7191=1,718E=1 ->numeric714C=516 (7140=1000).
+Thus the prior55535 result was correctly limited to holding numeric gates
+at zero. The propagated fault can select an inactive sentinel or a ramp.
+Do not generalize these examples into full physical torque or fault safety
+claims; upstream states, arbitration consumers and actuator endpoints remain.
+
+HARNESS AND REPRODUCTION
+
+sh_subset.py now implements MULU.W and MACL push/pop/read instructions needed
+by the original TCU record indexing. Sixteen independent instruction vectors
+check unsigned low-word multiplication plus MACL/SR/stack preservation.
+Unsupported arithmetic still raises; no divider or peripheral was mocked.
+
+Run python research/ecu-at-can/verify_freshness.py. Saved JSON includes table
+records, counts, fault bitmap lifecycles and ECU examples. Existing import,
+bridge, actuation and network verifiers must remain unchanged in their output
+after this interpreter extension. Excerpts are regenerated by disassemble.py.
+
+NEXT EVIDENCE
+
+Follow-up diagnostics.txt establishes the two qualification timers, including
+table+22 durations500/2000/5000 and stock211 exclusions.8EE2 is not an input
+to action1 qualification; receipt recovery resets both paths. It also traces
+ECU9710 to8F320 and records the peripheral boundary inA1638. Continue final
+TCU DTC/fallback consumers,7190 physical gates and714C engine arbitration.
+Keep traction sender attribution and roof signal mappings as separate open
+requirements in traction-roof.txt; neither is established by this test alone.
+
+Further progress: can211-spark.txt / verify_can211_spark.py now trace714C
+through3F97C/3FA3E and gated spark correction to four cylinder values.
+Twenty complete synthetic examples pass; physical wire units/sender and
+ignition timers remain open. See that record for factor-source corrections.

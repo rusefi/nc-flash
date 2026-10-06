@@ -1,0 +1,128 @@
+TCU HCAN recovery, diagnostic group35 and CAN201/cut policy
+Evidence checkpoint: 2026-10-05
+
+Follow-up: can201-invalid.txt now executes the group3A producer,500-tick
+qualification and healthy recovery. Earlier open3A statements below are historical.
+
+This continues can201-fault-policy.txt using the same unchanged ECU/TCU
+images and SHA256-checked imports. Addresses are hex; counts/ticks decimal.
+Original TCU instructions execute with explicit MCR/GSR register samples;
+ECU command evaluation uses the existing admitted fixture per checkpoint.
+No ROM/application patches, hardware traffic or physical-time measurement.
+
+Register attribution (external source)
+--------------------------------------
+Renesas SH-2E SH7055S hardware manual, Rev2.00 July2003, sections16.2.1/2,
+printed527-529 (PDF566-568), AppendixA printed909 (PDF948), accessed2026-10-05:
+https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual
+The map places MCR at FFFFE400 and GSR at FFFFE401. MCR bits0/1 request
+reset/halt. GSR bits0/1/3 indicate bus off, an error warning, and configuration
+state. The executable's big-endian word read combines these two bytes.
+This is consistent with the previously established SH7055-family map, not
+proof of an exact chip variant. Register status is supplied in the verifier;
+hardware transitions and CAN error-counter evolution are not simulated.
+
+Original-code evidence
+----------------------
+1B3E8 error-handler body tests GSR mask01. When asserted it calls1AC7A,
+which disables application communication flags via1B99C/1BCA8/1BCBE,
+calls199E0(1) to set MCR halt request, and sets8BCF=1. The body then writes
+6000 to the IRR word atFFFFE412. Verification stops before RTE at1B422:
+the interrupt entry/return machinery is neither implemented nor bypassed
+inside a claimed full interrupt simulation. Saved registers/stack are checked.
+
+Helper mappings, verified across128 MCR/GSR combinations:
+  19A14 -> MCR mask02 (word mask0200);19A30 -> GSR mask08;
+  19A62 -> GSR mask01;19A80 -> GSR mask02;
+  199AC(action) sets/clears MCR mask01;199E0 sets/clears mask02.
+They preserve the GSR sample and other MCR bits in these fixtures. Treat
+MCR and GSR as distinct bytes; interpreting the word's low byte as MCR
+would misidentify both the cause and the recovery operations.
+
+1A164 recovery task
+------------------
+Action0 initializes state8BD9=0, retry counter8BCE=0, recovery flag8BCD=0,
+deadline8BD4=0, timer mode8BD8=2, and event latch8BCF=0. Action1 processes
+the following states and tail-calls diagnostic producer1A4E4(1):
+
+  state0: wait while GSR configuration bit is set; otherwise go to state1
+          unless timer mode8BD8==1, in which case go directly to state2.
+  state1: event latch8BCF==1 sets8BCD=1 and timer mode1, sets deadline to
+          current tick+40 when retry count<10 or+1000 otherwise, goes2.
+          Without the latch it clears8BCD and remains1.
+  state2: with timer mode1, wait until current unsigned tick>=deadline.
+          Then test MCR halt, event latch, or GSR error warning. If any is
+          present, set8BCD=1, increment8BCE saturating at255, clear MCR halt,
+          request MCR reset and go3. Without these conditions, clear retry/
+          recovery state, restore application communication flags, go1.
+  state3: release MCR reset and go4 when GSR configuration is acknowledged
+          OR after four calls without that acknowledgement (counter8EE0>3).
+  state4: wait while GSR configuration remains set. Once clear, rebuild
+          outgoing application buffers via19794/197A6, restore communication
+          flags, clear event latch, set timer mode1, and advance the OLD
+          deadline by40 (<10 retries) or1000 (>=10 retries); go0.
+
+The counter counts the task's retry transitions, not individual bus errors
+or necessarily distinct bus-off interrupts. GSR bus-off alone is not tested
+in state2; the handler normally supplies the associated halt/event latch.
+State4 advances the previous deadline, not current tick: a deliberately late
+fixture with old500/current900 gives540 below10,1500 at/above10. Tick wrap
+behavior, invocation period and CAN hardware acknowledgement timing remain
+unproved. The four-call fallback is a software transition, not a guarantee
+that hardware reset completed successfully.
+
+Diagnostic/control propagation and receive-monitor interaction
+--------------------------------------------------------------
+1A4E4 admits checking only when9415==0 andA939==1. Otherwise it clears
+8BCE/8BCD/8BCF and emits raw0. When admitted, rawgroup35 atA76B is1 below
+10 retries,7 at/above10 (both the immediate threshold and ROM5EECC are10).
+Recovery logic can add mask80 when8BCD==0 and active-state/healthy gates
+permit.56908(35) -> activeA721 ->570F6/A977 ->57258/A98E ->21C1C/92C9
+->2055C substitution20480 and2513E/24FA0 cut inhibit is executed.
+
+An explicit47-checkpoint lifecycle starts a bus-off event at100, retries at
+140,180,...,500, with GSR configuration acknowledgements between attempts.
+At the tenth retry (tick500), active group35 becomes04, A98E=1C, request9454
+clears and four ECU command values become1. Serialized report isC0 73 FF.
+The next deadline becomes1500. A healthy check there clears the retry count
+and8BCD, but the active inhibit remains through6500. At6501 (strictly more
+than5000 healthy ticks), active policy clears, A98E=11 and request1/four
+zero command values return; storedC0 73 FF remains. Fixture80A4 is0.
+These are software command values, not measured fuel or spark outputs.
+
+1A082 wraps the receive-deadline diagnostic producer for groups36/37/38.
+It skips those calls when GSR configuration is set,8BCD!=0, or activegroup35
+has mask04. Active mask02 alone does not skip. Sixteen gate combinations
+verify that skipped calls leave all three raw group bytes unchanged. This
+explains a software distinction between local controller recovery and an
+individual missing-message diagnostic; a skipped producer does not itself
+clear a previously active missing-message fault.
+
+Verification and continuation
+-----------------------------
+  python research/ecu-at-can/verify_hcan_recovery.py
+Result: hcan-recovery-verification.json. Uses a local, narrow register-fixture
+subclass; base SH interpreter and arithmetic implementations remain unchanged.
+Unmodelled peripheral reads/writes fail closed (three expected rejections).
+All asserted checks passed:1024 helper cases,128 handler-body cases,240
+deadline/retry cases,8 acknowledgement cases,1024 producer cases,16
+receive-monitor gates and47 paired lifecycle checkpoints. Older verifiers
+were not rerun: no shared interpreter or existing verifier was changed.
+Initial exploratory output was superseded by asserted cases in this script.
+
+Previous turn made verified policy/restore progress; this turn resolves the
+group35 bus-off/retry source and its interaction with receive monitoring.
+Follow-up static discovery:583DC loops over five eight-byte records at
+5F198. Record0 containsFFFF8816 andgroup3A; the remaining entries mapAC7A
+->3B,880A->3C,880E->3D,8812->3E.583DC admits whenA939==1 and mapped
+A977/A978 mask08 are clear. Input validity1 emitsraw3; validity2 supplies
+healthy/recovery processing. Thus the missing3A producer is located, linked
+to the already traced CAN201 word0 validity byte. Its timed qualification
+and end-to-end invalid-payload recovery have NOT yet been executed. This
+new static lead is saved here for the next verifier/annotation update.
+Previous candidates286FC/28706 write27/28;1A598 accepts36/37/38 only. Retain the previous failed opcode/table searches in
+can201-fault-policy.txt. Do not label group3A as invalid payload without proof.
+Next: execute583DC/566E0 group3A qualification from CAN201 invalid sentinel
+and valid receipt recovery; then raw CAN201 byte6 consumer21628,
+CAN211 traction arbitration, and PRHT speed/neutral message attribution.
+The full ECU/TCU, traction and folding/unfolding roof objectives stay active.

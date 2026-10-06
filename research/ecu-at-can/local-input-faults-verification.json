@@ -1,0 +1,353 @@
+{
+  "mapping": [
+    {
+      "group": "43",
+      "dtc": "P0704",
+      "enable_address": "E1AD3",
+      "definition": "P0704 - CPP switch input circuit problem"
+    },
+    {
+      "group": "44",
+      "dtc": "P0850",
+      "enable_address": "E1AD4",
+      "definition": "P0850 - Neutral switch input circuit problem"
+    }
+  ],
+  "initializer_cases": 16,
+  "activity_cases": 1944,
+  "counter_cases": 7776,
+  "qualification_cases": 8748,
+  "reporting_cases": 729,
+  "activity_hold_cases": 480,
+  "stock_dispatch": {
+    "exhaustive_mask_cases": 131072,
+    "full_report_cases": 1215,
+    "groups_43_44_dispatch_masks": [
+      "0000",
+      "0000"
+    ],
+    "cache_updates_but_downstream_dispatch_rejected": true
+  },
+  "neutral_lifecycle": [
+    {
+      "sample": 191,
+      "counter_clutch": 8,
+      "counter_neutral": 9,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff02ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ]
+      ]
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 8,
+      "counter_neutral": 8,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff00ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ]
+      ]
+    },
+    {
+      "sample": 191,
+      "counter_clutch": 8,
+      "counter_neutral": 7,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff02ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ]
+      ]
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 8,
+      "counter_neutral": 6,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff00ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ]
+      ]
+    },
+    {
+      "sample": 191,
+      "counter_clutch": 8,
+      "counter_neutral": 5,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff02ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ]
+      ]
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 8,
+      "counter_neutral": 4,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff00ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ]
+      ]
+    },
+    {
+      "sample": 191,
+      "counter_clutch": 8,
+      "counter_neutral": 3,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff02ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ]
+      ]
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 8,
+      "counter_neutral": 2,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff00ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ]
+      ]
+    },
+    {
+      "sample": 191,
+      "counter_clutch": 8,
+      "counter_neutral": 1,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff02ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ]
+      ]
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 8,
+      "counter_neutral": 0,
+      "fault_clutch": 0,
+      "fault_neutral": 1,
+      "activity_hold": 30,
+      "can231": "ff01ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ],
+        [
+          68,
+          1
+        ]
+      ]
+    },
+    {
+      "sample": 254,
+      "counter_clutch": 8,
+      "counter_neutral": 0,
+      "fault_clutch": 0,
+      "fault_neutral": 1,
+      "activity_hold": 30,
+      "can231": "ff01ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ],
+        [
+          68,
+          1
+        ]
+      ]
+    },
+    {
+      "sample": 254,
+      "counter_clutch": 8,
+      "counter_neutral": 10,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff04ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ],
+        [
+          68,
+          2
+        ]
+      ]
+    },
+    {
+      "sample": 254,
+      "counter_clutch": 8,
+      "counter_neutral": 10,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 30,
+      "can231": "ff04ffff00000000",
+      "reports": []
+    }
+  ],
+  "clutch_lifecycle": [
+    {
+      "sample": 255,
+      "counter_clutch": 7,
+      "counter_neutral": 10,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 0,
+      "can231": "ff00ffff00000000",
+      "reports": []
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 6,
+      "counter_neutral": 10,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 0,
+      "can231": "ff00ffff00000000",
+      "reports": []
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 5,
+      "counter_neutral": 10,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 0,
+      "can231": "ff00ffff00000000",
+      "reports": []
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 4,
+      "counter_neutral": 10,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 0,
+      "can231": "ff00ffff00000000",
+      "reports": []
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 3,
+      "counter_neutral": 10,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 0,
+      "can231": "ff00ffff00000000",
+      "reports": []
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 2,
+      "counter_neutral": 10,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 0,
+      "can231": "ff00ffff00000000",
+      "reports": []
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 1,
+      "counter_neutral": 10,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 0,
+      "can231": "ff00ffff00000000",
+      "reports": []
+    },
+    {
+      "sample": 255,
+      "counter_clutch": 0,
+      "counter_neutral": 10,
+      "fault_clutch": 1,
+      "fault_neutral": 0,
+      "activity_hold": 0,
+      "can231": "ff01ffff00000000",
+      "reports": [
+        [
+          67,
+          1
+        ]
+      ]
+    },
+    {
+      "sample": 191,
+      "counter_clutch": 0,
+      "counter_neutral": 10,
+      "fault_clutch": 1,
+      "fault_neutral": 0,
+      "activity_hold": 0,
+      "can231": "ff01ffff00000000",
+      "reports": [
+        [
+          67,
+          1
+        ]
+      ]
+    },
+    {
+      "sample": 191,
+      "counter_clutch": 8,
+      "counter_neutral": 10,
+      "fault_clutch": 0,
+      "fault_neutral": 0,
+      "activity_hold": 0,
+      "can231": "ff02ffff00000000",
+      "reports": [
+        [
+          67,
+          2
+        ]
+      ]
+    }
+  ],
+  "scope": "Original caller segment and functions; bounded serial samples, explicit surrounding call order, real report cache; stock downstream rejection tested with global dispatch enabled and disabled. No stored DTC or OEM PRHT reception claim."
+}

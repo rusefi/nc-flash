@@ -1,0 +1,138 @@
+TCU selection admission through CAN231 into ECU state flags
+2026-10-06
+
+Scope, identities and reproduction
+---------------------------------
+This extends selection-pipeline.txt. Previous turn made verified progress:
+stock selection dispatch and default-disabled floor gate were saved and the
+Ghidra archive independently restored. The broader ECU/AT, traction-control
+and PRHT requirements remain active and incomplete.
+ECU LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+TCU LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+Run python research/ecu-at-can/verify_relative_branch.py and
+python research/ecu-at-can/verify_selection_reporting.py.
+Matching JSON artifacts are saved alongside. All functions run as original
+instructions with explicit RAM/timer fixtures; no patched return values,
+firmware changes, physical bus, actuator or wall-clock simulation.
+
+Main distinction (executed)
+--------------------------
+8084 is a requested software index. 488F4 delays admission of that request,
+48C08 retains the last admitted candidate at9C85, computes next index9C86,
+and only updates published8081 if its acceptance conditions pass. 8085
+receives9C86 even if8081 remains old. This supplies an executed explanation
+for the earlier distinction between8084 andCAN231's8081 source.
+It does NOT establish that8081 is mechanically attained gear, nor that any
+specific hydraulic/solenoid transition has completed before publication.
+
+Cache and initialization (executed)
+----------------------------------
+244FA writes and24532 reads byte array605C for indices below010D, otherwise
+array626E at index-minus010D.1536 cases cover all256 byte values at indices
+0,12,13,010C,010D,0110 (hex) and preserve adjacent sentinels. Index12 is606E;
+index13 is606F. Getters sign-extend byte results; tests compare the byte value.
+48BC0 loads606F and initializes8081/8085/9C85/9C86/9C80 to that byte,
+9C87=FF,9C88/9C89=0. Full48C08 later writes accepted8081 back through
+244FA(index13), confirming606F is a cache of the published software state.
+RAM access alone is not evidence of EEPROM persistence across power cycles.
+The previous44CFE trace separately writes8084 via index12/606E.
+
+Candidate delay (executed at full48C08 call boundary)
+----------------------------------------------------
+488F4 uses8084, last request9C75, pending flag9C79 bit0, direction9C77,
+timer815F and duration9C76. On a new request,815F resets unless already
+pending; direction is1 for increasing and2 for decreasing versus8081.
+489EE selects a delay from stock75310: rows of five bytes
+  37,37,37,0,0
+  0,0,0,0,0
+  18,18,18,18,18
+  0,0,0,0,0
+For rising input, row0 is selected when9C79 bit1 is set; otherwise9410 bit2
+selects row2 versus row1. Falling input uses row3. Index is request-1 for
+rising (clamped atzero forzero), or request with5 mapped4 for falling.
+48A62 updates bit1 from signed9340,92D5 bit0 and previous bit2. Stock
+thresholds7735C=-5120 and7735E=256; full latch interpretation remains open.
+
+488F4 encodes remaining delay in815E, using timer-duration+255 with unsigned
+word comparison/cap255. Until815E reachesFF it returnsFF and sets pending
+bit0; atFF it returns the request and clears pending. It stores its result
+at9C74 and always updates last-request9C75.9B56 values1/2 bypass this delay
+statically; that branch is not part of the new timeline tests.
+Executed rising0->1 fixtures:9340=-5121 and9410=0 hold at timer0/36 and
+release at37;9340=0 and9410 bit2 set hold at0/17 and release at18. The saved
+output also includes one post-release call for each. Timer values are injected;
+no service frequency, milliseconds or real shift duration is asserted.
+
+Next-state calculation and acceptance (executed)
+------------------------------------------------
+48C08 calls47B3C after candidate handling. Its47B72 uses stock6x6 table5E1E8
+indexed by old8081 and requested candidate; each ordinary cell steps one
+index toward the request, or holds if equal.916C bit0 bypasses this table and
+uses the request directly. Further47B3C checks remain active in the full call.
+144 full-call fixtures cover all6x6 old/request pairs, acceptance block9545
+bit2 clear/set, and916C bit0 clear/set with other RAM gates zero. Under these
+fixtures next=min/max by one step normally, direct request with916C override.
+48C08 marks9C8A bit0 when the selected next index differs from prior9C86.
+It calls48174 and49260 before deciding whether to accept. On acceptance with
+pending bit and changed index, it clears pending, updates9C87/9C88 transition
+metadata, saves old8081 at9C80 and writes9C86 to8081. It then initializes
+transition work through48D84/48F20 when8080!=FF. A final cap clamps8081 to5.
+
+48174 always returns0 while9545 bit2 is set. Otherwise it calls one of
+484D0/487B8/48812/48860 according to transition-classr5, with916C bit0
+forcing success AFTER those helper calls.2520 helper fixtures verify block
+dominance and the override across30 transition indices and28 classes. The
+normal class-specific acceptance formulas are not exhaustively proved here.
+The144 full-call cases also establish that blocked requests keep8081 and606F
+old while8085/9C86 can already show a newer pending index.
+
+TCU-to-ECU reporting (executed)
+-------------------------------
+Every144 state case runs19414(mode1), transfers its eight CAN231 bytes to
+ECU6ABC, then executes35BB8 and3585C with734A=80 and734C=1. WithTCU8080=6,
+the frame's high nibble is8081+1 and exactly the corresponding ECU6ACB..6AD0
+flag is1. Mode/class6 is explicit; other state classes encode differently.
+Seven sequential full-call checkpoints request5 starting from0: two blocked
+calls keep wire nibble1, then releasing9545 advances published indices1..5,
+wire nibbles2..6 and the corresponding ECU flags. This is an explicit software
+call sequence, not proof of five real-time vehicle shifts.
+
+Harness extension and validation
+--------------------------------
+New sh_relative_branch.py subclasses the existing software arithmetic model;
+existing shared interpreters and prior verifiers are unchanged. The first
+complete state transition initially failed closed on MOVA at48F58. MOVA and
+BRAF now execute the original48F20 jump table rather than skipping it.
+1024 MOVA,320 BRAF,7 actual delay-slot programs and3 expected rejections pass.
+Tests include allMOVA displacements, two alignments, allBRAF registers,
+32-bit target wrap, preservedT/PR, and capture before delay-slot register
+changes. MOVA in a slot uses branch destination+2. Other PC-relative memory
+loads in slots remain explicitly rejected in this subclass.
+Primary ISA reference: Renesas REJ09B0316-0200, sections7.2.8 and7.2.34,
+printed pages67 and123, checked2026-10-06:
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+
+Limits and continuation
+-----------------------
+Full44CFE request calculation, all acceptance formulas and9545/916C producer
+provenance remain open. Next inspect9545 reference24DFC/2522E and related
+control functions to connect acceptance to engine request coordination; also
+trace48F20 transition queue into actuator control. No physical gear names,
+mechanical completion or milliseconds should be inferred from these tests.
+Integer GBR opcode scans found8084 writes44CDA/44DB2 and8081 writes48BE8/
+48CCE/48CEC in10000..5BFFF; this is a bounded candidate scan, not proof that
+all computed/aliased writers have been found. The absence of directMOV.L
+literal references to8081/8084 was a failed search lead, resolved by GBR.
+Traction CAN211 sender/arbitration and PRHT speed/neutral CAN identification
+remain required; see traction-roof.txt. No application/flash behavior change,
+hardware test, new staging, commit or push occurred.
+
+Persistence verified
+--------------------
+All new scripts, JSON, notes and Ghidra exports are Git-eligible. The closed
+project archive was independently restored:11 project hashes,330 annotations
+(111 ECU/219 TCU),199 identical exports/reports. Exact currentarchive SHA256
+is in ghidra/snapshot.json and restore-verification.json. Both ROM hashes
+remain unchanged. No new staging, commit or push; existing staging preserved.

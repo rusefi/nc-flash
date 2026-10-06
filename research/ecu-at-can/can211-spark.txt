@@ -1,0 +1,142 @@
+CAN211 numeric request to per-cylinder spark: 2026-10-05
+
+RESULT AND SCOPE
+
+Actual instructions now execute from the ECU's CAN211 payload buffer through
+normalization, model inversion, spark correction/arbitration and four cylinder
+spark values. This advances the traction-control lead beyond an isolated
+numeric consumer. It does not identify the211 sender, physical units on its
+wire, complete DSC behavior, throttle/fuel branches or ignition timer hardware.
+It does not establish vehicle safety or full software pairing with the TCU.
+
+Input: unchanged examples/LFFEEE-stock.bin, SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Reproduce: python research/ecu-at-can/verify_can211_spark.py
+Saved output: can211-spark-verification.json. Addresses hexadecimal; RAMFFFF
+prefix omitted. Numeric examples/case counts are decimal. No ROM edits.
+
+CONVERSION AND MODEL PATH
+
+The existing34B8C/349CA/3FF2C trace converts fresh CAN211 word0 to714C by
+subtracting10000, subject to inhibition/ramp rules in freshness.txt.
+The original34BBC sets protected6A28=(B8244==1), stock1. This configures
+a conversion bypass, not a received211 flag.
+
+3F600 produces protected7154. With transmission mode734A bit40 clear it
+multiplies6A38*6A3C; with bit40 set it selects calibrated gear ratios or716C
+according to7187/7185/717F. 34FFA initializes6A38=6A3C=1. No payload
+writer for those two values has been established. An intermediate suggestion
+that these were CAN216 fields was wrong: proximity to216 code is insufficient.
+Stock initialization plus the AT branch yields factor1 in the executed chain.
+The64 factor tests cover AT/MT,gear0..7 and both selection gates.
+
+3F97C reads factor7154 and helper2118 compares it against +/-epsilon,
+where epsilon ROM3FBC8 bits3727C5AC = approximately0.00001.
+  abs(factor)<=epsilon:715C=protected711C.
+  otherwise:715C=max(protected714C,7148)/divisor + protected71C4,
+    divisor=1 if protected6A28==1, otherwise7154.
+Helper23E8 selects MAX, not minimum. Even with bypass6A28=1, the near-zero
+factor fallback still applies. Tested94 exact cases; two combinations with
+tiny factor and a large request correctly stop on unimplemented FPU rounding.
+Those two are not successful firmware executions or evidence of ECU errors.
+
+3F9EC uses count71F0: for0..7,7170=715C*8/(8-count); for8,7170=0.
+Nine count cases pass. Counts above8 are outside the tested domain; the
+helper converts its argument to unsigned8, so do not extend the formula to
+arbitrary counts. The count's producer and physical meaning remain open.
+
+3FA3E holds7174 unless71A8 is positive and outside a deadband of approximately
+0.00078125 (ROM3FC00 bits3A4CCCCC). Otherwise it computes:
+  q=max(71B0-7170+protected71D0+protected71D8,0)/71A8
+  7174=71AC - approximate_sqrt(q).
+Its own loop grows a power-of-two trial bound, then accumulates decreasing
+steps whose squares do not exceedq, halving until step<=ROM3FC10=0.17578125.
+This is firmware's iterative quadratic-model inversion, not an FPU sqrt.
+For the tested q range0..64, it equals floor(4*sqrt(q))/4; negative numerator
+clamps to0.69 cases cover these values and deadband/nonpositive holds.
+Upstream coefficient producers remain outside these synthetic-input tests.
+
+SPARK CORRECTION AND ARBITRATION
+
+53438 clears7D2C when protected718C==0 or6590==0. Otherwise:
+  difference=7A84-7174;
+  7D35==1:7D2C=max(difference,0);
+  other7D35:7D2C=clamp(difference,0,7D38).
+Forty-eight cases check gates, negative/zero/positive differences and cap.
+The physical identities of6590/7D35 and source of7D38 are still open.
+
+4FD9C combines other corrections. Define:
+  M=max(7F0C,7D84,7D48,7A8C,7BD8,7EDC)
+  S=M+7BC0+8480+7C0C+7C30+7C38+A390.
+It writes7AC4=S,7AC0=S+7D2C,7A94=S+7C74 and7A90=S+7D2C+7C74.
+Its remaining filter/limit calculation produces7AB0;7AB4=7AB0-7A90.
+The full function including2508 executes, with the other producers explicitly
+seeded. Thus increasing the positive211 correction lowers7AB4 in this path.
+
+4FBDA's tested ordinary branch computes
+  7A78=clamp(7C94+7B6C+7AB4,7AD0,ROM D05AC=50).
+7AD0 is selected from additional conditions/calibrations and a max with7A7C;
+the718C-active branch selects D05B4 versus inactive D05B0 when higher-priority
+gates do not intervene. The test executes these selections; it does not
+exhaustively validate every special mode in4FBDA.
+
+4FB4E's ordinary branch limits7A78 against old7ACC+lookup(A2D70,RPM),
+passes it through diagnostic override8B366, writes7A74, then adds the four
+ROM trims D0594/D0598/D059C/D05A0 into7A9C/7AA0/7AA4/7AA8 respectively.
+The last four values are identified as per-cylinder spark commands because
+the saved author definition sources/lffeee.xml explicitly names those ROM
+calibrations as spark final cylinder trims, and the original code adds each
+trim to the common output. Stock trims are all0. The real lookup and override
+execute in the example tests; RPM/model/previous-command inputs are synthetic.
+Final coil/timer outputs and angle/timing conversion are not yet traced.
+
+Twenty complete examples cover five211 values, downstream enable0/1 and
+correction cap2/100. Other corrections yield base spark24 in these examples:
+  CAN211 word0 714C  correction(cap100,enabled)  four cylinder outputs
+      10000       0                5                 19
+      10016      16                3                 21
+      10023      23                1.25              22.75
+      10025      25                0                 24
+      10050      50                0                 24
+Disabling6590 keeps the four outputs24. Cap2 limits the first two reductions
+to2. These are illustrative synthetic states, not measured operating points.
+The original active-latch3FDCA also executes;50 is inactive in these states.
+Calls are explicitly scheduled, respecting3FF2C ->3F97C ->3FDCA, with the
+intervening model inputs seeded; this is not full ECU task execution.
+
+HARNESS EXTENSION AND VALIDATION
+
+sh_exact_float.py adds FLDS (bit-preserving FR->FPUL), finite FABS and
+in-range finite FTRC (truncation toward zero). It still rejects inexact
+binary32 arithmetic, subnormal/non-finite arithmetic and FTRC overflow.
+The initial full4FD9C attempt stopped at FLDS2508; after that extension,
+4FB4E stopped at FTRC20F6. Both now execute without mocking either helper.
+448 independent ISA vectors plus10 deliberate rejections pass. FTRC vectors
+use explicit expected integer encodings, including +/-2.732 and signed bounds.
+Reference: Renesas SH-2E Software Manual REJ09B0316-0200, floating instructions,
+especially FTRC printed199..200:
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+Accessed2026-10-05. General FPSCR/exception emulation remains unsupported.
+
+All seven earlier verifier outputs match their saved JSON after this shared
+harness change: import,bridge,actuation,network,freshness,diagnostics,fault
+reporting. New verifier covers64 factors,94 bound conversions,2 expected
+inexact stops,9 count cases,69 root/hold cases,48 correction gates and20
+wire-to-spark examples. Ghidra annotations/exports/archive are refreshed
+separately; see CHECKPOINT.txt and ghidra/restore-verification.json.
+
+NEXT TRACES
+
+Trace7A9C/7AA0/7AA4/7AA8 to ignition timer conversion; verify rate/override
+gates beyond the example's ordinary branch. Resolve coefficient71A8/71AC/
+71B0, factor inputs6A38/6A3C, count71F0 and gate6590 physical identities.
+Continue other718C consumers for throttle/fuel and actual TCU211 consumers.
+29BEC's literal reference is part of protected-value checks, not an engine
+command-arbitration proof; do not infer an actuation role from the hit alone.
+CAN211 sender attribution, physical wire units, AT interaction beyond the
+mode branches, and the expanded PRHT objectives remain incomplete.
+
+Stock-source follow-up (2026-10-06): model-sources.txt now executes the
+immediate coefficient/offset/count producers and198 paired feedback cases.
+This closes the earlier immediate model-source lead; raw sensor/state
+identities, upstream pattern policy and real task history remain unproved.

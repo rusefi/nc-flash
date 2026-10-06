@@ -1,0 +1,120 @@
+ECU numeric command overrides: original producers and serial lifecycles
+2026-10-06
+
+Scope and evidence
+------------------
+verify_control_overrides.py executes full stock bodies23A24,245FC,246E8 and
+initializers23A1C,245D8,246E0. Independent finite RTZ binary32/state oracles
+check values, counters, previous-enable history, stack balance and protected
+record checksums. The shared instruction interpreter and ROMs are unchanged.
+Report: control-overrides-verification.json (includes both SHA256 identities).
+Passed:720 relative cases,2160 absolute cases,6 highest-enable cases,18
+initializer cases;2578 serial cycles and27 paired CAN boundary updates.
+Run: python research/ecu-at-can/verify_control_overrides.py >
+     research/ecu-at-can/control-overrides-verification.json
+
+Relative source5620:23A24
+------------------------
+Let R be round-toward-zero binary32, C=unsigned word5668, closed=protected
+2114 (fallback ROM BADD8=10.5), feedback=raw float5534. Stock BAE52=50.
+  C<50: output5620=ROM BB194=1.
+  C==50: output5620=R(feedback-closed), without the later upper cap.
+  C>50: output5620=min(BB198, R(old5620+BB19C)).
+BB198 bits4139999A=11.600000381469727; BB19C bits3E99999A=
+0.30000001192092896. Initializer23A1C writes protected zero.
+This body has no enable test of its own. 24B82 produces C by incrementing
+only when5670==1, otherwise clearing. 25682 selects5620+closed for5670==1,
+then applies the shared final clamp0..protected2124. A negative capture is
+possible; do not invent a lower bound inside23A24.
+
+Absolute source5650:245FC
+------------------------
+Inputs: raw float8248; protected closed2114 (fallback10.5); unsigned byte
+stage5634; raw enable5635; previous565A; unsigned timer5658.
+  If stage>=3 AND previous==0 AND enable==1:
+    candidate=R(8248+closed); timer=0.
+  Else if OLD timer<=ROM BB1A0=63:
+    candidate=R(8248+closed); timer=saturating increment.
+  Else:
+    candidate=R(old5650+BB1A8); timer holds.
+Always write5650=min(R(closed+BB1A4),candidate), then previous565A=raw enable.
+BB1A4=6. BB1A8 bits3C03126F=0.00800000037997961.
+Initializer245D8 writes5650=R(closed+6), timer=65535, and leaves565A unchanged.
+Numeric updates also occur while enable=0. Only the entry-reset predicate
+requires enable1;2->1 does not reset. Timer63 still follows source and becomes
+64; the following call ramps. Source changes after that threshold are ignored
+by this body until a qualifying reset. Stage is unsigned:128/255 satisfy>=3.
+There is an upper cap here, but no local lower bound. Final25682 clamp remains.
+
+Highest source565C:246E8
+-----------------------
+If raw566C exactly1: output=max(BB170=1,BB174~0.2)=1; else output0.
+Initializer246E0 writes0. Protected writer15522 is used on every path.
+These direct tests use explicit enable fixtures. Stock24910 never admits
+this override because25242's stockBAE40=1 forceszero. This does not establish
+an in-vehicle route into that branch.
+
+Integrated execution
+--------------------
+The existing timer verifier now provides optional producer callbacks and an
+option to omit its old5620/5650 fixture writes. Its default behavior is retained
+and its full rerun matched the preceding saved JSON byte-for-byte. The new loop uses original
+initializers, then observed relative order246E8 ->21D18 ->23A24 ->245FC ->25682.
+It reuses original timers, dispatcher, local gates, CAN models, SCI1 callbacks,
+application reply processing and packer. 257D8 and other task bodies remain
+omitted. Each call checks all40 transmitted bytes and the next queued command
+against the preceding selected command. Replies remain a synthetic peer.
+
+Mode0 lifecycle:1878 serial cycles, paired TCU216/218->ECU CAN updates at16
+boundaries, then retained inputs between updates. Normal selection calls1..5;
+feedback6..624; relative625..1875; bypass/normal fallback1876 onward.
+Relative count1 starts atcall625. With closed10.5 and decoded feedback
+12.20703125, command11.5 throughcall673;call674/count50 capturesfeedback;
+call675 beginsramp;call707/count83 reachesrelative cap~11.6 (command~22.1).
+Atcount201/call825 the prior verified5676/PDDRbit11 output clears, but numeric
+selection still follows the relative branch in this selected-task fixture.
+This is not proof of physical actuator movement with that output clear.
+
+Absolute lifecycle:700 additional serial cycles,11 paired CAN updates.
+Explicit upstream mode1, filtered source8, stage3 and enable1 admit fourth
+priority. Call1 resets timer0 and output12.5 from8248=2 and closed10.5.
+Call65 follows source and increments63->64;call66 startsramp even though source
+is changed to-5. Cap16.5 reached bycall569. Enable0 at570 selectsnormal but
+numericproducer still updates;0->1 at571 resets and captures5.5. Rawenable2
+at600 suppresses normal-request flag yet numericselection usesnormal;2->1 at601
+does notreset (timer30). This injected nonBoolean input is a robustness case,
+not claimed reachable from normal producer24084, which emits Boolean values.
+
+Static continuation leads, not executed in this report
+------------------------------------------------------
+24084 maps stage5634:0 ->(5635,5636)=(0,0);1 ->(0,1);>=2 ->(1,0).
+Stage writer24072 follows a15-entry (8-byte) callback/priority table2F520;
+an earlier branch24002..24008 writesstage3. Establish fullentry/call order,
+callbacks, source predicates and retained reset lifecycles before calling the
+absolute override fully explained. This includes stage2 enabling5650 without
+the stage>=3 entry reset.
+
+8248 has a concrete writer at5C56C..5C574, tailcalling protected15522 after
+207C clamps source8250 using raw8254/825C bounds. Inspect full5C500..5C574
+and upstream8250/8254/825C producers next. Reads39CF8/39D3C,2D208/2D218 and
+B66FE are not producers. 39D24 also publishes8248/BACA8 to6D00, which feeds
+normal angle255C8; current fixtures omit this coupling. Preserve it as a
+specific next integration requirement. These excerpts are saved in disassembly.
+
+Limits and remaining goals
+--------------------------
+Finite normal/zero float operands only; no exception/NaN model. Full scheduler,
+upstream8248/stage/enable,6CB4/mode inputs, protected-RAM initialization and5354
+servicing,20A8 clear/57CD recovery consumers and A720 history/binding limits
+remain open. These numeric sources belong to the shared ECU command path;
+this does not attribute every branch to traction control or prove an actuator.
+Traction: retain CAN211/21A sender attribution,7978 consumers/fuel paths and
+physical outputs. ECU/TCU:retain fulltask/capture timing,group7 andoverlap/
+composite/2->1 requests. Roof:retain OEM type/status reception,bothfold/unfold,
+pause/resume,reversal,timeouts,synchronization and recovery; no new OEM PRHT
+receiver or CAN fold/unfold command was established here.
+
+Persistence: Ghidra annotations/exports refreshed; closed project independently
+restored with11 matching project hashes,936 annotations and521 identical
+exports. Exact archive identity: ghidra/snapshot.json and CHECKPOINT.txt.
+Artifacts are Git-eligible and saved locally; no staging, commit or push.

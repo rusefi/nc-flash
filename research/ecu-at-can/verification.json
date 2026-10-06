@@ -1,0 +1,424 @@
+{
+  "rom_sha256": {
+    "ECU": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+    "TCU": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+  },
+  "ecu_descriptors": [
+    {
+      "address": "0x378cc",
+      "can_id": "0x200",
+      "direction": "TX",
+      "mailbox": 1,
+      "dlc": 8,
+      "buffer": "0xffff6b14"
+    },
+    {
+      "address": "0x378dc",
+      "can_id": "0x201",
+      "direction": "TX",
+      "mailbox": 2,
+      "dlc": 8,
+      "buffer": "0xffff6b2c"
+    },
+    {
+      "address": "0x378ec",
+      "can_id": "0x211",
+      "direction": "RX",
+      "mailbox": 3,
+      "dlc": 8,
+      "buffer": "0xffff6a10"
+    },
+    {
+      "address": "0x378fc",
+      "can_id": "0x215",
+      "direction": "TX",
+      "mailbox": 4,
+      "dlc": 8,
+      "buffer": "0xffff6b50"
+    },
+    {
+      "address": "0x3790c",
+      "can_id": "0x216",
+      "direction": "RX",
+      "mailbox": 5,
+      "dlc": 8,
+      "buffer": "0xffff6a40"
+    },
+    {
+      "address": "0x3791c",
+      "can_id": "0x218",
+      "direction": "RX",
+      "mailbox": 6,
+      "dlc": 8,
+      "buffer": "0xffff6a68"
+    },
+    {
+      "address": "0x3792c",
+      "can_id": "0x21a",
+      "direction": "RX",
+      "mailbox": 7,
+      "dlc": 8,
+      "buffer": "0xffff6aa8"
+    },
+    {
+      "address": "0x3793c",
+      "can_id": "0x231",
+      "direction": "TX",
+      "mailbox": 8,
+      "dlc": 8,
+      "buffer": "0xffff6b64"
+    },
+    {
+      "address": "0x3794c",
+      "can_id": "0x231",
+      "direction": "RX",
+      "mailbox": 9,
+      "dlc": 8,
+      "buffer": "0xffff6abc"
+    },
+    {
+      "address": "0x379cc",
+      "can_id": "0x240",
+      "direction": "TX",
+      "mailbox": 33,
+      "dlc": 8,
+      "buffer": "0xffff6b70"
+    },
+    {
+      "address": "0x379dc",
+      "can_id": "0x420",
+      "direction": "TX",
+      "mailbox": 34,
+      "dlc": 8,
+      "buffer": "0xffff6b80"
+    },
+    {
+      "address": "0x379ec",
+      "can_id": "0x430",
+      "direction": "RX",
+      "mailbox": 35,
+      "dlc": 8,
+      "buffer": "0xffff6ae0"
+    },
+    {
+      "address": "0x379fc",
+      "can_id": "0x4b0",
+      "direction": "RX",
+      "mailbox": 36,
+      "dlc": 8,
+      "buffer": "0xffff6af0"
+    },
+    {
+      "address": "0x37a0c",
+      "can_id": "0x4c1",
+      "direction": "RX",
+      "mailbox": 37,
+      "dlc": 1,
+      "buffer": "0xffff6b0c"
+    },
+    {
+      "address": "0x37a1c",
+      "can_id": "0x4ec",
+      "direction": "TX",
+      "mailbox": 38,
+      "dlc": 8,
+      "buffer": "0xffff6b94"
+    },
+    {
+      "address": "0x37a2c",
+      "can_id": "0x4f0",
+      "direction": "TX",
+      "mailbox": 39,
+      "dlc": 8,
+      "buffer": "0xffff6ba8"
+    },
+    {
+      "address": "0x37a3c",
+      "can_id": "0x4f1",
+      "direction": "TX",
+      "mailbox": 40,
+      "dlc": 8,
+      "buffer": "0xffff6bbc"
+    }
+  ],
+  "tcu_tx": [
+    {
+      "index": 0,
+      "id_register_value": "20fd",
+      "can_id": "0x7e9",
+      "dlc": 8,
+      "buffer": "0xffff8ee4"
+    },
+    {
+      "index": 1,
+      "id_register_value": "2098",
+      "can_id": "0x4c1",
+      "dlc": 1,
+      "buffer": "0xffff8eec"
+    },
+    {
+      "index": 2,
+      "id_register_value": "2046",
+      "can_id": "0x231",
+      "dlc": 8,
+      "buffer": "0xffff8eed"
+    },
+    {
+      "index": 3,
+      "id_register_value": "0043",
+      "can_id": "0x218",
+      "dlc": 8,
+      "buffer": "0xffff8ef5"
+    },
+    {
+      "index": 4,
+      "id_register_value": "c042",
+      "can_id": "0x216",
+      "dlc": 8,
+      "buffer": "0xffff8efd"
+    }
+  ],
+  "tcu_rx": [
+    {
+      "filter_index": 0,
+      "logical_index": 10,
+      "can_id": "0x7df",
+      "copied_bytes": 0,
+      "buffer": "0x0",
+      "callback": "0x1db10"
+    },
+    {
+      "filter_index": 1,
+      "logical_index": 11,
+      "can_id": "0x7e1",
+      "copied_bytes": 0,
+      "buffer": "0x0",
+      "callback": "0x1cb3a"
+    },
+    {
+      "filter_index": 2,
+      "logical_index": 0,
+      "can_id": "0x4f1",
+      "copied_bytes": 8,
+      "buffer": "0xffff8f05",
+      "callback": "0x0"
+    },
+    {
+      "filter_index": 3,
+      "logical_index": 1,
+      "can_id": "0x4ec",
+      "copied_bytes": 7,
+      "buffer": "0xffff8f0d",
+      "callback": "0x0"
+    },
+    {
+      "filter_index": 4,
+      "logical_index": 2,
+      "can_id": "0x4b0",
+      "copied_bytes": 8,
+      "buffer": "0xffff8f14",
+      "callback": "0x0"
+    },
+    {
+      "filter_index": 5,
+      "logical_index": 3,
+      "can_id": "0x430",
+      "copied_bytes": 7,
+      "buffer": "0xffff8f1c",
+      "callback": "0x0"
+    },
+    {
+      "filter_index": 6,
+      "logical_index": 4,
+      "can_id": "0x420",
+      "copied_bytes": 1,
+      "buffer": "0xffff8f23",
+      "callback": "0x0"
+    },
+    {
+      "filter_index": 7,
+      "logical_index": 5,
+      "can_id": "0x240",
+      "copied_bytes": 8,
+      "buffer": "0xffff8f24",
+      "callback": "0x0"
+    },
+    {
+      "filter_index": 8,
+      "logical_index": 6,
+      "can_id": "0x215",
+      "copied_bytes": 8,
+      "buffer": "0xffff8f2c",
+      "callback": "0x0"
+    },
+    {
+      "filter_index": 9,
+      "logical_index": 7,
+      "can_id": "0x211",
+      "copied_bytes": 5,
+      "buffer": "0xffff8f34",
+      "callback": "0x0"
+    },
+    {
+      "filter_index": 10,
+      "logical_index": 8,
+      "can_id": "0x201",
+      "copied_bytes": 7,
+      "buffer": "0xffff8f39",
+      "callback": "0x0"
+    },
+    {
+      "filter_index": 11,
+      "logical_index": 9,
+      "can_id": "0x200",
+      "copied_bytes": 7,
+      "buffer": "0xffff8f40",
+      "callback": "0x0"
+    }
+  ],
+  "bitfield_machine_code_cases": 576,
+  "paired_machine_code_cases": {
+    "0x216": 64,
+    "0x218": 64,
+    "0x231": 64,
+    "0x201": 64
+  },
+  "tcu_218_mode_examples": [
+    {
+      "mode_argument": 0,
+      "payload": "0f a0 46 00 ff ff 00 00",
+      "first_field_decoded": 0.0
+    },
+    {
+      "mode_argument": 1,
+      "payload": "0e b0 46 00 ff ff 00 00",
+      "first_field_decoded": -12.0
+    },
+    {
+      "mode_argument": 16,
+      "payload": "ff ff ff 80 ff ff 00 00",
+      "first_field_decoded": null
+    }
+  ],
+  "paired_231_application_state_examples": [
+    {
+      "tcu_internal_state": 0,
+      "payload": "10 00 00 0a 00 00 00 01",
+      "ecu_flags_6acb_through_6ad0": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "tcu_internal_state": 1,
+      "payload": "20 00 00 0a 00 00 00 01",
+      "ecu_flags_6acb_through_6ad0": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "tcu_internal_state": 2,
+      "payload": "30 00 00 0a 00 00 00 01",
+      "ecu_flags_6acb_through_6ad0": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "tcu_internal_state": 3,
+      "payload": "40 00 00 0a 00 00 00 01",
+      "ecu_flags_6acb_through_6ad0": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "tcu_internal_state": 4,
+      "payload": "50 00 00 0a 00 00 00 01",
+      "ecu_flags_6acb_through_6ad0": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "tcu_internal_state": 5,
+      "payload": "60 00 00 0a 00 00 00 01",
+      "ecu_flags_6acb_through_6ad0": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "ecu_231_nibble_decoder_cases": 256,
+  "ecu_231_inactive_gate_cases": 3,
+  "tcu_216_word_producer_examples": [
+    {
+      "mode": 1,
+      "first_source": 3200,
+      "second_source": 6400,
+      "first_four_payload_bytes": "02 64 02 c8"
+    },
+    {
+      "mode": 1,
+      "first_source": 32767,
+      "second_source": 32767,
+      "first_four_payload_bytes": "ff fe ff fe"
+    },
+    {
+      "mode": 0,
+      "first_source": 3200,
+      "second_source": 6400,
+      "first_four_payload_bytes": "ff fe ff fe"
+    },
+    {
+      "mode": 16,
+      "first_source": 3200,
+      "second_source": 6400,
+      "first_four_payload_bytes": "ff ff ff ff"
+    },
+    {
+      "mode": 1,
+      "first_source": -32768,
+      "second_source": -16385,
+      "first_four_payload_bytes": "00 00 00 00"
+    },
+    {
+      "mode": 1,
+      "first_source": -32,
+      "second_source": -1,
+      "first_four_payload_bytes": "01 ff 01 ff"
+    },
+    {
+      "mode": 1,
+      "first_source": 32766,
+      "second_source": 0,
+      "first_four_payload_bytes": "05 ff 02 00"
+    }
+  ],
+  "scope": "Isolated integer machine code, synthetic RAM and direct payload transfer; no bus, timing, FPU, or vehicle simulation."
+}

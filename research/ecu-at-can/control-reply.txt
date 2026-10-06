@@ -1,0 +1,114 @@
+Follow-up: control-policy.txt verifies full285A4 admission and21D18 feedback
+override. Its enabled-gate lifecycle supersedes the forced57CC loss fixture
+for local admission behavior; full gate producers/recovery consumers stay open.
+
+ECU SCI1 application reply and missing-feedback policy, 2026-10-06
+================================================================
+Reproduce: python research/ecu-at-can/verify_control_reply.py
+Original ECU/TCU hashes: control-reply-verification.json.192 numeric,192
+six-channel filter,810 header/status,120 scheduling and432 monitor cases
+pass (1746 total), plusfive paired CAN/serial/application checkpoints and28
+transport-produced missing/recovery points withone explicitreset afterward.
+No ROM/shared-interpreter changes. Prior/currentgoalturns madeverifiedprogress.
+
+Fullapplication22224..2256A nowexecutes
+--------------------------------------
+ControlApplication extends the existing sampledSCI1 harness with ONLYword
+F754 andread-onlywordF75E (FFFF prefix). Testsuse6DF8=0,local9462=1 fordirect
+cases and0/1 inlifecycles. SeparateC260 reset/handshake branch is unmodeled.
+Full22224 originalcalls execute; applicationphase doesnot alter orreplace
+transport-produced completion/payload inintegrated tests. Peripheral samples,
+replybytes,localgates andcallschedules remainfixtures,notphysicalhardware.
+
+C20A consumescompletion. Status1 permits firsttwoBEwords into55B8/+2.
+Onlywhen word1==(word0 XORFFFF) arewords2..18 copied, and23748 executes.
+Onlyheader8000 or9001..9080 callsdecoder2291A andsets5578=1. Atentrance222CC
+5578 and55DE arecleared. Otherheaders can passcomplement andcopyrawpayload
+butdonotdecodenumericfeedback. Invalidcomplement updatesonlyrawheaderwords.
+Status0/2 (andteststatus3) retainall38bytes ofapplicationrawbuffer55B8.
+Allrejectedclasses hold numeric5534/5540/5544/5548/554C/5550/5554. This is
+retention,notproofthose stalevaluesremainpermitted byall downstreamcontrols.
+For9001..9080,228F0 copiesreplybytes30..37 toRAMBB70+8*(header-9001).
+All128 headerindices andrangeboundaries wereexecuted/checked. This isRAM
+storage,notflashwrite. Command'sphysicalmeaning remainsunassigned.
+
+Decoder numericoutputs and filtering
+-------------------------------------
+Original2291A executesentirebody;independentoracles covertheseoutputs,notall
+itsderivedflags/diagnosticwrites. R=RTZbinary32. Wn=BEunsignedword atpayload
+byteoffsetn. StockscaleS=229B8=0.0000762939453125, A=22C44=.030517578125.
+ 5544=R(W8*S);5548=R(W10*S);554C=R(W12*S).
+ 5550=R(unsignedbyte14*.078125).
+ 5554=R(signedbyte15*.78125);5558=rawbyte16.
+If55DF!=1: protected5534=R(W4*A);5540=R(W6*A).
+If55DF==1:
+ 5534=max(0,R(R(R(R(5544-BB1E4)*BB1E8)*125)/5));
+ 5540=max(0,R(R(R(R(5548-BB1EC)*BB1F0)*125)/5)).
+StockBB1E4=0,BB1E8~.84,BB1EC=5,BB1F0~-.84.
+Original15522 writes5534plusbothchecksumwords,verified. Noresultupperclamp
+is claimed here; syntheticpayloadsmayproduceout-of-rangephysicalcandidates.
+Mode55DF1 copiesrawbytes17..22 directly into557E..5583. Othermodevaluesuse
+23408 tovoteperbit among previousfiltered,previousraw andnewraw values,then
+storeallnewrawbytes at55E0..55E5.192 cases exerciseallbittriplecombinations
+and0/1/2 modevalues acrossallsixchannels, independentper-bitmajorityoracle.
+The decoderalso derivesflags andwritesdiagnosticrecords; theseexecute but
+are NOT exhaustively independentlymodeled. Avoidclaimingwholefaultpolicy.
+
+Nextcommand scheduling
+----------------------
+C230 samplesF75Ebit2. Ifset,55E7 increments saturating255;elseclears0.
+Next38-byte requestispreparedandC350starts whencompletion1or2 ORupdated
+55E7 > stockB8100=1. Thus twoqualifiedcalls fromzero can start withstatus0.
+This directpin/statuspolicy isverified; physicalpinidentity/period areopen.
+Ifsamplebit2set: header8000/complement7FFF,17words copiedfromROMFF800,
+sequence55EC holds. Otherwiseuse55EC/complement,2256C packscommandfields,
+copyROMFF800+8*(55EC-9001) intoTXbytes30..37, increment55EC andwrap9034
+backto9001. Testedsequence9001,9033,9034 andstatus0/1/2/3,counterboundaries.
+Full19word C1F6copy andC00A/C350 execute. Otherapplicationbits/statusflags
+are outside the independentoracle. Separate C260/231F8 resetpath isopen.
+
+Missingfeedback monitor285F0
+---------------------------
+9462==1 resetsbadcounter57D2,goodcounter57D0,missing57CE,recovery57CD and
+protectedfault20A8. Otherwise57CE=Boolean(5578==0).
+Only57CC==1 enablescounts;othergatevalueszero bothcounters whileholding
+fault/recoverylatches. Whenenabled:
+ missing: ifOLD57D2>=ROMwordE1004=25,set20A8=1;increment57D2saturating65535,
+          clear57D0.
+ present(anynonzero5578): ifOLD57D0>=E1006=250,set57CD=1;increment57D0
+          saturating65535,clear57D2. This doesNOTclear20A8.
+432 cases coverreset/receipt/gate0/1/2,thresholdedges andsaturation.
+A28step lifecycle usesrealSCI1checksum/status thenfull22224 then285F0:
+27valid-checksum butbad-complement replies;fault20A8setsatcall26,not25.
+Call28withrecognizedvalidreplyrefreshesfeedback/clearsbadcounter butfault
+holds1. Explicit9462=1 resetthen clearsit. Here57CC isheldenabled asfixture;
+itsfullupstreampolicy isNOTverified. Staticprecedingcode285CC reads20A8 and
+caninhibit57CC,so doNOTextrapolate thisforcedgate lifecycle intoautomatic
+vehiclefaultrecovery timing. No milliseconds or DTCnumberassigned.
+
+Paired retainedloop
+-------------------
+Onecompletion2 fixture bootstraps firstapplication-generatedrequest; thereafter
+originalE86E/BFB4 handlesall40replybytes andC20A isconsumedonlyby22224.
+ActualTCU216/218packersandECUreceivers/fullA477E plusoriginalcandidatecommand
+selection runbetweenreplyarrivalandapplicationservice. Fiveconsecutive
+replies: recognized9001;badcomplement9002;badchecksum9003;unknownFFFF;
+recognized9004. Numericfeedbackholdsacrossmiddlethree,updatesonlast.
+Traction718C0/1/1/1/0 produces nextrequestcommandwords578/569/569/569/578.
+Applicationalwaysstartsnexttransferinthissequence,evenafterfailedreply.
+Syntheticreceiveranswersarenotaphysicalthrottlecontrollerfirmwaremodel.
+
+Nextactions andfullscope
+-----------------------
+Staticcaller2BE4A invokes21E8C then22224 undercriticalmask;fullcaller/21E8C
+notexecuted.5534reader21D18 feedsclosedoffset/overridepolicy,leadingbackto
+commandselection. Traceitandfull57CCadmission,20A8/recoveryconsumers before
+claimingclosedcontrolloop. KeepC260/231F8 defaults andremainingreplyflags/
+diagnostics,remotepeer/pins/clockrate open. UpstreamA720/history/bindingCAN
+limits andpriorityflagproducers remainimportant.
+Allthreegoalsremainrequired: ECU/ATfulltask/capturetiming/group7/overlap/
+composite/2->1/faultlifecycles;deeptractionCAN211/21Asender/7978/fuel/physical
+outputs;OEMPRHT foldANDunfold/type/speed/neutralreception,pause/resume,
+reversal,timeouts,synchronization/recovery. SeeCHECKPOINT.txt/traction-roof.txt.
+Reproduciblescript/JSON/evidence,annotations/disassembly andfullGhidraarchive
+savedlocally;independentrestoreidentityinCHECKPOINT.txt.No staging/commit/push.

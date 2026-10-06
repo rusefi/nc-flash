@@ -1,0 +1,114 @@
+TCU group13 / P0722 speed invalidation and recovery
+Evidence checkpoint: 2026-10-05
+
+SCOPE AND REPRODUCTION
+
+Uses unchanged examples/LFG1TF000.bin and examples/LFFEEE-stock.bin;
+verify_speed_fault.py asserts their SHA256 identities (see README.txt).
+Run: python research/ecu-at-can/verify_speed_fault.py
+Saved passing output: speed-fault-verification.json. The existing integer
+and bounded RTZ interpreters are unchanged. Original handlers/helpers execute;
+capture arguments, admitted diagnostic inputs and scheduling are synthetic.
+No peripheral edges, physical time units or PRHT receiver are emulated.
+
+FAULT SOURCE AND PRODUCER (EXECUTED)
+
+512 one-hot fixtures across A958..A997 in full publisher21C1C find only
+A962 bit2 sets92C6 bit2, which invalidates CAN216 bytes5..6 at18F8C.
+A962 is diagnostic summary index0A, contributed by group13 (hex), code0722.
+Record5ECA8:0100000001f411c7072200000a000a00. Its type1 selects56908 through
+dispatcher56658/table5EB5C; A936==1 admits that dispatcher.
+
+Producer58AA8 requires A938==1 and A735==0. Otherwise it stores raw0 at
+A749, resets word8900, word88F2 and latchAC89. In admitted operation:
+  58808 requires exactly one asserted Boolean among88B4/B5/B6/B7/BA/BB/BC,
+  and that input must be B7,BA,BB orBC.128 Boolean combinations tested.
+  5885E requires bit0 in A959/A95A/A95B/A95C/A95D/A95E/A960/A961;
+  all256 combinations tested. A95F is not part of this helper.
+  Other prerequisites:8420==0, bit0 inA964/A97D/A963, u16[A4F8]>=300,
+  and A5BC/A5BD/A5BE/A5BF all zero.20 individual gate-rejection cases pass.
+  Main prerequisite failure resets8900, preserving a previously selected
+  raw recovery bit80; it does not perform the whole admission-off reset.
+
+With prerequisites satisfied, raw status includes bit0. The unsigned8900
+counter determines the remaining state:
+  count<=12: raw1 (or81 if recovery selected)
+  12<count<=6000: raw3, reset88F2/AC89, setAC87=1
+  count>6000: raw7, reset88F2/AC89
+6000 is12*word[5ECAC], with stock word500. Nine boundaries are executed.
+Separately, admitted88F2>=250 sets secondary summary status3 instead of1
+via57F00(index0A); this secondary threshold is a static trace, not a new
+complete lifecycle test. No conversion of these counts into milliseconds.
+
+CAPTURE COUNTERS AND END-TO-END LIFECYCLE (EXECUTED)
+
+17A58 takes captured count inr4, stores it890C, calculates unsigned delta/10
+into8908 (cap7FFFFFFF), calls211DC and clears88F0. It increments saturating
+16-bit counters8900/8902/8904.179A8 similarly uses88FC/88F8 and20678, clears
+8900 and increments88F0/88F2/88F4. Eight reset/saturation cases pass.
+The test calls the complete17A58 handler6001 times, without179A8 between,
+running58AA8,56658,570F6,21C1C and CAN216 builder at listed checkpoints.
+
+  count       raw13 active13 A962 92C6  CAN216word5 ECU201word4 stored report
+  0,12        01    00       01   00    20000       12345       absent
+  13,6000     03    02       0A   02    20000       12345       absent
+  6001        07    04       1C   06    FFFF        FFFF        07 22 ff
+  recovery    81    00       11   00    40000       12345       07 22 ff
+
+ECU fixtures select healthy decoded4B0 inputs12345. Thus the invalid TCU
+word independently invalidates201 even with those alternate inputs healthy.
+At recovery the candidate changes from10000 to30000: speed-fault handling
+had cleared the limiter latch, so recovery publishes40000 immediately.
+The retained stored diagnostic is distinct from the recovered active state.
+
+Recovery test executes179A8 once (clears8900), sets80B6=1 and80B8=0.
+58C42 qualifies recovery when u16[80B6]>0, A963 bit0 and u16[8900]<12.
+When A962 bit0 is clear, qualification latchesAC89=1; AC89==1 and80B8==0
+select rawbit80 and clearAC87.48 boundary/gate combinations pass. Merely
+seeding88F2 with1/249/250 without clearing8900 did not recover the fault in
+exploratory execution. This is not a real drive-cycle or report-erasure test.
+
+FACTORY CORRELATION AND LIMITS
+
+Mazda2008 SJ6A-EL P0722 diagnostic procedure (read2026-10-05):
+https://www.ncmiata-servicemanual.com/src/g5w05/html/id050208801600.html
+The factory procedure calls P0722 a vehicle-speed-sensor circuit malfunction
+and describes D-range, turbine pulses and absent VSS signal as detection
+conditions. It identifies VSS B/A connections to TCM2D/2C and says the code
+can be stored with first-drive-cycle warnings; it lists no pending code.
+This supports a VSS-versus-turbine interpretation of the cross-counters,
+but does not identify the MCU pins or prove that this firmware matches the
+manual's calibration. The manual's12-pulse description and this image's
+separate >12 / >6000 states must not be flattened into one threshold.
+Internal active state2 is not automatically an OBD pending-code status.
+Later web reopens returned an internal access error; no manual copy saved.
+
+Static ISR lead:16B5E tests TSR0FFFFF42C bit1;16B72..78 read32-bit FFFFF438
+and call17A58. Capture0A ISR16C7C usesFFFFF434 and179A8. Physical wiring
+mapping and interrupt scheduling remain unverified.
+
+FAILED LEAD AND NEXT WORK
+
+Calling566E0 manually for group13 appeared to require500 calls, but was
+the wrong processor: record type1 selects56908. The formal test uses full
+56658 dispatch. Do not retain a500-call confirmation claim for this path.
+
+Static global monitor gate58768 calls23E7C and can reset through5873C/58744.
+A4E8 states0/1/2 set8420=FFFF; other states can load10000. If8420<7500,
+signed80A6>=20 andA965 bit0, it clears8420. This gate is not newly executed;
+the new lifecycle assumes it is admitted. Trace it and real capture identity
+before claiming full-system P0722 detection or physical time constants.
+
+Separate CAN201 continuation:2055C reads8814, scales by256/100, substitutes
+signed ROM76DDE when92C9 bit6, clamps0..32767 ->80E8; tailcalls50C9A to
+scale80E8*100/256 ->809E and setA4E4 (fault4;8816==2 valid1;otherwise2).
+The full function executed in exploratory fixtures, but has no new systematic
+verifier yet.2059A shifts history918C/8E/90 and forms9184;205D4/205FA filter
+into9186/9188.21628 consumes201byte6-derived8808 with soft-double helpers;
+its complete arithmetic/downstream consumers are still unexecuted.
+
+All three objectives remain active: ECU/TCU integration, deep traction logic,
+and NC PRHT folding/unfolding integration. This establishes a speed sender's
+fault/recovery behavior, not roof reception or a roof open/close CAN command.
+Next prioritize PRHT speed-invalid/neutral message attribution and CAN211
+traction arbitration, while retaining the TCU gate/consumer leads above.

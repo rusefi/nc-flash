@@ -1,0 +1,167 @@
+ECU source history, ratio retention and timer-controlled decay
+2026-10-06
+
+Executed evidence
+-----------------
+The ECU retains a ratio when its denominator is near zero. It also maintains
+an independent protected reference whose decay depends on a countdown and
+holdoff. Both affect the source selector traced in control-sources.txt.
+
+verify_control_history.py executes original bodies 58338, 58280, 582BC,
+58140, 581B8, 58102, 58088 and 582B2, including their original helpers.
+Independent finite RTZ/state oracles check outputs and protected records.
+Both ROM identities and results are in control-history-verification.json.
+
+Passed: 1,692 direct cases (343 ratio, 100 remainder, 108 hysteresis,
+972 timer, 60 holdoff, 108 decay, one initialization), plus 220 serial cycles
+with 23 actual paired TCU216/218 -> ECU CAN updates. ROMs, shared interpreter
+and older verifier scripts are unchanged.
+
+Reproduce from repository root:
+  python research/ecu-at-can/verify_control_history.py >
+    research/ecu-at-can/control-history-verification.json
+
+R below means round toward zero to binary32 at each indicated operation.
+Tests cover finite normal/zero operands; nonfinite and exception behavior
+remain unmodeled. Addresses are hexadecimal unless a value is stated.
+
+Ratio and remainder
+-------------------
+58338 reads numerator 802C, denominators 8038/803C and old ratio 8028.
+The individual tolerances at 58564/5856C/58574 are approximately 0.005,
+0.0078125 and 0.0000078125. Tests use their exact ROM float values.
+
+  abs(numerator) <= epsilon0: write 8028 = 0, regardless of denominators.
+  Otherwise, if both abs(denominator) > their respective epsilon:
+    write 8028 = R(numerator / R(denominator1 * denominator2)).
+  Otherwise: hold 8028 exactly.
+
+After every branch, original helpers publish two status bytes:
+  5AACC: 8197 = (R(8028 - 801C) >= DAC58 = 20266).
+  5AAF0: 8198 = (R(8028 - 801C) <= 0).
+Both execute even after the ratio is held or cleared.
+
+582B2 initializes offset 801C to D9E88 = 681.5. Then 58280 publishes:
+  8018 = max(0, R(R(8028 - 801C) - R(6C20 / 60))).
+The divisor 60 is literal 58314. Holding 8028 therefore does not guarantee
+8018 holds if correction 6C20 changes. The lifecycle executes these producers;
+ratio inputs and 6C20 remain fixtures without physical source attribution.
+
+Retained-reference hysteresis
+-----------------------------
+582BC reads protected 2310, defaulting to D9E84 = 0 if invalid, and compares
+source 8018 against that reference:
+  source >= R(saved + 50): 8023 = 0;
+  source <= saved: 8023 = 1;
+  otherwise: retain 8023, including a non-Boolean previous value.
+The high comparison runs first. Constant 50 is D9E78. This body does not
+write the protected reference itself.
+
+Decay admission and cadence
+---------------------------
+58140 updates unsigned word 8020. It reloads D9E76 = 113 when any of these
+conditions holds:
+  8194 == 0;
+  7012 == 1;
+  7346 == 0;
+  8023 == 0 AND R(7020 + 100) > 6DB4 (constant 100 at D9E7C).
+Otherwise it decrements a nonzero counter. Raw 7012 = 2 does not trigger the
+exact-one test; raw 8194/7346 = 2 count as nonzero. Equality at 7020 + 100
+does not trigger the reload.
+
+581B8 updates unsigned byte holdoff 8022 and previous word 8024:
+  current 8020 == 0 AND (previous 8024 != 0 OR old 8022 == 0): load 3;
+  otherwise: decrement a nonzero holdoff.
+It always saves current 8020 into 8024. Constant 3 is D9E74. At the falling
+edge of 8020, the holdoff reloads even if already nonzero. While 8020 remains
+zero, the holdoff repeats 3, 2, 1, 0, 3, 2, 1, 0...
+
+58102 reads protected 2310 with default zero. Only when both 8020 and 8022
+are zero does it write:
+  saved > D9E80 (~0.05): R(saved - step);
+  otherwise: zero.
+When admission fails, all eight protected-record bytes remain unchanged.
+A failed read may still invoke the original reader's failure side effect.
+Original writer 152FE computes both checksum copies, writes under an
+interrupt mask, then restores the incoming mask. Its NaN path is untested.
+
+58088 initializes protected 2310 to zero through that writer. An upward
+update or restoration of a nonzero record has not been established.
+
+Retained paired lifecycle
+-------------------------
+Original initializers run, then protected 2310 is explicitly seeded to 1
+as prior valid history. Its origin remains unproved. No direct injection
+of 8018, 8028, 8020, 8022, 8023 or 8024 follows. Ratio inputs 1363, 2 and 1
+initially produce 681.5; offset 681.5 and correction zero yield 8018 = 0.
+
+  Call 1: 8194 is zero, reloading timer 113.
+  Call 2: upstream 8194 becomes 1; remaining qualifiers allow countdown.
+  Call 20: denominator 8038 becomes zero; ratio 681.5 holds.
+  Call 21: numerator becomes zero; ratio clears despite zero denominator.
+  Call 40: valid ratio inputs return; ratio 681.5 returns.
+  Call 114: timer reaches zero; holdoff loads 3.
+  Call 117: first decay, 1 -> 0.949999988079071.
+  Calls 121, 125, ...: one protected write every four calls.
+  Call 145: larger numerator produces 8018 = 1000; hysteresis clears.
+    Timer does not reload because 7020 + 100 is below fixture 6DB4 = 150.
+  Call 161: ratio and remainder return to baseline; hysteresis sets 1.
+  Call 193: retained value reaches zero; later admitted writes retain zero.
+  Call 201: upstream absolute enable changes 0 -> 1, selecting its original
+    entry-reset path.
+
+The source selector executes before decay in the explicit test schedule,
+so that cycle's 8014 can reflect the pre-decay record. The test preserves
+this difference. Normal and absolute command producers, serial framing,
+application reply checks and paired CAN boundary updates execute. Each
+queued command is checked against the preceding selected value. Replies
+remain synthetic; this is not an implementation of the remote controller.
+
+Scheduling evidence and limits
+------------------------------
+Original caller 1CA4A -> 1CA50 -> 1CA56 invokes 58140 -> 581B8 -> 58102
+consecutively, establishing local countdown/holdoff/decay order.
+Separate caller 1A82A -> 1A830 -> 1A836 -> 1A83C -> 1A842 invokes
+58338 -> 58280 -> 58092 -> 582BC -> 580AC. The earlier source-map group
+at 1CC98/9E/A4 and coupling consumer at 18572 are connected through RAM.
+
+The test invokes these groups once per synthetic cycle. Their full ordering
+and rates across tasks remain unverified. Constants 113 and 3 are call
+counts, not milliseconds. Physical actuator and complete vehicle behavior
+remain unproved.
+
+Initial failed run and correction
+---------------------------------
+An exact Fraction(1,10) fixture was rejected by the existing exact-value
+encoder. The fixture now explicitly uses RTZ binary32 q(Fraction(1,10));
+the complete verifier then passed. This was a test-input representation
+error. Neither firmware nor interpreter rounding was changed.
+
+Next concrete actions
+---------------------
+Execute the ratio-input producers: 583B8 writes 802C from 8030/8034 and
+7016; 583EE/58422 produce 8030/8034; 5844E produces 8038 after 51286/39FB4
+and lookup A35B0; writer 58552 publishes 803C from arithmetic on 6DC4/6D40
+around 58528. These last two environment inputs also appear in the CAN
+models. Connect their producers and call order before claiming a complete
+source chain.
+
+Find the origin or restoration of nonzero 2310. Aligned literal references
+found 58080 (via 1543E), 58088 (initialization), 580AC/58102/582BC and AED2E.
+AED2E reads the record and copies its value to 5804 + 3D8 = 5BDC. It does
+not establish an upward writer or EEPROM storage. Table-based or relative
+addressing can evade this search. Likewise, 582B2 is the found writer of
+801C; literal references alone cannot establish that it is the only writer.
+
+Retain upstream 8194/7012/7346/7020/6DB4 and 735A/6536 provenance, 240xx
+stage/enable, 257D8/full task, protected RAM/5354, 20A8 clear/57CD consumers
+and A720 history with binding limits. ECU/TCU capture timing and remaining
+group7/overlap/composite/2->1 behavior remain open. Traction sender attribution,
+7978/fuel consumers and physical outputs remain open. OEM PRHT folding and
+unfolding, pause/resume, reversal, timeouts, synchronization and recovery
+remain active; this trace adds no OEM roof receiver or CAN command evidence.
+
+Persistence: refreshed Ghidra archive independently restored with 11 matching
+project hashes, 972 annotations and 538 identical exports. Exact identity is
+in ghidra/snapshot.json and CHECKPOINT.txt. Git-eligible work saved locally;
+no staging, commit or push.

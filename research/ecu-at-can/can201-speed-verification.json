@@ -1,0 +1,119 @@
+{
+  "scope": "Execute ECU CAN4B0 words -> selected value -> CAN201 bytes4/5.\n\nUnmodified ECU instructions, synthetic RAM and explicit call order. The D504\nfallback executes its cached-value branch (4564=0). No peripheral, scheduler,\nDSC sender or PRHT receiver is simulated. Physical speed units are unproven.\nIndependent binary-search RTZ reference models each rounded operation.",
+  "ecu_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "end_to_end_cases": 1600,
+  "encoder_boundary_cases": 66,
+  "pack_mode_cases": 4,
+  "initialization_and_receipt_reload": "pass",
+  "examples": [
+    {
+      "input_words": [
+        10000,
+        10000
+      ],
+      "selected_binary32": "0x0",
+      "selected_decimal": 0.0,
+      "output_word": 10000,
+      "can201_fixture_payload": "1234567827109abc"
+    },
+    {
+      "input_words": [
+        12345,
+        14567
+      ],
+      "selected_binary32": "0x420a3d6e",
+      "selected_decimal": 34.55998992919922,
+      "output_word": 13456,
+      "can201_fixture_payload": "1234567834909abc"
+    },
+    {
+      "input_words": [
+        12345,
+        65535
+      ],
+      "selected_binary32": "0x41bb9998",
+      "selected_decimal": 23.449996948242188,
+      "output_word": 12345,
+      "can201_fixture_payload": "1234567830399abc"
+    },
+    {
+      "input_words": [
+        65534,
+        65534
+      ],
+      "selected_binary32": "0x440ad5c2",
+      "selected_decimal": 555.3399658203125,
+      "output_word": 40000,
+      "can201_fixture_payload": "123456789c409abc"
+    },
+    {
+      "input_words": [
+        65535,
+        14567
+      ],
+      "selected_binary32": "0x4236ae10",
+      "selected_decimal": 45.66998291015625,
+      "output_word": 14567,
+      "can201_fixture_payload": "1234567838e79abc"
+    },
+    {
+      "input_words": [
+        65535,
+        65535
+      ],
+      "selected_binary32": "0x41b80000",
+      "selected_decimal": 23.0,
+      "output_word": 12300,
+      "can201_fixture_payload": "12345678300c9abc"
+    }
+  ],
+  "paired_tcu216_cases": 96,
+  "paired_examples": [
+    {
+      "tcu_word5_argument": 12345,
+      "receipt_live": false,
+      "can4b0_words": [
+        14567,
+        14567
+      ],
+      "selected_value": 45.66998291015625,
+      "fallback_value": 65537.0,
+      "can201_word4": 65535
+    },
+    {
+      "tcu_word5_argument": 12345,
+      "receipt_live": true,
+      "can4b0_words": [
+        14567,
+        14567
+      ],
+      "selected_value": 45.66998291015625,
+      "fallback_value": 23.449996948242188,
+      "can201_word4": 14567
+    },
+    {
+      "tcu_word5_argument": 65535,
+      "receipt_live": false,
+      "can4b0_words": [
+        14567,
+        14567
+      ],
+      "selected_value": 45.66998291015625,
+      "fallback_value": 65537.0,
+      "can201_word4": 65535
+    },
+    {
+      "tcu_word5_argument": 65535,
+      "receipt_live": true,
+      "can4b0_words": [
+        14567,
+        14567
+      ],
+      "selected_value": 45.66998291015625,
+      "fallback_value": 65537.0,
+      "can201_word4": 65535
+    }
+  ],
+  "limits": "RAM fixtures and explicit scheduling; speed units, DSC ownership and roof consumption unproven."
+}

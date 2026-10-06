@@ -1,0 +1,129 @@
+{
+  "scope": "Execute group13/P0722 producer, capture counters, diagnosis and CAN propagation.\n\nSynthetic admitted inputs and explicit call order; original ROM instructions.\nCapture handlers receive counter arguments without emulating peripheral edges.\nNo physical time/pulse calibration, DSC or PRHT receiver is established.",
+  "one_hot_mapping_cases": 512,
+  "speed_fault_contributors": [
+    [
+      "0xa962",
+      2
+    ]
+  ],
+  "selector_helper_cases": 128,
+  "diagnostic_helper_cases": 256,
+  "gate_rejections": 20,
+  "counter_boundaries": [
+    {
+      "counter": 0,
+      "raw": 1
+    },
+    {
+      "counter": 1,
+      "raw": 1
+    },
+    {
+      "counter": 11,
+      "raw": 1
+    },
+    {
+      "counter": 12,
+      "raw": 1
+    },
+    {
+      "counter": 13,
+      "raw": 3
+    },
+    {
+      "counter": 5999,
+      "raw": 3
+    },
+    {
+      "counter": 6000,
+      "raw": 3
+    },
+    {
+      "counter": 6001,
+      "raw": 7
+    },
+    {
+      "counter": 65535,
+      "raw": 7
+    }
+  ],
+  "capture_saturation_cases": 8,
+  "recovery_gate_cases": 48,
+  "capture_handler_calls": 6001,
+  "paired_timeline": [
+    {
+      "capture_handler_calls": 0,
+      "capture_counter_8900": 0,
+      "raw_group13": 1,
+      "active_group13": 0,
+      "summary_a962": 1,
+      "flags_92c6": 0,
+      "limiter_initialized": 1,
+      "can216_word5": 20000,
+      "can201_with_healthy_4b0": 12345,
+      "stored_report": ""
+    },
+    {
+      "capture_handler_calls": 12,
+      "capture_counter_8900": 12,
+      "raw_group13": 1,
+      "active_group13": 0,
+      "summary_a962": 1,
+      "flags_92c6": 0,
+      "limiter_initialized": 1,
+      "can216_word5": 20000,
+      "can201_with_healthy_4b0": 12345,
+      "stored_report": ""
+    },
+    {
+      "capture_handler_calls": 13,
+      "capture_counter_8900": 13,
+      "raw_group13": 3,
+      "active_group13": 2,
+      "summary_a962": 10,
+      "flags_92c6": 2,
+      "limiter_initialized": 1,
+      "can216_word5": 20000,
+      "can201_with_healthy_4b0": 12345,
+      "stored_report": ""
+    },
+    {
+      "capture_handler_calls": 6000,
+      "capture_counter_8900": 6000,
+      "raw_group13": 3,
+      "active_group13": 2,
+      "summary_a962": 10,
+      "flags_92c6": 2,
+      "limiter_initialized": 1,
+      "can216_word5": 20000,
+      "can201_with_healthy_4b0": 12345,
+      "stored_report": ""
+    },
+    {
+      "capture_handler_calls": 6001,
+      "capture_counter_8900": 6001,
+      "raw_group13": 7,
+      "active_group13": 4,
+      "summary_a962": 28,
+      "flags_92c6": 6,
+      "limiter_initialized": 0,
+      "can216_word5": 65535,
+      "can201_with_healthy_4b0": 65535,
+      "stored_report": "07 22 ff"
+    },
+    {
+      "recovery_capture_179a8": true,
+      "capture_counter_8900": 0,
+      "raw_group13": 129,
+      "active_group13": 0,
+      "summary_a962": 17,
+      "flags_92c6": 0,
+      "limiter_initialized": 1,
+      "can216_word5": 40000,
+      "can201_with_healthy_4b0": 12345,
+      "stored_report": "07 22 ff"
+    }
+  ],
+  "limitations": "Explicit synthetic schedule; no real timing, physical pin identity, PRHT reception or actuator response."
+}

@@ -1,0 +1,2297 @@
+{
+  "scope": "Original ECU CAN215 -> TCU base/request -> CAN216 -> same ECU spark state.\n\nExplicit model, admission, diagnostic-summary and timer fixtures. Original\nfunctions execute; no physical CAN controller, real scheduler or unit claim.",
+  "rom_sha256": {
+    "ECU": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+    "TCU": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+  },
+  "encoder_cases": 432,
+  "complete_callback_conversion_cases": 400,
+  "dependency_cases": 20,
+  "summary_policy_cases": 4096,
+  "diagnostic_group_cases": 219,
+  "contributing_groups": [
+    "0x35",
+    "0x36",
+    "0x3b"
+  ],
+  "feedback_cases": 72,
+  "feedback_matrix": [
+    {
+      "primary71ec": -5,
+      "offset71c4": -5,
+      "can215": "01 fb 02 1e 01 fb 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 3.5,
+      "spark": [
+        17.5,
+        17.5,
+        17.5,
+        17.5
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": -5,
+      "offset71c4": -5,
+      "can215": "01 fb 02 1e 01 fb 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 3.5,
+      "spark": [
+        17.5,
+        17.5,
+        17.5,
+        17.5
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": -5,
+      "offset71c4": -5,
+      "can215": "01 fb 02 1e 01 fb 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 3.5,
+      "spark": [
+        17.5,
+        17.5,
+        17.5,
+        17.5
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": -5,
+      "offset71c4": -5,
+      "can215": "01 fb 02 1e 01 fb 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 3.5,
+      "spark": [
+        17.5,
+        17.5,
+        17.5,
+        17.5
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": -5,
+      "offset71c4": -5,
+      "can215": "01 fb 02 1e 01 fb 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": -5,
+      "offset71c4": -5,
+      "can215": "01 fb 02 1e 01 fb 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 0,
+      "offset71c4": 0,
+      "can215": "02 00 02 1e 02 00 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 3.0,
+      "spark": [
+        18.0,
+        18.0,
+        18.0,
+        18.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 0,
+      "offset71c4": 0,
+      "can215": "02 00 02 1e 02 00 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 3.0,
+      "spark": [
+        18.0,
+        18.0,
+        18.0,
+        18.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 0,
+      "offset71c4": 0,
+      "can215": "02 00 02 1e 02 00 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 3.0,
+      "spark": [
+        18.0,
+        18.0,
+        18.0,
+        18.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 0,
+      "offset71c4": 0,
+      "can215": "02 00 02 1e 02 00 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 3.0,
+      "spark": [
+        18.0,
+        18.0,
+        18.0,
+        18.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 0,
+      "offset71c4": 0,
+      "can215": "02 00 02 1e 02 00 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 0,
+      "offset71c4": 0,
+      "can215": "02 00 02 1e 02 00 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 5,
+      "offset71c4": 5,
+      "can215": "02 05 02 1e 02 05 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 2.0,
+      "spark": [
+        19.0,
+        19.0,
+        19.0,
+        19.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 5,
+      "offset71c4": 5,
+      "can215": "02 05 02 1e 02 05 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 2.0,
+      "spark": [
+        19.0,
+        19.0,
+        19.0,
+        19.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 5,
+      "offset71c4": 5,
+      "can215": "02 05 02 1e 02 05 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 2.0,
+      "spark": [
+        19.0,
+        19.0,
+        19.0,
+        19.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 5,
+      "offset71c4": 5,
+      "can215": "02 05 02 1e 02 05 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 0,
+      "can216": "02 00 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 0,
+      "at_correction": 5.0,
+      "traction_correction": 2.0,
+      "spark": [
+        19.0,
+        19.0,
+        19.0,
+        19.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 5,
+      "offset71c4": 5,
+      "can215": "02 05 02 1e 02 05 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 5,
+      "offset71c4": 5,
+      "can215": "02 05 02 1e 02 05 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 0,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 10,
+      "offset71c4": -5,
+      "can215": "02 0a 02 1e 01 fb 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.5,
+      "spark": [
+        18.25,
+        18.25,
+        18.25,
+        18.25
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 10,
+      "offset71c4": -5,
+      "can215": "02 0a 02 1e 01 fb 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.5,
+      "spark": [
+        18.25,
+        18.25,
+        18.25,
+        18.25
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 10,
+      "offset71c4": -5,
+      "can215": "02 0a 02 1e 01 fb 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 320,
+      "can216": "02 0a 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 10,
+      "at_correction": 3.75,
+      "traction_correction": 3.5,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 10,
+      "offset71c4": -5,
+      "can215": "02 0a 02 1e 01 fb 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 320,
+      "can216": "02 0a 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 10,
+      "at_correction": 3.75,
+      "traction_correction": 3.5,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 10,
+      "offset71c4": -5,
+      "can215": "02 0a 02 1e 01 fb 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 10,
+      "offset71c4": -5,
+      "can215": "02 0a 02 1e 01 fb 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 15,
+      "offset71c4": 0,
+      "can215": "02 0f 02 1e 02 00 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 15,
+      "offset71c4": 0,
+      "can215": "02 0f 02 1e 02 00 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 15,
+      "offset71c4": 0,
+      "can215": "02 0f 02 1e 02 00 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 320,
+      "can216": "02 0a 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 10,
+      "at_correction": 3.75,
+      "traction_correction": 3.0,
+      "spark": [
+        19.25,
+        19.25,
+        19.25,
+        19.25
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 15,
+      "offset71c4": 0,
+      "can215": "02 0f 02 1e 02 00 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 320,
+      "can216": "02 0a 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 10,
+      "at_correction": 3.75,
+      "traction_correction": 3.0,
+      "spark": [
+        19.25,
+        19.25,
+        19.25,
+        19.25
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 15,
+      "offset71c4": 0,
+      "can215": "02 0f 02 1e 02 00 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 15,
+      "offset71c4": 0,
+      "can215": "02 0f 02 1e 02 00 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": 5,
+      "can215": "02 14 02 1e 02 05 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 2.0,
+      "spark": [
+        19.75,
+        19.75,
+        19.75,
+        19.75
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": 5,
+      "can215": "02 14 02 1e 02 05 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 2.0,
+      "spark": [
+        19.75,
+        19.75,
+        19.75,
+        19.75
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": 5,
+      "can215": "02 14 02 1e 02 05 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 320,
+      "can216": "02 0a 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 10,
+      "at_correction": 3.75,
+      "traction_correction": 2.0,
+      "spark": [
+        20.25,
+        20.25,
+        20.25,
+        20.25
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": 5,
+      "can215": "02 14 02 1e 02 05 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 320,
+      "can216": "02 0a 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 10,
+      "at_correction": 3.75,
+      "traction_correction": 2.0,
+      "spark": [
+        20.25,
+        20.25,
+        20.25,
+        20.25
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": 5,
+      "can215": "02 14 02 1e 02 05 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": 5,
+      "can215": "02 14 02 1e 02 05 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 480,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": -5,
+      "can215": "02 14 02 1e 01 fb 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.5,
+      "spark": [
+        19.5,
+        19.5,
+        19.5,
+        19.5
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": -5,
+      "can215": "02 14 02 1e 01 fb 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.5,
+      "spark": [
+        19.5,
+        19.5,
+        19.5,
+        19.5
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": -5,
+      "can215": "02 14 02 1e 01 fb 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 640,
+      "can216": "02 14 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 20,
+      "at_correction": 2.0,
+      "traction_correction": 3.5,
+      "spark": [
+        20.5,
+        20.5,
+        20.5,
+        20.5
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": -5,
+      "can215": "02 14 02 1e 01 fb 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 640,
+      "can216": "02 14 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 20,
+      "at_correction": 2.0,
+      "traction_correction": 3.5,
+      "spark": [
+        20.5,
+        20.5,
+        20.5,
+        20.5
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": -5,
+      "can215": "02 14 02 1e 01 fb 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 20,
+      "offset71c4": -5,
+      "can215": "02 14 02 1e 01 fb 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 25,
+      "offset71c4": 0,
+      "can215": "02 19 02 1e 02 00 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 25,
+      "offset71c4": 0,
+      "can215": "02 19 02 1e 02 00 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 25,
+      "offset71c4": 0,
+      "can215": "02 19 02 1e 02 00 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 640,
+      "can216": "02 14 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 20,
+      "at_correction": 2.0,
+      "traction_correction": 3.0,
+      "spark": [
+        21.0,
+        21.0,
+        21.0,
+        21.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 25,
+      "offset71c4": 0,
+      "can215": "02 19 02 1e 02 00 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 640,
+      "can216": "02 14 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 20,
+      "at_correction": 2.0,
+      "traction_correction": 3.0,
+      "spark": [
+        21.0,
+        21.0,
+        21.0,
+        21.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 25,
+      "offset71c4": 0,
+      "can215": "02 19 02 1e 02 00 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 25,
+      "offset71c4": 0,
+      "can215": "02 19 02 1e 02 00 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": 5,
+      "can215": "02 1e 02 1e 02 05 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 2.0,
+      "spark": [
+        21.0,
+        21.0,
+        21.0,
+        21.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": 5,
+      "can215": "02 1e 02 1e 02 05 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 2.0,
+      "spark": [
+        21.0,
+        21.0,
+        21.0,
+        21.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": 5,
+      "can215": "02 1e 02 1e 02 05 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 640,
+      "can216": "02 14 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 20,
+      "at_correction": 2.0,
+      "traction_correction": 2.0,
+      "spark": [
+        22.0,
+        22.0,
+        22.0,
+        22.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": 5,
+      "can215": "02 1e 02 1e 02 05 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 640,
+      "can216": "02 14 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 20,
+      "at_correction": 2.0,
+      "traction_correction": 2.0,
+      "spark": [
+        22.0,
+        22.0,
+        22.0,
+        22.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": 5,
+      "can215": "02 1e 02 1e 02 05 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": 5,
+      "can215": "02 1e 02 1e 02 05 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 800,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": -5,
+      "can215": "02 1e 02 1e 01 fb 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": -5,
+      "can215": "02 1e 02 1e 01 fb 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": -5,
+      "can215": "02 1e 02 1e 01 fb 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 960,
+      "can216": "02 1e 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 30,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": -5,
+      "can215": "02 1e 02 1e 01 fb 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 960,
+      "can216": "02 1e 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 30,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": -5,
+      "can215": "02 1e 02 1e 01 fb 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 30,
+      "offset71c4": -5,
+      "can215": "02 1e 02 1e 01 fb 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.5,
+      "spark": [
+        22.5,
+        22.5,
+        22.5,
+        22.5
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 35,
+      "offset71c4": 0,
+      "can215": "02 23 02 1e 02 00 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 35,
+      "offset71c4": 0,
+      "can215": "02 23 02 1e 02 00 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 35,
+      "offset71c4": 0,
+      "can215": "02 23 02 1e 02 00 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 960,
+      "can216": "02 1e 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 30,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 35,
+      "offset71c4": 0,
+      "can215": "02 23 02 1e 02 00 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 960,
+      "can216": "02 1e 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 30,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 35,
+      "offset71c4": 0,
+      "can215": "02 23 02 1e 02 00 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 35,
+      "offset71c4": 0,
+      "can215": "02 23 02 1e 02 00 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 40,
+      "offset71c4": 5,
+      "can215": "02 28 02 1e 02 05 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 40,
+      "offset71c4": 5,
+      "can215": "02 28 02 1e 02 05 00 02",
+      "timer8170": 0,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 40,
+      "offset71c4": 5,
+      "can215": "02 28 02 1e 02 05 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 960,
+      "can216": "02 1e 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 30,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 40,
+      "offset71c4": 5,
+      "can215": "02 28 02 1e 02 05 00 02",
+      "timer8170": 5,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 960,
+      "can216": "02 1e 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 30,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "primary71ec": 40,
+      "offset71c4": 5,
+      "can215": "02 28 02 1e 02 05 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary71ec": 40,
+      "offset71c4": 5,
+      "can215": "02 28 02 1e 02 05 00 02",
+      "timer8170": 10,
+      "tcu_base92e4": 1120,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 2.0,
+      "spark": [
+        24.0,
+        24.0,
+        24.0,
+        24.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "invalid_hold_substitute_recover": [
+    {
+      "primary": 25,
+      "invalid": 0,
+      "summary_a98c": 1,
+      "can215": "02 19 02 1e 02 00 00 02",
+      "validity88ea": 2,
+      "base80b4": 250,
+      "status_a538": 1,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary": 35,
+      "invalid": 0,
+      "summary_a98c": 1,
+      "can215": "02 23 02 1e 02 00 00 02",
+      "validity88ea": 2,
+      "base80b4": 350,
+      "status_a538": 1,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary": 0,
+      "invalid": 1,
+      "summary_a98c": 1,
+      "can215": "ff ff ff ff ff ff 00 02",
+      "validity88ea": 1,
+      "base80b4": 350,
+      "status_a538": 2,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary": 0,
+      "invalid": 1,
+      "summary_a98c": 0,
+      "can215": "ff ff ff ff ff ff 00 02",
+      "validity88ea": 1,
+      "base80b4": 350,
+      "status_a538": 2,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary": 0,
+      "invalid": 1,
+      "summary_a98c": 4,
+      "can215": "ff ff ff ff ff ff 00 02",
+      "validity88ea": 1,
+      "base80b4": 9240,
+      "status_a538": 4,
+      "tcu_source915a": 29248,
+      "can216": "05 92 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 914,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary": 25,
+      "invalid": 0,
+      "summary_a98c": 1,
+      "can215": "02 19 02 1e 02 00 00 02",
+      "validity88ea": 2,
+      "base80b4": 250,
+      "status_a538": 1,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "limits": "ECU215 source/model coefficients and TCU active phase3 are fixtures. A98C is injected, not produced by timed diagnostics. CAN payload buffers are transferred explicitly; no ISR, real-time or physical-unit assertion."
+}

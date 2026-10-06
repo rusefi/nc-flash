@@ -1,0 +1,1992 @@
+{
+  "startup_copy": {
+    "source": "5F220..5F5FF",
+    "destination": "FFFFAD4C..FFFFB12B",
+    "bytes_verified": 992,
+    "descriptor_A": "010C7FFF",
+    "descriptor_B": "01037FFF"
+  },
+  "capacity_checks": [
+    {
+      "capacity": 12,
+      "failed_handle": 255,
+      "counter_after_failure": 13
+    },
+    {
+      "capacity": 3,
+      "failed_handle": 255,
+      "counter_after_failure": 4
+    }
+  ],
+  "merge_cases": 841,
+  "stateful_list_cases": 600,
+  "merge_examples": [
+    {
+      "first": null,
+      "second": [
+        320,
+        0
+      ],
+      "slot2": 32767,
+      "mode": 255,
+      "source915A": 32767
+    },
+    {
+      "first": null,
+      "second": [
+        320,
+        1
+      ],
+      "slot2": 320,
+      "mode": 1,
+      "source915A": 480
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        640,
+        1
+      ],
+      "slot2": 640,
+      "mode": 1,
+      "source915A": 160
+    },
+    {
+      "first": [
+        640,
+        0
+      ],
+      "second": [
+        320,
+        1
+      ],
+      "slot2": 320,
+      "mode": 1,
+      "source915A": 480
+    },
+    {
+      "first": [
+        640,
+        1
+      ],
+      "second": [
+        320,
+        2
+      ],
+      "slot2": 640,
+      "mode": 1,
+      "source915A": 160
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        320,
+        1
+      ],
+      "slot2": 32767,
+      "mode": 255,
+      "source915A": 32767
+    }
+  ],
+  "paired_cases": [
+    {
+      "first": null,
+      "second": null,
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": null,
+      "second": null,
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": null,
+      "second": null,
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": null,
+      "second": null,
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        0,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        0,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 800,
+      "can216": "02 19 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 25,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        0,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        0,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        320,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        320,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        320,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        320,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        640,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        640,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        640,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        640,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        640,
+        0
+      ],
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        640,
+        0
+      ],
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        640,
+        0
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": null,
+      "second": [
+        640,
+        0
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": null,
+      "record1": null,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": null,
+      "record1": null,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": null,
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": null,
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        0,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        0,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        0,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        0,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        320,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        320,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        320,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        320,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        640,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        640,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        640,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        640,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 160,
+      "can216": "02 05 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 5,
+      "at_correction": 4.25,
+      "traction_correction": 3.0,
+      "spark": [
+        18.75,
+        18.75,
+        18.75,
+        18.75
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        640,
+        0
+      ],
+      "record1": null,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        640,
+        0
+      ],
+      "record1": null,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        640,
+        0
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        320,
+        1
+      ],
+      "second": [
+        640,
+        0
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": null,
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": null,
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": null,
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": null,
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        0,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        0,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        0,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        0,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        320,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        320,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        320,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        320,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        640,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        640,
+        1
+      ],
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        640,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        640,
+        1
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        640,
+        0
+      ],
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        640,
+        0
+      ],
+      "record1": null,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 3.0,
+      "spark": [
+        23.0,
+        23.0,
+        23.0,
+        23.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        640,
+        0
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 00",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "first": [
+        32767,
+        1
+      ],
+      "second": [
+        640,
+        0
+      ],
+      "record1": 320,
+      "tcu_source915a": 480,
+      "can216": "02 0f 02 00 ff 27 10 20",
+      "can211_word0": 10016,
+      "enabled_at": 1,
+      "enabled_211": 1,
+      "cut": 1,
+      "at_network_fault": false,
+      "at_numeric": 15,
+      "at_correction": 3.0,
+      "traction_correction": 3.0,
+      "spark": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "other_cylinder_commands": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "stock_policy_callback": {
+    "entry": "4D98A",
+    "calibration773E8": 0,
+    "value": 0,
+    "mode": 0,
+    "aggregate_source915A": 32767,
+    "entry_conditions_unproved": true
+  },
+  "scope": "Original initialized list mechanics and slot2 merge through CAN216/ECU spark. Candidate fixtures do not prove physical policy entry, gear or real timing."
+}

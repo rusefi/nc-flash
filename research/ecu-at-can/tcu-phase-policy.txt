@@ -1,0 +1,152 @@
+TCU descending phase policy and returned ECU request, 2026-10-06
+
+RESULT AND SCOPE
+
+The selector-created operation0 requests in selection-creation.txt were
+inactive because phase departure has a timer gate as well as a measurement
+gate. Original timer advancement now drives accepted3->2,4->3,5->4 through
+phases0->1->2->3 and managed-request release. CAN216 and the ECU spark path
+are checked at22 transition checkpoints. Two cases produce a reduction;
+code9's stock map is zero despite a functioning state sequence.
+
+The phase ring still contains its completed record. This is phase completion
+and group8 request release, not full application completion. Other groups
+and their acknowledgement/retirement behavior are not simulated or claimed.
+The measured/reference sources and scheduling interleave are explicit
+fixtures, not a model of a moving vehicle or the complete application task.
+
+Reproduce from repo root:
+  python research/ecu-at-can/verify_tcu_phase_policy.py > research/ecu-at-can/tcu-phase-policy-verification.json
+The verifier executes original bodies, including software arithmetic, heap,
+queue, phase dispatch, request callbacks, timer wheel and CAN builders. No
+shared interpreter, original ROM or application code was changed.
+
+Checks passed:
+  1260 descending initial-timer cases, including signed boundaries/slots0,15
+  1470 departure measurement/timer/flag cases
+  4200 target-band, qualification counter, operation and inhibit cases
+  20 code11 special counter-bypass cases
+  28 dispatch cases including phase0 target-qualification admission
+  112 completion-timer cases across all16 slots
+  3 selector-created lifecycles;22 paired CAN216/ECU checkpoints
+
+ORIGINAL PHASE GATES
+
+Phase records95D4 have stride15: code+10,operation+11,third+12,state+13.
+31682 classifies0..4 as direction0 and other codes as direction1. This pass
+tests descending codes5..11 (family=code-5). It does not verify the ascending
+neighbor/overlap logic in317E4 or the ascending qualifier32614.
+
+317E4(index), descending initial timer:
+  delay = ROM byte70A8A[5*family + u8(808C)]
+  if record operation !=0: delay=0
+  admitted = s16(8380 +2*index) >=2*delay
+The operation override executes the original +0.5 conversion helper5BBEC;
+its integer result truncates to0. It is not an invented bypass in the harness.
+All valid808C banks0..4 are tested; production of this range is independently
+verified in tcu-request-dispatch.txt. Stock delays are6 for families0..2 and3
+for families3..6, invariant across these five banks. Signed negative timer
+values are not admitted, including FFFF; do not interpret them as large ages.
+
+3241C(index,code), departure predicate:
+  either92C6 bit1 or bit4 -> no transition (-1)
+  from = ROM5D428[code]
+  measured = s16(80EE)
+  reference = s32(9218 +4*from)
+  threshold = s16(70AEE +2*(family+5)) =128 in this stock image
+  admitted timer AND measured >= reference+threshold ->1; otherwise -1
+Other tested92C6 bits2/5/7 do not inhibit this local predicate. They can
+affect other paths, including cancellation; this is not a global permission.
+
+324CE(index,code,operation), target qualification:
+92C6 bits1/4 return -1 without touching bounds/counter/971A. Otherwise it
+uses to=ROM5D446[code], creates lower=reference-128 and upper=reference+128
+in9704/9700 via original software arithmetic, then dispatches by direction.
+For descending direction, it clears971A bit1 and calls327B0.
+
+327B0 qualifying measurement:
+  codes5/6/7: lower <= measured < upper
+  codes8/9/10: that band OR measured < s16(770BC), stock128
+  code11: measured >= lower (no upper bound)
+If qualified, byte96EF[index] increments with saturation255; otherwise zero.
+Count threshold is ROM70B14[2*family + bool(9410 bit1)]:
+  code     bit1 clear   bit1 set
+   5           20         20
+   6           20         50
+   7           20         50
+   8            5         30
+   9           20         32
+  10           12         20
+  11           12         50
+If global selection operation9C88==5 and9410 bit1 is set, codes8/9 instead
+use70B22/23, both3. The qualifier reads this global operation via48D6A;
+do not substitute the function's operation argument or the record field.
+For code11 only, s16(96CC)>=s16(770C2), stock0x4800, bypasses the count
+threshold when measured>=lower. The signed boundary is explicitly tested.
+Successful qualification returns2 from324CE. All counts refer to calls
+that actually reach this predicate, not milliseconds or timer-wheel ticks.
+
+321AE dispatches three state columns in5D474 through5D464 callbacks.
+In state0, if3241C does not return1, it also invokes324CE and maps its
+successful return2 to1. Thus departure threshold/timer is one admission
+route; target qualification can also advance phase0. Do not describe the
+timer as an unconditional requirement for every phase0->1 transition. All
+seven descending codes are tested at both counter boundaries in states0/1,
+with an unready initial timer and unsatisfied departure measurement.
+
+31A78 applies returned states and resets83A0[index] on0->1,83C0[index]
+when entering2. Callback325DA returns3 when signed83C0[index]>=stock8
+at770C0. Callback325F2 returns-1. Original11014 wheel advances the signed
+timer range four times per16 primary calls. The reset phase and service order
+matter. This proves a call ratio, not a physical duration.
+
+SELECTOR -> PHASE -> MANAGED REQUEST -> CAN216 -> ECU
+
+Each fixture uses original initialization and48C08 with cached old state3,4,5
+and request old-1, producing codes7,8,9, operation0 and group8 requests.
+Sources:80EA=4672,80F6=4224,809C=20000,80EE=1000;92D0=4,A93A=1.
+The relevant target reference9218 is explicitly5000; from-reference is0.
+At primary call80, measured80EE changes to5000. Each cycle runs one11014,
+one31524 event2, then two event4 calls and4C7AC/1FB8C aggregation. No phase
+state or timer is directly injected after creation.
+
+Verified milestones, in primary-call counts for this particular schedule:
+  code7: phase1 at46; request3 at80,4 at81,5 at100;
+         phase2 at129; request released135; phase3 at158.
+  code8: phase1 at22; request3 at80,5 at81;
+         phase2 at109; request released111; phase3 at138.
+  code9: phase1 at22; request3 at80,5 at81;
+         phase2 at111; request released117; phase3 at142.
+
+At call80, code7 reduction576 changes base800 to returned915A=224;
+code8 reduction332 returns468. Near completion these rise to704/778 as the
+request ramps away. CAN216/ECU receive and synthetic spark-model checks give
+corrections4/3.25 initially and1.5/1 near the sampled completion boundaries.
+These numbers are internal model outputs, not a claim of measured crank
+degrees or physical torque. Code9's zero map keeps915A=7FFF throughout.
+Released requests restore7FFF, packed as CAN216 word0 FFFE; AT correction0.
+
+paired_snapshot clones live RAM before CAN fixture mutations, preserving
+ongoing fault/phase state. The helper forces CAN216 byte4 invalid and supplies
+ECU gates/model and a non-intervening CAN211 fixture. These checks establish
+the returned AT path, not new DSC attribution or all traction arbitration.
+
+PERSISTENCE AND NEXT WORK
+
+Ghidra annotations and table types now cover these phase predicates, delay/
+count calibrations and counters. The paired project is refreshed and verified
+by independent restore; current archive identity is in CHECKPOINT.txt and
+ghidra/snapshot.json. Original firmware identities are unchanged.
+
+Next trace event3/31C18 group acknowledgements and ring retirement, initialize
+other manager groups (especially ascending group7), then test overlapping/
+composite transitions and ascending phase policy. Follow reference9218 and
+measurement80EE production, qualification-counter source96CC and complete task
+timing. The earlier hardware rejection at1412A/FFFFF810 remains explicit.
+This turn and the preceding selector-creation turn both made verified progress.
+
+The complete ECU/AT objective remains open. Also preserve deep traction
+sender/units/actuator paths and OEM PRHT CAN reception, fold/unfold sequencing,
+reversal and timeouts per traction-roof.txt. No OEM roof or DSC firmware has
+been established by this phase trace. No new CAN identifier or physical unit
+is inferred from it. Saved locally; no staging, commit or push.

@@ -1,0 +1,203 @@
+Follow-up: tcu-transition-progress.txt executes the original paired startup
+48BC0 ->32140 after cached-state setup. The zero progress inputs used in the
+older traces below are an explicit fixture, not the paired startup result for
+cached state1. The new produced code6/operation8 replacement retires normally
+while4C880 suppresses its managed spark-request group. Earlier evidence and
+results remain unchanged within their original fixture scope.
+
+TCU proposal and transition classification (2026-10-06)
+=====================================================
+
+Scope and identities
+--------------------
+Continues tcu-source-selection.txt: explain why the full selection caller
+changed proposal2 to1 yet constructed a code0 phase record. This is one part
+of the ECU/AT goal. Deep traction integration and OEM PRHT folding/unfolding,
+including interruption/recovery, remain separate open requirements in
+CHECKPOINT.txt and traction-roof.txt.
+
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+Paired ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+Original instructions execute with the existing strict SHRotate harness.
+No instruction, map result, classification result or callback is stubbed.
+RAM addresses below have FFFF prefix. Physical axes/units remain unproved.
+
+Proposal scan4508A
+-----------------
+The helper starts from byte8084 and operation9B3D, not the values already
+present at its two pointer arguments. It performs exactly five comparisons.
+Up-index starts at the original unsigned proposal and increases each step;
+down-index starts9 and decreases to5. While up-index<5, unsigned80EA at or
+above word9B1E[up-index] increments the candidate unless it equals5. Otherwise
+80EA strictly below word9B1E[down-index] decrements it unless it equals0.
+Every change selects operation9B14 at that comparison's index. The candidate
+is truncated to a byte for each bound check and the final pointer write.
+
+The index advance is independent of whether a change occurred. Multiple
+changes are possible, including both directions under inconsistent explicit
+thresholds. This helper does not publish accepted8081 or clamp arbitrary
+input bytes to5; the larger44CFE caller performs its own final clamp.
+
+In the retained full-caller fixture, original threshold producers supply:
+  thresholds [3748,7030,10405,14782,21789,2094,5226,8904,13210,17241]
+  operations [0,0,0,0,0,0,0,0,0,0]
+With proposal2 and measurement4672, up-indices2/3/4 fail, down-index6 succeeds
+(4672<5226), and down-index5 fails (4672>=2094). Result: proposal1, operation0.
+This explains the adjustment previously narrowed to4508A. The physical
+meaning and full upstream provenance of the threshold inputs remain open.
+
+Pending work31720
+----------------
+Return0 unless application phase mode8088==2. Then inspect the head record
+at95D4+15*96C4: phase byte+13 in0/1/2 immediately returns1, even if count96C5
+is0. Otherwise scan count records, wrapping at16. A zero acknowledgement
+byte in any required group returns1; otherwise0. Required groups have
+ROM5D3BC[group*4+2] EQUAL TO ZERO, stock groups1..7. This polarity was checked
+against original31792 branch; a preliminary scratch interpretation saying
+nonzero was incorrect and was not used in the saved oracle.
+
+This predicate is not simply count!=0 or head phase<3. Phase3 with pending
+required acknowledgements still counts as work. Input fixtures use valid
+head0..15 and count0..16; corrupted larger queue layouts are not validated.
+
+Qualification flags474C4
+-----------------------
+limit9C52=max(unsigned939E, stock ROM7734A=9600).
+Let x=unsigned96C8,y=unsigned96CA,z=unsigned96CC:
+  bit0: map75144(x,z)>=limit OR x==25600
+  bit1: curve75166(y)>=limit OR y==25600
+  bit2: map75155(z,y)>=limit OR z==25600
+Update low three bits9C54 and preserve its high five bits. The sentinel
+comparison is exact equality; values above25600 clamp in the maps but do
+not qualify through that equality shortcut. Original1078A/10764 interpolation
+executes and is compared with the independent integer interpolation model.
+
+Both2D maps use axes [0,12800,25600]. Rows, in increasing second-axis order:
+  75144: [6400,12800,38400], [6400,16128,38400], [19200,22528,38400]
+  75155: [6400,12800,19200], [12800,16128,22528], [19200,22528,38400]
+Curve75166 uses the same axes and values [6400,22528,32000]. At all-zero
+axes, every result6400 is below stock limit9600, so the low flags are0.
+Changing x alone to12800 sets bit0 through the original producer. Do not
+name these inputs as torque, clutch pressure, or physical load without
+tracing their actual producers and scaling.
+
+History adjustment475DC
+----------------------
+Given old history byte9C50 and accepted byte8081:
+  old<accepted: advance one if signed80EE <= signed32(reference[old+1]+128).
+  old>accepted: retreat one if signed80EE > signed32(reference[old]-128).
+  old==accepted: hold.
+References are32-bit elements at9218; add/subtract wraps32 bits. Original
+software arithmetic converts constants128.5/256.5 to integers128/256.
+After this tentative step, reset to accepted if31720 returns0, signed80EA
+is below256, or class8080==FF. The helper itself does not persist9C50.
+
+Row selection476A4 and code lookup47670
+-------------------------------------
+History0 ->row0; history1 ->row2 if flagbit0 else1;
+history2 defaults to3, but next1 ->row4 if bit0 else3,
+and next2 ->row6 if bit2 else5. History3 ->7, history4 ->8, other ->9.
+Flagbit1 is not used by this particular row selector.
+
+If accepted==proposed,47670 returnsFF before looking up a row. Otherwise
+it selects byte5E1AC[row*6+proposed]. Valid proposed columns are0..5:
+  row0  5 0  1  2 3 4
+  row1  5 0  1  2 3 4
+  row2  5 6  1  2 3 4
+  row3  5 0  1  2 3 4
+  row4  5 6  1  2 3 4
+  row5  5 6  1  2 3 4
+  row6  5 6  7  2 3 4
+  row7  5 6  7  8 3 4
+  row8  5 6 10  8 9 4
+  row9  5 6 10 11 9 4
+The60-byte table ends exactly where the existing5E1E8 one-step table starts.
+
+Wrapper4744C calls474C4,475DC,47670, then applies operation overrides:
+20decimal->code11;21/22->10;25->9;26->3. Other operations retain the table
+result. Overrides apply even if accepted==proposed. It always persists the
+adjusted history9C50, including override and unchanged-proposal paths.
+
+Original operation selection4740C returns0 when31720 reports no work.
+Otherwise it dispatches through5DEB8[previous_code*6+proposed]. In the
+observed previous-code1/proposed1 case it calls47762, which returns8 while
+the existing code1 phase read through3159A(1) is signed<1, otherwise9.
+Other operation-table paths remain outside the new independent model.
+
+Reproduction and verification
+----------------------------
+From the repository root:
+  python research/ecu-at-can/verify_tcu_transition_classification.py
+The verifier writes tcu-transition-classification-verification.json.
+Retained traces reuse verify_tcu_source_selection.manager_traces with an
+optional observer factory; the default behavior is unchanged. Both full
+320-call traces must equal the previously saved source-selection results.
+The new observer checks4508A and4744C at original entry/return boundaries.
+No phase/code/history output is injected in those traces.
+
+Two bounded creation probes differ only by explicit upstream96C8=0/12800
+after the first original phase creation. They stop before periodic service.
+At axis0, the original caller creates code0/operation8 beside the existing
+code1. At axis12800, it produces flagbit0 and code6/operation8, invokes the
+original creation path, and all groups acknowledge the OLD code1 record.
+All three original retirement callbacks run for code1; the ring head advances
+to1 and the sole active record is code6/operation8. Immediate paired CAN216
+remains FFFE request-withdrawn and calculated ECU spark26 under the explicit
+ECU fixture. No later code6 phase/reduction/recovery is claimed here.
+
+The first exploratory assertion incorrectly expected two active records
+after code6 creation. An initial diagnostic also read slot0 without adding
+the updated ring head. The saved probe fixes that inspection, captures both
+stored records plus creation calls/acknowledgements/retirement callbacks,
+and asserts the active code6/head1 outcome. This is original-caller evidence
+of context-dependent replacement, not evidence that allocation failed.
+Completed two-record retirement evidence remains in the separate retained
+code1+code0 traces. Future work must preserve that distinction.
+
+Verified outcomes:
+  3072 proposal cases;10336 pending-work cases;1372 qualification/map cases;
+  1340 history cases;12288 row cases;2016 code cases;1024 wrapper cases.
+  Total31448 direct cases. Two retained320-call traces produce640 proposal
+  and646 classification checks, preserving the entire previously saved
+  manager result including67 paired ECU snapshots. Two bounded creation
+  probes add8 wrapper observations,2 proposal observations and2 paired
+  snapshots. Source-selection default behavior remains unchanged.
+
+The retained initial classification is code1/history1/no pending work. The
+first fullcaller then produces proposal1; operation8, history2 andflags0
+select row3/column1 ->code0. Once accepted==proposed, baseline returnsFF
+whilehistory can still update. This explains why a numeric2->1 accepted-state
+change does not, by itself, establish a descending request class.
+
+Ghidra persistence:19 new annotations, nine named functions and explicit
+60-byte code table plus17/17/7-byte map/curve types. Both programs saved;
+closed.gpr+.rep archive independently extracted, all11 hashes verified,
+reopened read-only,1211 annotations and629 export/report files matched.
+Archive672d972c9e008bd1ea04710904c22cac61ed5638329fbf5a13fa3815d8b6aca8,
+10,841,658 bytes. Manifests/scripts/exports are repository artifacts. No
+staging, commit orpush; pre-existing staged/unstaged work is preserved.
+
+Remaining work
+--------------
+Trace96C8/CA/CC/939E producers and source semantics, other4740C operations,
+full produced code6 lifecycle and shared971A overlap through both active
+records. Preserve composite transitions,2->1 timing, full scheduler and
+physical signal/actuator attribution as open ECU/AT requirements.
+Traction next59720/8118,72B4/72BC and gate producers; roof nextPCM
+transmission-type publication plus matching OEM PRHT receiver, keeping
+fold/unfold interruption, reversal, timeouts and fault recovery in scope.
+
+Static continuation leads (not additional executed coverage)
+-----------------------------------------------------------
+Aligned literal reference search found96C8/CA/CC stores at32186/32188/3218C
+and323E2/323E4/323E8.32348 reads allthree retainedwords; gates9315bits0/1,
+curve70B39(9334)->9718, calls328FC then32C2C using histories970C/9710/9714,
+and rewrites96C8/CA/CC. Its literal caller candidate is1EC16 via1ED00.
+The32C2C and328FC dependency bodies are not independently modeled here.
+939E references23762/239BE need producer/consumer separation. Reproduce:
+  python research/ecu-at-can/disassemble.py tcu refs ffff96c8 ffff96ca ffff96cc ffff939e
+  python research/ecu-at-can/disassemble.py tcu refs 32348
+Static excerpts32170..321A6 and32348..3241C are appended to the disassembly
+artifact. Aligned-literal searches do not enumerate all indirect writers.

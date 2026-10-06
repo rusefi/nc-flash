@@ -1,0 +1,68 @@
+{
+  "artifact": "Openhoonage NC Cluster Commander 1.01 (aftermarket, not Mazda PRHT)",
+  "hex_sha256": "b45768a97782aacadb5f6216f5b6e07c3a9e6214e01b316043eaf38ab550d48f",
+  "binary_sha256": "23fbf7ce002e574364030a156660c1e6dcff6f61643565538ceda8e3e5a9f56b",
+  "binary_size": 29172,
+  "execution": "AVR byte PC19c4 through 1a26; stops before sender1166",
+  "selector_gear_cases": 65536,
+  "scratch_preservation_cases": 512,
+  "expected_fail_closed_rejections": 4,
+  "record_digest_sha256": "12a49088544df22fdbbc1d4ea67c66558e6313e6133d5f73fdbe3a608001c4d0",
+  "samples": [
+    {
+      "selector": 0,
+      "gear": 2,
+      "payload": "0000000000000002"
+    },
+    {
+      "selector": 1,
+      "gear": 2,
+      "payload": "0100000000000002"
+    },
+    {
+      "selector": 2,
+      "gear": 2,
+      "payload": "0200000000000002"
+    },
+    {
+      "selector": 3,
+      "gear": 2,
+      "payload": "0300000000000002"
+    },
+    {
+      "selector": 4,
+      "gear": 2,
+      "payload": "0400000000000002"
+    },
+    {
+      "selector": 5,
+      "gear": 2,
+      "payload": "0480000000000002"
+    },
+    {
+      "selector": 6,
+      "gear": 2,
+      "payload": "0440000000000002"
+    },
+    {
+      "selector": 7,
+      "gear": 2,
+      "payload": "0000000000000002"
+    }
+  ],
+  "static_menu_labels": {
+    "1": "Park",
+    "2": "Reverse",
+    "3": "Neutral",
+    "4": "Drive",
+    "5": "Manual",
+    "6": "AT"
+  },
+  "limits": [
+    "No SPI/CAN/PRHT execution",
+    "No prologue or scheduler execution",
+    "Record bytes5/6 are uninitialized in this builder",
+    "Menu label cross-references reviewed statically in roof/converter-excerpts.txt",
+    "P/N agreement is independent corroboration, not OEM receiver proof"
+  ]
+}

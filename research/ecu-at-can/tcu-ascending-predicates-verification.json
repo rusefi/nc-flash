@@ -1,0 +1,2151 @@
+{
+  "scope": "Original ascending release admission and reactivation predicates.\n\nIndependent bounds/side-effect oracles plus manager-driven repeated entry.\nInputs, task cadence and ECU coefficients are explicit test fixtures.\n",
+  "bounds_cases": 1470,
+  "release_predicate_cases": 324,
+  "rearm_predicate_cases": 3888,
+  "signed_wrap_cases": 32,
+  "state_transition_cases": 2048,
+  "manager_calls": 384,
+  "manager_traces": [
+    {
+      "forced_input8081": 0,
+      "trace": {
+        "measured_a": 25000,
+        "numeric_entry": {
+          "code": 1,
+          "permission": 7,
+          "inhibit": 0,
+          "x": 14080,
+          "y": 4000,
+          "captured": 2000,
+          "flags": 0,
+          "timer": 0
+        },
+        "independently_calculated_candidate": 1280,
+        "checkpoints": [
+          {
+            "call": 1,
+            "subcall": 0,
+            "state": 2,
+            "flags": 0,
+            "request": 0,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 80,
+            "subcall": 0,
+            "state": 2,
+            "flags": 0,
+            "request": 0,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 80,
+            "subcall": 1,
+            "state": 3,
+            "flags": 128,
+            "request": 1280,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 0,
+            "can216": "02 00 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 0,
+            "at_correction": 5.0,
+            "traction_correction": 0.0,
+            "spark": [
+              21.0,
+              21.0,
+              21.0,
+              21.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 90,
+            "subcall": 1,
+            "state": 4,
+            "flags": 224,
+            "request": 1280,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 0,
+            "can216": "02 00 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 0,
+            "at_correction": 5.0,
+            "traction_correction": 0.0,
+            "spark": [
+              21.0,
+              21.0,
+              21.0,
+              21.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 92,
+            "subcall": 1,
+            "state": 4,
+            "flags": 224,
+            "request": 510,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 290,
+            "can216": "02 09 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 9,
+            "at_correction": 4.0,
+            "traction_correction": 0.0,
+            "spark": [
+              22.0,
+              22.0,
+              22.0,
+              22.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 94,
+            "subcall": 1,
+            "state": 4,
+            "flags": 96,
+            "request": 0,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 98,
+            "subcall": 1,
+            "state": 4,
+            "flags": 224,
+            "request": 1280,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 0,
+            "can216": "02 00 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 0,
+            "at_correction": 5.0,
+            "traction_correction": 0.0,
+            "spark": [
+              21.0,
+              21.0,
+              21.0,
+              21.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 104,
+            "subcall": 1,
+            "state": 4,
+            "flags": 224,
+            "request": 510,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 290,
+            "can216": "02 09 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 9,
+            "at_correction": 4.0,
+            "traction_correction": 0.0,
+            "spark": [
+              22.0,
+              22.0,
+              22.0,
+              22.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 106,
+            "subcall": 1,
+            "state": 4,
+            "flags": 96,
+            "request": 0,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 123,
+            "subcall": 0,
+            "state": 4,
+            "flags": 96,
+            "request": 0,
+            "phase": 2,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 154,
+            "subcall": 0,
+            "state": 4,
+            "flags": 96,
+            "request": 0,
+            "phase": 3,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 154,
+            "subcall": 1,
+            "state": 0,
+            "flags": 0,
+            "request": 0,
+            "phase": 3,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      },
+      "predicate_counts": {
+        "release": 10,
+        "rearm": 153
+      },
+      "admitted_predicates": [
+        {
+          "kind": "release",
+          "captured_error": 250,
+          "first_bound": 5256,
+          "second_bound": 5000,
+          "measured": 5250,
+          "flags": 128,
+          "derivative": 0,
+          "input8081": 0
+        }
+      ],
+      "release_checks": [
+        {
+          "measured": 5250,
+          "captured_error": 250,
+          "request": 1280,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 0,
+          "error": 250,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5250,
+          "captured_error": 250,
+          "request": 1280,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 0,
+          "error": 250,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5100,
+          "captured_error": 250,
+          "request": 510,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 154,
+          "error": 100,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5100,
+          "captured_error": 250,
+          "request": 510,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 154,
+          "error": 100,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 6000,
+          "captured_error": 250,
+          "request": 1280,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 0,
+          "error": 1000,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 6000,
+          "captured_error": 250,
+          "request": 1280,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 0,
+          "error": 1000,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 6000,
+          "captured_error": 250,
+          "request": 1280,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 0,
+          "error": 1000,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 6000,
+          "captured_error": 250,
+          "request": 1280,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 0,
+          "error": 1000,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5250,
+          "captured_error": 250,
+          "request": 1280,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 0,
+          "error": 250,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5250,
+          "captured_error": 250,
+          "request": 1280,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 0,
+          "error": 250,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5100,
+          "captured_error": 250,
+          "request": 510,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 154,
+          "error": 100,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5100,
+          "captured_error": 250,
+          "request": 510,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 154,
+          "error": 100,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        }
+      ]
+    },
+    {
+      "forced_input8081": null,
+      "trace": {
+        "measured_a": 25000,
+        "numeric_entry": {
+          "code": 1,
+          "permission": 7,
+          "inhibit": 0,
+          "x": 14080,
+          "y": 4000,
+          "captured": 2000,
+          "flags": 0,
+          "timer": 0
+        },
+        "independently_calculated_candidate": 1280,
+        "checkpoints": [
+          {
+            "call": 1,
+            "subcall": 0,
+            "state": 2,
+            "flags": 0,
+            "request": 0,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 80,
+            "subcall": 0,
+            "state": 2,
+            "flags": 0,
+            "request": 0,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 80,
+            "subcall": 1,
+            "state": 3,
+            "flags": 128,
+            "request": 1280,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 0,
+            "can216": "02 00 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 0,
+            "at_correction": 5.0,
+            "traction_correction": 0.0,
+            "spark": [
+              21.0,
+              21.0,
+              21.0,
+              21.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 90,
+            "subcall": 1,
+            "state": 4,
+            "flags": 224,
+            "request": 1280,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 0,
+            "can216": "02 00 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 0,
+            "at_correction": 5.0,
+            "traction_correction": 0.0,
+            "spark": [
+              21.0,
+              21.0,
+              21.0,
+              21.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 92,
+            "subcall": 1,
+            "state": 4,
+            "flags": 224,
+            "request": 510,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 290,
+            "can216": "02 09 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 9,
+            "at_correction": 4.0,
+            "traction_correction": 0.0,
+            "spark": [
+              22.0,
+              22.0,
+              22.0,
+              22.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 94,
+            "subcall": 1,
+            "state": 4,
+            "flags": 96,
+            "request": 0,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 98,
+            "subcall": 1,
+            "state": 3,
+            "flags": 240,
+            "request": 768,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 32,
+            "can216": "02 01 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 1,
+            "at_correction": 4.75,
+            "traction_correction": 0.0,
+            "spark": [
+              21.25,
+              21.25,
+              21.25,
+              21.25
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 102,
+            "subcall": 1,
+            "state": 4,
+            "flags": 240,
+            "request": 768,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 32,
+            "can216": "02 01 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 1,
+            "at_correction": 4.75,
+            "traction_correction": 0.0,
+            "spark": [
+              21.25,
+              21.25,
+              21.25,
+              21.25
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 104,
+            "subcall": 1,
+            "state": 4,
+            "flags": 240,
+            "request": 306,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 494,
+            "can216": "02 0f 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 15,
+            "at_correction": 3.0,
+            "traction_correction": 0.0,
+            "spark": [
+              23.0,
+              23.0,
+              23.0,
+              23.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 106,
+            "subcall": 1,
+            "state": 4,
+            "flags": 112,
+            "request": 0,
+            "phase": 1,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 123,
+            "subcall": 0,
+            "state": 4,
+            "flags": 112,
+            "request": 0,
+            "phase": 2,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 154,
+            "subcall": 0,
+            "state": 4,
+            "flags": 112,
+            "request": 0,
+            "phase": 3,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 154,
+            "subcall": 1,
+            "state": 0,
+            "flags": 0,
+            "request": 0,
+            "phase": 3,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      },
+      "predicate_counts": {
+        "release": 11,
+        "rearm": 153
+      },
+      "admitted_predicates": [
+        {
+          "kind": "release",
+          "captured_error": 250,
+          "first_bound": 5256,
+          "second_bound": 5000,
+          "measured": 5250,
+          "flags": 128,
+          "derivative": 0,
+          "input8081": 2
+        },
+        {
+          "kind": "rearm",
+          "captured_error": 250,
+          "first_bound": 5256,
+          "second_bound": 5000,
+          "measured": 6000,
+          "flags": 96,
+          "derivative": 0,
+          "input8081": 2
+        },
+        {
+          "kind": "rearm",
+          "captured_error": 250,
+          "first_bound": 5256,
+          "second_bound": 5000,
+          "measured": 6000,
+          "flags": 240,
+          "derivative": 0,
+          "input8081": 2
+        },
+        {
+          "kind": "rearm",
+          "captured_error": 250,
+          "first_bound": 5256,
+          "second_bound": 5000,
+          "measured": 6000,
+          "flags": 240,
+          "derivative": 0,
+          "input8081": 2
+        },
+        {
+          "kind": "rearm",
+          "captured_error": 250,
+          "first_bound": 5256,
+          "second_bound": 5000,
+          "measured": 6000,
+          "flags": 240,
+          "derivative": 0,
+          "input8081": 2
+        },
+        {
+          "kind": "release",
+          "captured_error": 250,
+          "first_bound": 5256,
+          "second_bound": 5000,
+          "measured": 5250,
+          "flags": 240,
+          "derivative": 0,
+          "input8081": 2
+        }
+      ],
+      "release_checks": [
+        {
+          "measured": 5250,
+          "captured_error": 250,
+          "request": 1280,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 0,
+          "error": 250,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5250,
+          "captured_error": 250,
+          "request": 1280,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 0,
+          "error": 250,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5100,
+          "captured_error": 250,
+          "request": 510,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 154,
+          "error": 100,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5100,
+          "captured_error": 250,
+          "request": 510,
+          "captured_request": 1280,
+          "flags": 224,
+          "progress": 154,
+          "error": 100,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 1280,
+          "flags": 96,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5250,
+          "captured_error": 250,
+          "request": 768,
+          "captured_request": 768,
+          "flags": 240,
+          "progress": 0,
+          "error": 250,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5250,
+          "captured_error": 250,
+          "request": 768,
+          "captured_request": 768,
+          "flags": 240,
+          "progress": 0,
+          "error": 250,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5100,
+          "captured_error": 250,
+          "request": 306,
+          "captured_request": 768,
+          "flags": 240,
+          "progress": 154,
+          "error": 100,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5100,
+          "captured_error": 250,
+          "request": 306,
+          "captured_request": 768,
+          "flags": 240,
+          "progress": 154,
+          "error": 100,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5050,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 50,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        },
+        {
+          "measured": 5000,
+          "captured_error": 250,
+          "request": 0,
+          "captured_request": 768,
+          "flags": 112,
+          "progress": null,
+          "error": 0,
+          "dynamic_bound": 0
+        }
+      ]
+    }
+  ],
+  "limits": "Predicates verified against original opcodes. Input8081 is a fixture, not a proven physical selector. Phase qualification32614, task timing and upstream signal attribution remain open."
+}

@@ -1,0 +1,166 @@
+TCU request timers and periodic service
+2026-10-06; follow-up to tcu-request-dispatch.txt
+
+Follow-up: tcu-request-admission.txt now executes original upstream creation,
+80EA/80EE captured-axis sources,9410 hysteresis and916F cancellation-source
+aggregation. Physical identities/full scheduling and remaining phase policy
+are still open; earlier results below retain their original fixture scope.
+
+RESULT AND LIMIT
+
+Original timer-wheel, mode-gate, event-dispatch, queue and request-state code
+now execute together. Ramp timers8115..8120 increment on eight of sixteen
+primary-wheel slots; hold timers81F2..81FD increment on two. Manager group5
+receives service on four of eight admitted periodic calls. These are distinct
+clocks. Timer expiry alone does not release a request: the next manager
+service evaluates expiry, releases it and drains queued cleanup.
+
+This establishes instruction-level call ratios, not milliseconds. The full
+hardware ISR and application task have NOT executed in these fixtures. The
+coupled tests deliberately vary their call ratio and initial timer phase.
+Do not mistake their tick column for measured time or firmware scheduling.
+No ROM, application code or shared interpreter was changed.
+
+INPUT AND REPRODUCTION
+
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+
+  python research/ecu-at-can/verify_tcu_request_timing.py
+
+Saved output: tcu-request-timing-verification.json. Import-safe verifier uses
+the unchanged SHRelativeBranch interpreter and prior managed-request fixture.
+ObserveService only records call-site arguments; it never substitutes code.
+Zero-initialized non-request subsystem states bound the other periodic groups;
+running those bodies is not a claim of complete system initialization.
+
+Passed:270 increment-helper cases;1024 primary-wheel calls with624640 timer
+value comparisons;512 mode cases;24 event/state/phase cases;12 complete
+request lifecycles;12 released CAN216-to-ECU spark paths alongside CAN211.
+Wheel testing spans two complete nested512-call cycles, including saturation,
+negative signed-word seeds, counter rollover and every configured timer.
+
+ORIGINAL TIMER WHEEL (EXECUTED)
+
+11004 clears u32 phases8494,8498,849C.12880 tail-calls it.
+11014 first calls1E5EC on even OLD8494, then ROM5C0F0[8494], then advances
+and wraps8494 at16.1E5EC increments u16[90C8], wrapping rather than saturating.
+It does not call the full application task1E5F6.
+
+5C0F0 sixteen pointers:
+11048,1106A,11048,110B4,11048,1106A,11048,11128,
+11048,1106A,11048,110B4,11048,1106A,11048,1114A.
+
+Primary service ranges (end exclusive; RAM addresses have FFFF prefix):
+11048: bytes810C..8157; includes twelve ramp timers8115..8120.
+1106A: bytes8158..8188; signed words8380..8410; unsigned words82E0..8330.
+110B4: bytes8188..8281; unsigned words8330..8372; includes twelve hold timers.
+11128: bytes8284..82BC.
+1114A: secondary wheel, ROM5C130[8498]; increments/wraps8498 at16.
+
+5C130 sixteen pointers:
+11172,11194,11172,111CA,11172,11194,11172,111CE,
+11172,11194,11172,111CA,11172,11194,11172,1123C.
+11172: bytes82BC..82D0.
+11194: bytes82D0..82DC; unsigned word8374.
+111CA: no operation.
+111CE: byte82DC; unsigned words8378,837A.
+1123C: increments849C; on2 calls1125C and resets0.
+1125C: unsigned word837C, once per512 primary calls from reset.
+
+ROM76CBC..76D20 stores these interval boundaries as32-bit pointers.
+1127E increments bytes unlessFF;11292 increments words unlessFFFF;
+112A6 increments words unless7FFF. The latter also increments negative
+16-bit values; FFFF becomes0000. It does not clamp negative inputs.
+
+12886 admits11014 only if byte8009==3.12386 first changes8009 from1 to3,
+then tail-calls12886. Other byte values remain unchanged. Thus12386 admits
+starting1 and3; calling12886 directly with1 does not advance any timer.
+
+HARDWARE/CALLER LEADS (STATIC, NOT EXECUTED)
+
+12374 calls12880, sets8009=1, then tail-calls16CE4.16CE4 writes04FF to
+FFFFF71C and ORs bit1 into wordFFFFF710.16CF4 is the ISR: after15B80(13),
+it tests bit7 ofFFFFF718; when set, clears it and calls12386;15BF0(13),
+register restoration and RTE follow. This is the CMT1-side lead consistent
+with the previously documented CMT0 registers, not a verified physical rate.
+Preserve the compare value04FF (1279); do not convert it into time without
+the source clock, divider and hardware scheduling evidence.
+
+126EC calls11EF2,5329A, then checks8007:1 calls122F4,3 calls12726.
+12726 tests84F5:1 changes it to2 and84F4 to7;2 calls1E5F6(84F4&7).
+It always increments byte84F4 afterward; the first1 branch therefore leaves8.
+1E5F6 contains a long application task; at1E6A0 it calls31524(event4,0),
+after source producers and before2C738/2E7CC/4C0F4 and phased tables.
+Its complete initialization, hardware dependencies and call frequency remain
+unverified. There is no proved1:1 relationship with12386.
+
+Do not call90C8 a pending-work counter: observed consumers1ED50 and1ED66
+extract bits3..5 and6..8 to index callback tables5CC88 and5CCA8. That is
+static evidence of phase selection; task admission remains to be traced.
+MOV.W-literal search found refs1E5EC/1ED50/1ED66, not an exhaustive proof
+against other indirect references.
+
+PERIODIC EVENT DISPATCH (EXECUTED FOR EVENT4)
+
+31524 reads event/state table5D3E4+3*event+u8[8088]. For event4 and states
+0,1,2, actions areFF,FF,4. Only state2 calls31E20. ItsFF result keeps8088.
+Other event payload actions and invalid state indices are outside this test.
+31E20 first advances96C6, wrapping at8; then tests ten4-byte records5D3BC.
+Each record is group word, metadata byte, period-class byte. Class1 is
+unconditional; otherwise class must equal ROM5D420[current96C6].
+5D420 bytes:2,4,2,8,2,4,2,FF.
+Stock records, in order (group / metadata / class):
+05/1/2,06/0/2,20/0/4,0B/0/4,02/0/4,25/0/4,14/0/4,1A/0/4,26/1/2,29/1/2.
+Class2 groups run on phases0,2,4,6; class4 groups on1,5. None run on3,7.
+There is no stock class1 or8 group in this ten-record table.
+
+For every admitted group, original4C2A0(queue0,r5=1,group<<16|2,pointer0)
+queues operation2, and4C316 immediately drains queue0, including callbacks
+and any nested messages. All24 legal state/phase cases check exact group
+order, retained dispatcher state, next phase and empty queue.
+
+COUPLED REQUEST LIFECYCLES (EXPLICIT SCHEDULE FIXTURES)
+
+Use original startup copying, heap, lists, group5 event1 creation and queue
+draining from the preceding verifier. Phase/reference/measurement sources
+are explicit application fixtures. Execute12386 once each loop, then31524
+event4 every1,3 or7 loops, with initial primary-wheel phase0 or15. No hold
+or ramp timer is injected after request construction. Twelve runs cover
+code6/op0 and code7/op17; every loop compares original RAM with an independent
+state/value model, and completion checks full queue/ring/list/heap cleanup.
+
+Example code6, initial phase0, event4 every loop: state3/value1024 at call2;
+state5/value1024 and ramp reset at4; release at102 with ramp49. Event4 every
+three loops instead: state3 at6, state5 at12, release at114 with ramp51.
+The threshold stays49; delayed observation accounts for51. Neither timeline
+asserts a vehicle duration. Code7 additionally passes through state4 until
+hold>=3, then ramp duration18; all exact transitions are in the JSON.
+
+After release, execute actual merge4C7AC and aggregate1FB8C; the prior paired
+helper packs CAN216 and runs its ECU consumer alongside CAN21110016. These
+twelve checks validate the released output only; active CAN/spark checkpoints
+remain in tcu-request-dispatch-verification.json and earlier map evidence.
+
+CONTINUATION / ALL THREE OBJECTIVES
+
+Next trace126EC caller/task admission and timer clock setup; execute the full
+application task with explicitly bounded hardware inputs. Trace creation/
+cancel policy, phase95D4 lifecycle,9410/916F producers and measured/reference
+roles. Keep other4E/list producers, record1 phases1/2 and92E6 open.
+
+Deep traction integration still needs actual CAN211 sender/units, real task
+ordering, physical outputs and remaining throttle/fuel paths. NC PRHT work
+still needs receiver proof for transmission type/speed/neutral, and complete
+fold/unfold interlocks, reversal and timeout/recovery transitions. See
+traction-roof.txt, roof-aftermarket.txt, local-inputs.txt, local-input-faults.txt
+and output-inhibition.txt. These goals are not completed by a TCU timer trace.
+All relevant new evidence is saved here; no staging, commit or push.
+
+Ghidra save:665 annotations,398 exports; independently restored11 project
+files and matched every hash, label/comment and export. Archive SHA256:
+3e4dbd29c456bd8aa54a351a7b9d836217cf8223915de74d4919762307fda357
+Size10,739,539 bytes. Identity/inventory:ghidra/snapshot.json; verification:
+ghidra/restore-verification.json. Live database and restore scratch stay ignored.

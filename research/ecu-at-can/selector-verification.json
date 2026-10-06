@@ -1,0 +1,76 @@
+{
+  "scope": "TCU sampled inputs through CAN231 to the ECU's combined state flag.\n\nFive peripheral read addresses return explicit constant test samples. This\nexecutes original input filtering and application code, not physical GPIO,\nADC conversions, interrupts, CAN hardware or a complete task scheduler.\nPhysical P/R/N/D assignment and PRHT interpretation remain unverified.",
+  "isa_gbr_store_vectors": 120,
+  "input_descriptors": [
+    {
+      "channel": 0,
+      "pin_candidate": "PK2",
+      "processed_input": "0xffff88b4",
+      "wire_low_nibble": 1,
+      "assert_samples": 2,
+      "release_samples": 2
+    },
+    {
+      "channel": 1,
+      "pin_candidate": "PK3",
+      "processed_input": "0xffff88b5",
+      "wire_low_nibble": 2,
+      "assert_samples": 2,
+      "release_samples": 2
+    },
+    {
+      "channel": 2,
+      "pin_candidate": "PK4",
+      "processed_input": "0xffff88b6",
+      "wire_low_nibble": 3,
+      "assert_samples": 2,
+      "release_samples": 2
+    },
+    {
+      "channel": 3,
+      "pin_candidate": "PK5",
+      "processed_input": "0xffff88b7",
+      "wire_low_nibble": 4,
+      "assert_samples": 2,
+      "release_samples": 2
+    }
+  ],
+  "all_four_bit_transitions": 256,
+  "adc_boundary_cases": 9,
+  "adc_hold_recovery_cases": 12,
+  "sender_fault_cases": 32,
+  "ecu_combined_flag_gate_cases": 128,
+  "single_input_examples": [
+    {
+      "asserted_mask": 0,
+      "class_8080": 6,
+      "byte0": "0x10",
+      "ecu_combined_723a": 0
+    },
+    {
+      "asserted_mask": 1,
+      "class_8080": 0,
+      "byte0": "0x1",
+      "ecu_combined_723a": 1
+    },
+    {
+      "asserted_mask": 2,
+      "class_8080": 255,
+      "byte0": "0xe2",
+      "ecu_combined_723a": 0
+    },
+    {
+      "asserted_mask": 4,
+      "class_8080": 0,
+      "byte0": "0x3",
+      "ecu_combined_723a": 1
+    },
+    {
+      "asserted_mask": 8,
+      "class_8080": 6,
+      "byte0": "0x14",
+      "ecu_combined_723a": 0
+    }
+  ],
+  "unresolved": "P versus N physical pin assignment, gearbox motion, absolute task timing, downstream diagnostics and PRHT CAN interpretation."
+}

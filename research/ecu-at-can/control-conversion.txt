@@ -1,0 +1,104 @@
+ECU numeric conversion and selection, 2026-10-06
+================================================
+Evidence: original LFFEEE-stock ECU and LFG1TF000 TCU, SHA256 identities in
+control-conversion-verification.json. All addresses hexadecimal; short RAM
+addresses have FFFF prefix. No firmware patches, vehicle or peripheral test.
+
+Reproduce: python research/ecu-at-can/verify_control_conversion.py
+324 full conversion cases, 180 publication/selection cases and12 paired
+TCU/ECU five-stage calls pass. Isolated BRAF extension passes160 vectors,
+one executed branch andfour expected non-NOP-slot rejections. Exact RTZ
+binary32 arithmetic oracle independently checks11 outputs plus a flag.
+
+Caller and sources
+------------------
+A477E calls A61A8,A4B98,A6238,A6490,A4FF8, in that order via wrappers
+A49E8/A49EE/A49F2/A49F8/A49FE. No gate in this wrapper. Original fullcaller
+executes in12 paired fixtures, with an observer capturing inputs atA4FF8
+without altering execution. The oracle independently checks onlyA4FF8;
+preceding stages have incomplete independent models. These fixtures therefore
+show reachability and continuity, not complete task correctness or a binding
+CAN request in every case. Main-task static sequence1852A:A47A6,
+18530:A477E,18536:41A68,1853C:42240; main task was NOT executed.
+A47A6 converts bytes7304/739A/739B to floatsA594/A598/A59C (static).
+A61A8 snapshots protected6DB4*1->A5A0,72F8->A5A4,6D00->A5A8.
+
+Conversion, stock ROMC563A=C563B=0
+--------------------------------
+R means round toward zero to binary32 at each indicated operation.
+A654 = R(R(R(A720*C56FC)*A50FC)/CA974)
+C56FC=1, A50FC=12566.369140625, CA974=1998.
+
+A4FF8 inverts two stock 2D maps at X=A5A0, target=A654:
+mapA25CC ->A740; mapA25E0 ->A738. Both have18 X and30 Y entries.
+X spans750..7500, Y spans0..200. Forward X interpolation clamps to endpoint
+rows. Each tested interpolated Z row is nondecreasing (asserted by oracle).
+Select the enclosing Z interval, using first/last interval outside its range;
+invert with Y bounds lo/hi and forward values a/b:
+ R(R(R(R(b-target)*lo)+R(R(target-a)*hi)) /
+   max(floatBits3727C5AC, min(10000,R(b-a))))
+The inversion EXTRAPOLATES outside map output range, before later limiting.
+It can produce very large intermediate values across an almost-flat endpoint
+interval. This is executed firmware behavior, not a physical-command claim.
+The independent oracle uses bisect on forward map samples rather than the
+firmware's embedded jump-table search. Samples include X below/above endpoints,
+interior X, negative and large targets, zero and positive offsets.
+
+weight = clamp(R(oldA630 + (718C!=0 ? C5680 : -C5684)),0,1).
+Both stock step constants are1. Valid history0..1 reaches the chosen endpoint
+in one call; out-of-range history remains subject to add/subtract thenclamp.
+A734=R(R(A738*weight)+R(A740*R(1-weight)))
+A73C=R(A734-A5A8); A730=A72C=max(A73C,0).
+A648=lookup1(A2484,A5A4), A644=lookup1(A2490,A5A4).
+A660=max(min(A72C,A648),A644).
+A5AC=0 only when A644 < A72C < A648, otherwise1.
+A630 stores weight. NonBoolean718C=2 behaves as active.
+Stock-path write PCs: A501C:A654,A6034:A740,A60DA:A738,A60F4:A734,
+A6104:A73C,A6110:A730,A6118:A72C,A6126:A648,A6134:A644,
+A6172:A660,A619C:A630. Function returnsA61A6.
+Alternative nonstock C563A lookupA2478 and C563B constantC5688 path are
+static leads only; ROM bytes were not changed to exercise them.
+
+Publication and local substitution
+----------------------------------
+Full41A68 copiesA660/A65C/A658/A650/A654 ->72C8/72CC/72D0/72D4/72D8
+and Boolean(A613==1)/Boolean(A612==1)->72DC/72DD. Critical helpers useSRmaskF0;
+fixtures start with that mask to avoid the separate scheduler tail.
+Full42240: stockC90A0=1, source72C8 unless protectedA3A4==1; then72F8.
+Original207C clamps source with low72F4/high72F0, testing low first. Tests
+include reversed limits, ties and nonBoolean substitution flag2.
+Writes72FC. In two otherwise equal paired cases source216=3200,211word10040,
+A720=34.5;718C0 produces72FC8.395195007324219,718C1 produces8.063745498657227.
+This demonstrates the active flag's map choice after actual CAN unpacking and
+fullcaller execution. It does not establish the physical meaning of72FC.
+
+Next consumers and unresolved scope
+----------------------------------
+Aligned72FC references: pools25764/39CAC/4229C/426E0 with instruction users
+25602/39B24/42272/4268E. Static39B04 writes protected6CD4 from clamp72FC
+unlessA3A4==1, when it substitutesBACB0.4268E updates hysteresis flag7344
+using BB254/BB258. These downstream functions were NOT executed this turn.
+A660 also feeds next-cycleA6490 atA6BEC. Independently model A720/history
+selection and execute72FC consumers toward physical throttle/fuel/enable.
+B6960 is inside a diagnostic calculation readingA720-A65C and6DB4, maps
+A405C/A4068/A4074, counters617C/617E and protected20BA. It is NOT a proved
+actuator and B6938 was not established as its function entry.
+
+Preserve all three goals: ECU/AT integration (fulltask/timing,ascendinggroup7,
+overlap/composite/2->1 and physical capture identities still open), deep
+traction (including7978 consumers, CAN21A sender and physical outputs), OEM
+PRHT fold AND unfold (receiver evidence, pause/resume,reversal,timeouts,
+synchronization/recovery). Factory documents and aftermarket mappings remain
+separate from missing OEM roof firmware. See traction-roof.txt/CHECKPOINT.txt.
+
+Tool correction and persistence
+-------------------------------
+Initial fullA4FF8 probe failed on unsupported0023/BRAF atA5474. No firmware
+change: new sh_control_float.py extends existing SHModelFloat only for BRAF
+whose delay slot is NOP. All other BRAF slots reject. PC+4+Rn wraps to32 bits;
+reference Renesas SH-2E REJ09B0316-0200 BRAF, already saved in relative-branch
+verification provenance. Existing interpreters unchanged. Ghidra uses its
+SH-2A compatibility language, not a claim of the physical MCU model.
+Tests/report/script/annotations/disassembly and a refreshed full Ghidra archive
+are saved locally; current archive identity and independent restore results
+are in CHECKPOINT.txt andghidra/restore-verification.json. No staging/commit/push.

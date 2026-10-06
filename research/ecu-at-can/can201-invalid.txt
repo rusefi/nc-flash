@@ -1,0 +1,141 @@
+CAN201 invalid payload: timed TCU fallback and ECU cut-request recovery
+Evidence checkpoint: 2026-10-05
+
+Scope and artifact identities
+------------------------------
+Completes the previously missing group3A branch of can201-fault-policy.txt;
+hcan-recovery.txt covers group35 and the earlier policy record coversgroup36.
+Original images remain unchanged:
+  ECU LFFEEE-stock.bin SHA256
+  7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+  TCU LFG1TF000.bin SHA256
+  8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+Addresses and masks below are hex; durations/counts decimal. No physical
+time, CAN peripheral, full vehicle scheduler or actuator simulation.
+
+Three established causes of the same control policy
+---------------------------------------------------
+The A98E aggregate combines mapped diagnostic groups35,36,3A. Through21C1C,
+its mask08 sets92C9 mask40:2055C substitutes80E8=20480 and2513E/24FA0
+clear cut request9454.18F8C publishes the cleared CAN216 byte7 mask20;
+the admitted ECU command fixture releases the four cylinder command values.
+
+  group35: local HCAN recovery retry threshold; encoded reportC073.
+  group36: qualified loss of any enabled class0 receive record; reportC100.
+  group3A: CAN201 word0 invalidity qualified for500 diagnostic ticks;
+           internal active/history state, no serialized DTC in this fixture.
+
+These are distinct causes. A received invalid payload initially holds the
+last numeric value; a mature diagnostic substitutes a fixed value and
+inhibits the cut producer. Stored history alone does not assert the inhibit.
+
+Original producer and configuration
+-----------------------------------
+583DC loops over five eight-byte records at5F198. Each starts with a validity
+byte pointer followed by a diagnostic group byte:
+  5F198:8816 ->3A (CAN201 word0 validity)
+  5F1A0:AC7A ->3B (aggregate computed by58504)
+  5F1A8:880A ->3C (CAN201 byte6 validity)
+  5F1B0:880E ->3D
+  5F1B8:8812 ->3E
+Onlygroup3A's complete numeric/control lifecycle is newly verified here.
+58504 setsAC7A=1 when either88EE/88EA is1,2 when both are2,otherwise3.
+Twenty-five helper cases verify this without assigning physical field names.
+
+Producer583DC admits whenA939==1 and the previous mapped summariesA977 and
+A978 both lack mask08. When admitted, input validity1 yields raw3; other
+values yield raw1. Validity2 additionally enables its healthy/recovery branch.
+When blocked, raw0 is emitted. The verifier covers every byte value and all
+three binary gate combinations (2048 cases); do not equate an arbitrary
+non-1 validity value with confirmed healthy reception.
+
+Group3A's16-byte record at5EF18:
+  00 01 01 F4 00 01 11 00 00 00 00 00 27 00 24 00
+Type0 selects566E0; interval500 and count threshold1 make one qualified
+interval sufficient.56658 processes configured groups only whenA936==1.
+Three gate fixtures0/1/2 execute the actual dispatcher: only1 qualifies.
+Raw3A=A770; active3A=A726; deadline=A868; qualification count=A918;
+mapped summary=A97C. These are low offsets inFFFFxxxx RAM.
+
+Executed transition sequence
+-----------------------------
+171CC interprets rawCAN201 wordFFFF as invalid, sets8816=1 and keeps8814.
+Valid words divide by4 and update8814 with8816=2. Original callback1ACD8,
+producer583DC, full configured-group dispatcher56658, healthy task57F50,
+summaries570F6/57258 and application publisher21C1C all execute in order.
+The remaining unrelated producers from56F80 are not part of these fixtures.
+
+Example initialized withCAN201 raw16000 (8814=4000,80E8=10240):
+  tick0 valid: raw1, active0, aggregate01, statusA4E4=1, cut1.
+  tick100 FFFF: raw3, active01, deadline600, aggregate01, status2, cut1.
+  tick599 FFFF: still holding10240, no diagnostic substitution yet.
+  tick600 FFFF: active05, aggregate1C,80E8=20480,status4,cut0.
+  tick601 valid: numeric receiver updates immediately; active44 and
+                substitution/inhibit remain pending healthy recovery.
+  tick1101: exactly500 healthy ticks; readiness set, still inhibited this pass.
+  tick1102: raw81,active0,aggregate11; normal conversion/status andcut1 return.
+
+With80A4!=0, active recovery remains inhibited after the healthy interval.
+With80A4==0, one invalid sample near recovery completion resets the healthy
+period: invalid1100/valid1101 retains the fault through1601 and clears1602.
+A second producer pass at the SAME1101 timestamp also clears the fault;
+500 ticks plus a processing pass is the condition, not an extra clock tick.
+The six base lifecycles vary prior raw0/16000/65534 and80A4=0/1; two further
+lifecycles verify this interruption. The zero and high initial values verify
+that holding an invalid number and substituting20480 are separate operations.
+
+A valid sample before the qualification deadline cancels the pending interval.
+Invalid100/valid599/invalid600 re-arms at1100 and cannot qualify at1099.
+Temporarily blocking583DC through either mapped group35 or36 at599 similarly
+cancels pending qualification and re-arms at1100 after admission returns600.
+Those dependency-gate tests directly supply mapped summary bits and evaluate
+the producer/qualifier; they do not claim to simulate concurrent bus recovery.
+
+Seven additional checkpoints start at the ECU:6DB4 source ->3663E ->366EC
+with6B4F invalidity ->365D0 full8-byte CAN201 ->TCU seven-byte receiver
+copy requirement ->callback/diagnostics ->
+CAN216 ->ECU35034/34CEC and the existing cylinder command chain. Source4000
+first transmits16000;6B4F=1 transmitsFFFF; restored source4500 transmits18000.
+The TCU holds, qualifies and recovers as above; its recovered80E8 becomes11520.
+ECU publisher and command fixtures are newly constructed at each checkpoint;
+TCU state persists. This does not execute the ECU's global task scheduler.
+
+Reporting distinction
+----------------------
+The group record's report code/flags differ from theC073/C100 records.
+Original serializer558CC returns an empty list throughout these isolated
+group3A lifecycles. CAN216 report mask02 and CAN231 byte1 mask40 remain
+clear (normal startup gate admitted at8464=200, no output override), despite
+the active control inhibit. Mapped history mask10 persists after recovery.
+Thus absence of these report outputs does not prove normal control behavior.
+No claim is made about every diagnostic service, other faults or actual lamps.
+
+Verification, persistence and next work
+---------------------------------------
+  python research/ecu-at-can/verify_can201_invalid.py
+Passed:2048 producer and25 helper cases;54 base lifecycle checkpoints,
+16 interrupted-recovery checkpoints,7 interrupted-qualification checkpoints,
+19 dependency/dispatcher gate checkpoints,7 complete round-trip checkpoints
+and7 same-tick recovery checkpoints.
+Saved assertions/results: can201-invalid-verification.json. Original ROM
+hashes are checked by the shared import-safe helpers. Shared interpreters
+and earlier verifiers were not changed; no broad regression rerun is needed.
+The full dispatcher addition replaced an earlier exploratory selected-group
+call; its gate is now explicitly tested rather than implicitly bypassed.
+
+Prior turn made verified HCAN recovery progress; this turn executes the last
+previously untraced source of the CAN201/cut aggregate. This closes that
+specific provenance gap, not the overall ECU/TCU, traction or PRHT goals.
+Next:group3C/byte6 consumer21628 and its application value/diagnostic gates;
+CAN211 traction arbitration; PRHT speed/neutral message attribution. Physical
+CAN timing/units, controller internals and full actuator endpoints stay open.
+
+Next-step static locator:21628 reads8808, tests92D5 mask08, and returns
+its conversion inR0; no direct application store is in that function.
+MOV.L reference search finds candidatecaller21522 via pool21604. Trace
+that caller and92D5 provenance before naming the byte6 control function.
+
+Recovery correction (2026-10-06): healthy index27 at5F110 is500 ticks.
+Earlier samples601/5601 skipped over the actual boundary and did not prove
+5000 ticks. Updated assertions sample1100/1101 and a repeated1101 pass;
+all pass. See can215-invalid.txt for the shared correction across3A/3B/3C.

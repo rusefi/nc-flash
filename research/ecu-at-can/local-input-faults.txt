@@ -1,0 +1,163 @@
+Local input diagnostics, MT CAN231 and stock AT dispatch (2026-10-06)
+===================================================================
+
+Result
+------
+The ECU's MT CAN231 byte1 bit0 combines the active clutch-input and neutral-
+input diagnostic latches. Original ROM lookup functions identify their
+groups43/44 as P0704/P0850. The source functions, event counters, snapshot
+order, qualification, report cache, and serial-to-CAN fault/recovery sequences
+now execute. These extend local-inputs.txt and mt-can231.txt.
+
+Crucial stock-image limit: AC008-indexed dispatch masks for both groups are
+zero. Every16-bit runtime mask is rejected by9034E. Thus6C1E4 ->8FAC8 ->8FB52
+can update the internal report cache without admitting either group to its
+downstream dispatch path, even with99D5=1 and DTC enable bytesE1AD3/E1AD4=1.
+Do not infer stored P0704/P0850, MIL activation, or AT vehicle faults from
+these MT-mode fixtures. This does not exclude another diagnostic entry path.
+
+All three ECU/AT, deep traction and PRHT folding/unfolding requirements remain
+active and incomplete. This turn and its predecessor made verified progress.
+
+Evidence and reproduction
+-------------------------
+ECU examples/LFFEEE-stock.bin, SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Run: python research/ecu-at-can/verify_local_input_faults.py
+Saved output: local-input-faults-verification.json.
+Python standard library; assertions enabled. Existing exact finite FPU
+interpreter and bounded serial fixture compose via normal inheritance;
+no shared interpreter, earlier verifier, ROM or application is modified.
+Original excerpts and reproduction list are in disassemble.py/disassembly.txt.
+
+Passed16 initializer,1944 activity,7776 event-counter,8748 qualification,
+729 report-cache and480 activity-hold cases.131072 group/runtime-mask checks
+and1215 full report cases verify the stock dispatch rejection. No failing
+test or unsupported opcode was encountered. Stateful runs execute273 complete
+sample/diagnostic/CAN cycles:23 neutral and250 clutch cycles. JSON retains
+13 neutral and10 clutch milestones; assertions also check intermediate calls.
+
+Scope: synthetic serial samples, explicit surrounding call order and finite
+float values. No peripheral timing, external switch wiring, full scheduler,
+stored DTC/MIL lifecycle, OEM PRHT reception or roof actuation is simulated.
+Mode734A=40,configuration734C=0,override7002=0 and dispatch99D5=0
+are explicit lifecycle fixtures; the imported AT ROM is unchanged. Qualification cases also cover normal AT mode80 inhibition.
+
+Physical naming and binary tables
+---------------------------------
+6C1E4 sends groups43/44 through8FAC8.8FB52 reads unsigned16 mapE1288+2*group;
+both entries map to the same numeric index. Original902DC(index) returns
+u16[E1770+2*index]:43->0704,44->0850.902F0(code) returns the matching indices.
+Both directions execute.9033C(index,mask1) checks enableE1A90+index and
+returns0 for both stock1 bytes, permitting that particular enable test.
+sources/lffeee.xml independently names E1AD3 as CPP switch P0704 andE1AD4 as
+neutral switch P0850. This supports identifying723E/bank1bit6 as clutch input
+and7244/723A/bank1bit0 as the local neutral input, subject to the overrides
+already documented in mt-can231.txt. Board connector pins remain unidentified.
+CAN231 byte1 bit2 therefore has stronger neutral attribution, but its use by
+the factory roof receiver still needs independent receiver/capture evidence.
+
+Original caller order
+---------------------
+1B952..1B96E calls6BF3A,6BFAA,6C0CC,6C110,6C1E4 in that order. The verifier
+executes these original call instructions and stops explicitly BEFORE1B970,
+the next unrelated call site. No helper is replaced or skipped; stack returns
+to the original synthetic baseline. This is a bounded caller segment, not
+execution of the whole outer task.6C91E is called at1B93A earlier in that
+task;6C9BE/6CAA4/6CB5C intervene and remain outside the lifecycle execution.
+Initialization6BF20 is referenced by170B4; complete startup timing is open.
+744C6's full function executes with stockE0CC2=0, producing911A=1; its
+aligned-reference callers are1660A and1B142. Reference scans are leads only.
+
+State and counter rules (all RAM addresses haveFFFF prefix)
+---------------------------------------------------------
+6BF20 initializes8EB4=10 (ROM E0295),8EB5=8(E0294), and snapshots via6C0CC.
+6C0CC Booleanizes7244->8EB7 and723E->8EBB. It runs AFTER each counter update,
+so counters see the preceding snapshot, not the just-updated one.
+
+6BF3A clears neutral-transition latch8EB6 when9462==1; otherwise any difference
+between previous8EB7 and current7244 sets1. Equality holds the latch.
+6D5C > stockfloatE02A8 (bits41F0A3D7,30.079999923706055) sets instantaneous
+8EB8=1 and held8EB9=1. Otherwise8EB8 clears,8EB9 holds.8EDC==0 then clears
+8EB9. The physical source and units of6D5C remain open; do not call the
+threshold30mph or30km/h from its numeric resemblance.
+
+6BFAA clears clutch-transition latch8EBA on reset9462==1;otherwise any
+723E versus old8EBB difference sets1, equality holds.
+Neutral counter8EB4 reloads10 when8EB6==1 or reset;otherwise a clutch-input
+transition with8EB8==1 decrements it if positive. Clutch counter8EB5 reloads8
+when8EBA==1 or reset;otherwise an8EB9 falling edge (current0,previous8EC0==1)
+decrements it if positive.8EC0 then snapshots8EB9. Nonzero values other than1
+do not satisfy exact-one conditions; tests cover them separately.
+Transition latches persist after an observed transition until reset in these
+routines; a valid transition therefore keeps its counter reloaded afterward.
+
+6C91E supplies8EDC. Helper2118 tests whether6D5C lies outside inclusive
+[-tolerance,+tolerance], tolerancebits3FF126E9=1.8839999437332153. Outside,
+or9462==1, reload30 fromE02A4. Inside, decrement positive8EDC once percall.
+It also updates8EE0/8EE1; the verifier checks8EE0, while the independent
+8EE1 diagnostic meaning is not assigned. Tolerance endpoints, negative
+values, threshold endpoints, reset andcounter0/1/2/30/255 all execute.
+Thirty qualifying calls are not a proven physical time duration.
+
+6C110 clears8EBC..8EBF on9462==1. Otherwise updates require734A bit40 and
+911A==1; rejected gates hold allfour flags. For clutch:8EB5==0 sets8EBC=1,
+8EBD=0;else8EBA==1 sets8EBC=0,8EBD=1;elsehold. For neutral:8EB4==0 sets
+8EBE=1,8EBF=0;else8EB6==1 sets8EBE=0,8EBF=1;elsehold. Counterzero has
+priority over the transition latch within the isolated qualifier.
+MT producer35C38 ORs exact-one8EBC/8EBE into byte1bit0, independently of the
+state bits2/1. Actual CAN hardware transmission is not part of this test.
+
+Report cache versus dispatch
+---------------------------
+6C1E4 gives pass flag8EBD mode2 priority over fault8EBC mode1 forgroup43;
+8EBF/8EBE do the same for44. If neither equals1, no report is called.
+8FAC8 tail-branches8FB52 withr6=0.8FB52's9462==1 or9A28==1 inhibit skips
+cache write;otherwise8FC94 cachesmode at971E+group (9761/9762).
+The group mapping read still occurs before this gate.
+
+Only99D5==1 attempts further dispatch.9034E reads wordAC008+2*mapped_index,
+ANDs runtime99D8, and returns1 when the result iszero;8FB52 thenreturns.
+Groups43/44 have0000 masks, so even99D8=FFFF rejects. This is independently
+exhausted for all65536 runtime masks pergroup and checked in the full report
+caller with flags0/1/2, dispatch gate0/1/2 and five representative masks.
+Neither8FCB8,8FE4E norDAE8 is reached. Stored-DTC interpretation is therefore
+explicitly excluded from the verified lifecycle claim.
+
+Integrated lifecycles
+--------------------
+Neutral: initialize serial bank1=FF (both active-low inputs0), then toggle
+clutchbit6 while holding neutralbit0 and keeping6D5C just above threshold.
+Every new sample needs two consistent filter calls. First sample holds the
+counter; second decrements. After10 transitions8EB4=0,8EBE=1 and CAN231
+byte1bit0 asserts. Changing neutralbit0 once holdsfault;twice filters the
+transition, reloads10, clearsfault and reportsmode2 for44. Reset clears both
+transition latches and active fault/pass flags. Previous report-cache contents
+can remain because reset inhibits newcache writes; this is not storedhistory.
+
+Clutch: hold both inputs while alternating one high-activity call with30
+zero-input calls.8EDC decrements30->0;only the final call drops8EB9 and
+decrements8EB5. After8 cycles8EB5=0,8EBC=1 and CANbit0 asserts. Two matching
+clutch-input samples reload8 and clear the active fault. The combined path
+executes raw serial sampling, filtering, local state publication,6C91E,
+original diagnostic caller segment and MT CAN231 producer/packer.
+
+Next actions and limits
+-----------------------
+Trace6D5C's actual producer and units,9462's writer/reset semantics, and full
+task scheduling. Two inspected9462 references (A1700 and91282) are readers,
+not writers; do not repeat them as promising writer leads. The stock mask
+finding also warrants comparing corresponding MT-image diagnostic tables.
+Trace ECU transmission-type encoding and OEM PRHT receiver/capture for the
+identified MT neutral/clutch/fault fields. Keep factory fold/unfold interruption,
+reversal and timeout conditions open. Continue CAN211 sender/traction output
+scheduling/pins and TCU slot2 policy4C7AC,phase1/2 admission,92E6 consumers
+per CHECKPOINT.txt. No broad completion or absence-of-other-paths claim.
+
+Persistence verification
+------------------------
+Ghidra549 annotations(261 ECU/288 TCU),307 exports(305 functions+2 readbacks).
+The closed .gpr/.rep archive was independently extracted;all11 project file
+hashes, annotations and exports matched. Current archive identity is saved
+in ghidra/snapshot.json and restore-verification.json. New evidence and
+exports are Git-eligible. Syntax/diff checks pass; no staging,commit orpush.

@@ -1,0 +1,2471 @@
+{
+  "scope": "Original reference production and two-sample error -> request release -> CAN.\n\nMeasured80EE and reference-source80EC are explicit input samples. Reference\nwords9218, capture95C0 and output80D8 are produced by original firmware.\nNo physical units or full application-task schedule are inferred.",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "reference_source_cases": 526,
+  "reference_word_checks": 3682,
+  "clipped_difference_cases": 658,
+  "creation_capture_cases": 1032,
+  "two_sample_filter_cases": 280,
+  "inactive_reset_cases": 1020,
+  "sample_sequence": [
+    {
+      "previous_raw": 3000,
+      "new_raw": 1000,
+      "output": 2000
+    },
+    {
+      "previous_raw": 1000,
+      "new_raw": 1000,
+      "output": 1000
+    },
+    {
+      "previous_raw": 1000,
+      "new_raw": 128,
+      "output": 564
+    },
+    {
+      "previous_raw": 128,
+      "new_raw": 0,
+      "output": 64
+    },
+    {
+      "previous_raw": 0,
+      "new_raw": 127,
+      "output": 63
+    },
+    {
+      "previous_raw": 127,
+      "new_raw": 0,
+      "output": 63
+    },
+    {
+      "previous_raw": 0,
+      "new_raw": -1,
+      "output": -1
+    },
+    {
+      "previous_raw": -1,
+      "new_raw": 0,
+      "output": -1
+    }
+  ],
+  "lifecycles": [
+    {
+      "old": 5,
+      "code": 9,
+      "head": 0,
+      "initial_difference": 1000,
+      "produced_references": [
+        24816,
+        14449,
+        9854,
+        7014,
+        5000,
+        4082,
+        22220
+      ],
+      "release_started": 81,
+      "retired_at": 142,
+      "checkpoints": [
+        {
+          "call": 0,
+          "phase_state": 0,
+          "request_state": 2,
+          "phase_count": 1,
+          "measured": 6000,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 22,
+          "phase_state": 1,
+          "request_state": 3,
+          "phase_count": 1,
+          "measured": 6000,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 23,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 6000,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 79,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 6000,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 500,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 81,
+          "phase_state": 1,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 111,
+          "phase_state": 2,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 117,
+          "phase_state": 2,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 142,
+          "phase_state": 3,
+          "request_state": 0,
+          "phase_count": 0,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 5,
+      "code": 9,
+      "head": 15,
+      "initial_difference": 1000,
+      "produced_references": [
+        24816,
+        14449,
+        9854,
+        7014,
+        5000,
+        4082,
+        22220
+      ],
+      "release_started": 81,
+      "retired_at": 142,
+      "checkpoints": [
+        {
+          "call": 0,
+          "phase_state": 0,
+          "request_state": 2,
+          "phase_count": 1,
+          "measured": 6000,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 22,
+          "phase_state": 1,
+          "request_state": 3,
+          "phase_count": 1,
+          "measured": 6000,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 23,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 6000,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 79,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 6000,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 500,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 81,
+          "phase_state": 1,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 111,
+          "phase_state": 2,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 117,
+          "phase_state": 2,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 142,
+          "phase_state": 3,
+          "request_state": 0,
+          "phase_count": 0,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 5,
+      "code": 9,
+      "head": 0,
+      "initial_difference": 128,
+      "produced_references": [
+        24816,
+        14449,
+        9854,
+        7014,
+        5000,
+        4082,
+        22220
+      ],
+      "release_started": 81,
+      "retired_at": 142,
+      "checkpoints": [
+        {
+          "call": 0,
+          "phase_state": 0,
+          "request_state": 2,
+          "phase_count": 1,
+          "measured": 5128,
+          "raw_error": 128,
+          "filtered_error": 128,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 22,
+          "phase_state": 1,
+          "request_state": 3,
+          "phase_count": 1,
+          "measured": 5128,
+          "raw_error": 128,
+          "filtered_error": 128,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 23,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5128,
+          "raw_error": 128,
+          "filtered_error": 128,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 79,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5128,
+          "raw_error": 128,
+          "filtered_error": 128,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 64,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 81,
+          "phase_state": 1,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 111,
+          "phase_state": 2,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 117,
+          "phase_state": 2,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 142,
+          "phase_state": 3,
+          "request_state": 0,
+          "phase_count": 0,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 5,
+      "code": 9,
+      "head": 15,
+      "initial_difference": 128,
+      "produced_references": [
+        24816,
+        14449,
+        9854,
+        7014,
+        5000,
+        4082,
+        22220
+      ],
+      "release_started": 81,
+      "retired_at": 142,
+      "checkpoints": [
+        {
+          "call": 0,
+          "phase_state": 0,
+          "request_state": 2,
+          "phase_count": 1,
+          "measured": 5128,
+          "raw_error": 128,
+          "filtered_error": 128,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 22,
+          "phase_state": 1,
+          "request_state": 3,
+          "phase_count": 1,
+          "measured": 5128,
+          "raw_error": 128,
+          "filtered_error": 128,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 23,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5128,
+          "raw_error": 128,
+          "filtered_error": 128,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 79,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5128,
+          "raw_error": 128,
+          "filtered_error": 128,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 64,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 81,
+          "phase_state": 1,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 111,
+          "phase_state": 2,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 117,
+          "phase_state": 2,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 142,
+          "phase_state": 3,
+          "request_state": 0,
+          "phase_count": 0,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 5,
+      "code": 9,
+      "head": 0,
+      "initial_difference": 127,
+      "produced_references": [
+        24816,
+        14449,
+        9854,
+        7014,
+        5000,
+        4082,
+        22220
+      ],
+      "release_started": 80,
+      "retired_at": 115,
+      "checkpoints": [
+        {
+          "call": 0,
+          "phase_state": 0,
+          "request_state": 2,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 22,
+          "phase_state": 1,
+          "request_state": 3,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 23,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 33,
+          "phase_state": 2,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 62,
+          "phase_state": 3,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 79,
+          "phase_state": 3,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "phase_state": 3,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 63,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 81,
+          "phase_state": 3,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 115,
+          "phase_state": 3,
+          "request_state": 0,
+          "phase_count": 0,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 5,
+      "code": 9,
+      "head": 15,
+      "initial_difference": 127,
+      "produced_references": [
+        24816,
+        14449,
+        9854,
+        7014,
+        5000,
+        4082,
+        22220
+      ],
+      "release_started": 80,
+      "retired_at": 115,
+      "checkpoints": [
+        {
+          "call": 0,
+          "phase_state": 0,
+          "request_state": 2,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 22,
+          "phase_state": 1,
+          "request_state": 3,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 23,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 33,
+          "phase_state": 2,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 62,
+          "phase_state": 3,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 79,
+          "phase_state": 3,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 5127,
+          "raw_error": 127,
+          "filtered_error": 127,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "phase_state": 3,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 63,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 81,
+          "phase_state": 3,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 115,
+          "phase_state": 3,
+          "request_state": 0,
+          "phase_count": 0,
+          "measured": 5000,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 3,
+      "code": 7,
+      "head": 0,
+      "initial_difference": 1000,
+      "produced_references": [
+        24816,
+        14449,
+        9854,
+        7014,
+        5000,
+        4082,
+        22220
+      ],
+      "release_started": null,
+      "retired_at": 158,
+      "checkpoints": [
+        {
+          "call": 0,
+          "phase_state": 0,
+          "request_state": 2,
+          "phase_count": 1,
+          "measured": 10854,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 46,
+          "phase_state": 1,
+          "request_state": 3,
+          "phase_count": 1,
+          "measured": 10854,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 224,
+          "can216": "02 07 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 7,
+          "at_correction": 4.0,
+          "traction_correction": 0.0,
+          "spark": [
+            22.0,
+            22.0,
+            22.0,
+            22.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 47,
+          "phase_state": 1,
+          "request_state": 4,
+          "phase_count": 1,
+          "measured": 10854,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 224,
+          "can216": "02 07 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 7,
+          "at_correction": 4.0,
+          "traction_correction": 0.0,
+          "spark": [
+            22.0,
+            22.0,
+            22.0,
+            22.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 68,
+          "phase_state": 1,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 10854,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 224,
+          "can216": "02 07 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 7,
+          "at_correction": 4.0,
+          "traction_correction": 0.0,
+          "spark": [
+            22.0,
+            22.0,
+            22.0,
+            22.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 79,
+          "phase_state": 1,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 10854,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 416,
+          "can216": "02 0d 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 13,
+          "at_correction": 3.25,
+          "traction_correction": 0.0,
+          "spark": [
+            22.75,
+            22.75,
+            22.75,
+            22.75
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "phase_state": 1,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 9854,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 416,
+          "can216": "02 0d 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 13,
+          "at_correction": 3.25,
+          "traction_correction": 0.0,
+          "spark": [
+            22.75,
+            22.75,
+            22.75,
+            22.75
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 81,
+          "phase_state": 1,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 9854,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 448,
+          "can216": "02 0e 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 14,
+          "at_correction": 3.25,
+          "traction_correction": 0.0,
+          "spark": [
+            22.75,
+            22.75,
+            22.75,
+            22.75
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 103,
+          "phase_state": 1,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 9854,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 129,
+          "phase_state": 2,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 9854,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 158,
+          "phase_state": 3,
+          "request_state": 0,
+          "phase_count": 0,
+          "measured": 9854,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "old": 4,
+      "code": 8,
+      "head": 0,
+      "initial_difference": 1000,
+      "produced_references": [
+        24816,
+        14449,
+        9854,
+        7014,
+        5000,
+        4082,
+        22220
+      ],
+      "release_started": null,
+      "retired_at": 138,
+      "checkpoints": [
+        {
+          "call": 0,
+          "phase_state": 0,
+          "request_state": 2,
+          "phase_count": 1,
+          "measured": 8014,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 22,
+          "phase_state": 1,
+          "request_state": 3,
+          "phase_count": 1,
+          "measured": 8014,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 468,
+          "can216": "02 0e 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 14,
+          "at_correction": 3.25,
+          "traction_correction": 0.0,
+          "spark": [
+            22.75,
+            22.75,
+            22.75,
+            22.75
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 23,
+          "phase_state": 1,
+          "request_state": 5,
+          "phase_count": 1,
+          "measured": 8014,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 468,
+          "can216": "02 0e 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 14,
+          "at_correction": 3.25,
+          "traction_correction": 0.0,
+          "spark": [
+            22.75,
+            22.75,
+            22.75,
+            22.75
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 53,
+          "phase_state": 1,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 8014,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 79,
+          "phase_state": 1,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 8014,
+          "raw_error": 1000,
+          "filtered_error": 1000,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "phase_state": 1,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 7014,
+          "raw_error": 0,
+          "filtered_error": 500,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 81,
+          "phase_state": 1,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 7014,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 109,
+          "phase_state": 2,
+          "request_state": 0,
+          "phase_count": 1,
+          "measured": 7014,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 138,
+          "phase_state": 3,
+          "request_state": 0,
+          "phase_count": 0,
+          "measured": 7014,
+          "raw_error": 0,
+          "filtered_error": 0,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    }
+  ],
+  "paired_can216_ecu_checks": 73,
+  "limits": "Input80EC/80EE sensor production, units and real task order remain unproved. Explicit producer schedule and input step, original reference/error/phase/request/queue/CAN bodies. No direct80D8 or9218 injection in integrated cases. Full ascending/overlap/composite, traction and OEM roof goals remain open."
+}

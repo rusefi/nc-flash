@@ -1,0 +1,1006 @@
+{
+  "scope": "TCU candidate -> admission/state update -> CAN231 -> ECU one-hot state.\n\nOriginal functions execute completely under explicit RAM and timer fixtures.\nNo vehicle, wall-clock, physical gear or actuator timing simulation.",
+  "cache_cases": 1536,
+  "paired_state_cases": 144,
+  "admission_gate_cases": 2520,
+  "stock_one_step_matrix": [
+    {
+      "old": 0,
+      "requested": 0,
+      "accepted": 0,
+      "candidate": 0,
+      "next": 0,
+      "transition_code": 255,
+      "pending": 0,
+      "cached": 0,
+      "can231": "10 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 0,
+      "requested": 1,
+      "accepted": 1,
+      "candidate": 1,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 0,
+      "requested": 2,
+      "accepted": 1,
+      "candidate": 2,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 0,
+      "requested": 3,
+      "accepted": 1,
+      "candidate": 3,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 0,
+      "requested": 4,
+      "accepted": 1,
+      "candidate": 4,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 0,
+      "requested": 5,
+      "accepted": 1,
+      "candidate": 5,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 1,
+      "requested": 0,
+      "accepted": 0,
+      "candidate": 0,
+      "next": 0,
+      "transition_code": 5,
+      "pending": 0,
+      "cached": 0,
+      "can231": "10 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 1,
+      "requested": 1,
+      "accepted": 1,
+      "candidate": 1,
+      "next": 1,
+      "transition_code": 255,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 1,
+      "requested": 2,
+      "accepted": 2,
+      "candidate": 2,
+      "next": 2,
+      "transition_code": 1,
+      "pending": 0,
+      "cached": 2,
+      "can231": "30 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 1,
+      "requested": 3,
+      "accepted": 2,
+      "candidate": 3,
+      "next": 2,
+      "transition_code": 1,
+      "pending": 0,
+      "cached": 2,
+      "can231": "30 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 1,
+      "requested": 4,
+      "accepted": 2,
+      "candidate": 4,
+      "next": 2,
+      "transition_code": 1,
+      "pending": 0,
+      "cached": 2,
+      "can231": "30 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 1,
+      "requested": 5,
+      "accepted": 2,
+      "candidate": 5,
+      "next": 2,
+      "transition_code": 1,
+      "pending": 0,
+      "cached": 2,
+      "can231": "30 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 2,
+      "requested": 0,
+      "accepted": 1,
+      "candidate": 0,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 2,
+      "requested": 1,
+      "accepted": 1,
+      "candidate": 1,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 2,
+      "requested": 2,
+      "accepted": 2,
+      "candidate": 2,
+      "next": 2,
+      "transition_code": 255,
+      "pending": 0,
+      "cached": 2,
+      "can231": "30 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 2,
+      "requested": 3,
+      "accepted": 3,
+      "candidate": 3,
+      "next": 3,
+      "transition_code": 2,
+      "pending": 0,
+      "cached": 3,
+      "can231": "40 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 2,
+      "requested": 4,
+      "accepted": 3,
+      "candidate": 4,
+      "next": 3,
+      "transition_code": 2,
+      "pending": 0,
+      "cached": 3,
+      "can231": "40 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 2,
+      "requested": 5,
+      "accepted": 3,
+      "candidate": 5,
+      "next": 3,
+      "transition_code": 2,
+      "pending": 0,
+      "cached": 3,
+      "can231": "40 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 3,
+      "requested": 0,
+      "accepted": 2,
+      "candidate": 0,
+      "next": 2,
+      "transition_code": 7,
+      "pending": 0,
+      "cached": 2,
+      "can231": "30 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 3,
+      "requested": 1,
+      "accepted": 2,
+      "candidate": 1,
+      "next": 2,
+      "transition_code": 7,
+      "pending": 0,
+      "cached": 2,
+      "can231": "30 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 3,
+      "requested": 2,
+      "accepted": 2,
+      "candidate": 2,
+      "next": 2,
+      "transition_code": 7,
+      "pending": 0,
+      "cached": 2,
+      "can231": "30 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 3,
+      "requested": 3,
+      "accepted": 3,
+      "candidate": 3,
+      "next": 3,
+      "transition_code": 255,
+      "pending": 0,
+      "cached": 3,
+      "can231": "40 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 3,
+      "requested": 4,
+      "accepted": 4,
+      "candidate": 4,
+      "next": 4,
+      "transition_code": 3,
+      "pending": 0,
+      "cached": 4,
+      "can231": "50 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "old": 3,
+      "requested": 5,
+      "accepted": 4,
+      "candidate": 5,
+      "next": 4,
+      "transition_code": 3,
+      "pending": 0,
+      "cached": 4,
+      "can231": "50 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "old": 4,
+      "requested": 0,
+      "accepted": 3,
+      "candidate": 0,
+      "next": 3,
+      "transition_code": 8,
+      "pending": 0,
+      "cached": 3,
+      "can231": "40 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 4,
+      "requested": 1,
+      "accepted": 3,
+      "candidate": 1,
+      "next": 3,
+      "transition_code": 8,
+      "pending": 0,
+      "cached": 3,
+      "can231": "40 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 4,
+      "requested": 2,
+      "accepted": 3,
+      "candidate": 2,
+      "next": 3,
+      "transition_code": 8,
+      "pending": 0,
+      "cached": 3,
+      "can231": "40 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 4,
+      "requested": 3,
+      "accepted": 3,
+      "candidate": 3,
+      "next": 3,
+      "transition_code": 8,
+      "pending": 0,
+      "cached": 3,
+      "can231": "40 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "old": 4,
+      "requested": 4,
+      "accepted": 4,
+      "candidate": 4,
+      "next": 4,
+      "transition_code": 255,
+      "pending": 0,
+      "cached": 4,
+      "can231": "50 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "old": 4,
+      "requested": 5,
+      "accepted": 5,
+      "candidate": 5,
+      "next": 5,
+      "transition_code": 4,
+      "pending": 0,
+      "cached": 5,
+      "can231": "60 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "old": 5,
+      "requested": 0,
+      "accepted": 4,
+      "candidate": 0,
+      "next": 4,
+      "transition_code": 9,
+      "pending": 0,
+      "cached": 4,
+      "can231": "50 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "old": 5,
+      "requested": 1,
+      "accepted": 4,
+      "candidate": 1,
+      "next": 4,
+      "transition_code": 9,
+      "pending": 0,
+      "cached": 4,
+      "can231": "50 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "old": 5,
+      "requested": 2,
+      "accepted": 4,
+      "candidate": 2,
+      "next": 4,
+      "transition_code": 9,
+      "pending": 0,
+      "cached": 4,
+      "can231": "50 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "old": 5,
+      "requested": 3,
+      "accepted": 4,
+      "candidate": 3,
+      "next": 4,
+      "transition_code": 9,
+      "pending": 0,
+      "cached": 4,
+      "can231": "50 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "old": 5,
+      "requested": 4,
+      "accepted": 4,
+      "candidate": 4,
+      "next": 4,
+      "transition_code": 9,
+      "pending": 0,
+      "cached": 4,
+      "can231": "50 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "old": 5,
+      "requested": 5,
+      "accepted": 5,
+      "candidate": 5,
+      "next": 5,
+      "transition_code": 255,
+      "pending": 0,
+      "cached": 5,
+      "can231": "60 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "blocked_then_admitted": [
+    {
+      "call": 1,
+      "gate9545": 4,
+      "accepted": 0,
+      "candidate": 5,
+      "next": 1,
+      "transition_code": 255,
+      "pending": 1,
+      "cached": 0,
+      "can231": "10 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "call": 2,
+      "gate9545": 4,
+      "accepted": 0,
+      "candidate": 5,
+      "next": 1,
+      "transition_code": 255,
+      "pending": 1,
+      "cached": 0,
+      "can231": "10 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "call": 3,
+      "gate9545": 0,
+      "accepted": 1,
+      "candidate": 5,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "call": 4,
+      "gate9545": 0,
+      "accepted": 2,
+      "candidate": 5,
+      "next": 2,
+      "transition_code": 1,
+      "pending": 0,
+      "cached": 2,
+      "can231": "30 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "call": 5,
+      "gate9545": 0,
+      "accepted": 3,
+      "candidate": 5,
+      "next": 3,
+      "transition_code": 2,
+      "pending": 0,
+      "cached": 3,
+      "can231": "40 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "call": 6,
+      "gate9545": 0,
+      "accepted": 4,
+      "candidate": 5,
+      "next": 4,
+      "transition_code": 3,
+      "pending": 0,
+      "cached": 4,
+      "can231": "50 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "call": 7,
+      "gate9545": 0,
+      "accepted": 5,
+      "candidate": 5,
+      "next": 5,
+      "transition_code": 4,
+      "pending": 0,
+      "cached": 5,
+      "can231": "60 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "delayed_candidates": [
+    {
+      "timer_fixture": 0,
+      "configured_delay": 37,
+      "gate9410": 0,
+      "source9340": -5121,
+      "candidate_return9c74": 255,
+      "accepted": 0,
+      "candidate": 0,
+      "next": 0,
+      "transition_code": 255,
+      "pending": 0,
+      "cached": 0,
+      "can231": "10 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "timer_fixture": 36,
+      "configured_delay": 37,
+      "gate9410": 0,
+      "source9340": -5121,
+      "candidate_return9c74": 255,
+      "accepted": 0,
+      "candidate": 0,
+      "next": 0,
+      "transition_code": 255,
+      "pending": 0,
+      "cached": 0,
+      "can231": "10 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "timer_fixture": 37,
+      "configured_delay": 37,
+      "gate9410": 0,
+      "source9340": -5121,
+      "candidate_return9c74": 1,
+      "accepted": 1,
+      "candidate": 1,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "timer_fixture": 38,
+      "configured_delay": 37,
+      "gate9410": 0,
+      "source9340": -5121,
+      "candidate_return9c74": 1,
+      "accepted": 1,
+      "candidate": 1,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "timer_fixture": 0,
+      "configured_delay": 18,
+      "gate9410": 4,
+      "source9340": 0,
+      "candidate_return9c74": 255,
+      "accepted": 0,
+      "candidate": 0,
+      "next": 0,
+      "transition_code": 255,
+      "pending": 0,
+      "cached": 0,
+      "can231": "10 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "timer_fixture": 17,
+      "configured_delay": 18,
+      "gate9410": 4,
+      "source9340": 0,
+      "candidate_return9c74": 255,
+      "accepted": 0,
+      "candidate": 0,
+      "next": 0,
+      "transition_code": 255,
+      "pending": 0,
+      "cached": 0,
+      "can231": "10 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "timer_fixture": 18,
+      "configured_delay": 18,
+      "gate9410": 4,
+      "source9340": 0,
+      "candidate_return9c74": 1,
+      "accepted": 1,
+      "candidate": 1,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "timer_fixture": 19,
+      "configured_delay": 18,
+      "gate9410": 4,
+      "source9340": 0,
+      "candidate_return9c74": 1,
+      "accepted": 1,
+      "candidate": 1,
+      "next": 1,
+      "transition_code": 0,
+      "pending": 0,
+      "cached": 1,
+      "can231": "20 00 00 0a 00 00 00 01",
+      "ecu_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "limits": "Other RAM inputs start atzero;48BC0 initializes statefromcache. Gateproducers andclockunits unproved.8081 is accepted softwarestate, not proof of mechanically attainedgear. Full44CFE candidate calculation remains outside this verifier."
+}

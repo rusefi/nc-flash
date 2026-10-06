@@ -1,0 +1,154 @@
+ECU CAN215 -> TCU request -> CAN216 -> ECU spark (2026-10-06)
+===========================================================
+
+Result and scope
+----------------
+The upstream CAN215 link is now executable. ECU71EC and protected71C4
+are encoded into separate words; the TCU subtracts their converted values,
+selects/clamps the difference and scales it into request base92E4. The
+previously verified phase3 policy and request aggregator then produce
+CAN216word0, which reaches ECU spark alongside CAN211. Each feedback case
+uses the same ECU instance to produce215 and process returned216, preserving
+71C4 as the shared model input. This is explicit function scheduling with
+synthetic model/local gates, not a full vehicle or real-time simulation.
+
+Both unchanged ROM hashes and all verification results are in
+can215-feedback-verification.json. RAM addresses omitFFFF; code/calibration
+addresses are hexadecimal; counts and numeric examples are decimal.
+
+ECU producer
+------------
+369D6 copies6E2E to6B62 and calls the numeric/status builders. The three
+word encoders are36AD8,36B68,36BA4:
+  bytes0..1:71EC ->6B58
+  bytes2..3:71B4 ->6B5A
+  bytes4..5:protected71C4 ->6B5C.
+For each, helper20E8 computes int(source+512+0.5), saturating its integer
+result to[0,65535], followed by a cap65534. If6B62==1, the encoder instead
+writesFFFF. Values2/FF in6B62 do not take that invalid branch. Tested inputs
+are finite exactly representable values; int denotes truncation toward zero.
+36A28 packs all8 bytes into6B50 when734A has either40 or80 set; otherwise
+the pre-existing payload remains. Both MT and AT modes can publish215.
+All original numeric/status builders and the packer's critical-section
+helpers execute; no controller-transmit peripheral is emulated.
+
+TCU conversion, subtraction and validity
+---------------------------------------
+Receive buffer8F2C corresponds to CAN215 in the previously decoded table.
+1ACF0 is the complete conversion callback used here. Its call order includes
+177DC BEFORE17854. Getter1C866 reads bytes4..5;1C812 reads bytes0..1.
+Stock10F38 records5C81A/5C822=01 01 FE 00 and5C5B4/5C5B8=01 0A 00 00
+give conversion10*(raw-512). Let clip16 saturate to[-32768,32767]:
+  177DC: word4!=FFFF ->88E4=clip16(10*(word4-512)),88E6=2;
+         word4==FFFF ->retain88E4,88E6=1.
+  17854: word0!=FFFF AND88E6==2 ->
+           88E8=clip16(10*(word0-512)-signed88E4),88EA=2.
+         Otherwise retain88E8;88EA=1 when word0FFFF or88E6==1,
+         else88EA=3 (dependency unready/other status).
+
+The offset is clamped BEFORE subtraction; cancellation is only valid in
+the unsaturated domain. For example, equal raw65534 words do not yield0:
+the clamped offset32767 is subtracted from650220, then the difference clips
+to32767. Boundary pairs test this explicitly. Invalid data holds the old
+number with a changed validity; a held number is not a fresh request.
+The callback also processes other CAN215 fields with other RAM initially
+zero; the new independent assertions concern the offset/difference path.
+
+TCU application/fault selection
+------------------------------
+516D8's stock initialization source5FD50 is9240 (static initialization lead).
+Full516E6 selects the value and statusA538 in this priority order:
+  88EA==2 ANDA98Cbit0 ->88E8,status1;
+  elseA98Cbit2 ->stock5FD52=9240,status4;
+  elseA98Cbit1 ->9240,status3;
+  else retain old80B4,status2.
+It then clamps to[-1000,9240] using5FD56/5FD54 and writes80B4.
+All4096 summary/validity/value fixtures pass. Some synthetic summaries have
+healthy and fault bits simultaneously: the fresh/bit0 branch wins. This is
+branch precedence, not proof such a summary occurs in normal diagnostics.
+
+216D8 then converts signed80B4*32/10 with truncation and signed16 saturation
+into92E2/92E4, as verified in tcu-spark-requests.txt. In the unclipped valid
+domain, the net scale is92E4=32*(CAN215word0-CAN215word4).
+The CAN216 request is derived from this base, not a raw copy of word0.
+
+Diagnostic provenance is also executed:570F6 ->57258 combinesA977/A978/A97D
+according to table5FCC0=1F 20 25 00. Groups35,36,3B are the contributors.
+Each of73 groups is tested with state02,04 and history-only10: active02/04
+in a contributor causes the9240 substitute (status3/4 respectively); history
+alone leaves fresh250 accepted.219 mapping/policy cases pass. Prior work
+traces35/36 qualification separately. Group3B's qualification/source remains
+open; its observed table5F198 dependencyAC7A is a continuation lead, not yet
+proof that a particular invalid CAN215 field independently sets the group.
+
+Feedback and shared CAN211 model
+-------------------------------
+Seventy-two feedback cases vary input difference0/15/25/35, offset71C4=-5/0/5,
+phase3 timer8170=0/5/10 and separate216bit5 cut0/1. The complete sequence is:
+  ECU369D6/36A28 ->CAN215 buffer transfer ->TCU1ACF0/516E6/216D8
+  ->2C234/1FB8C ->18F10/18F8C ->same ECU CAN216 and CAN211 spark paths.
+TCU phase3 starts active with reduction320 and duration10. End-of-ramp
+withdrawal emitsFFFE, decoded by ECU as65022, as in the preceding record.
+Diagnostic/local gates are explicit fixtures; the scheduler is not executed.
+
+Keeping primary71EC-offset71C4 constant keeps the TCU base constant in these
+cases. The SAME offset71C4 also enters ECU CAN211 conversion3F97C, so it can
+change CAN211's spark correction even when the returned AT request is equal.
+For difference25,elapsed0,CAN211word0=10016, no cut:
+  offset primary  TCUbase CAN216decoded ATcorrection 211correction spark
+    -5      20      800       15           3             3.5       19.5
+     0      25      800       15           3             3         20
+     5      30      800       15           3             2         21
+These are raw model values, not measured physical units. Normal final-spark
+selection, zero stock cylinder trims and the separate cut-command path all
+execute with the admitted fixtures documented in spark-interaction.txt.
+
+A six-step lifecycle preserves TCU state through fresh25, fresh35, invalid
+hold, invalid hold with summary0, invalid substitute with summary4, fresh25
+recovery.80B4 is250,350,350,350,9240,250;statusA538 is1,1,2,2,4,1. Returned
+CAN216decoded values are15,25,25,25,914,15. Each step produces and processes
+the payload with one ECU instance; a fresh ECU model fixture is used for the
+next step. This does not simulate ECU task history between lifecycle steps.
+
+Reproduction
+------------
+  python research/ecu-at-can/verify_can215_feedback.py > research/ecu-at-can/can215-feedback-verification.json
+
+Passed432 sender cases,400 complete-callback conversion cases,20 dependency
+cases,4096 policy cases,219 diagnostic-group cases,72 feedback cases and6
+lifecycle checkpoints. No ROM or shared SH interpreter changes.
+verify_spark_interaction.paired now optionally takes an existing ECU instance
+and model offset, preserving the original default fixtures. Both earlier
+spark-interaction and tcu-spark-requests verifiers were rerun; their complete
+JSON outputs exactly match the previous saved results.
+
+Remaining work and useful leads
+-------------------------------
+ECU sources71EC/71C4 remain fixtures. Literal71EC users408B4/409CC point to
+producers around40896 and409A0;71C4 users include3F854/40544/409A0/409AE.
+Static408B4 sums71F8+protected71D0+protected71D8 into71EC. Trace full callers
+and shared model producers before assigning physical torque units.
+Group3B's AC7A producer/timed policy, slot2 request policy4C7AC, phase1/2
+entry and real scheduling remain open. All other CAN215 fields need their
+own consumer/output review; executing a callback is not semantic attribution.
+Traction sender/complete arbitration and PRHT folding/unfolding CAN IDs,
+interlocks and remote state transitions remain required, incomplete goals.
+
+Persistence verification
+------------------------
+Ghidra annotations and typed table5FCC0 saved with both programs. Independent
+archive extraction verified all11 project file hashes; read-only reopening
+verified404 annotations and240 byte-identical function/readback exports.
+Current archive identity is in ghidra/snapshot.json and CHECKPOINT.txt;
+ghidra/restore-verification.json records restoration. Evidence, verifier and
+JSON are Git-eligible. Saved locally without new staging, commit or push.
+
+Follow-up (2026-10-06): can215-invalid.txt now executes the group3B AC7A
+producer, qualification/recovery and second difference field through the
+returned request. It supersedes the diagnostic open lead above. Physical
+model/source, full scheduling, traction and roof requirements remain open.
+
+Stock-source follow-up (2026-10-06): model-sources.txt now executes the
+immediate coefficient/offset/count producers and198 paired feedback cases.
+This closes the earlier immediate model-source lead; raw sensor/state
+identities, upstream pattern policy and real task history remain unproved.

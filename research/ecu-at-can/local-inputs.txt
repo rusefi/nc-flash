@@ -1,0 +1,138 @@
+ECU local serial inputs to MT CAN231 (2026-10-06)
+================================================
+
+Result and scope
+----------------
+The input at FFFF44A4 is a filtered serial-bank sample, not a direct GPIO
+read. Original CA94/CADE ->76B4 ->786E code now executes through explicit
+peripheral samples, followed by 411F0/412A2 ->35BAA ->36DB0. MT CAN231
+byte1 bits2/1 follow active-low filtered bank1 bits0/6 under the previously
+verified configuration/override rules (mt-can231.txt). This advances the
+factory PRHT neutral-permission candidate; OEM reception, physical switch
+identity, connector wiring, sample period and roof commands remain unproved.
+The ECU/AT, deep traction and folding/unfolding roof goals remain incomplete.
+
+Input and reproduction
+----------------------
+examples/LFFEEE-stock.bin, SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Run: python research/ecu-at-can/verify_local_inputs.py
+Output: local-inputs-verification.json. Python standard library, assertions
+enabled. Uses unchanged sh_subset.py and import-safe verify_mt_can231.py.
+Original disassembly is retained in disassembly.txt; regenerate using the
+GNU SH objdump command in CHECKPOINT.txt. No app/ROM changes.
+
+Passed:2048 serial bank/value/delayed-ready cases;1024 initializers;256 full
+filter cases covering every single-bit truth table, inverted channels and
+conditional sampling;9 stateful serial-to-CAN231 points;4 rejected peripheral
+accesses;one bounded never-ready case. All real helper calls execute.
+The filter oracle votes independently per bit across old filtered state,
+previous sample and current sample, rather than copying the ROM expression.
+No test failed in this verifier's initial run.
+
+Bounded peripheral model
+------------------------
+InputSamples maps only byte accesses F000..F006 and word accesses F72C/F764/
+F746/F74E, all with FFFF prefix. Unknown addresses/widths and writes to RDR
+or sampled input ports raise. RDR returns the explicitly supplied bank byte
+selected by F72C bits14/15. SSR reads are fixtures:80 outside polling;
+80 for a requested number of polls,then C0. All peripheral writes are logged.
+These are sampled reads, not a full register model. In particular, writing
+SSR status bits is not emulated as ordinary RAM or as a receive operation.
+The bounded never-ready case stops at the interpreter's instruction limit
+inside78CA..78D2, before RDR is read. It demonstrates the local polling loop
+has no timeout; it does not model external watchdog/interrupt recovery.
+
+Executed sampling and filtering
+-------------------------------
+76B4(bankbyte) saves/restores SR and uses real22E4/22F4 interrupt-mask helpers.
+SCR0 is masked with0B, then FC; SMR0=80, SDCR0=F2, BRR0=4. Bank0 clears
+F72C bits14/15;bank1 sets14/clears15;all other byte values clear14/set15.
+Other port bits survive. SCR0 becomes(SCR0&0B)|30;786E receives argumentFF.
+
+786E executes the794C NOP delay, clears F764 bit0 through E744, delays,
+writes SSR=(SSR&87)|80, writes TDR=FF, then SSR=(SSR&7F)|78. It waits for
+SSR bit40 at78CA..78D2, reads RDR, writes SSR=(SSR&BF)|B8, delays and sets
+F764 bit0. The returned byte is preserved; SR interrupt-mask bits restore.
+This is evidence of serial acquisition and bank/strobe control, not external
+chip identification, pin multiplexing validation or an electrical waveform.
+
+CA94 initialization copies current samples into filtered/previous pairs:
+  F746 word ->44A0/44AA; F74E word ->44A2/44AC;
+  76B4(1) byte ->44A4/44AE;76B4(2) byte ->44A5/44AF;
+  CBC8 Boolean ->44A6/44A8 words.
+CBC8 returns unsigned word401C>=8000. CA94 leaves44B0 untouched.
+CADE updates the first four channels every call with
+  filtered=((previous|current)&filtered)|(previous&current), previous=current.
+This holds the old state when samples disagree and changes after two
+consistent samples. Only when byte4004 differs from44B0 does it sample CBC8,
+filter44A6/44A8 by the same rule and cache4004 into44B0.
+
+The saved lifecycle starts bank1=FF. FF,FE,FF,FE leaves MT231 byte1=0;
+a second FE changes it to04. BE once retains04;BE twice changes to06.
+FF once retains06;FF twice clears0. Other payload bytes are FF,FF,FF,0,0,0,0
+as described in mt-can231.txt. Diagnostic latches are zero in this lifecycle.
+
+Manual corroboration (register naming only)
+------------------------------------------
+Renesas SH-2E SH7058 F-ZTAT Hardware Manual, REJ09B0046-0300H,
+Rev3.0 Sep2004, sections15/19 and register tables, accessed2026-10-06:
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+PDF SHA2569c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+F000..F006 map SMR0,BRR0,SCR0,TDR0,SSR0,RDR0,SDCR0. SMR bit7 selects
+synchronous operation; SSR bit6 indicates receive data available. F72C is
+PHDR and F764 is PGDR. Register correspondence supports the interpretation;
+it does not independently identify the board's external input device.
+Manual source retained by provenance rather than copying the whole PDF.
+
+Historical diagnostic leads: now executed in local-input-faults.txt
+--------------------------------------------------------
+Follow-up local-input-faults.txt verifies these leads, caller order, P0704/
+P0850 mapping and stock dispatch rejection. The description below records
+the preceding static pass; use the follow-up for current status.
+MT231 byte1 bit0 ORs exact-one latches8EBC/8EBE (mt-can231.txt). Original
+6BF20..6C26C shows their producers; preserve this lead for the next pass:
+*6BF20 calls6C0CC snapshot,loads ROM E0295=10->8EB4/E0294=8->8EB5.
+ Stock E02A8 bits41F0A3D7 represent30.079999923706055; units unproved.
+ E1AD3/E1AD4 are both1 in this image.
+*6C0CC snapshots Boolean(protected7244!=0)->8EB7 and
+ Boolean(protected723E!=0)->8EBB. Scheduling/call order remains unresolved.
+*6BF3A: protected9462==1 clears8EB6;otherwise a difference between8EB7 and
+ protected7244 sets8EB6=1, equality holds it. Protected float6D5C greater
+ than ROMfloatE02A8 sets8EB8/8EB9=1;otherwise clears8EB8 and holds8EB9.
+ Finally8EDC==0 clears8EB9. Physical identities of these gates are unknown.
+*6BFAA:9462==1 clears8EBA;otherwise old8EBB!=protected723E sets8EBA=1.
+ If8EB6==1 or reset, reload8EB4=E0295. Else if8EB8==1 and723E!=8EBB,
+ decrement positive8EB4. If8EBA==1 or reset,reload8EB5=E0294. Else if8EB9==0
+ and8EC0==1,decrement positive8EB5. Finally8EC0=8EB9. These are event
+ conditions, not evidence for a timer duration. Other conditions hold counters.
+*6C110:9462==1 clears8EBC/8EBD/8EBE/8EBF. Else,only mode734A bit40 and
+ 911A==1 permit updates. Counter8EB5==0 sets8EBC=1/8EBD=0;otherwise8EBA==1
+ clears8EBC/sets8EBD. Counter8EB4==0 sets8EBE=1/8EBF=0;otherwise8EB6==1
+ clears8EBE/sets8EBF. Remaining cases retain old values.
+*6C1E4:8EBD==1 reports8FAC8(group43,mode2);otherwise8EBC==1 reports(43,1).
+ Similarly8EBF has mode2 priority over8EBE mode1 for group44. Groups are hex.
+ 8FAC8 tail-branches8FB52 withr6=0; downstream recording remains untraced here.
+ Do not assign P0704/P0850 solely from neighboring group numbers. Definition
+ sources/lffeee.xml names their enable bytes E1AD3/E1AD4, but the group-to-DTC
+ mapping must be established independently before applying physical names.
+
+Continuation
+------------
+Execute these diagnostic bodies with exact finite float comparisons; use
+independent counter/latch oracles and stateful sequences. Trace911A/9462/
+8EDC, snapshot caller scheduling, group43/44 recording and DTC mapping.
+Then connect actual serial samples through diagnostics and CAN publication.
+Find board/pin evidence for bank1 bits0/6; preserve neutral-candidate wording
+until corroborated. Follow OEM PRHT receive/type/speed/reversal/timeouts,
+converter201 unit helpers, traction output scheduling/pins/CAN211 sender,
+and TCU slot2 policy4C7AC,phase1/2 admission,92E6 consumers per CHECKPOINT.
+
+Persistence verification
+------------------------
+Ghidra535 annotations(247 ECU/288 TCU), including explicit STATIC ONLY
+labels for diagnostic leads;298 exports(296 functions+2 readbacks). Closed
+project archive independently extracted;all11 project hashes and every
+restored export matched. Current archive hash is in ghidra/snapshot.json
+and ghidra/restore-verification.json. Evidence is Git-eligible; saved locally,
+no new staging, commit or push. Prior staged work was preserved.

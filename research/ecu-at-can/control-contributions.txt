@@ -1,0 +1,201 @@
+2026-10-06: baseline contributors and CAN211-latch suppression
+
+Verified result
+---------------
+Original59154 suppresses baseline contribution80DC whenever the previously
+traced protected latch7978 is nonzero. The executed CAN211 bit13 ->6A20 ->
+4E80C ->7978 path now reaches this consumer and the baseline/history/ratio/
+command chain, alongside actual TCU packers and ECU CAN decoders.
+Request withdrawal does not itself release the retained latch. Resetting its
+admission count clears it in the tested original code, restoring80DC.
+
+Neighboring59250 produces correction80E0 using a different rule: a zero to
+nonzero67AC transition selects an initial value, then it decays on subsequent
+calls. This routine does not read7978. Baseline80DC and current-input80E0
+must remain distinct in explanations of the shared CAN control logic.
+
+This identifies an executed latch consumer, not the physical CAN211 sender,
+traction-versus-stability event type, fuel/ignition hardware effect or a full
+DSC system. Both ECU/TCU binaries remain unchanged. Other required traction
+and roof evidence remains open independently.
+
+Artifacts and reproduction
+--------------------------
+  python research/ecu-at-can/verify_control_contributions.py \
+    > research/ecu-at-can/control-contributions-verification.json
+
+The JSON records ROM SHA256 identities, every stock map, case counts and
+retained lifecycle checkpoints. The verifier executes nine complete original
+bodies with independent finite RTZ/state oracles. Existing interpreters and
+older verifier scripts are unchanged. Disassembly excerpts preserve the new
+bodies and observed callers. No test failure occurred in this pass; the first
+passing suite was expanded to include correction59250, then passed again.
+
+2,375 direct/state checks pass:
+  144 averaging state/reset/boundary cases
+  512 consecutive original averaging updates after original reset
+  203 two-input map knots/midpoints/clamps
+  116 optional-extra threshold/curve cases
+   25 contribution-sum cases
+  132 mode-selected blend-map cases
+   28 blend-weight boundary cases
+  243 contribution gate/blend cases
+  972 correction activation/decay cases
+
+The integration additionally passes320 complete synthetic serial cycles,
+36 paired TCU CAN updates and320 original CAN211/latch updates. It reaches
+both blend-weight endpoints through original per-call updates. Every serial
+cycle checks40 outgoing bytes and the next command using the existing harness.
+TCU18F10/191A8 packers and ECU normalization/fullA477E run at paired updates;
+TCU upstream request values, CAN211 input payload and remote replies remain
+fixtures. These are not vehicle bus captures or hardware tests.
+
+Conventions
+-----------
+Short RAM addresses have FFFF prefix. R denotes binary32 rounding toward
+zero after each operation. Physical signal identities/units are not inferred
+from map axes. Invocation counts are not milliseconds.
+
+Retained average:590A0
+---------------------
+If73C4 bit80 is set:
+  80D8 = 65535; 80D4 = 0; 80D0 = current6D20.
+Otherwise, while the old unsigned16 count80D8 is nonzero:
+  80D8 = old80D8 - 1
+  80D4 = R(old80D4 + current6D20)
+  80D0 = R(80D4 / (65535 - 80D8))
+If the old count is zero, all three outputs hold.
+
+The reset sample is copied to the output but is excluded from the newly
+accumulated sum. After reset,512 alternating100/80 samples yield mean90
+and count65023. Direct tests cover count1 ->0 and subsequent holding; this
+does not claim a complete65535-sample integration run or a real task rate.
+
+Mapped baseline contribution:5904C,59070,5903C
+--------------------------------------------
+5904C writes80C8 = A365C(6D38,6D30). The stock float map has14 x knots
+-30..100 by10 and three y knots[-20,0,20]; values are saved in the JSON.
+Original236C interpolation executes. For example, x20,y0 gives about.286;
+x80,y20 gives about.1711036.
+
+59070 writes80CC = A3650(80D0) only when6D30 < DA474 = -200; otherwise0.
+The seven stock curve values (axis40..100 by10) are allzero. Both branches
+execute in direct tests; stock results arezero even below the threshold.
+This does not establish production reachability of6D30 < -200.
+
+5903C writes80C4 = R(80C8 + 80CC). Both original producers replace the prior
+fixed80C4 contribution in the integrated lifecycle. 58F10 uses80C4 in its
+baseline80BC sum;51286 also uses it in the shared ratio-factor sum7BB8.
+
+Two blend maps and coefficient:591A0,591D6,5920C
+-----------------------------------------------
+591A0 sets80E4 fromA3670 when7012 is exactly1, otherwiseA367C.
+591D6 sets80E8 fromA3688 when7012 is exactly1, otherwiseA3694.
+All four use6D28 and eight knots[-40,-20,0,20,40,60,80,100]. Values:
+  A3670: .02,.02,.02,.02,.03,.06,.06,.06
+  A367C: .02,.02,.04,.04,.05,.05,.05,.05
+  A3688: .02,.02,.02,.02,.03,.05,.05,.05
+  A3694: .02,.02,.04,.04,.04,.04,.04,.04
+These are decimal descriptions; the JSON preserves the stored float values.
+
+5920C updates80EC:
+  if7234 == 1: min(1, R(old80EC + DA5C0))
+  otherwise:  max(0, R(old80EC - DA5C4))
+Both stock steps are approximately.007. Each branch has one bound; it is not
+a general clamp of arbitrary corrupt input to0..1. Starting atzero and using
+these original updates, the integration reaches1 and later0. These producers
+continue executing while7978 suppresses the final contribution.
+
+Latch-gated contribution:59154
+-----------------------------
+If67AC != 1 OR7978 != 0:80DC = 0.
+Otherwise original2508 computes a blend:
+  a = R(1 - 80EC)
+  b = R(1 - a)
+  candidate = R(80E8 + R(b * R(80E4 - 80E8)))
+  if abs(R(80E8 - candidate)) < float[59348] (~.00001):80DC = 80E8
+  otherwise:80DC = candidate.
+
+Keep both rounded subtractions formingb; algebraically replacingb with80EC
+can lose bit-level agreement. Neither80E4 nor80E8 is a previous output of
+this routine: both come from current map lookups. Its coefficient is retained.
+
+Activation correction:59250
+---------------------------
+If67AC == 0,80E0 clears. If67AC is nonzero and previous80F0 iszero, choose:
+                             7012=1,6E3C=1  7012=1,6E3C!=1  7012!=1
+  7242 == 1                       .04             .06            .05
+  7242 != 1                       .04             .01            .01
+These correspond toDA59C..DA5B0. With previous80F0 nonzero, subtract a
+selected DA5B4/DA5B8/DA5BC step and floor atzero. All three stock steps are
+approximately.0005, though the original selection still executes.
+Always copy raw67AC into80F0, including the clearing branch.
+
+Raw67AC == 2 activates this correction but disables59154's contribution;
+the exact-one versus nonzero predicates matter. 58A7A adds80E0 with its other
+corrections before multiplying by7020/6DB4. It is not an80BC baseline term.
+
+Retained CAN and command lifecycle
+---------------------------------
+Original4E7F4 initializes the latch. Protected722E=1 and the explicit7974
+admission count are fixtures; other latch requests/edge state remain inactive.
+Each call runs original211 unpack/normalization,4E80C and then the contribution
+group. There is no direct7978 injection after initialization.
+
+Calls11..20 assert211 bit13:7978 sets and80DC becomeszero. Calls21..30 send
+no request, but the latch stays set and80DC stayszero. Setting7974 tozero
+at31 clears the latch and restores the produced contribution. The41..60
+request/withdrawal sequence repeats;61 resets again.
+
+For example, baseline80C4 is about.286 during the first sequence. Call11
+has80DC=0 and baseline80BC about.286; call31 has80DC about.04217 and baseline
+about.32817. Later input changes produce80C4 about.1711036. The independently
+updated coefficient reaches1 then0. Disabling67AC at181 clears both80DC and
+80E0; reenabling it at191 restores the blended contribution and a new.01
+correction pulse. These transitions are checked through the existing history,
+ratio, command packing, serial exchange and reply admission routines.
+
+Selected commands vary in the fixture, but later absolute-override ramping
+also changes them. Do not infer a direct proportional or monotonic physical
+traction response from these rows. Shared arbitration and history still matter.
+
+The paired helper overwrites CAN211 fields and resetsA3A4 during its update.
+Those are explicit test actions, not firmware writers. This test supplies
+the desired211 payload again before the next latch/contribution step. Freshness
+counter expiration and alternate latch triggers remain covered separately in
+traction-flags.txt; this integration does not simulate real network timing.
+
+Scheduling and remaining work
+------------------------------
+Observed boot calls16E10/16/1C/22 run average,map,extra,sum. Periodic map/extra/
+sum are called1C77C/82/88. The average has a separate caller1CA44. Main local
+order1A5E6..1A5FE is correction59250, map591A0, map591D6, weight5920C,
+contribution59154, followed by the previously verified retained-source group.
+These relative orders are respected. Cross-task phase/rate and intervening
+work remain unverified; the full task entries are not executed in this test.
+
+Next trace the remaining80FC/8100 contributors and gate67AC provenance:
+static593DE writes80FC = R(R(80F4 * 8110) * max(8108,810C)); source bodies
+include593C4,59504,595D0,59626. Correction59402 writes8100. These are leads,
+not part of this pass's executed evidence. Also retain7012/7016/A3A4 writers,
+nonzero2310 restoration,240xx stage/enable,protectedRAM/5354,20A8 reset/57CD,
+A720 binding history and real publication order.
+
+The previous goal turn made verified progress, as did this pass. All three
+goals remain incomplete. Preserve TCU capture timing/group7 numeric/overlap/
+composite/2->1 requirements. Traction still needs sender attribution, further
+7978/fuel consumers and physical outputs. Roof still needs matching OEM PRHT
+reception of speed/type/neutral/selector candidates, folding and unfolding,
+interruption/reversal/timeouts/synchronization/recovery. No OEM roof CAN
+command or motion is established by this contribution trace.
+
+Persistence verification
+------------------------
+Ghidra apply and live readback passed. Independent extraction/reopening then
+verified11 project hashes,1075 annotations (550 ECU,525 TCU) and574 matching
+exports (572 functions plus2 readback reports). Archive SHA256:
+b096c89a95c8ebb91e3c54dd40b764144752af8643c2712c64c8c5bd31aca6e6
+Exact inventory and restore result are in ghidra/snapshot.json and
+ghidra/restore-verification.json. The archive includes both.gpr and.rep.
+New script, JSON and report are Git-eligible. py_compile and git diff --check
+pass. Saved locally; no staging, commit or push.

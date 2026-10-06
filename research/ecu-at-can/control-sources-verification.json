@@ -1,0 +1,1147 @@
+{
+  "ecu_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "map_cases": 191,
+  "selector_cases": 720,
+  "bound_cases": 108,
+  "coupling_cases": 9,
+  "serial_cycles": 180,
+  "paired_can_updates": 21,
+  "tables": {
+    "0xa35a4": {
+      "count": 7,
+      "kind": 0,
+      "axis_address": "0xd9e94",
+      "values_address": "0xd9eb0",
+      "axis": [
+        -20.0,
+        0.0,
+        20.0,
+        40.0,
+        60.0,
+        80.0,
+        100.0
+      ],
+      "values": [
+        18500.0,
+        18500.0,
+        8000.0,
+        8000.0,
+        8000.0,
+        4000.0,
+        4000.0
+      ]
+    },
+    "0xa19f4": {
+      "count": 24,
+      "kind": 0,
+      "axis_address": "0xbb260",
+      "values_address": "0xbb2c0",
+      "axis": [
+        0.0,
+        887.0,
+        1319.0,
+        1819.0,
+        2319.0,
+        2819.0,
+        3319.0,
+        3819.0,
+        4319.0,
+        4819.0,
+        5319.0,
+        5819.0,
+        6819.0,
+        7819.0,
+        8819.0,
+        9819.0,
+        10819.0,
+        11819.0,
+        13819.0,
+        15819.0,
+        17819.0,
+        19819.0,
+        21819.0,
+        23819.0
+      ],
+      "values": [
+        0.0,
+        0.8292002081871033,
+        1.2335950136184692,
+        1.6859580278396606,
+        2.121583938598633,
+        2.5707380771636963,
+        2.9535889625549316,
+        3.3444221019744873,
+        3.690124034881592,
+        4.089992046356201,
+        4.464271068572998,
+        4.830982208251953,
+        5.494986057281494,
+        6.0960211753845215,
+        6.708463191986084,
+        7.229112148284912,
+        7.723292827606201,
+        8.162640571594238,
+        9.082014083862305,
+        9.981249809265137,
+        10.817899703979492,
+        11.708439826965332,
+        12.591859817504883,
+        12.765740394592285
+      ]
+    },
+    "0xa1a0c": {
+      "count": 16,
+      "kind": 0,
+      "axis_address": "0xbb3a0",
+      "values_address": "0xbb3e0",
+      "axis": [
+        -30.0,
+        -20.0,
+        -10.0,
+        0.0,
+        10.0,
+        20.0,
+        30.0,
+        40.0,
+        50.0,
+        60.0,
+        70.0,
+        80.0,
+        90.0,
+        100.0,
+        110.0,
+        120.0
+      ],
+      "values": [
+        4.5,
+        4.0,
+        3.5,
+        3.0,
+        2.5,
+        2.0,
+        1.5,
+        1.0,
+        0.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "0xa1a00": {
+      "count": 16,
+      "kind": 0,
+      "axis_address": "0xbb320",
+      "values_address": "0xbb360",
+      "axis": [
+        -30.0,
+        -20.0,
+        -10.0,
+        0.0,
+        10.0,
+        20.0,
+        30.0,
+        40.0,
+        50.0,
+        60.0,
+        70.0,
+        80.0,
+        90.0,
+        100.0,
+        110.0,
+        120.0
+      ],
+      "values": [
+        60.0,
+        57.5,
+        55.0,
+        52.5,
+        50.0,
+        47.5,
+        45.0,
+        42.5,
+        40.0,
+        37.5,
+        30.0,
+        30.0,
+        30.0,
+        30.0,
+        30.0,
+        30.0
+      ]
+    }
+  },
+  "lifecycle": [
+    {
+      "call": 1,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        1,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 0,
+        "bad_count": 0,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 13.969565391540527,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 13.969565391540527,
+      "absolute_timer": 0,
+      "source": 3.4695661067962646,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "mapped",
+      "mapped_input": 4000.0,
+      "selected_input": 4000.0,
+      "unbounded_source": 3.4695661067962646,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 4.081841945648193,
+      "normal_candidate": 3.4695656299591064
+    },
+    {
+      "call": 2,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        2,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 1,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 13.969565391540527,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 13.969565391540527,
+      "absolute_timer": 1,
+      "source": 3.4695661067962646,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "mapped",
+      "mapped_input": 4000.0,
+      "selected_input": 4000.0,
+      "unbounded_source": 3.4695661067962646,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 4.081841945648193,
+      "normal_candidate": 3.4695656299591064
+    },
+    {
+      "call": 20,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        20,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 19,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 13.969565391540527,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 13.969565391540527,
+      "absolute_timer": 19,
+      "source": 3.4695661067962646,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "mapped",
+      "mapped_input": 4000.0,
+      "selected_input": 4000.0,
+      "unbounded_source": 3.4695661067962646,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 4.081841945648193,
+      "normal_candidate": 3.4695656299591064
+    },
+    {
+      "call": 21,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        21,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 20,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 16.5,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 16.5,
+      "absolute_timer": 20,
+      "source": 11.12112808227539,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "mapped",
+      "mapped_input": 18500.0,
+      "selected_input": 18500.0,
+      "unbounded_source": 11.12112808227539,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 13.08367919921875,
+      "normal_candidate": 11.121127128601074
+    },
+    {
+      "call": 40,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        40,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 39,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 16.5,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 16.5,
+      "absolute_timer": 39,
+      "source": 11.12112808227539,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "mapped",
+      "mapped_input": 18500.0,
+      "selected_input": 18500.0,
+      "unbounded_source": 11.12112808227539,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 13.08367919921875,
+      "normal_candidate": 11.121127128601074
+    },
+    {
+      "call": 41,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        41,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 40,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.500186920166016,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.500186920166016,
+      "absolute_timer": 40,
+      "source": 0.00018696734332479537,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "status_bit7",
+      "mapped_input": 18500.0,
+      "selected_input": 0.20000000298023224,
+      "unbounded_source": 0.00018696734332479537,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 0.00021996157011017203,
+      "normal_candidate": 2.9682955741882324
+    },
+    {
+      "call": 63,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        63,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 62,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.500186920166016,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.500186920166016,
+      "absolute_timer": 62,
+      "source": 0.00018696734332479537,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "status_bit7",
+      "mapped_input": 18500.0,
+      "selected_input": 0.20000000298023224,
+      "unbounded_source": 0.00018696734332479537,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 0.00021996157011017203,
+      "normal_candidate": 2.9682955741882324
+    },
+    {
+      "call": 64,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        64,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 63,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.500186920166016,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.500186920166016,
+      "absolute_timer": 63,
+      "source": 0.00018696734332479537,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "status_bit7",
+      "mapped_input": 18500.0,
+      "selected_input": 0.20000000298023224,
+      "unbounded_source": 0.00018696734332479537,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 0.00021996157011017203,
+      "normal_candidate": 3.182715654373169
+    },
+    {
+      "call": 65,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        65,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 64,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.500186920166016,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.500186920166016,
+      "absolute_timer": 64,
+      "source": 0.00018696734332479537,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "status_bit7",
+      "mapped_input": 18500.0,
+      "selected_input": 0.20000000298023224,
+      "unbounded_source": 0.00018696734332479537,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 0.00021996157011017203,
+      "normal_candidate": 2.9682955741882324
+    },
+    {
+      "call": 66,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        66,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 65,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.508186340332031,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.508186340332031,
+      "absolute_timer": 64,
+      "source": 4.5,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "status_bit7",
+      "mapped_input": 18500.0,
+      "selected_input": 0.20000000298023224,
+      "unbounded_source": 0.00018696734332479537,
+      "bounds": [
+        4.5,
+        60.0
+      ],
+      "normal_offset": 5.294117450714111,
+      "normal_candidate": 4.499999523162842
+    },
+    {
+      "call": 80,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        80,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 79,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.62017822265625,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.62017822265625,
+      "absolute_timer": 64,
+      "source": 4.5,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "status_bit7",
+      "mapped_input": 18500.0,
+      "selected_input": 0.20000000298023224,
+      "unbounded_source": 0.00018696734332479537,
+      "bounds": [
+        4.5,
+        60.0
+      ],
+      "normal_offset": 5.294117450714111,
+      "normal_candidate": 4.499999523162842
+    },
+    {
+      "call": 81,
+      "mode": 1,
+      "branch": "normal",
+      "selection": "normal",
+      "counters": [
+        0,
+        81,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 80,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 14.999999046325684,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.628177642822266,
+      "absolute_timer": 64,
+      "source": 4.5,
+      "source_stage": 3,
+      "source_enable": 0,
+      "input_branch": "status_bit7",
+      "mapped_input": 18500.0,
+      "selected_input": 0.20000000298023224,
+      "unbounded_source": 0.00018696734332479537,
+      "bounds": [
+        4.5,
+        60.0
+      ],
+      "normal_offset": 5.294117450714111,
+      "normal_candidate": 4.499999523162842
+    },
+    {
+      "call": 100,
+      "mode": 1,
+      "branch": "normal",
+      "selection": "normal",
+      "counters": [
+        0,
+        100,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 99,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 14.999999046325684,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.780166625976562,
+      "absolute_timer": 64,
+      "source": 4.5,
+      "source_stage": 3,
+      "source_enable": 0,
+      "input_branch": "status_bit7",
+      "mapped_input": 18500.0,
+      "selected_input": 0.20000000298023224,
+      "unbounded_source": 0.00018696734332479537,
+      "bounds": [
+        4.5,
+        60.0
+      ],
+      "normal_offset": 5.294117450714111,
+      "normal_candidate": 4.499999523162842
+    },
+    {
+      "call": 101,
+      "mode": 1,
+      "branch": "normal",
+      "selection": "normal",
+      "counters": [
+        0,
+        101,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 100,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 23.26573944091797,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.788166046142578,
+      "absolute_timer": 64,
+      "source": 12.765740394592285,
+      "source_stage": 3,
+      "source_enable": 0,
+      "input_branch": "retained_bound",
+      "mapped_input": 18500.0,
+      "selected_input": 23819.0,
+      "unbounded_source": 12.765740394592285,
+      "bounds": [
+        4.5,
+        60.0
+      ],
+      "normal_offset": 15.01851749420166,
+      "normal_candidate": 12.765739440917969
+    },
+    {
+      "call": 120,
+      "mode": 1,
+      "branch": "normal",
+      "selection": "normal",
+      "counters": [
+        0,
+        120,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 119,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 23.26573944091797,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.940155029296875,
+      "absolute_timer": 64,
+      "source": 12.765740394592285,
+      "source_stage": 3,
+      "source_enable": 0,
+      "input_branch": "retained_bound",
+      "mapped_input": 18500.0,
+      "selected_input": 23819.0,
+      "unbounded_source": 12.765740394592285,
+      "bounds": [
+        4.5,
+        60.0
+      ],
+      "normal_offset": 15.01851749420166,
+      "normal_candidate": 12.765739440917969
+    },
+    {
+      "call": 121,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        121,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 120,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 16.5,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 16.5,
+      "absolute_timer": 0,
+      "source": 12.765740394592285,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "retained_bound",
+      "mapped_input": 18500.0,
+      "selected_input": 23819.0,
+      "unbounded_source": 12.765740394592285,
+      "bounds": [
+        4.5,
+        60.0
+      ],
+      "normal_offset": 15.01851749420166,
+      "normal_candidate": 12.765739440917969
+    },
+    {
+      "call": 140,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        140,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 139,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 16.5,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 16.5,
+      "absolute_timer": 19,
+      "source": 12.765740394592285,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "retained_bound",
+      "mapped_input": 18500.0,
+      "selected_input": 23819.0,
+      "unbounded_source": 12.765740394592285,
+      "bounds": [
+        4.5,
+        60.0
+      ],
+      "normal_offset": 15.01851749420166,
+      "normal_candidate": 12.765739440917969
+    },
+    {
+      "call": 141,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        141,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 140,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.5,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.5,
+      "absolute_timer": 20,
+      "source": 0.0,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "retained_bound",
+      "mapped_input": 18500.0,
+      "selected_input": 0.0,
+      "unbounded_source": 0.0,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 0.0,
+      "normal_candidate": 2.9682958126068115
+    },
+    {
+      "call": 160,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        160,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 159,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.5,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.5,
+      "absolute_timer": 39,
+      "source": 0.0,
+      "source_stage": 3,
+      "source_enable": 1,
+      "input_branch": "retained_bound",
+      "mapped_input": 18500.0,
+      "selected_input": 0.0,
+      "unbounded_source": 0.0,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 0.0,
+      "normal_candidate": 3.182715892791748
+    },
+    {
+      "call": 161,
+      "mode": 1,
+      "branch": "normal",
+      "selection": "normal",
+      "counters": [
+        0,
+        161,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 160,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 13.468295097351074,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.5,
+      "absolute_timer": 40,
+      "source": 0.0,
+      "source_stage": 3,
+      "source_enable": 0,
+      "input_branch": "retained_bound",
+      "mapped_input": 18500.0,
+      "selected_input": 0.0,
+      "unbounded_source": 0.0,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 0.0,
+      "normal_candidate": 2.9682958126068115
+    },
+    {
+      "call": 180,
+      "mode": 1,
+      "branch": "normal",
+      "selection": "normal",
+      "counters": [
+        0,
+        180,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 179,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 13.68271541595459,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.5,
+      "absolute_timer": 59,
+      "source": 0.0,
+      "source_stage": 3,
+      "source_enable": 0,
+      "input_branch": "retained_bound",
+      "mapped_input": 18500.0,
+      "selected_input": 0.0,
+      "unbounded_source": 0.0,
+      "bounds": [
+        0.0,
+        30.0
+      ],
+      "normal_offset": 0.0,
+      "normal_candidate": 3.182715892791748
+    }
+  ],
+  "limits": "6D28/6D20/mode/status/2310/8018 andstage/enable remain inputs; finite RTZ only. Cross-task rate/order, upstream acquisition andphysical units/actuation unproved. Synthetic serial peer."
+}

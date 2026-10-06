@@ -1,0 +1,90 @@
+Warning-status endpoints: original-code evidence, 2026-10-05
+
+Scope and inputs
+
+This extends fault-reporting.txt using the same unchanged, SHA256-checked
+LFFEEE-stock.bin ECU and LFG1TF000.bin TCU. Hexadecimal addresses, zero-based
+payload bytes; RAM addresses have FFFF prefix. It distinguishes stored MIL
+request from the active diagnostic indication. Neither is proof of mechanical
+fallback or a physical cluster lamp. Traction/roof goals remain open.
+
+TCU stored flag -> diagnostic MIL status and CAN216
+
+5434C builds PID01 body: 01, count+(A99B!=0 ?80:00),04,00,00.
+54A36 computes the stored-DTC count from6188 and group codes/filter582F4.
+The thirteen eight-byte entries at5E778 include PID01 at5E780 pointing to5434C.
+54284 dispatches requested PIDs; outer54234 checks mode01 permission through
+5604C. Synthetic90B6=1 admits the request; default0 did not. The physical
+protocol state and transport framing have not been executed.
+
+Primary semantic reference: Elm Electronics ELM327 datasheet, printed p36,
+https://elmelectronics.com/wp-content/uploads/2020/05/ELM327DSL.pdf
+Accessed2026-10-05. Its mode01/PID01 example identifies first data-byte bit7
+as MIL status and the lower seven bits as stored-DTC count. That definition,
+together with the actual dispatcher/handler, supports naming A99B as the
+TCU's stored MIL request. It is also CAN216 byte7 bit1 (18F10/18F8C).
+
+verify_fault_reporting.py executes54234 with a one-PID request context.
+Before qualification the body is01 00 04 00 00; with storedC100/U0100 it is
+01 81 04 00 00. It stays81 after active recovery in all fourteen tested
+lifecycles. These are PID bodies, without positive service41 or ISO-TP header.
+Stored-flag aging/clear remains untraced; persistence across power loss is
+not established by synthetic RAM execution.
+
+ECU request -> CAN420
+
+The previously verified chain is CAN216 byte7 bit1 -> protected2184 ->6E53
+via3B282 -> protected24EE via775CA. 7774A then selects input1 only if91BD==0
+and (protected24EE==1 OR6536==0). It calls8B8A0 and stores its result in91BE.
+The physical meanings of91BD and6536 remain unresolved.
+
+8B8A0 uses the16-byte descriptorAD46C: maskE0 at+8 and pointerFFFF960C
+at+12. If maskE0 AND966C is zero, mode960C is cleared. Mode0 passes input
+and updates9638=(input==1); mode7 returns(9638==1); other modes pass input.
+This diagnostic override is separate from the upstream9462 inhibit.
+
+371F0 builds6B8C from91BD==1 atbit15,91BE==1 atbit14,693A==1 atbit6.
+CAN420 descriptor379DC has DLC8 and buffer6B80. Transmitter3707A packs:
+  byte0=6B88, byte1=6B89, bytes2..3=BE16[6B8A], byte4=6B8F,
+  bytes5..6=BE16[6B8C], byte7=6B8E.
+Thus the gated MIL request reaches CAN420 byte5 bit6. The TCU's420 receiver
+copies only byte0; it does not consume this warning field through that copy.
+
+Actual7774A/8B8A0/371F0 plus packing instructions370A6..370DC are executed.
+The complete3707A attempt stops at an inexact float multiply at2F326 in the
+preceding counter conversion. The exact-only FPU harness correctly rejects
+it, even with zero counter RAM. No ROM or helper was mocked. The saved test
+therefore explicitly executes the straight packing slice, not full transmit
+scheduling or the6A48 peripheral driver. 7778E/777A0 are clear/reset paths
+for protected24EE, not ordinary readers as a literal-reference list alone
+could suggest. Cluster reception and lamp hardware remain outside the test.
+
+TCU active aggregate -> CAN231
+
+5701A/532C8 publish active aggregateA666. Initialization5327C setsA666=0,
+A664=A665=1,8464=0,A667=A668=0. Selection5329A compares unsigned16[8464]
+with ROM16[5FD64]=200 decimal; at or above that boundary it clearsA664.
+WhileA664==1 it forcesA665=1. Otherwise532D8 returnsA666 unlessA668==1,
+when it returns overrideA667; this becomesA665. The source and units of8464
+have not been traced, so do not label the startup threshold as milliseconds.
+
+19414(mode1) readsA665 and calls1C39A, setting CAN231 byte1 bit6 (8EEE&40).
+Modes0/16 clear this field. This route establishes an active-status broadcast,
+not a solenoid/gear fallback. ECU3585C's normalizer decodes other bits in
+byte1; it does not decodebit6 there. Other users of the full byte remain open.
+
+Verification and continuation
+
+python research/ecu-at-can/verify_fault_reporting.py
+  14 paired qualification/recovery lifecycles, now including PID01,231 and420;
+  32 ECU receive/aggregate gates;
+  72 TCU startup/override/sender-mode cases (199,200,201 boundary values);
+  192 ECU display/override/other-warning packing cases.
+Saved output: fault-reporting-verification.json. Shared interpreters unchanged.
+No ROM patch, hardware access, application change, commit or push.
+
+Next: trace stored MIL clearing/aging separately from active recovery; name
+80A4/A939,91BD/6536 gates and8464 producer; return to CAN211 arbitration
+consumers714C and PRHT PCM speed/type/neutral versus TCU selector dependencies.
+Candidate A99B references54552,576B4,578C4 need instruction-level review;
+they are leads, not established semantics.

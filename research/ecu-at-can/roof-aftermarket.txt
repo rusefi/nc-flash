@@ -1,0 +1,175 @@
+NC PRHT signal corroboration from public aftermarket firmware, 2026-10-06
+
+RESULT AND EVIDENCE BOUNDARY
+
+Openhoonage NC Cluster Commander 1.01 provides independent corroboration for
+CAN231 selector codes1=Park,2=Reverse,3=Neutral,4=Drive. Its own menu labels
+those states, and its original AVR builder places them in payload byte0.
+This agrees with the ECU/TCU grouping of1/3 already executed in
+selector-inputs.txt. It strengthens the P/N interpretation, but does not
+prove PRHT reception, roof permission bytes, physical TCU pin assignment,
+or OEM equivalence of the rest of this aftermarket frame.
+
+The public image is an aftermarket GM-to-NC-cluster converter, NOT Mazda
+PCM, TCU, DSC or PRHT firmware. It is older than the author's announced
+PRHT-support update. No roof-controller binary or vehicle capture was added.
+All three goals remain active: ECU/AT integration, deep traction integration
+and NC PRHT folding/unfolding CAN. No CAN open/close command is established.
+
+PUBLIC ARTIFACTS AND PROVENANCE
+
+First-party product documentation (accessed2026-10-06):
+https://openhoonage.com/cluster-commander/3-nc-cluster-commander
+It describes translating GM data into NC cluster speed/selector displays
+and providing P/N information to an extended PRHT network. Its feature list
+claims working PRHT support, but its installation section calls that support
+untested/future. Preserve this contradiction instead of treating it as a
+validated receiver experiment. The standard installation isolates the
+cluster's CAN connection; this is not an OEM network capture.
+
+First-party download index:
+https://openhoonage.com/cluster-commander/7-firmware
+The linked NC1.01 entry is dated2018-02-16 and lists E38 support, VIN,
+odometer and tach changes. Its ZIP changelog has the same four changes.
+https://openhoonage.com/firmware/nc/nc_cc_firmware_101.zip
+ZIP277169bytes SHA256:
+1f2db33a03727a3aeda2e69b22689099459e6845d99ef5827882f06e82d991af
+Retained input roof/nc_cc_1_01.hex:82069bytes SHA256:
+b45768a97782aacadb5f6216f5b6e07c3a9e6214e01b316043eaf38ab550d48f
+Decoded contiguous flash0000..71F3:29172bytes SHA256:
+23fbf7ce002e574364030a156660c1e6dcff6f61643565538ceda8e3e5a9f56b
+All Intel HEX lengths/checksums, nonoverlap, contiguous coverage and EOF pass.
+RunMe.bat selects avrdude ATmega328P/Arduino,57600baud. It was read, not run.
+Download-manifest.json records every ZIP member's name, size and SHA256.
+The original HEX is Git-eligible via an exact local ignore exception; the
+derived binary is reproduced in memory. Bundled executables are not needed
+for this analysis and were neither run nor retained as repository inputs.
+
+The author's2019-04-25 announcement calls1.02 nearly complete, including
+PRHT support and further AT decoding. We did not locate a linked1.02 binary:
+https://openhoonage.com/?catid=9&id=8:openhoonage-fun-with-can-bus&view=article
+Do not silently assign that later feature set to the1.01 download. Search
+index snippets initially obscured the date; direct article retrieval resolved
+it. Firmware strings alone do not establish absence of roof-related logic.
+
+ORIGINAL AVR SELECTOR BODY EXECUTION
+
+All addresses in this section are AVR FLASH BYTE addresses, NOT SH addresses.
+Function199C allocates a16-byte temporary frame. The bounded harness starts
+at19C4 after its prologue with synthetic Y=0600 and r1=0. It executes all
+body instructions until1A26, immediately before the call to1166. The
+interface pointer is032E; registers8..23 hold this by-value record:
+  +0..3 little-endian identifier00000231
+  +4 zero (standard identifier branch)
+  +5/+6 untouched stack contents
+  +7 length8
+  +8..15 payload bytes0..7
+SRAM0272 supplies the converter's selector state;0273 supplies its gear byte.
+  Selector0..4: payload0=selector,payload1=0
+  Selector5: payload0=4,payload1=80
+  Selector6: payload0=4,payload1=40
+  Selector7..255: payload0=0,payload1=0
+  All cases: payload2..6=0,payload7=SRAM0273 unchanged
+Thus do NOT transfer this converter's forward-gear location to the OEM TCU,
+whose full CAN231 publication is documented separately. Only the shared
+low-nibble selector convention is corroborated here.
+
+Static menu cross-references258A..263E compare the SAME SRAM0272 with1..6
+and print strings atB0F/B07/AFF/AF8/AF0/AEC respectively:
+  1 Park;2 Reverse;3 Neutral;4 Drive;5 Manual;6 AT.
+String bytes are verified; branches and argument construction are preserved
+in roof/converter-excerpts.txt for independent static review. The menu body
+itself is not executed by this harness.
+
+verify_roof_converter.py executes65536 selector/gear pairs,512 additional
+scratch-content cases and4 expected fail-closed rejection cases. It decodes
+original LDI,CPI,LDS,LDD/STD Y+q,BRBC andRJMP opcodes. Only consumed C/Z flags
+are modeled. Unsupported instructions, branch flags, PC ranges and memory
+accesses reject. Independent output formulas check the whole outgoing
+argument record, including preserved stack bytes, not just selector0.
+Results and sample payloads are in roof-converter-verification.json.
+No prologue/epilogue, scheduler, interrupts, SPI, CAN or PRHT is executed.
+No general AVR-emulator accuracy is implied by these bounded tests.
+
+STATIC TRANSPORT AND SPEED LEADS (NOT NEW EXECUTED WIRE PROOF)
+
+1166 stores the by-value record, uses standard identifier bits at11DA..11F6,
+then emits MCP2515-style load-buffer headers and payload through SPI helper
+D3A. Standard231 implies SIDH46/SIDL20. It selects a TX buffer via110E and
+requests transmission with81/82/84 at12B0..12C6. Primary MCP2515 DS20001801K,
+registers3-3/3-4/3-7 and section12.6/12.7, supports that interpretation:
+https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/MCP2515-Family-Data-Sheet-DS20001801K.pdf
+Important audit limits: the builder leaves record+5/+6 uninitialized. Sender
+11F8..1200 uses+5 in its DLC byte arithmetic (8 -128*byte modulo256), and
+payload loop1282..129A appears to iterate0 THROUGH length inclusive. Neither
+quirk is repaired, hidden by zero-filled scratch, nor tested on hardware.
+Do not call these bounded argument tests a validated wire transmission.
+
+17EC constructs standard201 length8 and the same interface032E. Its
+candidate speed field is payload4/5, big-endian after helpers fed by SRAM0269.
+The menu labels0269 as MPH and calls integer division with100 at24F2..24FE;
+the201 builder uses binary32 constants3FCDFEDA (~1.60934) and461C4000(10000)
+at186A..187E. This supports the stock ECU201 speed hypothesis and motivates
+checking km/h hundredths plus10000, but those software float helpers and
+their rounding/range behavior are NOT executed/fully identified here.
+Keep exact physical scaling and OEM PRHT use unproved. Existing original
+ECU4B0/216->201 arithmetic remains authoritative in can201-speed.txt.
+
+MX5THINGS LEAD, SEPARATE HARDWARE GENERATIONS
+
+First-party support and product pages (accessed2026-10-06):
+https://mx5things.com/pages/support
+https://mx5things.com/products/roof-controller-for-mazda-mx-5-nc
+They link two different NC guides, RFC2-NC and RCNC-2; neither is an ND RF
+protocol definition, despite their misleading PDF metadata titles.
+
+RFC2-NC guide Rev1.0,2022:
+https://cdn.shopify.com/s/files/1/0014/3779/4419/files/RFC2-NC_User_Guide.pdf?v=1656874041
+It describes one-touch/disabled/valet modes, selectable speed up to30mph,
+reverse operation, latch-triggered automatic opening and opposite-button
+pause during one-touch. It interposes a harness at the PRHT controller and
+describes CAN activity indication plus HEX updates. These are aftermarket
+features; do not assign opposite-button behavior to the OEM state machine.
+The identical guide was initially found on a reseller mirror; first-party
+link above is now available. No CAN IDs/bit fields are published there.
+
+RCNC-2 guide Rev1.3,2025:
+https://cdn.shopify.com/s/files/1/0014/3779/4419/files/RCNC-2_User_Guide.pdf?v=1719695390
+This newer generation retains one-touch/speed/reverse/automatic features
+and describes serial settings. It does not establish an accessible firmware
+image. The current linked Windows ZIP contains one633192-byte executable,
+not a separate HEX/BIN. Archive members/hashes and exact URL are recorded
+in roof/download-manifest.json. The executable was not run or inspected for
+embedded firmware; its lack of a separate image is not proof none exists.
+The older guide's instruction to select Update.hex does not establish that
+the current newer-generation ZIP contains the older firmware.
+
+REPRODUCTION AND CONTINUATION
+
+From repository root, no extra dependencies for bounded execution:
+  python research/ecu-at-can/verify_roof_converter.py
+Compare JSON with roof-converter-verification.json.
+Excerpts were generated with GNU AVR objdump2.26.20160125, Ubuntu package
+binutils-avr2.26.20160125+Atmel3.7.0-2, extracted without system installation:
+  mkdir -p /tmp/nc-roof-research
+  cd /tmp/nc-roof-research
+  apt-get download binutils-avr
+  dpkg-deb -x binutils-avr_*.deb avr-tools
+From repository root:
+  python research/ecu-at-can/verify_roof_converter.py --objdump /tmp/nc-roof-research/avr-tools/usr/bin/avr-objdump
+This writes roof/converter-excerpts.txt and prints verification JSON.
+The tool's generated temporary binary is removed after excerpt generation;
+all required input bytes, results and continuation evidence remain in repo.
+AVR primary instruction reference:
+https://onlinedocs.microchip.com/oxy/GUID-0B644D8F-67E7-49E6-82C9-1B2B9ABE6A0D-en-US-23/GUID-BA59618D-4850-490B-B176-0BCC3D9438A1.html
+
+Next: identify/execute converter201 float helpers to test the unit lead;
+seek actual OEM PRHT firmware or independent receive/capture evidence for
+201/231 and PCM transmission-type/MT-neutral fields. Trace folding/unfolding
+timeouts, reversals, communication loss and recovery against factory sources.
+The public1.01 image cannot close those goals. Traction output scheduling,
+pin routing and CAN211 sender identity, plus TCU slot2/phase1/2, remain open.
+No Ghidra changes this turn: this AVR image has not been imported. The last
+verified ECU/TCU project archive remains current for its513 annotations and
+280 exports; see CHECKPOINT.txt and ghidra/snapshot.json. No ROM/application
+changes, staging, commit or push. Existing index changes were preserved.

@@ -1,0 +1,146 @@
+TCU CAN216 speed producer and CAN201 receive audit — 2026-10-05
+===============================================================
+
+This extends can201-speed.txt from the TCU setter into the actual numeric
+producer and stateful limiter. The unchanged LFG1TF000 code is executed
+through the unchanged LFFEEE ECU fallback and CAN201 packer. CAN201's TCU
+application callback is also executed with a byte-read audit. Physical speed
+units, absolute timing, sensor identity and PRHT consumption remain unproven.
+All three research requirements remain active; neither a speed trace nor
+receipt of an identifier establishes the complete traction/roof integration.
+
+Numeric source: executed52B10
+
+Addresses below are FFFF RAM unless identified as ROM. Inputs are signed16
+A552, unsigned16 period-derived91A2 and bit0 of9330. Original helper calls
+10D0C/10CE4/10B52 and their software division loops execute without stubs.
+Stock ROM76E7A=4100 and76E7C=1000. The actual integer calculation is:
+  a = clamp(trunc(signed16(A552)*6000 / signed16(4100)), -32768,32767)
+  b = min(65535, unsigned16(a)*1000 / scale)  [integer floor]
+  scale = 1000 when9330 bit0 clear, otherwise unsigned16(ROM76E7C)
+  A5AC = min(65535, unsigned16(91A2)*unsigned16(b) >>8)
+  A5B6 = A5AC /100 [integer floor]
+Both scale branches therefore agree for this stock calibration, but are
+distinct executable branches.140 fixtures include signed inputs, saturation,
+period bounds and both scale branches, then run full18F8C and the ECU chain.
+The signed-to-unsigned transition is preserved, not assumed to be positive.
+
+A552 provenance is currently static:51AF0 initializes A550/A552 from
+ROM5FD7C=196. 51B0A can replace A552 with89F2 when validity89F5==2 and
+diagnostic state bit0 permits; diagnostic bit2 can choose ROM5FD7E=196;
+other conditions retain state while changing statusA555. Both calculations
+invoke5B654 withA991 diagnostic data. Full input/diagnostic provenance and
+physical units are unverified. Previous selector-threshold.txt traces91A2
+toward the local timer capture path; the present tests seed91A2 explicitly.
+This is not evidence that the TCU derives this value from received CAN201.
+
+Stateful CAN216 producer: executed18F8C
+
+Normal argument1 reads candidate unsigned16[A5AC]. With92C6 bit2 clear:
+  cap candidate to30000;
+  if initialized byte8AE7!=0, restrict candidate to
+      max(0, previous8AE8-1000) .. previous8AE8+1000;
+  store limited candidate to8AE8, set8AE7=1;
+  add10000 and pack BE into216 bytes5-6 via1C666; also store word8AF0.
+936 cases cover candidate edges, valid previous values0..30000, both latch
+states, the speed fault bit and producer arguments0/1/16. All continue to
+the ECU. The cap occurs BEFORE the limiter. No global invariant is claimed
+for arbitrarily corrupted previous state outside the tested reachable range.
+
+92C6 bit2 set sendsFFFF, storesFFFF to8AE8 and clears8AE7. The first valid
+call after that fault immediately accepts the capped candidate; the limiter
+resumes on later calls. Argument0 sends10000 and resets previous/latch to0.
+Argument16 sendsFFFF while retaining previous/latch. Other arguments enter
+paths with caller-register dependencies and are outside these mode tests;
+the complete caller/scheduling contract remains to be traced.
+
+Ten-call executed lifecycle (CAN216 word5):
+  input0 ->10000;
+  input10000 ->11000 ->12000;
+  fault ->FFFF;
+  recovered input10000 ->20000 immediately;
+  input0 ->19000;
+  mode16 ->FFFF while retaining previous9000;
+  normal input0 ->18000;
+  mode0 ->10000/reset;
+  normal input30000 ->40000 immediately.
+With independently valid CAN4B0 words12345/12345, the ECU emits CAN20112345
+except the fault/mode16 steps emitFFFF, verifying the independent216-derived
+invalidity gate through the complete producer. No physical time per call is
+assigned to the1000 change limit.92C6 bit2 producer remains an open lead.
+
+Byte4 no longer skipped
+
+Previously the whole18F8C tests set92C6 bit5 to skip unsupported division.
+The new integer harness executes that calculation too. In normal mode,
+byte4=clamp(trunc(signed16[80EE]/96),0,254), orFF if92C6 bit5 is set.
+Twenty producer fixtures cover signed bounds, quotient boundaries, cap and
+fault;65536 independent helper executions test all signed16 inputs divided
+by96. The byte4 fault and speed-word fault are separate bits. Byte4's
+physical meaning is not inferred solely from its scaling.
+
+TCU CAN201 reception and application consumption
+
+verify_tcu_can201.py verifies filter index10 ID201 ->application8 ->DLC7,
+buffer8F39. The original copy slice1B630 through before1B798 accepts DLC>=7
+only when8F6C has bit2 or3; copies exactly7 bytes, marks8F4F bit0 and8F71.
+432 mode/DLC/interrupt-mask cases (72 accepted) verify copy extent and guards.
+Hardware filter matching and acknowledgement are outside that slice.
+
+Complete dispatch1BD10 ->receipt callback1C264 ->application1ACD8:
+  1C264 sets mask30 in8F87 and8F8D.
+  171CC reads BE bytes0-1 through1C890, converts floor(raw/4) ->8814,
+    sets8816=2;FFFF retains old8814 but sets validity1.
+  17070 reads byte6, converts raw*5 ->8808, sets880A=2;FF retains old
+    numeric8808 but sets validity1.
+  18158 copies raw bytes0-1 ->89DC/89DD and sets89DE=1 forFFFF,2 otherwise.
+  Dispatch consumes the pending receipt bits.
+Original10F38 conversions and integer helpers run in full. The factors are
+confirmed in ROM5C812/5C5A4 and5C80A/5C598, not guessed from output examples.
+
+1225 dispatch fixtures vary first-word and byte6 sentinel/boundary values
+and all32 bits of payload bytes2-5 independently, plus contrasting patterns.
+Every payload read during these complete callbacks is audited:
+  PC1C8A0 byte0; PC1C8AA byte1; PC17078 byte6.
+No byte4/5 read occurs in these executed dispatch paths. This is explicitly
+not a proof of global non-use by other tasks, computed accesses, or untested
+states. The TCU copies these bytes; the audited callback does not consume
+them. No roof receiver is present in either tested binary.
+
+Harness, verification and reproducibility
+
+New sh_integer_arithmetic.py inherits the existing strict integer base and
+adds DIV0U, DIV0S, DIV1, ROTCL, ADDC, SUBC, MULS.W, MUL.L, SHLL16/SHLR16.
+M/Q/T are modeled as SR bits9/8/0. Each DIV1 executes a real CPU division
+step; firmware helpers are not replaced with Python division. The unchanged
+base/FPU classes used by earlier verifiers retain their previous behavior.
+This is a bounded instruction harness, not a chip/timing/peripheral model.
+
+Primary ISA source retrieved2026-10-05:
+https://www.renesas.com/en/document/mas/sh-2e-software-manual
+Renesas REJ09B0316-0200, DIV0S/DIV0U/DIV1 pp82-88, related arithmetic ISA.
+Independent verification uses an explicit DIV1 case table and mathematical
+quotients for full original firmware helpers;1200 ISA cases,576 unsigned32
+divisions,65536 signed16 divide96 cases and41 signed sign combinations pass.
+The earlier unsupported4028 at5AFFC was resolved by implementing/test-driving
+SHLL16, not by skipping it. Old recorded unsupported DIV0U/MULS.W stops remain
+true for the unchanged old base; this new class supports them.
+
+Run from repo root and compare stdout with correspondingly named saved JSON:
+  python research/ecu-at-can/verify_integer_arithmetic.py
+  python research/ecu-at-can/verify_tcu_speed.py
+  python research/ecu-at-can/verify_tcu_can201.py
+Results: integer-arithmetic-verification.json, tcu-speed-verification.json,
+tcu-can201-verification.json. Both ROM identities are asserted in the tests.
+Earlier verifiers were not rerun: their shared harness and inputs did not
+change in this checkpoint. No firmware/application/index/commit/push changes.
+
+Next concrete work
+
+Trace92C6 bit2 to qualified fault producers and mode0/1/16 callers, then
+execute A552 validity/diagnostic selection and91A2 capture conversion. Follow
+TCU8814/8808 beyond receipt into control logic, and continue reverse messages
+200/215/240/420. For roof, correlate the proven sender fields with an actual
+PRHT receiver or capture; for traction, continue CAN211 engine endpoints and
+fault/arbitration behavior. Keep physical names and units conditional until
+independent factory/capture evidence resolves them.

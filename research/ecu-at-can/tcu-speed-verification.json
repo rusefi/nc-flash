@@ -1,0 +1,103 @@
+{
+  "scope": "Original TCU speed calculation/limiter -> CAN216 -> ECU CAN201.\n\nExplicit synthetic source states/call order. No sensor hardware, real timing,\nDSC sender or PRHT receiver. Numeric producer is executed without mocked\ndivision helpers; period acquisition and calibration provenance remain open.",
+  "limiter_and_paired_ecu_cases": 936,
+  "byte4_cases": 20,
+  "upstream_calculation_and_paired_cases": 140,
+  "lifecycle": [
+    {
+      "candidate": 0,
+      "speed_fault": 0,
+      "mode": 1,
+      "limiter_initialized": 1,
+      "limiter_value": 0,
+      "can216_word5": 10000,
+      "can201_with_valid_4b0": 12345
+    },
+    {
+      "candidate": 10000,
+      "speed_fault": 0,
+      "mode": 1,
+      "limiter_initialized": 1,
+      "limiter_value": 1000,
+      "can216_word5": 11000,
+      "can201_with_valid_4b0": 12345
+    },
+    {
+      "candidate": 10000,
+      "speed_fault": 0,
+      "mode": 1,
+      "limiter_initialized": 1,
+      "limiter_value": 2000,
+      "can216_word5": 12000,
+      "can201_with_valid_4b0": 12345
+    },
+    {
+      "candidate": 10000,
+      "speed_fault": 1,
+      "mode": 1,
+      "limiter_initialized": 0,
+      "limiter_value": 65535,
+      "can216_word5": 65535,
+      "can201_with_valid_4b0": 65535
+    },
+    {
+      "candidate": 10000,
+      "speed_fault": 0,
+      "mode": 1,
+      "limiter_initialized": 1,
+      "limiter_value": 10000,
+      "can216_word5": 20000,
+      "can201_with_valid_4b0": 12345
+    },
+    {
+      "candidate": 0,
+      "speed_fault": 0,
+      "mode": 1,
+      "limiter_initialized": 1,
+      "limiter_value": 9000,
+      "can216_word5": 19000,
+      "can201_with_valid_4b0": 12345
+    },
+    {
+      "candidate": 0,
+      "speed_fault": 0,
+      "mode": 16,
+      "limiter_initialized": 1,
+      "limiter_value": 9000,
+      "can216_word5": 65535,
+      "can201_with_valid_4b0": 65535
+    },
+    {
+      "candidate": 0,
+      "speed_fault": 0,
+      "mode": 1,
+      "limiter_initialized": 1,
+      "limiter_value": 8000,
+      "can216_word5": 18000,
+      "can201_with_valid_4b0": 12345
+    },
+    {
+      "candidate": 30000,
+      "speed_fault": 0,
+      "mode": 0,
+      "limiter_initialized": 0,
+      "limiter_value": 0,
+      "can216_word5": 10000,
+      "can201_with_valid_4b0": 12345
+    },
+    {
+      "candidate": 30000,
+      "speed_fault": 0,
+      "mode": 1,
+      "limiter_initialized": 1,
+      "limiter_value": 30000,
+      "can216_word5": 40000,
+      "can201_with_valid_4b0": 12345
+    }
+  ],
+  "stock_calibrations": [
+    4100,
+    1000
+  ],
+  "limits": "Per-call limiter, not a physical rate;91A2 acquisition,A552 provenance,92C6 bit2 producer and roof receiver remain open."
+}

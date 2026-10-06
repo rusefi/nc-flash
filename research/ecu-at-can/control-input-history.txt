@@ -1,0 +1,193 @@
+ECU baseline/current input history through the paired command path
+2026-10-06
+
+Result and scope
+----------------
+The retained command test now executes the baseline producer and the complete
+local history group from 58F10 through 58A7A, rather than supplying 80BC,
+8048 or protected 804C. The firmware snapshots protected history, filters a
+target, derives a coefficient, reconstructs a base, and adds corrections.
+It then feeds the previously verified ratio, source maps and command path.
+
+verify_control_input_history.py checks original bodies against independent
+finite RTZ/state oracles. Passed 1,547 direct cases: 162 baseline, 48 snapshot,
+600 limit-group, 128 target-group, 405 coefficient, 84 reconstruction,
+72 current-input and 48 initialization cases. Groups check every intermediate
+producer; initialization cases also exercise original history publication.
+A further 140 serial cycles contain 21 actual paired TCU216/218 -> ECU CAN
+updates. ROMs, shared interpreter and earlier verifiers are unchanged.
+
+The JSON retains both ROM hashes, case counts and lifecycle checkpoints.
+Run from repository root:
+  python research/ecu-at-can/verify_control_input_history.py >
+    research/ecu-at-can/control-input-history-verification.json
+
+R below means round toward zero to binary32 at every indicated operation.
+Addresses are hexadecimal; constants are stated as decimal values.
+
+Baseline producer 58F10
+-----------------------
+If abs(7020) <= literal 58FD8 = .9765625, hold both 80C0 and 80BC.
+Otherwise:
+  80C0 = max(813C, R(R(8098 * 6DB4) / 7020)).
+  Form an ordered sum of these values, rounding after every addition:
+    80C4, 80DC, 80FC, 8118, 822C, 80C0, 8170, 817C, 8180, 81C8,
+    8204, 81E4, 8220, 8238, 8218.
+  Subtract 81F8, then 8214, rounding separately; floor at zero into 80BC.
+Original protected/raw access helpers execute. These source contributions
+remain inputs; the analysis does not assign physical units or controller
+ownership to each term.
+
+History initialization, snapshot and publication
+------------------------------------------------
+58608 copies 80BC into raw 8060/806C and writes protected zeros into
+804C/8070/8064. 5863A publishes target 806C into protected 8070 and filtered
+8060 into protected 8064.
+
+58652 refreshes protected 8070/8064 from 80BC when 7016 is zero. It then
+snapshots them into 8084/8088 in all modes. The test executes original
+3880/3894 and verifies restoration of the incoming interrupt mask for masks
+0x10, 0x30 and 0xF0. It does not execute 3894's zero-mask scheduler-resume
+branch via 3D78. That is a separate task-context requirement.
+
+Limit group 586A6, 58730, 587A2
+------------------------------
+586A6 detects previous 8094 == 1 and current 73B8 == 0: load holdoff 8080
+from D9F11, which is zero in this ROM. Otherwise decrement a nonzero byte.
+Always save raw 73B8 into 8094.
+
+58730 updates retained limit 8078. Its qualified branch requires holdoff zero,
+7346 == 1 and 76B2 == 1. General inspected operations are:
+  qualified: min(R(old + D9F24), max(old, D9F28));
+  otherwise: max(R(old - D9F24), A35C8(6DB4)).
+In this stock ROM, D9F24/D9F28 and all 13 A35C8 values are zero. Thus the
+qualified branch retains old 8078; the other branch floors it at zero.
+The table axes run 500..6500 by 500. This is not an alternate-calibration test.
+
+587A2, only when 7012 == 1, updates 8090 from A35D4(6DB4), then sets
+807C = max(8090,8078). Other modes set 807C to zero while retaining 8090.
+A35D4 has 15 knots from 1000..7500; stock values range approximately
+0.12..0.17. Its original lookup, including interpolation, executes in tests.
+
+Target, filter and positive gap
+-------------------------------
+587E4 updates target 806C:
+  7016 == 1 and abs(6DB4) > .9765625:
+    max(R(R(80BC * 7020) / 6DB4), 807C);
+  otherwise: 80BC.
+The comparison includes both positive and negative boundary values.
+
+58846 uses original filter 2508 in mode 1. Let a = R(1 - D9F1C), where
+D9F1C is approximately .8984400034:
+  blend = R(target + R(R(1-a) * R(prior8088-target))).
+Snap to target if abs(R(target-blend)) < literal 58968 = .000244140625;
+otherwise use blend. Other modes write 8060 = 80BC.
+
+58884 writes positive gap 805C = max(0,R(806C-8060)) only in mode 1;
+other modes write zero. 588B8 scales this gap times 6DB4, divided by 60,
+multiplied by CC028 (~.0012), multiplied by CA974 (1998), divided by 2,
+rounding after each operation, into 8058. Other modes write zero.
+
+Coefficient 5898C
+----------------
+Always update 808C = A35BC(6D28). Its six knots are:
+  axis:   -20, 0, 20, 40, 60, 80;
+  values: ~.3, .3, .25, .2, .15, .13.
+The oracle uses the exact floats from the ROM.
+
+Stock D9F10 is zero. With 7346 nonzero and 7016 nonzero:
+  raw = R(R(R(8058-808C) * D9F14) / D9F18);
+  coefficient = clamp(raw, 0, D9F14).
+D9F14 ~ .8984400034; D9F18 ~ .1099999994. If 7010 == 1 or raw 7EEE is
+nonzero, multiply by D9F20 = .5, rounding. If the enable conditions fail,
+write zero. The hypothetical zero-divisor calibration branch holds its old
+coefficient; it is not exercised by modifying the ROM.
+
+Thus this stock producer bounds 8054 to 0..~.89844, or half that upper bound
+in the selected submode. Direct checks include non-Boolean input bytes.
+
+Reconstructed base 58A34 and current input 58A7A
+-----------------------------------------------
+58A34 sets d = R(1-8054). When abs(d) > literal 58B38 = .00390625:
+  protected 804C = R(R(806C - R(8054 * prior8084)) / d).
+Otherwise it preserves all eight bytes of the old protected record.
+The stock coefficient bound keeps d outside that guard. Direct injected
+coefficient tests exercise the guard but do not establish a normal route to
+it. Original checksum writes and their preservation are checked.
+
+58A7A publishes 8048:
+  7016 == 0: copy baseline 80BC.
+  Nonzero 7016 with abs(6DB4) <= .9765625: retain old 8048.
+  Otherwise sum 80E0,8100,8140,8150,8230 in that order with RTZ additions;
+    8048 = R(804C + R(R(sum * 7020) / 6DB4)).
+
+This upstream nonzero mode test differs from the downstream 583B8 selector:
+raw mode 2 can compute corrected 8048 while 583B8 chooses its baseline
+numerator. The executed lifecycle demonstrates both behaviors together.
+
+Retained paired lifecycle
+-------------------------
+The original baseline producer first generates 80BC = .5 from a contribution
+fixture; original record initialization follows. The current group executes
+in its observed local order. Previously verified ratio/history/source/command
+bodies follow, along with serial framing and reply checks. Original 5863A
+publishes the new target/filter history once at the end of each test cycle.
+No direct baseline/current/history-output injections occur in this lifecycle.
+
+  Calls 1..10, mode 0: current input .5, target/filter .5, coefficient zero.
+  Call 11, mode 1: correction .125 raises current input to .625.
+  Call 21, 6DB4 rises from 150 to 1500: target falls to ~.05; filter decays
+    gradually from .5. Current input is ~.0625.
+  Call 41, 6DB4 returns to 150: target rises to .5 while the filter lags.
+    Coefficient reaches ~.89844; reconstructed base rises to ~4.48088 and
+    current input to ~4.60588. Downstream numerator and command caps apply;
+    selected command reaches 16.5 in this fixture.
+  Call 42: the newly published target is now the prior target; reconstructed
+    base returns to .5 even while the coefficient remains high.
+  Call 61, raw mode 2: corrected current input remains .625, but the downstream
+    selector takes the baseline numerator. Mode 0 at call 81 restores .5.
+  Call 101, mode 1 with half-coefficient flag and 6DB4 = 50: coefficient
+    ~.44922, reconstructed base ~2.31561, current input ~2.69061.
+  Calls 111..114, 6DB4 = 0: current input holds its previous value; target
+    and filtered history still update under their own rules.
+  Call 115: restoring 6DB4 resumes current-input updates.
+
+All 40 outgoing serial bytes and the next queued command are checked in each
+cycle. Replies are synthetic. CAN model updates are deliberately held during
+the four 6DB4-zero calls; their results are retained and paired updates resume
+at call 115. This does not prove full CAN-model behavior at zero 6DB4.
+
+Scheduling and remaining evidence
+--------------------------------
+Original caller 1A63A executes 58F10, followed by 58652,586A6,58730,587A2,
+587E4,58846,58884,588B8,5898C,58A34,58A7A at 1A640..1A67C. It then branches
+to 1A80C and the previously verified ratio-input group. This local order is
+now executed. Publisher 5863A is called at 1D710 in a separate task; its real
+cadence relative to the calculation group remains unverified. Calling it once
+per synthetic cycle is explicit, not proof of production scheduling.
+
+Concrete static lead: 58B78 computes 8098 = R(809C * A35E0(6D5C)),
+also storing the lookup result in 80B4. Execute this body and trace 809C.
+This observation is not included in the executed case counts above.
+
+Next: trace the producers of 8098 and the baseline/correction contributions,
+plus 7016 mode and task publication order. Establish initialization and
+restoration of nonzero 2310 rather than assuming it from a seeded record.
+The zero-mask scheduler path, 240xx enable/stage, complete task integration,
+protected RAM/5354, 20A8 reset/57CD and A720 binding history remain open.
+
+Keep ECU/TCU capture timing and group7/overlap/composite/2->1 behavior open.
+Traction sender attribution,7978/fuel consumers and physical outputs remain
+required. OEM PRHT folding/unfolding,pause/resume,reversal,timeouts,
+synchronization and recovery remain active. This trace supplies no OEM roof
+receiver or CAN fold/unfold command evidence and proves no physical movement.
+
+Persistence verification
+------------------------
+The refreshed Ghidra archive was extracted independently and both programs
+reopened read-only. All 11 project-file hashes, 1025 annotations (500 ECU,
+525 TCU), and 559 exported functions/reports matched the saved live project.
+Archive identity is recorded in ghidra/snapshot.json,
+ghidra/restore-verification.json and CHECKPOINT.txt. Research inputs, scripts,
+results, annotations, exports and archive are saved locally in Git-eligible
+repository files. No staging, commit or push was performed.

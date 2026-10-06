@@ -1,0 +1,178 @@
+2026-10-06: ascending group7 map and permission path
+==================================================
+
+Result
+------
+Ascending group7 can produce a numeric CAN216 request that changes the paired
+ECU's calculated spark. Earlier zero-output ascending fixtures did not establish
+an absent feature: their permission byte9410 was6 (required bit0 clear), and
+their live map input80F8 was0. The new retained code1 trace changes only explicit
+upstream inputs, executes original creation/dispatch, and produces1280 when the
+permission producer enables bit0. Request release then restores the sentinel.
+
+Reproduction and limits
+-----------------------
+  python research/ecu-at-can/verify_tcu_ascending_map.py \
+    > research/ecu-at-can/tcu-ascending-map-verification.json
+
+Inputs are unchanged examples/LFG1TF000.bin (TCU SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6) and
+examples/LFFEEE-stock.bin (ECU SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08).
+Original ROM bodies and arithmetic/lookup helpers execute in the existing
+interpreters; no opcode or callback substitution. The independent map oracle
+uses two-stage integer interpolation, truncating signed differences toward0.
+
+Verification:18 constructor cases,845 map knot/midpoint/edge cases,1925 scaling
+cases,120 callback gate cases,5 retained permission updates,2 manager traces of
+111 calls each and29 paired ECU checkpoints (10 callback,5 permission,14 manager).
+The five permission updates are additional to the2908 direct cases above.
+Each manager call executes11014, event2 and two separate event4 services.
+
+All input samples, target reference5000, invocation cadence and ECU coefficients
+are fixtures. This is neither full boot/task execution nor hardware validation.
+Code1 uses the existing old1->requested2 classification; no physical gear-label
+assumption is added. No real-time duration or physical map-axis units inferred.
+The paired helper changes cancellation-related CAN fixtures only in a copied
+TCU snapshot, never in the retained lifecycle. CAN211 numeric input is20016,
+deliberately outside the active traction correction range, to isolate this AT
+numeric path. This does not complete the separate traction investigation.
+
+Constructor and table routing
+-----------------------------
+4DC98 dispatches through2FEF8 with descriptorFFFFB08C. Observed descriptor:
+  B08C=5E4CC, B090=5E500, B094=5E4D8, B098=5E4E8,
+  B09C=5E504, B0A0=FFFFA358, B0A4=05020100, B0A8=010C7FFF.
+5E4CC contains4DCA0,4DCA4,4DCE0. 5E4D8 contains4DD10,4DD70,
+4DDA0,4DE6C. 5E4E8 contains4DE7E,4DEA8,4DF3C,4DFE8,0,0.
+5E500 is0; 5E504 contains4DFF8,4E036,4E0EE.
+
+4DCA4, r5=code/r7=record:
+  byte+1=code; word+4=0 via original double0.5-to-integer helper5BBEC;
+  byte+12=808D (not808C);
+  word+14=80C8; word+16=80D2; word+18=80D4;
+  byte+2=4C6C2(priority1) list handle; returns2.
+Constructor preserves existing+8; manager allocation/clearing is separate.
+Explicit tests distinguish808D from808C and preserve a nonzero+8 fixture.
+
+Numeric calculation4E3A8
+------------------------
+Bank=code for0..4, otherwise0. All offsets below are ROM addresses.
+  threshold = u16BE(76738+2*bank)
+  map =76805+50*bank
+  scale curve =76913+9*bank
+  base = u16(1078A(u16(80F8),u16(record+18),map)) >>2
+  if record+8 bit0x10 CLEAR and u16(record+16)>=threshold:
+    factor = u16(10764(u8(8276)<<8,scale_curve)) >>8
+    result = (base*factor)>>4
+  else result=base
+
+Stock threshold words:38400,13312,38400,38400,38400 (decimal).
+The comparison is effectively unsigned16; values above32767 are not negative.
+All five maps are6x6 byte-axis/value tables (each byte scaled256 by helpers).
+The full curves are saved in the ROM; timer knots and integer factors are:
+  bank0/2: knots0,3,6,12 -> factors6,11,16,16;
+  bank1:   knots0,3,4,6  -> factors0,2,10,16;
+  bank3/4: knots0,2,5,12 -> factors8,13,16,16.
+This is initial attenuation that rises to full value, not a decay curve.
+Bit0x10 bypasses the scaling, and a captured value below its threshold also
+bypasses it. Live80F8 is read at every call; the second map axis is captured.
+1925 cases include threshold-1/equal/+1,65535, codes5/255 fallback, timer255,
+bit0x10/0x80 combinations and knots/adjacent timer values.
+
+Callback4E036 and arbitration
+----------------------------
+It calls4E3A8, then suppresses the candidate if92D5 bit0 is set OR9410 bit0
+is clear. Positive candidates set record+8 bit0x80; zero clears it. Other bits
+are preserved. It stores word+4 and calls4C6DA(handle,value,positive_flag).
+The odd-looking software-double branches convert+/-0.5 to integer0; they do
+not add a half-unit to the calculated request. Original helper execution checks
+this rather than replacing those instructions with a presumed constant.
+
+Original4C7AC publishes list output into request slot2;1FB8C selects the source.
+With the fixture's original216D8-produced base800, positive requests produce
+915A=max(800-request,0). Zero candidate/mode0 yields915A=7FFF. TCU18F10/18F8C
+then pack CAN216, and the existing paired ECU helper executes normalization,
+numeric selection/model, correction and per-cylinder spark calculation.
+Both gates are tested independently, including unrelated bits set. All five
+code maps are paired once enabled and once suppressed.
+
+Produced permission sequence
+-----------------------------
+Original23BF6 runs with916D fallback off. Bit0 lower threshold comes from
+700C8(80C8)>>1 and broad threshold from700D3(80C8)>>1. It clears bit0 only
+when809C<broad AND809A<lower; sets it when809A>=lower+512; otherwise holds.
+At80C8=16000, lower96 and broad5984. Starting9410=6, inputs(809A,809C):
+  (0,20000) -> bit0 clear;
+  (25000,20000) -> bit0 set;
+  (0,20000) -> bit0 retained;
+  (0,0) -> bit0 cleared;
+  (25000,0) -> bit0 set again.
+Each update is followed by the actual numeric callback/arbitration and paired
+ECU verification. This explains why changing809A alone need not disable an
+already enabled request. Other9410 bits still follow their own hysteresis.
+
+Retained manager traces
+-----------------------
+Both start with full_fixture's62 original initialization functions, existing
+selection initialization48BC0, and48C08 creation (old1/requested2). Inputs:
+8080=6,92D0=4,A93A=1,80EA=4672,80F6=4224,809C=20000,80EE=1000,
+80F8=14080. Only809A differs:0 vs25000. Creation invokes23BF6 itself and
+produces9410=6 vs7; no direct permission or callback record injection.
+The reference9220=5000 is explicit; measured80EE changes to5000 at call80.
+Each event4 service is observed separately, preserving intermediate output.
+
+At the single4E036 entry, both traces have code1,x14080,y4000,captured2000,
+flags0,timer0,inhibit0. Independent candidate=1280 in both; permission decides
+whether it reaches the request list. At call80's second service, the enabled
+trace reaches state3/request1280/flag80. CAN216 starts0200 and ECU normalized
+request0 produces correction5 and calculated spark21 instead of26, using the
+explicit ECU model coefficients. First service ofcall81 still holds it.
+Second service ofcall81 moves to state4 and release callback4E0EE outputs0:
+915A becomes7FFF, CAN216 startsFFFE, ECU correction0 and spark26 return.
+Both traces retire at call110 and finish in idle state1 with an empty ring.
+The disabled trace produces no nonzero request at any saved state change.
+
+An initial exploratory trace with80F8=0 also reached4E036 once,4E0EE29times,
+4DDA0109times,4DF3C/4DFE8 once,4E3A8 once and4E314110times;9410 stayed6.
+It established the callbacks were reached, but did not isolate the map and
+permission causes. The saved two-trace verifier makes that distinction.
+
+Open work / continuation
+------------------------
+Next: independently specify4E0EE release/progress numeric policy using4E450
+and4E4DE; vary the measured target approach rather than jumping directly to it.
+Then verify4DDA0/4DF3C predicates and4E314 bounds across all ascending codes.
+Static leads, not newly complete oracles:4DDA0 checks8081,record+8 bit20,
+measured80EE relative to indexed reference and80F0;4DF3C can capture target
+error into+10;4DFE8 captures request+4 into+6 and setsbit20;4DE6C setsbit10
+and clears8276.4E2D6 computes a saturated measured-minus-reference difference.
+4E0EE uses those captured quantities and thresholds in a piecewise calculation.
+The disassembly excerpt preserves4DC98..4E694, including these unresolved bodies.
+Trace actual80F8/80D2/80D4/808D production and physical meaning; preserve full
+task/capture timing, overlap/composite/2->1 and fault lifecycle requirements.
+
+Traction next:59720->8118,72B4/72BC indirect writers, mode/gate provenance,
+cross-task publication, CAN211/21A sender attribution,7978/fuel consumers and
+physical actuator confirmation. This AT numeric trace does not identify DSC.
+Roof next: PCM transmission-type publication and matching OEM PRHT receiver.
+Factory sequence and sender candidates remain documented in traction-roof.txt;
+no OEM fold/unfold CAN command is proven. Preserve both directions, pause/
+resume, reversal, communication timeout, motor synchronization and fault recovery.
+All three research goals remain incomplete.
+
+Persistence verification
+------------------------
+Ghidra12.1.3 PUBLIC / Java21, SuperH:BE:32:SH-2A compatibility language,
+not a chip identification. Saved three new function annotations plus eight
+data/table annotations and updated two existing comments. Known table ranges
+now have explicit data types via ApplyCanEvidence.java. Closed both programs,
+archived.gpr and.rep together, extracted independently, verified all11 file
+hashes, reopened both programs read-only, verified1106 annotations (570 ECU,
+536 TCU) and matched all584 exports/reports byte-for-byte.
+Archive nc-at-can.tar.gz:10,818,368 bytes; SHA256
+8ad5223b4ff58cb9795c6a9fbd54db39c0cd6b7a72f6036af4d876a399f43d85
+Manifests and Ghidra README are current. New script passed py_compile; diff
+whitespace check passed. All new evidence files are Git-eligible. Original ROMs
+and shared interpreters/older verifiers unchanged. Saved locally; no staging,
+commit, push or index cleanup performed.

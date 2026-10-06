@@ -1,0 +1,1332 @@
+2026-10-06: persistence and continuation checkpoint
+
+Current scope: retain ECU/automatic-transmission integration, deep traction
+control logic/integration, and NC PRHT folding/unfolding CAN integration.
+The latter two have explicit completion criteria in traction-roof.txt;
+AGENTS.md requires carrying all three forward. None is complete.
+
+Current added-goal status and next actions:
+- Traction: executed evidence now connects shared CAN arbitration through
+  candidate throttle-angle conversion, command packing, serial transport and
+  application reply handling, feedback override and full24910 priority policy.
+  Next59720/8118,72B4/72BC indirect writers,67AC/7242/7012/7016/A3A4
+  gate producers
+  and cross-task publication order,
+  nonzero2310 origin, stage/enable240xx,
+  6CB4/mode inputs,
+  protectedRAM initialization,
+  20A8 reset/57CD consumers,fulltask order and A720 history with binding limits.
+  Retain CAN211/21A sender attribution, 7978 consumers, fuel paths and physical
+  actuator confirmation as open requirements.
+- Roof: factory opening/closing sequence and window handshake are documented;
+  ECU/TCU speed, MT-neutral and AT-selector sender candidates are preserved.
+  Next establish PCM transmission-type publication and matching OEM PRHT
+  reception. No OEM CAN fold/unfold command is demonstrated. Pause/resume,
+  reversal, communication timeout, motor synchronization and fault recovery
+  remain separate open requirements; aftermarket evidence is not OEM proof.
+
+Latest transition progress: tcu-transition-progress.txt executes the original
+48BC0 ->32140 startup order, complete32348 progress production and4C880
+request-group selection.24,785 direct cases and640 retained manager calls
+pass; both produced code6/operation8 replacements retire at call162 with
+CAN216 numeric request withdrawn. Operation8 suppresses the spark-request
+group. Earlier zero-progress/code0 traces retain their explicit fixture scope.
+Next: full939E producer containing23766,80FE/80FA/9334 and9315/95xx/99xx
+input provenance, actual task order and remaining overlapping/composite work.
+Traction/roof retain the distinct evidence and next actions listed above.
+
+Latest transition classification: tcu-transition-classification.txt explains
+why original4508A changes proposal2 to1 and why4744C selects code0 or6.
+31,448 direct checks pass. The640 retained manager calls include640 proposal
+and646 classification checks; prior67 paired ECU outcomes are unchanged.
+Two additional bounded creation probes show code0 coexisting with code1,
+while produced code6/operation8 retires code1 immediately. The later code6
+lifecycle remains open. Next: original96C8/CA/CC producers321xx/32348 and939E,
+complete replacement/overlap behavior, and task order. All three research
+goals remain incomplete; separate traction/roof next steps are listed above.
+
+Latest source selection: tcu-source-selection.txt connects filtered input25
+through17D60/22416, original495C0 proposal policy and full44CFE/48C08 to
+CAN216/ECU.18736 direct cases,11 input samples,640 manager calls and67 paired
+ECU checks pass. Two original phase records retire at110/218 withinputlow,
+142/294 withinputhigh. ADC-invalid input retention is distinct from published
+status2. Prior map/mode JSON regressions remain byte-identical. Next4508A
+proposal/code0 classification, shared971A overlap, remaining source flags and
+physical input25 identity/task order. All three research goals remain open.
+
+Latest phase-mode production: tcu-phase-mode.txt verifies original49260 and
+its source/history helpers:9271 direct cases,7 retained hysteresis samples,
+384 manager calls,386 mode/191 initial/223 qualifier/82 release checks and
+17 paired ECU checkpoints. Produced modes0/1 shift the request start from
+call80 to111 and withdrawal96 to112; both retire142. Source inputs and cadence
+remain fixtures. Earlier map/release JSON regressions are byte-identical.
+Next source9B40/9C91/9BFC/9ACD/9C00 production and full task/overlap/composite/
+2->1 behavior. Traction and roof remain separate incomplete goals below.
+
+Latest ascending phase: tcu-ascending-phase.txt verifies initial-delay neighbor
+branches, strict departure andtwo qualification routes:33015 direct cases,
+70 retained probe calls,160 manager calls with80 initial/111 qualifier/52 release
+oracles and10 paired ECU checks. Shared971A crossing flag canbe consumed by
+anotherindex; fullring overlap remainsopen. Next8086 producer (staticstore
+candidate492D2), fulloverlap/composite/2->1 and task timing. Allthree goals
+remainincomplete; distincttraction/roof steps are preserved.
+
+Latest ascending predicates: tcu-ascending-predicates.txt verifies release
+admission andreactivation:7762 direct cases,384 manager calls,327 predicate
+oracles,124 release oracles and25 paired ECU checkpoints. Natural accepted
+8081=2 reselects live map768 afterrebound; forced0 retainsrelease1280. Second
+release capturesnew768 despitebit40. Both retire154. Prior map/release outputs
+remainbyte-identical. Next32614/317E4 ascendingphase/overlap policy and input
+provenance. Allthree goals remain incomplete; separate traction/roof steps stay.
+
+Latest ascending release: tcu-ascending-release.txt verifies4E0EE and its
+bounds/capture/ratio helpers:5256 direct cases,12 gate combinations,12 retained
+numeric updates,160 manager calls/52 checked release updates and34 paired ECU
+checks. Stock release can restore a request after zero; activation9410/92D5
+bits are not rechecked inside this callback. Original manager releases1280
+through510/260/0, then retires142. Prior map verifier remains byte-identical.
+Next4DF3C/4E314/4DDA0,32614 phase qualification and upstream inputs. Allthree
+goals remain incomplete; separate traction and roof actions are preserved.
+
+Latest ascending TCU result: tcu-ascending-map.txt verifies the group7 map,
+constructor and bit0 permission path:2908 direct cases,5 produced permission
+updates,222 retained manager calls and29 paired ECU checkpoints pass. Original
+creation enables9410bit0 from upstream inputs; code1 produces1280 through
+CAN216 and changes calculated ECU spark under explicit coefficients. Earlier
+zero fixtures had a closed permission gate and zero live map axis. Next4E0EE
+release policy,4E314/predicates and upstream map inputs. All three goals remain
+incomplete; distinct traction and roof next actions remain below.
+
+Latest magnitude group: control-magnitude.txt verifies six local producers
+plus protected input initialization. 2565 direct checks and320 serialcycles/
+36 pairedCAN updates pass. Fast0->1 retrigger reloads12-call holdoff without
+newpulse; raw2 canpulse withoutreload. Secondmagnitude canpreservebaseline
+withfirstgateoff. 72B4/72BC productionwriter/CANmapping isunproved. Prior
+contribution pipeline isnowreusable; defaultJSON regression isbyte-identical.
+Next59720->8118,72B4/72BC indirectwriters and67AC/7242/modegate provenance,
+fulltask order. Preserve allthreegoals; nonecomplete.
+
+Latest contributions: control-contributions.txt executes nine original
+baseline map/average,7978-gated80DC and independent80E0 correction bodies.
+2375 direct/state checks,320 serialcycles,36 paired CAN updates and320
+CAN211/latch updates pass. Request withdrawal retains7978/80DC suppression;
+explicit admission-count reset restores contribution. Otherphysicalroles and
+real timing remainopen. Next80FC/8100 producers593DE/59402 andsource maps,
+67AC/7012/7016/A3A4 provenance andcross-task order. Allthree goals incomplete.
+
+Latest baseline source: control-baseline-source.txt executes six original
+809C/8098 target, retention and decay producers. 4997 direct cases and140
+serial cycles/22 paired CAN updates pass. Mode bit40/7EEE select distinct
+maps; stock scale1 and countdown reload0. Target clear via7346 can retain
+809C until the separate decay task. Publication helper resetsA3A4 as a fixture,
+not a firmware writer. Next5903C/5904C/59070 baseline contributions,7012/7016/
+A3A4 writers and cross-task publication order. All three goals remain incomplete.
+
+Latest input history: control-input-history.txt executes58F10 baseline and
+complete local58652..58A7A group, original58608 init/5863A publication.
+1547 direct cases and140 serialcycles/21pairedCAN updates pass. No baseline,
+current orhistory-output injection innewlifecycle; upstreamcontributions and
+mode/status remainfixtures. Publisher once-per-cycle isexplicit: realtask
+cadence and3894 zero-mask scheduler path remainopen. Stock8054<=~.89844
+keepsreconstructiondenominatoroutsidenearzero guard. Mode2 corrected8048
+stillselectsbaseline downstream. Historylag yieldsbriefboost underlocalcaps.
+Next58B78->8098 from809C*A35E0(6D5C),baseline/correction contributions,
+7016 mode,1D710 publication
+order,nonzero2310 restoration,240xxstage/enable/fulltask. KeepprotectedRAM/
+5354,20A8clear/57CD,A720bindinghistory,TCU timing/group7/overlap/composite/
+2->1,traction sender/7978/fuel/physicaloutputs andOEMPRHT bothfold/unfold,
+pause/resume,reversal/timeouts/synchronization/recovery. Previous/current
+turns made progress; allthreegoals incomplete. Latest saveidentity below.
+
+Latest ratio inputs: control-ratio-inputs.txt executes 5844E (51286/39FB4),
+58528,583EE,58422,583B8. 767 direct cases, two expected model stops and
+140 serial cycles/21 paired CAN updates pass. Stock8038 map factor is1;
+803C uses shared6DC4/6D40. Zero6DC4 yields held ratio for nonzero numerator;
+full CAN models were held during those four calls, then resumed. No hardware
+exception claim for6D40=-273. ROMs/interpreter/older verifiers unchanged.
+Next 58A7A->8048, 80BC andprotected804C histories/initialization, contribution
+sources, nonzero2310 restoration andcross-task timing; keep240xxstage/enable,
+fulltask,protectedRAM/5354,20A8clear/57CD,A720bindinghistory. Preserve TCU
+capture timing/group7/overlap/composite/2->1, traction sender/7978/fuel/physical
+outputs andOEM PRHT bothfold/unfold,pause/resume,reversal/timeouts/synchronization/
+recovery. Current and previous goal turns made progress; all three goals are
+incomplete. Current Ghidra identity is under Latest save verification.
+
+Latest retained history: control-history.txt executes58338 ratio/sideflags,
+58280 remainder,582BC hysteresis,58140/581B8/58102 decay andinitializers.
+1692 directcases plus220 serialcycles/23pairedCAN updates pass. Timer113
+reacheszero atfixturecall114;holdoff3/2/1/0 admitsdecay117then everyfourcalls;
+seededprotected1 reaches0at193. Near-zero numeratorclearsratio;near-zero
+denominatorholds8028. No laterdirecttimer/history injection. Decimal0.1
+fixturecorrectedtoexplicitRTZ;ROM/sharedinterpreter/olderverifiers unchanged.
+Next583B8/583EE/58422/5844E/58528ratioinputproducersandtheirupstreaminputs,
+2310 nonzeroorigin/restoration (AED2E onlyreads/copies5BDC),240xxstage/enable,
+fulltask/cross-taskorder,protectedRAM/5354,20A8clear/57CD,A720bindinghistory.
+KeepTCU capturetiming/group7/overlap/composite/2->1,traction sender/7978/fuel/
+physicaloutputs andOEMPRHT bothfold/unfold,pause/resume,reversal/timeouts/
+synchronization/recovery open. Currentandpreviousgoalturns madeverified
+progress;allthreegoalsincomplete. LatestGhidraidentityundersaveverification.
+
+Latest command sources: control-sources.txt executes58092/580AC input
+selection,5C500/53A/54E mapsandlimits,39D24 normaloffset publication.
+1028 directcases plus180 serialcycles/21pairedCAN updates pass. Newlifecycle
+hasno8010/8014/8250/8254/825C/8248/6D00 injection; earlierinputsremainfixtures.
+Stockupperboundneverbindssourcemap;lowercanbind. Absolute5650 aftertimer63
+rampsoldvaluewhile normal6D00 stilltracks8248. Fullcross-task rate/orderopen.
+Next58280->8018 andupstream8028/801C/6C20,58102/582BC/58338 retainedstate,
+2310 initialization,6D28/6D20/735A/6536 sources and240xx stage/enable.
+Keep257D8/fulltask,protectedRAM/5354,20A8 clear/57CD consumers,A720history,
+TCU capturetiming/group7/overlap/composite/2->1,traction sender/7978/fuel/
+physicaloutputs andOEMPRHT bothfold/unfold,pause/resume,reversal/timeouts/
+synchronization/recovery open. Thisandpreviousgoalturns madeverifiedprogress;
+allthreegoalsremainincomplete. Exact GhidraidentityunderLatest saveverification.
+
+Latest numeric overrides: control-overrides.txt executes23A24,245FC,246E8
+andoriginalinitializers.720 relative,2160 absolute,6 highest and18 initializer
+cases pass,plus2578 serialcycles/27 pairedCAN updates with no5620/5650/565C
+outputinjection. Atcount50relativecapturesfeedback;then~0.3ramp capped~11.6.
+Absolutetimer<=63follows8248+closed,then~0.008ramp cappedclosed+6;entryreset
+requiresstage>=3,previousenable0,current1. Default timer verifier rerun matches its saved JSON byte-for-byte after
+adding optional callbacks; shared interpreter unchanged.
+Next5C500..5C574 producer8248 and8250/8254/825C bounds,39D24 publishing
+8248/BACA8 to6D00 (currentlyomitted),240xx stage/enabletable2F520,
+thenomittedtask257D8/fulltask,6CB4/mode/protectedinitialization/5354servicing,
+20A8 reset/57CD consumers andA720 bindinghistory. KeepTCU capturetiming/
+group7/overlap/composite/2->1,traction sender/7978/fuel/physicaloutputs and
+OEMPRHT bothfold/unfold,pause/resume,reversal/timeouts/synchronization/recovery
+open. Allthreegoals remainincomplete;thisturn madeverifiedprogress.
+
+Latest retained timers: control-timers.txt executes247B6 before24910,
+24B82/24BAE afterward,localgates andlaterangle/override/selection.1458 input
+cases,432 GPIO cases,1600 finitefilterchecks,2514 complete syntheticserial
+cycles with28 pairedCAN boundaryupdates,38 pairedfault/clear cycles andthree
+valid-record comparisons pass. Timer5664>=6 admitsfeedback,625 switches
+relative,relativecount201 clears5676/PDDRbit11,C>1875 bypasses infixture.
+No directcounter/566A/5676 injection inlifecycles.536C comesfromoriginal
+copy/filter;6CB4source andmode remainfixtures. Mode1 expectationcorrected:
+invalid210C/2076/2088/208A sparseRAMrecords set5354via15146/157F0 andblock
+mode1 with2110=0. Testpreservesrejectionthenexplicit2110=1;validrecord
+comparison admitswithoutsetting5354. No ROM/sharedinterpreter changes.
+Next omittedtask/numeric5620/5650 producers,6CB4/mode sources,protectedRAM
+initialization/5354servicing15800..15C44,reset/57CDconsumers. Retainservice
+2BE4A/21E8C,A720 history/bindinglimits,TCU timing/group7/overlap/composite/
+2->1,traction sender/7978/fuel/physicaloutputs and OEM PRHT fold/unfold,
+pause/resume,reversal/timeouts/synchronization/recovery. Allthree goals
+remainincomplete;previous/currentturns madeprogress. Saveidentitybelow.
+
+Latest override admission: control-admission.txt executes full24910 plus
+24C88/24DCE/24E06 in observed relative order.4991 direct cases, six retained
+priority checkpoints,126 countdown calls and32 paired TCU/ECU serial fault
+checkpoints pass. No direct566E/5677/567A injection in integrated loop; local
+upstream values remain fixtures. Stock566C branch disabled;5672raw2 can
+suppress5674 while numericselection staysnormal. Missingfeedback fault
+rejects566E;under tested othergates normalcandidate returns,not proof of
+physicalvehicle response. Decimalfixture inputs corrected toRTZ binary32;
+no ROM/shared-interpreter changes. Previous/current turns made progress.
+Next247B6 earlier5664/5666 timers,24B82/24BAE and5676/566A/source inputs,
+fulltask order,28552 resetcaller and57CD consumers. Retain2BE4A/21E8C,
+A720 history/bindinglimits,TCU timing/group7/overlap/composite/2->1,
+traction sender/7978/fuel/physicaloutputs and all OEM PRHT fold/unfold,
+pause/resume,reversal/timeouts/synchronization/recovery requirements.
+All three goals remain incomplete. Latest save identity below.
+
+Latest control policy: control-policy.txt executes21D18 feedback override and
+285A4 full monitor admission. 810 override/18 default/972 admission cases,
+224 isolated SHLL16 vectors, eight paired CAN/serial checkpoints and30 actual
+serial loss/recovery calls pass. Full gate closes one call after faultsets;
+good replies alone cannot progress recovery. Explicit28552 clear then251
+monitor calls with retained good input sets57CD. Local566E/567A/mode inputs
+and schedule remain fixtures. Initial quantization assertion corrected to
+existing +.5/clamp packer; no ROM/shared-interpreter changes.
+Next full24910 priority policy producing566E from252C4,567A producer
+around24E94,28552 caller and57CD consumers2436C/736C6/73DD6. Then full
+2BE4A/21E8C and A720 history/binding limits. Keep TCU fulltask/capture timing,
+group7/overlap/composite/2->1, traction sender/7978/fuel/physical outputs and
+OEM PRHT bothfold/unfold,pause/resume,reversal,timeouts/synchronization and
+recovery open. Previous/current turns made verified progress; all three goals
+remain incomplete. Save/restore identity under Latest save verification.
+
+Latest application reply evidence: control-reply.txt executes full 22224,
+checks header admission, seven numeric feedback values, six filtered status
+bytes and next-request scheduling. 1746 direct cases pass, plus five paired
+CAN/serial/application checkpoints and 28 transport-produced loss/recovery
+points. Rejected replies retain numeric feedback. With monitor gate 57CC
+held enabled, the 26th missing call latches 20A8; a good reply resets its
+counter but retains the fault. Explicit reset clears it. Full gate policy,
+remaining decoder flags, C260 reset path and physical recipient remain open.
+Next trace 21D18 feedback-to-command policy, 57CC/20A8 recovery and full
+2BE4A/21E8C caller; retain A720 history and binding CAN limits. Preserve TCU
+fulltask/capture timing/group7/overlap/composite/2->1, traction sender/7978/
+fuel/physical outputs and OEM PRHT fold/unfold, pause/resume, reversal,
+timeouts and recovery. All three goals remain incomplete; prior and current
+turns made verified progress. Ghidra identity is under Latest save verification.
+Saved locally in Git-eligible files; no staging, commit or push.
+
+Latest serial transport: control-serial.txt executes synchronousSCI1
+configuration/start,41 bytecallbacks/40TXandRXbytes,checksum,statusconsume,
+timeout/recovery andpairedCAN-to-TDRpropagation.256config,120exchange,48monitor
+cases,4expectedaccessrejections,fiveinterrupted/recoverylifecycles andfive
+pairedcheckpoints pass. Registermapping iscorroborated byRenesas manual;
+remotecontroller/pins/clockrate/physicalactuation remainunknown. Replybytes
+are explicitfixtures,not anemulatedreceiver. Next fullapplicationreceipt/
+admission around222FA..2256A,complement/headerchecks,feedbackandfaultpolicy;
+then bindingA720/history andpriorityflag producers. PreserveTCU fulltask/
+capturetiming,group7/overlap/composite/2->1,traction sender/7978/fueloutputs and
+OEMPRHT fold/unfold,pause/resume,reversal/timeouts/recovery. Allthreegoals
+remainincomplete;prior/currentturns madeprogress. GhidraidentityunderLatest
+saveverification. Savedlocally/Git-eligible;no staging,commit orpush.
+
+Latest downstream command evidence: throttle-candidate.txt verifies72FC
+consumers, stock~.85 angleconversion, priorityoverrides/closedoffset and
+outgoingrecord packing, supported by savedromdrop throttleconstant labels.
+81 local,54 angle,324 selection and768 packing cases pass,plus6 retained
+pairedTCU/ECU checkpoints through outgoing437A wordbuffer. Physical actuator,
+transport/remoteprocessor andfulltask remain unproved. A720 tailpointer/static
+history lead is saved for independentmodeling. Next trace437A/C00A/C350 and
+receiver, priorityflag producers andA720 history/bindingCANlimit lifecycles.
+Preserve TCU physical capture/timing,group7/overlap/composite/2->1,traction
+sender/7978/fuel consumers and OEM PRHT bothfold/unfold,reversal/timeouts/
+pause/resume/recovery. Allthree goals remain incomplete;prior/currentturn
+made verifiedprogress. Ghidra identity under Latest save verification.
+Saved locally/Git-eligible;no staging,commit orpush.
+
+Latest control conversion: control-conversion.txt executes fullA4FF8 inverse
+maps/blending/limits,41A68 publication and42240 local substitution to72FC.
+324 direct,180 selection and12 paired fullA477E cases pass; isolated BRAF-NOP
+extension160 vectors/one executed branch/four expected rejections. Original
+caller stage order verified; only its finalstage has a complete independent
+oracle. Physical actuator attribution remains open. Next independently model
+A720/history and execute72FC consumers39B04/25602/4268E toward throttle/fuel.
+Retain7978 consumers/CAN21A sender, TCU fulltask/timing/group7/overlap/composite
+and OEM PRHT reception,bothfold/unfold,pause/resume,reversal/timeouts/recovery.
+Allthree goals remain incomplete. Ghidra identity under Latest save verification.
+Saved locally in Git-eligible files; no staging,commit orpush.
+
+Latest numeric convergence: numeric-arbitration.txt executes fullA6490 through
+A7432 and independently checks A710/A70C/A700/A6F0 from CAN211/21A/216/218.
+168 direct,128 variedmodel,110 paired,24 mode/receipt/sentinel,8 producedmodel
+cases pass, plus7 retainedhistory and23 grouped218 loss/recovery points.
+Stock34BBC makes divisor1; direct cases test factor floor/bypass.218 expiry
+alone retains byte6, but grouped69E2 invalidates it and ramps fresh216's limit.
+No ROM/shared-interpreter changes. Next model downstreamA720/history branches,
+traceA4FF8 conversion/consumer andB6960 to physical output, and source identities.
+Keep7978 readers and CAN21A sender open. OEM PRHT reception/fold/unfold,
+reversal/timeouts and recovery remain independent requirements; TCU fulltask,
+physical timing,group7/overlap/composite work continues. Allthree goals remain
+incomplete. Current Ghidra save/restore identity under Latest save verification.
+Saved locally in Git-eligible files; no staging,commit orpush.
+
+Latest traction arbitration: traction-flags.txt executes CAN211 flags ->CAN21A
+normalization and retained control latch7978.3072 numeric,2048 integratedflag,
+20 nonBoolean,180 countdown,1152 latch,972 history,4 initializer and1024
+paired TCU216/ECU cases pass;4 history calls and23 expiry/recovery points.
+Any of five211 flags enables21A word1; expiry suppresses both values and,
+with grouped monitor enabled,211 flags.7978 remains set until its own clear
+gate. TCU98A0bit0 ->216byte7bit7 ->ECU6A5F is verified, but stockB81B2=1
+forces6E57=0, disabling that potential7978 input. No ROM/interpreter changes.
+Next traction: full function containingA69A8 combines6AA0,6A9C and714C;
+trace its inputs/downstream physical consumers and7978 readers/producers.
+Saved static leads are not throttle/fuel identification. Roof: still seek
+OEM PRHT type/speed/MT-neutral/AT-selector reception; preserve bothfold/unfold,
+pause/resume,reversal,timeouts andfault recovery. TCU: preserve remaining
+hardware/task ratios,91A4 consumers,fullholdfault lifecycle,ascendinggroup7,
+overlap/composite/2->1 work fromtcu-reference-policy.txt. Allthree goals
+remain incomplete. Ghidra save/independent restore identity is recorded under
+Latest save verification. Evidence saved locally; no staging/commit/push.
+
+Latest cached-source policy: tcu-reference-policy.txt independently verifies
+20FAC active/cached/stale/index behavior and20EAA's separate cache/output.
+1764 policy,768 threshold,216 alternate,16 elapsed-counter and768 full128B6
+mode cases pass, plus80 primary-wheel calls andtwo capture-driven sequences/
+72 CAN216byte4/ECU checks.9001->7017 gradual change is a negativecontrol;
+13333->7017 setsbit4 atcall2, clearsat25 withcounter7, changes references/error
+while measuredCAN byte stays52. The initial small-change trigger expectation
+was corrected in the test fixture, not firmware.91AC increments via2094E,
+called by128B6 only800A==3, and acceptedcapture clearsit; physical clock open.
+Next advance traction CAN211 readers35608/4E854 toward throttle/fuel and
+enable/arbitration consumers. Retain TCU hardware/task ratios,fullholdfault
+lifecycle,91A4 consumers,ascendinggroup7/overlap/composite/2->1 work and OEM
+PRHT type/speed/neutral reception,fold/unfold reversal/timeouts. Previous/
+current goal turns made verified progress; allthree objectives incomplete.
+Ghidra refreshed/independently restored per Latest save verification below.
+Evidence saved locally in Git-eligible files; no staging,commit orpush.
+
+Latest reference acquisition: tcu-reference-source.txt connects capture0A
+179A8 ->20678 filtered18-entry history ->full2086C/209B4 ->80EA/80EC and
+2117C references, alongside capture0B measured production, to actual requests.
+320 ingestion,162 sums,63 timestamps,36 rawage,402 hold/faultgate,480
+discrepancy and900 producer cases pass;450 use full2086C. Branch oracle
+observes actual gate outputs, with separate gate tests in documented domains.
+Two code7 andone code9 lifecycles/35 paired CAN216/ECU checkpoints inject
+none of80EA/80EC/80EE/9218/80D8. Code7 nonzero request739 ramps/releases111,
+retirement178; code9 releases137/retires162, under explicit call schedules.
+Reference80EC can differ from80EA because its history window uses9238.
+Next independently model full20FAC active/cached/stale policy and20EAA,
+trace91AC/8158 timers andphysical capture/task identity; preserve group7,
+overlap/composite/2->1, traction throttle/fuel/arbitration and OEM PRHT
+type/speed/neutral reception/reversal/timeouts. Physical units unproved.
+Previous/current goal turns made verified progress; all goals incomplete.
+Ghidra snapshot/restore identity under Latest save verification is current.
+New evidence saved locally/Git-eligible; no staging,commit orpush.
+
+Latest acquisition evidence: tcu-measurement.txt executes capture0B timestamp
+delta17A58 ->211DC history ->2124C/212F4 measured80EE, substitution9234,
+derivative80F0, reference/error, phase/request retirement and CAN216/ECU.
+175 arithmetic,49 division,5 init,540 ingestion,288 timestamp,1536 freshness,
+726 history,392 substitution and625 derivative cases pass.32 recovery points
+plus two shift lifecycles include86 measurement/22 request paired ECU checks.
+Stale resets0/history; two qualifying captures recover gradually. Source
+change at call80 ends code9 hold102, releases137, retires162, both heads0/15.
+No direct80EE/9218/80D8 injection in those lifecycles. Physical units, clocks,
+sensor wiring and fulltask scheduling remain open. Corrected80EC directwriter
+20C84 to209B4, called by2086C. Next full209B4 acquisition/fault/history, then
+both produced inputs driving nonzero maps; retain group7/overlap/composite,
+traction and OEM roof goals below. Prior/current goal turns made progress.
+Ghidra update/independent restoration is recorded under Latest save verification.
+Saved locally, Git-eligible; no staging, commit or push.
+
+Scope continuation (2026-10-06, user reaffirmed additional goals):
+- Traction: current executed evidence reaches stock model/pattern generation,
+  shared cylinder inhibition and ECU timer-register writes. Next trace remaining
+  throttle/fuel arbitration and enable/disable consumers, starting with the
+  saved CAN211 flag readers in traction-roof.txt and output-inhibition.txt.
+  DSC sender attribution, physical units, task timing and physical actuator
+  effects remain unproved. Include interaction with driver and AT requests.
+- Roof: factory documents establish the normal open/close sequence and local
+  window handshake; ECU/TCU sender candidates are saved in mt-can231.txt,
+  can201-speed.txt and roof-aftermarket.txt. Next trace PCM transmission-type
+  publication and seek matching OEM PRHT receive evidence for speed and MT/AT
+  neutral/selector fields. Preserve pause/resume, reversal, communication
+  timeout, motor synchronization and fault recovery as separate open items.
+  No OEM roof fold/unfold CAN command has been demonstrated.
+- ECU/AT: continue acquisition using tcu-acquisition-leads.txt, then the
+  existing reference/error and request lifecycle records. The new acquisition
+  notes are provisional; they do not supersede verified results or Ghidra.
+All three goals remain independent completion requirements. This scope update
+and the provisional continuation notes are saved locally in Git-eligible files;
+no Ghidra project changes, staging, commit or push in this update.
+
+Latest produced-source evidence: tcu-reference-error.txt executes2117C Q12
+reference production and30B28/30B9E capture/two-sample error through request
+release and retirement.526 inputs/3682 words,658 clamp,1032 capture,280 filter,
+1020 reset cases and8 lifecycles/73 paired CAN216/ECU checks pass. Integrated
+cases inject neither9218 nor80D8. Code9 errors127/128 differ at the target
+band's exclusive upper boundary and strict filteredhold<64, verified separately.
+Next full2086C writer20C84->80EC and2124C writer21254->80EE acquisition;
+source units, fulltask timing, ascendinggroup7 numeric policy andoverlap/
+composite/2->1 classification remain open. Keep traction and OEM roof goals.
+Prior/current goal turns made progress. Ghidra refreshed/restored; latest
+identity below. Saved locally, Git-eligible; no staging/commit/push.
+
+Latest retirement evidence: tcu-phase-retirement.txt closes original event3
+acknowledgement and head/tail ring retirement through ten initialized groups.
+4096 bitmaps,975 stateful acknowledgements,10 lifecycles and64 paired ECU
+checks pass. Expanded62-function initialization enables group7 ascending
+requests and explains code9's hold: real creation captures80D8=1000, so phase3
+can wait for signed80D8<64 before request release. Explicit64/63 inputs prove
+the boundary; periodic80D8 source production still open. Rotation extension
+passes6592 cases,two delay programs/two rejections; older interpreters unchanged.
+Next ascendinggroup7 numeric policy, overlapping/composite transitions,
+80D8/30B9E/30C20 and9218 sources,2->1 classifier context and fulltask timing.
+Allthree goals remain incomplete; prior/current goal turns made progress.
+Ghidra updated and independently restored; current identity below. New
+evidence is Git-eligible and saved locally; no staging/commit/push.
+
+Latest phase-policy evidence: tcu-phase-policy.txt executes descending initial
+timer/departure gates, target qualification and completion through original
+selector-created requests.1260 timer,1470 departure,4200 qualification,20
+bypass,28 alternate-admission/dispatch and112 completion cases pass; three
+lifecycles include22 paired CAN216/ECU checks. Codes7/8 produce reductions;
+code9's stock map stayszero. Target qualification can also advancephase0
+without the departure timer. Phase3 completion and request release do not
+retire the phase-ring record: other-group acknowledgement remains open.
+Next event3/31C18 acknowledgement/retirement, initialize ascendinggroup7,
+then overlapping/composite and ascending phase policy; trace9218/80EE/96CC
+sources and full-task timing. Keep deep traction and OEM PRHT objectives.
+Previous selector-creation and current phase-policy turns made progress.
+Ghidra updated; independent restore result/identity under Latest save verification.
+Evidence saved locally in Git-eligible files; no staging/commit/push.
+
+Latest bounded continuation: selection-creation.txt and its verifier connect
+48C08 acceptance to actual phase/group8 request creation for3->2,4->3,5->4.
+Six CAN231/ECU checks and12 periodic CAN216/ECU checks pass. Blocking9545bit2
+prevents creation; release creates operation0 requests, but phase0/state2
+persist under these source fixtures and returned AT correction stays zero.
+Acceptance is not activation. Earlier operation17 results cannot be silently
+transferred to operation0. Unsaved exploratory classifier/composite/phase
+leads and the incomplete group7 fixture are now preserved in that record.
+Next execute3241C/324CE phase predicates and317E4/32614/327B0 dependencies;
+initialize group7 before ascending tests. Continue traction sender/units,
+remaining actuator paths and OEM PRHT reception/reversal/timeouts separately.
+No Ghidra mutation this pass: the last verified archive below remains current.
+All new evidence is Git-eligible and saved locally; no staging/commit/push.
+
+Latest upstream-admission evidence: tcu-request-admission.txt executes event1
+creation through all eight callbacks, phase ring, captured axes,9410 gates
+and managed request. Original event2 advances code7/op17 tophase1, enabling
+reduction576. Gate suppression retains the request;1FD24 aggregates nine
+source conditions into916Fbit0, which cancels and frees it. Recovery alone
+under periodic service does not recreate it.2940 gate,144 capture,1280
+aggregate,152 source-bit,8 creation cases and9 lifecycles/45 paired ECU paths
+pass. Full-task probes reject at1412A/FFFFF810; physical timing still open.
+Corrected Ghidra event table length18->15 (next callback starts5D3F4).
+Paired helper sets92C6bit5; new snapshot wrapper prevents that test fixture
+from contaminating ongoing aggregate/lifecycle state. Original helper/ROM/
+shared interpreter/app unchanged. Previous and current goal turns progressed.
+Next connect saved selection-reporting.txt48C08 acceptance through48D84/
+48F20 to event1 creation and returnedCAN216, then full phase lifecycle; source
+roles for80EA/80EE/809A/809C/80F6,916D and nine cancellation conditions;
+full hardware/task setup. Retain other4E/second-list,record1 phases1/2,92E6,
+traction sender/units/task order/physical outputs/remainingthrottle/fuel,
+OEM PRHT type/speed/neutral reception andfold/unfold reversal/timeouts.
+Allthree goals incomplete. Independent Ghidra restore verified11 project
+hashes,690 annotations and413 identical exports. Current archive identity is
+under Latest save verification. Saved locally; no staging,commit orpush.
+
+Latest timer/service evidence: tcu-request-timing.txt executes original timer
+wheels and periodic event4 dispatch through managed request completion.
+270 helper cases,1024 wheel calls/624640 value checks,512 mode cases,
+24 periodic cases,12 full lifecycles and12 released CAN216/ECU paths pass.
+Ramp slots increment8/16 primary calls, hold slots2/16; manager group5 runs
+4/8 admitted event4 calls. Expiry awaits the next service, so the ratios and
+initial phase matter. Explicit coupled schedules do not establish milliseconds.
+Static CMT1 ISR and application-task leads saved;90C8 is a phase-selection
+counter, not proved pending work. No ROM/shared-interpreter/app changes.
+Next126EC task admission/callers, clock setup, full1E5F6 task, phase95D4,
+creation/cancel,9410/916F and measured/reference sources. Retain other4E/
+second-list producers,record1 phases1/2,92E6; traction sender/units/timing/
+physical outputs/remaining throttle/fuel and OEM PRHT type/speed/neutral
+reception,fold/unfold reversal and timeout/recovery. Allthree goals remain
+incomplete; this turn made verified progress. Independent Ghidra restore verified11 project
+hashes,665 annotations and398 identical exports; current archive identity is
+under Latest save verification. Saved locally; no staging,commit orpush.
+
+Latest managed-request evidence: tcu-request-dispatch.txt executes original
+queue/heap/manager creation, states2->3->[4]->5, completion and aborts through
+CAN216 into ECU spark alongside CAN211.65536 index,1502 activation,384 hold,
+1080 parameter-selection cases,28 paired paths and8 abort lifecycles pass.
+3138A restricts808C to0..4: the15-byte calibration groups are three arrays
+of five. At ramp completion, release precedes another numeric callback;
+original queued cleanup removes ring entry andfrees/zeros heap record.
+Direct4C3CA exploratory call bypassed manager state update; final tests use
+fullgroup5event1 creation andqueue drain, fixing that incomplete fixture.
+No ROM/shared-interpreter/app changes. Next full31E20 scheduling andtimer
+service8115/81F2, phase95D4 lifecycle, creation/cancel and9410/916F sources;
+measurement/ref sources,other4E/second-list producers,record1 phases1/2 and
+92E6 remainopen. Preserve traction sender/scheduler/pins/remainingpaths and
+OEM PRHT type/speed/neutral reception,fold/unfold reversal/timeouts.
+Allthree goals incomplete; previous/current turn made verified progress.
+Ghidra independent restore verified11 project hashes,627 annotations and
+373 identical exports; archive identity under Latest save verification. Saved locally,no staging/commit/push.
+
+Latest TCU map/ramp evidence: tcu-request-maps.txt executes constructor,
+stock map selection/interpolation, gated updates, ramp capture/completion
+and CAN216 -> ECU spark alongside traction CAN211.36 constructor,9 clamp,
+1352 grid,720 duration,3456 active-update,4844 ramp and48 ramp-gate cases
+pass, plus12 paired lifecycle paths.
+Stock offset curves arezero; map request1024 decays over49 sampled counts.
+7FFF boundary withdraws downstream; initial new oracle expectation corrected,
+no firmware/harness edits. Full dispatch,9410 gate producer,80F6/80C4/808C
+sources and8115 timer service remain open. Next execute table state dispatch
+4CD18/4CE7A/4CEC6; continue other4E andsecond-list producers,record1 phases
+1/2 and92E6. Preserve traction sender/scheduling/pins and OEM PRHT type/speed/
+neutral reception,fold/unfold reversal/timeouts;allthree goals incomplete.
+New evidence, Ghidra annotations/tables/exports saved; independent restore
+passed11 project hashes,587 annotations and338 identical exports. No staging/commit/push.
+
+Latest TCU slot2 evidence: tcu-slot2.txt executes startup data copying and
+both stock request lists through4C7AC,1FB8C,CAN216 and ECU spark. Descriptors
+B028/B02C are copied from5F4FC/5F500:one priority,12/3 entries,7FFF sentinel.
+841 merge cases,600 stateful queue operations,capacity/exhaustion and60
+paired paths pass. Signed/mode merge has asymmetric sentinel behavior;
+first-bank7FFF can suppress valid second-bank value when modes match.
+Allocation wrappers increment counters even onFF failure; invalid-handle
+consumption is not tested. Stock4D98A callback publishes zero/mode0 with
+773E8=0,so active physical policy entry is still unproved. No shared harness,
+ROM or application edits. Initial Python capacity-model lifetime error fixed.
+Next trace active first-bank4D010/4E producers,callback dispatch4C2A0 and
+entry/allocation at4CC18/4DCD0/4D88C/4DA64;then phase1/2 and92E6 consumers.
+Retain ECU6D5C/reset,traction sender/scheduler/pins and OEM PRHT type/speed/
+neutral reception,fold/unfold reversal/timeouts. All three goals incomplete;
+previous/current turns made verified progress. No staging,commit orpush.
+Independent Ghidra restore verified11 project hashes,572 annotations and
+327 matching exports; current archive identity is recorded below.
+
+Latest local-input fault evidence: local-input-faults.txt executes the original
+caller order, event counters,30-call activity hold, fault/recovery and MT231.
+ROM lookups prove group43=P0704 clutch and44=P0850 neutral; XML corroborates.
+Stock dispatch masks for both groups are0000: internal reports cache, but
+8FAC8/8FB52 rejects downstream dispatch for all65536 runtime masks each.
+Do not claim stored DTCs from synthetic MT-mode faults in this AT image.
+16 initialization,1944 activity,7776 counter,8748 qualification,729 cache,
+480 hold,131072 mask and1215 full-report cases pass, plus273 integrated
+serial/diagnostic/CAN cycles. No shared interpreter/ROM/app changes.
+Next trace6D5C source/units,9462 writer and task timing; compare MT-image
+mask tables. Trace PCM type and OEM PRHT receive/fold/reversal/timeouts,
+CAN211 sender/traction scheduling/pins,TCU slot2/phase1/2/92E6 consumers.
+All three goals stay active/incomplete. Previous/current turns made verified
+progress; no staging, commit or push. Independent Ghidra restore verified
+11 project hashes,549 annotations and307 matching exports; identity below.
+
+Latest local acquisition evidence: local-inputs.txt and verify_local_inputs.py
+execute CA94/CADE serial bank acquisition and filtering through MT CAN231.
+44A4 is filtered SCI0 bank1, not direct GPIO.2048 serial,1024 initialization,
+256 full-filter cases and9 serial-to-CAN lifecycle points pass;4 unsupported
+peripheral accesses reject and never-ready samples remain in the poll loop.
+Physical input chip/wiring, sample timing and OEM PRHT reception remain open.
+Static diagnostic6BF20..6C23E leads are saved explicitly as unexecuted:
+counters8EB4/8EB5, latches8EBC/8EBE and groups43/44 need lifecycle verification,
+DTC mapping and task order. Next execute those bodies, trace911A/9462/8EDC,
+and connect real sampled input through diagnostics to CAN231. Keep roof
+speed/type/reversal/timeouts, traction scheduler/pins/CAN211 sender and TCU
+slot2/phase1/2/92E6 work active. All three goals remain incomplete; this turn
+made verified progress. No shared interpreter, ROM or application edits.
+New evidence saved in Git-eligible files; no staging, commit or push.
+Ghidra independent restore passed11 project hashes,535 annotations and298
+identical exports. Current archive identity is under Latest save verification.
+
+Latest MT/AT ownership evidence: mt-can231.txt executes the ECU's MT231
+builders/local-state sources, complete packer and actual TCU comparison.
+MT payload is FF,flags,FF,FF,0,0,0,0;byte1 bit2 follows723A. Normal AT uses
+TCU low-nibble1/3 and suppresses ECU publication. Configuration0 without
+mode40 can publish retained fields; it does not force MT production.
+12288 source,1024 builder,65536 pack-gate,6144 driver-admission and768
+paired ECU/TCU cases pass, plus16 initializers/two25-call lifecycles.
+Initializer seedsFFFE and falls through for an immediate eligible attempt.
+Admitted tests stop BEFORE driver6A48; no CAN hardware success is invented.
+Follow-up updated above:44A4 serial/filter executed;8EBC/8EBE producers, PCM type encoding and
+OEM PRHT receive/timeout/reversal evidence. Keep converter201 unit lead,
+traction scheduling/pin routing/CAN211 sender and TCU slot2/phase1/2/92E6
+work active. All three requirements remain incomplete; previous/current
+turns made verified progress. New scripts do not alter shared interpreters,
+older verifiers, ROMs or app code. No new staging, commit or push.
+Ghidra independent restore passed11 project hashes,522 annotations and287
+identical exports. Archive identity is under Latest save verification below.
+New evidence is Git-eligible; diff and syntax checks pass.
+
+Latest roof evidence: roof-aftermarket.txt retains public Openhoonage NC
+Cluster Commander1.01 HEX, provenance, AVR excerpts and a bounded verifier.
+65536 selector/gear cases,512 scratch cases and4 fail-closed rejections pass.
+Its menu independently labels CAN231 codes1/3 Park/Neutral, corroborating
+the ECU/TCU grouping. This is aftermarket sender evidence, not OEM PRHT
+receiver proof. Public1.01 predates the announced1.02 roof-support update;
+product documentation contradicts itself about support. Preserve that limit.
+Converter201 payload4/5 and its MPH menu/float constants provide a speed-unit
+lead; software float helpers remain unexecuted. New/current MX5Things NC
+guides distinguish two hardware generations; current download has only a
+configuration EXE, not a separate firmware image. No installers were run.
+Next roof work: converter201 helper arithmetic, PCM type/MT-neutral fields,
+OEM PRHT receiver/capture, fold/unfold interruption/reversal and timeouts.
+Retain traction output scheduling/pin routing/CAN211 sender and TCU slot2/
+phase1/2/92E6 work. All three requirements remain active and incomplete.
+The previous turn and this turn made verified progress. New evidence is
+Git-eligible, with an exact HEX exception. No Ghidra changes: existing
+verified ECU/TCU archive remains current; new AVR input is not imported.
+Saved locally, no new staging, commit or push; pre-existing index preserved.
+
+Latest output scheduler evidence: output-inhibition.txt / verify_output_inhibition.py
+execute full1FB5A ->20290 ->96F4/2F2A0 through conditional timer writes from
+shared736A.720 low-level,2268 admission/release,16 mixed-mask and6 boundary
+cases pass, plus16 full callers,3 deferred-cache lifecycle points and6 paired
+CAN211/actualTCU216 sender paths.384 SHAL and77 signedQ16 division cases
+validate the separate composed harness;4 peripheral accesses fail closed.
+Cached5486 can differ from applied record inhibition until the cycle boundary.
+SH7058 manual identifies the registers and deferred-underflow stop semantics;
+no pin waveform, wiring or real task timing is claimed. No shared interpreter,
+older verifier, ROM or app edits. Evidence, manual provenance, incomplete
+opcode probes and reproduction are saved in the new authoritative record.
+Next:1FB5A acquisition/interrupt schedule;41E8+24*channel bytes19/20 producers,
+launch/cancel/completion lifecycle;timer setup/pin routing;command calculation
+4514C/741C/78B0 to duration records. Retain TCU slot2/phase1/2 and92E6 work,
+CAN211 sender, and PRHT speed/neutral CAN attribution,fold/unfold and timeout/
+reversal. The next broad-scope pass should also advance those roof signals.
+All three requirements remain active/incomplete; previous/current turns made
+verified progress. No new staging, commit or push; pre-existing index retained.
+Ghidra independent restore verified11 project hashes,513 annotations and280
+identical exports; all new evidence is Git-eligible and diff checks pass.
+
+Latest traction event evidence: traction-pattern.txt / verify_traction_pattern.py
+execute CAN211 conversion ->stock model thresholds ->hysteresis/index ->mask
+and count ->event sampling ->per-cylinder mask40 ->shared736A/getter1F864.
+81 threshold,567 hysteresis,243 priority/enable,324 mask/count,2160 phase,
+1152 mapping/position,8192 exhaustive sampling and243 history/gate cases pass.
+120 complete request/event paths and1280 stateful rotation events also pass.
+Eight bits represent eight event positions across four cylinders. TCU mask80
+and local pattern mask40 combine in736A; final physical output is unproved.
+No interpreter, older verifier, ROM or application changes. Explicit schedule
+is a fixture, not a timebase claim. Full formulas, tables, limits and static
+leads are saved in traction-pattern.txt and its reproducible JSON/script.
+Next: getter1F864 consumers1FCD4/1FEBA/20070, mask cache5486, helper20290,
+records53DC and final actuator path; full caller near44C1C, rotation task at
+1D13A and actual task order; map487F0 ->7678 ->consumer47800. Also retain
+TCU slot2 policy4C7AC, phase1/2 admission and92E6 consumers. Deep traction
+source/actuation and PRHT speed/neutral CAN attribution,fold/unfold and fault
+transitions remain active alongside ECU/AT integration. Previous/current
+turns made verified progress; the full objective remains incomplete.
+Ghidra independent restore passed11 project hashes,491 annotations and268
+identical exports. New evidence and exports are Git-eligible; diff checks pass.
+No new staging, commit or push; pre-existing index preserved.
+
+Latest stock model sources: model-sources.txt / verify_model_sources.py execute
+stock coefficient/auxiliary maps, count/mask production, CAN215 publication,
+TCU request return and same-ECU CAN211/216 spark interaction.5508 map and71
+curve cases,243 coefficient producers,48 auxiliary-map and162 ratio cases,
+2160 count-producer and2304 count/source cases pass.144 seeded-count and54
+produced-count feedback cases now use original coefficients and71C0 gate.
+Separate SHModelFloat extension passes320 MACH-transfer,1280 multiply and96
+finite-negation vectors plus4 expected rejections. Earlier shared interpreters
+and verifiers unchanged. All new findings, source/manual provenance, failed
+unsupported-opcode probes and reproduction are saved beside the task.
+Next:7182/74F2 producers and74F1 physical consumers; real source-model task
+ordering versus received requests; raw source/axis physical identities. Also
+TCU slot2 policy4C7AC, phase1/2 admission,92E6 consumers and full scheduling.
+Deep traction logic/actuation and PRHT speed/neutral CAN attribution,fold/unfold
+and fault transitions remain active and incomplete alongside ECU/AT integration.
+Both the previous goal turn and this turn made verified progress.
+Ghidra independent restoration passed all11 project hashes,460 annotations
+and255 identical exports; latest archive identity is below. All new evidence
+and exports are Git-eligible; git diff --check passes. No ROM/app edits,
+new staging, commit or push.
+
+Latest CAN215 diagnostic evidence: can215-invalid.txt executes sharedgroup3B
+qualification and recovery through both application values and returned ECU
+spark. An invalid second field can substitute the healthy first field too.
+400 conversion,20 dependency,4096 policy/scaling cases,2 initializers and125
+lifecycle/gate checkpoints pass. A98C now comes from original diagnostics.
+Correction:3A/3B/3C healthy intervals are500 ticks, not5000. Older sparse
+samples skipped the boundary. Same-tick repeat proves that clearing needs
+another producer pass, not another tick. Both CAN201 verifiers/results and
+notes are corrected and pass; other group intervals remain separate.
+Full provenance, failed sparse-test interpretation and limits are saved in
+can215-invalid.txt. No shared interpreter or ROM/application changes.
+Next: ECU71EC/71C4 producers40896/409A0, second-channel92E6 consumers23604/
+4FB3C/4FC24, slot2 policy4C7AC, phase1/2 entry and real task scheduling.
+Keep deep traction source/model/arbitration and PRHT speed/neutral CAN map,
+fold/unfold transitions and timeout/reversal behavior active and incomplete.
+The previous goal turn and this turn made verified progress.
+Ghidra independent restoration passed11 project hashes,419 annotations and
+245 identical exports. New evidence is Git-eligible; git diff --check passes.
+Latest archive identity is recorded under Latest save verification.
+Saved locally without new staging, commit or push.
+
+Latest CAN215 feedback: can215-feedback.txt and verify_can215_feedback.py
+execute ECU369D6/36A28 ->TCU1ACF0/516E6/216D8 ->request ramp/aggregation
+->CAN216 ->same ECU spark model alongside CAN211.432 encoder,400 complete
+callback,20 dependency,4096 summary-policy,219 diagnostic-group and72
+feedback cases pass, plus6 persistent-TCU lifecycle checkpoints. CAN215
+invalidity holds the previous number; groups35/36/3B can drive substitution.
+Shared ECU71C4 affects both outgoing215 and CAN211 spark conversion.
+The optional existing-ECU/model-offset paired helper preserves all old defaults;
+complete spark-interaction and tcu-spark-requests JSON results match exactly.
+No shared interpreter, ROM or application changes. All three objectives remain
+active: ECU/AT integration, deep traction logic, and PRHT folding/unfolding CAN.
+Next: trace ECU71EC/71C4 producers near40896/409A0 and group3B AC7A timed
+qualification; retain slot2 policy4C7AC, phase1/2 entry and real scheduling.
+Prioritize traction source/arbitration and PRHT signal attribution in the next
+broad-scope pass. Physical units, CAN211 sender and exact roof CAN map remain
+unproved. Authoritative limits and static leads are in can215-feedback.txt.
+Ghidra independent restore verified all11 project hashes,404 annotations and
+240 identical exports; latest archive identity is under Latest save verification.
+New evidence is Git-eligible and git diff --check passes.
+Saved locally, no new staging/commit/push; pre-existing index untouched.
+
+Latest TCU request evidence: tcu-spark-requests.txt executes stock slot1/2
+priority, independent value/mode selection and phase3 record1 ramp through
+CAN216 to ECU spark.175 setter/reset,4900 aggregate,512 admission and900
+full ramp-caller cases pass, plus base-scaling boundaries,5 paired lifecycle
+samples and4 competing-record cases. Existing spark-interaction results
+match exactly after adding optional existing-TCU support. Physical units,
+phase1/2 entry, record2 policy and scheduling remain unresolved.
+New static base lead: CAN215word0 ->17854/88E8 ->516E6/80B4 ->216D8/92E4.
+Next execute that round trip and characterize4C7AC slot2 candidates; retain
+traction and PRHT signal/state objectives. Previous/current turns made
+verified progress. Allthree objectives remainactive and incomplete.
+269 base-scaling cases also pass. Ghidra independent restore verified11
+project file hashes,380 annotations and228 identical exports. New records
+are Git-eligible; git diff --check passes. Saved locally, no new staging,
+commit or push. Pre-existing index changes remain untouched.
+
+Latest simultaneous spark evidence: spark-interaction.txt executes TCU216
+word0 through its quadratic model and spark correction, alongside CAN211.
+The two corrections add in4FD9C; the separate216bit5 cut can also act.
+512 enable,51 model,45 correction and40 comparison cases pass, plus480
+paired paths and8 fault examples. AT correction permits negative values in
+isolation; CAN211 clamps them tozero. Final ordinary spark branch only;
+physical CAN211 sender/units and full task scheduling remain unproved.
+Next execute TCU1FB8C source aggregation for915A, then its record setters/
+callers; continue PRHT signal attribution and unresolved traction producers.
+Allthree objectives remainactive; the previous turn and this turn made
+verified progress. Details, failed leads and reproduction are saved beside
+this checkpoint. No new staging, commit or push.
+Ghidra independent restore passed all11 file hashes,360 annotations and217
+identical exports. New evidence is Git-eligible; git diff --check passes.
+
+Latest gate provenance: transition-gate.txt / verify_transition_gate.py
+identify2D1BC as the9545mask04 writer and execute its complete caller2C7B0.
+65536 gate,3072 byte-sweep,1280 source-producer and192 paired CAN231/ECU
+cases pass, plus7 lifecycle steps. Mode0/5 can arm the gate; retention needs
+unchanged mode orFF and9594/959C==2. Source writers execute from9564/9558
+fixtures. Physical mode names, upstream producers and scheduling remainopen.
+Next: source9564/9558/reset scheduling and transitionwork48F20/31524; also
+traction CAN211 arbitration and PRHT CAN speed/neutral attribution. Allthree
+objectives remainactive and incomplete. Full details, failed leads and
+reproduction are in transition-gate.txt; this turn made verified progress.
+Ghidra save/independent restore passed350 annotations and213 exports, with
+all11 project hashes verified. git diff --check passes; new artifacts are
+Git-eligible. Saved locally; no new staging, commit or push.
+The next broad-scope pass should prioritize simultaneous CAN211 traction/AT
+arbitration and the PRHT signal attribution, keeping gate-source work open.
+
+Latest reporting evidence: selection-reporting.txt / verify_selection_reporting.py
+execute8084 ->delayedcandidate9C85 ->next9C86/8085 ->accepted8081 ->CAN231
+->ECUone-hotflags.1536 cachecases,144 pairedstates,2520 acceptancegatecases,
+7 blocked/released and8 delaycheckpoints pass.37/18 countsareinjectedtimer
+values,notphysicaltime. SeparateMOVA/BRAF extension passes1024/320 ISA,
+7 delayprograms and3 expectedrejections; oldinterpreters unchanged.
+8081 isacceptedsoftwarestate,notprovenmechanicallyattainedgear. Next9545
+bit2 producer(refs24DFC/2522E),transitionwork48F20/31524 andfull44CFE.
+TractionCAN211 arbitration andPRHTspeed/neutral attribution remainrequired.
+Previous turn wasprogress; allthreeobjectives active. Ghidra refresh and
+independentrestore passed330 annotations/199 exports; latestmanifestbelow.
+
+Previous selection follow-up: selection-pipeline.txt / verify_selection_pipeline.py
+resolve46CC8's stock3-stage caller and trace its default-disabled gate.512
+input,1536 preservation,720 pipeline cases and6 paired ECU paths pass.21734
+clears92D5mask20; diagnostic21C1C preservesit. Earlier injectedflag tests do
+not prove normal activation.44CFE statically uses prior8084 asfloor, then
+canoverride/clamp the finalindex;8084 isdistinct fromCAN231source8081.
+Next trace record12 in244FA/24532,8084 consumers andalternative92B8 consumer
+3BB32. Broader traction/PRHT andphysicaltiming remainopen. Overallgoalactive;
+previous turn wasprogress. Ghidra refresh and independent restoration passed:
+309 annotations,11 project hashes and189 identical export/report files.
+
+Previous byte6 evidence (2026-10-06): can201-byte6.txt is the authoritative
+record for ECU6CF8/6718 ->CAN201byte6 ->TCU numeric/history/fault paths and
+46CC8 selection.392 encoder,1536 numeric,146 group,1024 aggregate,600 history,
+6 timer and108 selection cases pass, plus6 latch-recovery steps,4 paired
+selection paths and14 fault-lifecycle checkpoints. Correction: group3D joins
+35/36/3C in the byte6 fallback. Source units and physical selection role remain
+open. Next trace46CC8 callers/flag20 and6CF8/6718/A3A4, then CAN211 traction
+arbitration and PRHT speed/neutral attribution. All three objectives remain
+active and incomplete. Ghidra refresh and independent restoration passed:
+At that checkpoint300 annotations and184 exports matched; latest save below
+adds selection evidence and supersedes that archive.
+
+Previous invalid-data policy: can201-invalid.txt / verify_can201_invalid.py
+execute ECU6B4F ->CAN201FFFF ->TCUgroup3A qualification ->substitution/cut
+inhibit ->ECU commands.2048 producer cases,25 helper cases,six base andtwo
+interrupted-recovery lifecycles pass, plus qualification/dependency/global
+gates andseven complete round-trip checkpoints. Holds old value for500 ticks;
+then substitutes20480. Recovery needs500 healthy ticks plus the next producer pass with80A4=0.
+Internal history persists without the tested DTC/CAN report outputs. This
+closes the three-source provenance ofA98E; overall objectives remain open.
+Next21628/CAN201byte6 andgroup3C, CAN211 traction arbitration, PRHT CAN
+speed/neutral attribution. Physical timing and remote internals stay unproved.
+
+Previous controller recovery: hcan-recovery.txt / verify_hcan_recovery.py
+execute the bus-off handler body, reset/retry states, group35 diagnostic and
+CAN201/cut policy.1024 helper,128 handler,240 deadline/retry,8 acknowledgement,
+1024 producer,16 monitor-gate cases and47 lifecycle checkpoints pass. At10
+retries the inhibit asserts; healthy recovery preserves storedC073. Local
+controller recovery suppresses groups36/37/38 missing-message producers.
+New static lead583DC/table5F198 mapsCAN201validity8816 togroup3A; execute
+its timed qualification/recovery next. Then21628 byte6 consumer, CAN211
+traction arbitration and PRHT speed/neutral attribution. All three objectives remain
+active; explicit register fixtures do not establish electrical/physical timing.
+
+Previous diagnostic policy: can201-fault-policy.txt records the verified chain
+from groups35/36/3A through57258/A98E to CAN201 substitution and cut inhibit.
+146 mapping cases,512 paired summary cases and14 CAN loss/recovery lifecycles
+pass. Loss of any enabled class0 frame can inhibit the request even while201
+arrives; stored history alone does not. Group36 recovery requires more than
+5000 healthy ticks and80A4=0. Physical causes of35/3A and tick units remain
+open. Next: their producers, CAN211 traction arbitration and PRHT CAN speed/
+neutral attribution. All three requirements remain active and incomplete.
+See the authoritative record for fixtures, failed leads and reproduction.
+
+Previous interpolation evidence: software-lookup.txt / verify_software_lookup.py
+execute all65536 input values of stock cut-threshold curve703C0 against an
+independent integer formula.1115 ISA tests cover the separate rotate/swap/
+CLRT extension. Updated round-trip verifier passes800 mixed control cases,
+30 axis-producer/paired cases and the prior84 numeric/512 mapping/11 lifecycle
+cases.9334 derives from89A8 via22ECC with diagnostic fallback and word wrap.
+Next upstream acquisition17D9C, A98E diagnostic provenance, timer scheduling
+and201byte6 consumer21628. Physical units, traction and roof internals remain
+unresolved; all three requirements stay active. Prior/current turns progress.
+
+Previous CAN201 round trip: can201-cut-loop.txt / verify_can201_cut_loop.py
+execute ECU6DB4 ->201word0 ->TCU8814/80E8 ->9454 ->216bit5 ->ECU cylinder
+commands.84 numeric,512 diagnostic mapping,800 control/paired cases and11
+stateful TCU steps pass. Hysteresis and invalid-held versus substituted data
+are distinct. Lookup endpoints execute; five interior cases fail closed on
+unsupported rotates in software-double helpers. Next extend lookup arithmetic,
+traceA98E fault provenance and timing gates; physical units remain unproved.
+All ECU/TCU, traction and PRHT requirements remain active/incomplete.
+
+Roof follow-up: traction-roof.txt [J-L] now records the factory2008 opening/
+closing sequence, button-release pause/resume, manual latch completion and
+left/right pulse-mismatch diagnostics. The sequence is documented rather
+than firmware-executed; CAN IDs, reversal and timeout transitions stay open.
+
+Latest speed-fault evidence: speed-fault.txt / verify_speed_fault.py execute
+capture counters ->group13/code0722 ->92C6bit2 ->CAN216FFFF ->ECU201FFFF,
+even with healthy alternate4B0 inputs.6001 handler calls,512 one-hot mapping,
+384 helper combinations,20 gate rejections and48 recovery cases pass.
+Active recovery restores transmission and resets limiting while retaining
+stored0722. No physical timing or PRHT receiver is established. Next prioritize
+PRHT speed-invalid/neutral attribution and CAN211 traction arbitration;
+TCU global monitor gate58768 and201 downstream consumers remain open.
+All three objectives remain active/incomplete. No ROM/application changes.
+
+Previous TCU speed evidence: tcu-speed.txt / verify_tcu_speed.py execute
+52B10 source math ->18F8C limiter/fault modes ->216 ->ECU201.936 limiter
+cases,140 upstream cases and10 lifecycle steps pass, with byte4 division
+now executed. New integer extension passes1200 ISA and66153 division cases.
+verify_tcu_can201.py passes432 copy cases and1225 audited full callbacks:
+only bytes0/1/6 read there; no global claim about speed bytes4/5 non-use.
+Next:92C6 bit2 fault producer, mode callers,A552/capture provenance, and
+TCU downstream consumers. Physical units and PRHT receiver remain open;
+all original ECU/TCU, traction and roof objectives remain active/incomplete.
+Previous goal turn and this turn both made concrete evidence progress.
+
+Previous speed evidence: can201-speed.txt / verify_can201_speed.py execute
+CAN4B0 selection/average -> CAN201 bytes4-5, with CAN216 bytes5-6 providing
+the AT fallback and independent invalidity gate.1600 paths,66 encoder bounds,
+96 paired TCU216 cases and4 pack modes pass. Separate bounded RTZ harness
+passes581 rational,306 arithmetic,732 FMAC cases and8 expected rejections.
+Physical units, DSC ownership, TCU201 consumption and PRHT receiver remain
+unproven. Next: TCU216 word5 producer,201 receive audit,7353/freshness gates.
+All three full research objectives remain active; no ROM/application changes.
+
+Previous threshold evidence: selector-threshold.txt / verify_selector_threshold.py
+trace the threshold to a local timer-capture path (static upstream), execute
+all65536 application scaling inputs,256 capture-configuration fixtures and
+18 paired TCU->ECU threshold cases. Exact raw threshold932E>=7680. Physical
+sensor/units and full upstream arithmetic remain unverified; strict harness
+stops at22DFE MULS.W and5AF4C DIV0U are recorded, not mocked.
+Next: sensor/pulse scaling and group13 producer; separately trace PCM speed
+for PRHT. All original ECU/TCU, traction and roof objectives remain active.
+
+Previous recovery evidence: selector-recovery.txt / verify_selector_recovery.py
+and selector-recovery-verification.json execute30000 complete11AEC timer
+service calls,64 three-step paired recovery cases,2 history-report gates and
+4 group13 dependency cases. Active0708 can produce231 FF with no confirmed
+report. Input3 alone with88BA/BC zero clears active15/16; other tested single
+inputs retain it. Existing shared interpreter and ROMs unchanged.
+Next: trace group13/code0722 producer, raw80BA provenance, timer scheduling
+and history20 promotion. Global gating and PRHT receiver remain open.
+Previous goal turn and this one both made concrete evidence progress.
+
+Previous selector diagnostic evidence: selector-faults.txt /
+verify_selector_faults.py and selector-faults-verification.json save the
+previously unsaved producer/summary trace.384 input/gate/status fixtures,
+7 countdown boundaries,18 no-input timer fixtures and9 paired0707 lifecycle
+steps pass. No interpreter or ROM changes; older verifiers were not rerun.
+The timer/group16/recovery follow-up is now above. A962 maps group13/code0722;
+A938 and roof speed/neutral receiver evidence remain open. The full objectives
+remain active and incomplete.
+
+Previous selector evidence: selector-inputs.txt / verify_selector.py and saved
+selector-verification.json execute input filtering -> TCU231 -> ECU723A/7244.
+256 transitions,9 ADC bounds,12 hold/recovery lifecycles,32 fault cases,
+128 ECU gates and120 new GBR-store ISA vectors pass. All nine previous
+verifiers reran successfully with saved JSON matching. Shared harness gained
+MOV.B/W/L R0,@(disp,GBR); peripheral samples are local explicit fixtures.
+Physical P/R/N/D, PRHT byte mapping and the full objectives remain incomplete.
+
+Full active objective: comprehensive ECU<->AT CAN integration understanding,
+with the imported ECU binary in this repository and investigation of the TCU
+binary on the other end. Not complete: physical fields, actuator endpoints,
+reverse-direction maps, absolute timing and complete fault recovery remain.
+User expanded the objective on 2026-10-05: deep traction-control integration
+and logic, plus folding/unfolding roof CAN integration. Treat these as active
+requirements alongside ECU/TCU work; do not declare completion without them.
+Current roof scope is the NC factory power retractable hardtop (PRHT), based
+on the NC firmware/context. No DSC or PRHT controller binary is identified
+in the current research inputs yet. Use ECU/TCU code plus factory documents
+to progress; distinguish external-controller internals that remain unknown.
+The earlier instruction to ignore the transmission controller was superseded
+by the explicit objective to investigate both ROMs. User also requires all
+relevant memory in repository files; AGENTS.md/CLAUDE.md now enforce this.
+No commit/push, ROM modification, application change or hardware test was
+requested or performed. Local saves and Git eligibility are not commits.
+
+Saved in nc-flash:
+  research/ecu-at-can/software-lookup.txt   full stock curve and axis conversion
+  research/ecu-at-can/sh_software_arithmetic.py + verify_software_lookup.py
+  research/ecu-at-can/software-lookup-verification.json
+  research/ecu-at-can/can201-cut-loop.txt   executedECU-TCU-ECUrequestloop
+  research/ecu-at-can/verify_can201_cut_loop.py + can201-cut-loop-verification.json
+  research/ecu-at-can/speed-fault.txt   code0722 capture/diagnosis/CAN recovery
+  research/ecu-at-can/verify_speed_fault.py + speed-fault-verification.json
+  research/ecu-at-can/tcu-speed.txt   source calculation,limiter and201 audit
+  research/ecu-at-can/sh_integer_arithmetic.py + verify_integer_arithmetic.py
+  research/ecu-at-can/integer-arithmetic-verification.json
+  research/ecu-at-can/verify_tcu_speed.py + tcu-speed-verification.json
+  research/ecu-at-can/verify_tcu_can201.py + tcu-can201-verification.json
+  research/ecu-at-can/can201-speed.txt   speed candidate and independent216 invalidity
+  research/ecu-at-can/verify_can201_speed.py + can201-speed-verification.json
+  research/ecu-at-can/sh_rtz_float.py   bounded normal SH-2E RTZ arithmetic
+  research/ecu-at-can/verify_rtz_float.py + rtz-float-verification.json
+  research/ecu-at-can/selector-threshold.txt   capture provenance and scaling
+  research/ecu-at-can/verify_selector_threshold.py  scaling/configuration/CAN cases
+  research/ecu-at-can/selector-threshold-verification.json  passing results
+  research/ecu-at-can/selector-recovery.txt   countdown, recovery/report distinction
+  research/ecu-at-can/verify_selector_recovery.py  original-code lifecycle tests
+  research/ecu-at-can/selector-recovery-verification.json  passing results
+  research/ecu-at-can/selector-faults.txt     qualification, CAN231 and open leads
+  research/ecu-at-can/verify_selector_faults.py  original-code diagnostics checks
+  research/ecu-at-can/selector-faults-verification.json  passing results
+  research/ecu-at-can/selector-inputs.txt      sampled inputs ->231 ->ECU flags
+  research/ecu-at-can/verify_selector.py      input/ADC/paired/GBR execution
+  research/ecu-at-can/selector-verification.json  passing cases and examples
+  research/ecu-at-can/can211-spark.txt        numeric211 to cylinder spark evidence
+  research/ecu-at-can/verify_can211_spark.py  original-code path/gate/ISA checks
+  research/ecu-at-can/can211-spark-verification.json  twenty complete examples
+  examples/LFFEEE-stock.bin          exact imported AT engine ECU image
+  research/ecu-at-can/README.txt     findings, addresses, uncertainties, next work
+  research/ecu-at-can/import.json    import provenance and SHA256
+  research/ecu-at-can/import-verification.json  ECU checksums and calibration
+  research/ecu-at-can/verify_import.py         portable checksum/CRC verifier
+  research/ecu-at-can/sources/                 exact original CRC/XML inputs,
+                                              URLs and SHA256 provenance
+  research/ecu-at-can/ecu-import-review.txt    historical ECU calibration trace
+  research/ecu-at-can/disassembly.txt          selected original-code excerpts
+  research/ecu-at-can/disassemble.py           portable regeneration/ref helper
+  research/ecu-at-can/sh_subset.py             integer execution harness
+  research/ecu-at-can/verify_bridge.py         paired firmware verification
+  research/ecu-at-can/verification.json        1,107 passing cases and CAN tables
+  research/ecu-at-can/verify_actuation.py       original-code command-cut chain
+  research/ecu-at-can/actuation-verification.json  scenarios/lifecycle results
+  research/ecu-at-can/sh_exact_float.py         exact-only bounded FPU support
+  research/ecu-at-can/traction-roof.txt        expanded goals and sourced findings
+  research/ecu-at-can/verify_network.py        CAN211 and receipt-fault execution
+  research/ecu-at-can/network-verification.json  passing cases and lifecycle
+  research/ecu-at-can/warning-status.txt       MIL/PID01/420 and active231 endpoints
+  research/ecu-at-can/fault-reporting.txt      qualification -> report -> paired ECU
+  research/ecu-at-can/verify_fault_reporting.py 14 lifecycles,32/72/192 gate cases
+  research/ecu-at-can/fault-reporting-verification.json  original-code results
+  research/ecu-at-can/diagnostics.txt          receive qualification / ECU9710 trace
+  research/ecu-at-can/verify_diagnostics.py    original-code qualification lifecycles
+  research/ecu-at-can/diagnostics-verification.json  seven records / skipped groups
+  research/ecu-at-can/freshness.txt            TCU deadlines and ECU request gates
+  research/ecu-at-can/verify_freshness.py       original-code deadline/gate checks
+  research/ecu-at-can/freshness-verification.json  lifecycles and case counts
+  research/ecu-at-can/ghidra/nc-at-can.tar.gz   closed paired-ROM project archive
+  research/ecu-at-can/ghidra/snapshot.json     archive and per-file hashes
+  research/ecu-at-can/ghidra/annotations.tsv   330 reproducible evidence annotations
+  research/ecu-at-can/ghidra/decompiled/       175 function exports + 2 readbacks
+
+These paths are eligible for Git. Being saved on disk, tracked/staged, and
+committed are separate states. No commit or push was made by this investigation.
+The projects/ecu-transmission-review directory is ignored scratch material;
+its important results are now preserved above. Temporary files under
+/tmp/nc-ecu-analysis include the extracted objdump toolchain and full raw
+disassemblies. Those are reproducible and should not be the sole copy of
+findings. The saved scripts and excerpts do not depend on keeping /tmp.
+
+Ghidra state:
+  Current paired project: research/ecu-at-can/ghidra/live/nc-at-can.gpr
+  Companion database:     research/ecu-at-can/ghidra/live/nc-at-can.rep/
+  Restore instructions:   research/ecu-at-can/ghidra/README.txt
+  Existing sibling project: /home/snow/miata-nc-ghidra/lf9veb.gpr
+  Companion database:       /home/snow/miata-nc-ghidra/lf9veb.rep/
+  Installed headless:       /home/snow/.local/bin/analyzeHeadless
+  Installation:            Ghidra 12.1.3 PUBLIC
+
+Both AT ECU and TCU programs are now imported, analyzed, annotated and saved
+in the new nc-flash project. Independent read-only reopen verified all 330
+labels/comments. The archive contains the .gpr AND companion .rep files;
+independent extraction, file-hash checks and Ghidra read-back also passed.
+The .gpr alone does not preserve analysis. Live databases and logs remain
+ignored, while archive, scripts, annotations and exports are Git-eligible.
+Ghidra uses SH-2A language as an available FPU-capable superset; this is not
+an assertion that the target hardware is SH-2A. See ghidra/README.txt.
+
+The unchanged sibling project contains LF9VEB only; its TCU binary had not
+been imported. Its extensive prior research supplies leads, but MT addresses
+and calibrations must be rechecked against the AT ROM before transferring
+conclusions. Its AGENTS.md applies if making changes in that repository.
+
+Latest save verification:
+  Transition progress passed24785 direct cases,640 producer/646 classifier
+  checks, two completed replacement lifecycles and12 paired ECU snapshots.
+  Older map/phase-policy JSON stays byte-identical; classification regression
+  passes with prior67 paired source-selection outcomes unchanged.
+  Transition classification passed31448 direct cases,640 retained manager
+  calls/640 proposal/646 classifier checks and2 bounded paired creation
+  probes. Prior retained traces match exactly, including67 paired ECU checks.
+  Source-selection passed18736 direct cases,11 retained input samples,640
+  manager calls/640 source/642 mode/551 initial/637 qualifier/182 release
+  checks and67 paired ECU checkpoints. Two records retire inboth traces;
+  map/mode prior JSON remains byte-identical after optional observer addition.
+  Phase-mode producer passed9271 direct cases,7 retained hysteresis calls,
+  384 manager calls/386 mode/191 initial/223 qualifier/82 release checks and
+  17 paired ECU checkpoints. Older map/release JSON remains byte-identical.
+  Ascending phase passed33015 direct cases,70 retained probe calls,160manager
+  calls/80initial/111qualifier/52release oracles and10 paired ECU checks.
+  Shared971A andneighbor branches verified; fullringoverlap stillopen.
+  Ascending predicates passed7762 direct cases,384 manager calls/327 predicate
+  and124 release oracles,25 paired ECU checkpoints. Prior map/release default
+  JSON regressions remain byte-identical after optional fixture additions.
+  Ascending release passed5256 direct cases,12 gate combinations,12 retained
+  numeric updates,160 manager calls/52 release oracles and34 paired ECU checks.
+  Prior map lifecycle refactor reproduces saved JSON byte-for-byte.
+  Ascending TCU map passed2908 direct cases,5 permission updates,222 manager
+  calls and29 paired ECU checkpoints. Original9410bit0 creation gate admits
+  map candidate1280; release numeric policy remains open. See tcu-ascending-map.txt.
+  Magnitude group passed2565 direct checks,320 serialcycles/36 pairedCAN
+  updates. Refactored priorcontribution lifecycle passedbyte-identical JSON
+  regression. 72B4/72BC CAN/productionwriter remainsunproved.
+  Contributions passed2375 direct/state checks,320serialcycles,36pairedCAN
+  updates and320 CAN211/latch updates. Original7978 suppression and80E0 pulse
+  stay distinct; fulltask timing and physicalroles remainopen.
+  Baseline source passed4997 direct cases,140 serialcycles/22pairedCAN updates.
+  Original retention/decay and transmission-mode maps; cross-task timingopen.
+  A3A4 reset in paired publication is a fixture, not a firmware writer.
+  Input history passed1547 directcases,140 serialcycles/21pairedCAN updates.
+  Full localbaseline/history group andoriginalpublication;cross-task rateopen.
+  Ratio inputs passed767 directcases,2 expected model stops,140 serial cycles
+  with21 pairedCAN updates. No ROM/shared interpreter/older verifier changes.
+  Control history passed1692 directcases,220serialcycles/23pairedCAN updates.
+  Decimalfixtureencodingcorrected;ROM/sharedinterpreter/olderverifiersunchanged.
+  Control sources passed1028 directcases,180 serialcycles/21pairedCAN updates.
+  OriginalROMs/sharedinterpreter/olderverifiers unchanged; no redundant rerun.
+  Numeric overrides passed2904 direct cases,2578 serial cycles and27 paired
+  CAN updates. Timer harness now has optional producer hooks/fixture omission;
+  default regression passed with byte-identical saved JSON. No ROM/shared
+  interpreter changes.
+  Control timers passed1458 inputcases,432 GPIO cases,1600 finitefilter
+  checks,2514 retainedserialcycles/28pairedCANupdates,38pairedfault/clear
+  cycles and3valid-recordcomparisons. Fulltask/initialization stillopen.
+  Control admission passed4991 directcases,six retainedpriority checkpoints,
+  126 countdowncalls,32 pairedTCU/CAN/serial paths andexplicitfaultclear.
+  No sharedinterpreter/priorverifier changes. Earlierproducers/fulltask open.
+  Control policy passed1800 direct cases and224 SHLL16 vectors, eightpaired
+  CAN/serial checkpoints,30 loss/recovery calls,explicitreset and251enabled
+  monitor calls. Fullmonitor admission executed;localproducerpolicy remainsopen.
+  Control reply verifier passed 1746 direct cases, five paired CAN/serial/
+  application checkpoints, 28 transport-produced loss/recovery points and
+  one explicit reset. Monitor enable is a fixture; full gate policy is open.
+  Control serial verifier passed256 configuration,120 exchange,48 monitor
+  cases and4 expectedaccessrejections;five interruption/recoverylifecycles
+  andfive pairedCAN-to-TDR sequences. SampledMMIO only;remotepeer unmodeled.
+  Candidate throttle verifier passed81 local,54 angle,324 priority/limit and
+  768 packing cases,plus6 retained pairedTCU/ECU checkpoints. OriginalROMs
+  andshared interpreters unchanged. Physical transport remains unverified.
+  Control conversion passed324 direct,180 selection and12 paired fullcaller
+  cases,plus160 BRAF vectors/one executed branch/four expected rejections.
+  New bounded interpreter only;previous shared interpreters unchanged.
+  Reporting verifier passed1536 cache,144 pairedstate and2520 acceptance
+  cases,7 admission and8 delaycheckpoints. New isolatedISA extension passed
+  1024 MOVA,320 BRAF,7 delayprograms and3 expectedrejections. OriginalROM
+  hashes unchanged; sharedinterpreters/priorverifiers unchanged.
+  Selection verifier passed512 default-input,1536 diagnostic-preservation,
+  720 whole-pipeline cases and6 paired ECU paths. Shared interpreters and
+  prior verifier scripts unchanged; no redundant suite rerun.
+  Byte6 verifier passed392 encoder,1536 numeric,146 group,1024 aggregate,
+  600 history,6 timer and108 selection cases;6 latch-recovery steps,4 paired
+  selection paths,14 fault-lifecycle checkpoints. ROM hashes unchanged.
+  Shared interpreters and older verifiers unchanged in this addition.
+  CAN201 invalid verifier passed2048 producer/25 helper cases,54 base
+  lifecycle points,16 interrupted-recovery points,7 interrupted-qualification
+  points,19 dependency/dispatcher gate points and7 ECU round-trip points.
+  Shared interpreters and existing verifiers unchanged this turn.
+  HCAN recovery verifier passed1024 helpers,128 handler-body cases,240
+  deadline/retry cases,8 acknowledgement cases,1024 producer cases,16
+  monitor gates,47 lifecycle checkpoints and3 expected access rejections.
+  Shared interpreters/older verifiers unchanged; no redundant suite rerun.
+  CAN201 fault-policy verifier passed146 group mappings,512 paired summary
+  cases and14 loss/recovery lifecycles. Import-safe round-trip verifier output
+  matches its preceding saved JSON exactly; no shared interpreter change.
+  Ghidra archive d5ac1fe64ded79c5230ab89ec24b4ffe68868b58af2aaf4990f0a5e49a0224d7,
+  10,845,055 bytes;11 project hashes,1247 annotations(570 ECU/677 TCU),
+  643 identical restored exports(641 functions+2 readbacks). Both headless
+  sessions ended and restore-verification.json was refreshed.
+  New integer arithmetic verifier passed1200 ISA cases,576 unsigned32,
+  65536 signed16/96 and41 signed-sign divisions. TCU speed verifier passed
+  936 limiter cases,140 upstream cases,20 byte4 cases and10 lifecycle steps.
+  TCU201 verifier passed432 copy cases and1225 complete payload-read audits.
+  All new artifacts are Git-eligible; old shared harness unchanged this turn.
+  Previous can201-speed verifier passed1600 paths,66 bounds,96 paired cases,
+  4 pack modes; separate RTZ arithmetic checks passed581+306+732 cases and
+  8 expected rejections. All new scripts/JSON/record files are Git-eligible.
+  Working-tree results saved, no new staging/commit/push; prior stage differs.
+  Previous selector-threshold verifier passed:65536 scaling inputs,256 capture
+  register fixtures,18 paired cases and2 explicit unsupported-arithmetic stops. No
+  shared interpreter changes; older verifiers were not rerun this checkpoint.
+  Their last successful run is recorded in the preceding selector checkpoint.
+  Working-tree git diff --check passes. The pre-existing staged snapshot
+  still has whitespace warnings in older disassembly/decompilation files;
+  index was left untouched. It also contains an older temporary archive
+  entry (nc-at-can.tar.gz.tmp) absent from the working tree. Review the
+  index before any future commit; staged content is not this checkpoint.
+  New and updated memory/evidence files are not ignored. No commit/push.
+
+Latest expanded-scope evidence:
+  can211-spark.txt executes CAN211 word0 to four spark values7A9C/A0/A4/A8,
+  with original conversion/inversion/arbitration/override/trim helpers.
+  20 complete examples,64 factors,94 bounds,9 counts,69 root/hold cases,
+  48 correction gates pass. Shared harness adds FLDS/FABS/in-range FTRC:
+  448 ISA vectors,10 expected invalid rejections and2 expected inexact bound
+  stops. All seven earlier verifiers pass and saved JSON matches.
+  6A38/6A3C are NOT established216 fields; only their1 initialization is
+  traced. Prior intermediate suggestion was corrected. Full actuation/sender
+  attribution remains open. Previous goal turn and this turn both progress;
+  no repeated no-progress blocker exists.
+  warning-status.txt extends the fault verifier to PID01 MIL status and
+  ECU CAN420 byte5 bit6, plus active TCU CAN231 byte1 bit6.14 lifecycles,
+  32 receive gates,72 startup/override/sender cases and192 display/override
+  packing cases pass. Full420 transmitter stops at inexactFPU2F326; only
+  its explicit packing slice is executed. No interpreter/ROM changes.
+  traction-roof.txt adds factory2008 MT-neutral/AT-P-N conditions, direct
+  window handshake/U0030/U0031 and variant pin-label conflicts; exact CAN
+  fields remain open. Window-wire labels have a separate source mismatch
+  from the earlier CAN-pin mismatch. Do not infer a validated pinout.
+  fault-reporting.txt extends group36 to storedC100/U0100 serialization,
+  A99B ->CAN216 byte7 bit1 ->ECU2184/6E53/24EE.14 paired lifecycles cover
+  seven lost PCM records and80A4 recovery gates0/1;32 ECU gate cases pass.
+  5000 healthy ticks plus the next processing call can clear activeA722/A666,
+  but storedC100/A99B persist. See newer warning-status.txt for lamp-status
+  software endpoints; physical cluster/mechanical fallback remain open.
+  New verifier passes; the prior six passed last turn and were not rerun
+  because shared interpreter/ROM inputs are unchanged.
+  Factory multiplex table now establishes PRHTU2197=invalid vehicle-speed
+  data; source and scope saved intraction-roof.txt.
+  Previous turn was concrete progress; this turn also changes authoritative
+  evidence and reproduces it. No consecutive no-progress blocking condition.
+  diagnostics.txt / verify_diagnostics.py establish two TCU qualification
+  timers, seven isolated record lifecycles, four skipped-group combinations
+  across six times and eight gate reset cases. Stock211/4B0/430 have mode2
+  and are skipped by these qualifier loops, while their expiry bitmap works.
+  Qualification does not read8EE2; receipt recovery resets both paths.
+  ECU9710 writer8F320 callsA1638 selector67; full execution stops at peripheral
+  FFFFF74E. Physical option and live value remain unproven. This turn made
+  concrete progress; no repeated no-progress blocking condition exists.
+  All six research verifiers pass and match their saved JSON. No interpreter
+  changes were needed for the new qualifier tests. git diff --check passes.
+  freshness.txt / verify_freshness.py / freshness-verification.json add TCU
+  deadlines,20 watched-record lifecycles and the complete211 dispatcher path,
+  plus ECU inhibition/ramp/active-latch execution. All five research verifiers
+  passed with saved JSON unchanged except the new result. MACL/MULU.W support
+  is covered by16 independent ISA vectors; unsupported dividers still fail.
+  traction-roof.txt holds goals, factory sources, CAN211 decode/numeric branch,
+  faults and next traces. verify_network.py passed2048 flag cases,18 word
+  cases,32 gate cases,3 ramp boundaries,192 receipt-fault cases and a22-step
+  expiry/recovery sequence. No DSC sender, physical torque unit or actuator
+  chain is claimed. Factory roof signal chart identifies PCM speed/type/MT
+  neutral and TCM AT selector inputs; identifiers/bytes remain unresolved.
+  Roof CAN connector numbering conflicts between two factory sources, saved
+  explicitly for resolution. No CAN roof open/close command demonstrated.
+
+Next work:
+  1. CAN211 gates are now executed: see freshness.txt. Stock734E=0 is now
+     executed too;7353 depends on runtime9710 because B8299=FF. Trace9710,
+     physical gate identities and remaining714C arbitration consumers.
+     The spark chain now reaches7A9C/A0/A4/A8 (can211-spark.txt): follow
+     ignition timers,71A8/71AC/71B0 coefficients,71F0 count and6590 gate.
+     Other throttle/fuel paths remain open. TCU211 now has a verified empty
+     callback and payload-independent dispatch/watchdog (tcu-can211.txt).
+     Computed consumers elsewhere remain unexcluded. Selector source bits now trace to PKDR
+     bits2..5 and ADC-gated filtering (selector-inputs.txt). Next trace
+     status3/88BD diagnostics into92CD bit6, and8081 current-versus-target
+     gear provenance (48BC0/48C08; static leads in selector-inputs.txt).
+     Individual physical labels still need corroboration.
+     Other PCM-to-TCU payload consumers remain open.
+     TCU868C is cleared/set during15574 initialization (static evidence);
+     group36 now reaches serializedC100/U0100 and paired ECU report status.
+     ECU24EE now reaches CAN420 byte5 bit6; TCUA666 reaches231 byte1 bit6.
+     See warning-status.txt; cluster hardware/mechanical fallback remain open.
+     Keep stored-report aging/clear separate from active recovery; see
+     fault-reporting.txt. Trace80A4 andA939 physical gate identities.
+     See diagnostics.txt: bitmap8EE2 is not input to the qualifier.
+     Trace ECU configuration helperA1638 and91DC/91E0 if needed.
+     TCU211 admission/dispatch/deadline expiry/recovery is now executed.
+     For PRHT, map factory PCM speed/type/neutral and TCM selector inputs to
+     binary transmitters, then establish IDs/bytes with independent evidence.
+     Resolve the factory CAN-pin numbering discrepancy (1S/1U vs3S/3U).
+  2. Continue the README's unresolved physical-signal, actuator, timing and
+     timeout/DTC traces. Do not claim a comprehensive integration model yet.
+  3. As evidence improves, update annotations.tsv, apply and verify in Ghidra,
+     then close the project and refresh snapshot.py. Archive is a checkpoint,
+     not an automatic live backup.
+
+Latest verification:
+  python research/ecu-at-can/verify_bridge.py
+  576 bitfield + 256 paired pack/unpack + 3 sender modes + 6 paired state
+  examples + 256 state-nibble decoder + 3 inactive gate + 7 complete 216
+  word-producer cases = 1,107.
+  Synthetic integer execution only; no FPU/peripheral/vehicle simulation.
+  verify_import.py also rerun successfully; JSON matches import-verification.
+  Source inputs and the historical review were promoted out of ignored scratch
+  so checksum/calibration reproduction no longer requires that directory.
+
+Latest paired execution (separate from the 1,107 integer bridge cases):
+  verify_actuation.py passes80 paired flag/condition cases, six independent
+  gate-rejection cases, TCU modes0/16, 101 held-request follow-up calls with
+  release/reassert, and four ECU-local pair selections. See README actuation
+  section for the full chain and scope. Static leads below remain useful,
+  but the bit5 path is now executed through per-cylinder command zeroing.
+  Receive expiry alone and69E2==1 do not clear the decoded request; full
+  fault-policy investigation is therefore a priority. No global safety or
+  vehicle behavior conclusion follows from that local observation.
+
+Trace and follow-up:
+  New fault trace: ECU34806 updates69E2 only when722A==1. Any zero among
+  counters216(6A5D),218(6A90),231(6AD8),4C1(6B0E), with734C==1, sets1;
+  otherwise clears0. When722A!=1 it preserves previous state. Executed128 cases
+  by verify_network.py; see network-verification.json.
+  4C1 receipt reload36078, decrement36082, calibrationB824D=20. All four
+  relevant ECU reload calibrations B8249/A/B/D are20; units unresolved.
+  4288C derives734C from B8297==1 (stock1), via154C0. This resolves its
+  immediate configuration provenance; physical option naming still pending.
+  TCU receipt-dispatch and watchdog resolved further:1BD10 dispatches,
+  1C0CE clears pending bits;19AF0 checks record deadlines at8B38. See
+  freshness.txt for complete new evidence.1BE94 is TX scheduling, not RX
+  freshness. Recovery868C and final DTC/fallback policy remain open.
+
+  TCU 18F8C builds 216 bytes4..7. Byte7 bit5 uses FFFF9454; bit6 uses
+  FFFFA5AE; bit7 uses FFFF98A0 bit0; bit1 uses FFFFA99B. Bits2/3/4 are
+  cleared by the stock sender even though the ECU supports bit2 consumers.
+  The byte4 path divides signed GBR+EE by 96 and bounds it to0..254;
+  invalid92C6 bit5 gives FF. Word5..6 uses FFFFA5AC, clamp30000, slew1000
+  against FFFF8AE8, then +10000; invalid92C6 bit2 gives FFFF.
+
+  ECU 35006 tests 312 <= word6A54 <= 502 -> FFFF6A5E.
+  34CEC decodes byte7 bit5 ->6A61, bit6 ->6A60, bit2 ->6A64.
+  3AE52: AT mode and6A64==1 ->6E39.
+  3B4D4: AT6E62=(6A61==1),6E63=(6A5E==1). Stock B81B3=0 selects
+  231 byte1 bit4 (6AC9) plus7346==1 for6E64, not216 bit6.
+  3AD04 gates include6530==1,6531==0,6567==1,700E==1,6E2E==0,65F0==1.
+  It builds6E2C from6E62 and6E2D from(6E39||6E62), with enable B81AC/AD.
+  Rising flags load countdowns6E28/29 from B81AE/AF (stock100, not MT40).
+  3AC14 builds indexed array6E34:6E2A>0 sets entries1..4; otherwise
+  6E2D &&6E29>0 sets1/4,6E2C &&6E28>0 sets2/3.
+  4D76E reads6E34+cylinder;4D7AA ORs80 into another indexed status byte.
+  Entry4D716 / r9=78CF; verified status78D0..D3 bit80 ->44E50 zeros
+  float commands740C/7410/7414/7418. 42EA8 produces mask736A, Boolean7368
+  via diagnostic overlay8B5C0. These are now executed in the new harness.
+  Continue4514C's consumption of7408 into the larger fuel calculation;
+  4D6EC reads741C and scales by1000 into78B0. The final timer is unresolved.
+  Also inspect4D89E and3AFE6, and upstream TCU9454 writer2512E (250xx).
+
+Tool/reproduction notes:
+  Python scripts use the standard library. Run with assertions enabled.
+  ObjDump used: GNU Binutils for Ubuntu2.42; a native SH-capable objdump can
+  regenerate excerpts (Debian/Ubuntu package binutils-sh4-linux-gnu).
+  Current extracted executable:
+    /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump
+  Its shared-library directory must be supplied via LD_LIBRARY_PATH:
+    /tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu
+  Portable command: python research/ecu-at-can/disassemble.py --objdump
+    /path/to/sh-objdump excerpts > research/ecu-at-can/disassembly.txt
+  Do not rely on temporary projects/ecu-transmission-review helper paths.
+
+Important corrected leads:
+  TCU216 word0 source is915A, not80BA; normal unavailable isFFFE, notFFFF.
+  Do not transfer MT countdown40 into AT: stock AT100 is verified.
+  The initial new test assumed the last cylinder event code was0; original
+  table4F4F0 gives last code6. The corrected test visits each actual table
+  event and explicitly selects nonzero alternative commands using749F..A2
+  bit20. This avoids both the phase assumption and a zero-RAM false positive.
+  Exact FPU arithmetic uses the SH-2E manual, not SH-2A rounding behavior.

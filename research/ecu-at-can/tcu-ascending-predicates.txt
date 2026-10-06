@@ -1,0 +1,173 @@
+2026-10-06: ascending request admission, release and reactivation
+===============================================================
+
+Result
+------
+Original predicates now explain the previously observed release entry at an
+error of250. For code1, the stock fixed offset is256, so measured5250 is below
+reference5000+256 and admits release. Equality at5256 rejects that condition.
+The second threshold depends on derivative80F0 and source80EA. This is a test
+for being below either threshold, NOT an outside-band test.
+
+Release can return to the active map state when accepted software state8081
+is nonzero, recordbit20 proves prior release entry, measured input is at or
+above the fixed-offset threshold, and derivative80F0 is nonnegative. This
+choice materially changes CAN216: a rebound with a changed live map input
+recalculates768 on the natural path, whereas a forced-zero8081 path remains
+in release and restores captured1280. Both paths still produce a request.
+
+Reproduction and evidence
+-------------------------
+  python research/ecu-at-can/verify_tcu_ascending_predicates.py \
+    > research/ecu-at-can/tcu-ascending-predicates-verification.json
+
+Uses original examples/LFG1TF000.bin (TCU SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6)
+and examples/LFFEEE-stock.bin (ECU SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08).
+Instruction excerpt: tcu-ascending-map-disassembly.txt (4DC98..4E694).
+The existing software-arithmetic and lookup helpers execute original opcodes.
+New independent oracles cover outputs, return values and capture side effects.
+
+7762 direct cases:1470 bound-helper,324 release-predicate,3888 reactivation-
+predicate,32 signed-wrap and2048 state-entry cases. Two192-call manager traces
+verify327 predicate invocations,124 release updates and25 paired ECU checkpoints.
+The default ascending map AND release verifiers reproduce their saved JSON
+byte-for-byte after the optional-input additions to their shared lifecycle.
+
+The shared lifecycle now optionally changes80F8 at specified calls and can
+explicitly perturb8081 AFTER original creation. Defaults do neither. ROMs,
+shared interpreters and other verifiers are unchanged. Inputs, reference5000,
+call cadence and ECU coefficients remain fixtures. No physical sensor units,
+gear attainment, wall-clock duration or hardware output is established.
+
+Bound helper4E314
+------------------
+Bank=code0..4, otherwise0. It writes two signed32 outputs:
+  first = u16(curve[7677E+9*bank](u16(record+14))) >>2
+  axis =208F0(80EA) =4*clamp(s16(80EA),0,16383)
+  factor =u16(curve[767AB+9*bank](axis)) >>8
+  second =s16(-s16(80F0))*factor
+First stock curves are constant:256 forcodes0/1,320 forcodes2/3/4. The function
+still reads the captured axis, but changing it cannot change this stock offset.
+Second curves depend on code/source; negation wraps at signed-word8000 before
+MULS.W. Tests cover code5/255 fallback, unsigned captured axes, source clipping
+and negative/positive derivative boundaries, including8000.
+
+Release predicate4DF3C
+----------------------
+Reference =s32(9218[ROMbyte(5D446+record.code)]).
+Compute A=s32(reference+first), B=s32(reference+second), with32-bit wrap.
+Return1 iff s16(80EE)<A OR s16(80EE)<B. On return1, call4E2D6 and write the
+saturated measured-minus-reference error into recordword+10. Otherwise return0
+and leave+10 unchanged. Both equality comparisons are non-admitting.
+No sort or lower/upper-band interpretation is applied to these two thresholds.
+Tests exercise values immediately below/equal/above both sums, signed-word
+measurements, capture preservation and extreme signed reference wrap.
+
+Reactivation predicate4DDA0
+---------------------------
+Return1 only if all four conditions hold:
+  u8(8081)>=1;
+  record+8 bit0x20 set;
+  s16(80EE)>=s32(reference+first);
+  s16(80F0)>=0.
+It invokes4E314 but does not use the second output in the decision. No capture
+side effect occurs here.3888 cases vary every conjunct, threshold equality,
+unrelated flags and input8081=0/1/255. The last is a direct boundary fixture;
+normal accepted-state publication is separately capped by original logic.
+
+8081 is not a newly identified physical signal: prior selection-reporting.txt
+already executes48BC0/48C08 production, cache606F, CAN231 publication and ECU
+one-hot decoding. This turn establishes an additional local consumer of that
+same accepted software state. Its mechanical meaning remains unconfirmed.
+
+State entry callbacks
+---------------------
+4DE6C sets record+8 bit0x10, clears byte8276 and returns state3. It preserves
+the current request+4 and captured request+6.768 cases cover all flag bytes
+and three initial timer values. It can execute repeatedly while already in
+state3; observed qualifying calls keep resetting the timer. Bit0x10 bypasses
+initial map attenuation, as independently verified in tcu-ascending-map.txt.
+
+4DFE8 copies current requestword+4 to+6, setsbit0x20 and returns state4.
+1280 cases cover allflagbytes and five signed/sentinel boundary values.
+It preservesbit0x40, but still overwrites+6 at each entry. Therefore a second
+release can acquire a new captured magnitude even when the release callback's
+own first-capture bit0x40 is already set from the first release.
+
+Retained paired comparison
+--------------------------
+Both use original62-function initialization,48BC0 cache load and48C08 creation
+with old1/requested2/code1. Natural accepted8081 becomes2. Source inputs and
+enabled9410 are the same as tcu-ascending-release.txt. One trace keeps that
+produced8081; the comparison explicitly forces it to0 after creation. That
+perturbation leaves cache/other accepted-state fields alone and is not claimed
+as a normally reachable full-system state. It isolates the consumer predicate.
+
+Measured80EE starts1000, with explicit samples:
+  call80=5000,81=6000,90=5250,92=5100,94=5050,
+  98=6000,102=5250,104=5100,106=5050,108=5000.
+Atcall98, live map axis80F8 changes14080->9728 in BOTH traces.
+Reference stays5000. Each call runs11014, event2 and two event4 services.
+No request record, captured request/error, predicate return or state is injected.
+
+Both paths: call80 activates1280; call90 admits release and captureserror250;
+call92 releases to510; call94 outputs0. Atcall98 they diverge:
+  natural8081=2: predicate admits reactivation, state3/flagsF0; live map now
+    produces768,915A32, ECU numeric1/correction4.75/calculated spark21.25;
+  forced8081=0: no state reactivation, remainsstate4; its retained release
+    formula restores1280,915A0, ECU numeric0/correction5/spark21.
+
+Natural path again entersrelease atcall102, capturing768 into+6 despitebit40
+already being set. Atcall104, error100/captured250 produces306,915A494,
+ECU numeric15/correction3/spark23. Forced-zero path instead produces510,
+915A290, ECU numeric9/correction4/spark22. Both withdraw to0 atcall106 and
+restore calculated spark26. Both reachphase2 at123 and retire at154, ending
+idle with empty rings. Natural trace has60 release updates and13 paired
+checkpoints; forced trace64 and12. Every release update uses the prior oracle.
+
+The natural trace observes153 reactivation-predicate calls and11 release-
+predicate calls; forced trace153 and10. Four natural reactivation admissions
+occur during the measured6000 plateau (including calls while already state3).
+This is not four separately completed shifts or four physical transitions.
+
+Corrections and failed probe
+-----------------------------
+An exploratory plan interpreted4DF3C as checking outside a band. Original
+branches and independent equality tests establish the below-either rule above.
+An early fixture attempted to change8081 before48C08 to isolate reactivation;
+that also changed creation/classification, and the expected code1 assertion
+failed. The saved verifier applies only the comparison perturbation after
+original creation. The natural trace uses produced8081=2 throughout.
+Reading full_fixture's8081=0 before48BC0 is insufficient to infer its value
+during an active request;48BC0 loads1 and48C08 publishes2 in this fixture.
+
+Next and remaining scope
+------------------------
+Next32614 ascending phase qualification and317E4 ascending initial/overlap
+policy: request state3/4 can cycle while globalphase1 waits, so complete phase
+policy must be independently verified. Preserve composite/2->1 transitions,
+full task/capture timing, outer cancellation/fault recovery and map-input
+80F8/80D2/80D4/808D production/physical attribution.
+Traction:59720->8118,72B4/72BC writers, mode/gate provenance and task order;
+CAN211/21A sender attribution,7978/fuel consumers and physical confirmation.
+Roof: PCM transmission-type publication and matching OEM PRHT receiver; no
+OEM CAN fold/unfold command proven. Keep both directions, pause/resume,
+reversal, communication timeout, motor synchronization and fault recovery.
+Allthree full research goals remain incomplete. This and previous goal turns
+made verified progress; there is no recurring external blocker.
+
+Persistence verification
+------------------------
+Ghidra12.1.3 PUBLIC / Java21, SuperH:BE:32:SH-2A compatibility language
+(not chip identification). Five functions and two calibration ranges added,
+two existing comments updated, calibration ranges typed in the apply script.
+Closed.gpr/.rep archive independently extracted and all11 file hashes checked;
+both programs reopened read-only,1124 annotations verified (570 ECU/554 TCU),
+all595 export/report files matched byte-for-byte.
+Archive nc-at-can.tar.gz:10,821,076 bytes; SHA256
+895435ef803952b950a4f94dca1a8b3db79578f26540a7d4e7d3cee680318013
+Manifests and checkpoint/Ghidra README are current. New/changed scripts passed
+py_compile; git diff --check passed; new evidence files are Git-eligible.
+Saved locally; no staging, commit, push or index cleanup.

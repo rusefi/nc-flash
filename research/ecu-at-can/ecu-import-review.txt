@@ -1,0 +1,106 @@
+HISTORICAL ECU-only import review. Current conclusions and paired TCU evidence
+are in README.txt. Retained for earlier calibration/diagnostic traces.
+
+LFFEEE stock engine ECU import and transmission review
+Date: 2026-10-05
+
+RESULT
+The imported LFFEEE image is an automatic-transmission engine ECU calibration.
+The original LF9VEB image is calibrated for a six-speed manual. Both images
+contain corresponding executable branches for different transmission modes.
+Static analysis identifies a strong AT/MT configuration-selector candidate,
+not merely tables with AT in their names. Full vehicle compatibility of an
+altered LF9VEB image has not been established.
+
+IMPORT AND VALIDATION
+Source: C:\Users\snow\Downloads\SW-LFFEEE000.HEX\SW-LFFEEE000.HEX.bin
+Copy: ../../examples/LFFEEE-stock.bin
+The supplied SW-LFFEEE000.HEX path is a directory containing a raw binary,
+not an Intel HEX text file. The image is 1,048,576 bytes, big-endian SH7058.
+Internal ID at 0xB8046: LFFEEE.
+SHA256: 7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+Factory calibration CRC32: 0x4F465365, matching Romdrop's LFFEEE factory entry.
+CRC covers bytes 0x2000 onward with 0xFFB00..0xFFB07 normalized to FF.
+All populated ECU checksum table entries pass. See import-verification.json.
+Factory CRC comparison excludes the bootloader; it is not a signature check.
+The source and imported image are byte-identical. Neither was modified/flashed.
+
+CALIBRATION COMPARISON (ROM addresses are also raw file offsets)
+                                      LFFEEE (AT)           LF9VEB (MT)
+Final-drive scalar                    0xC1200: 4.100        0xC14F8: 4.100
+Six gear ratios, float32 BE            0xC1204..0xC1218      0xC14FC..0xC1510
+                                      3.538 2.060 1.404     3.815 2.260 1.640
+                                      1.000 0.713 0.582     1.177 1.000 0.787
+Configuration-selector candidate      0xB8296: 0x00         0xB858E: 0x01
+Derived runtime mode flags            0xFFFF734A: 0x80      0xFFFF6C76: 0x40
+DFCO AT/timer-active decay scalar     0xCDDD8: 0.0035       0xCD90C: 0.0010
+DFCO MT/timer-expired decay scalar    0xCDDDC: 0.0070       0xCD910: 0.0070
+The two ratio sets match Mazda's published six-speed AT and MT ratios.
+
+EXECUTABLE SELECTOR TRACE
+LFFEEE reader 0x429E8 reads byte 0xB8296. LF9VEB reader 0x39380 reads 0xB858E.
+When this byte is not FF, the reader returns it directly. When it is FF,
+there is a separate RAM/configuration lookup and fallback path. Neither of
+these supplied ROMs selects that FF path.
+
+The return passes through an identity wrapper (AT 0x8C122, MT 0x83432).
+Initialization at AT 0x42728 / MT 0x390C0 converts the value into mode flags:
+    selector 0 -> 0x80
+    selector 1 -> 0x40
+    selector 3 -> 0xA0
+    other      -> 0x00
+Writes occur at AT 0x427D2 -> RAM 0xFFFF734A and
+MT 0x3916A -> RAM 0xFFFF6C76.
+
+AT code 0x3F600 and MT code 0x3DB58 both test bit 0x40 of that mode byte.
+When set (the supplied MT calibration), the routine selects among the
+calibrated gear ratios using the runtime gear and validity flags.
+When clear (the supplied AT calibration), it instead multiplies two runtime
+float inputs: AT RAM 0xFFFF6A3C and 0xFFFF6A38; MT equivalents 0xFFFF6A00
+and 0xFFFF69FC. The origin/meaning of those inputs is not fully decoded here.
+This mode branch exists in the original LF9VEB executable too.
+Calling the selector AT/MT is an inference from its control flow and the two
+known calibration types; no manufacturer symbol name has been recovered.
+
+OTHER ENGINE ECU PATHS
+The intake-pool compensation routine selects between two table descriptors
+using a runtime timer: AT 0x451BA, timer RAM 0xFFFF7496; MT 0x4484E,
+timer RAM 0xFFFF747E. Referenced table data:
+    MT/timer-expired: AT 0xCC394, MT 0xCBF00 (same 8 float values).
+    AT/timer-active:  AT 0xCC508, MT 0xCC03C (same 24 float values).
+The DFCO code at AT 0x479CE / MT 0x47062 selects the two decay scalars above
+using RAM 0xFFFF7EEE / 0xFFFF7DCA. These table names come from public
+Romdrop metadata; the complete causal link from transmission mode to these
+runtime timer flags has not been traced.
+
+DIAGNOSTIC FLAGS ARE NOT SUFFICIENT EVIDENCE
+C0101 TCM communication enable is 1 in both ROMs (AT 0xE1B0D; MT 0xE0975).
+P0704 clutch-pedal and P0850 neutral-switch enables are also 1 in both.
+Their presence does not distinguish AT from MT calibration.
+
+LIMITS
+These are different software/calibration families. The comparison establishes
+shared engine-ECU branches and different stock configuration, not a verified
+one-byte conversion or interchangeable flash images. Other calibration,
+hardware, vehicle-network, and runtime behavior has not been fully matched.
+No transmission-controller ROM was used in this review.
+Public lffeee.xml includes Romdrop patch-specific definitions; it was used as
+a reference, and those extra features were not assumed present in stock code.
+
+REPRODUCIBILITY
+Run: python research/ecu-at-can/verify_import.py
+This reads both ROMs and the saved CRC database and prints verification JSON.
+disassembly.txt preserves selected annotated SH-2E disassembly from objdump.
+disassemble.py accepts a --objdump argument; see CHECKPOINT.txt for setup.
+Literal-pool data is also displayed as instructions by objdump -D; only
+traced executable ranges should be interpreted as code.
+
+SOURCES
+Mazda published ratio specifications:
+https://news.mazdausa.com/download/2010-MX-5-specs.pdf
+LFFEEE stock file listing (2008 2.0 MZR AT; identification corroboration):
+https://www.mazdaecu.eu/mazda-mx-5/mazda-mx-5-nc/2008-2.0-mzr-a-t-stage5-lffe/
+Upstream map metadata and stock CRC database (saved in sources/):
+https://raw.githubusercontent.com/speepsio/romdrop/master/metadata/lffeee.xml
+https://raw.githubusercontent.com/speepsio/romdrop/master/romdrop.crc
+MT map metadata: examples/metadata/lf9veb.xml in this repository.

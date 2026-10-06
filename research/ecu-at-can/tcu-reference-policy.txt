@@ -1,0 +1,133 @@
+TCU cached-source policy, discrepancy recovery and elapsed counters
+Evidence checkpoint: 2026-10-06
+
+REPRODUCTION AND SCOPE
+
+Run: python research/ecu-at-can/verify_tcu_reference_policy.py
+Saved result: tcu-reference-policy-verification.json.
+Uses unchanged LFG1TF000 TCU and LFFEEE-stock ECU images identified in the
+preceding source records. No ROM, application or shared interpreter changes.
+Original20FAC,20EAA,31720,2094E,128B6 and their helpers execute without stubs.
+Independent arithmetic/state models assert cached values, indices, flags,
+history, counters and outputs; no gate-output observation is used for them.
+
+Passing coverage:1764 cache/index/age/phase cases;768 exact threshold cases;
+216 alternate-output cases;16 counter/SR cases;768 elapsed-task mode cases;
+80 original timer-wheel calls;two capture-driven36-call control/recovery
+sequences with72 CAN216 byte4/ECU unpack checks. Index fixtures are restricted
+to the seven known calibration entries. Synthetic timestamps, phase-state
+fixtures and call schedules do not establish actual clocks, units or wiring.
+
+20FAC DISCREPANCY POLICY
+
+This closes the prior independent-oracle gap for active/cached/stale branches
+listed in tcu-reference-source.txt. Each case executes original31720 to
+confirm the seeded active/inactive state, then20FAC and20EAA in sequence.
+Coverage crosses both activity states, ages0/4/5/127/128/255, classes0/1/FF,
+all seven current indices and all seven saved indices, with deterministic
+signed-word, flag, history and counter fixtures. Separate thresholds exercise
+decrease997/998, counter5/6/7/255 and discrepancy/percentage boundaries.
+
+At20FAC entry, raw = signed16[91A2]. Shift the six raw history words at
+91B8..91C2; compare the old oldest word against the current raw value.
+Select the measurement for discrepancy calculation:
+- Active phase work: retain signed91C4 and saved index91C9, even if the
+  current measured80EE, accepted8081, class or freshness have changed.
+- No active work: refresh91C4 from signed80EE when810C<5, otherwisezero;
+  refresh91C9 from8081. ClassFF uses coefficient index6 for this conversion,
+  while the saved index remains8081.
+Active cached mode uses the saved index in preference to the classFF choice.
+Class0 does not suppress this discrepancy conversion.
+
+converted = signed16-saturate(sample*4096 / signed coefficient70000[index]),
+with division truncating toward zero. These signed boundary tests include
+negative samples, which are abnormal producer states because normal80EE is
+nonnegative; their meaning must not be transferred to physical measurements.
+
+If oldest_raw - raw >=998, set91A6 bit4 and clear91C6.
+Then, if converted-raw >=128 AND >=trunc(converted*5/100), clear91C6;
+otherwise increment it, saturating at255. Finally, if9194 bit0 and92C6 bit4
+are both clear and91C6>=7, clear91A6 bit4. Preserve all other91A6 bits.
+The recovery check uses the newly updated counter. Seven qualifying calls
+can therefore clear the latch, but repeated drop events reset that progress.
+This is an internal source-selection latch, not proof of a diagnostic report.
+
+20EAA ALTERNATE SOURCE AND ITS DISTINCT CACHE
+
+The alternate source has its own sample91B6/index91C8, separate from the
+91C4/91C9 discrepancy cache and91A8/91C7 reference-fallback cache.
+It refreshes only when NO active phase work AND4*u8[8196]>=37. With a
+refresh,810C<5 selects signed80EE, otherwisezero; save8081 in91C8. Active
+work or the settling interval retains the prior sample/index. Thus20FAC
+can already use a new idle measurement while20EAA still uses the old one.
+
+Output priority:
+ 9194 bit0 OR91A6 bit4 -> signed80EA, clamped0..32767
+ otherwise class8080==0 ->0
+ otherwise -> coefficient-converted cached/fresh sample, clamped0..32767
+ClassFF selects coefficient6 when refreshing; retained-cache mode uses its
+saved index. The cache update occurs before output gating, including when
+the returned value is80EA. Full2086C stores the result at91A4 and invokes
+50EA4. That tail and downstream diagnostic uses are not newly fully modeled.
+
+ELAPSED COUNTER AND TIMER OWNERSHIP
+
+2094E increments unsigned16[91AC], saturating atFFFF, inside an SR critical
+section. Tests preserve SR bits other thanT. Accepted capture20678 clears
+91AC; an original179A8 callback from aFFFF counter verifies the reset.
+The special early-return ingestion condition can retain it, as already
+tested in tcu-reference-source.txt.
+
+The complete wrapper128B6 reads800A. ONLY mode3 calls11864,1E506 and11A64.
+1E506 tailcalls2094E. All256 modes and three elapsed-counter boundaries are
+executed; mode3 increments91AC and scheduler counter84D0, others retain them.
+Earlier evidence associates128B6 with the CMT0 path. This turn executes the
+wrapper directly; it does not emulate the hardware interrupt or its period.
+
+Separately, original11014 timer-wheel calls from zero phase give:
+ 810C/810D capture ages: one increment per2 primary calls
+ 8158 hold counter: one increment per4 primary calls
+ 8196 settling counter: one increment per8 primary calls
+All saturate at255. The tested zero-phase schedule reaches8196=10 at call76,
+which meets4*8196>=37; it is not a universal time delay. Active209B4 clears
+8196, and20CBC can clear8158. These separate schedules must not be assigned
+one clock frequency merely because they contribute to the same source gate.
+
+CAPTURE-DRIVEN CONTROL AND RECOVERY
+
+Both sequences initialize original18-/24-entry capture histories and feed
+179A8/17A58 timestamps, full2124C/2086C,2117C references and30B9E error.
+They do not directly inject80EA,80EC,80EE or9218. Measured capture intervals
+stay12800, giving80EE=5000 and validCAN216 byte4=52, accepted by ECU35034.
+After settling, a synthetic active phase holds measured/index caches5000/3.
+Reference capture interval then changes to12160, eventually producing7017.
+
+Control: initial interval9480 produces9001. Its gradual18-sample change to
+7017 never creates a>=998 drop over the six raw samples, so bit4 staysclear.
+This was initially chosen to provoke the latch; the failed expectation led
+to retaining it as an explicit negative control rather than changing firmware.
+
+Latching case: initial interval6400 produces13333. The larger change gives:
+ call  raw91A2  source80EA/80EC  bit4  counter  reference[index4]  error80D8
+ 1     12698     12698           0     33       9052              -4278
+ 2     12121      5000           1      1       3564              -1308
+ 18     7017      5000           1      1       3564               1436
+ 25     7017      7017           0      7       5002                717
+ 36     7017      7017           0     18       5002                 -2
+The latched fallback therefore changes the shift-reference/error path while
+the measurement and its CAN byte remainconstant. Onclear, the two-sample
+error takes another update to settle.91A4 remains5000 and8196 remainszero
+through active-phase service. Full checkpoints are in the saved JSON.
+These are source-policy lifecycles, not newly created/retired shift requests;
+the preceding reference-source tests cover complete requests and ECU spark.
+
+CONTINUATION
+
+Independent source-policy models now cover the named cached/stale branches.
+Still open: physical capture identities, clock setup, real task/interrupt
+ratios, complete hold-time fault lifecycle with real scheduling, remaining
+ascendinggroup7/overlap/composite/2->1 classification, and wider consumers
+of91A4. Continue the separate traction goal through CAN211 throttle/fuel
+and enable/arbitration consumers (saved35608/4E854 leads); retain OEM PRHT
+type/speed/neutral reception, fold/unfold reversal and timeouts. The broader
+ECU/AT, traction and roof goals remain incomplete.

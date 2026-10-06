@@ -1,0 +1,131 @@
+ECU CAN211/21A/216/218 numeric convergence
+2026-10-06
+
+Executed result
+---------------
+The full ECU function A6490..A7432 executes using the existing bounded RTZ
+instruction harness. It contains the formerly partialA69A8 lead and builds
+two distinct paths from CAN values, with independently checked outputs
+A710/A70C/A700/A6F0. Real TCU packers and ECU unpack/normalization bodies
+feed those paths. This advances the ECU/AT and traction arbitration work;
+it does not yet identify physical actuator roles or complete the large
+function's many other branches, histories and output dependencies.
+
+Reproduce from repo root:
+  python research/ecu-at-can/verify_numeric_arbitration.py
+Saved JSON: numeric-arbitration-verification.json.
+Stock ECU SHA2567604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Stock TCU SHA2568fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Shared interpreters, old verifiers and both ROMs unchanged. Full function
+return and stack restoration are asserted; there is no branch/helper mock.
+Explicit synthetic local sources and call schedules remain part of the test.
+
+Verified arithmetic, including original operation order
+-------------------------------------------------------
+Let R(x) mean binary32 round-toward-zero after each arithmetic operation,
+as implemented by the already-tested finite-normal RTZ harness. The exact
+epsilon literal3C23D70A is5368709/536870912, approximately0.01.
+Protectedbyte6A28 is a conversion bypass, not a receivedCAN211 flag.
+  d = 1 when6A28 is nonzero, else max(7154, epsilon).
+Paired cases execute34BBC, which initializes stock6A28=1 fromB8244.
+The separate direct matrix tests nonstock bypass0/2 and factor boundaries.
+
+A6930 reads CAN2186A80; A6944 reads factor7154; A69A8 reads CAN21A6AA0.
+  A710 = R(max(R(6AA0/d), 6A80, -10000) + 71C4).
+A6A76 reads CAN211714C; A6A8E reads CAN21A6A9C; A6B04 reads CAN2166A30.
+  A70C = R(min(R(max(714C, 6A9C, -10000)/d), 6A30) + 71C4).
+Both-10000 floors are stock ROM values atC5678/C567C. Neither path is a
+simple fixed priority. One takes a maximum before the offset; the other
+takes a maximum, divides, then applies the AT minimum bound before offset.
+The CAN21A word1 request-flag gating happens upstream; see traction-flags.txt.
+
+Both outputs then undergo the same operation sequence:
+  v = R(input * S), S=ROM42CA9999=13277593/131072 (~101.2999954)
+  v = R(v / 293)
+  v = R(v / max(6DC4, epsilon))
+  v = R(v * R(6D40 + 273))
+  v = R(v - 71D8)
+  v = R(v - 71D0)
+A700 receives this conversion ofA710; A6F0 receives conversion ofA70C.
+A6FC then equals min(A6F0, A650). The test checks this relationship using
+the executedA650; it does not independently modelA650's preceding history
+and source calculation. Constants resembling gas-law normalization are only
+a physical-meaning lead. No pressure, temperature or airflow units are
+assigned here without tracing their source and actuator destination.
+
+TCU -> ECU producer coverage
+----------------------------
+TCU18F10 builds216 word atbytes2..3 from signed80BC:
+  normal = max(0, (source >>5)+512); source7FFF or mode0 ->FFFE;
+  mode16 ->FFFF.
+Actual ECU35034/34CEC/34EB8 produce6A30. Healthy controlled gates yield
+raw-512, except raw312..502 ->65022 andFFFF ->65537. Thus normal negative
+source values can enter a special window: source-6400/raw312 and-320/raw502
+are inside; source-6432/raw311 and-288/raw503 are outside. Expired216 receipt
+uses the previous limit plus16, capped at141 under the tested default path.
+The paired expired cases start with prior limit0 and therefore expect16;
+this is not a universal expiry output. Other fault/inhibit branches are
+documented in the existing word1 limit export and remain separate.
+
+TCU191A8 builds218 byte6 from signed9118:
+  source7FFF or mode0/16 ->FF; otherwise clamp((source >>6)+50, 0, 254).
+ECU35420/35218 produce6A80=min(2*byte6-100,50), or-10000 when invalid,
+grouped69E2==1, MT mode, or7190==1. Receipt6A90 alone is not directly
+tested by this conversion. Initial test expected direct expiry suppression;
+it failed for normal-mode receipt0. Inspection of original35218 corrected
+the oracle, not ROM or interpreter behavior. The expired normal-mode paired
+cases intentionally leave69E2=0 to prove this distinction.
+
+The test uses the actual first-four-byte216 packer and218 byte6 packer;
+other payload bytes are initialized0. It does not claim the full TCU task
+produces these synthetic80BC/9118 values or that all other fields are real.
+CAN211/21A inputs execute their actual unpackers/normalizers, and3FF2C
+produces714C. No DSC sender firmware or CAN hardware is simulated.
+Eight additional cases use initialize_sources fromverify_model_sources.py
+to produce71C4/71D8/71D0 with stock maps before paired CAN arbitration;
+those three outputs are not replaced by fixture constants in those cases.
+
+Freshness and history sequences
+-------------------------------
+Seven repeated fullA6490 calls preserve its own local histories while21A
+changes60 ->40 ->0 ->raw0 ->FFFE ->FFFF ->60. Each checked numeric path
+still matches the independently calculated result from the actual inputs.
+This is not a complete oracle for all history fields or closed-loop stability.
+
+The separate218 loss sequence executes3545E reload,3519E decrement,
+34806 grouped fault,35218 conversion,34EB8 limit update and fullA6490.
+Only218 ages;216/231/240 grouped counters stay fresh in the explicit fixture.
+The grouped monitor is enabled with722A=1 and734C=1. At receipt0,69E2=1
+invalidates2186A80 to-10000. With7138=1000 and71E0=0,216's existing200
+limit instead ramps216 then232, despite fresh216 data. New218 receipt clears
+the grouped fault and restores6A80=50 and6A30=200. No vehicle timing inferred.
+CAN211 contributes300, making this limit binding: A70C changes232 ->248
+->264 ->232, while A710 changes82 ->-9968 ->82 in the same sequence.
+There are23 checkpoints, including receipt reload/recovery atcall22.
+
+Coverage and limits
+-------------------
+168 denominator/precedence cases;128 varied-model cases;110 paired TCU/ECU
+cases;24 mode/receipt/sentinel cases;8 stock-model producer cases;7 retained
+history points;23 grouped-fault lifecycle points. Every case runs fullA6490
+through its realreturn atA7430/delayA7432. Original lookup bodies execute.
+Independent arithmetic assertions cover the four named outputs; broad
+function execution is not evidence of exhaustive branch or actuator coverage.
+
+Continuation leads
+------------------
+StaticA49F8 tailcallsA6490;A49FE branches toA4FF8. Actual task order not
+executed. A6490 ends with additional map/hysteresis/limit combinations,
+eventuallyA720 and stateblockA5B0. Their full independent model remains open.
+A720 literalusersA48A4(initializer),A5004(consumer),A7316(writer),B6960.
+A714 literalusersA486C(initializer),A6DA4(writer). These scans cover only
+aligned literal references, not all indirect/GBR access.
+A4FF8 starts by convertingA720 usingC56FC, constant4644597A andCA974,
+storingA654 atA501C, then further maps. Trace this whole consumer andB6960
+to the actuator-facing output; do not label it throttle from numeric constants.
+Model inputs6DC4/6D40/71D8/71D0 and ratio7154 need source/physical attribution.
+CAN21A sender,7978 physical consumers and broadertraction logic remain open.
+
+Keep original ECU/AT task/source/group7/overlap/composite requirements, plus
+the independent OEM PRHT fold/unfold reception and interruption/recovery
+requirements, in CHECKPOINT.txt. All three broader goals remain incomplete.

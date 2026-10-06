@@ -1,0 +1,98 @@
+{
+  "scope": "CAN201 change -> stock TCU selection pipeline, with explicit task fixtures.\n\nNo instruction replacement. RAM fixtures do not establish physical gear state,\nfull scheduler order, or global absence of other flag writers.",
+  "default_input_cases": 512,
+  "diagnostic_preservation_cases": 1536,
+  "pipeline_cases": 720,
+  "executed_stage_order": [
+    "0x452dc",
+    "0x44664",
+    "0x466b8",
+    "0x4662c",
+    "0x46db6",
+    "0x46d34",
+    "0x46de4",
+    "0x46cc8",
+    "0x46d30",
+    "0x46a34",
+    "0x46b00"
+  ],
+  "paired_ecu_paths": [
+    {
+      "ecu_source": 45,
+      "omitted_default_input_update": false,
+      "flag20": false,
+      "signed_change": -1280,
+      "selection_pair": [
+        0,
+        9
+      ],
+      "floor_writes": []
+    },
+    {
+      "ecu_source": 45,
+      "omitted_default_input_update": true,
+      "flag20": true,
+      "signed_change": -1280,
+      "selection_pair": [
+        3,
+        255
+      ],
+      "floor_writes": [
+        {
+          "pc": "0x46d24",
+          "value": 3
+        },
+        {
+          "pc": "0x46d28",
+          "value": 255
+        }
+      ]
+    },
+    {
+      "ecu_source": 50,
+      "omitted_default_input_update": false,
+      "flag20": false,
+      "signed_change": 0,
+      "selection_pair": [
+        0,
+        9
+      ],
+      "floor_writes": []
+    },
+    {
+      "ecu_source": 50,
+      "omitted_default_input_update": true,
+      "flag20": true,
+      "signed_change": 0,
+      "selection_pair": [
+        0,
+        9
+      ],
+      "floor_writes": []
+    },
+    {
+      "ecu_source": 55,
+      "omitted_default_input_update": false,
+      "flag20": false,
+      "signed_change": 1280,
+      "selection_pair": [
+        0,
+        9
+      ],
+      "floor_writes": []
+    },
+    {
+      "ecu_source": 55,
+      "omitted_default_input_update": true,
+      "flag20": true,
+      "signed_change": 1280,
+      "selection_pair": [
+        0,
+        9
+      ],
+      "floor_writes": []
+    }
+  ],
+  "conclusion": "21734/21A16 clearsflag20;21C1C preservesit. Stock3-stage pipeline calls46CC8, whose floor requires flag20. Injected-path activation is not proof of normal activation.",
+  "limits": "Other branch controls zero-initialized; source/selection physical identities, intervening writers and whole scheduler remain unproved."
+}

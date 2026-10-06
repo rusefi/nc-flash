@@ -1,0 +1,124 @@
+CAN211 / CAN216 simultaneous spark requests (2026-10-06)
+======================================================
+
+Result
+------
+The CAN216 first-word path reaches the same per-cylinder spark calculation
+as the CAN211 numeric path. In the executed ordinary branch, their separate
+corrections are added. A maximum across other corrections occurs upstream,
+but it does not choose between these two corrections. TCU CAN216 bit5 can
+simultaneously select zero for the separate cylinder commands740C..7418.
+This connects actual TCU sender code to ECU spark outputs while exercising
+the traction-control lead concurrently. CAN211 sender identity and physical
+wire units remain unproved; this is not a complete DSC or vehicle model.
+
+Inputs are the unchanged examples/LFFEEE-stock.bin and LFG1TF000.bin.
+Exact hashes, fixtures, case counts and output rows are in
+spark-interaction-verification.json. RAM addresses below omit prefixFFFF;
+function/calibration addresses are hexadecimal. Numeric examples are decimal.
+
+TCU word0 to ECU spark correction
+--------------------------------
+TCU18F10(mode1) encodes signed915A as max((value >>5)+512,0). Source7FFF
+producesFFFE. ECU35034/34CEC decodes word0 to6A34=raw-512, except its
+documented invalid/network/MT branches. Thus source7FFF gives65022 here,
+whereas network fault69E2==1 gives65537. Do not conflate those sentinels.
+3B584 selects6A34 into6E04 in the ordinary AT branch; MT selects0, and
+positive6E2A or6E2B selects a local constant. The latter branches are not
+newly exercised in the paired matrix.
+
+The complete model-inversion function starts at3B5C6. Address3B5FE cited
+in earlier notes is an interior arithmetic branch, not a function entry.
+With71A8 positive and outside the deadband (~0.00078125), it computes:
+
+  q = max(71B0 - 6E04 - 71E0 - 71CC + protected71D0, 0) / 71A8
+  6E08 = 71AC - approximate_sqrt(q)
+
+It uses the original iterative root loop, with the same step termination
+constant3E340000 as the CAN211 model. In the tested q range it produces
+floor(4*sqrt(q))/4. Nonpositive/deadband curvature retains old6E08.
+The shared71A8/71B0/71AC coefficients are fixtures; their producers are open.
+CAN211's numerator instead uses71B0-7170+71D0+71D8 (can211-spark.txt).
+
+3AE82 sets6E3A iff MT bit734A&40 is clear AND71C0>6E04 (strict comparison).
+3AEEC sets6E2F iff all these local conditions hold:
+  6566==1,65DD==1,6530==1,6531==0,protected700E==1,
+  8EF8==0,8F30==0,protectedA3A4==0,8F4B==0.
+All512 Boolean combinations execute. Physical identities of these gates
+remain open. Merely receiving a numeric request does not prove admission.
+
+5295C produces7C74: if6E3A==1 AND6E2F==1, then
+  7C74=min(7A80-6E08, ROM BFAE4).
+Otherwise7C74=0. BFAE4 bits421EE80A =39.726600646972656 (raw float units).
+There is no lower clamp in this function: negative differences pass through.
+The independent CAN211 correction53438 does clamp negative differences to0.
+The AT negative behavior is an isolated-function result, not a demonstrated
+normal operating condition. No physical angle/unit claim follows from it.
+
+Shared output computation and simultaneous cut
+---------------------------------------------
+As already traced in can211-spark.txt,4FD9C forms base correctionS from
+other maxima/sums. It then writes:
+  7AC4=S; 7AC0=S+CAN211correction7D2C;
+  7A94=S+ATcorrection7C74; 7A90=S+7D2C+7C74.
+The final filter/difference calculation,4FBDA clamp and4FB4E rate/diagnostic
+selection/cylinder trims all execute. In these fixtures S=4 and the output
+without either correction is26, so every cylinder receives26-7D2C-7C74.
+The rate limit and diagnostic override do not intervene in these cases;
+this formula is not a universal final-spark equation for every ECU mode.
+
+Illustrations with both paths admitted, model71B0=25/71A8=1/71AC=30:
+  TCU915A  CAN216 decoded  CAN211 word0  AT correction 211 correction spark
+        0        0           10000           5              5         16
+      512       16           10016           3              3         20
+      800       25           10025           0              0         26
+
+TCU18F8C also transmits9454 in byte7bit5. The existing original ECU
+3B4D4/3AD04/3AC14 ->4D716 ->44E50 chain executes in each paired test.
+With its local gates admitted, this bit zeros740C..7418 even while the spark
+array7A9C/7AA0/7AA4/7AA8 contains the computed corrections. Without bit5,
+the deliberately nonzero alternate cylinder commands remain1. Spark
+calculation continuing during a cut is not proof that a coil/injector fires.
+
+Eight AT-network-fault examples demonstrate another distinction:69E2==1
+makes the first-word spark contribution inactive through65537/6E3A, while
+CAN211 correction remains and the separately normalized bit5 cut still
+acts in these fixtures. This agrees with the earlier actuation tests; it
+does not model the complete diagnostic scheduler or vehicle fault policy.
+
+Verification and boundaries
+---------------------------
+  python research/ecu-at-can/verify_spark_interaction.py > research/ecu-at-can/spark-interaction-verification.json
+
+Passed512 enable-gate combinations,51 model/hold cases,45 correction/cap
+cases,40 strict-comparison cases,480 paired paths (240 combinations under
+both producer call orders), and8 fault examples. Both explicit call orders
+give identical results for these fixtures. Actual ECU task order is open.
+No helper stubs, ROM changes or shared interpreter changes were needed.
+Exact finite arithmetic suffices for these chosen values; arbitrary inputs,
+floating exceptions and physical timing are not claimed. Existing broader
+RTZ arithmetic support is separate and was not modified or rerun here.
+
+Continue
+--------
+Follow-up: tcu-spark-requests.txt now executes the aggregation and record1
+phase3 caller through CAN216 to ECU spark. The source-fixture limit below
+describes this original simultaneous-request verifier; use the newer record
+for current producer evidence and remaining upstream work.
+
+TCU source915A is still a fixture in the original standalone matrix. Static search now identifies initialization
+1FB18 and the actual writer at1FCC8 inside1FB8C. The latter copies five
+signed-word records915C..9164 and byte records9166..916A, filters by table
+5CD0C and uses92E4 plus aggregation helpers30686/3065A. Setters1FB4A and
+1FB6E appear to populate/reset the records. This is an unexecuted lead;
+derive the full formula and trace record callers before assigning physical
+torque units or connecting the earlier transition-gate request-source leads.
+Literal references:915A pools19020/1FC18/1FD1C; users18F30/1FB42/1FCC2.
+
+The saved author XML has no addressBFAE4 entry,71A8 mention or traction/
+torque category matching this path; it does not supply new unit attribution.
+
+Remaining integration: coefficient/gate producers, real timing, downstream
+ignition conversion, other throttle/fuel arbitration, and CAN211 sender
+attribution. The deep traction-control and PRHT folding/unfolding CAN goals
+remain active alongside ECU/AT work; see traction-roof.txt and CHECKPOINT.txt.

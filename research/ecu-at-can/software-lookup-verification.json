@@ -1,0 +1,69 @@
+{
+  "scope": "Verify added ISA and every u16 input of stock TCU cut-threshold lookup.",
+  "isa_cases": 1115,
+  "stock_curve_u16_cases": 65536,
+  "outputs_be16_sha256": "a7b0d193cc9aa44cf282e1ad4de57a9e9f407d70e04058edbb753ee8cd23cb7d",
+  "examples": [
+    {
+      "axis": 0,
+      "threshold": 8960
+    },
+    {
+      "axis": 2559,
+      "threshold": 8960
+    },
+    {
+      "axis": 2560,
+      "threshold": 8960
+    },
+    {
+      "axis": 2561,
+      "threshold": 8960
+    },
+    {
+      "axis": 2565,
+      "threshold": 8960
+    },
+    {
+      "axis": 2566,
+      "threshold": 8959
+    },
+    {
+      "axis": 5000,
+      "threshold": 8554
+    },
+    {
+      "axis": 10239,
+      "threshold": 7681
+    },
+    {
+      "axis": 10240,
+      "threshold": 7680
+    },
+    {
+      "axis": 10241,
+      "threshold": 7680
+    },
+    {
+      "axis": 15359,
+      "threshold": 7169
+    },
+    {
+      "axis": 15360,
+      "threshold": 7168
+    },
+    {
+      "axis": 25599,
+      "threshold": 7168
+    },
+    {
+      "axis": 25600,
+      "threshold": 7168
+    },
+    {
+      "axis": 65535,
+      "threshold": 7168
+    }
+  ],
+  "limits": "Original software arithmetic executed, no helper stubs. This curve's bounded operands do not validate arbitrary software-double operations or physical units."
+}

@@ -1,0 +1,171 @@
+TCU second request slot: initialized lists to ECU spark (2026-10-06)
+=================================================================
+
+Result and scope
+----------------
+The previously uninitialized4C7AC probe is replaced by original startup
+descriptor copying, original list initialization/allocation/set/release,
+candidate selection, record2 publication, aggregation and actual CAN216
+sender -> ECU spark. Two candidate lists feed slot2:12 entries and3 entries.
+Their merge is mode-sensitive and asymmetric around the7FFF sentinel.
+This extends tcu-spark-requests.txt; candidate values remain fixtures, except
+for one executed stock callback that publishes inactive zero/mode0.
+
+841 merge cases,600 stateful queue operations, both capacity/exhaustion paths
+and60 paired TCU/ECU cases pass. The paired cases include simultaneousCAN211
+spark correction and independent CAN216bit5 cylinder inhibition. Physical
+policy entry, numeric units, scheduler and the remaining phase1/2 logic are
+still open. ECU/AT, deep traction and PRHT folding/unfolding goals remain
+active/incomplete. This turn and the preceding turn made verified progress.
+
+Inputs and reproduction
+-----------------------
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Run: python research/ecu-at-can/verify_tcu_slot2.py
+Output: tcu-slot2-verification.json. Standard-library Python with assertions.
+Imports only guarded verifiers; uses existing software-arithmetic interpreter
+unchanged. No ROM/app/shared interpreter edits or helper stubs.
+Original GNU SH excerpts are in disassembly.txt; regenerate using
+disassemble.py and the objdump setup in CHECKPOINT.txt.
+
+One initial test failed because the capacity loop retained an old Python
+queue model after replacing its TCU fixture. Each bank now gets its own
+fixture/model inside the loop. The corrected test and all later cases pass;
+no firmware or interpreter behavior was changed to satisfy the test.
+
+Startup and actual descriptors
+-----------------------------
+10400's startup sequence calls15D04 at10426, after the RAM test/clear routine
+15C58. Executed15D04 copies992 bytes ROM5F220..5F5FF to RAMAD4C..B12B,
+four bytes per iteration. Every resulting byte is checked against ROM.
+This is execution of the full data-copy function, not the full startup or
+hardware initialization. List bookkeeping RAM outside this region starts
+zero in the harness; global boot execution remains unproved.
+
+DescriptorB028 comes from5F4FC:01 0C 7F FF.
+DescriptorB02C comes from5F500:01 03 7F FF.
+Format:byte0 number of priority heads,byte1 number of available entries,
+word2 initial/sentinel value. Both stock lists have exactly one priority
+head. The earlier zero-RAM probe ignored this data and was not representative.
+Direct literal-reference searches do not find the writer because copying is
+through incrementing pointers. BootloaderB000/B020 references were unrelated
+to these application descriptors; preserve the discovered15D04 provenance.
+
+First bank: bufferA20A,selected wordA242/indexA244,modesA245..A252,
+bookkeepingA202,initializer4C69A,allocator4C6C2,setter4C6DA,release4C734,
+reader4C75E. Reader also publishes selected word80E2 andmodeA200.
+Second bank:bufferA25A,wordA26E/indexA270,modesA271..A275,bookkeepingA258,
+initializer4CA64,allocator4CA90,setter4CAA8,release4CACE,reader4CAF8.
+Reader also publishes wordA256 andmodeA254. RAM addresses omitFFFF.
+Original init-call sites1E178/1E186 call the two bankinitializers. Intermediate
+4C3C0/4C8F0 initialize separate work machinery and are outside this test.
+
+Original list mechanics
+----------------------
+30454 creates4-byte nodes:previous byte,next byte,signed value word. With
+stock descriptors,node0 is the active-list head,node1 the free-list head.
+First bank entries are2..13;second bank entries2..4. Activehead starts as a
+self-loop;freehead initially links every available entry. All values are7FFF.
+Bankinitializers clear mode arrays and seed their published word7FFF; they
+do not explicitly reset the bookkeeping counters in the inspected bodies.
+
+304C6 allocates the first free node and inserts it at the tail of the
+requested priority list. Wrappers receive priority1, which maps to head0.
+The verifier never claims valid behavior for other priorities in these
+one-priority stock lists.305D0 unlinks a node;305F0 inserts before a head.
+30518 writes its word;the bank wrapper writes the parallel mode byte.
+30524 unlinks and returns an entry to the free-list tail, resets its word
+to7FFF;the wrapper clears its mode and decrements bookkeeping.
+
+Full allocation returnsFF when no free node remains, but the bankwrapper
+still increments bookkeeping:12->13 and3->4. The test verifies this result
+without passingFF to an unchecked setter. Do not infer a vehicle fault or
+out-of-bounds write without checking actual callers' handling of failure.
+Valid release/reuse follows FIFO free-list order.600 deterministic operations
+(seed216) check both directions of every list link, counters, selected index,
+value/mode and final slot2 against independent Python queue models.
+
+3054E scans priority heads from high to low, walking allocation order in each.
+In the stock single-priority lists it returns the first nonsentinel value,
+not a maximum/minimum across all nodes. When all active values are7FFF,
+the selected index is the LAST visited active node, so its mode is retained.
+An empty list returns7FFF withindexFF;the bankreader then suppliesmode0.
+Tests distinguish an empty bank from an active sentinel-valued entry.
+The generic multi-priority case is not independently characterized here.
+
+4C7AC merge and record2 publication
+---------------------------------
+The full caller executes both readers,then snapshots first/second values
+toA204/A206 and modes toA208/A209. LetA,B be signed16 values andma,mb bytes:
+  Ifma==mb:chooseB only ifA<B AND B!=7FFF;otherwise chooseA.
+  Ifma!=mb:chooseB andmode1 only ifmb==1;otherwise chooseA/modeA.
+  If chosen value==7FFF:reset record2 through1FB6E.
+  Otherwise:set record2(value,mode) through1FB4A.
+  Publish chosen rawword to80E4 regardless of record reset.
+
+Thus a first-bank sentinel can dominate a valid second-bank value when
+modes match. With different modes,second-bankmode1 takes precedence even
+if its value is7FFF, withdrawing an otherwise valid first-bank request.
+Tie values retain the first bank. These are signed comparisons,not unsigned
+maxima.841 combinations cover empty banks,0,1,320,640,7FFF,8000,FFFF values
+and0/1/2/FF modes using real allocation and setters, without editing links.
+
+Examples(base92E4=800, no record1):
+  First bank      Second bank    record2/value mode   final915A
+  empty           320,0          7FFF,FF             7FFF
+  empty           320,1           320,1               480
+  320,1           640,1           640,1               160
+  640,0           320,1           320,1               480
+  640,1           320,2           640,1               160
+  7FFF,1          320,1          7FFF,FF             7FFF
+
+Record2 -> CAN216 -> ECU
+-----------------------
+The existing1FB8C aggregation remains a separate layer:enabled records1/2,
+last nonsentinel word/mode selection,zero-record2 exception whenrecord1 is
+present,subtract from92E4 only formode1,and signed-lowword clamp. Full216D8
+converts fixture80B4=250 tobase800.60 combinations of both candidate banks,
+optionalrecord1=320 andcut0/1 execute4C7AC/1FB8C,the original18F10/18F8C
+sender,and ECU consumers withCAN211word0=10016. The sameTCU instance carries
+the actual produced915A;paired() asserts it rather than replacing it.
+Saved results include rawCAN216,numeric decode,spark correction/four-cylinder
+outputs and independent cylinder-command inhibition. Coefficients andCAN211
+input are explicit fixtures from spark-interaction.txt,not physical angles.
+
+One stock policy callback,limited conclusion
+-------------------------------------------
+4D98A receives an explicitly supplied callback record atA2B0,whose+4 handle
+was allocated through4CA90. It reads signed calibration773E8=0, executes
+real5BBEC software-double conversion of0.5 to0, clears record+8 bit80,
+stores0 atrecord+2 and calls4CAA8(handle,0,mode0). With the first bank empty,
+the full merge withdraws record2. Its request-entry conditions and actual
+record ownership have NOT been established by this synthetic callback record.
+This result does not demonstrate an active physical reduction policy.
+
+Next concrete investigation
+---------------------------
+Trace original bank entry/callback dispatch. Allocator call sites:
+4CC18/4DCD0 ->first4C6C2;4D88C/4DA64 ->second4CA90. Setter call sites:
+4CF88/4D124/4D224/4E014/4E0CC/4E2AC ->first4C6DA;
+4D96C/4D9E4/4DB58/4DC28 ->second4CAA8. These are aligned literal leads,
+not proof of exhaustive references. Inspect record work atA278,table5E354,
+dispatch4C2A0,entry4CCxx/4D868/4DA40/4DC98 and the underlying2Fxxx helpers.
+Original4CF6A and4D950 appear to reset values/modes via0.5->0 conversion;
+4D010 and4E-related producers are stronger next leads for active requests.
+Relate policy admission to actual accepted/requested selection state before
+claiming shift/gear identity. Keep phase1/2 entry and92E6 consumers active.
+Also retain ECU6D5C units/reset,traction sender/output scheduling/pins,and
+OEM PRHT type/speed/neutral reception,fold/unfold reversal/timeouts from
+CHECKPOINT.txt. No scope reduction or broad completion claim.
+
+Persistence verification
+------------------------
+Ghidra572 annotations(261 ECU/311 TCU),327 exports(325 functions+2 readbacks).
+Closed .gpr/.rep archive independently extracted;all11 project hashes and
+all restored annotations/exports matched. Current identity is recorded in
+ghidra/snapshot.json and restore-verification.json. New findings,verifier,
+JSON and exports are Git-eligible. Syntax/diff checks pass. Saved locally,
+no new staging,commit orpush;the pre-existing index was preserved.
