@@ -1,0 +1,69 @@
+TCU ADC-derived readiness84D8 — 2026-10-07
+
+Executed evidence
+verify_tcu_readiness_b.py PASS:256 original11DD8 initializer whole-RAM cases,
+12544 independent original11DEE whole-RAM/register/MMIO cases and9 retained
+steps in two original-initialized chains. Session77418 terminalexit0.
+Independent model uses arithmetic conversion from previously verified16FF6;
+original execution includes1413C poll,14128 ADCcount,16FF6conversion,15730time.
+No callee substitution, forced return, readyflag write in retained chains,
+production/shared ISA/ROM changes or physical controller claim.
+
+11DD8 writes84D8=1,84DAword=0,84E0/84E4long=0. Other RAM including raw84DC
+preserved.256 patterned initialRAM cases. 11DEE uses stockdescriptor5C57C
+pointingFFFFF812; original1413C pollsF818 bit7,14128 extractsword>>6 &1023.
+Storesrawcount long84DC andconvertedword84DA. Value=clamp(300+count*64000/2976,
+0,22000) for tested10-bit domain. Physical voltage/sensor identity unproved.
+
+State1: converted>5547 starts84E0 ifzero; otherwise unsigned32(time-84E0)
+>=100000 clears84E0 andadvancesstate2. Value<=5547 clears84E0. State2 similarly
+usesvalue>9000,84E4,100000 threshold thenstate3. Otherstates don'tchange but
+stillpoll/readADC andpublishraw/convertedvalues. Thus actual0 neveradvances;
+callinginitializer matters. No inferred milliseconds or absoluteclock.
+
+Cases coverall1024ADCcounts underboth advancingstates withsix timestamp pairs:
+(old,now)=(0,0),(0,1),(1,100000),(1,100001),(1,100002),(FFFF0000,34464).
+Lastpair crosses32bitwrap exactly100000counts. Low6ADCregisterbits vary with
+count&63 andignored. Statuspolls [0,128] beforecount; all256states also tested
+withcount600/time200000/immediatestatus128. ExactfiniteMMIO sequence checked;
+timeportF6C0 readonly on activehighthreshold path. Callee-savedR8..14/SP and
+SRoutsideT/Q/M unchanged. WholeRAM comparison excludes syntheticstack region
+under existingproject oracle convention; no stackhardware claim.
+
+Retained initialized chain(count600)
+timestamps1,100000,100001,100002,200001,200002 ->states1,1,2,2,2,3.
+Finalbothdeadlines0. Zero-epochchain times0,100000,200000 ->1,1,2: zero isalso
+thefirmwareunsetmarker, so thesecondsample startsqualification again. This
+verifieddistinction mattersbeforejoininganycommonclock startup fixture.
+
+Reproduce
+ python research/ecu-at-can/verify_tcu_readiness_b.py
+Python3.14.3; inputexamples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+tcu-readiness-b-disassembly.txt contains11DD8..11EE4. GNUobjdump2.42 setup/
+packageprovenance in tcu-pulse-input.txt; use disassemble.py tcu dis BEGIN END.
+Originalconversion proof: tcu-cycle-callback.txt/verify_tcu_cycle_callback.py.
+ADC/status/timestamp fixtureaddresses followexecutedROMaccesses; this test
+supplies completion andcounts, notconversionlatency or chipbehavior.
+
+Unresolved startup and next concrete action
+84D8 isonlyone prerequisite. Retained operationaldiagnostic/application fixtures
+stillstartinmode3 with84A0/84D8/84EC=0; do notclaimfullbootfromthat run.
+SavedstaticA lead:tcu-readiness-a-lead-disassembly.txt112CC..11484. 112CC
+initializes84A0=1;112E6 pollsdescriptor5C578(F810),converts16EFE,publishes84A4/
+84A2 andstate84A0. Visiblethresholds5525/3600/9000 and100000tick deadlines;
+states1/2/3/4 have high/low/recovery branches. Subsequentlyexecuted:see
+tcu-readiness-a.txt for24960cases/256initializers/12step low/recovery chain.
+Savedstaticcapturelead:tcu-capture-readiness-lead-disassembly.txt122D8..12374.
+122D8 sets84EC=1 and8450=255 via16E6C lead;122F4 state1 requires84D8=3,
+calls128F8 (17A40/17990/20658/211C4),clears8450,enables16C5C/16B24,state2.
+State2 reaches3 once8450>=20;12912 tail isRTS. ExistingCMT0wheel increments
+8450; fullproducer/caller/startupinterleave stillneedsverification. No forced
+readiness values in any futurejoinedclaim; explicitcomponenttestinputs allowed.
+84A0stateproducer isnowverified in tcu-readiness-a.txt. Nextverify122F4capture
+admission, thentrace realcaller/timestampconfiguration beforeboot-levelclaim.
+
+All three broader ECU/AT, traction andbothroof goals remainopen. User hasno
+additionaldump/capture/benchinputs. TractionphysicalIRQ/EC62/remoteDSC androof
+edition/VIN/reversal/timeout/LRsync/physicalproof remainexplicitinCHECKPOINT.
+Savedlocally; no staging/commit/push. CHECKPOINT owns pairedGhidraarchive status.

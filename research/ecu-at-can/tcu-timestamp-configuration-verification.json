@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "scope": "Original timestamp counter start/read with strict documented access widths.\n\nSoftware register samples only. Preserve the original counter-reset word-write\nconflict with the compatible SH7055S manual instead of inventing its behavior.\n",
+  "starts": 256,
+  "reads": 1024,
+  "rejected_widths": 6,
+  "retained_reset_width_conflict": {
+    "instruction": "0x1465e",
+    "address": "0xfffff6c2",
+    "size": 2,
+    "value": 0,
+    "exception": "TCNT10A requires longword access in retained manual"
+  },
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "word_literal_candidates": {
+    "0xf6c0": [
+      {
+        "pc": "0x14660",
+        "literal": "0x146fe"
+      },
+      {
+        "pc": "0x15730",
+        "literal": "0x157d6"
+      },
+      {
+        "pc": "0x15900",
+        "literal": "0x15988"
+      },
+      {
+        "pc": "0x16038",
+        "literal": "0x160a2"
+      },
+      {
+        "pc": "0x16068",
+        "literal": "0x160a2"
+      },
+      {
+        "pc": "0x16498",
+        "literal": "0x1650e"
+      },
+      {
+        "pc": "0x1653c",
+        "literal": "0x16574"
+      },
+      {
+        "pc": "0x16560",
+        "literal": "0x16574"
+      }
+    ],
+    "0xf6c2": [
+      {
+        "pc": "0x1465c",
+        "literal": "0x146fc"
+      },
+      {
+        "pc": "0x158fc",
+        "literal": "0x15986"
+      }
+    ],
+    "0xf6e2": [],
+    "0xf6e4": []
+  },
+  "source_pages_zero": [
+    248,
+    262,
+    266,
+    377,
+    386,
+    388,
+    395
+  ],
+  "limits": "No counter progression/reset-write semantics/fullboot. PSCR4=1 supports conditional Pphi/2 only if documented channel10 mapping applies and TI10 clear input is disabled."
+}

@@ -1,6 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Sets30 in8F87/8F8D then calls1ACD8.1225 full audited dispatch cases. */
+/* Sets30 in8F87/8F8D then1ACD8;1225 earlierdispatchcases. NoworiginalISRmailbox10/logical8
+   ->native1BD10 ->thiscallback in352fulltasks; logical6 CAN215 and1 CAN4EC dispatchbefore201. See
+   tcu-receive-admission.txt. */
 
 void CAN201_MarkReceiptAndDispatch(void)
 

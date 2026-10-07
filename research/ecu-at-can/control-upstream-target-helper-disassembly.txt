@@ -1,0 +1,134 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0008bb20 <.data+0x8bb20>:
+   8bb20:	ff fb       	fmov	fr15,@-r15
+   8bb22:	ff eb       	fmov	fr14,@-r15
+   8bb24:	ff db       	fmov	fr13,@-r15
+   8bb26:	4f 22       	sts.l	pr,@-r15
+   8bb28:	97 66       	mov.w	0x8bbf8,r7	! f0
+   8bb2a:	d6 36       	mov.l	0x8bc04,r6	! ad3cc
+   8bb2c:	d3 36       	mov.l	0x8bc08,r3	! ffff966c
+   8bb2e:	65 63       	mov	r6,r5
+   8bb30:	64 30       	mov.b	@r3,r4
+   8bb32:	35 7c       	add	r7,r5
+   8bb34:	84 58       	mov.b	@(8,r5),r0
+   8bb36:	24 09       	and	r0,r4
+   8bb38:	64 4c       	extu.b	r4,r4
+   8bb3a:	24 48       	tst	r4,r4
+   8bb3c:	8f 03       	bf.s	0x8bb46
+   8bb3e:	64 63       	mov	r6,r4
+   8bb40:	51 53       	mov.l	@(12,r5),r1
+   8bb42:	e2 00       	mov	#0,r2
+   8bb44:	21 20       	mov.b	r2,@r1
+   8bb46:	34 7c       	add	r7,r4
+   8bb48:	c7 30       	mova	0x8bc0c,r0
+   8bb4a:	ff 4c       	fmov	fr4,fr15
+   8bb4c:	54 43       	mov.l	@(12,r4),r4
+   8bb4e:	fd 8d       	fldi0	fr13
+   8bb50:	64 40       	mov.b	@r4,r4
+   8bb52:	61 4c       	extu.b	r4,r1
+   8bb54:	21 18       	tst	r1,r1
+   8bb56:	8f 0c       	bf.s	0x8bb72
+   8bb58:	fe 08       	fmov	@r0,fr14
+   8bb5a:	f6 dc       	fmov	fr13,fr6
+   8bb5c:	d2 2c       	mov.l	0x8bc10,r2	! 20e8
+   8bb5e:	42 0b       	jsr	@r2
+   8bb60:	f5 ec       	fmov	fr14,fr5
+   8bb62:	64 03       	mov	r0,r4
+   8bb64:	d5 2b       	mov.l	0x8bc14,r5	! ffff9642
+   8bb66:	63 4d       	extu.w	r4,r3
+   8bb68:	43 19       	shlr8	r3
+   8bb6a:	60 43       	mov	r4,r0
+   8bb6c:	25 30       	mov.b	r3,@r5
+   8bb6e:	a0 14       	bra	0x8bb9a
+   8bb70:	80 51       	mov.b	r0,@(1,r5)
+   8bb72:	60 13       	mov	r1,r0
+   8bb74:	88 05       	cmp/eq	#5,r0
+   8bb76:	8d 04       	bt.s	0x8bb82
+   8bb78:	00 09       	nop	
+   8bb7a:	60 13       	mov	r1,r0
+   8bb7c:	88 07       	cmp/eq	#7,r0
+   8bb7e:	8f 0c       	bf.s	0x8bb9a
+   8bb80:	00 09       	nop	
+   8bb82:	f5 dc       	fmov	fr13,fr5
+   8bb84:	d3 1e       	mov.l	0x8bc00,r3	! 20a8
+   8bb86:	d5 23       	mov.l	0x8bc14,r5	! ffff9642
+   8bb88:	64 50       	mov.b	@r5,r4
+   8bb8a:	64 4c       	extu.b	r4,r4
+   8bb8c:	84 51       	mov.b	@(1,r5),r0
+   8bb8e:	44 18       	shll8	r4
+   8bb90:	60 0c       	extu.b	r0,r0
+   8bb92:	24 0b       	or	r0,r4
+   8bb94:	43 0b       	jsr	@r3
+   8bb96:	f4 ec       	fmov	fr14,fr4
+   8bb98:	ff 0c       	fmov	fr0,fr15
+   8bb9a:	f0 fc       	fmov	fr15,fr0
+   8bb9c:	4f 26       	lds.l	@r15+,pr
+   8bb9e:	fd f9       	fmov	@r15+,fr13
+   8bba0:	fe f9       	fmov	@r15+,fr14
+   8bba2:	00 0b       	rts	
+   8bba4:	ff f9       	fmov	@r15+,fr15
+   8bba6:	ff fb       	fmov	fr15,@-r15
+   8bba8:	ff eb       	fmov	fr14,@-r15
+   8bbaa:	ff db       	fmov	fr13,@-r15
+   8bbac:	d7 15       	mov.l	0x8bc04,r7	! ad3cc
+   8bbae:	4f 22       	sts.l	pr,@-r15
+   8bbb0:	96 23       	mov.w	0x8bbfa,r6	! 100
+   8bbb2:	65 73       	mov	r7,r5
+   8bbb4:	d3 14       	mov.l	0x8bc08,r3	! ffff966c
+   8bbb6:	35 6c       	add	r6,r5
+   8bbb8:	64 30       	mov.b	@r3,r4
+   8bbba:	84 58       	mov.b	@(8,r5),r0
+   8bbbc:	24 09       	and	r0,r4
+   8bbbe:	64 4c       	extu.b	r4,r4
+   8bbc0:	24 48       	tst	r4,r4
+   8bbc2:	8f 03       	bf.s	0x8bbcc
+   8bbc4:	64 73       	mov	r7,r4
+   8bbc6:	e2 00       	mov	#0,r2
+   8bbc8:	51 53       	mov.l	@(12,r5),r1
+   8bbca:	21 20       	mov.b	r2,@r1
+   8bbcc:	c7 12       	mova	0x8bc18,r0
+   8bbce:	34 6c       	add	r6,r4
+   8bbd0:	54 43       	mov.l	@(12,r4),r4
+   8bbd2:	ff 4c       	fmov	fr4,fr15
+   8bbd4:	64 40       	mov.b	@r4,r4
+   8bbd6:	fd 8d       	fldi0	fr13
+   8bbd8:	61 4c       	extu.b	r4,r1
+   8bbda:	21 18       	tst	r1,r1
+   8bbdc:	8f 20       	bf.s	0x8bc20
+   8bbde:	fe 08       	fmov	@r0,fr14
+   8bbe0:	d2 0b       	mov.l	0x8bc10,r2	! 20e8
+   8bbe2:	f6 dc       	fmov	fr13,fr6
+   8bbe4:	42 0b       	jsr	@r2
+   8bbe6:	f5 ec       	fmov	fr14,fr5
+   8bbe8:	d5 0c       	mov.l	0x8bc1c,r5	! ffff9644
+   8bbea:	64 03       	mov	r0,r4
+   8bbec:	63 4d       	extu.w	r4,r3
+   8bbee:	43 19       	shlr8	r3
+   8bbf0:	25 30       	mov.b	r3,@r5
+   8bbf2:	60 43       	mov	r4,r0
+   8bbf4:	a0 28       	bra	0x8bc48
+   8bbf6:	80 51       	mov.b	r0,@(1,r5)
+   8bbf8:	00 f0       	.word 0x00f0
+   8bbfa:	01 00       	.word 0x0100
+   8bbfc:	ff ff       	.word 0xffff
+   8bbfe:	96 40       	mov.w	0x8bc82,r6	! 2118
+   8bc00:	00 00       	.word 0x0000
+   8bc02:	20 a8       	tst	r10,r0
+   8bc04:	00 0a       	sts	mach,r0
+   8bc06:	d3 cc       	mov.l	0x8bf38,r3	! fef9000b
+   8bc08:	ff ff       	.word 0xffff
+   8bc0a:	96 6c       	mov.w	0x8bce6,r6	! 61f0
+   8bc0c:	3a 00       	cmp/eq	r0,r10
+   8bc0e:	00 00       	.word 0x0000
+   8bc10:	00 00       	.word 0x0000
+   8bc12:	20 e8       	tst	r14,r0
+   8bc14:	ff ff       	.word 0xffff
+   8bc16:	96 42       	mov.w	0x8bc9e,r6	! 6013
+   8bc18:	3b 48       	sub	r4,r11
+	...
+

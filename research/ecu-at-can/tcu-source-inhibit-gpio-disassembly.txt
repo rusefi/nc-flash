@@ -1,0 +1,86 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000186a4 <.data+0x186a4>:
+   186a4:	2f e6       	mov.l	r14,@-r15
+   186a6:	2f d6       	mov.l	r13,@-r15
+   186a8:	2f c6       	mov.l	r12,@-r15
+   186aa:	ec 00       	mov	#0,r12
+   186ac:	2f b6       	mov.l	r11,@-r15
+   186ae:	eb 01       	mov	#1,r11
+   186b0:	2f a6       	mov.l	r10,@-r15
+   186b2:	2f 96       	mov.l	r9,@-r15
+   186b4:	4f 22       	sts.l	pr,@-r15
+   186b6:	dd 24       	mov.l	0x18748,r13	! 5f7dc
+   186b8:	94 43       	mov.w	0x18742,r4	! 8a1c
+   186ba:	6e 43       	mov	r4,r14
+   186bc:	da 23       	mov.l	0x1874c,r10	! 141bc
+   186be:	69 43       	mov	r4,r9
+   186c0:	79 05       	add	#5,r9
+   186c2:	60 e0       	mov.b	@r14,r0
+   186c4:	60 0c       	extu.b	r0,r0
+   186c6:	88 01       	cmp/eq	#1,r0
+   186c8:	8f 01       	bf.s	0x186ce
+   186ca:	65 c3       	mov	r12,r5
+   186cc:	65 b3       	mov	r11,r5
+   186ce:	4a 0b       	jsr	@r10
+   186d0:	54 d1       	mov.l	@(4,r13),r4
+   186d2:	7e 01       	add	#1,r14
+   186d4:	3e 92       	cmp/hs	r9,r14
+   186d6:	8f f4       	bf.s	0x186c2
+   186d8:	7d 0c       	add	#12,r13
+   186da:	4f 26       	lds.l	@r15+,pr
+   186dc:	69 f6       	mov.l	@r15+,r9
+   186de:	6a f6       	mov.l	@r15+,r10
+   186e0:	6b f6       	mov.l	@r15+,r11
+   186e2:	6c f6       	mov.l	@r15+,r12
+   186e4:	6d f6       	mov.l	@r15+,r13
+   186e6:	00 0b       	rts	
+   186e8:	6e f6       	mov.l	@r15+,r14
+   186ea:	2f e6       	mov.l	r14,@-r15
+   186ec:	2f d6       	mov.l	r13,@-r15
+   186ee:	2f c6       	mov.l	r12,@-r15
+   186f0:	2f b6       	mov.l	r11,@-r15
+   186f2:	2f a6       	mov.l	r10,@-r15
+   186f4:	4f 22       	sts.l	pr,@-r15
+   186f6:	9c 23       	mov.w	0x18740,r12	! 8a26
+   186f8:	de 13       	mov.l	0x18748,r14	! 5f7dc
+   186fa:	94 23       	mov.w	0x18744,r4	! 8a21
+   186fc:	db 14       	mov.l	0x18750,r11	! 142f8
+   186fe:	6a 43       	mov	r4,r10
+   18700:	6d 43       	mov	r4,r13
+   18702:	7a 05       	add	#5,r10
+   18704:	4b 0b       	jsr	@r11
+   18706:	64 e2       	mov.l	@r14,r4
+   18708:	2d 00       	mov.b	r0,@r13
+   1870a:	4b 0b       	jsr	@r11
+   1870c:	54 e2       	mov.l	@(8,r14),r4
+   1870e:	7d 01       	add	#1,r13
+   18710:	2c 00       	mov.b	r0,@r12
+   18712:	3d a2       	cmp/hs	r10,r13
+   18714:	7c 01       	add	#1,r12
+   18716:	8f f5       	bf.s	0x18704
+   18718:	7e 0c       	add	#12,r14
+   1871a:	4f 26       	lds.l	@r15+,pr
+   1871c:	6a f6       	mov.l	@r15+,r10
+   1871e:	6b f6       	mov.l	@r15+,r11
+   18720:	6c f6       	mov.l	@r15+,r12
+   18722:	6d f6       	mov.l	@r15+,r13
+   18724:	00 0b       	rts	
+   18726:	6e f6       	mov.l	@r15+,r14
+   18728:	90 0b       	mov.w	0x18742,r0	! 8a1c
+   1872a:	64 4c       	extu.b	r4,r4
+   1872c:	00 0b       	rts	
+   1872e:	04 54       	mov.b	r5,@(r0,r4)
+   18730:	90 08       	mov.w	0x18744,r0	! 8a21
+   18732:	64 4c       	extu.b	r4,r4
+   18734:	00 0b       	rts	
+   18736:	00 4c       	mov.b	@(r0,r4),r0
+   18738:	90 02       	mov.w	0x18740,r0	! 8a26
+   1873a:	64 4c       	extu.b	r4,r4
+   1873c:	00 0b       	rts	
+   1873e:	00 4c       	mov.b	@(r0,r4),r0
+

@@ -2,7 +2,12 @@
 
 /* Unsigned32 timestamp delta/10 ->88F8, calls20678; clears8900, saturating
    increments88F0/88F2/88F4.63 timestamp cases and both-capture shift lifecycles; physical
-   wiring/clocks open. See tcu-reference-source.txt and earlier speed-fault.txt. */
+   wiring/clocks open. See tcu-reference-source.txt and earlier speed-fault.txt. Complete126EC
+   experiment executes original20658/211C4 init, timestamp callbacks and timer without age
+   overrides; reference7017 fromcall20. See tcu-captured-requests.txt. Joined320 recovery pairs
+   execute560 originalcaptureISRprefixes with differentialRAM/register/MMIO checks; exactpriortrace
+   afteronlynewobservations andcallbackPR normalization. See tcu-capture-delivery.txt; no
+   hardwareadmission/cadence proof. */
 
 undefined4 Capture0A_ProcessCapturedCount(int param_1)
 

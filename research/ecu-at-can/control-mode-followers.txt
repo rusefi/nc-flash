@@ -1,0 +1,132 @@
+ECU post-mode producers, retained minimum and expiry gate
+========================================================
+2026-10-06. Executed original ECU instructions; this fills the five-body gap
+between mode selection and the previously verified downstream path. It does
+not identify CAN211/21A sender/units, physical DSC actuation or task cadence.
+ECU/AT and roof folding AND unfolding remain separately incomplete.
+
+Reproduction
+------------
+ python research/ecu-at-can/verify_control_mode_followers.py
+Python3.14.3; existing exact finite RTZ arithmetic/interpreter. ECU input:
+examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Paired TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Outputs: control-mode-followers-verification.json and the separately saved
+control-mode-followers-comparison.json. No ROM, production, interpreter or
+existing verifier edits. All callbacks/helpers execute original instructions.
+
+3,556 direct checks:256 mask,10 biased input,256 scaling,10 initializer,
+400 minimum,1,600 counter and1,024 expiry. Also60 original seven-call slices,
+240 retained calls,320 integrated cycles,36 paired CAN boundaries and320
+CAN211 latch updates pass. No test failure in this extension. A lookup for
+sh_float.py found no file; the existing imported exact/RTZ implementation was
+used unchanged, not a replacement floating-point interpreter.
+
+Five post-mode bodies
+---------------------
+RAM suffixes mean FFFFxxxx.30B4A writes693C=1 iff any695B bits0x1E are set.
+This covers arbitrary byte masks, not only the eight single-bit modes.
+30512 writes67D0=RTZ(6CB4+DB1D4), with stock offset approximately0.11
+(exact stored float0.10999999940395355).30522 calls2098 to write
+67D4=RTZ(u8(6CAC)*float_at30604), stock factor0.08320312201976776. All256
+raw bytes are verified; the initial signed load is zero-extended by2098.
+
+3053A initializes67D8 by copying67D0 bits.30544 changes67D8 only when70F0 is
+exactly1, using helper23F8 to choose min(old67D8,current67D0). Other values,
+including2/255, preserve the old value. A later increase does not undo a
+previous decrease. Verification covers finite values, not NaN/Inf behavior.
+
+30702 writes6936=1 only when byte6927==0 AND raw byte9462==0; otherwise0.
+Helper154B0 is a raw byte getter. No complement/checksum validation is added
+or inferred. This differs from separately verified protected-record readers.
+
+Countdown30764
+---------------
+This producer decrements positive byte6927 toward zero only if ALL hold:
+ 67D4 > DB178 (16.973400115966797)
+ 67D0 < DB17C (10.9375)
+ 91E5 !=1
+ raw9462 !=1
+Otherwise it reloads stockDB0B6=200. Comparisons are strict, with adjacent
+representable RTZ values tested on both sides. Zero stays zero while admitted.
+Raw9462=2 allows decrement but prevents30702 from setting6936, because the
+consumer requires raw9462 exactly0. These byte semantics are not fault names.
+
+In the240-call standalone retained trace, initial count200 reaches1 at199,
+then zero/6936=1 at200. Call205 supplies raw9462=1 and reloads200/clears6936.
+Call210 supplies2: count becomes195, flag stays0. A raw6CB4 drop at30 sets a
+lower67D8 which remains when6CB4 rises at40. Call counts are not milliseconds.
+
+Executed callers and explicit scheduling
+----------------------------------------
+The original contiguous1876E..18798 slice executes, in order:
+ 3181C,30202,30B4A,30512,30522,30544,30702.
+All60 slice cases compare produced modes/selectors/timer and new outputs with
+the independently checked bodies. The downstream segment begins at18798.
+Original caller bytes for30764 are19E10(load)/19E12(call), while3053A is
+16A76(load)/16A78(call). Those two short call sites are statically recorded;
+their functions execute directly, not their complete enclosing tasks.
+
+The integrated replay retains the prior source/mode/target feedback pipeline
+and inserts the five bodies immediately after30202. It removes continuing
+fixtures for67D0/67D4: initialization from older setup is overwritten by the
+original producers before downstream consumption.67D8 is initialized once
+through3053A and then retained.6927 is initialized once, then30764 produces it.
+Raw6CB4,6CAC,70F0,9462 and91E5 remain fixtures.30764 runs before this task's
+new67D0/67D4 and gate updates, consuming prior produced values; this is an
+explicit cross-task order, not proven vehicle scheduler ordering.
+
+Raw6CAC values0/120/255 produce67D4 values0/9.984374046325684/21.216794967651367.
+At161 the high value sets downstream6937 inhibition. The counter starts
+qualifying on the following call and does not expire within this integrated
+scenario; expiry proof comes from the separate240-call trace. The integrated
+trace still executes all paired CAN and CAN211 latch checks.
+
+Saved replay comparison
+-----------------------
+The comparison JSON records both source filenames and SHA256 identities.
+It compares common saved checkpoints with control-mode-feedback's earlier
+replay; this is NOT an expected-compatibility test, since inputs/producers
+have intentionally changed. Among the compared output fields, differences:
+ call41:6CC8 1.1592483520507812 ->1.1952258348464966;
+        8118 0.0006188846309669316 ->0.0006380918202921748.
+ call50:8118 0.0022209198214113712 ->0.002226232085376978.
+These are execution results under stated input/order fixtures, not vehicle
+measurements or evidence of physical torque/brake response. High6937 alone
+does not establish a new output difference at every later checkpoint.
+
+Sources and next actions
+------------------------
+GNU SH binutils2.42 excerpts: control-mode-copy-disassembly.txt,
+control-mode-followers-disassembly.txt, control-mode-followers-caller-
+disassembly.txt, control-mode-followers-counter-caller-disassembly.txt and
+control-mode-followers-init-caller-disassembly.txt. Reproduce with
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis START STOP
+Use each excerpt's displayed range. Exact ROMs/scripts/results remain in the
+repository; the temporary binutils path is not the only evidence record.
+
+Next raw-input leads: control-mode-followers-input-leads.txt records aligned
+literal references. Stores397AC and398BC both derive6CAC from the high byte
+of a word at input pointer+16; the containing record/producer must be traced.
+They are static interpretations from control-mode-followers-source-leads-
+disassembly.txt, not executed upstream proofs or CAN message identification.
+6CB4 references include1DED8/1DEF0/1DF14/1DF48 and several other consumers;
+classify actual writers before attributing provenance. Raw6Dxx/8F30 sources,
+399B0, cross-task scheduling and DSC sender/units/actuation stay open.
+TCU3AC70/1F2AA and roof revision/receiver/reversal/timeouts/synchronization
+remain independent next work; the user has no additional dumps/captures/tests.
+
+Local save and independent archive verification
+----------------------------------------------
+Both Ghidra programs saved. Refreshed .gpr+.rep archive independently restored:
+1,592 annotations (697ECU/895TCU),789 byte-identical exports and11 matching
+project hashes before and after reopening. No errors, incomplete decompiles,
+locks or pending job. Archive10,920,117 bytes; SHA256
+dea3a60aeaa2c6f5408bd17f4cb16ab68653a91b3c5ea8e2f1cd62629e15ddf8.
+Manifests preserve identities/method. All11 new evidence artifacts are
+Git-eligible; py_compile andgit diff --check pass. Saved locally; no staging,
+commit, push, production or ROM changes. Existing mixed index, including
+staged archive temporary entry, untouched. This turn made verified progress;
+all three broader scopes remain open and the goal remains active.

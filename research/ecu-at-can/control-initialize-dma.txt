@@ -1,0 +1,96 @@
+Earlier RAM initialization through DMA — 2026-10-06
+
+Full objective and constraints remain CHECKPOINT.txt: ECU/AT integration,
+deep traction, and both roof directions with interruption/recovery remain
+incomplete. User has no additional artifacts. No staging/commit/push.
+Previous turn made progress on application initialization; this turn verifies
+the earlier clear needed for its otherwise untouched activity counters.
+
+Reproduce (repository root, Python3.14.3):
+python research/ecu-at-can/verify_control_initialize_dma.py
+python research/ecu-at-can/verify_control_clear_startup.py
+python research/ecu-at-can/probe_control_initialize_dma_parent.py
+ECU SHA2567604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Disassembly/callers: control-initialize-dma-disassembly.txt and the preceding
+control-initialize-prerequisite-leads.txt. Objdump setup incontrol-task.txt.
+
+Executed evidence:
+-16 halfword/register checks,4 status-clear checks,32 enable/flag combinations,
+30 RAM fills and24 expected unsupported-access/configuration rejections pass.
+-Eight original100D8 executions clear exactlyFFFF4000..FFFFBF9F inclusive,
+with nonzero seeds and guards before/after the block. WholeapplicationRAM,
+nonvolatileGPR/stack/GBR/SR checked. Originalcode firstwriteszero4000,
+then configuresDMA0 withfixedsource4000,incrementingdestination4000,
+8168longwords. CHCR001F0129 starts the transfer. SAR remains4000,
+DAR endsBFA0,count0,TEsets;originalCPU pollsTE andfinallyclearsDE/TE,
+leavingCHCR001F0128 andDMAOR1. No interrupt is requested (IE=0).
+-With DMA service withheld, original100D8 stays in1015C..10162 wait through
+2000instruction bound. Seed9158=A55A remains; no synthetic completion flag.
+This is a controlled no-service test, not a physical firmware-hang claim.
+
+Bounded model: sh_control_initialize_dma.py supports onlychannel0,
+fixed-source/incrementing-destination,longword,auto-request burst,aligned
+applicationRAM endpoints,1..8192units. Wholeburst completes before nextCPU
+instruction; no bus-cycle/elapsed-time/arbitration/interrupt/error model.
+DMATCR0=0 (hardwaremaximum count) is rejected ratherthan treatedas zero work.
+Otherchannels/modes/invalidaddresses are rejected. TE andDMAOR errorflags
+require observedone beforeclearing; software cannot setthem. Halfwordaliases
+preservetheotherhalf, includingtheoriginalECCE write. No firmwarecallee stub.
+The existing initialized-activity observer now inherits this boundedfixture;
+its ordinary nonDMA behavior remains inherited. Production/ROM/sharedISA
+unchanged; commonprobe runner parameterized forentry/limit toavoidduplication.
+
+Primary source: officialSH7058 REJ09B0046-0300H rev3.00, retainedPDF/JSON
+sources/renesas-sh7058-hardware-rej09b0046-0300h.{pdf,json};SHA256
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+Rechecked2026-10-06. Table10.1 printed166-167/PDF208-209: registerwidths and
+halfwordpreservation. Sections10.2.3/4/5 and10.3 printed169-179/PDF211-221:
+24-bitcount,addresses/modes,enable/statusflags andtransfercompletion.
+Localextraction PyMuPDF1.28.2; retainedPDF makes rereading reproducible.
+
+Executedsequence:100D8 -> CA94 ->1619A ->10explicit event2 deliveries.
+EntirecandidateRAM seedednonzero beforeclear; guardedwholeRAM oracle passes.
+CA94 samplesexplicitPFDRbit0=1;1619A returns with9158/915E/915C=0,
+8FD4=640 and9125=1. Tenouterreturns pass11activity fullRAM boundaries:
+initializer6F2C8 andfivecondition/hold/timer routines ineachoftwocontrolcalls.
+735C remains1,9158/915E remain0. This demonstrates localRAM/input provenance
+underexplicitfixtures, notfullboot/cadence/board/remote-controller behavior.
+Fulljoiningcallerchain is notexecuted; sequence isconsistent withknownstartup
+fragments. Originalstack fixtureoutsideclearblock doesnotprovephysicalstack
+relocation/reset behavior.
+
+Staticcaller evidence: F89C startup calls10022 viaF8A6;10022 BSR100D8 at100A2.
+DD46 callsCA94 andDF66 calls21540->1619A inanotherstartupfragment. Linkfrom
+F89C's scheduler entry tothatfragment remainsunexecuted. Earlieralignedliteral
+search foundno100D8 reference becauseitscallerusesrelativeBSR; a fullaligned
+BRA/BSR destination scan found100A2; scan is preserved inverify_control_initialize_dma.py
+and its JSONcaller-candidate list. Literalabsence isnotabsenceofcallers.
+
+Parent10022 probe stopsbeforeclear atF534,unsupportedbyte readFFFFF70B.
+CORRECTION toinitialcommentary: thisisSYSCR2 clock/module-standby control,
+NOTthewatchdog. Table5.2 printed74/PDF116 andappendixPDF1108 specifyread
+F70B/byte,writeF70A/word; keyedwrite usesupperbyte3C. Proseprinted76/949
+ambiguously saysallocatedF70A when discussingreads; do not useittooverride
+explicitread-address tables. SYSCR2 reset1,implementedbits8F. No register
+fixture addedyet; status/stall remainsinparentprobeJSON withreproduciblescript.
+Next: bound/testSYSCR2 keyedaccess andclock/FPUstandbylimitations, thenresume
+10022 toverifyparent RAM-test/clear andrestore behavior. Do notskip waitor
+pretend fullhardware/resetproof. Avoidexpandingunrelatedperipheralsintogoals.
+
+ECU/AT operationalqueue/ack/overlap/cadence/persistence/physicalintegration,
+traction CAN211/21A sender/units/remoteDSC actuation,andbothroofdirections
+interruption/resume/reversal/timeout/LRsync/recovery remainindependentlyopen.
+Roof evidence andnextsource/receiverneed remaintraction-roof.txt; userhasnone.
+Ghidra100D8 annotation savedandindependentlyrestored; identitybelow.
+
+Finalsave/restore:1900annotations (825ECU/1075TCU),956identicalexports,
+11projecthashes verifiedbefore/after independentreadonlyreopen. Both.gpr/.rep
+archivedtogether,10,989,977bytes;SHA256:
+7c827c805f2f60bd9b618ac40f89387b253872ddb1ec1097d70d9743c30b0586
+Restoredatignoredghidra/restore-check/control-initialize-dma-20261006.
+Apply/readback/restorelogs cleanwithbothREADBACK_OK. Ghidra12.1.3PUBLIC/
+Java21.0.10; workflowREADME/snapshot.py andcurrentmanifests preserved.
+NinenewartifactsGit-eligible;six changed/new scriptscompile;diffcheckclean.
+MixedindexincludingADarchive.tmp intact. Locallysaved only;nostaging/commit/
+push. No productioncode,ROM orsharedISA changes.

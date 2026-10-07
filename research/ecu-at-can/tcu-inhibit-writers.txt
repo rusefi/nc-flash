@@ -1,0 +1,124 @@
+TCU inhibit writers and timed mode pulses — 2026-10-06
+====================================================
+Fullobjective remains ECU/automatic-transmission CAN integration, deeptraction
+logic/integration and NC roof folding ANDunfolding interruption/resume/reversal,
+communicationtimeout,L/Rsynchronization/faultrecovery. Allthree incomplete.
+Userhasnoadditionalremotecontroller/capture/bench inputs. No staging/commit/push.
+
+Executed inhibit writer47C9C
+---------------------------
+verify_tcu_inhibit_writers.py predicts completeapplicationRAM plusreturnvalue
+independently, then executesoriginalinstructions/helpers. Old9C58bit0 is a
+retainedlatch. WithA735!=0 and92C8bit5clear, argumentlowbyte5 isreplacedby4.
+Ifmainlatch isclear, signed16(80EA) strictlybelow the selectedstockthreshold
+setsit:7424(ROM77350) when92C7bit3isset, otherwise16640(ROM7734E).
+Otherargumentbits retain unlessa branchassigns4 or3; highargumentcases tested.
+
+Asecond latch at9C60bit2 sets when92C7bit7isset, bit2wasclear andsigned80EA
+isstrictlybelow16640. ItdoesnotrequireA735 or92C8 admission. If9415==1,
+bit2alwaysclears, andmain9C58bit0 clears onlywhenA735==0. Othermodebytes
+including2 donotclear eitherlatch. Eitherremaininglatch forcesreturnedproposal3.
+Other9C58/9C60bits preserve. Thusauxlatch canforceproposal3 withoutdirectly
+setting9C58bit0/outputsource1. No physicalmeaning assigned toA735/80EA/flags.
+Thresholdexactboundary andsignedwordcases arechecked withallfourcombinations
+of92C7 bits3/7. Theargument5->4 adjustment happensonlyinsideprimaryadmission.
+
+Writerfound viaoriginalBSR47B66 inside47B3C; longliteralrefs47C9C wereempty.
+No longliteralhit neverprovedabsence. Incompleteparent47B72/47BB4/47DA8
+admission/proposal semantics remain distinctfromverifiedleaf47C9C effects.
+Fulltask boundary checks execute47C9C inphase1/5 withtheactualincomingargument.
+
+Executed producer23DD0 andrequest APIs
+-------------------------------------
+23D94 clears9414..941A and8280; doesnotreset82B9/82BA. Threeoriginalsetters
+23DB8/23DC0/23DC8 write9417/9418/9419=1 respectively.
+23DD0 detectsA520 exact0->1 (old941A==0,currentA520==1) onlywhile8280 isbelow
+stockROM76EA0=92. Theinstructioncompares signextendedbytes asunsigned32;
+withstock92 allcounterbytes92..255fail. All256counterbytes aretested.
+ItcopiescurrentA520 to941A regardless ofevent; nonbinarybytes arenotedges.
+
+9414 is1 iff9417==1 ORqualifiedstartupedge, otherwise0. Atriggerclears9417.
+9415 retainsoldstate unless9418==1 ORqualifiedstartupedge: trigger sets1,
+clears9418 andresets82B9=0. Thenstate1 clearsif82B9>=15.
+9416 similarlyrespondsto9419==1/reset82BA, withstate1 clearingat82BA>=15;
+startupedge alone doesnottrigger9416. Non1state/requestbytes arepreserved
+whereoriginalcode doesnotexplicitlyoverwrite them. Reset precedesexpiry,
+soanewrequestwitholdtimer255 setsstate1 andtimer0 ratherthanexpiringimmediately.
+Original23E7C readhelper returns9415. Candidate51088 isanotherreader and
+resetsitsownpublication state; itisnota9415writer.
+No timerincrement occursinside23DD0. These are softwarestates, not physical
+switchstates or a proved diagnostic-mode meaning for everyconsumer.
+
+Actual timerwheel andtask phase interaction
+------------------------------------------
+Original11014 executes512times witha completeapplicationRAM oracle using
+independentRANGES fromverify_tcu_request_timing.py. 8280 increments/saturates
+in8188..8281 atwheelposition3mod8.82B9/82BA increment/saturatein8284..82BC
+atposition7mod16. Threewheelcounters8494/8498/849C and90C8 increments/wrap
+arechecked, as areallotherexistingRANGES.12880 initializeswheelcounters.
+Eightwheelcalls perapplicationcall isexplicitlyimposed inthisscenario,
+NOT measuredinterruptcadence. Absoluteclock/units/interruptdelivery remainopen.
+
+32standalone+64retained complete126EC tasks passnewwriteroracles atactual
+boundaries:24pulseproducerchecks(phase0/4) and24latchwriterchecks(phase1/5).
+Existingphase3/7 source1 andfivecommand/output oracles remainactive, asdo
+macrocallorder/phase/event4 and529AC/185F8 checks. In96fulltasks this gives
+48newwriter+24source+288five-output+192command/pin=552semanticboundaries.
+Othernestedtasksemantics arestillnotallindependentlymodeled.
+
+Retainedzero-basedcalltimeline usesA735=1 for0..15 then0, withoriginal
+23DC0 requestat24. No direct9C58 or9415 stateinjection:
+ call5: 47C9C sets9C58bit0 underproducedtaskconditions.
+ call7: 1F3CE setsA5A2;529AC producesA5A0/8A18=1.
+ call24: request9418 isconsumed;9415=1,82B9=0.
+ call25: 47C9C sees9415=1/A735=0 andclears9C58bit0.
+ call27: 1F3CE clearsA5A2 andaggregatecommand;pinselection recovers.
+ call55: timer82B9 reaches15, butpulseproducerhasnotrunatthisphase.
+ call56: phase0 runs23DD0 withtimer16 andclears9415.
+These are verifiedsoftwarecallcounts; never relabelas milliseconds. Actual
+boundaryinputs andoutputs areinJSON. UpstreamA735/92C7/92C8/80EA/A520
+production/admission andexternalphysicalconditions remainpartlyfixture-driven.
+The40callmanual-timer source-inhibit scenario ishistorical; thisscenario now
+usesoriginaltimercode withdeclaredrelativecallratio.
+
+Verification andartifacts
+-------------------------
+1728 latchcases +2128 pulsecases +16init +48requestsetter =3920directchecks.
+32standalone/64retainedtasks,48newwriterboundaries,512fullRAMtimerwheelchecks.
+Finalexpandedrun passes. Initialsmaller432latchcasespassed; expandedmatrix
+separatelycrossesboththresholdbits atall boundaryvalues. No failedfirmware
+claim arose; expansion improvedboundarycoverage andremovedmanualtimerinjection.
+python research/ecu-at-can/verify_tcu_inhibit_writers.py
+python -m py_compile research/ecu-at-can/verify_tcu_inhibit_writers.py
+Python3.14.3. UnchangedTCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Normalreturns checkR8..R15,MACL andSR exceptarithmeticflags. ApplicationRAM
+oracle excludes syntheticstack belowFFFF0000; peripheralstate/traces compare.
+No sharedISA/oldverifier/production edits. RANGES importedwithoutmodification.
+Saveddisassembly: tcu-inhibit-writer-disassembly.txt47C9C..47DF0;
+mode-writer23D70..23E82; latch-caller47B3C..47B72;mode-caller1E880..1E890.
+Toolinvocation/provenance: disassemble.py withGNU SHbinutils2.42 asrecorded
+in tcu-timer-configuration.txt. ExactROMaddresses andconstants reproducible.
+Ghidra adds6function/14data annotations; pairedarchive/independentrestore
+identity livesinCHECKPOINT.txt andghidra manifests. Savedlocally only.
+
+Continuation andindependent scopes
+----------------------------------
+NextTCU:535B4 isonlya tailthunkto23DC0; actualrequestlead54B32 loadsit
+frompool54B60. A520 initializer51308 andproducer51314 arestaticleads:
+produceraccepts88CC when88CD==2/A991bit0, otherwiseuses5FD38 fallbackonbit2
+(mask4), retainsoldvalueonotherinvalidstates andpublishesstatusA521.
+Savedrequest-caller/input-leads disassembly covers5358A..535E0 and51300..51390.
+Neithernewproducer norrequestadmission isclaimedexecutedwithanindependent
+oracle here. A735/92C7/92C8/80EA upstreamadmission andparent47B3C
+proposalchain. Slot1F3B6 callerkeydomain andphase0/4 1FD24/23BF0 request
+queue/ack/overlap remainopen. Source1latch/pulse numericalwriters nowproved;
+do notlabelthemunexplored. Realclock/boot/CPUenable/PBIR/RTE,persistence and
+physicalboard/load/feedback integration remainunproved.
+Traction remainsseparate: executedlocalECU ADC/qualification/ATspark evidence;
+nextfulltask ordering/freshness/399B0 callers. FactoryDSC docs/candidateCAN211/
+21A sender/units aredistinctfrommissingremoteDSC/board/physicalproof.
+Roofneedsnewapplicablesource orOEMreceiver/capture/physicalevidence. Factory
+revision/pin/PID conflicts persist. BOTHfolding ANDunfolding interruption,
+resume/reversal,communicationtimeout,L/Rsynchronization/faultrecovery remainopen.
+No extra userartifacts; do notaskagain. No staging/commit/push authorized.

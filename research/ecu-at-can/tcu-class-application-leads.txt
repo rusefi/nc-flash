@@ -1,0 +1,59 @@
+TCU class-adjustment application leads (2026-10-06)
+=================================================
+Static interpretation unless explicitly linked to an executed verifier.
+Source: unchanged examples/LFG1TF000.bin, SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+GNU SH binutils 2.42 disassembly is retained in:
+ tcu-class-application-leads-disassembly.txt (366D0..36A0A)
+ tcu-class-admission-leads-disassembly.txt (36B52..36D1A)
+Reproduce with disassemble.py and the same objdump command recorded in
+ tcu-class-adjustments.txt, replacing the range.
+Literal pools decoded as instructions are DATA, not additional code paths.
+
+Consumer application lead
+-------------------------
+36704 calls 3AC70, dynamic consumer 36A74 and helper 3676E. The latter calls
+fixed consumer 36A0A, scales it by unsigned word 77130=32768 / 2^15 through
+10C4C, adds signed 7712E=4019, and clamps between 76DD2=0 and 76DD0=15232.
+36704 combines signed half of 98DC, 3AC70 output and dynamic adjustment
+weighted by 7712A=128 (original arithmetic shift helper); it clamps against
+3676E's return and upper 7712C=15206. It stores the lower value at 9854,
+then tail-calls 39C0A with byte 9856 and selected value. Validate full helpers,
+shift count, stack-word access, clamp order and tail before claiming executed
+application or assigning physical meaning.
+
+Uniform update state machine
+----------------------------
+36800 dispatches state byte 9858 through 3689E (state 1) or 368B6 (state 2).
+If resulting state is 3 it calls verified 36B26 with signed 77138=11, then
+clears the state through 368D6. State-2 helper 368B6 selects 3 only when
+36948 returns 1. Other helpers: 36838 starts state 1 from zero; 36848 checks
+9889 bit 6 and sets state 2 or 0; 3686E updates count 985A/cache index 3.
+
+36948 checks 9889 bit 0, GBR bytes 8080==6 and 8081>=4, signed word 80EE in
+[77134=3712,77136=5120), and finally an unsigned comparison of the sign-
+extended 985A load against sign-extended ROM word 7713A. Stock 7713A=0;
+cmp/hs at 36984 and branch 36986 therefore appear to reject every count.
+This is STATIC, not yet exhaustively executed. It suggests another stock
+admission restriction; do not equate standalone 36B26 behavior with natural
+state-2 admission. Direct entry with state 3 may still call the updater.
+
+Class update state machine
+--------------------------
+369A4 dispatches state 985C through 36B52 (1) or 36BAC (2), THEN runs the
+previously verified counter/update slice. 369EC starts state 1 from zero and
+resets timer 821E; 36A02 clears the state. 36CEC reports modes 2/3/4/6 from
+getter 371EA (byte 9870). 36CD8 compares timer 821E against byte 7714C=61.
+
+36BDA reads 9390, 80F2 and 98DE before calling getters 371EA (9870) and
+39F8E (9922). It requires nonzero 9922, 98E0 bit 0 clear, mode neither 0 nor
+5, signed 9390 in [10240,12800), signed 80F2 in [12800,12800), signed 98DE
+in [-77,77), 92C5 bit 2 clear, 92D1 bit 2 set and signed 993E>=-128. Failure
+clears timer 821E. Equal 80F2 bounds make that admission empty in stock ROM.
+See verify_tcu_class_admission.py and its separate result for executed proof;
+this file alone records static decoding and next application leads.
+
+Next: use complete 369A4 stock admission evidence to qualify the earlier
+conditional updater tests. Execute 36704/3676E and 39C0A application, and
+36800/36948 uniform-update admission. Natural 98DC/80EE producers, other
+callers, persistence, queue overlap and physical integration remain open.

@@ -1,0 +1,3025 @@
+{
+  "scope": "Original three limit producers and a seven-call production caller segment.\n\nStock finite RTZ behavior; physical units and full task scheduling remain open.\n",
+  "ecu_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "direct": {
+    "accumulator": 540,
+    "factor": 32,
+    "sum": 2022,
+    "caller": 24
+  },
+  "sum_branches": {
+    "slew": 162,
+    "zero": 432,
+    "curve": 255,
+    "target": 795,
+    "mode_override": 378
+  },
+  "serial_cycles": 320,
+  "paired_can_updates": 36,
+  "can211_latch_updates": 320,
+  "lifecycle": [
+    {
+      "call": 1,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        1,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 0,
+        "bad_count": 0,
+        "good_count": 0,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 16.5,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 16.5,
+      "absolute_timer": 0,
+      "source": 6.363228797912598,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.007000000216066837,
+      "mapped": 0.28600001335144043,
+      "gated": 0.04006999731063843,
+      "correction": 0.05000000074505806,
+      "contribution_enable": 1,
+      "baseline": 0.3760699927806854,
+      "current": 1.0702593326568604,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "pulse",
+      "magnitude_holdoff": 12,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.10000000149011612,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -1.3749957084655762,
+        0.0,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.0,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 2,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        2,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 1,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.63132095336914,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.63132095336914,
+      "absolute_timer": 1,
+      "source": 0.13132144510746002,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.014000000432133675,
+      "mapped": 0.28600001335144043,
+      "gated": 0.040139999240636826,
+      "correction": 0.0494999997317791,
+      "contribution_enable": 1,
+      "baseline": 0.32613998651504517,
+      "current": -0.0183501448482275,
+      "average": 90.0,
+      "magnitude_gate": 0,
+      "magnitude_branch": "clear",
+      "magnitude_holdoff": 11,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.0,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.0,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -1.3749957084655762,
+        0.0,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.0,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 10,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        10,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 9,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.741301536560059,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.741301536560059,
+      "absolute_timer": 9,
+      "source": 0.24130168557167053,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.06999999284744263,
+      "mapped": 0.28600001335144043,
+      "gated": 0.040699996054172516,
+      "correction": 0.04549999162554741,
+      "contribution_enable": 1,
+      "baseline": 0.32670000195503235,
+      "current": 0.1035609096288681,
+      "average": 90.0,
+      "magnitude_gate": 0,
+      "magnitude_branch": "clear",
+      "magnitude_holdoff": 5,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.0,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.0,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -1.3749957084655762,
+        0.0,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.0,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 11,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        11,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 10,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.575146675109863,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.575146675109863,
+      "absolute_timer": 10,
+      "source": 0.07514702528715134,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 8192,
+      "latch": 1,
+      "weight": 0.07699999213218689,
+      "mapped": 0.28600001335144043,
+      "gated": 0.0,
+      "correction": 0.04499999061226845,
+      "contribution_enable": 1,
+      "baseline": 0.28600001335144043,
+      "current": 0.08397157490253448,
+      "average": 90.0,
+      "magnitude_gate": 0,
+      "magnitude_branch": "clear",
+      "magnitude_holdoff": 4,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.0,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.0,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -1.3749957084655762,
+        0.0,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.0,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 12,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        12,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 11,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.641592979431152,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.641592979431152,
+      "absolute_timer": 11,
+      "source": 0.14159387350082397,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 8192,
+      "latch": 1,
+      "weight": 0.08399999141693115,
+      "mapped": 0.28600001335144043,
+      "gated": 0.0,
+      "correction": 0.04449998959898949,
+      "contribution_enable": 1,
+      "baseline": 0.28600001335144043,
+      "current": 0.09180554747581482,
+      "average": 90.0,
+      "magnitude_gate": 0,
+      "magnitude_branch": "clear",
+      "magnitude_holdoff": 3,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.0,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.0,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -1.3749957084655762,
+        0.0,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.0,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 20,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        20,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 19,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.950240135192871,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.950240135192871,
+      "absolute_timer": 19,
+      "source": 0.4502403736114502,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 8192,
+      "latch": 1,
+      "weight": 0.13999998569488525,
+      "mapped": 0.28600001335144043,
+      "gated": 0.0,
+      "correction": 0.0404999814927578,
+      "contribution_enable": 1,
+      "baseline": 0.335999995470047,
+      "current": 0.1281944066286087,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 9,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.08499999344348907,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -1.3749957084655762,
+        0.0,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.0,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 21,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        21,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 20,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.706585884094238,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.706585884094238,
+      "absolute_timer": 20,
+      "source": 1.2065861225128174,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 1,
+      "weight": 0.14699998497962952,
+      "mapped": 0.28600001335144043,
+      "gated": 0.0,
+      "correction": 0.039999980479478836,
+      "contribution_enable": 1,
+      "baseline": 0.36951330304145813,
+      "current": 0.21730615198612213,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 8,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.07999999076128006,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.03432999923825264,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 7.846829891204834,
+      "normalized_contribution": 0.03351331874728203,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 22,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        22,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 21,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.004441261291504,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.004441261291504,
+      "absolute_timer": 21,
+      "source": 0.5044412612915039,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 1,
+      "weight": 0.15399998426437378,
+      "mapped": 0.28600001335144043,
+      "gated": 0.0,
+      "correction": 0.039499979466199875,
+      "contribution_enable": 1,
+      "baseline": 0.3696599304676056,
+      "current": 0.13458459079265594,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 7,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.07499998807907104,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.06865999847650528,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 7.881159782409668,
+      "normalized_contribution": 0.03365993872284889,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 30,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        30,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 29,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.947793960571289,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.947793960571289,
+      "absolute_timer": 29,
+      "source": 0.44779419898986816,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 1,
+      "weight": 0.20999997854232788,
+      "mapped": 0.28600001335144043,
+      "gated": 0.0,
+      "correction": 0.035499971359968185,
+      "contribution_enable": 1,
+      "baseline": 0.38928914070129395,
+      "current": 0.12790599465370178,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.034999966621398926,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.343299925327301,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.155799865722656,
+      "normalized_contribution": 0.05328917130827904,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 31,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        31,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 30,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 12.282036781311035,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 12.282036781311035,
+      "absolute_timer": 30,
+      "source": 1.7820369005203247,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.21699997782707214,
+      "mapped": 0.28600001335144043,
+      "gated": 0.042169999331235886,
+      "correction": 0.034999970346689224,
+      "contribution_enable": 1,
+      "baseline": 0.44835683703422546,
+      "current": 0.2877481281757355,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.02999996580183506,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.3776299059391022,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.190129280090332,
+      "normalized_contribution": 0.07018686830997467,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 32,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        32,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 31,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.394888877868652,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.394888877868652,
+      "absolute_timer": 31,
+      "source": 0.8948897123336792,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.2239999771118164,
+      "mapped": 0.28600001335144043,
+      "gated": 0.042239997535943985,
+      "correction": 0.03449996933341026,
+      "contribution_enable": 1,
+      "baseline": 0.4628118872642517,
+      "current": 0.18060727417469025,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.024999964982271194,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.4119598865509033,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.224459648132324,
+      "normalized_contribution": 0.08457189798355103,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 40,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        40,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 39,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.967924118041992,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.967924118041992,
+      "absolute_timer": 39,
+      "source": 0.4679247736930847,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.2799999713897705,
+      "mapped": 0.28600001335144043,
+      "gated": 0.042799998074769974,
+      "correction": 0.030499961227178574,
+      "contribution_enable": 1,
+      "baseline": 0.4385058283805847,
+      "current": 0.13027936220169067,
+      "average": 90.0,
+      "magnitude_gate": 0,
+      "magnitude_branch": "clear",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.0,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.0,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.6865995526313782,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.499098777770996,
+      "normalized_contribution": 0.1097058579325676,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 41,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        41,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 40,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.101860046386719,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.101860046386719,
+      "absolute_timer": 40,
+      "source": 0.6018603444099426,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 8192,
+      "latch": 1,
+      "weight": 0.28699997067451477,
+      "mapped": 0.28600001335144043,
+      "gated": 0.0,
+      "correction": 0.029999960213899612,
+      "contribution_enable": 1,
+      "baseline": 0.3958524763584137,
+      "current": 0.14607010781764984,
+      "average": 90.0,
+      "magnitude_gate": 2,
+      "magnitude_branch": "pulse",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.0,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.0,
+      "magnitude_correction": 0.10000000149011612,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.7209295034408569,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.533429145812988,
+      "normalized_contribution": 0.10985247790813446,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 50,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        50,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 49,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.129707336425781,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.129707336425781,
+      "absolute_timer": 49,
+      "source": 0.6297082304954529,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 8192,
+      "latch": 1,
+      "weight": 0.34999996423721313,
+      "mapped": 0.28600001335144043,
+      "gated": 0.0,
+      "correction": 0.025499951094388962,
+      "contribution_enable": 1,
+      "baseline": 0.44717204570770264,
+      "current": 0.14935331046581268,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 5,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.06499998271465302,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        1.029899001121521,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.842398643493652,
+      "normalized_contribution": 0.11117207258939743,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 51,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        51,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 50,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.117094039916992,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.117094039916992,
+      "absolute_timer": 50,
+      "source": 0.6170949339866638,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 1,
+      "weight": 0.3569999635219574,
+      "mapped": 0.28600001335144043,
+      "gated": 0.0,
+      "correction": 0.02499995008111,
+      "contribution_enable": 1,
+      "baseline": 0.4473186731338501,
+      "current": 0.14786624908447266,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 4,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.059999980032444,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        1.064228892326355,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.876728057861328,
+      "normalized_contribution": 0.1113186925649643,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 60,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        60,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 59,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.00357723236084,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.00357723236084,
+      "absolute_timer": 59,
+      "source": 0.5035780668258667,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 1,
+      "weight": 0.41999995708465576,
+      "mapped": 0.28600001335144043,
+      "gated": 0.0,
+      "correction": 0.02049994096159935,
+      "contribution_enable": 1,
+      "baseline": 0.44863826036453247,
+      "current": 0.13448281586170197,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        0.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.0
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.014999964274466038,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        1.3731979131698608,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 9.185697555541992,
+      "normalized_contribution": 0.11263827979564667,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 61,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        61,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 60,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.955368041992188,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 10.955368041992188,
+      "absolute_timer": 60,
+      "source": 0.4553689658641815,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.4269999563694,
+      "mapped": 0.28600001335144043,
+      "gated": 0.044269997626543045,
+      "correction": 0.01999993994832039,
+      "contribution_enable": 1,
+      "baseline": 0.4436767101287842,
+      "current": 0.12879905104637146,
+      "average": 90.0,
+      "magnitude_gate": 0,
+      "magnitude_branch": "clear",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.0,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.03999999910593033,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        1.4075278043746948,
+        0.0
+      ],
+      "upstream_inhibit": 2,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.07340674102306366,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 70,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        70,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 69,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.991312980651855,
+      "can_update": false,
+      "relative": 1.0,
+      "absolute": 10.991312980651855,
+      "absolute_timer": 64,
+      "source": 0.44625088572502136,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.4899999499320984,
+      "mapped": 0.28600001335144043,
+      "gated": 0.04489999637007713,
+      "correction": 0.015499931760132313,
+      "contribution_enable": 1,
+      "baseline": 0.44430670142173767,
+      "current": 0.1277240514755249,
+      "average": 90.0,
+      "magnitude_gate": 0,
+      "magnitude_branch": "clear",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.0,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.03999999910593033,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        1.7164968252182007,
+        0.0
+      ],
+      "upstream_inhibit": 2,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.07340674102306366,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 71,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        71,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 70,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 10.999312400817871,
+      "can_update": false,
+      "relative": 1.0,
+      "absolute": 10.999312400817871,
+      "absolute_timer": 64,
+      "source": 0.5414703488349915,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.49699994921684265,
+      "mapped": 0.28600001335144043,
+      "gated": 0.04496999830007553,
+      "correction": 0.014999931678175926,
+      "contribution_enable": 1,
+      "baseline": 0.4852210581302643,
+      "current": 0.13895024359226227,
+      "average": 90.0,
+      "magnitude_gate": 0,
+      "magnitude_branch": "clear",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.0,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.03999999910593033,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        1.7508267164230347,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 9.563325881958008,
+      "normalized_contribution": 0.11425109952688217,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 80,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        80,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 79,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.071307182312012,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.071307182312012,
+      "absolute_timer": 64,
+      "source": 0.5354613661766052,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.5599997043609619,
+      "mapped": 0.28600001335144043,
+      "gated": 0.04559999704360962,
+      "correction": 0.010499930940568447,
+      "contribution_enable": 1,
+      "baseline": 0.4871706962585449,
+      "current": 0.13824181258678436,
+      "average": 90.0,
+      "magnitude_gate": 0,
+      "magnitude_branch": "clear",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.0,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.03999999910593033,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        2.059795618057251,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 9.872295379638672,
+      "normalized_contribution": 0.11557069420814514,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 81,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        81,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 80,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.079306602478027,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.079306602478027,
+      "absolute_timer": 64,
+      "source": 0.7859823107719421,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.5669996738433838,
+      "mapped": 0.28600001335144043,
+      "gated": 0.05566999316215515,
+      "correction": 0.00999993085861206,
+      "contribution_enable": 1,
+      "baseline": 0.4612320065498352,
+      "current": 0.16777774691581726,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "pulse",
+      "magnitude_holdoff": 12,
+      "magnitude_inputs": [
+        0.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        0.5,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.02500000037252903,
+      "magnitude_correction": 0.08999999612569809,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        2.094125509262085,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 9.906624794006348,
+      "normalized_contribution": 0.09456202387809753,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 100,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        100,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 99,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.231295585632324,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.231295585632324,
+      "absolute_timer": 64,
+      "source": 0.5515521764755249,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.6999990940093994,
+      "mapped": 0.28600001335144043,
+      "gated": 0.05699998885393143,
+      "correction": 0.0004999293596483767,
+      "contribution_enable": 1,
+      "baseline": 0.463954895734787,
+      "current": 0.14013886451721191,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        0.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        0.5,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.02500000037252903,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        2.7463934421539307,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 10.558893203735352,
+      "normalized_contribution": 0.09595493227243423,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 101,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        101,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 100,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.23929500579834,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.23929500579834,
+      "absolute_timer": 64,
+      "source": 0.5503742098808289,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.7069990634918213,
+      "mapped": 0.1711035966873169,
+      "gated": 0.057069987058639526,
+      "correction": 0.0,
+      "contribution_enable": 1,
+      "baseline": 0.32158032059669495,
+      "current": 0.14000000059604645,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.029999999329447746,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        0.5,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.019999999552965164,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -26.3749942779541,
+        1.0979562997817993,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.07340674102306366,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 120,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        120,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 119,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.391283988952637,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.391283988952637,
+      "absolute_timer": 64,
+      "source": 0.5503742098808289,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.8399984836578369,
+      "mapped": 0.1711035966873169,
+      "gated": 0.0583999827504158,
+      "correction": 0.0,
+      "contribution_enable": 1,
+      "baseline": 0.3229103088378906,
+      "current": 0.14000000059604645,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.029999999329447746,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        0.5,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.019999999552965164,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -26.3749942779541,
+        0.0,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.07340674102306366,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 140,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        140,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 139,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.55127239227295,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.55127239227295,
+      "absolute_timer": 64,
+      "source": 0.5503742098808289,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.9799978733062744,
+      "mapped": 0.1711035966873169,
+      "gated": 0.019999999552965164,
+      "correction": 0.0,
+      "contribution_enable": 1,
+      "baseline": 0.2645103335380554,
+      "current": 0.14000000059604645,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.029999999329447746,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        0.5,
+        1.0,
+        0.0
+      ],
+      "magnitude_baseline": 0.0,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -26.3749942779541,
+        0.0,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.07340674102306366,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 160,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        160,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 159,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.711260795593262,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.711260795593262,
+      "absolute_timer": 64,
+      "source": 0.5503742098808289,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 1.0,
+      "mapped": 0.1711035966873169,
+      "gated": 0.05999999865889549,
+      "correction": 0.0,
+      "contribution_enable": 1,
+      "baseline": 0.23910357058048248,
+      "current": 0.14000000059604645,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.029999999329447746,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        0.5,
+        1.0,
+        0.4000000059604645
+      ],
+      "magnitude_baseline": 0.007999999448657036,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -26.3749942779541,
+        0.0,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.0,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 180,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        180,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 179,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.871249198913574,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.871249198913574,
+      "absolute_timer": 64,
+      "source": 0.0,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.859999418258667,
+      "mapped": 0.1711035966873169,
+      "gated": 0.04859999194741249,
+      "correction": 0.0,
+      "contribution_enable": 1,
+      "baseline": 0.26970356702804565,
+      "current": 0.07491765171289444,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        -26.3749942779541,
+        0.0,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 0.0,
+      "normalized_contribution": 0.0,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 181,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        181,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 180,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.87924861907959,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.87924861907959,
+      "absolute_timer": 64,
+      "source": 0.03348962217569351,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.8529993891716003,
+      "mapped": 0.1711035966873169,
+      "gated": 0.0,
+      "correction": 0.0,
+      "contribution_enable": 0,
+      "baseline": 0.2846168875694275,
+      "current": 0.07906024158000946,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.07999999821186066,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.07999999821186066,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.03432999923825264,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 7.846829891204834,
+      "normalized_contribution": 0.03351331874728203,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 190,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        190,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 189,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.95124340057373,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.95124340057373,
+      "absolute_timer": 64,
+      "source": 0.03659864887595177,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.7899991273880005,
+      "mapped": 0.1711035966873169,
+      "gated": 0.0,
+      "correction": 0.0,
+      "contribution_enable": 0,
+      "baseline": 0.28593647480010986,
+      "current": 0.07942678779363632,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.07999999821186066,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.07999999821186066,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.343299925327301,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.155799865722656,
+      "normalized_contribution": 0.034832913428545,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 191,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        191,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 190,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 11.959242820739746,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 11.959242820739746,
+      "absolute_timer": 64,
+      "source": 0.19675704836845398,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.7829990983009338,
+      "mapped": 0.1711035966873169,
+      "gated": 0.04782998934388161,
+      "correction": 0.05000000074505806,
+      "contribution_enable": 1,
+      "baseline": 0.30391308665275574,
+      "current": 0.09830918163061142,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.3776299059391022,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.190129280090332,
+      "normalized_contribution": 0.034979529678821564,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 200,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        200,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 199,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 12.031237602233887,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 12.031237602233887,
+      "absolute_timer": 64,
+      "source": 0.18777944147586823,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.719998836517334,
+      "mapped": 0.1711035966873169,
+      "gated": 0.04719998687505722,
+      "correction": 0.04549999162554741,
+      "contribution_enable": 1,
+      "baseline": 0.3046026825904846,
+      "current": 0.09725072979927063,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.6865995526313782,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.499098777770996,
+      "normalized_contribution": 0.03629911690950394,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 201,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        201,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 200,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 12.039237022399902,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 12.039237022399902,
+      "absolute_timer": 64,
+      "source": 0.1867818981409073,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.7129988074302673,
+      "mapped": 0.1711035966873169,
+      "gated": 0.04712998494505882,
+      "correction": 0.04499999061226845,
+      "contribution_enable": 1,
+      "baseline": 0.3046793043613434,
+      "current": 0.09713312983512878,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        0.7209295034408569,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 8.533429145812988,
+      "normalized_contribution": 0.0364457406103611,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 220,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        220,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 219,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 12.1912260055542,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 12.1912260055542,
+      "absolute_timer": 64,
+      "source": 0.16782891750335693,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.579998254776001,
+      "mapped": 0.1711035966873169,
+      "gated": 0.04579998180270195,
+      "correction": 0.035499971359968185,
+      "contribution_enable": 1,
+      "baseline": 0.3061350882053375,
+      "current": 0.09489861130714417,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        1.3731979131698608,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 9.185697555541992,
+      "normalized_contribution": 0.03923153877258301,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 240,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        240,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 239,
+        "fault": 0,
+        "recovery": 0
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 12.351214408874512,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 12.351214408874512,
+      "absolute_timer": 64,
+      "source": 0.3208310008049011,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.43999767303466797,
+      "mapped": 0.1711035966873169,
+      "gated": 0.04439997300505638,
+      "correction": 0.025499951094388962,
+      "contribution_enable": 1,
+      "baseline": 0.3810742497444153,
+      "current": 0.11293727159500122,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        2.059795618057251,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 9.872295379638672,
+      "normalized_contribution": 0.11557069420814514,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 260,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        260,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 259,
+        "fault": 0,
+        "recovery": 1
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 12.511202812194824,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 12.511202812194824,
+      "absolute_timer": 64,
+      "source": 0.30088064074516296,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.29999709129333496,
+      "mapped": 0.1711035966873169,
+      "gated": 0.04299996793270111,
+      "correction": 0.015499931760132313,
+      "contribution_enable": 1,
+      "baseline": 0.3826066553592682,
+      "current": 0.11058515310287476,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        2.7463934421539307,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 10.558893203735352,
+      "normalized_contribution": 0.11850311607122421,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 280,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        280,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 279,
+        "fault": 0,
+        "recovery": 1
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 12.671191215515137,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 12.671191215515137,
+      "absolute_timer": 64,
+      "source": 0.2809302806854248,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.15999670326709747,
+      "mapped": 0.1711035966873169,
+      "gated": 0.04159996658563614,
+      "correction": 0.0054999301210045815,
+      "contribution_enable": 1,
+      "baseline": 0.3841390609741211,
+      "current": 0.10823304206132889,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        3.4329912662506104,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 11.245491027832031,
+      "normalized_contribution": 0.12143553048372269,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 300,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        300,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 299,
+        "fault": 0,
+        "recovery": 1
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 12.83117961883545,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 12.83117961883545,
+      "absolute_timer": 64,
+      "source": 0.27158254384994507,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.01999656856060028,
+      "mapped": 0.1711035966873169,
+      "gated": 0.04019996151328087,
+      "correction": 0.0,
+      "contribution_enable": 1,
+      "baseline": 0.385671466588974,
+      "current": 0.10713095963001251,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        4.119588851928711,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 11.932088851928711,
+      "normalized_contribution": 0.12436794489622116,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    },
+    {
+      "call": 320,
+      "mode": 1,
+      "branch": "absolute",
+      "selection": "5672",
+      "counters": [
+        0,
+        320,
+        0
+      ],
+      "eligible": 0,
+      "enable": 1,
+      "qualified": 1,
+      "conditional_input": 0,
+      "protected_gate": 0,
+      "monitor": {
+        "gate": 1,
+        "bad_count": 0,
+        "good_count": 319,
+        "fault": 0,
+        "recovery": 1
+      },
+      "gates": {
+        "timer": 0,
+        "qualified": 1,
+        "monitor_enable": 1
+      },
+      "command": 12.991168022155762,
+      "can_update": true,
+      "relative": 1.0,
+      "absolute": 12.991168022155762,
+      "absolute_timer": 64,
+      "source": 0.27802038192749023,
+      "source_stage": 3,
+      "source_enable": 1,
+      "can211_flags": 0,
+      "latch": 0,
+      "weight": 0.0,
+      "mapped": 0.1711035966873169,
+      "gated": 0.03999999910593033,
+      "correction": 0.0,
+      "contribution_enable": 1,
+      "baseline": 0.38840392231941223,
+      "current": 0.10788997262716293,
+      "average": 90.0,
+      "magnitude_gate": 1,
+      "magnitude_branch": "decay",
+      "magnitude_holdoff": 0,
+      "magnitude_inputs": [
+        -9999.0,
+        201.0
+      ],
+      "magnitude_choices": [
+        0.05000000074505806,
+        0.03999999910593033
+      ],
+      "magnitude_factors": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "magnitude_baseline": 0.05000000074505806,
+      "magnitude_correction": 0.0,
+      "input_limits": [
+        65.0,
+        1.0,
+        51.999996185302734
+      ],
+      "upstream_terms": [
+        7.8125,
+        4.806186676025391,
+        0.0
+      ],
+      "upstream_inhibit": 0,
+      "published6cc8": 12.61868667602539,
+      "normalized_contribution": 0.12730036675930023,
+      "normalized_updated": true,
+      "normalized_divisor": 2.996999740600586
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00030ce4 <.data+0x30ce4>:
+   30ce4:	2f e6       	mov.l	r14,@-r15
+   30ce6:	2f d6       	mov.l	r13,@-r15
+   30ce8:	2f c6       	mov.l	r12,@-r15
+   30cea:	4f 22       	sts.l	pr,@-r15
+   30cec:	dd 7a       	mov.l	0x30ed8,r13	! ffff68fc
+   30cee:	de 7b       	mov.l	0x30edc,r14	! ffff67e4
+   30cf0:	d2 7b       	mov.l	0x30ee0,r2	! ffff8f30
+   30cf2:	63 20       	mov.b	@r2,r3
+   30cf4:	23 38       	tst	r3,r3
+   30cf6:	8f 3b       	bf.s	0x30d70
+   30cf8:	00 09       	nop	
+   30cfa:	dc 7a       	mov.l	0x30ee4,r12	! 154bc
+   30cfc:	d4 7a       	mov.l	0x30ee8,r4	! ffff6d5c
+   30cfe:	4c 0b       	jsr	@r12
+   30d00:	00 09       	nop	
+   30d02:	d4 7a       	mov.l	0x30eec,r4	! a3804
+   30d04:	d3 7a       	mov.l	0x30ef0,r3	! 22f8
+   30d06:	43 0b       	jsr	@r3
+   30d08:	f4 0c       	fmov	fr0,fr4
+   30d0a:	d2 7a       	mov.l	0x30ef4,r2	! ffff695c
+   30d0c:	d3 7a       	mov.l	0x30ef8,r3	! 33c02
+   30d0e:	43 0b       	jsr	@r3
+   30d10:	f2 0a       	fmov	fr0,@r2
+   30d12:	d1 7a       	mov.l	0x30efc,r1	! 33c2a
+   30d14:	41 0b       	jsr	@r1
+   30d16:	00 09       	nop	
+   30d18:	d4 79       	mov.l	0x30f00,r4	! ffff6d40
+   30d1a:	4c 0b       	jsr	@r12
+   30d1c:	00 09       	nop	
+   30d1e:	d3 79       	mov.l	0x30f04,r3	! ffff67e0
+   30d20:	d2 79       	mov.l	0x30f08,r2	! ffff6960
+   30d22:	f3 38       	fmov	@r3,fr3
+   30d24:	f2 28       	fmov	@r2,fr2
+   30d26:	f0 30       	fadd	fr3,fr0
+   30d28:	d1 78       	mov.l	0x30f0c,r1	! db0c1
+   30d2a:	f0 20       	fadd	fr2,fr0
+   30d2c:	fd 0a       	fmov	fr0,@r13
+   30d2e:	60 10       	mov.b	@r1,r0
+   30d30:	60 0c       	extu.b	r0,r0
+   30d32:	88 01       	cmp/eq	#1,r0
+   30d34:	8f 19       	bf.s	0x30d6a
+   30d36:	00 09       	nop	
+   30d38:	d4 75       	mov.l	0x30f10,r4	! ffff6d20
+   30d3a:	4c 0b       	jsr	@r12
+   30d3c:	00 09       	nop	
+   30d3e:	d3 75       	mov.l	0x30f14,r3	! db214
+   30d40:	f3 38       	fmov	@r3,fr3
+   30d42:	f0 35       	fcmp/gt	fr3,fr0
+   30d44:	8f 11       	bf.s	0x30d6a
+   30d46:	00 09       	nop	
+   30d48:	d2 73       	mov.l	0x30f18,r2	! ffff6920
+   30d4a:	61 21       	mov.w	@r2,r1
+   30d4c:	21 18       	tst	r1,r1
+   30d4e:	8f 0c       	bf.s	0x30d6a
+   30d50:	00 09       	nop	
+   30d52:	f6 9d       	fldi1	fr6
+   30d54:	c7 72       	mova	0x30f20,r0
+   30d56:	d3 71       	mov.l	0x30f1c,r3	! db210
+   30d58:	f7 08       	fmov	@r0,fr7
+   30d5a:	f3 38       	fmov	@r3,fr3
+   30d5c:	f5 e8       	fmov	@r14,fr5
+   30d5e:	f6 31       	fsub	fr3,fr6
+   30d60:	d2 70       	mov.l	0x30f24,r2	! 2508
+   30d62:	42 0b       	jsr	@r2
+   30d64:	f4 d8       	fmov	@r13,fr4
+   30d66:	a0 08       	bra	0x30d7a
+   30d68:	fe 0a       	fmov	fr0,@r14
+   30d6a:	f3 d8       	fmov	@r13,fr3
+   30d6c:	a0 05       	bra	0x30d7a
+   30d6e:	fe 3a       	fmov	fr3,@r14
+   30d70:	d4 6d       	mov.l	0x30f28,r4	! db15c
+   30d72:	f3 48       	fmov	@r4,fr3
+   30d74:	fd 3a       	fmov	fr3,@r13
+   30d76:	f2 48       	fmov	@r4,fr2
+   30d78:	fe 2a       	fmov	fr2,@r14
+   30d7a:	4f 26       	lds.l	@r15+,pr
+   30d7c:	6c f6       	mov.l	@r15+,r12
+   30d7e:	6d f6       	mov.l	@r15+,r13
+   30d80:	00 0b       	rts	
+   30d82:	6e f6       	mov.l	@r15+,r14
+   30d84:	4f 22       	sts.l	pr,@-r15
+   30d86:	d3 56       	mov.l	0x30ee0,r3	! ffff8f30
+   30d88:	60 30       	mov.b	@r3,r0
+   30d8a:	60 0c       	extu.b	r0,r0
+   30d8c:	88 01       	cmp/eq	#1,r0
+   30d8e:	8f 05       	bf.s	0x30d9c
+   30d90:	00 09       	nop	
+   30d92:	d2 65       	mov.l	0x30f28,r2	! db15c
+   30d94:	d1 65       	mov.l	0x30f2c,r1	! ffff67e8
+   30d96:	f3 28       	fmov	@r2,fr3
+   30d98:	a0 0c       	bra	0x30db4
+   30d9a:	f1 3a       	fmov	fr3,@r1
+   30d9c:	d2 64       	mov.l	0x30f30,r2	! ffff91e5
+   30d9e:	60 20       	mov.b	@r2,r0
+   30da0:	60 0c       	extu.b	r0,r0
+   30da2:	88 01       	cmp/eq	#1,r0
+   30da4:	8f 06       	bf.s	0x30db4
+   30da6:	00 09       	nop	
+   30da8:	d4 55       	mov.l	0x30f00,r4	! ffff6d40
+   30daa:	d1 4e       	mov.l	0x30ee4,r1	! 154bc
+   30dac:	41 0b       	jsr	@r1
+   30dae:	00 09       	nop	
+   30db0:	d3 5e       	mov.l	0x30f2c,r3	! ffff67e8
+   30db2:	f3 0a       	fmov	fr0,@r3
+   30db4:	4f 26       	lds.l	@r15+,pr
+   30db6:	00 0b       	rts	
+   30db8:	00 09       	nop	
+

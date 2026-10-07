@@ -1,6 +1,7 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Only8009==3 tail-calls11014; every byte mode executed. */
+/* Only8009==3 tail-calls11014; every byte mode executed. IndependentwholeRAMCMT1prefix cases
+   nowcoverall512 validprimaryphase combinations; tcu-cmt1-delivery.txt. */
 
 uint Timer_ServiceWhenMode3(void)
 

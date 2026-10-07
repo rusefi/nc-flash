@@ -1,0 +1,88 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000f52c <.data+0xf52c>:
+    f52c:	2f e6       	mov.l	r14,@-r15
+    f52e:	4f 22       	sts.l	pr,@-r15
+    f530:	93 2e       	mov.w	0xf590,r3	! f70b
+    f532:	7f fc       	add	#-4,r15
+    f534:	6e 30       	mov.b	@r3,r14
+    f536:	94 2c       	mov.w	0xf592,r4	! fb
+    f538:	d2 17       	mov.l	0xf598,r2	! e7b6
+    f53a:	42 0b       	jsr	@r2
+    f53c:	24 e9       	and	r14,r4
+    f53e:	92 29       	mov.w	0xf594,r2	! f7c2
+    f540:	63 21       	mov.w	@r2,r3
+    f542:	63 3d       	extu.w	r3,r3
+    f544:	d1 14       	mov.l	0xf598,r1	! e7b6
+    f546:	43 19       	shlr8	r3
+    f548:	2f 30       	mov.b	r3,@r15
+    f54a:	41 0b       	jsr	@r1
+    f54c:	64 e3       	mov	r14,r4
+    f54e:	6e f0       	mov.b	@r15,r14
+    f550:	6e ec       	extu.b	r14,r14
+    f552:	60 e3       	mov	r14,r0
+    f554:	88 0b       	cmp/eq	#11,r0
+    f556:	8d 04       	bt.s	0xf562
+    f558:	00 09       	nop	
+    f55a:	60 e3       	mov	r14,r0
+    f55c:	88 0d       	cmp/eq	#13,r0
+    f55e:	8f 02       	bf.s	0xf566
+    f560:	00 09       	nop	
+    f562:	a0 10       	bra	0xf586
+    f564:	e4 00       	mov	#0,r4
+    f566:	88 50       	cmp/eq	#80,r0
+    f568:	8f 02       	bf.s	0xf570
+    f56a:	00 09       	nop	
+    f56c:	a0 0b       	bra	0xf586
+    f56e:	e4 01       	mov	#1,r4
+    f570:	60 e3       	mov	r14,r0
+    f572:	88 0e       	cmp/eq	#14,r0
+    f574:	8d 04       	bt.s	0xf580
+    f576:	00 09       	nop	
+    f578:	60 e3       	mov	r14,r0
+    f57a:	88 0f       	cmp/eq	#15,r0
+    f57c:	8f 02       	bf.s	0xf584
+    f57e:	00 09       	nop	
+    f580:	a0 01       	bra	0xf586
+    f582:	e4 02       	mov	#2,r4
+    f584:	94 07       	mov.w	0xf596,r4	! ff
+    f586:	60 43       	mov	r4,r0
+    f588:	7f 04       	add	#4,r15
+    f58a:	4f 26       	lds.l	@r15+,pr
+    f58c:	00 0b       	rts	
+    f58e:	6e f6       	mov.l	@r15+,r14
+    f590:	f7 0b       	fmov	fr0,@-r7
+    f592:	00 fb       	.word 0x00fb
+    f594:	f7 c2       	fmul	fr12,fr7
+    f596:	00 ff       	mac.l	@r15+,@r0+
+    f598:	00 00       	.word 0x0000
+    f59a:	e7 b6       	mov	#-74,r7
+    f59c:	00 0b       	rts	
+    f59e:	00 09       	nop	
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000e7b6 <.data+0xe7b6>:
+    e7b6:	e6 f7       	mov	#-9,r6
+    e7b8:	e3 3c       	mov	#60,r3
+    e7ba:	46 18       	shll8	r6
+    e7bc:	64 4c       	extu.b	r4,r4
+    e7be:	43 18       	shll8	r3
+    e7c0:	76 0a       	add	#10,r6
+    e7c2:	24 3b       	or	r3,r4
+    e7c4:	26 41       	mov.w	r4,@r6
+    e7c6:	00 09       	nop	
+    e7c8:	00 09       	nop	
+    e7ca:	00 09       	nop	
+    e7cc:	00 09       	nop	
+    e7ce:	00 0b       	rts	
+    e7d0:	00 09       	nop	
+

@@ -1,0 +1,18 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000022e4 <.data+0x22e4>:
+    22e4:	00 02       	stc	sr,r0
+    22e6:	c9 f0       	and	#240,r0
+    22e8:	35 02       	cmp/hs	r0,r5
+    22ea:	8d 01       	bt.s	0x22f0
+    22ec:	24 02       	mov.l	r0,@r4
+    22ee:	65 03       	mov	r0,r5
+    22f0:	00 0b       	rts	
+    22f2:	45 0e       	ldc	r5,sr
+    22f4:	00 0b       	rts	
+    22f6:	44 0e       	ldc	r4,sr
+

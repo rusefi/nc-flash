@@ -1,7 +1,9 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Executed byte-index+13 selection from eight15-byte tables763FC..76465;code+1 andoperation+8
-   overrides,flag+18bit20 forcode7. Indices0..14 tested; origin bounds and time units open. */
+/* Eight15-byte table selector bycode/operation/flag20,index+13. Producer3138A normallyindex0..4.
+   Naturalcode5/op1/index0 selectsROM763FC=85; originalhalf-rate8115timer
+   resets151,reaches85at320,nextmanager service321 releases/acks inexplicit11014/task interleave. No
+   physicaltimeclaim. tcu-initialized-requests.txt. */
 
 undefined1 SparkRequest_SelectFirstListRampDuration(int param_1)
 

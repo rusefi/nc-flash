@@ -1,0 +1,120 @@
+TCU CMT1 admission and joined timer delivery — 2026-10-07
+========================================================
+Fullobjective: ECU/AT integration, deeptraction logic/integration, andNC roof
+folding AND unfolding withinterruption, resume/reversal, communicationtimeout,
+L/Rsync andfaultrecovery. Allincomplete. UserhasnoextraDSC/roof dumps/captures/
+benchresults; no stage/commit/push. Otherresearchthread remainspaused.
+
+Verified independent boundary
+------------------------------
+verify_tcu_cmt1_interrupt.py:512 originalinitializer cases,1024 independent
+wholeapplicationRAM ISRprefix cases,6illegalaccess rejections PASS.
+Initializers16CE4/12374 eachtest256 lowstart-registerbytes withupperA5.
+16CE4 writes1279(04FF) toFFFFF71C andORsbit1 inFFFFF710.12374 firstcalls
+12880->11004 resettinglongphases8494/8498/849C, then8009=1 andcompare/start.
+Clock84D0, captureelapsed91AC and90C8 remain unchangedbyinitialization.
+
+Original16CF4..16D3E beforeRTE: firstF718 statusbit80 admits; secondwordread
+isANDFF7F andwritten in12386 JSR delayslot.12386 promotesmode8009=1->3,
+otherwise preservesmode.12886 calls11014 onlyforresulting3. All256 modebytes
+withbothstatusstates plusall512 validprimaryphase combinations tested.
+Originalprimarywheel executes intact. Independentmodel coversall13 ranges,
+90C8 wrap andphase16/16/2 cascade. WholeRAM comparison excludesonlysynthetic
+stack, nototherapplicationstate. Exacthelperentries, finiteorderedMMIO and
+GPR/PR/MACL/SRoutside301 preservedbeforeRTE. Profile13 start875C,last86B2,
+max86D6; stock5F634scale0 preserveslatency86FA/871E. Durations0/100/75/65535
+coverzero,normal,32-bitcounterwrap andclamp. No hardwareRTE/clockrate claim.
+
+Model and shared-loop reuse
+----------------------------
+verify_tcu_request_timing.advance_model extracts theexistingindependentrange
+schedule; original1024-call/mode/requestsuite rerun byte-identical SHA256
+1b1a611036e7acdf8f26bbfeece5f5e1b02975c99faa3c89944aac06ec77f5f2.
+Result tcu-request-timing-reuse-verification.json. SharedpreRTE/register loop
+run_preserving_prefix nowalso usedbycapture andCMT0 tests. Reruns byte-identical:
+ capture512/6rejections f27de1daa8d2fbdba5f21582f82e9540fb30e9a7bffc87462de5cc75d39ef69e
+ CMT0512init/516prefix c0b374f13a436b68aef5e6c8eacdb6c57b1e0731ee9566ff8dc200c378b2a238
+Recorded in tcu-interrupt-prefix-reuse-verification.json. No sharedISA/ROM edits.
+
+Joined experiment completed
+-------------------------------
+probe_tcu_initialized_requests.run_primary_timer optionalhook routes the
+sharedrunner'sfirst11014 andqualifiedfixture'sremaining7 throughonepath;
+defaultdirectcalls retained. probe_tcu_cmt1_delivery.py executesoriginal12374
+withF710sample1, preserving precedingCMT0startbit (write3). Everypriorwheelcall
+isreplaced bytheverified16CF4 prefix, withF718samples128/128 andF6C0 samples
+1000*event_number then+100. Perpair exactly8 CMT1/100 CMT0 events; samecapture
+intervals, stop280, CANreceipts andapplication/diagnostic interleave. Theseare
+explicitfixtures, not measuredphysicalcadence. All8 actualISR models checkwhole
+RAM; no doublefirstwheelcall. Actual20CBC holdentry/return observer inherited
+fromtcu-clock-hold.txt, includingindependentwholeRAM proof.
+Prefix8 PASS:64CMT1/800CMT0/2actualholdchecks; removingONLYhold_checks and
+cmt1_interrupts yields exactprior8. verify_tcu_cmt1_delivery.py PASS.
+Full320 PASS:2560 independentwholeRAM CMT1 prefixes,32000 CMT0 prefixes,
+560 capture prefixes and80 actual20CBC wholeRAM returns. Two creations and20
+acks; no failure. Removing ONLY two new observations yields exactprior320;
+initial8 also exact. Retirement194, faultclear284, inhibit288, normalinput290.
+At280 actualhead9/history18*1216/elapsed100/timer8 producesratio21557 andhold;
+284 elapsed500/timer16 gives107789. History/head preservedthrough316, timer80;
+no resettimeout reached. Rawlateentry inference is now directly observed.
+No forced flags, ages, phase, acknowledgements orsource values.
+
+Reproduce and limits
+---------------------
+ python research/ecu-at-can/verify_tcu_cmt1_interrupt.py
+ python research/ecu-at-can/probe_tcu_cmt1_delivery.py --cycles 8 --filename tcu-cmt1-delivery-prefix8.json
+ python research/ecu-at-can/probe_tcu_cmt1_delivery.py
+TCUexamples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Python3.14.3; GNUobjdump2.42 originalinstructions/commands preserved in
+ tcu-cmt1-admission-lead-disassembly.txt. Theseformerlystaticleads nowhave
+executedinitializer/ISRprefix evidence; physicaladmission andcadence remainopen.
+Traction: localECU acquiredinput/freshness provenwithinfixtures; CAN211/21A
+sender/units andremoteDSC internals/actuation missing. NextlocalCAN/controlboundary.
+Roof: factorydocumentation/candidate/revision evidence distinctfrommissingOEM
+receiver/physicalproof. FoldingANDunfolding, interruption/reversal/timeout/
+sync/recovery remainopen; nextnewapplicablefactory/OEM/physicalsource.
+Checkpoint owns current Ghidra save/restore status.
+
+Next clock configuration lead
+-----------------------------
+After joined320 verification, identify the actual startup writers andvalues
+forF712/F718 andtheir vector/admission setup. Compare624/1279 andsharedstart
+bits do not bythemselves identify clockselection/dividers orrelative cadence.
+The current100CMT0/8CMT1 eventratio remains anexplicitfixture. Derive anyfuture
+ratio fromexecutedconfiguration andapplicablehardware documentation; do not
+infer physicalperiods fromsuccessful lifecycle tests orassign sensorunits.
+
+Ghidra and repository verification — 2026-10-07
+----------------------------------------------
+Both programs saved; pairedarchive refreshed and independentlyreopened.
+1930 annotations (833 ECU/1097 TCU),985 complete identical exports,11 project
+file hashes verified before/after reopening andagainstliveproject.
+Archive ghidra/nc-at-can.tar.gz:11,011,292 bytes; SHA256
+982a4ffce57bd816c235b03d1192afc697ec49bc7743d3309de7abe43d29dd21.
+Ghidra12.1.3 PUBLIC/Java21.0.10; VerifyCanEvidence.java timeout300 forboth
+programs, noERROR/Exception/DECOMPILE_INCOMPLETE. verify_restore.py PASS on
+independent ghidra/restore-check/cmt1-hold-20261007 extraction. Exactmanifests
+are snapshot.json andrestore-verification.json. Two oldgeneratedCMT1Lead
+exports replaced byverifiednames; new12374 functionexport added.
+Pythoncompilation/gitdiff --check PASS;14 newartifacts checked Git-eligible.
+No staging/commit/push; preexistingmixedindex andAD .tar.gz.tmp retained.
+Historical archive above predates full320 completion. Latest checkpoint owns
+the subsequent saved/restored archive identity.
+
+Timing follow-up: tcu-cmt-configuration.txt executes the actual control startup
+slice. Conditional native event ratio256:125 differs from this fixture100:8.
+This completed experiment remains fixture-specific; new cadence integration
+and original task scheduling remain open.
+
+Verified Ghidra persistence — 2026-10-07
+----------------------------------------
+Bothprograms saved andpairedarchive independentlyextracted/reopened read-only.
+1933annotations(833ECU/1100TCU),988 completeidenticalexports,11filehashes
+verified before/after andagainstliveproject.11,011,949-byte archive SHA256
+59af9265e16f4a0e0af61b535a289ff3921c4b88c3660b631c241d84fe1c0647.
+Ghidra12.1.3 PUBLIC/Java21.0.10,300-second export allowance; noERROR/Exception/
+DECOMPILE_INCOMPLETE inapply/live/restore logs. verify_restore.py --write-report
+PASS for ghidra/restore-check/cmt-config-20261007. JSONmanifests authoritative.
+No liveprobe/headlessprocess. Savedlocally, notstaged/committed/pushed; existing
+mixedindex andAD ghidra/nc-at-can.tar.gz.tmp preserved.

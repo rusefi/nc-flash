@@ -1,0 +1,3062 @@
+Renesas SH7055S hardware manual REJ09B0045-0200H; zero-index PDF pages. Source evidence, not hardware test.
+
+PAGE_ZERO 562
+Rev.2.0, 07/03, page 523 of 960 
+ 
+16.1.4 
+Register Configuration 
+Table 16.3 lists the HCAN’s registers. 
+Table 16.3 HCAN Registers 
+Chan-
+nel 
+ 
+Name 
+Abbre-
+viation 
+ 
+R/W 
+Initial 
+Value 
+ 
+Address 
+ 
+Access Size 
+Master control register 
+MCR 
+R/W 
+H'01 
+H'FFFF E400 8 bits 
+General status register 
+GSR 
+R 
+H'0C 
+H'FFFF E401 8 bits 
+16 bits 
+Bit configuration register 
+BCR 
+R/W 
+H'0000 
+H'FFFF E402 8/16 bits 
+Mailbox configuration  
+register 
+MBCR 
+R/W 
+H'0100 
+H'FFFF E404 8/16 bits 
+Transmit wait register 
+TXPR 
+R/W 
+H'0000 
+H'FFFF E406 8/16 bits 
+Transmit wait cancel  
+register 
+TXCR 
+R/W 
+H'0000 
+H'FFFF E408 8/16 bits 
+Transmit acknowledge 
+register 
+TXACK 
+R/W 
+H'0000 
+H'FFFF E40A 8/16 bits 
+Abort acknowledge register 
+ABACK 
+R/W 
+H'0000 
+H'FFFF E40C 8/16 bits 
+Receive complete register 
+RXPR 
+R/W 
+H'0000 
+H'FFFF E40E 8/16 bits 
+Remote request register 
+RFPR 
+R/W 
+H'0000 
+H'FFFF E410 8/16 bits 
+Interrupt register 
+IRR 
+R/W 
+H'0100 
+H'FFFF E412 8/16 bits 
+Mailbox interrupt mask 
+register 
+MBIMR 
+R/W 
+H'FFFF 
+H'FFFF E414 8/16 bits 
+Interrupt mask register 
+IMR 
+R/W 
+H'FEFF 
+H'FFFF E416 8/16 bits 
+Receive error counter 
+REC 
+R 
+H'00 
+H'FFFF E418 8 bits 
+Transmit error counter 
+TEC 
+R 
+H'00 
+H'FFFF E419 8 bits 
+16 bits 
+Unread message status 
+register 
+UMSR 
+R/W 
+H'0000 
+H'FFFF E41A 8/16 bits 
+Local acceptance filter  
+mask L 
+LAFML 
+R/W 
+H'0000 
+H'FFFF E41C 8/16 bits 
+0 
+Local acceptance filter  
+mask H 
+LAFMH 
+R/W 
+H'0000 
+H'FFFF E41E 8/16 bits 
+ 
+
+PAGE_ZERO 563
+Rev.2.0, 07/03, page 524 of 960 
+ 
+Table 16.3 HCAN Registers (cont) 
+Chan-
+nel 
+ 
+Name 
+Abbre-
+viation 
+ 
+R/W 
+Initial 
+Value 
+ 
+Address 
+ 
+Access Size 
+Message control 0  [1:8] 
+MC0 [1:8] 
+R/W 
+Undefined H'FFFF E420 8/16 bits 
+Message control 1  [1:8] 
+MC1 [1:8] 
+R/W 
+Undefined H'FFFF E428 8/16 bits 
+Message control 2  [1:8] 
+MC2 [1:8] 
+R/W 
+Undefined H'FFFF E430 8/16 bits 
+Message control 3  [1:8] 
+MC3 [1:8] 
+R/W 
+Undefined H'FFFF E438 8/16 bits 
+Message control 4 [1:8] 
+MC4 [1:8] 
+R/W 
+Undefined H'FFFF E440 8/16 bits 
+Message control 5 [1:8] 
+MC5 [1:8] 
+R/W 
+Undefined H'FFFF E448 8/16 bits 
+Message control 6 [1:8] 
+MC6 [1:8] 
+R/W 
+Undefined H'FFFF E450 8/16 bits 
+Message control 7 [1:8] 
+MC7 [1:8] 
+R/W 
+Undefined H'FFFF E458 8/16 bits 
+Message control 8 [1:8] 
+MC8 [1:8] 
+R/W 
+Undefined H'FFFF E460 8/16 bits 
+Message control 9 [1:8] 
+MC9 [1:8] 
+R/W 
+Undefined H'FFFF E468 8/16 bits 
+Message control 10 [1:8] 
+MC10 [1:8] R/W 
+Undefined H'FFFF E470 8/16 bits 
+Message control 11 [1:8] 
+MC11 [1:8] R/W 
+Undefined H'FFFF E478 8/16 bits 
+Message control 12 [1:8] 
+MC12 [1:8] R/W 
+Undefined H'FFFF E480 8/16 bits 
+Message control 13 [1:8] 
+MC13 [1:8] R/W 
+Undefined H'FFFF E488 8/16 bits 
+Message control 14 [1:8] 
+MC14 [1:8] R/W 
+Undefined H'FFFF E490 8/16 bits 
+Message control 15 [1:8] 
+MC15 [1:8] R/W 
+Undefined H'FFFF E498 8/16 bits 
+Message data 0 [1:8] 
+MD0 [1:8] 
+R/W 
+Undefined H'FFFF E4B0 8/16 bits 
+Message data 1 [1:8] 
+MD1 [1:8] 
+R/W 
+Undefined H'FFFF E4B8 8/16 bits 
+Message data 2 [1:8] 
+MD2 [1:8] 
+R/W 
+Undefined H'FFFF E4C0 8/16 bits 
+Message data 3 [1:8] 
+MD3 [1:8] 
+R/W 
+Undefined H'FFFF E4C8 8/16 bits 
+Message data 4 [1:8] 
+MD4 [1:8] 
+R/W 
+Undefined H'FFFF E4D0 8/16 bits 
+Message data 5 [1:8] 
+MD5 [1:8] 
+R/W 
+Undefined H'FFFF E4D8 8/16 bits 
+Message data 6 [1:8] 
+MD6 [1:8] 
+R/W 
+Undefined H'FFFF E4E0 8/16 bits 
+Message data 7 [1:8] 
+MD7 [1:8] 
+R/W 
+Undefined H'FFFF E4E8 8/16 bits 
+Message data 8 [1:8] 
+MD8 [1:8] 
+R/W 
+Undefined H'FFFF E4F0 8/16 bits 
+Message data 9 [1:8] 
+MD9 [1:8] 
+R/W 
+Undefined H'FFFF E4F8 8/16 bits 
+Message data 10 [1:8] 
+MD10 [1:8] R/W 
+Undefined H'FFFF E500 8/16 bits 
+Message data 11 [1:8] 
+MD11 [1:8] R/W 
+Undefined H'FFFF E508 8/16 bits 
+Message data 12 [1:8] 
+MD12 [1:8] R/W 
+Undefined H'FFFF E510 8/16 bits 
+Message data 13 [1:8] 
+MD13 [1:8] R/W 
+Undefined H'FFFF E518 8/16 bits 
+Message data 14 [1:8] 
+MD14 [1:8] R/W 
+Undefined H'FFFF E520 8/16 bits 
+0 
+Message data 15 [1:8] 
+MD15 [1:8] R/W 
+Undefined H'FFFF E528 8/16 bits 
+ 
+
+PAGE_ZERO 566
+Rev.2.0, 07/03, page 527 of 960 
+ 
+16.2 
+Register Descriptions 
+16.2.1 
+Master Control Register (MCR) 
+The master control register (MCR) is an 8-bit readable/writable register that controls the CAN 
+interface. 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+MCR7 
+— 
+MCR5 
+— 
+— 
+MCR2 
+MCR1 
+MCR0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+1 
+ 
+R/W: 
+R/W 
+R 
+R/W 
+R 
+R 
+R/W 
+R/W 
+R/W 
+ 
+• Bit 7—HCAN Sleep Mode Release (MCR7): Enables or disables HCAN sleep mode release 
+by bus operation. 
+ 
+Bit 7: MCR7 
+Description 
+0 
+HCAN sleep mode release by CAN bus operation disabled 
+(Initial value) 
+1 
+HCAN sleep mode release by CAN bus operation enabled 
+ 
+• Bit 6—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 5—HCAN Sleep Mode (MCR5): Enables or disables HCAN sleep mode transition. 
+ 
+Bit 5: MCR5 
+Description 
+0 
+HCAN sleep mode released 
+(Initial value) 
+1 
+Transition to HCAN sleep mode enabled 
+ 
+• Bits 4 and 3—Reserved: These bits are always read as 0. The write value should always be 0. 
+• Bit 2—Message Transmission Method (MCR2): Selects the transmission method for transmit 
+messages. 
+ 
+Bit 2: MCR2 
+Description 
+0 
+Transmission order determined by message identifier priority (Initial value) 
+1 
+Transmission order determined by mailbox (buffer) number priority  
+(TXPR1 > TXPR15) 
+ 
+
+PAGE_ZERO 567
+Rev.2.0, 07/03, page 528 of 960 
+ 
+• Bit 1—Halt Request (MCR1): Controls halting of the HCAN module. 
+ 
+Bit 1: MCR1 
+Description 
+0 
+Normal operating mode 
+(Initial value) 
+1 
+Halt mode transition request 
+ 
+• Bit 0—Reset Request (MCR0): Controls resetting of the HCAN module. 
+ 
+Bit 0: MCR0 
+Description 
+0 
+Normal operating mode (MCR0 = 0 and GSR3 = 0) 
+[Setting condition] 
+When 0 is written after an HCAN reset 
+ 
+1 
+Reset mode transition request 
+(Initial value) 
+ 
+In order for GSR3 to change from 1 to 0 after 0 is written to MCR0, time is required before the 
+HCAN is internally reset. There is consequently a delay before GSR3 is cleared to 0 after 
+MCR0 is cleared to 0. 
+ 
+16.2.2 
+General Status Register (GSR) 
+The general status register (GSR) is an 8-bit readable register that indicates the status of the CAN 
+bus. 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+— 
+— 
+— 
+— 
+GSR3 
+GSR2 
+GSR1 
+GSR0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+1 
+1 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+ 
+• Bits 7 to 4—Reserved: These bits are always read as 0. The write value should always be 0. 
+• Bit 3—Reset Status Bit (GSR3): Indicates whether the HCAN module is in the normal 
+operating state or the reset state. This bit cannot be modified. 
+ 
+Bit 3: GSR3 
+Description 
+0 
+Normal operating state 
+[Setting condition] 
+After an HCAN internal reset 
+ 
+1 
+Configuration mode 
+(Initial value) 
+[Reset condition] 
+MCR0-initiated reset state or sleep mode 
+ 
+
+PAGE_ZERO 568
+Rev.2.0, 07/03, page 529 of 960 
+ 
+• Bit 2—Message Transmission Status Flag (GSR2): Flag that indicates whether the module is 
+currently in the message transmission period. The “message transmission period” is the period 
+from the start of message transmission (SOF) until the end of a 3-bit intermission interval after 
+EOF (End of Frame). This bit cannot be modified. 
+ 
+Bit 2: GSR2 
+Description 
+0 
+Transmission in progress  
+1 
+[Reset condition] 
+Idle period 
+(Initial value) 
+ 
+• Bit 1—Transmit/Receive Warning Flag (GSR1): Flag that indicates an error warning. This bit 
+cannot be modified. 
+ 
+it 1: GSR1 
+Description 
+0 
+[Reset condition] 
+When TEC < 96 and REC < 96 or TEC ≥ 256 
+(Initial value) 
+1 
+When TEC ≥ 96 or REC ≥ 96 
+ 
+• Bit 0—Bus Off Flag (GSR0): Flag that indicates the bus off state. This bit cannot be modified. 
+ 
+Bit 0: GSR0 
+Description 
+0 
+[Reset condition] 
+Recovery from bus off state 
+(Initial value) 
+1 
+When TEC ≥ 256 (bus off state) 
+ 
+16.2.3 
+Bit Configuration Register (BCR) 
+The bit configuration register (BCR) is a 16-bit readable/writable register that is used to set CAN 
+bit timing parameters and the baud rate prescaler. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+BCR7 
+BCR6 
+BCR5 
+BCR4 
+BCR3 
+BCR2 
+BCR1 
+BCR0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+BCR15 
+BCR14 
+BCR13 
+BCR12 
+BCR11 
+BCR10 
+BCR9 
+BCR8 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+
+PAGE_ZERO 569
+Rev.2.0, 07/03, page 530 of 960 
+ 
+• Bits 15 and 14—Re-synchronization Jump Width (SJW): These bits set the maximum bit 
+synchronization range. 
+ 
+Bit 15: 
+BCR7 
+Bit 14: 
+BCR6 
+ 
+Description 
+0 
+Maximum bit synchronization width = 1 time quantum  
+0 
+1 
+Maximum bit synchronization width = 2 time quanta 
+0 
+Maximum bit synchronization width = 3 time quanta 
+1 
+1 
+Maximum bit synchronization width = 4 time quanta 
+ 
+• Bits 13 to 8—Baud Rate Prescaler (BRP): These bits are used to set the CAN bus baud rate. 
+ 
+Bit 13: 
+BCR5 
+Bit 12: 
+BCR4 
+Bit 11: 
+BCR3 
+Bit 10: 
+BCR2 
+Bit 9: 
+BCR1 
+Bit 8: 
+BCR0 
+ 
+Description 
+0 
+0 
+0 
+0 
+0 
+0 
+2 × system clock 
+(Initial value) 
+0 
+0 
+0 
+0 
+0 
+1 
+4 × system clock 
+0 
+0 
+0 
+0 
+1 
+0 
+6 × system clock 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ 
+⋅ 
+ 
+⋅ 
+ 
+⋅ 
+1 
+1 
+1 
+1 
+1 
+1 
+128 × system clock 
+ 
+SYNC_SEG
+PRSEG
+PHSEG1
+PHSEG2
+1-bit time
+1-bit time (8–25 time quanta)  
+Quantum
+ 1
+TSEG1 (time segment 1)*
+2–16
+TSEG2 (time segment 2)*
+2–8
+SYNC_SEG: Segment for establishing synchronization of nodes on the CAN bus. (Normal 
+bit edge transitions occur in this segment.)
+PRSEG:
+Segment for compensating for physical delay between networks.
+PHSEG1:
+Buffer segment for correcting phase drift (positive). (This segment is extended 
+when synchronization (re-synchronization) is established.)
+PHSEG2:
+Buffer segment for correcting phase drift (negative). (This segment is 
+shortened when synchronization (re-synchronization) is established.)
+Note:  * The time quanta value for TSEG1 and TSEG2 is the TSEG value + 1.
+ 
+Figure 16.2   Detailed Description of One Bit 
+
+PAGE_ZERO 570
+Rev.2.0, 07/03, page 531 of 960 
+ 
+HCAN bit rate calculation: 
+fCLK
+2 × (BRP + 1) × (3 + TSEG1 + TSEG2)
+Bit rate [b/s] =
+ 
+Note: fCLK = Pφ (peripheral clock (φ/2)) 
+ 
+The BCR values are used for BRP, TSEG1, and TSEG2. 
+BCR Setting Constraints 
+TSEG1 > TSEG2 = SJW 
+(SJW = 1 to 4) 
+3 + TSEG1 + TSEG2 = 8 to 25 time quanta 
+TSEG2 > B'001 (BRP = B'000000) 
+TSEG2 > B'000 (BRP > B'000000) 
+These constraints allow the setting range shown in table 16.4 for TSEG1 and TSEG2 in BCR. 
+Table 16.4 Setting Range for TSEG1 and TSEG2 in BCR 
+ 
+ 
+TSEG2 (BCR [14:12]) 
+ 
+ 
+001 
+010 
+011 
+100 
+101 
+110 
+111 
+0011 
+No 
+Yes 
+No 
+No 
+No 
+No 
+No 
+0100 
+Yes* 
+Yes 
+Yes 
+No 
+No 
+No 
+No 
+0101 
+Yes* 
+Yes 
+Yes 
+Yes 
+No 
+No 
+No 
+0110 
+Yes* 
+Yes 
+Yes 
+Yes 
+Yes 
+No 
+No 
+0111 
+Yes* 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+No 
+1000 
+Yes* 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+1001 
+Yes* 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+1010 
+Yes* 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+1011 
+Yes* 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+1100 
+Yes* 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+1101 
+Yes* 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+1110 
+Yes* 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+TSEG1  
+(BCR [11:8]) 
+1111 
+Yes* 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Notes: The time quanta value for TSEG1 and TSEG2 is the TSEG value + 1. 
+ 
+*  Setting is enabled except when BRP[13:8] = B'000000. 
+ 
+
+PAGE_ZERO 571
+Rev.2.0, 07/03, page 532 of 960 
+ 
+• Bit 7—Bit Sample Point (BSP): Sets the point at which data is sampled. 
+ 
+Bit 7: BCR15 
+Description 
+0 
+Bit sampling at one point (end of time segment 1 (TSEG1)) 
+(Initial value) 
+1 
+Bit sampling at three points (end of time segment 1 (TSEG1), and 1 time 
+quantum before and after) 
+ 
+• Bits 6 to 4—Time Segment 2 (TSEG2): These bits are used to set the segment for correcting 1-
+bit time error. A value from 2 to 8 can be set. 
+ 
+Bit 6:  
+BCR14 
+Bit 5:  
+BCR13 
+Bit 4:  
+BCR12 
+ 
+Description 
+0 
+Setting prohibited 
+(Initial value) 
+0 
+1 
+TSEG2 (PHSEG2) = 2 time quanta 
+0 
+TSEG2 (PHSEG2) = 3 time quanta 
+0 
+1 
+1 
+TSEG2 (PHSEG2) = 4 time quanta 
+0 
+TSEG2 (PHSEG2) = 5 time quanta 
+0 
+1 
+TSEG2 (PHSEG2) = 6 time quanta 
+0 
+TSEG2 (PHSEG2) = 7 time quanta 
+1 
+1 
+1 
+TSEG2 (PHSEG2) = 8 time quanta 
+ 
+• Bits 3 to 0—Time Segment 1 (TSEG1): These bits are used to set the segment for absorbing 
+output buffer, CAN bus, and input buffer delay. A value from 4 to 16 can be set. 
+ 
+Bit 3: 
+BCR11 
+Bit 2: 
+BCR10 
+Bit 1: 
+BCR9 
+Bit 0: 
+BCR8 
+ 
+Description 
+0 
+0 
+0 
+0 
+Setting prohibited 
+(Initial value) 
+0 
+0 
+0 
+1 
+Setting prohibited 
+0 
+0 
+1 
+0 
+Setting prohibited 
+0 
+0 
+1 
+1 
+TSEG1 (PRSEG + PHSEG1) = 4 time quanta 
+0 
+1 
+0 
+0 
+TSEG1 (PRSEG + PHSEG1) = 5 time quanta 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ ⋅ 
+ 
+⋅ 
+ 
+⋅ 
+ 
+⋅ 
+1 
+1 
+1 
+1 
+TSEG1 (PRSEG + PHSEG1) = 16 time quanta 
+ 
+
+PAGE_ZERO 572
+Rev.2.0, 07/03, page 533 of 960 
+ 
+16.2.4 
+Mailbox Configuration Register (MBCR) 
+The mailbox configuration register (MBCR) is a 16-bit readable/writable register that is used to 
+set mailbox (buffer) transmission/reception. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+MBCR7 
+MBCR6 
+MBCR5 
+MBCR4 
+MBCR3 
+MBCR2 
+MBCR1 
+— 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+1 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+MBCR15 MBCR14 MBCR13 MBCR12 MBCR11 MBCR10 
+MBCR9 
+MBCR8 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• Bits 15 to 9 and 7 to 0—Mailbox Setting Register (MBCR7 to 1, MBCR15 to 8): These bits set 
+the polarity of the corresponding mailboxes. 
+ 
+Bit x: MBCRx 
+Description 
+0 
+Corresponding mailbox is set for transmission 
+(Initial value) 
+1 
+Corresponding mailbox is set for reception 
+ 
+• Bit 8—Reserved: This bit always reads 1. The write value should always be 1. 
+ 
+16.2.5 
+Transmit Wait Register (TXPR) 
+The transmit wait register (TXPR) is a 16-bit readable/writable register that is used to set a 
+transmit wait after a transmit message is stored in a mailbox (buffer) (CAN bus arbitration wait). 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+TXPR7 
+TXPR6 
+TXPR5 
+TXPR4 
+TXPR3 
+TXPR2 
+TXPR1 
+— 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+TXPR15 TXPR14 TXPR13 TXPR12 TXPR11 TXPR10 TXPR9 
+TXPR8 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+
+PAGE_ZERO 573
+Rev.2.0, 07/03, page 534 of 960 
+ 
+• Bits 15 to 9 and 7 to 0—Transmit Wait Register (TXPR7 to 1, TXPR15 to 8): These bits set a 
+CAN bus arbitration wait for the corresponding mailboxes. 
+ 
+Bit x: TXPRx 
+Description 
+0 
+Transmit message idle state in corresponding mailbox 
+(Initial value) 
+[Clearing condition] 
+Message transmission completion and cancellation completion 
+1 
+Transmit message transmit wait in corresponding mailbox (CAN bus 
+arbitration) 
+x = 1 to 15 
+ 
+• Bit 8—Reserved: This bit always reads 0. The write value should always be 0. 
+ 
+16.2.6 
+Transmit Wait Cancel Register (TXCR) 
+The transmit wait cancel register (TXCR) is a 16-bit readable/writable register that controls 
+cancellation of transmit wait messages in mailboxes (buffers). 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+TXCR7 
+TXCR6 
+TXCR5 
+TXCR4 
+TXCR3 
+TXCR2 
+TXCR1 
+— 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+TXCR15 TXCR14 TXCR13 TXCR12 TXCR11 TXCR10 TXCR9 
+TXCR8 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• Bits 15 to 9 and 7 to 0—Transmit Wait Cancel Register (TXCR7 to 1, TXCR15 to 8): These 
+bits control cancellation of transmit wait messages in the corresponding HCAN mailboxes. 
+ 
+Bit x: TXCRx 
+Description 
+0 
+Transmit message cancellation idle state in corresponding mailbox  
+ 
+(Initial value) 
+[Clearing condition] 
+Completion of TXPR clearing (when transmit message is canceled normally) 
+1 
+TXPR cleared for corresponding mailbox (transmit message cancellation) 
+ 
+• Bit 8—Reserved: This bit always reads 0. The write value should always be 0. 
+ 
+
+PAGE_ZERO 574
+Rev.2.0, 07/03, page 535 of 960 
+ 
+16.2.7 
+Transmit Acknowledge Register (TXACK) 
+The transmit acknowledge register (TXACK) is a 16-bit readable/writable register containing 
+status flags that indicate normal completion of mailbox (buffer) message transmission. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+TXACK7 TXACK6 TXACK5 TXACK4 TXACK3 TXACK2 TXACK1 
+— 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+TXACK15 TXACK14 TXACK13 TXACK12 TXACK11 TXACK10 TXACK9 TXACK8 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• Bits 15 to 9 and 7 to 0—Transmit Acknowledge Register (TXACK7 to 1, TXACK15 to 8): 
+These bits indicate that transmission of a message in the corresponding HCAN mailbox has 
+been completed normally. 
+ 
+Bit x: TXACKx 
+Description 
+0 
+[Clearing condition] 
+Writing 1 
+(Initial value) 
+1 
+Completion of message transmission for corresponding mailbox 
+ 
+• Bit 8—Reserved: This bit is always read as 0. The write value should always be 0. 
+ 
+
+PAGE_ZERO 577
+Rev.2.0, 07/03, page 538 of 960 
+ 
+16.2.10 Remote Request Register (RFPR) 
+The remote request register (RFPR) is a 16-bit readable/writable register containing status flags 
+that indicate normal reception of remote frames in mailboxes (buffers). When a bit in this register 
+is set, the corresponding bit in the receive complete register (RXPR) is also set. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+RFPR7 
+RFPR6 
+RFPR5 
+RFPR4 
+RFPR3 
+RFPR2 
+RFPR1 
+RFPR0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+RFPR15 RFPR14 RFPR13 RFPR12 RFPR11 RFPR10 RFPR9 
+RFPR8 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• Bits 15 to 0—Remote Request Register (RFPR7 to 0, RFPR15 to 8): These bits indicate that a 
+remote frame has been received normally in the corresponding mailbox. 
+ 
+Bit x: RFPRx 
+Description 
+0 
+[Clearing condition] 
+Writing 1 
+(Initial value) 
+1 
+Completion of remote frame reception in corresponding mailbox 
+ 
+16.2.11 Interrupt Register (IRR) 
+The interrupt register (IRR) is a 16-bit readable/writable register containing status flags for the 
+various interrupt sources. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+IRR7 
+IRR6 
+IRR5 
+IRR4 
+IRR3 
+IRR2 
+IRR1 
+IRR0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+1 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R 
+R 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+— 
+— 
+— 
+IRR12 
+— 
+— 
+IRR9 
+IRR8 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R/W 
+R 
+R 
+R 
+R/W 
+ 
+
+PAGE_ZERO 578
+Rev.2.0, 07/03, page 539 of 960 
+ 
+• Bit 15—Overload Frame Interrupt Flag (IRR7): Status flag indicating that the HCAN has 
+transmitted an overload frame. 
+ 
+Bit 15: IRR7 
+Description 
+0 
+[Clearing condition] 
+Writing 1 
+(Initial value) 
+1 
+Overload frame transmission  
+[Setting conditions] 
+Error active/error passive state 
+• 
+When overload frame is transmitted 
+ 
+• Bit 14—Bus Off Interrupt Flag (IRR6): Status flag indicating the bus off state caused by the 
+transmit error counter. 
+ 
+Bit 14: IRR6 
+Description 
+0 
+[Clearing condition] 
+Writing 1 
+(Initial value) 
+1 
+Bus off state caused by transmit error 
+[Setting condition] 
+When TEC ≥ 256 
+ 
+• Bit 13—Error Passive Interrupt Flag (IRR5): Status flag indicating the error passive state 
+caused by the transmit/receive error counter. 
+ 
+Bit 13: IRR5 
+Description 
+0 
+[Clearing condition] 
+Writing 1 
+(Initial value) 
+1 
+Error passive state caused by transmit/receive error 
+[Setting condition] 
+When TEC ≥ 128 or REC ≥ 128 
+ 
+• Bit 12—Receive Overload Warning Interrupt Flag (IRR4): Status flag indicating the error 
+warning state caused by the receive error counter. 
+ 
+Bit 12: IRR4 
+Description 
+0 
+[Clearing condition] 
+Writing 1 
+(Initial value) 
+1 
+Error warning state caused by receive error 
+[Setting condition] 
+When REC ≥ 96 
+ 
+
+PAGE_ZERO 579
+Rev.2.0, 07/03, page 540 of 960 
+ 
+• Bit 11—Transmit Overload Warning Interrupt Flag (IRR3): Status flag indicating the error 
+warning state caused by the transmit error counter. 
+ 
+Bit 11: IRR3 
+Description 
+0 
+[Clearing condition] 
+Writing 1 
+(Initial value) 
+1 
+Error warning state caused by transmit error 
+[Setting condition] 
+When TEC ≥ 96 
+ 
+• Bit 10—Remote Frame Request Interrupt Flag (IRR2): Status flag indicating that a remote 
+frame has been received in a mailbox. 
+ 
+Bit 10: IRR2 
+Description 
+0 
+[Clearing condition] 
+Clearing of all bits in RFPR (remote request wait register) 
+(Initial value) 
+1 
+Remote frame received and stored in mailbox 
+[Setting conditions] 
+When remote frame reception is completed. 
+When corresponding MBIMR = 0. 
+ 
+• Bit 9—Receive Message Interrupt Flag (IRR1): Status flag indicating that a mailbox receive 
+message has been received normally. 
+ 
+Bit 9: IRR1 
+Description 
+0 
+[Clearing condition] 
+Clearing of all bits in RXPR (receive complete register) when MBIMR is 0
+ 
+(Initial value) 
+1 
+Data frame or remote frame received and stored in mailbox 
+[Setting conditions] 
+When data frame or remote frame reception is completed. 
+When corresponding MBIMR = 0. 
+ 
+
+PAGE_ZERO 580
+Rev.2.0, 07/03, page 541 of 960 
+ 
+• Bit 8—Reset Interrupt Flag (IRR0): Status flag indicating that the HCAN module has been 
+reset. This bit cannot be masked in the interrupt mask register (IMR). If this bit is not cleared 
+after a power-on reset or recovery from software standby mode, interrupt processing will be 
+executed immediately when interrupts are enabled by the interrupt controller. 
+ 
+Bit 8: IRR0 
+Description 
+0 
+[Clearing condition] 
+Writing 1 
+ 
+1 
+Interrupt request (OVR) due to power-on reset or transition to software 
+standby mode 
+(Initial value) 
+[Setting condition] 
+When reset processing is completed after power-on reset or software 
+standby mode transition 
+ 
+• Bits 7 to 5, 3, and 2—Reserved: These bits always read 0. The write value should always be 0. 
+• Bit 4—Bus Operation Interrupt Flag (IRR12): Status flag indicating detection of a dominant 
+bit due to bus operation when the HCAN module is in HCAN sleep mode. 
+ 
+Bit 4: IRR12 
+Description 
+0 
+CAN bus idle state 
+(Initial value) 
+[Clearing condition] 
+Writing 1 
+1 
+CAN bus operation in HCAN sleep mode 
+[Setting condition] 
+Bus operation (dominant bit detection) in HCAN sleep mode 
+ 
+• Bit 1—Unread Interrupt Flag (IRR9): Status flag indicating that a receive message has been 
+overwritten while still unread. 
+ 
+Bit 1: IRR9 
+Description 
+0 
+[Clearing condition] 
+Clearing of all bits in UMSR (unread message status register) (Initial value) 
+1 
+Unread message overwrite 
+[Setting condition] 
+When UMSR (unread message status register) is set 
+ 
+
+PAGE_ZERO 581
+Rev.2.0, 07/03, page 542 of 960 
+ 
+• Bit 0—Mailbox Empty Interrupt Flag (IRR8): Status flag indicating that the next transmit 
+message can be stored in the mailbox. 
+ 
+Bit 0: IRR8 
+Description 
+0 
+[Clearing condition] 
+Writing 1 
+(Initial value) 
+1 
+Transmit message has been transmitted or aborted, and new message can 
+be stored 
+[Setting condition] 
+When TXPR (transmit wait register) is cleared by completion of transmission 
+or completion of transmission abort 
+ 
+16.2.12 Mailbox Interrupt Mask Register (MBIMR) 
+The mailbox interrupt mask register (MBIMR) is a 16-bit readable/writable register containing 
+flags that enable or disable individual mailbox (buffer) interrupt requests. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+MBIMR7 MBIMR6 MBIMR5 MBIMR4 MBIMR3 MBIMR2 MBIMR1 MBIMR0 
+ 
+Initial value: 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+MBIMR15 MBIMR14 MBIMR13 MBIMR12 MBIMR11 MBIMR10 MBIMR9 MBIMR8 
+ 
+Initial value: 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• Bits 15 to 0—Mailbox Interrupt Mask (MBIMR7 to 0, MBIMR15 to 8): Flags that enable or 
+disable individual mailbox interrupt requests. 
+ 
+Bit x: MBIMRx 
+Description 
+0 
+[Transmitting] 
+Interrupt request to CPU due to TXPR clearing 
+[Receiving] 
+Interrupt request to CPU due to RXPR setting 
+ 
+1 
+Interrupt requests to CPU disabled 
+(Initial value) 
+ 
+
+PAGE_ZERO 582
+Rev.2.0, 07/03, page 543 of 960 
+ 
+16.2.13 Interrupt Mask Register (IMR) 
+The interrupt mask register (IMR) is a 16-bit readable/writable register containing flags that 
+enable or disable requests by individual interrupt sources. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+IMR7 
+IMR6 
+IMR5 
+IMR4 
+IMR3 
+IMR2 
+IMR1 
+— 
+ 
+Initial value: 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+— 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+— 
+— 
+— 
+IMR12 
+— 
+— 
+IMR9 
+IMR8 
+ 
+Initial value: 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+ 
+R/W: 
+R 
+R 
+R 
+R/W 
+R 
+R 
+R/W 
+R/W 
+ 
+• Bit 15—Overload Frame Interrupt Mask (IMR7): Enables or disables overload frame interrupt 
+requests. 
+ 
+Bit 15: IMR7 
+Description 
+0 
+Overload frame interrupt request (OVR) to CPU by IRR7 enabled 
+1 
+Overload frame interrupt request (OVR) to CPU by IRR7 disabled 
+ 
+(Initial value) 
+ 
+• Bit 14—Bus Off Interrupt Mask (IMR6): Enables or disables bus off interrupt requests caused 
+by the transmit error counter. 
+ 
+Bit 14: IMR6 
+Description 
+0 
+Bus off interrupt request (ERS) to CPU by IRR6 enabled 
+ 
+1 
+Bus off interrupt request (ERS) to CPU by IRR6 disabled 
+(Initial value) 
+ 
+• Bit 13—Error Passive Interrupt Mask (IMR5): Enables or disables error passive interrupt 
+requests caused by the transmit/receive error counter. 
+ 
+Bit 13: IMR5 
+Description 
+0 
+Error passive interrupt request (ERS) to CPU by IRR5 enabled 
+1 
+Error passive interrupt request (ERS) to CPU by IRR5 disabled (Initial value) 
+ 
+
+PAGE_ZERO 583
+Rev.2.0, 07/03, page 544 of 960 
+ 
+• Bit 12—Receive Overload Warning Interrupt Mask (IMR4): Enables or disables error warning 
+interrupt requests caused by the receive error counter. 
+ 
+Bit 12: IMR4 
+Description 
+0 
+REC error warning interrupt request (OVR) to CPU by IRR4 enabled 
+ 
+1 
+REC error warning interrupt request (OVR) to CPU by IRR4 disabled
+ 
+(Initial value) 
+ 
+• Bit 11—Transmit Overload Warning Interrupt Mask (IMR3): Enables or disables error 
+warning interrupt requests caused by the transmit error counter. 
+ 
+Bit 11: IMR3 
+Description 
+0 
+TEC error warning interrupt request (OVR) to CPU by IRR3 enabled 
+ 
+1 
+TEC error warning interrupt request (OVR) to CPU by IRR3 disabled
+ 
+(Initial value) 
+ 
+• Bit 10—Remote Frame Request Interrupt Mask (IMR2): Enables or disables remote frame 
+reception interrupt requests. 
+ 
+Bit 10: IMR2 
+Description 
+0 
+Remote frame reception interrupt request (OVR) to CPU by IRR2 enabled
+ 
+ 
+1 
+Remote frame reception interrupt request (OVR) to CPU by IRR2 disabled
+ 
+(Initial value) 
+ 
+• Bit 9—Receive Message Interrupt Mask (IMR1): Enables or disables message reception 
+interrupt requests. 
+ 
+Bit 9: IMR1 
+Description 
+0 
+Message reception interrupt request (RM) to CPU by IRR1 enabled 
+ 
+1 
+Message reception interrupt request (RM) to CPU by IRR1 disabled
+ 
+(Initial value) 
+ 
+• Bit 8—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bits 7 to 5, 3, and 2—Reserved: These bits are always read as 1. The write value should 
+always be 1. 
+
+PAGE_ZERO 586
+Rev.2.0, 07/03, page 547 of 960 
+ 
+16.2.17 Local Acceptance Filter Masks (LAFML, LAFMH) 
+The local acceptance filter masks (LAFML, LAFMH) are 16-bit readable/writable registers that 
+filter receive messages to be stored in the receive-only mailbox (MC0, MD0) according to the 
+identifier. In these registers, consist of LAFMH15: MSB to LAFMH5: LSB are 11 
+standard/extended identifier bits, and LAFMH1: MSB to LAFML0: LSB are 18 extended 
+identifier bits. 
+ 
+LAFML 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+LAFML7 
+LAFML6 
+LAFML5 
+LAFML4 
+LAFML3 
+LAFML2 
+LAFML1 
+LAFML0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+LAFML15 LAFML14 LAFML13 LAFML12 LAFML11 LAFML10 LAFML9 
+LAFML8 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+LAFMH 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+LAFMH7 LAFMH6 LAFMH5 
+— 
+— 
+— 
+LAFMH1 LAFMH0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R 
+R 
+R 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+LAFMH15 LAFMH14 LAFMH13 LAFMH12 LAFMH11 LAFMH10 LAFMH9 LAFMH8 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+
+PAGE_ZERO 587
+Rev.2.0, 07/03, page 548 of 960 
+ 
+• LAFMH Bits 7 to 0 and 15 to 13–11-Bit Identifier Filter (LAFMH7 to 5, LAFMH15 to 8): 
+Filter mask bits for the first 11 bits of the receive message identifier (for both standard and 
+extended identifiers). 
+ 
+Bit x: LAFMHx 
+Description 
+0 
+Stored in MC0, MD0 (receive-only mailbox) depending on bit match between 
+MC0 message identifier and receive message identifier 
+(Initial value) 
+1 
+Stored in MC0, MD0 (receive-only mailbox) regardless of bit match between 
+MC0 message identifier and receive message identifier 
+ 
+• LAFMH Bits 12 to 10—Reserved: These bits are always read as 0. The write value should 
+always be 0. 
+• LAFMH Bits 9 and 8, LAFML bits 15 to 0–18-Bit Identifier Filter (LAFMH1, 0, LAFML7 to 
+0, LAFML15 to 8): Filter mask bits for the 18 bits of the receive message identifier (extended). 
+ 
+Bit x: LAFMHx 
+ 
+LAFMLx 
+ 
+Description 
+0 
+Stored in MC0 (receive-only mailbox) depending on bit match between MC0 
+message identifier and receive message identifier  
+(Initial value) 
+1 
+Stored in MC0 (receive-only mailbox) regardless of bit match between MC0 
+message identifier and receive message identifier  
+ 
+
+PAGE_ZERO 588
+Rev.2.0, 07/03, page 549 of 960 
+ 
+16.2.18 Message Control (MC0 to MC15) 
+The message control register sets (MC0 to MC15) consist of eight 8-bit readable/writable registers 
+(MCx[1] to MCx[8]). The HCAN has 16 sets of these registers (MC0 to MC15). 
+The initial value of these registers is undefined, so they must be initialized (by writing 0 or 1). 
+ 
+MCx [1] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+ 
+ 
+ 
+DLC3 
+DLC2 
+DLC1 
+DLC0 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+MCx [2] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+MCx [3] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+MCx [4] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+MCx [5] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+STD_ID2 STD_ID1 STD_ID0 
+RTR 
+IDE 
+ 
+EXD_ID17 EXD_ID16 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+
+PAGE_ZERO 589
+Rev.2.0, 07/03, page 550 of 960 
+ 
+ 
+MCx [6] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+STD_ID10 STD_ID9 STD_ID8 STD_ID7 STD_ID6 STD_ID5 STD_ID4 STD_ID3 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+MCx [7] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+EXD_ID7 EXD_ID6 EXD_ID5 EXD_ID4 EXD_ID3 EXD_ID2 EXD_ID1 EXD_ID0 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+MCx [8] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+EXD_ID15 EXD_ID14 EXD_ID13 EXD_ID12 EXD_ID11 EXD_ID10 EXD_ID9 EXD_ID8 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• MCx[1] Bits 7 to 4—Reserved: The initial value of these bits is undefined; they must be 
+initialized (by writing 0 or 1). 
+• MCx[1] Bits 3 to 0: Data Length Code (DLC3 to 0): These bits indicate the required length of 
+data frames and remote frames. 
+ 
+Bit 3: 
+DLC3 
+Bit 2: 
+DLC2 
+Bit 1: 
+DLC1 
+Bit 0: 
+DLC0 
+ 
+Description 
+0 
+Data length = 0 bytes 
+ 
+0 
+1 
+Data length = 1 byte 
+0 
+Data length = 2 bytes 
+0 
+1 
+1 
+Data length = 3 bytes 
+0 
+Data length = 4 bytes 
+0 
+1 
+Data length = 5 bytes 
+0 
+Data length = 6 bytes 
+0 
+1 
+1 
+1 
+Data length = 7 bytes 
+1 
+* 
+* 
+* 
+Data length = 8 bytes 
+*: Don’t care 
+ 
+• MCx[2] Bits 7 to 0—Reserved: The initial value of these bits is undefined; they must be 
+initialized (by writing 0 or 1). 
+
+PAGE_ZERO 590
+Rev.2.0, 07/03, page 551 of 960 
+ 
+• MCx[3] Bits 7 to 0—Reserved: The initial value of these bits is undefined; they must be 
+initialized (by writing 0 or 1). 
+• MCx[4] Bits 7 to 0—Reserved: The initial value of these bits is undefined; they must be 
+initialized (by writing 0 or 1). 
+• MCx[6] Bits 7 to 0: Standard Identifier (STD_ID10 to STD_ID3) 
+MCx[5] Bits 7 to 5: Standard Identifier (STD_ID2 to STD_ID0) 
+These bits set the identifier (standard identifier) of data frames and remote frames. 
+ 
+Standard identifier
+SOF
+ID10
+ID9
+ID8
+ID7
+ID6
+ID5
+ID4
+ID3
+ID2
+ID1
+ID0
+RTR
+STD_IDxx
+IDE
+SRR
+ 
+Figure 16.3   Standard Identifier 
+• MCx[5] Bit 4: Remote Transmission Request (RTR): Used to distinguish between data frames 
+and remote frames. 
+ 
+Bit 4: RTR 
+Description 
+0 
+Data frame 
+ 
+1 
+Remote frame 
+ 
+• MCx[5] Bit 3: Identifier Extension (IDE): Used to distinguish between the standard format and 
+extended format of data frames and remote frames. 
+ 
+Bit 3: IDE 
+Description 
+0 
+Standard format 
+ 
+1 
+Extended format 
+ 
+• MCx[5] Bit 2—Reserved: The initial value of this bit is undefined; it must be initialized (by 
+writing 0 or 1). 
+• MCx[5] Bits 1 and 0: Extended Identifier (EXD_ID17, EXD_ID16) 
+MCx[8] Bits 7 to 0: Extended Identifier (EXD_ID15 to EXD_ID8) 
+MCx[7] Bits 7 to 0: Extended Identifier (EXD_ID7 to EXD_ID0) 
+These bits set the identifier (extended identifier) of data frames and remote frames. 
+ 
+
+PAGE_ZERO 591
+Rev.2.0, 07/03, page 552 of 960 
+ 
+Extended Identifier
+IDE
+ID17
+ID16
+ID15
+ID14
+ID13
+ID12
+ID11
+ID10
+ID9
+ID8
+ID7
+ID6
+ID5
+EXD_IDxx
+ID4
+ID3
+ID2
+ID1
+ID0
+RTR
+R1
+EXD_IDxx
+ 
+Figure 16.4   Extended Identifier 
+16.2.19 Message Data (MD0 to MD15) 
+The message data register sets (MD0 to MD15) consist of eight 8-bit readable/writable registers 
+(MDx[1] to MDx[8]). The HCAN has 16 sets of these registers (MD0 to MD15). 
+The initial value of these registers is undefined, so they must be initialized (by writing 0 or 1). 
+ 
+ 
+MDx[1]  Message Data 1 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+MDx[2]  Message Data 2 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+MDx[3]  Message Data 3 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Initial value: 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+
+PAGE_ZERO 948
+Rev.2.0, 07/03, page 909 of 960 
+ 
+Appendix A   On-chip peripheral module Registers 
+A.1 
+Address 
+On-chip peripheral module register addresses and bit names are shown in the following table.   
+16-bit and 32-bit registers are shown in two and four rows of 8 bits, respectively. 
+Table A.1 
+Address 
+ 
+Register 
+Bit Names 
+ 
+Address 
+Abbr. 
+Bit 7 
+Bit 6 
+Bit 5 
+Bit 4 
+Bit 3 
+Bit 2 
+Bit 1 
+Bit 0 
+Module 
+H'FFFFE400 MCR 
+MCR7 
+— 
+MCR5 
+— 
+— 
+MCR2 
+MCR1 
+MCR0 
+H'FFFFE401 GSR 
+— 
+— 
+— 
+— 
+GSR3 
+GSR2 
+GSR1 
+GSR0 
+H'FFFFE402 
+BCR7 
+BCR6 
+BCR5 
+BCR4 
+BCR3 
+BCR2 
+BCR1 
+BCR0 
+H'FFFFE403 
+BCR 
+BCR15 
+BCR14 
+BCR13 
+BCR12 
+BCR11 
+BCR10 
+BCR9 
+BCR8 
+H'FFFFE404 
+MBCR7 
+MBCR6 
+MBCR5 
+MBCR4 
+MBCR3 
+MBCR2 
+MBCR1 
+— 
+H'FFFFE405 
+MBCR 
+MBCR15 MBCR14 MBCR13 MBCR12 MBCR11 MBCR10 MBCR9 
+MBCR8 
+H'FFFFE406 
+TXPR7 
+TXPR6 
+TXPR5 
+TXPR4 
+TXPR3 
+TXPR2 
+TXPR1 
+— 
+H'FFFFE407 
+TXPR 
+TXPR15 
+TXPR14 
+TXPR13 
+TXPR12 
+TXPR11 
+TXPR10 
+TXPR9 
+TXPR8 
+H'FFFFE408 
+TXCR7 
+TXCR6 
+TXCR5 
+TXCR4 
+TXCR3 
+TXCR2 
+TXCR1 
+— 
+H'FFFFE409 
+TXCR 
+TXCR15 
+TXCR14 
+TCR13 
+TXCR12 
+TXCR11 
+TSCR10 
+TXCR9 
+TXCR8 
+H'FFFFE40A 
+TXACK7 
+TXACK6 
+TXACK5 
+TXACK4 
+TXACK3 
+TXACK2 
+TXACK1 
+— 
+H'FFFFE40B 
+TXACK 
+TXACK15 TXACK14 TXACK13 TXACK12 TXACK11 TXACK10 TXACK9 
+TXACK8 
+H'FFFFE40C 
+ABACK7 ABACK6 ABACK5 ABACK4 ABACK3 ABACK2 ABACK1 — 
+H'FFFFE40D 
+ABACK 
+ABACK15 ABACK14 ABACK13 ABACK12 ABACK11 ABACK10 ABACK9 ABACK8 
+H'FFFFE40E 
+RXPR7 
+RXPR6 
+RXPR5 
+RXPR4 
+RXPR3 
+RXPR2 
+RXPR1 
+RXPR0 
+H'FFFFE40F 
+RXPR 
+RXPR15 
+RXPR14 
+RXPR13 
+RXPR12 
+RXPR11 
+RXPR10 
+RXPR9 
+RXPR8 
+H'FFFFE410 
+RFPR7 
+RFPR6 
+RFPR5 
+RFPR4 
+RFPR3 
+RFPR2 
+RFPR1 
+RFPR0 
+H'FFFFE411 
+RFPR 
+RFPR15 
+RFPR14 
+RFPR13 
+RFPR12 
+RFPR11 
+RFPR10 
+RFPR9 
+RFPR8 
+H'FFFFE412 
+IRR7 
+IRR6 
+IRR5 
+IRR4 
+IRR3 
+IRR2 
+IRR1 
+IRR0 
+H'FFFFE413 
+IRR 
+— 
+— 
+— 
+IRR12 
+— 
+— 
+IRR9 
+IRR8 
+H'FFFFE414 
+MBIMR7 
+MBIMR6 
+MBIMR5 
+MBIMR4 
+MBIMR3 
+MBIMR2 
+MBIMR1 
+MBIMR0 
+H'FFFFE415 
+MBIMR 
+MBIMR15 MBIMR14 MBIMR13 MBIMR12 MBIMR11 MBIMR10 MBIMR9 
+MBIMR8 
+H'FFFFE416 
+IMR7 
+IMR6 
+IMR5 
+IMR4 
+IMR3 
+IMR2 
+IMR1 
+— 
+H'FFFFE417 
+IMR 
+— 
+— 
+— 
+IMR12 
+— 
+— 
+IMR9 
+IMR8 
+H'FFFFE418 REC 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+H'FFFFE419 TEC 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+H'FFFFE41A 
+UMSR7 
+UMSR6 
+UMSR5 
+UMSR4 
+UMSR3 
+UMSR2 
+UMSR1 
+UMSR0 
+H'FFFFE41B 
+UMSR 
+UMSR15 UMSR14 UMSR13 UMSR12 UMSR11 UMSR10 UMSR9 
+UMSR8 
+HCAN 
+(channel 0) 
+ 

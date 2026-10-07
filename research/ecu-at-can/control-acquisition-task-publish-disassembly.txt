@@ -1,0 +1,184 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00017d60 <.data+0x17d60>:
+   17d60:	00 09       	nop	
+   17d62:	d3 3d       	mov.l	0x17e58,r3	! aa536
+   17d64:	43 0b       	jsr	@r3
+   17d66:	00 09       	nop	
+   17d68:	d2 3c       	mov.l	0x17e5c,r2	! aabcc
+   17d6a:	42 0b       	jsr	@r2
+   17d6c:	00 09       	nop	
+   17d6e:	d3 3c       	mov.l	0x17e60,r3	! aa3d0
+   17d70:	43 0b       	jsr	@r3
+   17d72:	00 09       	nop	
+   17d74:	d2 3b       	mov.l	0x17e64,r2	! 1610e
+   17d76:	42 0b       	jsr	@r2
+   17d78:	00 09       	nop	
+   17d7a:	d3 3b       	mov.l	0x17e68,r3	! 110d4
+   17d7c:	43 2b       	jmp	@r3
+   17d7e:	4f 26       	lds.l	@r15+,pr
+   17d80:	00 0b       	rts	
+   17d82:	00 09       	nop	
+   17d84:	00 0b       	rts	
+   17d86:	00 09       	nop	
+   17d88:	2f e6       	mov.l	r14,@-r15
+   17d8a:	4f 22       	sts.l	pr,@-r15
+   17d8c:	de 37       	mov.l	0x17e6c,r14	! ffff5361
+   17d8e:	d2 38       	mov.l	0x17e70,r2	! ffff535c
+   17d90:	63 22       	mov.l	@r2,r3
+   17d92:	23 38       	tst	r3,r3
+   17d94:	8d 76       	bt.s	0x17e84
+   17d96:	00 09       	nop	
+   17d98:	d3 36       	mov.l	0x17e74,r3	! 1df32
+   17d9a:	43 0b       	jsr	@r3
+   17d9c:	00 09       	nop	
+   17d9e:	d2 36       	mov.l	0x17e78,r2	! 7aaf8
+   17da0:	42 0b       	jsr	@r2
+   17da2:	00 09       	nop	
+   17da4:	d3 35       	mov.l	0x17e7c,r3	! 9d170
+   17da6:	43 0b       	jsr	@r3
+   17da8:	00 09       	nop	
+   17daa:	d2 35       	mov.l	0x17e80,r2	! 9c2f2
+   17dac:	42 0b       	jsr	@r2
+   17dae:	00 09       	nop	
+   17db0:	63 e0       	mov.b	@r14,r3
+   17db2:	e2 03       	mov	#3,r2
+   17db4:	63 3c       	extu.b	r3,r3
+   17db6:	33 23       	cmp/ge	r2,r3
+   17db8:	8f 03       	bf.s	0x17dc2
+   17dba:	00 09       	nop	
+   17dbc:	e1 00       	mov	#0,r1
+   17dbe:	a1 17       	bra	0x17ff0
+   17dc0:	2e 10       	mov.b	r1,@r14
+   17dc2:	60 e0       	mov.b	@r14,r0
+   17dc4:	70 01       	add	#1,r0
+   17dc6:	a1 13       	bra	0x17ff0
+   17dc8:	2e 00       	mov.b	r0,@r14
+   17dca:	00 00       	.word 0x0000
+   17dcc:	00 06       	mov.l	r0,@(r0,r0)
+   17dce:	47 02       	sts.l	mach,@-r7
+   17dd0:	00 07       	mul.l	r0,r0
+   17dd2:	60 16       	mov.l	@r1+,r0
+   17dd4:	00 07       	mul.l	r0,r0
+   17dd6:	61 70       	mov.b	@r7,r1
+   17dd8:	00 07       	mul.l	r0,r0
+   17dda:	62 66       	mov.l	@r6+,r2
+   17ddc:	00 06       	mov.l	r0,@(r0,r0)
+   17dde:	3c 02       	cmp/hs	r0,r12
+   17de0:	00 06       	mov.l	r0,@(r0,r0)
+   17de2:	04 8e       	mov.l	@(r0,r8),r4
+   17de4:	00 06       	mov.l	r0,@(r0,r0)
+   17de6:	e2 f6       	mov	#-10,r2
+   17de8:	00 06       	mov.l	r0,@(r0,r0)
+   17dea:	6f 60       	mov.b	@r6,r15
+   17dec:	00 07       	mul.l	r0,r0
+   17dee:	4e be       	.word 0x4ebe
+   17df0:	00 06       	mov.l	r0,@(r0,r0)
+   17df2:	07 e4       	mov.b	r14,@(r0,r7)
+   17df4:	00 06       	mov.l	r0,@(r0,r0)
+   17df6:	b3 56       	bsr	0x184a6
+   17df8:	00 06       	mov.l	r0,@(r0,r0)
+   17dfa:	b4 e0       	bsr	0x187be
+   17dfc:	00 01       	.word 0x0001
+   17dfe:	f1 18       	fmov	@r1,fr1
+   17e00:	00 08       	clrt	
+   17e02:	31 94       	div1	r9,r1
+   17e04:	00 08       	clrt	
+   17e06:	5a 94       	mov.l	@(16,r9),r10
+   17e08:	00 08       	clrt	
+   17e0a:	5d a8       	mov.l	@(32,r10),r13
+   17e0c:	00 08       	clrt	
+   17e0e:	ee 9a       	mov	#-102,r14
+   17e10:	00 08       	clrt	
+   17e12:	36 66       	cmp/hi	r6,r6
+   17e14:	00 08       	clrt	
+   17e16:	3a 24       	div1	r2,r10
+   17e18:	00 08       	clrt	
+   17e1a:	3b 88       	sub	r8,r11
+   17e1c:	00 08       	clrt	
+   17e1e:	3c 50       	cmp/eq	r5,r12
+   17e20:	00 08       	clrt	
+   17e22:	3d a0       	cmp/eq	r10,r13
+   17e24:	00 08       	clrt	
+   17e26:	3f 42       	cmp/hs	r4,r15
+   17e28:	00 08       	clrt	
+   17e2a:	41 7a       	.word 0x417a
+   17e2c:	00 08       	clrt	
+   17e2e:	43 f2       	.word 0x43f2
+   17e30:	00 08       	clrt	
+   17e32:	45 2e       	ldc	r5,vbr
+   17e34:	00 08       	clrt	
+   17e36:	46 d4       	.word 0x46d4
+   17e38:	00 08       	clrt	
+   17e3a:	48 00       	shll	r8
+   17e3c:	00 08       	clrt	
+   17e3e:	4b b6       	.word 0x4bb6
+   17e40:	00 08       	clrt	
+   17e42:	4d ee       	.word 0x4dee
+   17e44:	00 08       	clrt	
+   17e46:	4f 9e       	.word 0x4f9e
+   17e48:	00 08       	clrt	
+   17e4a:	51 d2       	mov.l	@(8,r13),r1
+   17e4c:	00 08       	clrt	
+   17e4e:	54 0c       	mov.l	@(48,r0),r4
+   17e50:	00 08       	clrt	
+   17e52:	1d 8e       	mov.l	r8,@(56,r13)
+   17e54:	00 02       	stc	sr,r0
+   17e56:	be 68       	bsr	0x17b2a
+   17e58:	00 0a       	sts	mach,r0
+   17e5a:	a5 36       	bra	0x188ca
+   17e5c:	00 0a       	sts	mach,r0
+   17e5e:	ab cc       	bra	0x175fa
+   17e60:	00 0a       	sts	mach,r0
+   17e62:	a3 d0       	bra	0x18606
+   17e64:	00 01       	.word 0x0001
+   17e66:	61 0e       	exts.b	r0,r1
+   17e68:	00 01       	.word 0x0001
+   17e6a:	10 d4       	mov.l	r13,@(16,r0)
+   17e6c:	ff ff       	.word 0xffff
+   17e6e:	53 61       	mov.l	@(4,r6),r3
+   17e70:	ff ff       	.word 0xffff
+   17e72:	53 5c       	mov.l	@(48,r5),r3
+   17e74:	00 01       	.word 0x0001
+   17e76:	df 32       	mov.l	0x17f40,r15	! 9d15e
+   17e78:	00 07       	mul.l	r0,r0
+   17e7a:	aa f8       	bra	0x1746e
+   17e7c:	00 09       	nop	
+   17e7e:	d1 70       	mov.l	0x18040,r1	! 9a111
+   17e80:	00 09       	nop	
+   17e82:	c2 f2       	mov.l	r0,@(968,gbr)
+   17e84:	d1 70       	mov.l	0x18048,r1	! 1df32
+   17e86:	41 0b       	jsr	@r1
+   17e88:	00 09       	nop	
+   17e8a:	d3 70       	mov.l	0x1804c,r3	! 3985e
+   17e8c:	43 0b       	jsr	@r3
+   17e8e:	00 09       	nop	
+   17e90:	d2 6f       	mov.l	0x18050,r2	! 418c4
+   17e92:	42 0b       	jsr	@r2
+   17e94:	00 09       	nop	
+   17e96:	d3 6f       	mov.l	0x18054,r3	! 41982
+   17e98:	43 0b       	jsr	@r3
+   17e9a:	00 09       	nop	
+   17e9c:	d2 6e       	mov.l	0x18058,r2	! 7aaf8
+   17e9e:	42 0b       	jsr	@r2
+   17ea0:	00 09       	nop	
+   17ea2:	d3 6e       	mov.l	0x1805c,r3	! 9d170
+   17ea4:	43 0b       	jsr	@r3
+   17ea6:	00 09       	nop	
+   17ea8:	d2 6d       	mov.l	0x18060,r2	! 9c2f2
+   17eaa:	42 0b       	jsr	@r2
+   17eac:	00 09       	nop	
+   17eae:	d3 6d       	mov.l	0x18064,r3	! 34554
+   17eb0:	43 0b       	jsr	@r3
+   17eb2:	00 09       	nop	
+   17eb4:	d2 6c       	mov.l	0x18068,r2	! 34416
+   17eb6:	42 0b       	jsr	@r2
+   17eb8:	00 09       	nop	
+   17eba:	d3 6c       	mov.l	0x1806c,r3	! 3437a
+   17ebc:	43 0b       	jsr	@r3
+   17ebe:	00 09       	nop	
+

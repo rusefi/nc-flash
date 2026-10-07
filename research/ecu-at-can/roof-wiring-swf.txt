@@ -1,0 +1,110 @@
+NC PRHT factory wiring recovered from Flash sources (2026-10-06)
+================================================================
+Objective: close ECU/AT CAN integration, deep traction integration, and NC
+roof folding AND unfolding including interruption, resume/reversal, timeout,
+synchronization and fault recovery. All remain incomplete. User has no extra
+roof/DSC firmware, captures or bench results. No staging/commit/push authority.
+This milestone advances documentary wiring evidence, not controller execution.
+
+NEW DOCUMENTARY RESULT
+The accessible2008 factory0916-c schematic identifies LHroof3L/3D and
+RHdeck3M/3E. These match the previously saved2009 sheet. Thus the earlier
+2008 diagnostic's3C and repeated3M cannot be explained simply by comparing
+2008diagnostics against2009wiring: conflicting references coexist within the
+2008 mirror. Treat those diagnostic pin references as suspect; actual vehicle
+harness and motor direction polarity still require independent validation.
+Same sheet shows LHdeck3H/3P andRHroof3A/3I; pulse inputs1M/1O/1I/1K for
+LHroof/LHdeck/RHroof/RHdeck respectively, shared1G/1Q sensor wiring.
+
+0916-b shows four limit contacts sharing1V(L, blue): deck-open3F(L/O),
+deck-closed3O(L/G), roof-open1T(B/R), roof-closed1R(B/W). The drawing depicts
+the deck-closed contact connected and the other three contacts open; this is
+not a measured endpoint-state table or proof of a diagnostic PID's polarity.
+It does not settle training DECK_CL Off-at-closed versus workshop On-at-closed.
+Top-lock input1D(P/L) is a separate switch to bodyground11, with a Bose branch.
+Window connections1C(P) and1E(BR/B) run to the power-window main switch.
+CAN-L1U(G/B) andCAN-H1S(L/W) run to the PCMnetwork cross-reference; this
+identifies wiring, not specific CAN IDs, message acceptance or timeout.
+
+0916-a shows separate RHT L/R30A supplies at2A/2B, ROOM15A at1J and the
+METER15A ignition path at1X;2E/2F are grounds. Both open/close switch contacts
+feed1H(Y) through separate resistor symbols on one wire, rather than separate
+CANcommand wires. No resistor values or complete input decoding are specified.
+1A goes to trunk-opener relay,1F to trunk compartment light switch,2C to the
+indicator/illumination assembly. Hardware implementation and actuation are
+unverified; a drawn circuit is not permission to drive guessed voltages.
+
+SOURCE IDENTITIES AND APPLICABILITY
+Mirror index explicitly labels2008 MX-5. It supplies original SWF files via
+embedded object/embed references, although text extraction exposes no circuit.
+https://www.ncmiata-servicemanual.com/src/g5d09/g5d09.html
+https://www.ncmiata-servicemanual.com/src/g5d09/html/0916-a.html
+https://www.ncmiata-servicemanual.com/src/g5d09/html/0916-b.html
+https://www.ncmiata-servicemanual.com/src/g5d09/html/0916-c.html
+For each, replace .html with .swf to reproduce the actual embedded file URL.
+Saved sources in sources/:
+ mazda-2008-prht-wiring-0916-a.swf 89,845bytes SHA256
+ fa04f976d27b7ef0e884856cc20b0af8b982b46301c9a8347af3571b31c015dc
+ mazda-2008-prht-wiring-0916-b.swf 67,143bytes SHA256
+ 628d9b1fb2fd2a56390f51cb5766fa86fbe223b04c2b3cbb6656b2f4031eaa26
+ mazda-2008-prht-wiring-0916-c.swf 62,501bytes SHA256
+ 495d03f8ce59fbac0869ddc1617c88afff6f1dba102f84a8ab3556a8eb74ff36
+Adjacent .png files are native-rendered1620x1180 schematics, all visually
+inspected. mazda-2008-prht-wiring-swf.json pins downloads and rendered hashes.
+No specific VIN/market applicability established.2009compilation onScribd
+contains text for0916-a/b but was not independently recovered as a source
+image; not promoted into the verified2009artifact set.
+
+REPRODUCTION AND RENDERING CORRECTION
+Python3.14.3; Java21; JPEXS FFDec26.3.0 from officialrelease:
+https://github.com/jindrapetrik/jpexs-decompiler/releases/download/version26.3.0/ffdec_26.3.0.zip
+19,871,169bytes SHA256
+35f4930eb7c380afe66f2117f90b006deac0631473ad7500bb39c78f68645ecd.
+Download with Pythonurllib.request.urlopen, verify hash, extract with
+zipfile.ZipFile.extractall into a temporary tool directory. No system package
+installation is needed. Actual tool directory was/tmp/nc-ecu-analysis/ffdec;
+it is replaceable and is not the only copy of any project conclusion/input.
+Tool's primary CLI documentation:
+https://github.com/jindrapetrik/jpexs-decompiler/wiki/Commandline-arguments
+Reproduce from repositoryroot:
+ python research/ecu-at-can/render_roof_wiring.py --jar /path/to/ffdec.jar
+The script verifies each SWF hash and FFDecversion, invokes:
+ java -Djava.awt.headless=true -jar /path/to/ffdec.jar -select 1 -zoom 2 \
+   -format frame:png -export frame SCRATCH SOURCE.swf
+It copies frame1 into sources/, verifies PNGsignature/dimensions, and records
+all output hashes. Finalrun exported3schematics successfully; py_compile and
+git diff --check pass. This checks artifact reproduction, not roof behavior.
+
+Initial SVGexport produced6frames perfile. Laterframes contain viewer menus
+and overlays, not six independent wiring sheets. PyMuPDF1.28.2 conversion
+warned of an unresolved symbol (SVG a included unresolvedtext4; all three
+also referenced unresolvedsprite0/1). Those derivedPDFs were removed; final
+artifacts use FFDec's nativePNG renderer, which completed without errors.
+Nativefirst-frame PNGs were visually checked against circuits in SVGexports;
+colored clickable backgrounds/viewer decorations differ between renderers.
+Do not use the discarded convertedPDFs as authoritative evidence. Original
+SWFs plus versioned reproducibleexport preserve the source without depending
+on a browser's obsolete Flash support or an ignored screenshot cache.
+
+CHECKED LEADS / LIMITS
+CHARM2011 diagram0916-b retrieval again timed out. The Trull2008-2009 index
+lists selectedmechanical/electrical PDFs but no roof/body/multiplexmanual:
+https://trull.org/alex/pubmirror/www.mellens.net/mazda/Mazda-Miata-2008-2009/index.html
+Searches for2009CDN0916-a/b and09-02F yielded references/other-system sheets,
+not a recovered applicable source. Do not infer nonexistent documentation
+from failed retrieval. No numericaltimeout, pulse mismatch, release/reversal
+matrix or receiverfirmware was discovered in this wiring work.
+
+OPEN AND NEXT
+Roof: retain BOTH folding and unfolding, pause/resume/reversal, communication
+loss/recovery and numericaltimeout, left/right synchronization and fault
+recovery. Factory wiring is nowdurable for2008a/b/c and2009c; next obtain
+applicable2009technical/multiplex09-02F/G orreceiver evidence. DECK_CLlogical
+meaning and directionvoltage table remain unresolved, distinct from pinpairs.
+ECU/AT: next execute18816/18A44 outputhandoff/helpers18E48/529EA andfeedback;
+queues/ack/overlap/cadence/persistence/physicalintegration remain incomplete.
+Traction: periodicacquisition verified; next4DFE followups5E38/5CF4 completion
+contract, NCboard/channel1/8 identity, raw6Dxx/8F30/399B0 andremoteDSC evidence.
+No Ghidra analysis change; current archive/manifests remain from the verified
+acquisition-schedule milestone (1641annotations/811exports/11projecthashes).
+Saved locally, Git-eligible; no staging, commit, push orROM/production changes.

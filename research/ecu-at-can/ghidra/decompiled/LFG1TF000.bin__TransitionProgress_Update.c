@@ -2,7 +2,9 @@
 
 /* 9315 low2bits reset progress/rates;otherwise70B39(9334)>>8 ->9718,328FC
    updatesselectedrates,32C2C integrates signedoldwords.971Abit0 cleared then conditionallyset;
-   otherbits preserved.832 complete-body cases; tcu-transition-progress.txt. */
+   otherbits preserved.832 complete-body cases; tcu-transition-progress.txt. Reset9315 is produced
+   by22416 class encoding:FF/0 reset; otherclasses proceed. Full sampled-input/reset chain executed.
+    */
 
 void TransitionProgress_Update(void)
 

@@ -1,0 +1,154 @@
+TCU retained proposal threshold overlay46200
+Verified2026-10-06; Ghidra saved and independently restored
+
+SCOPE AND RESULT
+
+The second configured4530C producer46200 now has an independent whole-body
+model, including46580 hysteresis,46372 admission,463CC capture,46402/4643A
+latching predicates and46546 flag withdrawal.3906 direct cases,11 retained
+four-producer calls and24 full proposal/selection replays pass. Original
+instructions execute; no callback/result is replaced. No ROM, application or
+shared interpreter changes. Whole physical selector/sensor/task behavior is
+not claimed from these explicit RAM fixtures.
+
+Reproduce:
+  python research/ecu-at-can/verify_tcu_retained_thresholds.py
+Python3.14.3 standard library; bounded SHRotate/ObservedClass interpreter chain.
+Outputs:tcu-retained-thresholds-verification.json. Disassembly in
+ tcu-retained-thresholds-disassembly.txt covers46200..4662C; generated with
+ disassemble.py tcu dis46200 4662c (hex arguments, separated by spaces),
+ GNU SH objdump2.42. Replaceable install/package details are in
+ tcu-class-thresholds.txt. Exact ROM/scripts/results remain in the repository.
+
+Input TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Input tcu-fault-selection-snapshots.json SHA256
+16d58c0427de7905b52531ef943cc01b311d1aeeda511eebf33d525362bda943.
+Both are checked against the preceding fault-selection result manifest.
+Snapshots150/211 are synthetic entry44CFE RAM/peripheral samples, not vehicle
+RAM captures. Their provenance and original acquisition are in
+ tcu-fault-selection.txt. ECU execution is not added in this verifier.
+
+EXACT STOCK ORDER AND FLAGS
+
+46200 snapshots9BF5 low3 bits into locals before any helper. These are three
+retained latch bits. It then ALWAYS calls46580, before class admission or
+fresh input capture.46580 reads PREVIOUS signed words9BF6/9BF8 and updates
+9BF5bit3 and9AEA bit2. When active it writes source9B40=6; when inactive it
+leaves the prior source unchanged. In full4530C, the earlier primary bank
+producer normally supplies that prior source anew on each call.
+
+General original hysteresis comparisons use ROM77314..7731E:
+  Set if A>=77314 OR (A>=77316 AND B>=77318).
+  Then clear if A<7731A OR (A<7731C AND B<7731E).
+Stock77314=77316=32000;7731A=7731C=14720, so stock reduces to:
+  A>=32000 ->set, A<14720 ->clear, otherwise retain previousbit3.
+Both words are signed16. B thresholds13056/12416 do not alter the final
+stock result because the paired A thresholds are equal. This is not a claim
+about modified calibrations. Upper bits of both flag bytes are preserved.
+
+46372 admits when raw class8080 is notFF,0,1,2 AND9330bit0 isclear.
+All256 class byte values and representative gate bytes were checked for
+this helper; no physical meaning or global validity for unusual classes is
+inferred. On admission only,463CC captures9336->9BF6 and9390->9BF8;
+92C9bits0/1 separately substitute stock10240 for the corresponding word.
+The newly captured values influence hysteresis on the NEXT call, not this one.
+
+If admission fails OR hysteresis isoff,46546 clears low3 bits of9BF5 and
+9BF4. It does NOT clear active9BF5bit3,9AEA bit2 or source6. Consequently,
+source6 may be visible while no curve is replaced. Source code alone is
+not proof that the associated threshold descriptors are installed.
+
+LATCH PREDICATES AND CURVE REPLACEMENT
+
+With admission and hysteresisactive, only previously clear latch bits call
+46402. All three stock policy bytes73F20..22 are1, so the original4643A
+predicate must return1. Policy0/other calibration branches are not claimed
+executed on this unchanged image. Existing latch bits survive until withdrawal.
+
+Use unsigned axis9B3E, unsigned category9B3C and SIGNED measured80EA. Curves
+are unsigned word interpolations. Let D4=curve73F54, D3=73FB4, D2=74014:
+  index2: measured>=D4 OR category<4.
+  index1: (category4 AND measured>=D4) OR
+          (category3 AND measured>=D3) OR category<3.
+  index0: same category4/3 tests, OR(category2 AND measured>=D2), ORcategory<2.
+An unsupported index returns0 in4643A. Signed measurement and unsigned
+category are important: a high-bit measurement fails nonnegative threshold
+comparisons but may still qualify through the low-category alternative.
+
+Latchedindex2 OR1 OR0 replaces upper/lower slots3/8 with73F24/73F54.
+Latchedindex1 OR0 additionally replaces slots2/7 with73F84/73FB4.
+Latchedindex0 additionally replaces slots1/6 with73FE4/74014.
+Each installed slot gets operation6/kind5; other descriptors/operations/kinds
+are preserved.9BF4 records replacements cumulatively in bits2/1/0. Its other
+bits survive. The later class producer47240 can replace these entries again;
+this verifier composes both original producers and their independent models.
+
+RETAINED11-CALL DEMONSTRATION
+
+Explicit class6/history6, primary default-bank controls, axis6400,category0;
+keep RAM across all calls. Each whole4530C runs46FA0,46200,45AA4,47240 and
+then ten original108E6 lookups. All final threshold words match independent
+interpolation. Only sampled9336/9390,92C9 and9330 change between calls.
+
+Call Raw9336 Fault92C9 Gate9330 Captured9BF6 Flag9BF5 Source Replacements
+1    32000   0         0        32000        00       0      none
+2    32000   0         0        32000        0F       6      slots1..3/6..8
+3        0   0         0            0        0F       6      retained
+4        0   0         0            0        00       0      none
+5    32000   0         0        32000        00       0      none
+6    32000   0         0        32000        0F       6      installed
+7    32000   1         0        10240        0F       6      retained
+8    32000   0         0        32000        00       0      none
+9    32000   0         0        32000        0F       6      installed
+10   32000   0         1        32000        08       6      NONE
+11   32000   0         0        32000        0F       6      installed
+
+This distinguishes delayed capture effects from immediate admission loss.
+The actual scheduler cadence and physical identities of9336/9390 remain open.
+
+DIRECT COVERAGE AND FULL REPLAYS
+
+300 hysteresis cases: equality/adjacent boundaries, signed endpoints, previous
+flag combinations and B boundaries.1024 admission cases.150 capture cases.
+1664 predicate cases (plus original46402 checks for valid indices): curve
+boundaries, signed measurements and categories0..5/128/255.768 whole-producer
+cases include independent randomized descriptor operation/kind preservation.
+All stack balances and expected fields are checked.
+
+24 separate replays restore snapshots150/211, setclass0/3/6 andpreviousclass
+equal tocurrent, previous9BF6=0/32000,9BF8=16000,gate9330=0/1. Whole44CFE
+then original1EAC6 selection-before-limit segment execute. Both46200 and47240
+are independently checked inside the original dispatch. In these bounded
+states, changing retained-source activation/admission does not change the
+final creation within a class: faultclass0/6 creates[1,1,0],faultclass3 none;
+recovery creates[6,8,0] throughout. This is a useful negative result, not a
+proof the overlay cannot change final transitions elsewhere. All rows retain
+stage descriptors, proposals, accepted state and creation arguments.
+
+CONTINUATION AND REQUIRED BROADER SCOPE
+
+Next ECU/AT:45AA4 retained overlay/admission, then upstream9336/9390/9330,
+class/bank producers, actual task order, later44E14/44F5A adjustments and
+naturally produced overlapping/composite transitions.49B08 remains a static
+monitor lead. Physical sensor names and actuator effects require separate
+corroboration; do not infer them from source6 or the numeric thresholds.
+Traction: next59720/8118 and72B4/72BC/gate writers, cross-task arbitration and
+publication, CAN211/21A attribution and physical outputs. Executed ECU/TCU
+bridge evidence, factory descriptions, candidate mappings and missing DSC
+controller evidence remain distinct.
+Roof: next PCM transmission-type publication and matching OEM PRHT reception.
+Factory opening/closing/window handshake and candidate speed/neutral/selector
+fields do not prove receiver semantics. Folding AND unfolding, interruption/
+resume, reversal, communication timeout, motor synchronization and fault
+recovery remain open. No CAN fold/unfold command follows from this work.
+Allthree objectives remain active under the user's "everything open" request.
+Saved locally; no staging/commit/push. Ghidra archive verification complete.
+
+PERSISTENCE
+Ghidra12.1.3 PUBLIC/Java21 ApplyCanEvidence then read-only VerifyCanEvidence
+passed for572 ECU/795 TCU annotations. snapshot.py saved11 project files,
+10,875,095 bytes; SHA256 a9bc327945325a0cb63a25f9f60c3bf8f627701329db0c242c105f95622fa0ea.
+Extracted into separate retained-thresholds-20261006 scratch and reopened
+read-only:677 exports(675 functions+2 reports) byte-identical; all11 project
+hashes and archive checksum matched. Manifests preserve current identity.

@@ -63,7 +63,7 @@ void Control_PackOutgoingCommandRecord(void)
   else {
     puVar4[0x10] = 0;
   }
-  cVar10 = (*(code *)puVar1)(PTR_DAT_00022788);
+  cVar10 = (*(code *)puVar1)(PTR_Control_FilteredModeInput_00022788);
   if (cVar10 == '\x01') {
     puVar4[0x11] = puVar4[0x11] | 1;
   }

@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-07",
+  "status": "PASS",
+  "artifacts": {
+    "probe_tcu_hcan_startup.py": {
+      "bytes": 4950,
+      "sha256": "6afbc632beed0a629611f81265e7a022393818ad9c32e96b75597a18668fbc36"
+    },
+    "verify_tcu_hcan_startup.py": {
+      "bytes": 5144,
+      "sha256": "1d2498d78894693bc6d00fde73a0aa6cdcccf820c012f8cd1f884bd259e37ae9"
+    },
+    "probe_tcu_native_can_startup.py": {
+      "bytes": 3710,
+      "sha256": "f544c7f29652057982e68e026d1aac2c8555de10e0691181bcd3d36357b3f7d6"
+    },
+    "verify_tcu_diagnostic_timer.py": {
+      "bytes": 7565,
+      "sha256": "219b4d9e3e8b88ea1795731f4eada020e47e8089746c54b4d42d5bad7fb515ca"
+    },
+    "tcu-hcan-startup.txt": {
+      "bytes": 6683,
+      "sha256": "ba359b9218bbcf464b4a9129d828629cfaee8ed056aa39e4ae381a86c7cc40c0"
+    },
+    "tcu-hcan-startup-probe.json": {
+      "bytes": 30942,
+      "sha256": "f9558f553deb714cba9c32c33395a16aac2c1c55381491ec00a15e969f37cbb1"
+    },
+    "tcu-hcan-startup-verification.json": {
+      "bytes": 61067,
+      "sha256": "07a05339ae7b0d345f600408289a8e9f2c1db31ad969b794ba77bd84a0ff3805"
+    },
+    "tcu-hcan-startup-timer-stop.json": {
+      "bytes": 29596,
+      "sha256": "eb4740336caa07d3743b7ee4923c6484928874918f6874d1f6ef502b4752c6dc"
+    },
+    "tcu-hcan-startup-disassembly.txt": {
+      "bytes": 19544,
+      "sha256": "bb5ec570b6ead23c308caf0e11a74c7de341b4b8cd8ecbcb93e95901a659b240"
+    },
+    "tcu-hcan-startup-manual-excerpts.txt": {
+      "bytes": 37757,
+      "sha256": "4411e83634195b9daeea27b22261f020c5199e2485205bc704b93233e6a7387c"
+    },
+    "tcu-native-can-startup-probe.json": {
+      "bytes": 1411,
+      "sha256": "76d2f9df4b007d6178f0cdacb792cdf78fafd3da9f3077f4eff4febc94954fa1"
+    },
+    "tcu-diagnostic-timer-verification.json": {
+      "bytes": 21283,
+      "sha256": "ea2c938791fec667402fdaf93fc6d6a862766fac7dc20b6ff0ae894b5df0cc8f"
+    },
+    "ghidra/annotations.tsv": {
+      "bytes": 384503,
+      "sha256": "c55c96bf5b22891adc97551c3982487079ff1132218be79647450840fbdf17f7"
+    },
+    "ghidra/README.txt": {
+      "bytes": 6072,
+      "sha256": "853e5dfd1027ad59aaf60393b172a644308683e4ed0ac5a392b8dbef8e600a78"
+    },
+    "ghidra/snapshot.json": {
+      "bytes": 1326,
+      "sha256": "7bf5fd6721cba50fc9692df681bcceafef84b9691f296340a72e395961283102"
+    },
+    "ghidra/restore-verification.json": {
+      "bytes": 514,
+      "sha256": "f0d71a12685e6ab712ed5022d08c1f9db42916d989a3f24668f9320996135043"
+    }
+  },
+  "inputs": {
+    "examples/LFG1TF000.bin": {
+      "bytes": 524288,
+      "sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+    },
+    "examples/LFFEEE-stock.bin": {
+      "bytes": 1048576,
+      "sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08"
+    },
+    "research/ecu-at-can/sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf": {
+      "bytes": 5102824,
+      "sha256": "359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c"
+    }
+  },
+  "archive": {
+    "bytes": 11024174,
+    "sha256": "89879e2b40c3f67a334c13fe6bd9d8e0919839b243525b9789bb730ad6474e78"
+  },
+  "restoration": {
+    "date": "2026-10-07",
+    "archive_sha256": "89879e2b40c3f67a334c13fe6bd9d8e0919839b243525b9789bb730ad6474e78",
+    "restored_project_files_verified": 11,
+    "restored_annotations_verified": 1999,
+    "identical_export_files": 1036,
+    "restored_programs": [
+      "LFFEEE-stock.bin",
+      "LFG1TF000.bin"
+    ],
+    "method": "Independent Ghidra read-only reopening; verify_restore.py checks archive/live/restored hashes, complete expected export sets, no incomplete readbacks, all annotation rows and identical exports."
+  },
+  "checks": {
+    "hcan_whole_ram_mmio_cases": 256,
+    "can_timer_whole_ram_mmio_cases": 256,
+    "unprovided_access_rejections": 10,
+    "full_can_initializer_returned": true,
+    "native_task_mode": 1,
+    "native_can_mode": 10,
+    "prior_diagnostic_json_identical": true,
+    "prior_strict_probe_json_identical": true
+  },
+  "limits": "Index0 controller setup, externalGSR8/0 andboundedregisters. Full11FA0 coverage isnotindependentsemanticoracle for allchildren/fullboot/physicalCAN. NativeCANIRQ andreceipts remainnext; traction/roofscope unchanged/open. No staging/commit/push."
+}

@@ -1,0 +1,134 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000125f0 <.data+0x125f0>:
+   125f0:	4f 22       	sts.l	pr,@-r15
+   125f2:	d3 1a       	mov.l	0x1265c,r3	! 13ca4
+   125f4:	43 0b       	jsr	@r3
+   125f6:	00 09       	nop	
+   125f8:	d2 19       	mov.l	0x12660,r2	! 13b2e
+   125fa:	42 2b       	jmp	@r2
+   125fc:	4f 26       	lds.l	@r15+,pr
+   125fe:	d3 19       	mov.l	0x12664,r3	! 13d66
+   12600:	43 2b       	jmp	@r3
+   12602:	00 09       	nop	
+   12604:	4f 22       	sts.l	pr,@-r15
+   12606:	d3 10       	mov.l	0x12648,r3	! 13ce0
+   12608:	43 0b       	jsr	@r3
+   1260a:	00 09       	nop	
+   1260c:	d2 16       	mov.l	0x12668,r2	! 13bf0
+   1260e:	42 0b       	jsr	@r2
+   12610:	00 09       	nop	
+   12612:	e4 02       	mov	#2,r4
+   12614:	d3 0b       	mov.l	0x12644,r3	! 16008
+   12616:	43 2b       	jmp	@r3
+   12618:	4f 26       	lds.l	@r15+,pr
+   1261a:	4f 22       	sts.l	pr,@-r15
+   1261c:	d3 0a       	mov.l	0x12648,r3	! 13ce0
+   1261e:	43 0b       	jsr	@r3
+   12620:	00 09       	nop	
+   12622:	d2 12       	mov.l	0x1266c,r2	! 13c5a
+   12624:	42 0b       	jsr	@r2
+   12626:	00 09       	nop	
+   12628:	d3 0c       	mov.l	0x1265c,r3	! 13ca4
+   1262a:	43 2b       	jmp	@r3
+   1262c:	4f 26       	lds.l	@r15+,pr
+   1262e:	4f 22       	sts.l	pr,@-r15
+   12630:	d3 0f       	mov.l	0x12670,r3	! 16058
+   12632:	43 0b       	jsr	@r3
+   12634:	00 09       	nop	
+   12636:	d2 0f       	mov.l	0x12674,r2	! 16028
+   12638:	42 2b       	jmp	@r2
+   1263a:	4f 26       	lds.l	@r15+,pr
+   1263c:	00 01       	.word 0x0001
+   1263e:	3a 7c       	add	r7,r10
+   12640:	00 01       	.word 0x0001
+   12642:	3a b4       	div1	r11,r10
+   12644:	00 01       	.word 0x0001
+   12646:	60 08       	swap.b	r0,r0
+   12648:	00 01       	.word 0x0001
+   1264a:	3c e0       	cmp/eq	r14,r12
+   1264c:	00 01       	.word 0x0001
+   1264e:	3b 3a       	subc	r3,r11
+   12650:	00 01       	.word 0x0001
+   12652:	33 b8       	sub	r11,r3
+   12654:	00 01       	.word 0x0001
+   12656:	33 fa       	subc	r15,r3
+   12658:	00 01       	.word 0x0001
+   1265a:	3b b4       	div1	r11,r11
+   1265c:	00 01       	.word 0x0001
+   1265e:	3c a4       	div1	r10,r12
+   12660:	00 01       	.word 0x0001
+   12662:	3b 2e       	addc	r2,r11
+   12664:	00 01       	.word 0x0001
+   12666:	3d 66       	cmp/hi	r6,r13
+   12668:	00 01       	.word 0x0001
+   1266a:	3b f0       	cmp/eq	r15,r11
+   1266c:	00 01       	.word 0x0001
+   1266e:	3c 5a       	subc	r5,r12
+   12670:	00 01       	.word 0x0001
+   12672:	60 58       	swap.b	r5,r0
+   12674:	00 01       	.word 0x0001
+   12676:	60 28       	swap.b	r2,r0
+   12678:	00 0b       	rts	
+   1267a:	00 09       	nop	
+   1267c:	d3 09       	mov.l	0x126a4,r3	! 56ce0
+   1267e:	43 2b       	jmp	@r3
+   12680:	00 09       	nop	
+   12682:	c4 06       	mov.b	@(6,gbr),r0
+   12684:	64 03       	mov	r0,r4
+   12686:	60 4c       	extu.b	r4,r0
+   12688:	88 01       	cmp/eq	#1,r0
+   1268a:	89 08       	bt	0x1269e
+   1268c:	88 03       	cmp/eq	#3,r0
+   1268e:	89 03       	bt	0x12698
+   12690:	88 05       	cmp/eq	#5,r0
+   12692:	89 01       	bt	0x12698
+   12694:	00 0b       	rts	
+   12696:	00 09       	nop	
+   12698:	d2 03       	mov.l	0x126a8,r2	! 57002
+   1269a:	42 2b       	jmp	@r2
+   1269c:	00 09       	nop	
+   1269e:	00 0b       	rts	
+   126a0:	00 09       	nop	
+   126a2:	ff ff       	.word 0xffff
+   126a4:	00 05       	mov.w	r0,@(r0,r0)
+   126a6:	6c e0       	mov.b	@r14,r12
+   126a8:	00 05       	mov.w	r0,@(r0,r0)
+   126aa:	70 02       	add	#2,r0
+   126ac:	4f 22       	sts.l	pr,@-r15
+   126ae:	e3 00       	mov	#0,r3
+   126b0:	d2 2c       	mov.l	0x12764,r2	! ffff84f4
+   126b2:	d1 2d       	mov.l	0x12768,r1	! 52994
+   126b4:	41 0b       	jsr	@r1
+   126b6:	22 30       	mov.b	r3,@r2
+   126b8:	d3 2c       	mov.l	0x1276c,r3	! 185e4
+   126ba:	43 0b       	jsr	@r3
+   126bc:	00 09       	nop	
+   126be:	d2 2c       	mov.l	0x12770,r2	! 19794
+   126c0:	42 0b       	jsr	@r2
+   126c2:	e4 00       	mov	#0,r4
+   126c4:	d3 2b       	mov.l	0x12774,r3	! 197a6
+   126c6:	43 0b       	jsr	@r3
+   126c8:	e4 00       	mov	#0,r4
+   126ca:	d2 2b       	mov.l	0x12778,r2	! 5327c
+   126cc:	42 0b       	jsr	@r2
+   126ce:	00 09       	nop	
+   126d0:	92 47       	mov.w	0x12762,r2	! 84f5
+   126d2:	e3 00       	mov	#0,r3
+   126d4:	4f 26       	lds.l	@r15+,pr
+   126d6:	00 0b       	rts	
+   126d8:	22 30       	mov.b	r3,@r2
+   126da:	4f 22       	sts.l	pr,@-r15
+   126dc:	d1 27       	mov.l	0x1277c,r1	! 1dff8
+   126de:	41 0b       	jsr	@r1
+   126e0:	00 09       	nop	
+   126e2:	e0 01       	mov	#1,r0
+   126e4:	91 3d       	mov.w	0x12762,r1	! 84f5
+   126e6:	4f 26       	lds.l	@r15+,pr
+   126e8:	00 0b       	rts	
+   126ea:	21 00       	mov.b	r0,@r1
+

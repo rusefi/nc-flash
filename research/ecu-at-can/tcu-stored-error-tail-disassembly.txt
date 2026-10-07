@@ -1,0 +1,72 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00039f94 <.data+0x39f94>:
+   39f94:	4f 22       	sts.l	pr,@-r15
+   39f96:	60 63       	mov	r6,r0
+   39f98:	d2 1b       	mov.l	0x3a008,r2	! 10c1c
+   39f9a:	7f f0       	add	#-16,r15
+   39f9c:	81 f4       	mov.w	r0,@(8,r15)
+   39f9e:	66 4f       	exts.w	r4,r6
+   39fa0:	60 73       	mov	r7,r0
+   39fa2:	67 5f       	exts.w	r5,r7
+   39fa4:	81 f6       	mov.w	r0,@(12,r15)
+   39fa6:	63 63       	mov	r6,r3
+   39fa8:	33 7c       	add	r7,r3
+   39faa:	37 68       	sub	r6,r7
+   39fac:	1f 31       	mov.l	r3,@(4,r15)
+   39fae:	e6 0a       	mov	#10,r6
+   39fb0:	2f 72       	mov.l	r7,@r15
+   39fb2:	85 f6       	mov.w	@(12,r15),r0
+   39fb4:	65 03       	mov	r0,r5
+   39fb6:	85 f4       	mov.w	@(8,r15),r0
+   39fb8:	42 0b       	jsr	@r2
+   39fba:	64 03       	mov	r0,r4
+   39fbc:	d7 13       	mov.l	0x3a00c,r7	! ffff98dc
+   39fbe:	66 03       	mov	r0,r6
+   39fc0:	53 f1       	mov.l	@(4,r15),r3
+   39fc2:	64 71       	mov.w	@r7,r4
+   39fc4:	65 43       	mov	r4,r5
+   39fc6:	35 37       	cmp/gt	r3,r5
+   39fc8:	8b 00       	bf	0x39fcc
+   39fca:	34 68       	sub	r6,r4
+   39fcc:	63 f2       	mov.l	@r15,r3
+   39fce:	35 33       	cmp/ge	r3,r5
+   39fd0:	89 00       	bt	0x39fd4
+   39fd2:	34 6c       	add	r6,r4
+   39fd4:	d3 0e       	mov.l	0x3a010,r3	! 76dd0
+   39fd6:	65 31       	mov.w	@r3,r5
+   39fd8:	45 00       	shll	r5
+   39fda:	65 5b       	neg	r5,r5
+   39fdc:	66 31       	mov.w	@r3,r6
+   39fde:	46 00       	shll	r6
+   39fe0:	34 53       	cmp/ge	r5,r4
+   39fe2:	89 00       	bt	0x39fe6
+   39fe4:	64 53       	mov	r5,r4
+   39fe6:	34 67       	cmp/gt	r6,r4
+   39fe8:	8b 00       	bf	0x39fec
+   39fea:	64 63       	mov	r6,r4
+   39fec:	27 41       	mov.w	r4,@r7
+   39fee:	7f 10       	add	#16,r15
+   39ff0:	4f 26       	lds.l	@r15+,pr
+   39ff2:	00 0b       	rts	
+   39ff4:	00 09       	nop	
+   39ff6:	99 22       	mov.w	0x3a03e,r9	! e201
+   39ff8:	00 03       	bsrf	r0
+   39ffa:	83 66       	.word 0x8366
+   39ffc:	ff ff       	.word 0xffff
+   39ffe:	98 e0       	mov.w	0x3a1c2,r8	! d34e
+   3a000:	ff ff       	.word 0xffff
+   3a002:	82 18       	.word 0x8218
+   3a004:	00 07       	mul.l	r0,r0
+   3a006:	72 08       	add	#8,r2
+   3a008:	00 01       	.word 0x0001
+   3a00a:	0c 1c       	mov.b	@(r0,r1),r12
+   3a00c:	ff ff       	.word 0xffff
+   3a00e:	98 dc       	mov.w	0x3a1ca,r8	! 85f2
+   3a010:	00 07       	mul.l	r0,r0
+   3a012:	6d d0       	mov.b	@r13,r13
+

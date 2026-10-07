@@ -1,0 +1,176 @@
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 74d62 74df8
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00074d62 <.data+0x74d62>:
+   74d62:	2f e6       	mov.l	r14,@-r15
+   74d64:	4f 22       	sts.l	pr,@-r15
+   74d66:	d2 3c       	mov.l	0x74e58,r2	! ffffa556
+   74d68:	d1 3c       	mov.l	0x74e5c,r1	! ffff914e
+   74d6a:	63 10       	mov.b	@r1,r3
+   74d6c:	23 38       	tst	r3,r3
+   74d6e:	8d 07       	bt.s	0x74d80
+   74d70:	6e 20       	mov.b	@r2,r14
+   74d72:	63 ec       	extu.b	r14,r3
+   74d74:	23 38       	tst	r3,r3
+   74d76:	8f 03       	bf.s	0x74d80
+   74d78:	00 09       	nop	
+   74d7a:	e2 01       	mov	#1,r2
+   74d7c:	d1 38       	mov.l	0x74e60,r1	! ffff914d
+   74d7e:	21 20       	mov.b	r2,@r1
+   74d80:	d0 38       	mov.l	0x74e64,r0	! ffff8fd4
+   74d82:	63 01       	mov.w	@r0,r3
+   74d84:	63 3d       	extu.w	r3,r3
+   74d86:	43 15       	cmp/pl	r3
+   74d88:	8d 2a       	bt.s	0x74de0
+   74d8a:	00 09       	nop	
+   74d8c:	d3 36       	mov.l	0x74e68,r3	! ffff925e
+   74d8e:	60 30       	mov.b	@r3,r0
+   74d90:	60 0c       	extu.b	r0,r0
+   74d92:	88 01       	cmp/eq	#1,r0
+   74d94:	8d 24       	bt.s	0x74de0
+   74d96:	00 09       	nop	
+   74d98:	d1 34       	mov.l	0x74e6c,r1	! 14450
+   74d9a:	41 0b       	jsr	@r1
+   74d9c:	00 09       	nop	
+   74d9e:	60 0c       	extu.b	r0,r0
+   74da0:	88 01       	cmp/eq	#1,r0
+   74da2:	8f 17       	bf.s	0x74dd4
+   74da4:	00 09       	nop	
+   74da6:	d3 2e       	mov.l	0x74e60,r3	! ffff914d
+   74da8:	62 30       	mov.b	@r3,r2
+   74daa:	22 28       	tst	r2,r2
+   74dac:	8f 12       	bf.s	0x74dd4
+   74dae:	00 09       	nop	
+   74db0:	d1 2f       	mov.l	0x74e70,r1	! ffffa562
+   74db2:	60 10       	mov.b	@r1,r0
+   74db4:	20 08       	tst	r0,r0
+   74db6:	8f 0d       	bf.s	0x74dd4
+   74db8:	00 09       	nop	
+   74dba:	d0 2e       	mov.l	0x74e74,r0	! ffff900a
+   74dbc:	62 00       	mov.b	@r0,r2
+   74dbe:	22 28       	tst	r2,r2
+   74dc0:	8f 08       	bf.s	0x74dd4
+   74dc2:	00 09       	nop	
+   74dc4:	d4 2c       	mov.l	0x74e78,r4	! ffff282c
+   74dc6:	d2 2d       	mov.l	0x74e7c,r2	! 15146
+   74dc8:	42 0b       	jsr	@r2
+   74dca:	e5 00       	mov	#0,r5
+   74dcc:	60 0c       	extu.b	r0,r0
+   74dce:	20 08       	tst	r0,r0
+   74dd0:	8d 06       	bt.s	0x74de0
+   74dd2:	00 09       	nop	
+   74dd4:	d3 2a       	mov.l	0x74e80,r3	! ffff915c
+   74dd6:	60 30       	mov.b	@r3,r0
+   74dd8:	60 0c       	extu.b	r0,r0
+   74dda:	88 01       	cmp/eq	#1,r0
+   74ddc:	8f 04       	bf.s	0x74de8
+   74dde:	00 09       	nop	
+   74de0:	d2 28       	mov.l	0x74e84,r2	! ffff9149
+   74de2:	e3 01       	mov	#1,r3
+   74de4:	a0 03       	bra	0x74dee
+   74de6:	22 30       	mov.b	r3,@r2
+   74de8:	d1 26       	mov.l	0x74e84,r1	! ffff9149
+   74dea:	e0 00       	mov	#0,r0
+   74dec:	21 00       	mov.b	r0,@r1
+   74dee:	d3 1b       	mov.l	0x74e5c,r3	! ffff914e
+   74df0:	23 e0       	mov.b	r14,@r3
+   74df2:	4f 26       	lds.l	@r15+,pr
+   74df4:	00 0b       	rts	
+   74df6:	6e f6       	mov.l	@r15+,r14
+
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 14450 14476
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00014450 <.data+0x14450>:
+   14450:	d3 14       	mov.l	0x144a4,r3	! ffffa55c
+   14452:	60 30       	mov.b	@r3,r0
+   14454:	60 0c       	extu.b	r0,r0
+   14456:	88 01       	cmp/eq	#1,r0
+   14458:	8f 02       	bf.s	0x14460
+   1445a:	e5 00       	mov	#0,r5
+   1445c:	a0 09       	bra	0x14472
+   1445e:	64 53       	mov	r5,r4
+   14460:	d2 11       	mov.l	0x144a8,r2	! ffff2b84
+   14462:	60 20       	mov.b	@r2,r0
+   14464:	60 0c       	extu.b	r0,r0
+   14466:	88 01       	cmp/eq	#1,r0
+   14468:	8f 02       	bf.s	0x14470
+   1446a:	00 09       	nop	
+   1446c:	a0 01       	bra	0x14472
+   1446e:	e4 01       	mov	#1,r4
+   14470:	64 53       	mov	r5,r4
+   14472:	00 0b       	rts	
+   14474:	60 43       	mov	r4,r0
+
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 15146 1518e
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00015146 <.data+0x15146>:
+   15146:	60 53       	mov	r5,r0
+   15148:	d3 26       	mov.l	0x151e4,r3	! 22e4
+   1514a:	2f e6       	mov.l	r14,@-r15
+   1514c:	2f d6       	mov.l	r13,@-r15
+   1514e:	6e 43       	mov	r4,r14
+   15150:	95 42       	mov.w	0x151d8,r5	! e0
+   15152:	4f 22       	sts.l	pr,@-r15
+   15154:	7f f8       	add	#-8,r15
+   15156:	80 f4       	mov.b	r0,@(4,r15)
+   15158:	43 0b       	jsr	@r3
+   1515a:	64 f3       	mov	r15,r4
+   1515c:	62 e0       	mov.b	@r14,r2
+   1515e:	62 2c       	extu.b	r2,r2
+   15160:	84 e1       	mov.b	@(1,r14),r0
+   15162:	60 07       	not	r0,r0
+   15164:	60 0c       	extu.b	r0,r0
+   15166:	32 00       	cmp/eq	r0,r2
+   15168:	8f 02       	bf.s	0x15170
+   1516a:	00 09       	nop	
+   1516c:	a0 06       	bra	0x1517c
+   1516e:	6d e0       	mov.b	@r14,r13
+   15170:	84 f4       	mov.b	@(4,r15),r0
+   15172:	6d 03       	mov	r0,r13
+   15174:	d3 1c       	mov.l	0x151e8,r3	! ffff534c
+   15176:	d2 1d       	mov.l	0x151ec,r2	! 157f0
+   15178:	42 0b       	jsr	@r2
+   1517a:	23 e2       	mov.l	r14,@r3
+   1517c:	d3 1c       	mov.l	0x151f0,r3	! 22f4
+   1517e:	43 0b       	jsr	@r3
+   15180:	64 f2       	mov.l	@r15,r4
+   15182:	60 d3       	mov	r13,r0
+   15184:	7f 08       	add	#8,r15
+   15186:	4f 26       	lds.l	@r15+,pr
+   15188:	6d f6       	mov.l	@r15+,r13
+   1518a:	00 0b       	rts	
+   1518c:	6e f6       	mov.l	@r15+,r14
+
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 157f0 15804
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000157f0 <.data+0x157f0>:
+   157f0:	d2 01       	mov.l	0x157f8,r2	! ffff5354
+   157f2:	e3 01       	mov	#1,r3
+   157f4:	00 0b       	rts	
+   157f6:	22 30       	mov.b	r3,@r2
+   157f8:	ff ff       	.word 0xffff
+   157fa:	53 54       	mov.l	@(16,r5),r3
+   157fc:	4f 22       	sts.l	pr,@-r15
+   157fe:	7f fc       	add	#-4,r15
+   15800:	d4 92       	mov.l	0x15a4c,r4	! ffff2060
+   15802:	d3 93       	mov.l	0x15a50,r3	! 1518e
+

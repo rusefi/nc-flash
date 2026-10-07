@@ -1,0 +1,71 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00044cfe <.data+0x44cfe>:
+   44cfe:	2f e6       	mov.l	r14,@-r15
+   44d00:	2f d6       	mov.l	r13,@-r15
+   44d02:	4f 22       	sts.l	pr,@-r15
+   44d04:	7f f8       	add	#-8,r15
+   44d06:	c4 84       	mov.b	@(132,gbr),r0
+   44d08:	2f 00       	mov.b	r0,@r15
+   44d0a:	d3 35       	mov.l	0x44de0,r3	! ffff9b3d
+   44d0c:	d4 38       	mov.l	0x44df0,r4	! ffff810f
+   44d0e:	60 30       	mov.b	@r3,r0
+   44d10:	80 f4       	mov.b	r0,@(4,r15)
+   44d12:	d0 38       	mov.l	0x44df4,r0	! ffff92c5
+   44d14:	60 00       	mov.b	@r0,r0
+   44d16:	c9 01       	and	#1,r0
+   44d18:	60 0d       	extu.w	r0,r0
+   44d1a:	20 08       	tst	r0,r0
+   44d1c:	8f 01       	bf.s	0x44d22
+   44d1e:	ee 00       	mov	#0,r14
+   44d20:	24 e0       	mov.b	r14,@r4
+   44d22:	dd 31       	mov.l	0x44de8,r13	! ffff9ae8
+   44d24:	63 40       	mov.b	@r4,r3
+   44d26:	d1 34       	mov.l	0x44df8,r1	! 772fa
+   44d28:	62 10       	mov.b	@r1,r2
+   44d2a:	33 22       	cmp/hs	r2,r3
+   44d2c:	89 02       	bt	0x44d34
+   44d2e:	60 d0       	mov.b	@r13,r0
+   44d30:	a0 02       	bra	0x44d38
+   44d32:	cb 80       	or	#128,r0
+   44d34:	60 d0       	mov.b	@r13,r0
+   44d36:	c9 7f       	and	#127,r0
+   44d38:	2d 00       	mov.b	r0,@r13
+   44d3a:	63 f0       	mov.b	@r15,r3
+   44d3c:	d2 27       	mov.l	0x44ddc,r2	! ffff9b3c
+   44d3e:	b1 46       	bsr	0x44fce
+   44d40:	22 30       	mov.b	r3,@r2
+   44d42:	b1 68       	bsr	0x45016
+   44d44:	00 09       	nop	
+   44d46:	d1 2d       	mov.l	0x44dfc,r1	! 49b08
+   44d48:	41 0b       	jsr	@r1
+   44d4a:	00 09       	nop	
+   44d4c:	d3 2c       	mov.l	0x44e00,r3	! 4530c
+   44d4e:	43 0b       	jsr	@r3
+   44d50:	00 09       	nop	
+   44d52:	65 f3       	mov	r15,r5
+   44d54:	75 04       	add	#4,r5
+   44d56:	b1 98       	bsr	0x4508a
+   44d58:	64 f3       	mov	r15,r4
+   44d5a:	d3 2a       	mov.l	0x44e04,r3	! 4a5de
+   44d5c:	43 0b       	jsr	@r3
+   44d5e:	64 f3       	mov	r15,r4
+   44d60:	d2 29       	mov.l	0x44e08,r2	! 495c0
+   44d62:	65 f3       	mov	r15,r5
+   44d64:	75 04       	add	#4,r5
+   44d66:	42 0b       	jsr	@r2
+   44d68:	64 f3       	mov	r15,r4
+   44d6a:	65 f3       	mov	r15,r5
+   44d6c:	d3 27       	mov.l	0x44e0c,r3	! 452dc
+   44d6e:	75 04       	add	#4,r5
+   44d70:	43 0b       	jsr	@r3
+   44d72:	64 f3       	mov	r15,r4
+   44d74:	60 d3       	mov	r13,r0
+   44d76:	60 00       	mov.b	@r0,r0
+   44d78:	c8 80       	tst	#128,r0
+   44d7a:	00 29       	movt	r0
+

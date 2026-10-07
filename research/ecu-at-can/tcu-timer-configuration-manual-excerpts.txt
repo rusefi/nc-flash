@@ -1,0 +1,2248 @@
+Durable source: sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf
+SHA256 359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c
+
+PDF zero-based page 240
+Rev.2.0, 07/03, page 201 of 960 
+ 
+11.1.3 
+Register Configuration 
+Table 11.3 summarizes the ATU-II registers. 
+Table 11.3 ATU-II Registers 
+ 
+Channel 
+ 
+Name 
+Abbrevia-
+tion 
+ 
+R/W 
+Initial  
+Value 
+ 
+Address 
+Access 
+Size (Bits) 
+Section 
+No. 
+Timer start register 1 
+TSTR1 
+R/W 
+H'00 
+H'FFFFF401 
+Timer start register 2 
+TSTR2 
+R/W 
+H'00 
+H'FFFFF400 
+Timer start register 3 
+TSTR3 
+R/W 
+H'00 
+H'FFFFF402 
+8, 16, 32 
+11.2.1 
+Prescaler register 1 
+PSCR1 
+R/W 
+H'00 
+H'FFFFF404 
+Prescaler register 2 
+PSCR2 
+R/W 
+H'00 
+H'FFFFF406 
+Prescaler register 3 
+PSCR3 
+R/W 
+H'00 
+H'FFFFF408 
+Common 
+Prescaler register 4 
+PSCR4 
+R/W 
+H'00 
+H'FFFFF40A 
+8 
+11.2.2 
+Free-running counter 
+0H 
+TCNT0H 
+R/W 
+H'0000 
+Free-running counter  
+0L 
+TCNT0L 
+R/W 
+H'0000 
+H'FFFFF430 
+11.2.15 
+Input capture register 
+0AH 
+ICR0AH 
+R 
+H'0000 
+Input capture register 
+0AL 
+ICR0AL 
+R 
+H'0000 
+H'FFFFF434 
+Input capture register 
+0BH 
+ICR0BH 
+R 
+H'0000 
+Input capture register 
+0BL 
+ICR0BL 
+R 
+H'0000 
+H'FFFFF438 
+Input capture register 
+0CH 
+ICR0CH 
+R 
+H'0000 
+Input capture register 
+0CL 
+ICR0CL 
+R 
+H'0000 
+H'FFFFF43C 
+Input capture register 
+0DH 
+ICR0DH 
+R 
+H'0000 
+Input capture register 
+0DL 
+ICR0DL 
+R 
+H'0000 
+H'FFFFF420 
+32 
+11.2.19 
+Timer interval interrupt  
+request register 1 
+ITVRR1 
+R/W 
+H'00 
+H'FFFFF424 
+0 
+Timer interval interrupt  
+request register 2A 
+ITVRR2A 
+R/W 
+H'00 
+H'FFFFF426 
+8 
+11.2.7 
+ 
+
+PDF zero-based page 242
+Rev.2.0, 07/03, page 203 of 960 
+ 
+Table 11.3 ATU-II Registers (cont) 
+ 
+Channel 
+ 
+Name 
+Abbrevia-
+tion 
+ 
+R/W 
+Initial  
+Value 
+ 
+Address 
+Access 
+Size (Bits) 
+Section 
+No. 
+Timer status register  
+1A 
+TSR1A 
+R/(W)* H'0000 H'FFFFF45E 
+Timer status register  
+1B 
+TSR1B 
+R/(W)* H'0000 H'FFFFF460 
+11.2.5 
+Timer interrupt enable  
+register 1A 
+TIER1A 
+R/W 
+H'0000 H'FFFFF462 
+Timer interrupt enable  
+register 1B 
+TIER1B 
+R/W 
+H'0000 H'FFFFF464 
+16 
+11.2.6 
+1 
+Trigger mode register 
+TRGMDR 
+R/W 
+H'00 
+H'FFFFF466 8 
+11.2.8 
+Free-running counter  
+2A 
+TCNT2A 
+R/W 
+H'0000 H'FFFFF600 
+Free-running counter  
+2B 
+TCNT2B 
+R/W 
+H'0000 H'FFFFF602 
+11.2.15 
+General register 2A 
+GR2A 
+R/W 
+H'FFFF H'FFFFF604 
+General register 2B 
+GR2B 
+R/W 
+H'FFFF H'FFFFF606 
+General register 2C 
+GR2C 
+R/W 
+H'FFFF H'FFFFF608 
+General register 2D 
+GR2D 
+R/W 
+H'FFFF H'FFFFF60A 
+General register 2E 
+GR2E 
+R/W 
+H'FFFF H'FFFFF60C 
+General register 2F 
+GR2F 
+R/W 
+H'FFFF H'FFFFF60E 
+General register 2G 
+GR2G 
+R/W 
+H'FFFF H'FFFFF610 
+General register 2H 
+GR2H 
+R/W 
+H'FFFF H'FFFFF612 
+11.2.20 
+Output compare  
+register 2A 
+OCR2A 
+R/W 
+H'FFFF H'FFFFF614 
+Output compare  
+register 2B 
+OCR2B 
+R/W 
+H'FFFF H'FFFFF616 
+Output compare  
+register 2C 
+OCR2C 
+R/W 
+H'FFFF H'FFFFF618 
+Output compare  
+register 2D 
+OCR2D 
+R/W 
+H'FFFF H'FFFFF61A 
+Output compare  
+register 2E 
+OCR2E 
+R/W 
+H'FFFF H'FFFFF61C 
+2 
+Output compare  
+register 2F 
+OCR2F 
+R/W 
+H'FFFF H'FFFFF61E 
+16 
+11.2.18 
+ 
+
+PDF zero-based page 243
+Rev.2.0, 07/03, page 204 of 960 
+ 
+Table 11.3 ATU-II Registers (cont) 
+ 
+Channel 
+ 
+Name 
+Abbrevia-
+tion 
+ 
+R/W 
+Initial  
+Value 
+ 
+Address 
+Access 
+Size (Bits) 
+Section 
+No. 
+Output compare  
+register 2G 
+OCR2G 
+R/W 
+H'FFFF H'FFFFF620 
+Output compare  
+register 2H 
+OCR2H 
+R/W 
+H'FFFF H'FFFFF622 
+11.2.18 
+Offset base register 2 
+OSBR2 
+R 
+H'0000 H'FFFFF624 
+16 
+11.2.21 
+Timer I/O control 
+register 2A 
+TIOR2A 
+R/W 
+H'00 
+H'FFFFF627 
+Timer I/O control 
+register 2B 
+TIOR2B 
+R/W 
+H'00 
+H'FFFFF626 
+Timer I/O control 
+register 2C 
+TIOR2C 
+R/W 
+H'00 
+H'FFFFF629 
+Timer I/O control 
+register 2D 
+TIOR2D 
+R/W 
+H'00 
+H'FFFFF628 
+11.2.4 
+Timer control register 
+2A 
+TCR2A 
+R/W 
+H'00 
+H'FFFFF62B 
+Timer control register 
+2B 
+TCR2B 
+R/W 
+H'00 
+H'FFFFF62A 
+8, 16 
+11.2.3 
+Timer status register  
+2A 
+TSR2A 
+R/(W)* H'0000 H'FFFFF62C 
+Timer status register  
+2B 
+TSR2B 
+R/(W)* H'0000 H'FFFFF62E 
+11.2.5 
+Timer interrupt enable  
+register 2A 
+TIER2A 
+R/W 
+H'0000 H'FFFFF630 
+2 
+Timer interrupt enable  
+register 2B 
+TIER2B 
+R/W 
+H'0000 H'FFFFF632 
+16 
+11.2.6 
+Timer status register 3 TSR3 
+R/(W)* H'0000 H'FFFFF480 
+11.2.5 
+Timer interrupt enable  
+register 3 
+TIER3 
+R/W 
+H'0000 H'FFFFF482 
+16 
+11.2.6 
+3–5 
+Timer mode register 
+TMDR 
+R/W 
+H'00 
+H'FFFFF484 8 
+11.2.9 
+Free-running counter 3 TCNT3 
+R/W 
+H'0000 H'FFFFF4A0 
+11.2.15 
+General register 3A 
+GR3A 
+R/W 
+H'FFFF H'FFFFF4A2 
+General register 3B 
+GR3B 
+R/W 
+H'FFFF H'FFFFF4A4 
+General register 3C 
+GR3C 
+R/W 
+H'FFFF H'FFFFF4A6 
+3 
+General register 3D 
+GR3D 
+R/W 
+H'FFFF H'FFFFF4A8 
+16 
+11.2.20 
+ 
+
+PDF zero-based page 245
+Rev.2.0, 07/03, page 206 of 960 
+ 
+Table 11.3 ATU-II Registers (cont) 
+ 
+Channel 
+ 
+Name 
+Abbrevia-
+tion 
+ 
+R/W 
+Initial  
+Value 
+ 
+Address 
+Access 
+Size (Bits) 
+Section 
+No. 
+Cycle register 6A 
+CYLR6A 
+R/W 
+H'FFFF H'FFFFF508 
+Cycle register 6B 
+CYLR6B 
+R/W 
+H'FFFF H'FFFFF50A 
+Cycle register 6C 
+CYLR6C 
+R/W 
+H'FFFF H'FFFFF50C 
+Cycle register 6D 
+CYLR6D 
+R/W 
+H'FFFF H'FFFFF50E 
+11.2.22 
+Buffer register 6A 
+BFR6A 
+R/W 
+H'FFFF H'FFFFF510 
+Buffer register 6B 
+BFR6B 
+R/W 
+H'FFFF H'FFFFF512 
+Buffer register 6C 
+BFR6C 
+R/W 
+H'FFFF H'FFFFF514 
+Buffer register 6D 
+BFR6D 
+R/W 
+H'FFFF H'FFFFF516 
+11.2.23 
+Duty register 6A 
+DTR6A 
+R/W 
+H'FFFF H'FFFFF518 
+Duty register 6B 
+DTR6B 
+R/W 
+H'FFFF H'FFFFF51A 
+Duty register 6C 
+DTR6C 
+R/W 
+H'FFFF H'FFFFF51C 
+Duty register 6D 
+DTR6D 
+R/W 
+H'FFFF H'FFFFF51E 
+16 
+11.2.24 
+Timer control register 
+6A 
+TCR6A 
+R/W 
+H'00 
+H'FFFFF521 
+Timer control register 
+6B 
+TCR6B 
+R/W 
+H'00 
+H'FFFFF520 
+8, 16 
+11.2.3 
+Timer status register 6 TSR6 
+R/(W)* H'0000 H'FFFFF522 
+11.2.5 
+Timer interrupt enable  
+register 6 
+TIER6 
+R/W 
+H'0000 H'FFFFF524 
+16 
+11.2.6 
+6 
+PWM mode register 
+PMDR 
+R/W 
+H'00 
+H'FFFFF526 8 
+11.2.10 
+Free-running counter  
+7A 
+TCNT7A 
+R/W 
+H'0001 H'FFFFF580 
+Free-running counter  
+7B 
+TCNT7B 
+R/W 
+H'0001 H'FFFFF582 
+Free-running counter 
+7C 
+TCNT7C 
+R/W 
+H'0001 H'FFFFF584 
+Free-running counter 
+7D 
+TCNT7D 
+R/W 
+H'0001 H'FFFFF586 
+11.2.15 
+Cycle register 7A 
+CYLR7A 
+R/W 
+H'FFFF H'FFFFF588 
+Cycle register 7B 
+CYLR7B 
+R/W 
+H'FFFF H'FFFFF58A 
+Cycle register 7C 
+CYLR7C 
+R/W 
+H'FFFF H'FFFFF58C 
+7 
+Cycle register 7D 
+CYLR7D 
+R/W 
+H'FFFF H'FFFFF58E 
+16 
+11.2.22 
+ 
+
+PDF zero-based page 266
+Rev.2.0, 07/03, page 227 of 960 
+ 
+• Bits 7 to 1—Reserved: These bits are always read as 0. The write value should always be 0. 
+• Bit 0—Counter Start 11 (STR11): Starts and stops free-running counter 11 (TCNT11). 
+ 
+Bit 0: STR11 
+Description 
+0 
+TCNT11 is halted 
+(Initial value) 
+1 
+TCNT11 counts 
+ 
+11.2.2 
+Prescaler Registers (PSCR) 
+The prescaler registers (PSCR) are 8-bit registers. The ATU-II has four PSCR registers. 
+Channel 
+Abbreviation 
+Function 
+0, 1, 2, 3, 4, 5, 8, 11 
+PSCR1 
+6 
+PSCR2 
+7 
+PSCR3 
+10 
+PSCR4 
+Prescaler setting for respective channels 
+ 
+PSCRx is an 8-bit writable register that enables the first-stage counter clock φ' input to each 
+channel to be set to any value from Pφ/1 to Pφ/32. 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+— 
+— 
+PSCxE 
+PSCxD 
+PSCxC 
+PSCxB 
+PSCxA 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+x = 1 to 4 
+ 
+Input counter clock φ' is determined by setting PSCxA to PSCxE: φ' is Pφ/1 when the set value is 
+H'00, and Pφ/32 when H'1F. 
+PSCRx is initialized to H'00 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+The internal clock φ' set with this register can undergo further second-stage scaling to create clock 
+φ" for channels 1 to 8 and 11, the setting being made in the timer control register (TCR). 
+• Bits 7 to 5—Reserved: These bits cannot be modified. 
+• Bits 4 to 0—Prescaler (PSCxE, PSCxD, PSCxC, PSCxB, PSCxA): These bits specify 
+frequency division of first-stage counter clock ø' input to the corresponding channel. 
+ 
+
+PDF zero-based page 268
+Rev.2.0, 07/03, page 229 of 960 
+ 
+Timer Control Registers 1A, 1B, 2A, 2B (TCR1A, TCR1B, TCR2A, TCR2B) 
+TCR1A, TCR2A 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+— 
+CKEGA1 
+CKEGA0 CKSELA3 CKSELA2 CKSELA1 CKSELA0 
+ Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+TCR1B, TCR2B 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+— 
+CKEGB1 
+CKEGB0 CKSELB3 CKSELB2 CKSELB1 CKSELB0 
+ Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• Bits 7 and 6—Reserved: These bits always read 0. The write value should always be 0. 
+• Bits 5 and 4—Clock Edge 1 and 0 (CKEGx1, CKEGx0): These bits select the count edge(s) 
+for external clock TCLKA and TCLKB input. 
+ 
+Bit 5: CKEGx1 
+Bit 4: CKEGx0 
+Description 
+0 
+Rising edges counted 
+(Initial value) 
+0 
+1 
+Falling edges counted 
+0 
+Both rising and falling edges counted 
+1 
+1 
+Count disabled 
+x = A or B 
+ 
+• Bits 3 to 0—Clock Select A3 to A0, B3 to B0 (CKSELA3 to CKSELA0, CKSELB3 to 
+CKSELB0): These bits select whether an internal clock or external clock is used. 
+When an internal clock is selected, scaled clock φ" is selected from φ', φ'/2, φ'/4, φ'/8, φ'/16, 
+and φ'/32. 
+When an external clock is selected, TCLKA, TCLKB, TI10 pin input, or a TI10 pin input 
+multiplied clock is selected. 
+When TI10 pin input and TI10 pin input clock multiplication are selected, set CKEG1 and 
+CKEG0 in TCR10 so that TI10 input is possible. 
+ 
+
+PDF zero-based page 269
+Rev.2.0, 07/03, page 230 of 960 
+ 
+Bit 3: 
+CKSELx3 
+Bit 2: 
+CKSELx2 
+Bit 1: 
+CKSELx1 
+Bit 0: 
+CKSELx0 
+ 
+Description 
+0 
+Internal clock φ": counting on φ' 
+(Initial value) 
+0 
+1 
+Internal clock φ": counting on φ'/2 
+0 
+Internal clock φ": counting on φ'/4 
+0 
+1 
+1 
+Internal clock φ": counting on φ'/8 
+0 
+Internal clock φ": counting on φ'/16 
+0 
+1 
+Internal clock φ": counting on φ'/32 
+0 
+External clock: counting on TCLKA pin input 
+0 
+1 
+1 
+1 
+External clock: counting on TCLKB pin input 
+0 
+Counting on TI10 pin input (AGCK) 
+0 
+1 
+Counting on multiplied (corrected)(AGCKM) 
+TI10 pin input clock 
+0 
+1 
+* 
+Setting prohibited 
+1 
+1 
+* 
+* 
+Setting prohibited 
+x = A or B 
+*: Donít care 
+ 
+ 
+Timer Control Registers 3 to 5 (TCR3, TCR4, TCR5) 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+— 
+CKEG1 CKEG0 CKSEL3 CKSEL2 CKSEL1 CKSEL0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• Bits 7 and 6—Reserved: These bits are always read as 0. The write value should always be 0. 
+• Bits 5 and 4—Clock Edge 1 and 0 (CKEG1, CKEG0): These bits select the count edge(s) for 
+external clock TCLKA and TCLKB input. 
+ 
+Bit 5: CKEG1 
+Bit 4: CKEG0 
+Description 
+0 
+Rising edges counted 
+(Initial value) 
+0 
+1 
+Falling edges counted 
+0 
+Both rising and falling edges counted 
+1 
+1 
+Count disabled 
+ 
+
+PDF zero-based page 271
+Rev.2.0, 07/03, page 232 of 960 
+ 
+Timer Control Registers 6A, 6B, 7A, 7B (TCR6A, TCR6B, TCR7A, TCR7B) 
+TCR6A, TCR7A 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+CKSELB2 CKSELB1 CKSELB0 
+— 
+CKSELA2 CKSELA1 CKSELA0 
+ Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R/W 
+R/W 
+R/W 
+R 
+R/W 
+R/W 
+R/W 
+ 
+TCR6B, TCR7B 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+CKSELD2 CKSELD1 CKSELD0 
+— 
+CKSELC2 CKSELC1 CKSELC0 
+ Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R/W 
+R/W 
+R/W 
+R 
+R/W 
+R/W 
+R/W 
+ 
+• Bit 7—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bits 6 to 4—Clock Select B2 to B0, D2 to D0 (CKSELB2 to CKSELB0, CKSELD2 to 
+CKSELD0): These bits select clock φ", scaled from the internal clock source, from φ', φ'/2, 
+φ'/4, φ'/8, φ'/16, and φ'/32. 
+ 
+Bit 6: 
+CKSELx2 
+Bit 5: 
+CKSELx1 
+Bit 4: 
+CKSELx0 
+ 
+Description 
+0 
+Internal clock φ": counting on φ' 
+(Initial value) 
+0 
+1 
+Internal clock φ": counting on φ'/2 
+0 
+Internal clock φ": counting on φ'/4 
+0 
+1 
+1 
+Internal clock φ": counting on φ'/8 
+0 
+Internal clock φ": counting on φ'/16 
+0 
+1 
+Internal clock φ": counting on φ'/32 
+0 
+Setting prohibited 
+1 
+1 
+1 
+Setting prohibited 
+x = B or D 
+ 
+
+PDF zero-based page 272
+Rev.2.0, 07/03, page 233 of 960 
+ 
+• Bit 3—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bits 2 to 0—Clock Select A2 to A0, C2 to C0 (CKSELA2 to CKSELA0, CKSELC2 to 
+CKSELC0): These bits select clock φ", scaled from the internal clock source, from φ', φ'/2, 
+φ'/4, φ'/8, φ'/16, and φ'/32. 
+ 
+Bit 2: 
+CKSELx2 
+Bit 1 
+CKSELx1 
+Bit 0 
+CKSELx0 
+ 
+Description 
+0 
+Internal clock φ": counting on φ' 
+(Initial value) 
+0 
+1 
+Internal clock φ": counting on φ'/2 
+0 
+Internal clock φ": counting on φ'/4 
+0 
+1 
+1 
+Internal clock φ": counting on φ'/8 
+0 
+Internal clock φ": counting on φ'/16 
+0 
+1 
+Internal clock φ": counting on φ'/32 
+0 
+Setting prohibited 
+1 
+1 
+1 
+Setting prohibited 
+x = A or B 
+ 
+Timer Control Register 8 (TCR8) 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+CKSELB2 CKSELB1 CKSELB0 
+— 
+CKSELA2 CKSELA1 CKSELA0 
+ Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R/W 
+R/W 
+R/W 
+R 
+R/W 
+R/W 
+R/W 
+ 
+The CKSELAx bits relate to DCNT8A to DCNT8H, and the CKSELBx bits relate to DCNT8I to 
+DCNT8P. 
+
+PDF zero-based page 346
+Rev.2.0, 07/03, page 307 of 960 
+ 
+11.2.10 PWM Mode Register (PMDR) 
+The PWM mode register (PMDR) is an 8-bit register. The ATU-II has one PMDR register. 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+DTSELD 
+DTSELC 
+DTSELB 
+DTSELA CNTSELD CNTSELC CNTSELB CNTSELA 
+ Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+PMDR is an 8-bit readable/writable register that selects whether channel 6 PWM output is set to 
+on-duty/off-duty, or to non-complementary PWM mode/complementary PWM mode. 
+PMDR is initialized to H'00 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+• Bit 7—Duty Selection Register D (DTSELD): Selects whether channel 6D TO6D output 
+PWM is set to on-duty or to off-duty. 
+ 
+Bit 7: DTSELD 
+Description 
+0 
+TO6D PWM output is on-duty 
+(Initial value) 
+1 
+TO6D PWM output is off-duty 
+ 
+• Bit 6—Duty Selection Register C (DTSELC): Selects whether channel 6C TO6C output PWM 
+is set to on-duty or to off-duty. 
+ 
+Bit 6: DTSELC 
+Description 
+0 
+TO6C PWM output is on-duty 
+(Initial value) 
+1 
+TO6C PWM output is off-duty 
+ 
+• Bit 5—Duty Selection Register B (DTSELB): Selects whether channel 6B TO6B output PWM 
+is set to on-duty or to off-duty. 
+ 
+Bit 5: DTSELB 
+Description 
+0 
+TO6B PWM output is on-duty 
+(Initial value) 
+1 
+TO6B PWM output is off-duty 
+ 
+
+PDF zero-based page 347
+Rev.2.0, 07/03, page 308 of 960 
+ 
+• Bit 4—Duty Selection Register A (DTSELA): Selects whether channel 6A TO6A output 
+PWM is set to on-duty or to off-duty. 
+ 
+Bit 4: DTSELA 
+Description 
+0 
+TO6A PWM output is on-duty 
+(Initial value) 
+1 
+TO6A PWM output is off-duty 
+ 
+• Bit 3—Counter Selection Register D (CNTSELD): Selects whether channel 6D PWM is set to 
+non-complementary PWM mode or to complementary PWM mode. 
+ 
+Bit 3: CNTSELD 
+Description 
+0 
+TCNT6D is set to non-complementary PWM mode 
+(Initial value) 
+1 
+TCNT6D is set to complementary PWM mode 
+ 
+• Bit 2—Counter Selection Register C (CNTSELC): Selects whether channel 6C PWM is set to 
+non-complementary PWM mode or to complementary PWM mode. 
+ 
+Bit 2: CNTSELC 
+Description 
+0 
+TCNT6C is set to non-complementary PWM mode 
+(Initial value) 
+1 
+TCNT6C is set to complementary PWM mode 
+ 
+• Bit 1—Counter Selection Register B (CNTSELB): Selects whether channel 6B PWM is set to 
+non-complementary PWM mode or to complementary PWM mode. 
+ 
+Bit 1: CNTSELB 
+Description 
+0 
+TCNT6B is set to non-complementary PWM mode 
+(Initial value) 
+1 
+TCNT6B is set to complementary PWM mode 
+ 
+• Bit 0—Counter Selection Register A (CNTSELA): Selects whether channel 6A PWM is set to 
+non-complementary PWM mode or to complementary PWM mode. 
+ 
+Bit 0: CNTSELA 
+Description 
+0 
+TCNT6A is set to non-complementary PWM mode 
+(Initial value) 
+1 
+TCNT6A is set to complementary PWM mode 
+ 
+
+PDF zero-based page 680
+Rev.2.0, 07/03, page 641 of 960 
+ 
+Section 20   Pin Function Controller (PFC) 
+20.1 
+Overview 
+The pin function controller (PFC) consists of registers for selecting multiplex pin functions and 
+their input/output direction. Table 20.1 shows the SH7055SF’s multiplex pins. 
+Table 20.1 SH7055SF Multiplex Pins 
+ 
+Port 
+Function 1 
+(Related Module) 
+Function 2 
+(Related Module) 
+Function 3 
+(Related Module) 
+Function 4 
+(Related Module) 
+A 
+PA0 input/output (port) 
+TI0A input (ATU-II) 
+ 
+ 
+A 
+PA1 input/output (port) 
+TI0B input (ATU-II) 
+ 
+ 
+A 
+PA2 input/output (port) 
+TI0C input (ATU-II) 
+ 
+ 
+A 
+PA3 input/output (port) 
+TI0D input (ATU-II) 
+ 
+ 
+A 
+PA4 input/output (port) 
+TIO3A input/output (ATU-II)  
+ 
+A 
+PA5 input/output (port) 
+TIO3B input/output (ATU-II)  
+ 
+A 
+PA6 input/output (port) 
+TIO3C input/output (ATU-II)  
+ 
+A 
+PA7 input/output (port) 
+TIO3D input/output (ATU-II)  
+ 
+A 
+PA8 input/output (port) 
+TIO4A input/output (ATU-II)  
+ 
+A 
+PA9 input/output (port) 
+TIO4B input/output (ATU-II)  
+ 
+A 
+PA10 input/output (port) 
+TIO4C input/output (ATU-II)  
+ 
+A 
+PA11 input/output (port) 
+TIO4D input/output (ATU-II)  
+ 
+A 
+PA12 input/output (port) 
+TIO5A input/output (ATU-II)  
+ 
+A 
+PA13 input/output (port) 
+TIO5B input/output (ATU-II)  
+ 
+A 
+PA14 input/output (port) 
+TxD0 output (SCI) 
+ 
+ 
+A 
+PA15 input/output (port) 
+RxD0 input (SCI) 
+ 
+ 
+B 
+PB0 input/output (port) 
+TO6A output (ATU-II) 
+ 
+ 
+B 
+PB1 input/output (port) 
+TO6B output (ATU-II) 
+ 
+ 
+B 
+PB2 input/output (port) 
+TO6C output (ATU-II) 
+ 
+ 
+B 
+PB3 input/output (port) 
+TO6D output (ATU-II) 
+ 
+ 
+B 
+PB4 input/output (port) 
+TO7A output (ATU-II) 
+TO8A output (ATU-II) 
+ 
+B 
+PB5 input/output (port) 
+TO7B output (ATU-II) 
+TO8B output (ATU-II) 
+ 
+B 
+PB6 input/output (port) 
+TO7C output (ATU-II) 
+TO8C output (ATU-II) 
+ 
+B 
+PB7 input/output (port) 
+TO7D output (ATU-II) 
+TO8D output (ATU-II) 
+ 
+B 
+PB8 input/output (port) 
+TxD3 output (SCI) 
+TO8E output (ATU-II) 
+ 
+B 
+PB9 input/output (port) 
+RxD3 input (SCI) 
+TO8F output (ATU-II) 
+ 
+ 
+
+PDF zero-based page 685
+Rev.2.0, 07/03, page 646 of 960 
+ 
+20.2 
+Register Configuration 
+PFC registers are listed in table 20.2. 
+Table 20.2 PFC Registers 
+ 
+Name 
+ 
+Abbreviation 
+ 
+R/W 
+Initial 
+Value 
+ 
+Address 
+Access 
+Size 
+Port A IO register 
+PAIOR 
+R/W 
+H'0000 
+H'FFFFF720 
+8, 16 
+Port A control register H 
+PACRH 
+R/W 
+H'0000 
+H'FFFFF722 
+8, 16 
+Port A control register L 
+PACRL 
+R/W 
+H'0000 
+H'FFFFF724 
+8, 16 
+Port B IO register 
+PBIOR 
+R/W 
+H'0000 
+H'FFFFF730 
+8, 16 
+Port B control register H 
+PBCRH 
+R/W 
+H'0000 
+H'FFFFF732 
+8, 16 
+Port B control register L 
+PBCRL 
+R/W 
+H'0000 
+H'FFFFF734 
+8, 16 
+Port B invert register 
+PBIR 
+R/W 
+H'0000 
+H'FFFFF736 
+8, 16 
+Port C IO register 
+PCIOR 
+R/W 
+H'0000 
+H'FFFFF73A 
+8, 16 
+Port C control register 
+PCCR 
+R/W 
+H'0000 
+H'FFFFF73C 
+8, 16 
+Port D IO register 
+PDIOR 
+R/W 
+H'0000 
+H'FFFFF740 
+8, 16 
+Port D control register H 
+PDCRH 
+R/W 
+H'0000 
+H'FFFFF742 
+8, 16 
+Port D control register L 
+PDCRL 
+R/W 
+H'0000 
+H'FFFFF744 
+8, 16 
+Port E IO register 
+PEIOR 
+R/W 
+H'0000 
+H'FFFFF750 
+8, 16 
+Port E control register 
+PECR 
+R/W 
+H'0000 
+H'FFFFF752 
+8, 16 
+Port F IO register 
+PFIOR 
+R/W 
+H'0000 
+H'FFFFF748 
+8, 16 
+Port F control register H 
+PFCRH 
+R/W 
+H'0015 
+H'FFFFF74A 
+8, 16 
+Port F control register L 
+PFCRL 
+R/W 
+H'5000 
+H'FFFFF74C 
+8, 16 
+Port G IO register 
+PGIOR 
+R/W 
+H'0000 
+H'FFFFF760 
+8, 16 
+Port G control register 
+PGCR 
+R/W 
+H'0000 
+H'FFFFF762 
+8, 16 
+Port H IO register 
+PHIOR 
+R/W 
+H'0000 
+H'FFFFF728 
+8, 16 
+Port H control register 
+PHCR 
+R/W 
+H'0000 
+H'FFFFF72A 
+8, 16 
+Port J IO register 
+PJIOR 
+R/W 
+H'0000 
+H'FFFFF766 
+8, 16 
+Port J control register H 
+PJCRH 
+R/W 
+H'0000 
+H'FFFFF768 
+8, 16 
+Port J control register L 
+PJCRL 
+R/W 
+H'0000 
+H'FFFFF76A 
+8, 16 
+Port K IO register 
+PKIOR 
+R/W 
+H'0000 
+H'FFFFF770 
+8, 16 
+Port K control register H 
+PKCRH 
+R/W 
+H'0000 
+H'FFFFF772 
+8, 16 
+Port K control register L 
+PKCRL 
+R/W 
+H'0000 
+H'FFFFF774 
+8, 16 
+Port K invert register 
+PKIR 
+R/W 
+H'0000 
+H'FFFFF776 
+8, 16 
+ 
+
+PDF zero-based page 691
+Rev.2.0, 07/03, page 652 of 960 
+ 
+• Bit 1—Reserved: This bit is always read as 0. The write value should always be 0.  
+If 1 is written to this bit, correct operation cannot be guaranteed. 
+• Bit 0—PA0 Mode Bit (PA0MD): Selects the function of pin PA0/TI0A. 
+ 
+Bit 0: PA0MD 
+Description 
+0 
+General input/output (PA0) 
+(Initial value) 
+1 
+ATU-II input capture input (TI0A) 
+ 
+20.3.3 
+Port B IO Register (PBIOR) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+PB15 
+IOR 
+PB14 
+IOR 
+PB13 
+IOR 
+PB12 
+IOR 
+PB11 
+IOR 
+PB10 
+IOR 
+PB9 
+IOR 
+PB8 
+IOR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+PB7 
+IOR 
+PB6 
+IOR 
+PB5 
+IOR 
+PB4 
+IOR 
+PB3 
+IOR 
+PB2 
+IOR 
+PB1 
+IOR 
+PB0 
+IOR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+The port B IO register (PBIOR) is a 16-bit readable/writable register that selects the input/output 
+direction of the 16 pins in port B. Bits PB15IOR to PB0IOR correspond to pins 
+PB15/PULS5/SCK2 to PB0/TO6A. PBIOR is enabled when port B pins function as general 
+input/output pins (PB15 to PB0) or serial clock pins (SCK0, SCK1, SCK2), and disabled 
+otherwise. 
+When port B pins function as PB15 to PB0 or SCK0, SCK1, and SCK2, a pin becomes an output 
+when the corresponding bit in PBIOR is set to 1, and an input when the bit is cleared to 0. 
+PBIOR is initialized to H'0000 by a power-on reset (excluding a WDT power-on reset), and in 
+hardware standby mode. It is not initialized in software standby mode or sleep mode. 
+
+PDF zero-based page 692
+Rev.2.0, 07/03, page 653 of 960 
+ 
+20.3.4 
+Port B Control Registers H and L (PBCRH, PBCRL) 
+Port B control registers H and L (PBCRH, PBCRL) are 16-bit readable/writable registers that 
+select the functions of the 16 multiplex pins in port B. PBCRH selects the functions of the pins for 
+the upper 8 bits of port B, and PBCRL selects the functions of the pins for the lower 8 bits. 
+PBCRH and PBCRL are initialized to H'0000 by a power-on reset (excluding a WDT power-on 
+reset), and in hardware standby mode. They are not initialized in software standby mode or sleep 
+mode. 
+Port B Control Register H (PBCRH) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+PB15 
+MD1 
+PB15 
+MD0 
+PB14 
+MD1 
+PB14 
+MD0 
+— 
+PB13 
+MD 
+PB12 
+MD1 
+PB12 
+MD0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+PB11 
+MD1 
+PB11 
+MD0 
+PB10 
+MD1 
+PB10 
+MD0 
+PB9 
+MD1 
+PB9 
+MD0 
+PB8 
+MD1 
+PB8 
+MD0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• Bits 15 and 14—PB15 Mode Bits 1 and 0 (PB15MD1, PB15MD0): These bits select the 
+function of pin PB15/PULS5/SCK2. 
+ 
+Bit 15: PB15MD1 
+Bit 14: PB15MD0 
+Description 
+0 
+General input/output (PB15) 
+(Initial value) 
+0 
+1 
+APC pulse output (PULS5) 
+0 
+Serial clock input/output (SCK2) 
+1 
+1 
+Reserved (Do not set) 
+ 
+
+PDF zero-based page 693
+Rev.2.0, 07/03, page 654 of 960 
+ 
+• Bits 13 and 12—PB14 Mode Bits 1 and 0 (PB14MD1, PB14MD0): These bits select the 
+function of pin PB14/SCK1/TCLKB/T110. 
+ 
+Bit 13: PB14MD1 
+Bit 12: PB14MD0 
+Description 
+0 
+General input/output (PB14) 
+(Initial value) 
+0 
+1 
+Serial clock input/output (SCK1) 
+0 
+ATU-II clock input (TCLKB) 
+1 
+1 
+ATU-II edge input (TI10) 
+ 
+• Bit 11—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 10—PB13 Mode Bit (PB13MD): Selects the function of pin PB13/SCK0. 
+ 
+Bit 10: PB13MD 
+Description 
+0 
+General input/output (PB13) 
+(Initial value) 
+1 
+Serial clock input/output (SCK0) 
+ 
+• Bits 9 and 8—PB12 Mode Bits 1 and 0 (PB12MD1, PB12MD0): These bits select the function 
+of pin PB12/TCLKA/UBCTRG. 
+ 
+Bit 9: PB12MD1 
+Bit 8: PB12MD0 
+Description 
+0 
+General input/output (PB12) 
+(Initial value) 
+0 
+1 
+ATU-II clock input (TCLKA) 
+0 
+Trigger pulse output (UBCTRG) 
+1 
+1 
+Reserved (Do not set) 
+ 
+• Bits 7 and 6—PB11 Mode Bits 1 and 0 (PB11MD1, PB11MD0): These bits select the function 
+of pin PB11/RxD4/HRxD0/TO8H. 
+ 
+Bit 7: PB11MD1 
+Bit 6: PB11MD0 
+Description 
+0 
+General input/output (PB11) 
+(Initial value) 
+0 
+1 
+Receive data input (RxD4) 
+0 
+HCAN receive data input (HRxD0) 
+1 
+1 
+ATU-II one-shot pulse output (TO8H) 
+ 
+
+PDF zero-based page 694
+Rev.2.0, 07/03, page 655 of 960 
+ 
+• Bits 5 and 4—PB10 Mode Bits 1 and 0 (PB10MD1, PB10MD0): These bits select the function 
+of pin PB10/TxD4/HTxD0/TO8G. 
+ 
+Bit 5: PB10MD1 
+Bit 4: PB10MD0 
+Description 
+0 
+General input/output (PB10) 
+(Initial value) 
+0 
+1 
+Transmit data output (TxD4) 
+0 
+HCAN transmit data output (HTxD0) 
+1 
+1 
+ATU-II one-shot pulse output (TO8G) 
+ 
+• Bits 3 and 2—PB9 Mode Bits 1 and 0 (PB9MD1, PB9MD0): These bits select the function of 
+pin PB9/RxD3/TO8F. 
+ 
+Bit 3: PB9MD1 
+Bit 2: PB9MD0 
+Description 
+0 
+General input/output (PB9) 
+(Initial value) 
+0 
+1 
+Receive data input (RxD3) 
+0 
+ATU-II one-shot pulse output (TO8F) 
+1 
+1 
+Reserved (Do not set) 
+ 
+• Bits 1 and 0—PB8 Mode Bits 1 and 0 (PB8MD1, PB8MD0): These bits select the function of 
+pin PB8/TxD3/TO8E. 
+ 
+Bit 1: PB8MD1 
+Bit 0: PB8MD0 
+Description 
+0 
+General input/output (PB8) 
+(Initial value) 
+0 
+1 
+Transmit data output (TxD3) 
+0 
+ATU-II one-shot pulse output (TO8E) 
+1 
+1 
+Reserved (Do not set) 
+ 
+Port B Control Register L (PBCRL) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+PB7MD1 PB7MD0 PB6MD1 PB6MD0 PB5MD1 PB5MD0 PB4MD1 PB4MD0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+— 
+PB3MD 
+— 
+PB2MD 
+— 
+PB1MD 
+— 
+PB0MD 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R/W 
+R 
+R/W 
+R 
+R/W 
+R 
+R/W 
+ 
+
+PDF zero-based page 695
+Rev.2.0, 07/03, page 656 of 960 
+ 
+• Bits 15 and 14—PB7 Mode Bits 1 and 0 (PB7MD1, PB7MD0): These bits select the function 
+of pin PB7/TO7D/TO8D. 
+ 
+Bit 15: PB7MD1 
+Bit 14: PB7MD0 
+Description 
+0 
+General input/output (PB7) 
+(Initial value) 
+0 
+1 
+ATU-II PWM output (TO7D) 
+0 
+ATU-II one-shot pulse output (TO8D) 
+1 
+1 
+Reserved (Do not set) 
+ 
+• Bits 13 and 12—PB6 Mode Bits 1 and 0 (PB6MD1, PB6MD0): These bits select the function 
+of pin PB6/TO7C/TO8C. 
+ 
+Bit 13: PB6MD1 
+Bit 12: PB6MD0 
+Description 
+0 
+General input/output (PB6) 
+(Initial value) 
+0 
+1 
+ATU-II PWM output (TO7C) 
+0 
+ATU-II one-shot pulse output (TO8C) 
+1 
+1 
+Reserved (Do not set) 
+ 
+• Bits 11 and 10—PB5 Mode Bits 1 and 0 (PB5MD1, PB5MD0): These bits select the function 
+of pin PB5/TO7B/TO8B. 
+ 
+Bit 11: PB5MD1 
+Bit 10: PB5MD0 
+Description 
+0 
+General input/output (PB5) 
+(Initial value) 
+0 
+1 
+ATU-II PWM output (TO7B) 
+0 
+ATU-II one-shot pulse output (TO8B) 
+1 
+1 
+Reserved (Do not set) 
+ 
+• Bits 9 and 8—PB4 Mode Bits 1 and 0 (PB4MD1, PB4MD0): These bits select the function of 
+pin PB4/TO7A/TO8A. 
+ 
+Bit 9: PB4MD1 
+Bit 8: PB4MD0 
+Description 
+0 
+General input/output (PB4) 
+(Initial value) 
+0 
+1 
+ATU-II PWM output (TO7A) 
+0 
+ATU-II one-shot pulse output (TO8A) 
+1 
+1 
+Reserved (Do not set) 
+ 
+
+PDF zero-based page 696
+Rev.2.0, 07/03, page 657 of 960 
+ 
+• Bit 7—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 6—PB3 Mode Bit (PB3MD): Selects the function of pin PB3/TO6D. 
+ 
+Bit 6: PB3MD 
+Description 
+0 
+General input/output (PB3) 
+(Initial value) 
+1 
+ATU-II PWM output (TO6D) 
+ 
+• Bit 5—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 4—PB2 Mode Bit (PB2MD): Selects the function of pin PB2/TO6C. 
+ 
+Bit 4: PB2MD 
+Description 
+0 
+General input/output (PB2) 
+(Initial value) 
+1 
+ATU-II PWM output (TO6C) 
+ 
+• Bit 3—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 2—PB1 Mode Bit (PB1MD): Selects the function of pin PB1/TO6B. 
+ 
+Bit 2: PB1MD 
+Description 
+0 
+General input/output (PB1) 
+(Initial value) 
+1 
+ATU-II PWM output (TO6B) 
+ 
+• Bit 1—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 0—PB0 Mode Bit (PB0MD): Selects the function of pin PB0/TO6A. 
+ 
+Bit 0: PB0MD 
+Description 
+0 
+General input/output (PB0) 
+(Initial value) 
+1 
+ATU-II PWM output (TO6A) 
+ 
+
+PDF zero-based page 697
+Rev.2.0, 07/03, page 658 of 960 
+ 
+20.3.5 
+Port B Invert Register (PBIR) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+PB15IR PB14IR PB13IR 
+— 
+PB11IR PB10IR 
+PB9IR 
+PB8IR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+PB7IR 
+PB6IR 
+PB5IR 
+PB4IR 
+PB3IR 
+PB2IR 
+PB1IR 
+PB0IR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+The port B invert register (PBIR) is a 16-bit readable/writable register that sets the port B 
+inversion function. Bits PB15IR to PB13IR and PB11IR to PB0IR correspond to pins 
+PB15/PULS5/SCK2 to PB13/SCK0 and PB11/RxD4/HRxD0/TO8H to PB0/TO6A. PBIR is 
+enabled when port B pins function as ATU-II outputs or serial clock pins, and disabled otherwise. 
+When port B pins function as ATU-II outputs or serial clock pins, the value of a pin is inverted 
+when the corresponding bit in PBIR is set to 1. 
+PBIR is initialized to H'0000 by a power-on reset (excluding a WDT power-on reset), and in 
+hardware standby mode. It is not initialized in software standby mode or sleep mode. 
+PBnIR 
+Description 
+0 
+Value is not inverted 
+(Initial value) 
+1 
+Value is inverted 
+n = 15 to 13, 11 to 0 
+ 
+
+PDF zero-based page 747
+Rev.2.0, 07/03, page 708 of 960 
+ 
+21.3 
+Port B 
+Port B is an input/output port with the 16 pins shown in figure 21.2. 
+PB15 (I/O) /PULS5 (output) /SCK2 (I/O)
+PB14 (I/O) /SCK1 (I/O) /TCLKB (input) /TI10 (input)
+PB13 (I/O) /SCK0 (I/O)
+PB12 (I/O) /TCLKA (input) /
+ (output)
+PB11 (I/O) /RxD4 (input) /HRxD0 (input) /TO8H (output)
+PB10 (I/O) /TxD4 (output) /HTxD0 (output) /TO8G (output)
+PB9 (I/O) /RxD3 (input) /TO8F (output)
+PB8 (I/O) /TxD3 (output) /TO8E (output)
+PB7 (I/O) /TO7D (output) /TO8D (output)
+PB5 (I/O) /TO7B (output) /TO8B (output)
+PB4 (I/O) /TO7A (output) /TO8A (output)
+PB3 (I/O) /TO6D (output)
+PB2 (I/O) /TO6C (output)
+PB1 (I/O) /TO6B (output)
+PB0 (I/O) /TO6A (output)
+PB6 (I/O) /TO7C (output) /TO8C (output)
+Port B
+ 
+Figure 21.2   Port B 
+21.3.1 
+Register Configuration 
+The port B register configuration is shown in table 21.3. 
+Table 21.3 Register Configuration 
+Name 
+Abbreviation 
+R/W 
+Initial Value 
+Address 
+Access Size 
+Port B data register 
+PBDR 
+R/W 
+H'0000 
+H'FFFFF738 
+8, 16 
+Port B port register 
+PBPR 
+R 
+port B pin values H'FFFFF782 
+8, 16 
+Note: A register access is performed in four or five cycles regardless of the access size. 
+ 

@@ -1,0 +1,140 @@
+ECU CMT1 interrupt entry/return and native idle scheduler handoff —2026-10-07
+
+Objective remains ECU/automatic-transmission CAN integration, deeptraction,
+and roof foldingANDunfolding with interruption/resume/reversal/timeout/LRsync/
+faultrecovery. Allincomplete. UserhasnoadditionalOEMDSC/roof dumps,captures or
+benchresults; no staging/commit/push. Previousgoalturn andthisturn madeverified
+progress; no blocked audit. OriginalROM/sharedISA/production unchanged.
+
+ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Python3.14.3. Reproduce fromrepositoryroot:
+ python research/ecu-at-can/verify_control_interrupt.py
+ python research/ecu-at-can/probe_control_interrupt_timer.py
+Instructions andstaticvectorlead incontrol-cmt1-interrupt-lead-disassembly.txt;
+GNUobjdump2.42/setup preserved incontrol-timer-event2.txt anddisassemble.py.
+
+Boundedlocalinstruction support
+sh_control_interrupt.py addsfourFPSCR/FPUL longwordstack transfers andLDSRn,PR
+onlytoControlInterrupt subclass. AlignedmappedRAM required; unsupportedaccesses
+failwithoutstatechange. ExistingrawFMOV andNOP-delayRTE reusedunchanged.
+4096stackinstructioncases across16registers/all64writableFPSCRpatterns PASS;
+96LDSRn,PRcases PASS;8invalidalignment/MMIO rejections PASS. UnchangedwholeRAM/
+GPR/FR/SR/systemregisters exceptspecifiedtransfer checked. Nohardwareexception
+acceptance/delivery ismodeled. Initialwrapper attemptstopped2F86opcode402A;
+control-interrupt-isa-limit.json preservesmissingLDS evidence/correction.
+Primarysource verified2026-10-07: RenesasSH-2E SoftwareManual REJ09B0316-0200,
+rev2.00May31,2006,353PDFpages:
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+Section7.3.16 printed201..202/PDFzero214..215: loadlongthenincrement4;
+FPSCRwritablemask18C60. Figure4.2 fixedDN/RM40001 retained. Section7.3.17
+printed204..205/PDFzero217..218: storelongatRn-4 thenupdateRn. Tunchanged.
+Section7.2.27 printed102/PDFzero115: LDSRn,PR copiesrawregister, Tunchanged;
+interruptdeferral tofollowinginstruction isnotmodeled. These areparaphrases,
+notbulkmanualcopy. NofullCPUconformance orFPUexceptionexpansion claim.
+
+Originalentry andreturngate independentverification PASS
+576original2F78->F28C prefixes: randomGPR/FRrawbits/PR/FPUL/FPSCR withvalid
+status(all16entrymasks,Q/M/T combinations) andexplicitPC/SRframe; independentwholeRAM including23savedstackwords,
+allGPR/FPU/systemstate. Wrapper2F78 pushesR0,PR,R1 then3290pushesR2..R7,
+FR0..10,FPSCR,FR11,FPUL;92bytesplus8-byteprovidedhardwareframe. Context12B8
+incrementsmod32 under12C0mask; incomingSR restored. F28CentryPR=32D8,
+R0=32D8,R1=F28C,R2=incomingSR. No callbackbodystub: componentstops atentry.
+576original32D8 returngatecases afterperturbingcallback-volatileGPR/FR/FPUL/
+FPSCR verifywholeRAM andrestoredstate. Sixnestingvalues0,1,255,7FFFFFFF,
+80000000,FFFFFFFF; savedmasks0/10/F0; ready/currentpriority0/1/3/255;
+taskstatebyte0/1. Independentclosedform gate: letcombined=oldnest|savedmask.
+Ifcombined&7FFFFFFF !=0 orreadypriorityFF, return333E/RTE. Otherwisehighbit
+selects33F0idlehandoff; otherwisecurrentdescriptorbyte1==1 returns; otherwise
+readypriority>currentpriority selects334C contextsave, elseRTE. 549directRTE,
+3contextsaveboundaries,24idlehandoffs. Directreturn restoresallGPR/PR/SR/stack
+andFR0..11/FPSCR/FPUL; unchangedFR12..15/GBR/MACH/MACL. Stackbytes remain.
+24original33F0..3D10 idlehandoffs independentlychecked: R15=ROM4078,
+context12B8=100,SR=12C0(B0fixture),R4context,R5selectedtask12B6. NoRTE.
+Nonidle334Ccontextsave andtaskexecution after3D10 notpartofcomponentproof.
+
+Joinedretainedprefix10 andfull600 PASS
+probe_control_interrupt_timer.py reusespriorinitializedtimersequence withtwo
+optionalhooks, defaultdirectbehaviorunchanged. Atfirstcycle original3B8A
+establishesidle12B8=80000000. EachcycleexplicitlyprovidesPC3D0C/SR0frame on
+ROM4078idlestack andentrySRF0, executes2F78/3290/F28C/1062E to32D8 then
+originalepilogue33F0->3D10->tasks until3D0C. Noexplicit3B8Acall aftereachIRQ.
+Taskcontextstack12BC=FFFED000 remainspriorfixture; hardwareframeandacceptance
+stillprovided. Bothqueue2/queue3consumeroracles remainactive. CHECKPOINT owns
+liveprocess andnextverification. Prefix10verified:10acquisition,2event1/2event2,
+15queue3/2queue2 actualwholeRAMchecks. All10recordedrows equalpriordirecttrace
+afteronlyaccountingF28C/1062E R4=context instead0 andF28C/1062E/FBE8
+PR32D8 insteadsentinelFFFFFFF0. Changedobservations assertedbeforenormalization;
+no applicationfields removed. WrapperstackaftercallbackFFFF1144, idleFFFF11A8,
+entrynest80000001/final80000000. Full600 COMPLETE session89133exit0; verify_control_interrupt_timer.py PASS.
+600actualwrappers/epilogues/idlehandoffs,600acquisition,150event1/120event2,
+298actualqueue3/120actualqueue2 wholeRAMreturns,6decode/121activity/
+26qualificationobservations,300SCI4TX/RXbytes. All600recordedrows equalprior
+trace afteronlytheexplicitentryR4/PR accounting above; exactinitial10.
+Queue2 head0..29 wraps4times among120consumes (andendshead0). All120event2
+monitoredfields equalpriorone-to-onetrace; notallRAM/physicaltiming comparison.
+verify_control_interrupt_timer.py owns comparison andactualqueue2ringchecks.
+Nohardwareacceptance/clock/remotecontrollerclaim.
+
+Remainingbroaderwork
+ECU/AT TCUcapture/diagnostic cadence grounding beforeextendingpendingcode5phase;
+traction actualVBR/priority/startup/IRQadmission, CAN211/21Aidentity/units and
+remoteDSCactuation. Roofbothdirections/allinterruption/recovery cases require
+applicableedition/VIN source andmissingOEM/physicalevidence. No newgeneric
+DTC/NVM prerequisite; no repeatedartifactquestions/exhausteddownloads.
+
+Executedvectorprefix andpriorityconfiguration
+verify_control_interrupt_vector.py:256originalF758..F760cases PASS, unchanged
+wholeRAM/architecturalstate exceptR3=FFC50,R2=40001,VBR=FFC50,FPSCR=40001.
+ReusesexistingtestedTCU LDCVBR implementationonly; noMMIO fixture fromTCU.
+CompatibleSH7058 table7.3 printed113/PDFzero155 assignsCMTI1 vector192/
+offset300: FFC50+300=FFF50 contains2F78. Vectorbasebinding isnowexecutedprefix
+plusstockROM/manualevidence; no resetreachability oractualvectorfetchproof.
+
+locate_control_interrupt_priority.py checksalignedMOV.W andMOV.L literals,
+preservesallcandidates/limits incontrol-interrupt-priority-leads.json. This
+foundAA4C..AA84 INTCsetup; ED12 iscomputedasED00+18,missedbylongliteral-only
+search. verify_control_interrupt_priority.py:256originalAA4A/AA94branchcaller
+cases PASS, exact13orderedwordwrites/unchangedwholeRAM/savedregisters/SR.
+ED00..ED18 values0999,9000,900B,9099,0990,9090,9099,9999,99B0,0999,
+9909,9909,00FF. LastED18isICR,nota13thpriorityregister. CompatibleCMTI1
+priority9 fromIPRJED12bits7..4. RetainedjoinedfixtureentrySRF0 remainsan
+explicitassumption; originalpriority9 doesnotretroactivelyproveitnative.
+Next matchadmissionmask underactualpriority aftergroundingstartup/reachability.
+No physicalinterrupt/pin/ICR-sideeffectsimulation. Exactinstructions in
+control-interrupt-setup-disassembly.txt. Primaryhardwaremanualalreadyretained:
+sources/renesas-sh7058-hardware-rej09b0046-0300h.pdf SHA256
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137,
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+Table7.2 printed103/PDFzero145 identifiesED12IPRJ/ED18ICR; table7.3 above.
+
+Default-hook regression
+probe_control_timer_queue2.py rerun88642exit0 PASS afteraddingoptionalIRQhooks.
+Complete10-cycle directrecord remainsidenticalto previousfile;2actualqueue2
+returns pass. Existingfull600directprobe wasnotrepeated. Eightchanged/new
+researchscriptscompile. No productiontests requiredforisolatedresearchfiles.
+Ghidra6newannotationssaved; archive/independentrestore COMPLETEbelow.
+No currentfirmwareprobe remains; allthreebroadergoals stayopen.
+
+Nextstaticparentleads saved, notexecuted
+Relativebranchscan: A944BSR AA94 insideA942startuphelper; AA94BRA AA4A.
+3DD8literal3A74/load3A5E; F758pointerFFFF8 only. Exactdisassembly/searches
+appendedcontrol-interrupt-setup-disassembly.txt. Nexttraceactualcontextsetup/
+startupadmission fromtheseparents beforeusingpriority9 asnativeentrymask or
+removingtaskstackfixture. Alignedscansmaymisscomputedpaths/finddatafalsepositives.
+
+DurableGhidra verification COMPLETE
+Ghidra12.1.3PUBLIC/Java21.0.10;1959annotations(856ECU/1103TCU),1009identical
+completeexports,11projectfiles. Apply29308/liveverify73470/snapshot75370/
+independentrestore87365 allEXIT0; threelogs clean. 300seconddecompileallowance.
+Independentemptyextractrestore-check/interrupt-timer-20261007: all11hashes
+verifiedbefore/afterreadonlyreopen andagainstlive. verify_restore.py --write-report
+PASS; annotations.tsv/snapshot.json/restore-verification.json preservemetadata.
+Pairedarchiveghidra/nc-at-can.tar.gz11,018,602bytes SHA256
+3b940dfab1be5dab029e27eb4bdc6802525fce28f2d41aa896126e5a8b023f8a.
+Annotations summarizecomponent/prefixproof; full600details/results areabove and
+incontrol-interrupt-timer-verification.json. No stale/incompletedecompiles.
+Eightresearchscriptscompile;18currentartifactsGit-eligible;gitdiff --checkPASS.
+control-interrupt-timer-artifacts.json preserves18artifactSHA256/lengths and
+archiveidentity. Prior30-artifactmanifest refreshedonlyforoptionaldriverhooks;
+all30identitiesmatch. Work localonly,no stage/commit/push; mixedindexpreserved.

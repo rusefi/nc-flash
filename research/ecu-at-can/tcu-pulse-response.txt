@@ -1,0 +1,133 @@
+TCU diagnostic pulse response construction and handoff — 2026-10-06
+
+Scope and status
+The three research objectives remain incomplete: ECU/AT CAN integration,
+deep traction logic/integration, and NC roof folding AND unfolding, including
+interruption/resume/reversal, communication timeout, synchronization and fault
+recovery. This turn verifies the diagnostic wrapper that can set pulse request
+9418, its two response buffers and cleanup. It does not prove wire transmission,
+acknowledgement, persistence or physical operation. No additional user dumps,
+captures or bench results exist. No staging, commit or push is authorized.
+Addresses are hexadecimal; counts are decimal unless prefixed.
+
+Reproduction
+  python research/ecu-at-can/verify_tcu_pulse_response.py
+  python -m py_compile research/ecu-at-can/verify_tcu_pulse_response.py
+Python3.14.3; original TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+All3,848 direct checks pass:1,280 timer,264 build,1,024 cleanup,1,024 handoff,
+256 complete wrapper. Six additional wrappers interleaved with24 complete126EC
+application tasks pass. Full application RAM and admitted peripheral traces
+are compared with independent models. ABI registers, stack and SR mask are
+preserved. Original nested helpers execute; no stubs, ROM/ISA/shared-verifier
+or production changes. ReturnR0 is not assigned a new wrapper contract; the
+stored resultA694 and complete side effects are checked instead.
+
+Verified wrapper53B5C and stock table identity
+R4 is stored in bothA688/A68C; R5 lowword inA690. It calls54AFC(A688), stores
+that handler's resultword inA694, and tailcalls1D94C(current90A7,result).
+The prior request admission/response oracle is composed here with the new
+handoff model. Unlike the direct request fixture, +8 now is the actualA690
+constructed by this original wrapper.
+Stock22 service records at5CA3C have16-byte stride. Row3 starts44 and contains
+handlerpointer53B5C at+8. Stock buffer pointers5CC20/5CC24 areFFFF8FA8 and
+FFFF90B8. Original table bytes are saved in tcu-pulse-response-tables.json.
+All22 nominal header rows are tested. Arbitrary out-of-range row/index inputs
+are not treated as valid protocol states; only buffer indices0/1 are checked.
+
+Verified handoff1D94C
+It executes a critical section, writes90A7=(argument index XOR1), clears90B7
+bit7, then uses the OLD record's90AC+2*index bit1:
+- set: calls1D85E(index, supplied resultword);
+- clear: calls1D9F2(index,0).
+Thus alternating selection alone does not imply a constructed response.
+Critical-section nesting0/1/254/255 and SR masks are covered. Outermost entry
+refreshes saved-mask8F65, while nestcount8F66 and entrySR mask restore.
+No interrupt-delivery or concurrent RAM mutation is modeled.
+
+Verified construction1D85E
+Both branches clear words90C0/90C2/90C4/90C6 and set record statusbit7.
+If90B4+index has a nonzero pending error, the selected buffer becomes:
+  [7F, previous first byte, pending error]
+and90B0+2*index becomes3. The pending error is not cleared here.
+Otherwise the first byte becomes the selected5CA3C row header, and the length
+word becomes(supplied argument+1) modulo65536. Other buffer bytes retain.
+Rows0..21, both buffers, positive/negative paths and lengths0/2/65535 are tested.
+The length wrapping is execution under an injected boundary value, not a claim
+that the received-message path can naturally request a65536-byte response.
+
+Verified cleanup1D9F2 and timer1D83A
+If there is no pending error and its argument lowbyte is0, cleanup sets status
+bit2. It then runs1D83A: when90B6!=1 OR90A8bit7, word90C6 becomes500;
+otherwise that word retains. This number is not assigned milliseconds.
+Cleanup clears90A8bit4. For record0 it additionally zeros90C2/90C4, clears
+90AC bits3/4/5,90B7bit6 and8F90bits6/7. For record1 it instead clears90AEbit5
+inside a critical section. Other bytes/words, including response buffers and
+lengths, retain unless stated above. This record asymmetry is executed evidence.
+
+Retained task scenario and useful distinctions
+Incoming service-row selection, status flags, error reset and request byte04
+are explicit fixtures before each of six wrappers; the real incoming dispatcher
+is not executed. Requests alternate records0,1,0,1,0,1 and are interleaved with
+complete126EC tasks and existing pulse/latch/source/output models.
+-Calls0/1: accepted; each sets9418, writes positive header44 and length1.
+-Call5: requestword nonzero, response mode2 suppresses the0x12 error. Result0,
+ record0 cleanup status4; first byte remains04 and prior length1 retains.
+ No response-ready bit7 is asserted and request9418 remains0.
+-Call6: nonzero requestword without suppression produces[7F,04,12], length3,
+ status82 and result2; request remains0.
+-Calls10/11: accepted again. The second buffer contains[44,04,12], but length1.
+ Only the first byte was replaced; stale trailing bytes are not newly emitted
+ response data. Actual transport must be traced before claiming transmission.
+Direct cases also cover a pre-existing pending error alongside successful
+admission. The wrapper preserves it, so pulse acceptance and negative-response
+construction can coexist under that injected state. Normal incoming reset/
+reachability is unproved; do not report this fixture as an observed vehicle bug.
+
+Primary-source interpretation and scope correction
+SAE International's public J1979_199709 summary identifies Mode04 as clearing
+emission-related diagnostic information:
+https://saemobilus.sae.org/standards/j1979_199709-e-e-diagnostic-test-modes
+Exact short excerpt, provenance and limitations are saved in
+sources/sae-j1979-mode04-source.txt. The full standard was not retrieved.
+Together with firmware service4 permission, row3 header44 and wrapper53B5C,
+this supports interpreting this caller as a diagnostic-clear request. It does
+not establish complete diagnostic reset coverage or EEPROM persistence.
+The9415 pulse also has the separate startup-edge trigger already executed in
+tcu-inhibit-writers.txt and tcu-pulse-input.txt; do not name all its uses solely
+from the diagnostic caller. Do not present this one-bit diagnostic request as
+a normal operational shift-command queue or claim it closes those queue gaps.
+
+Next work, distinguishing necessary integration from diagnostic follow-up
+The verified segment now reaches response RAM and record handoff. Remaining
+diagnostic leads are incoming service dispatch and response transport. Aligned
+literal search finds5CA3C at1D40A and5CC20 at1D210/1D2B0/1D3B4/1D864.
+Response length90B0 references include1D20A/1D220/1D284/1D51E/1D716/1DADE.
+These are static search results, not executed callers or transport proof.
+Avoid expanding all diagnostic services into an invented completion requirement.
+Next primary action: return to traction's full task around1B14E..1B190,
+including intervening calls and399B0 callers, to verify admission/order/freshness.
+Operational TCU queues/ack/overlap, raw/proposal producers, actual cadence,
+persistence and board/physical evidence remain open separately. Roof retains
+both directions, interruption/reversal/timeout/synchronization/recovery,
+source/pin/PID conflicts and missing OEM-controller evidence. A new applicable
+source or external evidence is needed for those remote gaps; no extra user inputs.
+
+Artifact provenance
+The verifier, JSON result, this report, timer disassembly, table-byte JSON and
+SAE excerpt record are Git-eligible. Prior tcu-pulse-request-dispatch-leads-disassembly.txt contains full wrapper/build/handoff/cleanup bodies. Toolchain
+GNU SH objdump2.42 reconstruction and package hash are in tcu-pulse-input.txt;
+Python verification does not require that temporary executable. No failed test
+preceded the passing run. Changes are research artifacts only.
+
+Ghidra persistence and final checks
+11 new annotations (5 functions,6 labels);1,851 total (776 ECU,1,075 TCU).
+Both programs saved. Live and independently restored readback pass;925 exports
+byte-identical and all11 project hashes unchanged before/after read-only reopen.
+Archive10,981,106 bytes, SHA256
+0ead5825a94027c7a7ae3604bbfa97dab2e40130d791767fad614b21a5c7d59f.
+Independent restore:ghidra/restore-check/pulse-response-20261006. Durable paired
+.gpr/.rep archive, annotations, exports and manifests are in ghidra/. No errors,
+incomplete decompiles or locks. Six new research artifacts confirmed not ignored.
+Python compilation passed. No staging/commit/push; pre-existing mixed index,
+including AD ghidra/nc-at-can.tar.gz.tmp, preserved. All three scopes remain open.

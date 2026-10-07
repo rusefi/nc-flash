@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-07",
+  "scope": "Verified ECU saved-task dispatcher and actual event2 preemption; conditional TCU capture-counter configuration. All three broader integration requirements remain incomplete.",
+  "artifacts": {
+    "verify_control_interrupt_nonidle.py": {
+      "bytes": 5315,
+      "sha256": "362be7abea85193e636c1960d677eb8328d6f7050e862c1259e3a648ef1851f7"
+    },
+    "verify_control_scheduler_resume.py": {
+      "bytes": 2311,
+      "sha256": "8d368a2a56fad77303bc9f5e4635dabb3fdea164ba0e2818bd7c029ae15c3c4e"
+    },
+    "probe_control_preemption.py": {
+      "bytes": 5255,
+      "sha256": "615a8b05d9f73e2863b18462dc5fe7a72b625e1beee50ee795c7a466e0a8581e"
+    },
+    "verify_control_preemption.py": {
+      "bytes": 5021,
+      "sha256": "bd2bb6a12948b987ed2e3c5b1d386748067b3ab8badcdd06ee69142ef3a4c7c0"
+    },
+    "verify_tcu_capture_configuration.py": {
+      "bytes": 4203,
+      "sha256": "db737df3df7602d01bd46920434f75118889d0c43f5843ca4e0f5913b9063113"
+    },
+    "control-scheduler-resume-verification.json": {
+      "bytes": 1528,
+      "sha256": "a36d7036cda2291d4cc54673d90e103aad65ff860e4aeec702b63b816dca9e0b"
+    },
+    "control-preemption-prefix10.json": {
+      "bytes": 102309,
+      "sha256": "3fb5e46e68cd80fc29966b4c30dd0cb30371c6402ec5fb4527d1c982b3abd26e"
+    },
+    "control-preemption-probe.json": {
+      "bytes": 4317046,
+      "sha256": "831d289189faf663e50020fbeb5250db39bed8999291c1b3de5111c8a48f7f7f"
+    },
+    "control-preemption-first-callback10.json": {
+      "bytes": 102245,
+      "sha256": "6c088f2db32ed7d7b3dd427d0271eae58cbbdc6697c8e4d6aa544ffeb8cefe64"
+    },
+    "control-preemption-selector2-before-options10.json": {
+      "bytes": 102261,
+      "sha256": "423af14f7c781ea963675e7eb4be5142b35d76bc22be329d80e740e68698e6db"
+    },
+    "control-preemption-verification.json": {
+      "bytes": 1220,
+      "sha256": "87024ca964a1712d20f80eaa151d74fc61ab501d6e8df60e21b7cb989dea86b3"
+    },
+    "tcu-capture-configuration-verification.json": {
+      "bytes": 848,
+      "sha256": "eb66904428ccd936f518e0cf6d789d9f440b812a9408a127945977b383afe6b0"
+    },
+    "control-preemption-disassembly.txt": {
+      "bytes": 7344,
+      "sha256": "b0b50817fb8bfef3b23f482a8807adcf03b5d8980b4bcf169b316e19fdd0935e"
+    },
+    "tcu-capture-clock-disassembly.txt": {
+      "bytes": 4838,
+      "sha256": "d2928d1eae2eb33d9256182b3ee18755becf8f94a7b3a8a66582b7b3afe0b25c"
+    },
+    "control-preemption.txt": {
+      "bytes": 7897,
+      "sha256": "fa2b1c4f664311b3a7297240e169c682d4ea5bd2ea043e040fa9fd413ff2e2b2"
+    },
+    "tcu-capture-clock.txt": {
+      "bytes": 6443,
+      "sha256": "3e06bf0599c1fd14d4601a0d759c8db7b4f92afcf32067a967a1bce5342e9005"
+    }
+  },
+  "inputs": {
+    "examples/LFFEEE-stock.bin": {
+      "bytes": 1048576,
+      "sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08"
+    },
+    "examples/LFG1TF000.bin": {
+      "bytes": 524288,
+      "sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+    },
+    "research/ecu-at-can/sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf": {
+      "bytes": 5102824,
+      "sha256": "359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c"
+    }
+  },
+  "archive": {
+    "name": "ghidra/nc-at-can.tar.gz",
+    "bytes": 11019592,
+    "sha256": "c28e5ef54f2db3ecd53563e3eeab6b9e067357212c0b5ca276c3237a8a0fc299"
+  },
+  "restore": {
+    "date": "2026-10-07",
+    "archive_sha256": "c28e5ef54f2db3ecd53563e3eeab6b9e067357212c0b5ca276c3237a8a0fc299",
+    "restored_project_files_verified": 11,
+    "restored_annotations_verified": 1970,
+    "identical_export_files": 1014,
+    "restored_programs": [
+      "LFFEEE-stock.bin",
+      "LFG1TF000.bin"
+    ],
+    "method": "Independent Ghidra read-only reopening; verify_restore.py checks archive/live/restored hashes, complete expected export sets, no incomplete readbacks, all annotation rows and identical exports."
+  }
+}

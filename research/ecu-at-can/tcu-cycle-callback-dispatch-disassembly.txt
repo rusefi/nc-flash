@@ -1,0 +1,47 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000124aa <.data+0x124aa>:
+   124aa:	4f 22       	sts.l	pr,@-r15
+   124ac:	c4 02       	mov.b	@(2,gbr),r0
+   124ae:	64 03       	mov	r0,r4
+   124b0:	60 4c       	extu.b	r4,r0
+   124b2:	88 01       	cmp/eq	#1,r0
+   124b4:	89 0d       	bt	0x124d2
+   124b6:	88 03       	cmp/eq	#3,r0
+   124b8:	8b 0b       	bf	0x124d2
+   124ba:	d2 0b       	mov.l	0x124e8,r2	! 16f78
+   124bc:	42 0b       	jsr	@r2
+   124be:	00 09       	nop	
+   124c0:	d3 0a       	mov.l	0x124ec,r3	! 50b48
+   124c2:	43 0b       	jsr	@r3
+   124c4:	00 09       	nop	
+   124c6:	d2 0a       	mov.l	0x124f0,r2	! 16e80
+   124c8:	42 0b       	jsr	@r2
+   124ca:	00 09       	nop	
+   124cc:	d3 09       	mov.l	0x124f4,r3	! 511cc
+   124ce:	43 2b       	jmp	@r3
+   124d0:	4f 26       	lds.l	@r15+,pr
+   124d2:	4f 26       	lds.l	@r15+,pr
+   124d4:	00 0b       	rts	
+   124d6:	00 09       	nop	
+   124d8:	00 01       	.word 0x0001
+   124da:	6f 68       	swap.b	r6,r15
+   124dc:	00 05       	mov.w	r0,@(r0,r0)
+   124de:	0b 3c       	mov.b	@(r0,r3),r11
+   124e0:	00 01       	.word 0x0001
+   124e2:	6e 70       	mov.b	@r7,r14
+   124e4:	00 05       	mov.w	r0,@(r0,r0)
+   124e6:	11 c0       	mov.l	r12,@(0,r1)
+   124e8:	00 01       	.word 0x0001
+   124ea:	6f 78       	swap.b	r7,r15
+   124ec:	00 05       	mov.w	r0,@(r0,r0)
+   124ee:	0b 48       	.word 0x0b48
+   124f0:	00 01       	.word 0x0001
+   124f2:	6e 80       	mov.b	@r8,r14
+   124f4:	00 05       	mov.w	r0,@(r0,r0)
+   124f6:	11 cc       	mov.l	r12,@(48,r1)
+

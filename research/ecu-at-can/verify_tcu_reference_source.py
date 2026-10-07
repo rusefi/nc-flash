@@ -39,6 +39,36 @@ def normalized(total, count):
     return clamp(div(153600000, period), 0, 32767), period
 
 
+def branch_model(g, regs):
+    """Predict selected209B4 outputs at its post-gate20AAC boundary."""
+    flags=r(g,0x91A6)
+    fallback=bool(r(g,0x9194)&1 or flags&16)
+    if fallback:
+        branch='fallback'; period=-1
+        kind=signed(regs[6],8)
+        index=6 if kind==-1 else regs[10]&255
+        if regs[5]&255==1: index=g.read(regs[15],1)
+        result=0 if kind==0 else clamp(div(signed(regs[9]<<12,32),COEFFICIENTS[index]),-32768,32767)
+        result=clamp(result,0,32767); reference=result
+    elif flags&1:
+        branch='hold';result=r(g,0x80EA,2);reference=r(g,0x80EC,2);period=r(g,0x9198,4)
+    elif r(g,0x810D)>=14 or r(g,0x9195)>=14:
+        branch='stale';result=reference=0;period=-1
+        flags|=4
+    else:
+        branch='history';flags&=~4
+        values=samples(g); idx=r(g,0x91B4)
+        total=0; kept=0; kept_sum=0
+        threshold=signed(r(g,0x9238,4),32)
+        for i in range(18):
+            total=signed(total+values[(idx-i)%18],32)
+            if total<threshold or kept<5:
+                kept+=1;kept_sum=total
+        result,period=normalized(total,18)
+        reference=result if r(g,0x92C6)&16 else normalized(kept_sum,kept)[0]
+    return dict(branch=branch, result=result, reference=reference, period=period, flags=flags)
+
+
 class Observed(SHRotate):
     """Read-only observation after original gate producers, never skip opcodes."""
     def instruction(self, pc):
@@ -195,31 +225,8 @@ def main():
         if whole_caller: actual=r(t,0x80EA,2)
         memory,regs=t.gate_state
         g=SHRotate(TCU);g.ram=memory
-        flags=r(g,0x91A6)
-        fallback=bool(r(g,0x9194)&1 or flags&16)
-        if fallback:
-            branch='fallback'; period=-1
-            kind=signed(regs[6],8)
-            index=6 if kind==-1 else regs[10]&255
-            if regs[5]&255==1: index=g.read(regs[15],1)
-            result=0 if kind==0 else clamp(div(signed(regs[9]<<12,32),COEFFICIENTS[index]),-32768,32767)
-            result=clamp(result,0,32767); reference=result
-        elif flags&1:
-            branch='hold';result=r(g,0x80EA,2);reference=r(g,0x80EC,2);period=r(g,0x9198,4)
-        elif r(g,0x810D)>=14 or r(g,0x9195)>=14:
-            branch='stale';result=reference=0;period=-1
-            flags|=4
-        else:
-            branch='history';flags&=~4
-            values=samples(g); idx=r(g,0x91B4)
-            total=0; kept=0; kept_sum=0
-            threshold=signed(r(g,0x9238,4),32)
-            for i in range(18):
-                total=signed(total+values[(idx-i)%18],32)
-                if total<threshold or kept<5:
-                    kept+=1;kept_sum=total
-            result,period=normalized(total,18)
-            reference=result if r(g,0x92C6)&16 else normalized(kept_sum,kept)[0]
+        predicted=branch_model(g,regs)
+        branch,result,reference,period,flags=[predicted[k] for k in ['branch','result','reference','period','flags']]
         assert actual==result and r(t,0x80EC,2)==reference,(case,branch,actual,result,r(t,0x80EC,2),reference)
         assert r(t,0x9198,4)==period&0xFFFFFFFF and r(t,0x91A6)==flags
         assert r(t,0x9194)&2==2*bool(flags&4) and t.macl==0x12345678

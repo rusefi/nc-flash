@@ -1,0 +1,105 @@
+2026-10-06: executed accumulator and sum limits
+
+RESULT
+Original314F8,3140C,31318 now produce6814,6810,680C for the input group in
+control-normalized-inputs.txt. An original caller segment verifies their order
+with the three terms and sum. Integrated replay no longer supplies these
+three outputs after explicit zero initialization. Physical loop identity,
+full task schedule, upstream signals and DSC execution remain open.
+
+REPRODUCTION AND IDENTITIES
+  python research/ecu-at-can/verify_control_input_limits.py
+Python3.14.3 standard library, assertions enabled. Existing SH interpreter,
+finite binary32 RTZ models and prior lifecycle are unchanged.
+Output: control-input-limits-verification.json.
+ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+No production code or ROM edits. Tests passed on first run.
+
+VALIDATION
+2,594 direct checks: accumulator limit540, factor32, sum limit2022.
+Sum-limit branches: zero432, curve255, slew162, target795, override378.
+Raw flags include0/1/2/255; timer includes0/1/65535. Curve samples include
+knots, interpolation and out-of-range values. Sum-limit tests also supply
+nondefault factor values0/.5/2 independently of the stock factor producer.
+Finite inputs only; arbitrary ROM calibrations and exception cases untested.
+24 original caller segments187C2 through before187EC execute:
+ 314F8 ->3153A ->31598 ->31606 ->3140C ->31318 ->312D4.
+Observed order, stack, interrupt mask and output bits match independently
+modeled sequential bodies. This is a local segment, not an entire task.
+320 serial cycles/36 paired CAN updates/320 CAN211 latch updates also pass.
+
+ALGORITHMS
+RAM addresses abbreviated with FFFF prefix omitted; R rounds each operation
+to binary32 toward zero. Clamp tests lower bound first, then upper.
+
+314F8 accumulator limit6814:
+ If6938 is exactly1, map67DC throughA38DC; otherwise writezero.
+ Within the enabled branch, any nonzero67C4 caps the result atROM DB1E0=65.
+
+3140C factor6810:
+ First2118 tests whether DB1F4 lies outside DB1F0 +/-31.25, with finite RTZ
+ on the bounds. Stock800 versus500 makes the predicate true.
+ Then6810=Clamp(R(R(6DB4-500)/R(800-500)),ROM DB1F8=1,1).
+ Consequently all tested finite stock cases write1, regardless of old6810.
+ The hold branch under different calibrations is only modeled, not executed
+ by changing ROM. Do not infer that it is unreachable in every firmware.
+
+31318 sum limit680C, with priority as listed:
+ 1. If693D==0 and unsigned word6910>0, writezero.
+ 2. Else if protected7016==0 and6910>0, writeR(6814*A37F8(682C)).
+ 3. Otherwise form target below, then choose mode behavior.
+ Target starts as old680C.2118 comparesDB1E4=550 withDB1E8=500 +/-31.25;
+ stock predicate is true. Formratio=R(R(6DB4-500)/R(550-500)); clamp it
+ betweenDB1EC approximately.1 and (1 if7016==0, otherwise6810).
+ Target=R(6814*ratio).
+ If7016==0:680C=min(R(old680C+DB1DC approximately.08),target).
+ This rate-limits increases, but follows a lower target immediately.
+ Else if protected7010 is exactly1:680C=R(6814*6810).
+ Else680C=target. Raw nonzero7016 values enter the same nonzero branch.
+ Original helpers2118/22F8/207C/23F8 execute; no helper replacement.
+
+RETAINED INPUTS AND OBSERVATIONS
+Inherited pipeline and serial peer retain explicit fixtures. New inputs:
+67DC=2000,6DB4=540,682C=.5,6938=1,67C4=1,693D=1,6910=0.
+6814/6810/680C startzero; their bodies produce65,1,51.999996185302734 at
+saved checkpoints. No direct output injection after initialization.
+Input67FC and684C schedules follow control-normalized-inputs.txt. Inhibit7002
+is deliberately moved to calls61..70 when the uninhibited sum is positive.
+Selected saved values (6CC8 / normalized8118):
+ call60:9.185697555541992 / .11263827979564667
+ call61:0 / .07340674102306366
+ call70:0 / .07340674102306366
+ call71:9.563325881958008 / .11425109952688217
+The retained history terms explain why zero6CC8 does not force zero8118.
+Accumulator continues to update while sum publication is inhibited.
+These are executed fixture observations, not a measured vehicle response.
+
+CALLER AND INPUT GAPS
+The executed local caller begins after187BC->3174C; earlier307EC/30BA4/3174C
+may alter inputs and gates. Next trace those and67FC/684C/67DC/6DB4 producers,
+6910 timer,6938/693D/67C4 flags, and399B0 publication callers1693E/199BC.
+The separate59720 group, magnitude and command pipeline remain verified with
+explicit inter-group scheduling. No complete production task cadence claim.
+CAN211/21A sender, signal units, remote DSC decisions, spark/fuel arbitration
+and physical actuation remain necessary for the traction objective.
+ECU/AT still needs45BA0/815D, optional44E14/44F5A and natural overlaps.
+Roof independently retains both directions, interruption/reversal, timeout,
+synchronization and recovery; see roof-fault-recovery.txt for documentation.
+
+DISASSEMBLY AND PERSISTENCE
+Main bodies and caller are preserved in control-normalized-inputs-disassembly.txt.
+control-input-limits-helpers-disassembly.txt adds2118..2136 and23E8..2408.
+Reproduce with disassemble.py at dis START STOP and GNU SH objdump2.42;
+replaceable tool setup/command in control-normalized-inputs.txt.
+Saved locally; no staging/commit/push. Ghidra save/restore identity is in the
+current checkpoint and ghidra/snapshot.json / restore-verification.json.
+
+PERSISTENCE VERIFIED
+Ghidra12.1.3 PUBLIC/Java21:613 ECU/814 TCU annotations saved and read back.
+Archive10,879,951 bytes; SHA256
+ e6778cd3ba8935ea0181bf62daa5078ea199f4718083e02c8d7f7d290b30282e.
+Independent input-limits-20261006 restoration:11 project hashes and703 export
+files(701functions+2readbacks) matched. No pending save job. No commit/push.

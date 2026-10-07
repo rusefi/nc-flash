@@ -1,0 +1,98 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000310f0 <.data+0x310f0>:
+   310f0:	92 42       	mov.w	0x31178,r2	! 95d0
+   310f2:	e3 01       	mov	#1,r3
+   310f4:	00 0b       	rts	
+   310f6:	22 30       	mov.b	r3,@r2
+   310f8:	97 3e       	mov.w	0x31178,r7	! 95d0
+   310fa:	63 70       	mov.b	@r7,r3
+   310fc:	23 38       	tst	r3,r3
+   310fe:	89 31       	bt	0x31164
+   31100:	d0 1e       	mov.l	0x3117c,r0	! 5d446
+   31102:	e5 00       	mov	#0,r5
+   31104:	63 4d       	extu.w	r4,r3
+   31106:	03 3c       	mov.b	@(r0,r3),r3
+   31108:	63 3c       	extu.b	r3,r3
+   3110a:	60 33       	mov	r3,r0
+   3110c:	88 00       	cmp/eq	#0,r0
+   3110e:	8d 0a       	bt.s	0x31126
+   31110:	66 4d       	extu.w	r4,r6
+   31112:	88 01       	cmp/eq	#1,r0
+   31114:	89 0a       	bt	0x3112c
+   31116:	88 02       	cmp/eq	#2,r0
+   31118:	89 0b       	bt	0x31132
+   3111a:	88 03       	cmp/eq	#3,r0
+   3111c:	89 13       	bt	0x31146
+   3111e:	88 04       	cmp/eq	#4,r0
+   31120:	89 19       	bt	0x31156
+   31122:	a0 1b       	bra	0x3115c
+   31124:	00 09       	nop	
+   31126:	d2 16       	mov.l	0x31180,r2	! ffff8247
+   31128:	a0 19       	bra	0x3115e
+   3112a:	00 09       	nop	
+   3112c:	d1 15       	mov.l	0x31184,r1	! ffff822c
+   3112e:	a0 13       	bra	0x31158
+   31130:	00 09       	nop	
+   31132:	60 63       	mov	r6,r0
+   31134:	d2 14       	mov.l	0x31188,r2	! ffff822d
+   31136:	88 01       	cmp/eq	#1,r0
+   31138:	8f 12       	bf.s	0x31160
+   3113a:	22 50       	mov.b	r5,@r2
+   3113c:	d1 13       	mov.l	0x3118c,r1	! ffff822e
+   3113e:	21 50       	mov.b	r5,@r1
+   31140:	d3 13       	mov.l	0x31190,r3	! ffff8160
+   31142:	a0 0d       	bra	0x31160
+   31144:	23 50       	mov.b	r5,@r3
+   31146:	60 63       	mov	r6,r0
+   31148:	d1 12       	mov.l	0x31194,r1	! ffff822f
+   3114a:	88 02       	cmp/eq	#2,r0
+   3114c:	8f 08       	bf.s	0x31160
+   3114e:	21 50       	mov.b	r5,@r1
+   31150:	d2 11       	mov.l	0x31198,r2	! ffff8161
+   31152:	a0 05       	bra	0x31160
+   31154:	22 50       	mov.b	r5,@r2
+   31156:	d1 11       	mov.l	0x3119c,r1	! ffff8230
+   31158:	a0 02       	bra	0x31160
+   3115a:	21 50       	mov.b	r5,@r1
+   3115c:	d2 10       	mov.l	0x311a0,r2	! ffff8231
+   3115e:	22 50       	mov.b	r5,@r2
+   31160:	e1 02       	mov	#2,r1
+   31162:	27 10       	mov.b	r1,@r7
+   31164:	00 0b       	rts	
+   31166:	00 09       	nop	
+   31168:	94 06       	mov.w	0x31178,r4	! 95d0
+   3116a:	63 40       	mov.b	@r4,r3
+   3116c:	23 38       	tst	r3,r3
+   3116e:	89 01       	bt	0x31174
+   31170:	e1 01       	mov	#1,r1
+   31172:	24 10       	mov.b	r1,@r4
+   31174:	00 0b       	rts	
+   31176:	00 09       	nop	
+   31178:	95 d0       	mov.w	0x3131c,r5	! 32c7
+   3117a:	ff ff       	.word 0xffff
+   3117c:	00 05       	mov.w	r0,@(r0,r0)
+   3117e:	d4 46       	mov.l	0x31298,r4	! 25588b01
+   31180:	ff ff       	.word 0xffff
+   31182:	82 47       	.word 0x8247
+   31184:	ff ff       	.word 0xffff
+   31186:	82 2c       	.word 0x822c
+   31188:	ff ff       	.word 0xffff
+   3118a:	82 2d       	.word 0x822d
+   3118c:	ff ff       	.word 0xffff
+   3118e:	82 2e       	.word 0x822e
+   31190:	ff ff       	.word 0xffff
+   31192:	81 60       	mov.w	r0,@(0,r6)
+   31194:	ff ff       	.word 0xffff
+   31196:	82 2f       	.word 0x822f
+   31198:	ff ff       	.word 0xffff
+   3119a:	81 61       	mov.w	r0,@(2,r6)
+   3119c:	ff ff       	.word 0xffff
+   3119e:	82 30       	.word 0x8230
+   311a0:	ff ff       	.word 0xffff
+   311a2:	82 31       	.word 0x8231
+

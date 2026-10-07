@@ -1,0 +1,120 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00031720 <.data+0x31720>:
+   31720:	2f e6       	mov.l	r14,@-r15
+   31722:	ee 00       	mov	#0,r14
+   31724:	2f d6       	mov.l	r13,@-r15
+   31726:	2f c6       	mov.l	r12,@-r15
+   31728:	2f b6       	mov.l	r11,@-r15
+   3172a:	2f a6       	mov.l	r10,@-r15
+   3172c:	2f 96       	mov.l	r9,@-r15
+   3172e:	2f 86       	mov.l	r8,@-r15
+   31730:	c4 88       	mov.b	@(136,gbr),r0
+   31732:	88 02       	cmp/eq	#2,r0
+   31734:	8f 47       	bf.s	0x317c6
+   31736:	6b e3       	mov	r14,r11
+   31738:	dd 28       	mov.l	0x317dc,r13	! ffff95d4
+   3173a:	90 4d       	mov.w	0x317d8,r0	! f0
+   3173c:	09 dc       	mov.b	@(r0,r13),r9
+   3173e:	62 d3       	mov	r13,r2
+   31740:	69 9c       	extu.b	r9,r9
+   31742:	64 9f       	exts.w	r9,r4
+   31744:	63 43       	mov	r4,r3
+   31746:	44 08       	shll2	r4
+   31748:	44 08       	shll2	r4
+   3174a:	34 38       	sub	r3,r4
+   3174c:	34 2c       	add	r2,r4
+   3174e:	84 4d       	mov.b	@(13,r4),r0
+   31750:	64 03       	mov	r0,r4
+   31752:	88 00       	cmp/eq	#0,r0
+   31754:	8d 06       	bt.s	0x31764
+   31756:	e7 01       	mov	#1,r7
+   31758:	88 01       	cmp/eq	#1,r0
+   3175a:	89 03       	bt	0x31764
+   3175c:	88 02       	cmp/eq	#2,r0
+   3175e:	89 01       	bt	0x31764
+   31760:	a0 02       	bra	0x31768
+   31762:	00 09       	nop	
+   31764:	a0 2f       	bra	0x317c6
+   31766:	6b 73       	mov	r7,r11
+   31768:	d8 1d       	mov.l	0x317e0,r8	! 5d3bc
+   3176a:	ec 0a       	mov	#10,r12
+   3176c:	66 e3       	mov	r14,r6
+   3176e:	a0 1f       	bra	0x317b0
+   31770:	65 e3       	mov	r14,r5
+   31772:	60 93       	mov	r9,r0
+   31774:	30 5c       	add	r5,r0
+   31776:	70 10       	add	#16,r0
+   31778:	ea 0f       	mov	#15,r10
+   3177a:	2a 09       	and	r0,r10
+   3177c:	64 e3       	mov	r14,r4
+   3177e:	6a af       	exts.w	r10,r10
+   31780:	63 a3       	mov	r10,r3
+   31782:	4a 08       	shll2	r10
+   31784:	4a 08       	shll2	r10
+   31786:	3a 38       	sub	r3,r10
+   31788:	62 4f       	exts.w	r4,r2
+   3178a:	42 08       	shll2	r2
+   3178c:	32 8c       	add	r8,r2
+   3178e:	84 22       	mov.b	@(2,r2),r0
+   31790:	20 08       	tst	r0,r0
+   31792:	8b 08       	bf	0x317a6
+   31794:	d3 11       	mov.l	0x317dc,r3	! ffff95d4
+   31796:	62 4f       	exts.w	r4,r2
+   31798:	33 ac       	add	r10,r3
+   3179a:	32 3c       	add	r3,r2
+   3179c:	61 20       	mov.b	@r2,r1
+   3179e:	21 18       	tst	r1,r1
+   317a0:	8b 01       	bf	0x317a6
+   317a2:	a0 04       	bra	0x317ae
+   317a4:	66 73       	mov	r7,r6
+   317a6:	74 01       	add	#1,r4
+   317a8:	63 4f       	exts.w	r4,r3
+   317aa:	33 c3       	cmp/ge	r12,r3
+   317ac:	8b ec       	bf	0x31788
+   317ae:	75 01       	add	#1,r5
+   317b0:	90 13       	mov.w	0x317da,r0	! f1
+   317b2:	03 dc       	mov.b	@(r0,r13),r3
+   317b4:	63 3c       	extu.b	r3,r3
+   317b6:	35 33       	cmp/ge	r3,r5
+   317b8:	89 01       	bt	0x317be
+   317ba:	26 68       	tst	r6,r6
+   317bc:	89 d9       	bt	0x31772
+   317be:	60 63       	mov	r6,r0
+   317c0:	88 01       	cmp/eq	#1,r0
+   317c2:	8b 00       	bf	0x317c6
+   317c4:	6b 73       	mov	r7,r11
+   317c6:	60 b3       	mov	r11,r0
+   317c8:	68 f6       	mov.l	@r15+,r8
+   317ca:	69 f6       	mov.l	@r15+,r9
+   317cc:	6a f6       	mov.l	@r15+,r10
+   317ce:	6b f6       	mov.l	@r15+,r11
+   317d0:	6c f6       	mov.l	@r15+,r12
+   317d2:	6d f6       	mov.l	@r15+,r13
+   317d4:	00 0b       	rts	
+   317d6:	6e f6       	mov.l	@r15+,r14
+   317d8:	00 f0       	.word 0x00f0
+   317da:	00 f1       	.word 0x00f1
+   317dc:	ff ff       	.word 0xffff
+   317de:	95 d4       	mov.w	0x3198a,r5	! 8b03
+   317e0:	00 05       	mov.w	r0,@(r0,r0)
+   317e2:	d3 bc       	mov.l	0x31ad4,r3	! c9018801
+   317e4:	2f e6       	mov.l	r14,@-r15
+   317e6:	2f d6       	mov.l	r13,@-r15
+   317e8:	2f c6       	mov.l	r12,@-r15
+   317ea:	6d 43       	mov	r4,r13
+   317ec:	de 46       	mov.l	0x31908,r14	! ffff95d4
+   317ee:	2f b6       	mov.l	r11,@-r15
+   317f0:	2f a6       	mov.l	r10,@-r15
+   317f2:	6b df       	exts.w	r13,r11
+   317f4:	2f 96       	mov.l	r9,@-r15
+   317f6:	6a e3       	mov	r14,r10
+   317f8:	2f 86       	mov.l	r8,@-r15
+   317fa:	63 b3       	mov	r11,r3
+   317fc:	4f 22       	sts.l	pr,@-r15
+   317fe:	e8 01       	mov	#1,r8
+

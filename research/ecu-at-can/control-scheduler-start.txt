@@ -1,0 +1,157 @@
+ECU scheduler mode entry, stock initialization and first task — 2026-10-07
+
+All three objectives remain active and incomplete: ECU/automatic-transmission
+CAN integration, deep traction control, and roof folding AND unfolding,
+including interruption/resume/reversal, communication timeout, synchronization
+and recovery. User has no additional DSC/roof dumps/captures/bench results.
+No staging/commit/push authorization. Previous and current goal turns made
+verified progress; no blocked-condition audit. ROM/shared ISA/production intact.
+
+ECU: examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Python3.14.3; local harness subclasses only. GNUobjdump2.42 setup/package
+identity and extraction commands are in tcu-pulse-input.txt.
+Reproduce from repository root:
+ python research/ecu-at-can/verify_control_scheduler_entry.py
+ python research/ecu-at-can/verify_control_scheduler_start.py
+ python research/ecu-at-can/verify_control_cmt1_fixture.py
+ python research/ecu-at-can/probe_control_scheduler_start.py
+ python research/ecu-at-can/probe_control_scheduler_cmt.py
+ python research/ecu-at-can/verify_control_startup_adc.py
+ python research/ecu-at-can/probe_control_scheduler_adc.py
+ python research/ecu-at-can/verify_control_startup_ports.py
+ python research/ecu-at-can/probe_control_scheduler_ports.py
+
+Executed mode admission
+verify_control_scheduler_entry.py:96 STC.L SR instruction cases/2 rejected
+accesses PASS. Only aligned mapped-RAM longword store added locally in
+sh_control_scheduler_entry.py; SR bits, other registers and RAM independently
+checked. Primary source Renesas SH-2E REJ09B0316-0200 rev2.00May31,2006,
+section7.2.58 printed152/PDFzero165:
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+STC.L decrements address4 and stores SR, preserving T. No interrupt-deferral,
+address-error exception handler or hardware interrupt acceptance is simulated.
+
+Original3A38:4 admitted lowbyte0 prefixes and1020 rejected mode prefixes PASS,
+all256 lowbytes times four highbit patterns. Signextends lowbyte before
+unsigned comparison with ROM4050=1. Nonzero lowbytes return0 without RAM writes;
+lowbyte0 saves caller SR after comparison(T0) and PR, stores SP in12D8,
+loads native SP from4078=FFFF11A8 and mask4054=B0, sets12B8=100, tails3DD8.
+Whole RAM including caller stack and all architectural state independently
+checked; no task initialization executed by this admission component.
+
+Executed stock initialization and first dispatch
+verify_control_scheduler_start.py:128 seeded whole-application-RAM cases PASS
+for original3DD8 through38C4/3F40/3F90/3A20/3D10/RTE toDCF8. Synthetic caller
+stack keeps temporary call storage distinct, but selected-task stack comes
+from stock ROM4078=FFFF11A8. Mode0 selected explicitly in this component.
+ROM4234 points4230 containing task0/task17;4238 count2. Initialization queues
+both, decrements their availability1->0, selects priority4/task17 first.
+Priority0 slot0/head0/tail0 contains0; priority4 slot38/head38/tail38 contains17.
+Ready bits12E0=11. Context12BC=FFFF11A8,12C0=B0; selected/current17,
+current descriptor41E0/RAM1230. 3D10 publishes45CC=17 and builds PCDCF8/SR0
+atFFFF11A0/11A4; original3F3C RTE reachesDCF8 with SPFFFF11A8/SR0.
+All application RAM changes checked independently, including task availability,
+queue heads/tails/slots/ready map, context fields and exception frame. Stops
+before first task17 body; no full reset, external clock or vehicle claim.
+
+First-task retained probe and bounded timer continuation
+probe_control_scheduler_start.py executes3DD8 and task17 with existing strict
+peripherals. Initial result retained incontrol-scheduler-start-probe.json:
+unsupported wordwriteF710 at10600,39 observed indirectcalls. ActualDCF8 enters
+110D4/FE9A/105FC; no direct initializer/task-body injections. This verifies
+reachability from stock scheduler initialization to timer configuration under
+explicit initial state, not from reset or hardware IRQ acceptance.
+
+control_cmt1_fixture.py adds word-only CMSTRF710,CMCSR1F718,CMCNT1F71A and
+CMCOR1F71C latches; reset values0/0/0/FFFF. Reserved bits rejected. CMF bit7
+can clear only after a read1/write0 and cannot be set by a write. Controls
+CMIE/CKS retained; no counter progression, compare matches or interrupt events.
+verify_control_cmt1_fixture.py:526 latch/clear cases and6 rejectedwrites PASS.
+Primary retained SH7058 manual REJ09B0046-0300H rev3.0Sep2004,
+sources/renesas-sh7058-hardware-rej09b0046-0300h.pdf SHA256
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137;
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+Table14.1/PDFzero495; sections14.2.1/2 PDFzero496/497. Legal byte/longword
+hardware accesses deliberately outside this bounded fixture. No physicalclock.
+probe_control_scheduler_cmt.py completed34654:5million-instruction limit at4B68,
+92indirectcalls. Preservedcontrol-scheduler-cmt-probe.json. Original4ACC polls
+ADFbit7 ofF818/838/858; the old latch never raisescompletion, so this is an
+unmodeled hardware wait, not a firmware defect. Original105FC configuration
+completed with exact six MMIO transactions and CMT1control40/compare2499/start2.
+
+Explicit ADC readiness/result continuation
+probe_control_scheduler_adc.py supplies finite byte samples only at original
+pollPC4B62/4B6C/4B76:33,B3 forbank0/1;2B,AB forbank2. No RAM readiness flags
+or original callees replaced. All32result words remain explicit suppliedsamples.
+verify_control_startup_adc.py:96original4ACC cases PASS with0/1/3notreadyreads,
+32random resultwords, varyingpriorADCcontrols. WholeapplicationRAM, finalcontrol
+latches, exactpollsequence/resultreadorder, savedregisters/GBR/SRmask checked.
+ADCstatus samples are evidence of bounded software behavior only, not conversion
+latency, analoginputs or hardwareinterrupts. SH7058ADCSR section17.2.2/PDF669
+and prior control-acquisition-completion.txt documentADFbit7.
+Newfulltask17trace96826 completes4ACC/CA94 thenstopsDD64 onbyte readF4CB;
+141indirectcalls. Preservedcontrol-scheduler-adc-probe.json; notfullstartup.
+
+Documented timer4/5/9 configuration continuation
+F4CB=TIOR4A, F4CA=TIOR4B,F4EA=TIOR5B; all8bitsR/W, includingCCIbits7/3.
+Do not mistakebits7/3 forreserved bits. F4C2/6/8=GR4A/C/D, F4E6/8=GR5C/D,
+wordR/W initialFFFF. F69C=TCR9C bytewithwritablemask33;F694=GR9EbyteinitialFF.
+Table11.3/PDF254,257; TIORlayout11.2.4/PDF294, TCR9Clayout11.2.3/PDF283.
+probe_control_scheduler_ports.py adds only these ten registerlatches to the
+existing register owner. No captureedges/counters/outputpins; no genericMMIO.
+verify_control_startup_ports.py:192originalDD56..70E4prefix cases/3rejects PASS,
+wholeapplicationRAM unchanged; exact18orderedtimer accesses, finalregisters,
+stack/SRmask checked. Stopsbefore70E4body; all intervening22E4/22F4execute.
+First configuration setsTIOR4Alow3bits5,TCR9Clow2bits1, TIOR4B/5Bnibbles6,
+clearsfive16bitGRsandone8bitGR. Fullcontinuation44306terminalexit0; JSONstatus
+ValueError: Unsupported write FFFFEC62/2 atA46F6,388indirectcalls.
+control-scheduler-ports-probe.json preserves trace; no liveprocess remains.
+EC62 not yet identified in retained hardware manual; no guessed registerfixture.
+
+
+Unidentified EC62 boundary and rejected lead
+Original A458C enters A46F2; A46F6 writes word0 toFFFFEC62. Static A46F8
+reads it back, A46FE mirrors the word intoFFFFBFCE. Nearby A466A-family code
+uses EC64+2*(BFC4>>1) and updates selected bits in EC62; this suggests an
+address-remapping/debug facility, but that interpretation is UNVERIFIED.
+No hardware fixture was added. The retained SH7058 manual has no EC62 text
+match, including whitespace-normalized search. RAMER is explicitlyFFFFEC26
+(table9.2/PDF185 and section9.2.4/PDF194), so do not relabel EC62 as RAMER.
+Web searches on 2026-10-07 for SH7058 EC62 / FFFFEC62 / Renesas EC62 produced
+no applicable primary register definition. The official E6000H manual offers
+an emulation-memory feature but no EC62 match; it does not identify this access:
+https://www.renesas.com/en/document/mat/sh7058-e6000h-emulator-hs7058eph62h-sh7058s-sh7059-e6000h-emulator-s7059eph62h-users-manual
+REJ10J2014-0100 rev1.00,244PDFpages. This is a failed identification lead,
+not proof that EC62 is absent from every chip variant. Source remains open.
+Static ranges and reproducible commands saved incontrol-scheduler-start-disassembly.txt.
+Meaningful independent work continued withcontrol-interrupt-nonidle.txt instead
+of assuming a register value to force this startup trace onward.
+
+Remaining requirements
+Continue actualtask17 startup; preserve each unsupported peripheral/opcode or
+unmodeled wait. Do not force readiness/skip callees. Prior interrupt-driven600
+used idle admission and synthetic taskstack, so this startup trace must not be
+assumed equivalent before checking actual context/background behavior.
+ECU/TCU capture/diagnostic timebase work remains separate. TractionCAN211/21A
+sender/units/remoteDSC actuation and actualpreemption/interleaving remain open. Isolatednonidle save/directrestore
+now verified incontrol-interrupt-nonidle.txt; notwholeboot orhardwareproof. Roof
+folding AND unfolding/interruption/recovery require applicable edition/VIN and
+missing OEM/physical evidence. No repeated artifact questions/exhausted downloads
+or new genericDTC/NVM prerequisite. Ghidra annotations saved andindependentlyrestored;
+CHECKPOINT owns the current archive/restore verification status.
+
+Saved analysis status
+Eight new Ghidra annotations saved to both-program paired archive;1967total,
+1013complete identicalexports/11projectfilehashes independentlyverified.
+Apply70965/liveverify54614/snapshot+restore2569 allterminalexit0; no logerrors.
+Reproduce annotation/save/restore via ghidra/README.txt andverify_restore.py.
+Archive SHA256 f1b9f3c0b4003ad84f53440155adcf11c48c4a0bfc4d863d4e90593b62ca0687
+Size 11018940bytes; restore-check/startup-nonidle-20261007.
+control-scheduler-start-artifacts.json preserves scripts/results/report hashes.
+No pendingprocess orprojectedits. Savedlocally; nothingstaged/committed/pushed
+bythiswork. Existingmixedindex remainsunchanged.
+
+Further source check (2026-10-07): control-ec62-source-followup.txt records the
+newer SH7058S/SH7059 primary manual search and download403. No applicableEC62
+definition; startup remains rejected. This does not identify the ECU variant.

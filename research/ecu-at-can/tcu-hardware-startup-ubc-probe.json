@@ -1,0 +1,198 @@
+{
+  "scope": "Locate full15574 hardware startup boundary; independently verify final flags.\n\nCombine only the existing strict INTC and configuration register owners. No\nnew register behavior, skipped callees or injected recovery/admission flags.\nInput state is the pre-existing native timeline fixture, not power-on reset.\n",
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "final_flag_slice_whole_ram_cases": 256,
+  "status": "REJECTED",
+  "error": "ValueError: Unsupported configuration write",
+  "last_instruction": "0x1445c",
+  "pc": "0x1445c",
+  "last_mmio": {
+    "operation": "write",
+    "address": "0xffffec20",
+    "size": 2,
+    "value": 15
+  },
+  "before": {
+    "recovery": 0,
+    "second": 0
+  },
+  "after": {
+    "recovery": 0,
+    "second": 0
+  },
+  "indirect_calls": [
+    {
+      "pc": "0x15588",
+      "target": "0x143dc"
+    },
+    {
+      "pc": "0x1558e",
+      "target": "0x14422"
+    },
+    {
+      "pc": "0x15594",
+      "target": "0x1442a"
+    },
+    {
+      "pc": "0x1559a",
+      "target": "0x14432"
+    },
+    {
+      "pc": "0x155a0",
+      "target": "0x1443e"
+    },
+    {
+      "pc": "0x155a6",
+      "target": "0x1444a"
+    },
+    {
+      "pc": "0x155ac",
+      "target": "0x14452"
+    }
+  ],
+  "intc_accesses": [
+    [
+      "write",
+      4294962432,
+      2,
+      0
+    ],
+    [
+      "write",
+      4294962434,
+      2,
+      0
+    ],
+    [
+      "write",
+      4294962436,
+      2,
+      13
+    ],
+    [
+      "write",
+      4294962438,
+      2,
+      48
+    ],
+    [
+      "write",
+      4294962440,
+      2,
+      3072
+    ],
+    [
+      "write",
+      4294962442,
+      2,
+      8256
+    ],
+    [
+      "write",
+      4294962444,
+      2,
+      20672
+    ],
+    [
+      "write",
+      4294962446,
+      2,
+      3840
+    ],
+    [
+      "write",
+      4294962448,
+      2,
+      0
+    ],
+    [
+      "write",
+      4294962450,
+      2,
+      2432
+    ],
+    [
+      "write",
+      4294962452,
+      2,
+      6
+    ],
+    [
+      "write",
+      4294962454,
+      2,
+      2560
+    ],
+    [
+      "write",
+      4294962456,
+      2,
+      255
+    ],
+    [
+      "write",
+      4294962458,
+      2,
+      0
+    ]
+  ],
+  "configuration_trace": [],
+  "limits": "Final1570C..15716 slice is independent component evidence only. Full15574 not reached its flag-setting tail unless status RETURNED. Prior configuration/state remain explicit fixture, not reset.",
+  "icr_fixture": {
+    "external_constant_nmi_level": 0,
+    "final_value": 255
+  },
+  "irq_status_fixture": {
+    "external_constant_status": 0,
+    "no_external_irq_arrivals": true
+  },
+  "ubc_fixture": {
+    "values": {
+      "0xffffec00": 0,
+      "0xffffec02": 0,
+      "0xffffec04": 0,
+      "0xffffec06": 0,
+      "0xffffec08": 0,
+      "0xffffec0a": 0
+    },
+    "accesses": [
+      [
+        "write",
+        4294962176,
+        2,
+        0
+      ],
+      [
+        "write",
+        4294962178,
+        2,
+        0
+      ],
+      [
+        "write",
+        4294962180,
+        2,
+        0
+      ],
+      [
+        "write",
+        4294962182,
+        2,
+        0
+      ],
+      [
+        "write",
+        4294962184,
+        2,
+        0
+      ],
+      [
+        "write",
+        4294962186,
+        2,
+        0
+      ]
+    ],
+    "no_break_events": true
+  }
+}

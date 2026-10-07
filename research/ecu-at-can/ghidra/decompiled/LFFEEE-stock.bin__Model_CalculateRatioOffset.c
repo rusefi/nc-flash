@@ -11,14 +11,15 @@ char Model_CalculateRatioOffset(void)
   float fVar3;
   float fVar4;
   
-  fVar4 = *(float *)PTR_DAT_00040a2c;
+  fVar4 = *(float *)PTR_Control_AccumulatedErrorLimit_00040a2c;
   cVar2 = (*(code *)PTR_FUN_00040a34)(fVar4,0,DAT_00040a30);
   puVar1 = PTR_DAT_00040a38;
   if (cVar2 != '\0') {
     fVar3 = (float)(*(code *)PTR_Lookup_FloatCurve_00040a44)
-                             (*(undefined4 *)PTR_DAT_00040a3c,DAT_00040a40);
+                             (*(undefined4 *)PTR_ControlInput_ScaledLimitAxis_00040a3c,DAT_00040a40)
+    ;
     *(float *)PTR_DAT_00040a48 = fVar3;
-    *(float *)puVar1 = (*(float *)PTR_DAT_00040a4c / fVar4) * fVar3;
+    *(float *)puVar1 = (*(float *)PTR_TargetFollow_FilteredContribution_00040a4c / fVar4) * fVar3;
   }
   cVar2 = (*(code *)PTR_FUN_00040a54)(PTR_DAT_00040a50);
   if (cVar2 == '\x01') {

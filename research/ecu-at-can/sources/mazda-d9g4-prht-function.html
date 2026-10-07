@@ -1,0 +1,380 @@
+
+ 
+ <!-- Let’s Start Button Start -->
+       <div style="background-color: red; 
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;">
+        <a href="https://mazdamanuals.com/" target="_top" Style=" background-color: yellow;
+    color: red;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    font-weight: bold; ">Home</a>
+        <h2 style=" color: white; 
+    margin: 0;
+    font-size: 3em;
+    text-align: center;
+    flex-grow: 1;
+    padding-left: 20px;"><a href="https://mazdamanuals.com/" target="_top" style="text-decoration: none; color: yellow; font-size: 20px">Mazda manuals </a></h2>
+    </div>
+                        
+                        <!-- Let’s Start Button End -->
+
+<html lang="en">
+
+<!-- Mirrored from mazdamanuals.com.au/wsm-secure/WSM/D9G4-1A-22C_Ver17/esicont/srvc/html/id091600101400.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 02 Apr 2025 03:14:04 GMT -->
+<head>
+
+<script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
+
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="mazda-css-en.css" type="text/css">
+<title>POWER RETRACTABLE HARDTOP CONTROL MODULE FUNCTION</title>
+</head>
+<body>
+
+<amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-1683721600816194">
+</amp-auto-ads>
+<a name="id091600101400"></a><p class="servinfo-title"><span class="servinfo-head"></span>POWER RETRACTABLE HARDTOP CONTROL MODULE FUNCTION</p>
+<hr>
+<p class="servinfo-title-id" align="right">id091600101400</p>
+<div class="list">•  Controls the power retractable hardtop control module, roof motor, and the deck panel motor based on the signals from each switch.</div>
+<div class="list">•  A fail-safe function has been adopted which stops the operation if an abnormal signal is detected from any part during power retractable hardtop operation.</div>
+<div class="list">•  A self-diagnostic function has been adopted which can verify the malfunctioning area.</div><br clear="all"><a name="id09160010140001"></a><p class="servinfosub-title"><span class="servinfosub-head"></span>Fail-safe Function</p>
+<div class="list">•  The power retractable hardtop control module monitors each input/output part, and if a malfunction is detected, performs the following actions.</div>
+<p clear="all">
+<table class="table-flame" border="1">
+<thead>
+<tr>
+<th id="" align="center">
+<p class="thead">Item</p>
+</th>
+<th id="" align="center">
+<p class="thead">Detection Condition</p>
+</th>
+<th id="" align="center">
+<p class="thead">Action after malfunction detected</p>
+</th>
+<th id="" align="center">
+<p class="thead">Recovery condition</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td id="" align="left">
+<div class="tbody">Power supply voltage error</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Power supply voltage is 7.5 V or less, or 17.5 V or more.</div>
+</td>
+<td id="" align="left">
+<div class="list">•  Power retractable hardtop not operated → Inhibits power retractable hardtop operation</div>
+<div class="list">•  Power retractable hardtop operating → Stops power retractable hardtop operation</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Power supply voltage is between 8.5 to 16.5 V.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Roof/deck panel motor hall sensor power supply voltage error</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Sensor power supply voltage is 5 V or less.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Stops roof/deck panel motor operation</div>
+</td>
+<td id="" align="left">
+<div class="tbody">The ignition switch is turned from the ON position in the following order.</div>
+<div class="list">•  OFF → ON</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Roof/deck panel motor hall sensor malfunction</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Roof/deck panel motor hall sensor pulse signal cannot be detected.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Temporarily stops the operation, however, the operation can be performed by turning on the power retractable hardtop switch again.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Pulse signal detected</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left" rowspan="2">
+<div class="tbody">Door glass open notification signal error</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Door glass open notification signal cannot be detected.</div>
+</td>
+<td id="" align="left">
+<div class="list">•  If the signal is detected during the power retractable hardtop close operation, inhibits the operation after the power retractable hardtop is fully closed. (Only deck panel can operate.)</div>
+<div class="list">•  If the signal is detected during the power retractable hardtop open operation, the open operation continues and after the operation finishes, the close operation can be performed only once. Inhibits the operation after the power retractable hardtop is fully closed. (Only deck panel can operate.)</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Door glass open notification signal can be detected.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Open notification signal is received continuously for 30 s or more.</div>
+</td>
+<td id="" align="left">
+<div class="list">•  If the signal is detected with the power retractable hardtop fully closed and not operating, inhibits the operation.</div>
+<div class="list">•  If the signal is detected with the power retractable hardtop fully open and not operating, the power retractable hardtop close operation can be performed only once. Inhibits the operation after the power retractable hardtop is fully closed.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Continuous reception of the open notification signal stops temporarily.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Roof/deck panel motor malfunction</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Supply voltage to the motor is lowered.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Stops roof/deck panel motor operation</div>
+</td>
+<td id="" align="left">
+<div class="tbody">The ignition switch is turned from the ON position in the following order.</div>
+<div class="list">•  OFF → ON</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Roof panel motor (Left and right position combination)</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Difference in pulse count number between left and right is at a certain level or more.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Stops roof panel motor operation</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Power retractable hardtop switch is operated again.</div>
+<div class="tbody">However, if detected three times or more, the ignition switch is turned from the ON position in the following order.</div>
+<div class="list">•  OFF → ON</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Deck panel motor (Left and right position combination)</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Difference in pulse count number between left and right is at a certain level or more.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Stops deck panel motor operation</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Power retractable hardtop switch is operated again.</div>
+<div class="tbody">However, if detected three times or more, the ignition switch is turned from the ON position in the following order.</div>
+<div class="list">•  OFF → ON</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Power retractable hardtop/deck panel limit switch malfunction</div>
+</td>
+<td id="" align="left">
+<div class="tbody">The power retractable hardtop/deck panel limit switch is malfunctioning.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Inhibits power retractable hardtop operation.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Normal logic is detected.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left" rowspan="2">
+<div class="tbody">Top lock switch malfunction</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Top lock switch on is detected with the power retractable hardtop open.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Close operation can be performed only once. Inhibits the operation after the power retractable hardtop is fully closed.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Top lock switch off is detected.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Top lock switch off is detected with the power retractable hardtop closed and vehicle speed detected.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">None</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Vehicle speed 0 km/h is detected.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left" rowspan="3">
+<div class="tbody">Power retractable hardtop switch malfunction</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Switch input is 1 V or less.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Inhibits power retractable hardtop operation.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Normal input voltage is recovered.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Switch on signal is detected for 30 s or more after IG-ON.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Inhibits power retractable hardtop operation.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Power retractable hardtop switch off signal is detected.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Power retractable hardtop open and close on signals are detected simultaneously for 30 s or more.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Inhibits power retractable hardtop operation.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Power retractable hardtop switch off signal is detected.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left" rowspan="4">
+<div class="tbody">Communication error</div>
+</td>
+<td id="" align="left">
+<div class="tbody">CAN system of the power retractable hardtop control module is malfunctioning.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Inhibits power retractable hardtop operation.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Normal communication is recovered.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">CAN communication error between PCM and power retractable hardtop control module</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Inhibits power retractable hardtop operation.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Normal communication is recovered.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">CAN communication error between TCM and power retractable hardtop control module</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Inhibits power retractable hardtop operation.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Normal communication is recovered.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Vehicle speed signal error</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Inhibits power retractable hardtop operation.</div>
+</td>
+<td id="" align="left">
+<div class="tbody">Normal communication is recovered.</div>
+</td>
+</tr>
+</tbody>
+</table>
+</p><br clear="all"><a name="id09160010140002"></a><p class="servinfosub-title"><span class="servinfosub-head"></span>Buzzer Operation Function</p>
+<div class="list">•  Sends beep signals to the instrument cluster before and after the power retractable hardtop system operation, when the operation is refused, and during an operation warning. (See <font class="extxref-label"><a href="id092200110300.html">POWER RETRACTABLE HARDTOP WARNING ALARM CONSTRUCTION/OPERATION</a></font>.)</div><br clear="all"><a name="id09160010140003"></a><p class="servinfosub-title"><span class="servinfosub-head"></span>Power Retractable Hardtop Indicator Light Control</p>
+<div class="list">•  Sends illumination or flash signal to the power retractable hardtop indicator light in the following pattern depending on the power retractable hardtop status.</div>
+<p clear="all">
+<table class="table-flame" border="1">
+<thead>
+<tr>
+<th id="" align="center" colspan="2">
+<p class="thead">Illumination pattern</p>
+</th>
+<th id="" align="center">
+<p class="thead">Illumination condition</p>
+</th>
+<th id="" align="center">
+<p class="thead">Lights off condition</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td id="" align="left">
+<div class="tbody">Power retractable hardtop operating</div>
+</td>
+<td id="" align="left"><img src="images/amxzzn00000599.png"></td>
+<td id="" align="left">
+<div class="tbody">Power retractable hardtop operation is continued.</div>
+</td>
+<td id="" align="left">
+<div class="list">•  Open operation is finished.</div>
+<div class="list">•  Close operation is finished.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Power retractable hardtop half-open and not operating</div>
+</td>
+<td id="" align="left"><img src="images/amxzzn00000600.png"></td>
+<td id="" align="left">
+<div class="list">•  Power retractable hardtop is fully opened and the top lock is unlocked. (Top lock switch is OFF.)</div>
+<div class="list">•  Power retractable hardtop switch is turned off during power retractable hardtop operation and the operation is temporarily stopped.</div>
+</td>
+<td id="" align="left">
+<div class="list">•  Open operation is finished.</div>
+<div class="list">•  Close operation is finished.</div>
+</td>
+</tr>
+<tr>
+<td id="" align="left">
+<div class="tbody">Power retractable hardtop system malfunctioning</div>
+</td>
+<td id="" align="left"><img src="images/amxzzn00000601.png"></td>
+<td id="" align="left">
+<div class="tbody">DTC is detected or recorded.(The power retractable hardtop indicator light does not illuminate depending on the DTC.)(The power retractable hardtop indicator light does not illuminate depending on the DTC.)(See <font class="extxref-label"><a href="id091600102200.html">ON-BOAD DIAGNOSTIC PID DATE MONITOR FUNCTION</a></font>.)</div>
+</td>
+<td id="" align="left">
+<div class="list">•  Malfunction is repaired or the DTC is cleared.</div>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1683721600816194"
+     crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Mirrored from mazdamanuals.com.au/wsm-secure/WSM/D9G4-1A-22C_Ver17/esicont/srvc/html/id091600101400.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 02 Apr 2025 03:14:05 GMT -->
+</html>

@@ -1,0 +1,46 @@
+Native TCU group initialization — 2026-10-07
+
+verify_tcu_native_group_initialization.py PASS three arguments0/12345678/FFFFFFFF.
+Original1DFF8 invoked from the same preinitialized peripheral/application fixture;
+all original callees execute. Original segment1E08E..1E254 invokes the62 entries
+from1E2B4..1E3A8 in order. Its whole application RAM equals the older sequence
+of62 original calls with R4/R5=0, when both start from the segment-entry RAM.
+This is differential execution evidence, not an independent semantic model.
+Callee-preserved R8..15 verified across full1DFF8.89 indirect calls observed in
+its own instruction ranges; directBSR callees are outside that count. Logged
+r4/r5 atcallinstructions arebefore delay slots, notcallee-entryarguments.
+
+Full1DFF8 and retirement.full_fixture are NOT interchangeable:209 application
+RAM bytes differ in each ofthree argument cases (same differences). Native620
+changed bytes versus legacy420; native62-call segment394 changed bytes.
+Native8080=6 versuslegacy0; native80B4word=0x2418 versuslegacy250;
+legacy92E2/92E4words=800 versusnative0. Exact byte deltas, calls and inputs are
+retained in tcu-native-group-initialization-verification.json. Native preceding
+and following initializers account for a larger scope; legacy also performs
+prerequisite setup and explicit80B4=250/216D8. No per-byte producer attribution
+yet. Do not replace nativeinitializedRAM with the62-group fixture afteradmission.
+
+Original126DA calls1DFF8 at126DE, thenwrites84F5=1. Priorreadiness tests execute
+this path at application admission; current test isolates its initialization
+comparison. Next preserve native state and add CMT1/capture/CAN event delivery.
+Original disassembly: tcu-native-group-initialization-disassembly.txt.
+Reproduce: python research/ecu-at-can/verify_tcu_native_group_initialization.py
+Python3.14.3/GNUobjdump2.42; tool setup in tcu-pulse-input.txt. TCU ROM SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+No production/ROM/sharedISA edits or staging/commit/push. Fullreset/mainloop,
+physicalECU/AT, remoteDSC/CAN211/21Asender/units and bothroof directions with
+interruption/reversal/timeout/synchronization/recovery remainopen. No extra user
+artifacts. CHECKPOINT owns currentGhidra status and separate next actions.
+
+Ghidra save and local verification
+1996annotations/1033completeidenticalexports/11projectfiles, independentrestore
+PASS. Fournew/threeupdatedannotations; apply14426/liveverify13333/snapshot25447/
+restoredverify51052 terminalexit0, cleanlogs. Archive11,023,527bytes SHA256
+54911f68c849722694e17632903603a7f5ba5ca84330588efe4cda91c42fc228.
+Freshrestore-check/native-capture-startup-20261007 checkedall11hashes before/after
+read-onlyreopen. verify_restore.py --write-reportPASS. Ghidra12.1.3PUBLIC/
+Java21.0.10. Apply/liveverify/snapshot/extract/reopen commands usepattern in
+ tcu-readiness-admission.txt
+withthisrestore-directory. Three scriptscompile/gitdiff--checkPASS; no liveprocess.
+Savedlocally only; no staging/commit/push. Currentidentities:
+ native-capture-startup-artifacts.json

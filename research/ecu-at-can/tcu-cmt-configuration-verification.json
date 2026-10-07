@@ -1,0 +1,219 @@
+{
+  "status": "PASS",
+  "scope": "Execute original CMT startup writes; infer relative periods conditionally.\n\nStrict software register latches, not clock counting or interrupt delivery.\nThe manual describes compatible SH7055S registers, not identified board silicon.\n",
+  "counts": {
+    "component": 96,
+    "caller_slice": 32,
+    "compare_start_chain": 32,
+    "actual_start_caller_slice": 32,
+    "rejected": 6
+  },
+  "examples": [
+    {
+      "registers": {
+        "0xfffff710": 3,
+        "0xfffff712": 65,
+        "0xfffff714": 0,
+        "0xfffff716": 624,
+        "0xfffff718": 65,
+        "0xfffff71a": 0,
+        "0xfffff71c": 1279
+      },
+      "accesses": [
+        [
+          "write",
+          4294965008,
+          2,
+          0
+        ],
+        [
+          "write",
+          4294965012,
+          2,
+          0
+        ],
+        [
+          "write",
+          4294965018,
+          2,
+          0
+        ],
+        [
+          "write",
+          4294965010,
+          2,
+          65
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          65
+        ],
+        [
+          "write",
+          4294965014,
+          2,
+          624
+        ],
+        [
+          "read",
+          4294965008,
+          2,
+          0
+        ],
+        [
+          "write",
+          4294965008,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294965020,
+          2,
+          1279
+        ],
+        [
+          "read",
+          4294965008,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294965008,
+          2,
+          3
+        ]
+      ]
+    }
+  ],
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "candidate_literal_users": {
+    "0xf710": {
+      "pools": [
+        "0x1c22",
+        "0x26e2",
+        "0x2ba2",
+        "0x2c88",
+        "0x35fa",
+        "0x3b26",
+        "0x14706",
+        "0x1598e",
+        "0x16d46",
+        "0x16dbe"
+      ],
+      "users": [
+        [
+          "0x1bd4",
+          "0x1c22"
+        ],
+        [
+          "0x2680",
+          "0x26e2"
+        ],
+        [
+          "0x2ad8",
+          "0x2ba2"
+        ],
+        [
+          "0x2c78",
+          "0x2c88"
+        ],
+        [
+          "0x359c",
+          "0x35fa"
+        ],
+        [
+          "0x3a8c",
+          "0x3b26"
+        ],
+        [
+          "0x14688",
+          "0x14706"
+        ],
+        [
+          "0x15920",
+          "0x1598e"
+        ],
+        [
+          "0x16cea",
+          "0x16d46"
+        ],
+        [
+          "0x16d62",
+          "0x16dbe"
+        ]
+      ]
+    },
+    "0xf712": {
+      "pools": [
+        "0x3b1e",
+        "0x14708",
+        "0x15990",
+        "0x16dc0"
+      ],
+      "users": [
+        [
+          "0x3a74",
+          "0x3b1e"
+        ],
+        [
+          "0x14690",
+          "0x14708"
+        ],
+        [
+          "0x15924",
+          "0x15990"
+        ],
+        [
+          "0x16d86",
+          "0x16dc0"
+        ]
+      ]
+    },
+    "0xf718": {
+      "pools": [
+        "0x3b20",
+        "0x1470a",
+        "0x16d48"
+      ],
+      "users": [
+        [
+          "0x3a7a",
+          "0x3b20"
+        ],
+        [
+          "0x14694",
+          "0x1470a"
+        ],
+        [
+          "0x16d0e",
+          "0x16d48"
+        ]
+      ]
+    }
+  },
+  "source_sha256": "359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c",
+  "source_pdf_pages_zero": [
+    488,
+    489,
+    490,
+    491,
+    492
+  ],
+  "interpretation": {
+    "control": 65,
+    "divider": 32,
+    "interrupt_enabled": true,
+    "peripheral_clock_cycles_per_match": [
+      20000,
+      40960
+    ],
+    "cmt0_to_cmt1_event_rate": "256/125",
+    "previous_supplied_ratio": "100/8",
+    "same_as_previous_supplied_ratio": false
+  },
+  "limits": "Original15608..15614 configuration and11698..116A4 start caller slices; not full boot between them. Compatible manual conditional relative frequency, not measured periods, board silicon, start offset, interrupt acceptance or application-task cadence."
+}

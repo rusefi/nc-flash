@@ -1,0 +1,112 @@
+TCU output-record service and rate-limited preparation
+2026-10-06; original stock instructions, independent reference models.
+
+Reproduction
+ python research/ecu-at-can/verify_tcu_output_service.py
+Python3.14.3, existing SHExtract; unchangedTCU SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+No helper stubs, ROMpatches, sharedinterpreter orproduction changes.
+JSON: tcu-output-service-verification.json. Original GNU SHbinutils2.42
+excerpts: tcu-output-service-disassembly.txt, -caller-disassembly.txt,
+tcu-output-driver-disassembly.txt, tcu-output-clamp-disassembly.txt,
+tcu-output-lookup-disassembly.txt andtcu-output-handoff-disassembly.txt.
+Handoff excerpt is a STATIC nextlead, not executedhardware evidence.
+
+Scope and model
+52E54 initializes fourchannels. ROM5FCA4 upperlimits={5400,5940,6150,6150};
+5FCAC lowerlimits={300,0,300,300};5FCB4 initialpayloads={5400,0,6150,6150}.
+Wordarrays indexed2*i, longaccumulatorarray4*i, flagsbytearraysi.
+Initialization setsA5D4/A5E4=200,A608=100, tagA5F8=0107, payloadA600 fromROM,
+retainedlowA63A/activeLowA62A andretainedhighA642/activeHighA632 fromROM,
+baseA622/offsetA64A/accumulatorA654=0;flagsA5EC/A61C andglobalA620=0.
+A5DC output is not initialized by this body. AllapplicationRAM is compared.
+
+530C8(i): iftagbit15 set OR lowbytezero, skips newrecord acceptance but
+STILL recomputes finaloutput fromretained state. Otherwise:
+ * Any lowbits0..2 -> signedpayload clamped toROMbounds, storebaseA622.
+ * Bit10 ->activehighA632=cachedA642; else resetboth toROMupper.
+ * Bit11 ->activelowA62A=cachedA63A; else resetboth toROMlower.
+ * Clear entiretaglowbyte, retainhighbyte.
+ * OffsetA64A=0 ifbit8 set, otherwise previousoutputA5DC.
+ * ClearlongaccumulatorA654 unlessbit12 set.
+Final: raw=s16(trunc(s32(accumulator)/1000)+s16(base)+s16(offset)); clamp
+raw between SORTED signedactivebounds; storewordA5DC. Pending/busyrecords
+therefore retain parameters but do not freeze the calculated output.
+Masks0408/0810 inside corresponding0400/0800 branches are necessarilytrue;
+no additional lowbit8/16 qualification is inferred fromtheirdead alternatives.
+
+52EDC(i+1), fourvalidatedchannelindices0..3:
+Feedback8A34bit15 differing frompreviousA608bit15 setsstickyA5EC fromzero to1;
+already nonzero flags retain their value. A608 then copiesfeedbackword.
+Let old=u16(A5D4), current=clamp(old,200,1000).
+IfmanualflagA61C nonzero: target=s16(A614). Otherwise10700 looks upA5DC in
+stockwordtable pointed toby5FC94+4*i, withuniformstep50, andstoresA5F0.
+IfglobalAD3C nonzero, diagnosticwordAD3E+2*i replacestarget afterward;
+the normal lookup still executes whenmanualflagzero.
+Delta=s16(target-current). Original5AA64 takesabsolute signedword, but52FE0
+sign-extends that return again. Ifs16(abs(delta))>88, target=current+/-88;
+otherwise retain target. Consequentlydelta=-32768 doesnotenter88limiter.
+CopyoldtoA5E4;A5D4=clamp(u16(target),200,1000). This unsignedfinalclamp is
+intentional inreference, including nonphysical arbitrarywordfixtures.
+If809Ewordzero andglobalA620nonzero, finaltestoverride overwritesBOTHcurrent
+andpreviousvalues:1->1000,2->200,3->500,anyothernonzero->100. Thisoverride
+bypassesnormalminimum/ratebound. No operationaladmission orphysicalmeaning
+is assigned to these raw flags.
+
+Lookup10700
+Input islowunsignedword; q,r=divmod(input,50), readtablewordq. Atremainder0
+or nextwordFFFF, return sign-extendedcurrentword. Otherwise addtruncated
+signeddifference*remainder/50. Function doesnotvalidate tablelength; newnormal
+lookup tests staywithin applicableROMchannelbounds, not arbitraryu16range.
+Tablepointers:5F894,5F994,5FA94,5FB94. Tables are128wordspaced inROM;
+no extrapolation pasttheirvalidrange is claimed. No physicalunits inferred.
+
+Integration and caller boundary
+Originalbase/application/listselection/publication produces recordindex1;
+new530C8then52EDC consumesit in160retained conditionaladjustmentcalls.
+No fixture overwritescomputedpayload/output betweenstages. Rawinputs,
+conditional36D1A invocations andcross-taskorder remainexplicit. Stockclass
+admission restrictions in tcu-class-admission.txt are not removed.
+Original12826..12836 adjacentcalls execute service(i),driver(i+1), thenstop
+before18816handoff. Enclosing127FC additionally calls188FC and, forphase3,
+18830/17B1A; those paths andactualtaskcadence are not proved bythese slices.
+127BA selects127FC onlywhen8008==3, andadvancesbyte84F8 by0->3,else--.
+Those enclosing predicates are static interpretations, not anexecutedscheduler.
+
+Next meaningful boundary
+18816 calls18A44 then clears8A64wordforchannel.18A44 readsA5D4/A5E4 and
+several8Axx feedback/coefficients, performs arithmetic andcalls18E48/529EA.
+Only beginning18A44 isdisassembledhere. Completeitsbody, helpers andinput
+provenance before claiming hardware/physicalactuation orCANintegration.
+Also retain raw3AC70 writerleads andqueueack/overlap/persistence/cadence gaps.
+
+Independent requiredscopes
+Traction: returntoactualADCcaller order/NCboardidentity,6Dxx/8F30 and399B0;
+CAN211/21A sender/units andremoteDSCactuation remainunproved.
+Roof: folding ANDunfolding stillneed release-then-reverse, numericaltimeouts,
+synchronization, interruption/recovery andOEMreceiver evidence;2009wiring
+corrections aredocumentationonly. Noadditionaluserdumps/captures/tests exist.
+Allthree goalsremainincomplete; no staging,commit,push authority.
+
+VERIFIED RESULT
+20 initialization/all-RAM cases,9216 fullservice calls,913 lookup cases,
+1056 fulldriver calls,40 rate/word-wrap edge cases,160 retained integrated
+chains and20 originaltwo-call slices pass. No failedtest/modelrevision or
+ISA extension thisturn. py_compile passes. AllapplicationRAM compared;
+syntheticstack excluded. FinalJSON records counts andall160retainedoutputs.
+
+Retained trace examples (numeric only, JSON authoritative):
+call1: scaledpayload1995 ->service1995 ->driver288(previous200).
+call2/3: driver376/464, each+88; bycall11 value489trackslookup.
+call59:payload2546 ->driver532; call60inhibit publishes0 ->driver444,
+not aninstant zero. Bycall65driver200; call66recoverypayload1982 ->288.
+These are explicit servicecalls, notmilliseconds orverifiedsolenoidunits.
+
+LOCAL SAVE / INDEPENDENT RESTORE
+BothGhidraprogramssaved;1626annotations(712ECU/914TCU),804byte-identicalexports,
+11matchingprojecthashes before/afterreadonlyrestore. Archive10,934,177bytes,
+SHA256 0d51dfd0dec153c42aa0c33272576c9dfdadb5847aa9c813842c7ffc02144293.
+Manifests snapshot.json/restore-verification.json; paired.gpr/.rep preserved.
+No errors,incompletedecompiles,locks orpendingjob. Nine newevidenceartifacts
+Git-eligible; finalverifier,py_compile andgitdiff--check pass.
+Savedlocally; no staging,commit,push,productioncodeorROMchanges.

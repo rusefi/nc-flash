@@ -1,0 +1,44 @@
+2026-10-06: NC roof training graphics and diagnostic polarity conflict
+
+Primary Mazda training document:
+https://www.mx5frbe.com/wp-content/uploads/2026/01/NC-2007-PRHT-Technical-Training-DTCs.pdf
+Discovery: https://www.mx5frbe.com/documentation/
+October3,2006revision;28pages. Saved source:
+sources/mazda-prht-training-2006-10-03.pdf
+2,564,596bytes; SHA256
+96a5671a17a627edbbe2877351690f7245e80597f3e940f6e1b0feaf5048323f.
+
+VERIFIED DOCUMENTATION ONLY
+Visually inspected printed/PDFpages23..27. Page23 says DECK_CL is Off with
+the deck fully closed and On otherwise. This contradicts the later online
+workshop PID page id0902j2345900 recorded in roof-fault-recovery.txt, which
+states On at the closed endpoint. Keep document versions distinct; actual
+PID polarity remains unproved. Physical3O is B+ at closed in page27, consistent
+with the prior terminal table and service timing chart.
+Pages25/26 corroborate1C window input,1E window request output,1S CAN-H,
+1U CAN-L, and1G Hall supply low when stationary/B+while moving. Page27 has
+an apparent motor-polarity problem: paired RH roof outputs3A/3I list the same
+voltage conditions, as do LH3D/3L. These tables cannot validate motor wiring.
+Page24 lists communication DTCs but supplies no numerical CAN timeout or
+pulse-mismatch threshold. No new reversal-after-release evidence appears.
+
+METHOD AND LIMITS
+Python3.14.3 urllib downloaded the previously opened public PDF. Poppler24.02.0:
+ pdftoppm -f 23 -l 27 -scale-to 1900 -png INPUT.pdf OUTPUT_PREFIX
+Allfive output pages visually read. Source PDF is Git-eligible; rendered cache
+underghidra/restore-check/roof-docs-20261006 is ignored/reproducible.
+No circuit connected, controller firmware obtained, CAN command demonstrated
+or vehicle behavior tested. User has no additional dumps/captures/bench data.
+Roof folding AND unfolding, release-then-reverse, communication loss/timeouts,
+synchronization and recovery retain their execution/hardware gaps.
+Next primary-document revision comparison for DECK_CL, and receiver evidence
+or a clearly labeled documentation state model; preserve the discrepancy.
+Saved locally; no staging/commit/push. No Ghidra changes from roof documents.
+
+Version conflict rechecked2026-10-06 by opening the body index and following
+its PID table link (direct page open failed again):
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902j2345900.html
+Current page says DECK_CL On at fully closed and Off otherwise, confirming
+the discrepancy against trainingpage23. Current rendered footer iscopyright
+2009, with2008model heading; do not propagate a2012footer assumption to this
+specific page. This does not establish whether firmware or documentation changed.

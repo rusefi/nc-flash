@@ -2,7 +2,8 @@
 
 /* Fullcaller executed640 times ininput25->source/mode->two-record manager traces. Producesproposal1
    fromfixture2,then48C08 accepts/createscode0. Allsource495C0 outputs independentlychecked;
-   othercaller branches bounded byfixture,physicalgear unresolved. tcu-source-selection.txt. */
+   Newproducedfault trace:4508A changes1->4 at150,4->1 at211; downstreampair stages preserve it.32
+   savedRAM replays isolate809C substitution. Physicalgear unresolved; tcu-fault-selection.txt. */
 
 void Selection_UpdateApplicationIndex(void)
 
@@ -30,10 +31,10 @@ void Selection_UpdateApplicationIndex(void)
   }
   *PTR_DAT_00044de8 = bVar4;
   *PTR_Selection_PreviousIndex_00044ddc = bVar3;
-  FUN_00044fce();
+  Selection_PublishProposalAxis();
   FUN_00045016();
-  (*(code *)PTR_FUN_00044dfc)();
-  (*(code *)PTR_FUN_00044e00)();
+  (*(code *)PTR_StoredAdjustment_RunLifecycle_00044dfc)();
+  (*(code *)PTR_Selection_ProduceProposalThresholds_00044e00)();
   Selection_ScanProposalThresholds(local_14,auStack_10);
   (*(code *)PTR_FUN_00044e04)(local_14);
   (*(code *)PTR_SourcePolicy_AdjustProposal_00044e08)(local_14,auStack_10);

@@ -1,0 +1,83 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00039bf2 <.data+0x39bf2>:
+   39bf2:	4f 22       	sts.l	pr,@-r15
+   39bf4:	d6 10       	mov.l	0x39c38,r6	! ffffae18
+   39bf6:	7f fc       	add	#-4,r15
+   39bf8:	d5 10       	mov.l	0x39c3c,r5	! ffff98b4
+   39bfa:	2f 41       	mov.w	r4,@r15
+   39bfc:	d3 11       	mov.l	0x39c44,r3	! 304c6
+   39bfe:	43 0b       	jsr	@r3
+   39c00:	64 f1       	mov.w	@r15,r4
+   39c02:	7f 04       	add	#4,r15
+   39c04:	4f 26       	lds.l	@r15+,pr
+   39c06:	00 0b       	rts	
+   39c08:	00 09       	nop	
+   39c0a:	d6 0c       	mov.l	0x39c3c,r6	! ffff98b4
+   39c0c:	d3 0e       	mov.l	0x39c48,r3	! 30518
+   39c0e:	43 2b       	jmp	@r3
+   39c10:	00 09       	nop	
+   39c12:	98 ae       	mov.w	0x39d72,r8	! 54e
+   39c14:	98 b2       	mov.w	0x39d7c,r8	! 6040
+   39c16:	98 b0       	mov.w	0x39d7a,r8	! 98ac
+   39c18:	ff ff       	.word 0xffff
+   39c1a:	99 24       	mov.w	0x39c66,r9	! 84e5
+   39c1c:	00 07       	mul.l	r0,r0
+   39c1e:	71 ec       	add	#-20,r1
+   39c20:	ff ff       	.word 0xffff
+   39c22:	98 89       	mov.w	0x39d38,r8	! 2cc8
+   39c24:	ff ff       	.word 0xffff
+   39c26:	98 60       	mov.w	0x39cea,r8	! 8801
+   39c28:	00 07       	mul.l	r0,r0
+   39c2a:	71 ee       	add	#-18,r1
+   39c2c:	00 03       	bsrf	r0
+   39c2e:	b4 b6       	bsr	0x3a59e
+   39c30:	00 03       	bsrf	r0
+   39c32:	b3 36       	bsr	0x3a2a2
+   39c34:	ff ff       	.word 0xffff
+   39c36:	98 d4       	mov.w	0x39de2,r8	! 6000
+   39c38:	ff ff       	.word 0xffff
+   39c3a:	ae 18       	bra	0x3986e
+   39c3c:	ff ff       	.word 0xffff
+   39c3e:	98 b4       	mov.w	0x39daa,r8	! 429
+   39c40:	00 03       	bsrf	r0
+   39c42:	04 54       	mov.b	r5,@(r0,r4)
+   39c44:	00 03       	bsrf	r0
+   39c46:	04 c6       	mov.l	r12,@(r0,r4)
+   39c48:	00 03       	bsrf	r0
+   39c4a:	05 18       	.word 0x0518
+   39c4c:	2f e6       	mov.l	r14,@-r15
+   39c4e:	4f 22       	sts.l	pr,@-r15
+   39c50:	de 3d       	mov.l	0x39d48,r14	! ffff98b4
+   39c52:	7f fc       	add	#-4,r15
+   39c54:	d6 3d       	mov.l	0x39d4c,r6	! ffffae18
+   39c56:	65 e3       	mov	r14,r5
+   39c58:	d3 3d       	mov.l	0x39d50,r3	! 30524
+   39c5a:	43 0b       	jsr	@r3
+   39c5c:	2f 52       	mov.l	r5,@r15
+   39c5e:	62 f2       	mov.l	@r15,r2
+   39c60:	84 21       	mov.b	@(1,r2),r0
+   39c62:	20 08       	tst	r0,r0
+   39c64:	8b 10       	bf	0x39c88
+   39c66:	84 e5       	mov.b	@(5,r14),r0
+   39c68:	60 0c       	extu.b	r0,r0
+   39c6a:	88 01       	cmp/eq	#1,r0
+
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00030518 <.data+0x30518>:
+   30518:	64 4c       	extu.b	r4,r4
+   3051a:	44 08       	shll2	r4
+   3051c:	34 6c       	add	r6,r4
+   3051e:	60 53       	mov	r5,r0
+   30520:	00 0b       	rts	
+   30522:	81 41       	mov.w	r0,@(2,r4)
+

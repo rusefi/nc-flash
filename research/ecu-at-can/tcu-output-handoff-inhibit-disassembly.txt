@@ -1,0 +1,48 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000529ac <.data+0x529ac>:
+   529ac:	93 21       	mov.w	0x529f2,r3	! a5a1
+   529ae:	60 30       	mov.b	@r3,r0
+   529b0:	60 0c       	extu.b	r0,r0
+   529b2:	88 01       	cmp/eq	#1,r0
+   529b4:	8d 05       	bt.s	0x529c2
+   529b6:	e4 00       	mov	#0,r4
+   529b8:	92 1c       	mov.w	0x529f4,r2	! a5a2
+   529ba:	60 20       	mov.b	@r2,r0
+   529bc:	60 0c       	extu.b	r0,r0
+   529be:	88 01       	cmp/eq	#1,r0
+   529c0:	8b 00       	bf	0x529c4
+   529c2:	e4 01       	mov	#1,r4
+   529c4:	93 14       	mov.w	0x529f0,r3	! a5a0
+   529c6:	23 40       	mov.b	r4,@r3
+   529c8:	d2 0b       	mov.l	0x529f8,r2	! 1863c
+   529ca:	42 2b       	jmp	@r2
+   529cc:	64 30       	mov.b	@r3,r4
+   529ce:	60 4c       	extu.b	r4,r0
+   529d0:	88 00       	cmp/eq	#0,r0
+   529d2:	89 03       	bt	0x529dc
+   529d4:	88 01       	cmp/eq	#1,r0
+   529d6:	89 04       	bt	0x529e2
+   529d8:	00 0b       	rts	
+   529da:	00 09       	nop	
+   529dc:	93 09       	mov.w	0x529f2,r3	! a5a1
+   529de:	00 0b       	rts	
+   529e0:	23 50       	mov.b	r5,@r3
+   529e2:	91 07       	mov.w	0x529f4,r1	! a5a2
+   529e4:	21 50       	mov.b	r5,@r1
+   529e6:	00 0b       	rts	
+   529e8:	00 09       	nop	
+   529ea:	93 01       	mov.w	0x529f0,r3	! a5a0
+   529ec:	00 0b       	rts	
+   529ee:	60 30       	mov.b	@r3,r0
+   529f0:	a5 a0       	bra	0x53534
+   529f2:	a5 a1       	bra	0x53538
+   529f4:	a5 a2       	bra	0x5353c
+   529f6:	ff ff       	.word 0xffff
+   529f8:	00 01       	.word 0x0001
+   529fa:	86 3c       	.word 0x863c
+

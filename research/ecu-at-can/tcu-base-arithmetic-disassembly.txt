@@ -1,0 +1,188 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0005b5c0 <.data+0x5b5c0>:
+   5b5c0:	40 21       	shar	r0
+   5b5c2:	40 21       	shar	r0
+   5b5c4:	40 21       	shar	r0
+   5b5c6:	40 21       	shar	r0
+   5b5c8:	40 21       	shar	r0
+   5b5ca:	40 21       	shar	r0
+   5b5cc:	40 21       	shar	r0
+   5b5ce:	40 21       	shar	r0
+   5b5d0:	40 21       	shar	r0
+   5b5d2:	40 21       	shar	r0
+   5b5d4:	40 21       	shar	r0
+   5b5d6:	40 21       	shar	r0
+   5b5d8:	40 21       	shar	r0
+   5b5da:	40 21       	shar	r0
+   5b5dc:	00 0b       	rts	
+   5b5de:	40 21       	shar	r0
+   5b5e0:	40 21       	shar	r0
+   5b5e2:	40 21       	shar	r0
+   5b5e4:	40 21       	shar	r0
+   5b5e6:	40 21       	shar	r0
+   5b5e8:	40 29       	shlr16	r0
+   5b5ea:	40 19       	shlr8	r0
+   5b5ec:	00 0b       	rts	
+   5b5ee:	60 0e       	exts.b	r0,r0
+   5b5f0:	40 04       	rotl	r0
+   5b5f2:	89 03       	bt	0x5b5fc
+   5b5f4:	40 04       	rotl	r0
+   5b5f6:	40 04       	rotl	r0
+   5b5f8:	00 0b       	rts	
+   5b5fa:	c9 07       	and	#7,r0
+   5b5fc:	40 04       	rotl	r0
+   5b5fe:	40 04       	rotl	r0
+
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0005bbe0 <.data+0x5bbe0>:
+   5bbe0:	00 00       	.word 0x0000
+   5bbe2:	03 ff       	mac.l	@r15+,@r3+
+   5bbe4:	00 00       	.word 0x0000
+   5bbe6:	01 00       	.word 0x0100
+   5bbe8:	01 00       	.word 0x0100
+   5bbea:	00 00       	.word 0x0000
+   5bbec:	2f 16       	mov.l	r1,@-r15
+   5bbee:	2f 26       	mov.l	r2,@-r15
+   5bbf0:	2f 36       	mov.l	r3,@-r15
+   5bbf2:	2f 46       	mov.l	r4,@-r15
+   5bbf4:	2f 56       	mov.l	r5,@-r15
+   5bbf6:	50 f5       	mov.l	@(20,r15),r0
+   5bbf8:	51 f6       	mov.l	@(24,r15),r1
+   5bbfa:	d4 1a       	mov.l	0x5bc64,r4	! 7ff
+   5bbfc:	d5 1a       	mov.l	0x5bc68,r5	! fffff
+   5bbfe:	63 03       	mov	r0,r3
+   5bc00:	62 03       	mov	r0,r2
+   5bc02:	42 29       	shlr16	r2
+   5bc04:	42 09       	shlr2	r2
+   5bc06:	42 09       	shlr2	r2
+   5bc08:	22 49       	and	r4,r2
+   5bc0a:	20 59       	and	r5,r0
+   5bc0c:	d4 18       	mov.l	0x5bc70,r4	! 3ff
+   5bc0e:	32 48       	sub	r4,r2
+   5bc10:	42 11       	cmp/pz	r2
+   5bc12:	8b 25       	bf	0x5bc60
+   5bc14:	e4 53       	mov	#83,r4
+   5bc16:	32 47       	cmp/gt	r4,r2
+   5bc18:	89 22       	bt	0x5bc60
+   5bc1a:	d4 14       	mov.l	0x5bc6c,r4	! 100000
+   5bc1c:	20 4b       	or	r4,r0
+   5bc1e:	72 ec       	add	#-20,r2
+   5bc20:	42 11       	cmp/pz	r2
+   5bc22:	8b 0f       	bf	0x5bc44
+   5bc24:	e4 20       	mov	#32,r4
+   5bc26:	32 43       	cmp/ge	r4,r2
+   5bc28:	89 05       	bt	0x5bc36
+   5bc2a:	42 15       	cmp/pl	r2
+   5bc2c:	8b 0e       	bf	0x5bc4c
+   5bc2e:	41 00       	shll	r1
+   5bc30:	40 24       	rotcl	r0
+   5bc32:	af fa       	bra	0x5bc2a
+   5bc34:	72 ff       	add	#-1,r2
+   5bc36:	60 13       	mov	r1,r0
+   5bc38:	72 e0       	add	#-32,r2
+   5bc3a:	42 15       	cmp/pl	r2
+   5bc3c:	8b 06       	bf	0x5bc4c
+   5bc3e:	40 00       	shll	r0
+   5bc40:	af fb       	bra	0x5bc3a
+   5bc42:	72 ff       	add	#-1,r2
+   5bc44:	40 01       	shlr	r0
+   5bc46:	72 01       	add	#1,r2
+   5bc48:	42 11       	cmp/pz	r2
+   5bc4a:	8b fb       	bf	0x5bc44
+   5bc4c:	43 00       	shll	r3
+   5bc4e:	8b 00       	bf	0x5bc52
+   5bc50:	60 0b       	neg	r0,r0
+   5bc52:	65 f6       	mov.l	@r15+,r5
+   5bc54:	64 f6       	mov.l	@r15+,r4
+   5bc56:	63 f6       	mov.l	@r15+,r3
+   5bc58:	62 f6       	mov.l	@r15+,r2
+   5bc5a:	61 f6       	mov.l	@r15+,r1
+   5bc5c:	00 0b       	rts	
+   5bc5e:	7f 08       	add	#8,r15
+
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00010d0c <.data+0x10d0c>:
+   10d0c:	4f 22       	sts.l	pr,@-r15
+   10d0e:	66 5f       	exts.w	r5,r6
+   10d10:	97 05       	mov.w	0x10d1e,r7	! 7fff
+   10d12:	26 68       	tst	r6,r6
+   10d14:	8b 26       	bf	0x10d64
+   10d16:	24 48       	tst	r4,r4
+   10d18:	8b 20       	bf	0x10d5c
+   10d1a:	a0 2f       	bra	0x10d7c
+   10d1c:	e4 00       	mov	#0,r4
+   10d1e:	7f ff       	add	#-1,r15
+   10d20:	80 00       	mov.b	r0,@(0,r0)
+   10d22:	ff ff       	.word 0xffff
+   10d24:	00 05       	mov.w	r0,@(r0,r0)
+   10d26:	b2 5c       	bsr	0x111e2
+   10d28:	00 05       	mov.w	r0,@(r0,r0)
+   10d2a:	ae 90       	bra	0x10a4e
+   10d2c:	00 05       	mov.w	r0,@(r0,r0)
+   10d2e:	bd 1c       	bsr	0x1076a
+   10d30:	00 05       	mov.w	r0,@(r0,r0)
+   10d32:	be bc       	bsr	0x10aae
+   10d34:	00 05       	mov.w	r0,@(r0,r0)
+   10d36:	c0 b0       	mov.b	r0,@(176,gbr)
+   10d38:	00 05       	mov.w	r0,@(r0,r0)
+   10d3a:	ba 6c       	bsr	0x10216
+   10d3c:	ff c0       	fadd	fr12,fr15
+   10d3e:	00 00       	.word 0x0000
+   10d40:	41 df       	mac.w	@r13+,@r1+
+   10d42:	ff ff       	.word 0xffff
+   10d44:	00 05       	mov.w	r0,@(r0,r0)
+   10d46:	bc 74       	bsr	0x10632
+   10d48:	c1 e0       	mov.w	r0,@(448,gbr)
+   10d4a:	00 00       	.word 0x0000
+   10d4c:	00 05       	mov.w	r0,@(r0,r0)
+   10d4e:	bd 70       	bsr	0x10832
+   10d50:	00 05       	mov.w	r0,@(r0,r0)
+   10d52:	bb ec       	bsr	0x1052e
+   10d54:	00 00       	.word 0x0000
+   10d56:	ff ff       	.word 0xffff
+   10d58:	00 05       	mov.w	r0,@(r0,r0)
+   10d5a:	af 44       	bra	0x10be6
+   10d5c:	44 15       	cmp/pl	r4
+   10d5e:	8b 0c       	bf	0x10d7a
+   10d60:	a0 0c       	bra	0x10d7c
+   10d62:	64 73       	mov	r7,r4
+   10d64:	d2 3a       	mov.l	0x10e50,r2	! 5ae90
+   10d66:	61 43       	mov	r4,r1
+   10d68:	42 0b       	jsr	@r2
+   10d6a:	60 63       	mov	r6,r0
+   10d6c:	64 03       	mov	r0,r4
+   10d6e:	34 77       	cmp/gt	r7,r4
+   10d70:	8b 00       	bf	0x10d74
+   10d72:	64 73       	mov	r7,r4
+   10d74:	92 6a       	mov.w	0x10e4c,r2	! 8000
+   10d76:	34 23       	cmp/ge	r2,r4
+   10d78:	89 00       	bt	0x10d7c
+   10d7a:	94 67       	mov.w	0x10e4c,r4	! 8000
+   10d7c:	4f 26       	lds.l	@r15+,pr
+   10d7e:	00 0b       	rts	
+   10d80:	60 43       	mov	r4,r0
+   10d82:	25 58       	tst	r5,r5
+   10d84:	4f 22       	sts.l	pr,@-r15
+   10d86:	8b 05       	bf	0x10d94
+   10d88:	24 48       	tst	r4,r4
+   10d8a:	8b 01       	bf	0x10d90
+   10d8c:	a0 07       	bra	0x10d9e
+   10d8e:	e6 00       	mov	#0,r6
+   10d90:	a0 05       	bra	0x10d9e
+   10d92:	e6 ff       	mov	#-1,r6
+

@@ -1,0 +1,153 @@
+{
+  "date": "2026-10-07",
+  "status": "PASS",
+  "artifacts": {
+    "verify_tcu_diagnostic_startup.py": {
+      "bytes": 6051,
+      "sha256": "8b3a3277a4966fbb9218eba480c9b12060ce422c75f15f892f2ff880e636a44a"
+    },
+    "verify_tcu_diagnostic_startup_records.py": {
+      "bytes": 3367,
+      "sha256": "dd87477caab55f4a797c1734c9f80a86a5b15e5c4393006198df8fdbf488b666"
+    },
+    "verify_tcu_readiness_admission.py": {
+      "bytes": 12292,
+      "sha256": "564a5416a644db71c796f6cf887eb32e4443c6708dea7b2876c40b5de9d0bcf6"
+    },
+    "verify_tcu_diagnostic_timer.py": {
+      "bytes": 7307,
+      "sha256": "ca64aa067530b67a0302f8c9af5b0fd9fb0eb9dd78172bba6afdd973125d219f"
+    },
+    "probe_tcu_qualified_receive.py": {
+      "bytes": 4473,
+      "sha256": "aadf8cbc1c9b280a9abfb514f1e97acc23bf29819aa64cdc698e1aa99c7cea41"
+    },
+    "tcu-diagnostic-startup.txt": {
+      "bytes": 6674,
+      "sha256": "f95a5715b404acf7060a19e7d993a4ff6e51982748af6c82ed935669633096c1"
+    },
+    "tcu-diagnostic-startup-disassembly.txt": {
+      "bytes": 3459,
+      "sha256": "2661dd7aa4bfb10aa9515b46adb797b3a7f6574a8c35e3280faf7ce5e79987c5"
+    },
+    "tcu-diagnostic-startup-verification.json": {
+      "bytes": 2069168,
+      "sha256": "f8a660e685dbc229aa05ee44f963c6ccf10d415893502435e9685b70ebbe2367"
+    },
+    "tcu-diagnostic-startup-records-verification.json": {
+      "bytes": 1005,
+      "sha256": "62df77ef6d5bcee1dcec3c5d43da760a9465f1b9a8e7c3486349d4bfb0b5927a"
+    },
+    "tcu-diagnostic-observer-reuse-prefix8.json": {
+      "bytes": 1144732,
+      "sha256": "08b0c7be5580e563eafb610e27f7ad4b6486b35e216e7d60dbd78dd3ce8b5308"
+    },
+    "tcu-native-group-initialization-disassembly.txt": {
+      "bytes": 18066,
+      "sha256": "29532ee3b3c51e626fd161a4ebb1e2686c6e02d562c57193548a7cffe16bca2c"
+    },
+    "ghidra/annotations.tsv": {
+      "bytes": 381722,
+      "sha256": "0aed4761044483da172f3989f8ee8cd75b1ff31e583d087db81ce406d921dd80"
+    },
+    "ghidra/README.txt": {
+      "bytes": 6088,
+      "sha256": "979ac4dff069495608676bbe8d098c276d88402156eb8968df142b2f63526ef0"
+    },
+    "ghidra/snapshot.json": {
+      "bytes": 1326,
+      "sha256": "e8b6ccc146ae1516f38ac0b47686ceeae148dd2f0d54d6fc5754b99635ec93d5"
+    },
+    "ghidra/restore-verification.json": {
+      "bytes": 514,
+      "sha256": "f5ec28dad1e433f1d19a6a4f20153eb4fb8eb078078f8441eea3a778d6b2071a"
+    }
+  },
+  "inputs": {
+    "examples/LFG1TF000.bin": {
+      "bytes": 524288,
+      "sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+    },
+    "examples/LFFEEE-stock.bin": {
+      "bytes": 1048576,
+      "sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08"
+    },
+    "research/ecu-at-can/sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf": {
+      "bytes": 5102824,
+      "sha256": "359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c"
+    }
+  },
+  "archive": {
+    "bytes": 11022956,
+    "sha256": "020d1ec56bca855ebade5f11c2360de29e87e7e83c9e70ccca64359688601d90"
+  },
+  "restoration": {
+    "date": "2026-10-07",
+    "archive_sha256": "020d1ec56bca855ebade5f11c2360de29e87e7e83c9e70ccca64359688601d90",
+    "restored_project_files_verified": 11,
+    "restored_annotations_verified": 1992,
+    "identical_export_files": 1029,
+    "restored_programs": [
+      "LFFEEE-stock.bin",
+      "LFG1TF000.bin"
+    ],
+    "method": "Independent Ghidra read-only reopening; verify_restore.py checks archive/live/restored hashes, complete expected export sets, no incomplete readbacks, all annotation rows and identical exports."
+  },
+  "scenarios": [
+    {
+      "poll": 50000,
+      "epoch": 7,
+      "cmt0_interrupts": 200,
+      "application_interrupts": 48,
+      "foreground_ram_checks": 81,
+      "capture_return_ram_checks": 30,
+      "command_pin_return_checks": 96,
+      "adc_ready_phi": 450000,
+      "capture_enabled_phi": 491520,
+      "capture_ready_phi": 2457600,
+      "application_admitted_phi": 2539520,
+      "application_admitted_ordinal": 31,
+      "additional_application_interrupt_required": true,
+      "diagnostic_interrupts": 8,
+      "diagnostic_admitted_phi": 3000000,
+      "diagnostic_actual_return_ram_checks": 5
+    },
+    {
+      "poll": 50000,
+      "epoch": 0,
+      "cmt0_interrupts": 200,
+      "application_interrupts": 48,
+      "foreground_ram_checks": 81,
+      "capture_return_ram_checks": 31,
+      "command_pin_return_checks": 96,
+      "adc_ready_phi": 500000,
+      "capture_enabled_phi": 573440,
+      "capture_ready_phi": 2539520,
+      "application_admitted_phi": 2621440,
+      "application_admitted_ordinal": 32,
+      "additional_application_interrupt_required": true,
+      "diagnostic_interrupts": 8,
+      "diagnostic_admitted_phi": 3000000,
+      "diagnostic_actual_return_ram_checks": 4
+    },
+    {
+      "poll": 65536,
+      "epoch": 4294967040,
+      "cmt0_interrupts": 200,
+      "application_interrupts": 48,
+      "foreground_ram_checks": 62,
+      "capture_return_ram_checks": 32,
+      "command_pin_return_checks": 96,
+      "adc_ready_phi": 589824,
+      "capture_enabled_phi": 655360,
+      "capture_ready_phi": 2621440,
+      "application_admitted_phi": 2703360,
+      "application_admitted_ordinal": 33,
+      "additional_application_interrupt_required": true,
+      "diagnostic_interrupts": 8,
+      "diagnostic_admitted_phi": 3000000,
+      "diagnostic_actual_return_ram_checks": 4
+    }
+  ],
+  "limits": "Partial original startup with external epochs/polling/peripheral inputs; no fullreset/mainloop/physical CAN, DSC or roof-controller proof. All three broader scopes remain open. No staging/commit/push."
+}

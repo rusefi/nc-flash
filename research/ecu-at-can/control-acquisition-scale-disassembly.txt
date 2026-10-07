@@ -1,0 +1,64 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00006708 <.data+0x6708>:
+    6708:	00 0d       	mov.w	@(r0,r0),r0
+    670a:	c4 72       	mov.b	@(114,gbr),r0
+    670c:	00 0d       	mov.w	@(r0,r0),r0
+    670e:	c4 70       	mov.b	@(112,gbr),r0
+    6710:	d3 12       	mov.l	0x675c,r3	! ffff400a
+    6712:	62 31       	mov.w	@r3,r2
+    6714:	d1 12       	mov.l	0x6760,r1	! ffff40ec
+    6716:	21 21       	mov.w	r2,@r1
+    6718:	4f 22       	sts.l	pr,@-r15
+    671a:	7f fc       	add	#-4,r15
+    671c:	d3 0f       	mov.l	0x675c,r3	! ffff400a
+    671e:	62 31       	mov.w	@r3,r2
+    6720:	d1 10       	mov.l	0x6764,r1	! dc47c
+    6722:	2f 21       	mov.w	r2,@r15
+    6724:	66 11       	mov.w	@r1,r6
+    6726:	d2 0e       	mov.l	0x6760,r2	! ffff40ec
+    6728:	64 f1       	mov.w	@r15,r4
+    672a:	65 21       	mov.w	@r2,r5
+    672c:	d3 0e       	mov.l	0x6768,r3	! 2534
+    672e:	65 5d       	extu.w	r5,r5
+    6730:	43 0b       	jsr	@r3
+    6732:	64 4d       	extu.w	r4,r4
+    6734:	64 03       	mov	r0,r4
+    6736:	63 4d       	extu.w	r4,r3
+    6738:	c7 0c       	mova	0x676c,r0
+    673a:	43 5a       	lds	r3,fpul
+    673c:	f2 08       	fmov	@r0,fr2
+    673e:	f3 2d       	float	fpul,fr3
+    6740:	f3 23       	fdiv	fr2,fr3
+    6742:	f3 3c       	fmov	fr3,fr3
+    6744:	d3 0a       	mov.l	0x6770,r3	! dc480
+    6746:	f1 38       	fmov	@r3,fr1
+    6748:	d2 0a       	mov.l	0x6774,r2	! ffff40e8
+    674a:	f3 12       	fmul	fr1,fr3
+    674c:	d1 04       	mov.l	0x6760,r1	! ffff40ec
+    674e:	f2 3a       	fmov	fr3,@r2
+    6750:	21 41       	mov.w	r4,@r1
+    6752:	7f 04       	add	#4,r15
+    6754:	4f 26       	lds.l	@r15+,pr
+    6756:	00 0b       	rts	
+    6758:	00 09       	nop	
+    675a:	00 00       	.word 0x0000
+    675c:	ff ff       	.word 0xffff
+    675e:	40 0a       	lds	r0,mach
+    6760:	ff ff       	.word 0xffff
+    6762:	40 ec       	.word 0x40ec
+    6764:	00 0d       	mov.w	@(r0,r0),r0
+    6766:	c4 7c       	mov.b	@(124,gbr),r0
+    6768:	00 00       	.word 0x0000
+    676a:	25 34       	mov.b	r3,@-r5
+    676c:	47 80       	.word 0x4780
+    676e:	00 00       	.word 0x0000
+    6770:	00 0d       	mov.w	@(r0,r0),r0
+    6772:	c4 80       	mov.b	@(128,gbr),r0
+    6774:	ff ff       	.word 0xffff
+    6776:	40 e8       	.word 0x40e8
+

@@ -1,0 +1,53 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00030b4a <.data+0x30b4a>:
+   30b4a:	d5 57       	mov.l	0x30ca8,r5	! ffff693c
+   30b4c:	d4 57       	mov.l	0x30cac,r4	! ffff695b
+   30b4e:	60 43       	mov	r4,r0
+   30b50:	60 00       	mov.b	@r0,r0
+   30b52:	c8 10       	tst	#16,r0
+   30b54:	00 29       	movt	r0
+   30b56:	70 ff       	add	#-1,r0
+   30b58:	60 0b       	neg	r0,r0
+   30b5a:	88 01       	cmp/eq	#1,r0
+   30b5c:	8d 1b       	bt.s	0x30b96
+   30b5e:	00 09       	nop	
+   30b60:	60 43       	mov	r4,r0
+   30b62:	60 00       	mov.b	@r0,r0
+   30b64:	c8 08       	tst	#8,r0
+   30b66:	00 29       	movt	r0
+   30b68:	70 ff       	add	#-1,r0
+   30b6a:	60 0b       	neg	r0,r0
+   30b6c:	88 01       	cmp/eq	#1,r0
+   30b6e:	8d 12       	bt.s	0x30b96
+   30b70:	00 09       	nop	
+   30b72:	60 43       	mov	r4,r0
+   30b74:	60 00       	mov.b	@r0,r0
+   30b76:	c8 04       	tst	#4,r0
+   30b78:	00 29       	movt	r0
+   30b7a:	70 ff       	add	#-1,r0
+   30b7c:	60 0b       	neg	r0,r0
+   30b7e:	88 01       	cmp/eq	#1,r0
+   30b80:	8d 09       	bt.s	0x30b96
+   30b82:	00 09       	nop	
+   30b84:	60 43       	mov	r4,r0
+   30b86:	60 00       	mov.b	@r0,r0
+   30b88:	c8 02       	tst	#2,r0
+   30b8a:	00 29       	movt	r0
+   30b8c:	70 ff       	add	#-1,r0
+   30b8e:	60 0b       	neg	r0,r0
+   30b90:	88 01       	cmp/eq	#1,r0
+   30b92:	8f 03       	bf.s	0x30b9c
+   30b94:	00 09       	nop	
+   30b96:	e2 01       	mov	#1,r2
+   30b98:	a0 02       	bra	0x30ba0
+   30b9a:	25 20       	mov.b	r2,@r5
+   30b9c:	e1 00       	mov	#0,r1
+   30b9e:	25 10       	mov.b	r1,@r5
+   30ba0:	00 0b       	rts	
+   30ba2:	00 09       	nop	
+

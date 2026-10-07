@@ -1,0 +1,127 @@
+ECU mode-selection feedback:30202 and word countdowns
+====================================================
+2026-10-06. ECU/AT integration, deeptraction/DSC integration andNCroof folding
+ANDunfolding remainopen. Numericexecution doesnotestablishphysicalidentity,
+actualtaskcadence, DSCactuation orroofreceiver behavior.
+
+Reproduction and evidence inputs
+---------------------------------
+ python research/ecu-at-can/verify_control_mode_feedback.py
+Python3.14.3; repository finiteRTZ instructioninterpreter andindependent
+branch/count models. ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08;
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+JSON control-mode-feedback-verification.json. Initialfullrunpassed10,918
+directcases,108callersegments,450retainedcalls,320cycles/36pairedCANupdates.
+Refinedcoupledscenario andcompatibilityregression passed; seebelow.
+
+Originaldisassembly incontrol-target-feedback-disassembly.txt (30202..30512),
+control-mode-timers-disassembly.txt (31BE6..31C36), control-mode-caller-
+disassembly.txt (1876E..18798) andpriorcontrol-target-source-caller2-disassembly.
+ GNU SH binutils2.42:
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+ python research/ecu-at-can/disassemble.py \
+ --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+ at dis 0x30202 0x30512
+NoROMorproductioncode changes. Repositoryscripts/inputs/textresults provide
+durable reproduction beyondtemporary toolinstallation paths.
+
+Executed ordered mode selection
+--------------------------------
+RAMsuffixes areFFFFxxxx.30202 snapshots entry6560,693B,6945,69BB,69B9 before
+selection. Letcurrent=6560,a=693B,b=6945,c=69BB,d=69B9. Thefirstmatchingrule
+writes695B (hexvalue); everycall chooses exactlyonebit:
+  80: a==0 ANDb==0 ANDraw6D5C>=DB218(stock20).
+  40: a==0 AND694Bexact1.
+  20: a==0 AND6948exact1.
+  10: c==0 ANDa==0 ANDb==1 AND693Eexact1 ANDu16(6914)>0 ANDcurrent==1.
+  08: c==0 ANDa==0 ANDb==1 AND693Fexact1 ANDu16(6916)>0.
+  04: c==1 ANDa==0 ANDd==0 ANDb==1.
+  02: c==1 ANDa==0 ANDd==1 ANDb==1.
+  01: otherwise.
+This is apriorityselector, notOR-composition ofindependentrequests. Raw2/255
+aretested anddo notsilentlybecometrue forexact1 gates. Fulltestcoversall8modes.
+
+Beforemodepublication,30202updates6956/6957 basedonENTRY695B andprevious69AD:
+73C4bit4clear ->154C0 writesword00FF (value0, complementFF).
+Else ifentry695Bbit4 ANDold69ADexact1 ANDentry6560==0 ->writes01FE.
+Otherwise retainBOTHbytes, including intentionallynoncomplementarytestpairs.
+At30500 it storesentry6560 into69AD on everypath. Thusitobservesafalling
+sourceevent onlywhiletheprior modebit4isactive. Selectionforcurrentcall may
+alreadybe08 whenselectorbecomes1.154B0 consumersreadthefirstbyteonly; no
+checksumvalidation is impliedbythistwo-byte value/complement store.
+
+31BE6 usesENTRY695Bbit4: clear reloadsu16(6914)=DB0D2(stock38); setdecrements
+positive6914 toward0.31C0E analogouslyusesbit3 andu16(6916)=DB0D4(stock375).
+These arefunctioncall counts, notmilliseconds. Zero isconsumedby30202toexclude
+mode10/08. Ifothergatesstayadmitted andmodechangesaway, thenexttimerbodycall
+reloadsthecount; reaching0doesnotpermanentlydisablethatmode.
+
+Verification and actual caller boundaries
+------------------------------------------
+10,918directcases:1024priority combinations,162rawgate/timerboundaries,
+9216selector/history/complementcases,216pairedwordtimercases,300seededrandom.
+108originalcallersegments:54at18774..1877A execute30202,54at1C9B4..1C9C6
+execute30CE4->31BE6->31C0E. Allmode/selector/history/timer andsourceoutputs
+plusstackreturn match. ThisdoesNOTclaimonecontiguouscallerfromsource tomode.
+450retainedcalls executeoriginaltimer/modebodies withlatchesinitiallyfixture1,
+checkfalling-event selectorstore, explicitclear andmode8expiry/re-entry.
+
+Actual187taskorder:3181C at18770,30202 at18776,then30B4A/30512/30522/30544/
+30702 beforethepreviouslyverified18798..187ECnumericsegment. Thosefive
+interveningbodies areNOTnewlyexecuted here. Thecoupled harness schedules:
+sourceandwordtimers ->1Btarget/followers(usingoldmode) ->3181C ->30202 ->
+previousdownstreamchain. Itisexplicitcross-taskordering; latermodefeedsnext
+cycle'starget/follower path. Noactualschedulerperiod/priority established.
+
+Coupled scenario refinement and harness correction
+--------------------------------------------------
+Theinitial320-cycle runpassedbutobservedonlymodes01/08/20/40. Itsfirstlatch
+admissionwindow expiredbeforesecondlatch activation; alsoitsraw6943/6944
+fixtureskept30FB6onthegateprioritybranch. Thiswasvalidboundedbehavior but
+insufficienttoexercise mode10/falling-eventfeedback inthecoupledreplay.
+Refinement: raw73C4bit4clearatcall25 requalifies theoriginalfirstcounter;
+raw6943/6944held0 letsproduced695Bselecttargetbranches. No693E/693F,6914/6916,
+695B,6956/6957 or69AD outputfixtureaftersetup. Raw6560changesatcalls30/51;
+raw694B/6948providehigherprioritymodeslater. Assertionsrequireandverifymode10at30
+andselector01FEwithmode08at51. Inputcallbackmovedafterdefault rawsetup soits
+rawinputsarenotoverwritten; optionalmodecallback suppressesoldmodefixtures.
+
+An overlybroadtextreplacement accidentallymodifiedtheunrelatedcaller_cases
+body'sindentation, causingimport-timeIndentationErrorbeforeexecution. Fixed
+thatexactblock andpy_compilepassed beforebothverifierswererestarted. These
+failedrunsdidnotproducefirmwareevidence. TheoriginalsourceJSON isretainedfor
+byte-identical compatibilitycomparison withmode_producer=None.
+
+Open requirements/next work
+---------------------------
+Refinedrun,compatibilitycomparison andGhidra save/independentrestore complete. Nextintervening187bodies,rawadmissionsand
+fullscheduler order; ECU/AT fullacks/overlaps, otherstoredsetters andpersistence
+remainindependent. Tractionsender/units, DSCinternal behaviorandactuation,
+androofbothdirections/reversal/timeout/synchronization/receiverremainopen.
+Noextrauserfirmware/capture/benchinputs. Roof2015factorymanualiscorroborating
+documentation only; itsreceiver requirementsarecarriedinCHECKPOINT.txt.
+
+Final result:10,918directcases,108originalcallersegments,450retainedcalls,
+320pairedcycles/36pairedCANupdates/320CAN211latchupdatespass. Refinedreplay
+observesmodes01/08/10/20/40, includingassertedmode10at30 and01FEselector/
+mode08at51. All8modevaluesarecovereddirectly; onlythelisted5areclaimedin
+thisspecificcoupledtrajectory. Legacy sourceverifierfullrerunpassedandJSON
+remainedbyte-identical:SHA25608563a599a7971a35f06c4caef8f98a8b579b0d5bdb5891e8f0f7b7773d837a5.
+Seecontrol-mode-feedback-compatibility.json. Nofirmwaremodeldiscrepancy;
+initialinsufficientscenarioandsyntaxerrorremainrecordedabove.
+
+Retained expiry observations (original timer/mode calls):
+{'call': 395, 'mode': 8, 'selector': 255, 'timer_a': 38, 'timer_b': 1}
+{'call': 396, 'mode': 1, 'selector': 255, 'timer_a': 38, 'timer_b': 0}
+{'call': 397, 'mode': 8, 'selector': 255, 'timer_a': 38, 'timer_b': 375}
+
+Ghidra save/restore:1,537 annotations(684ECU/853TCU),752 identicalexports,
+11projecthashes verified. Apply/VerifyCanEvidence perghidra/README.txt;
+snapshot.py createdthepaired.gpr/.rep archive. Extractedseparatelyinto
+ghidra/restore-check/mode-feedback-20261006, allinventoryhasheschecked,
+reopenedbothprograms read-onlywithVerifyCanEvidence andbytecompared every
+export. NoERROR/Exception/incompletedecompile/remainingprojectlocks.
+Archiveidentity in ghidra/snapshot.json andrestore-verification.json.
+Saved locally; no staging,commit,push orproductioncode/inputROMchanges.

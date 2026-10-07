@@ -20,7 +20,7 @@ void HCAN_ProduceDiagnosticGroup35(char param_1)
     cVar2 = (*(code *)PTR_FUN_0001a5e4)();
     pbVar5 = (byte *)(int)DAT_0001a5d8;
     pcVar4 = (char *)(int)DAT_0001a5da;
-    if ((cVar2 == '\0') && (*PTR_DAT_0001a5e8 == '\x01')) {
+    if ((cVar2 == '\0') && (*PTR_Diagnostic_CommunicationAdmission_0001a5e8 == '\x01')) {
       uVar7 = 1;
       uVar6 = 1;
       uVar3 = (ushort)*pbVar5;

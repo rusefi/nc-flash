@@ -13,7 +13,7 @@ void Control_MapRatioEnvironmentDifference(void)
                            (*(undefined4 *)PTR_Control_RatioContributionSum_0003a010,
                             PTR_Control_ContributionMapDescriptor_0003a014);
   *(float *)PTR_Control_IntermediateContributionMap_0003a01c = fVar1;
-  fVar2 = (float)(*(code *)PTR_FUN_0003a024)(PTR_DAT_0003a020);
+  fVar2 = (float)(*(code *)PTR_FUN_0003a024)(PTR_Control_RawSecondPublished_0003a020);
   fVar2 = (fVar1 * (fVar2 + DAT_0003a028)) / DAT_0003a02c;
   fVar1 = DAT_0003a034;
   if (*PTR_DAT_0003a030 == '\0') {

@@ -1,0 +1,375 @@
+{
+  "scope": "Original ECU CAN201 source -> TCU conversion/cut request -> ECU cylinder commands.\n\nSynthetic source and gate fixtures, explicit call schedule, no peripheral or\nphysical-time model. Original lookup interpolation and software arithmetic\nexecute using the independently tested extended integer instruction harness.",
+  "numeric_cases": 84,
+  "fault_publisher_one_hot_cases": 512,
+  "fault_contributors": [
+    [
+      "0xa98e",
+      3
+    ]
+  ],
+  "lookup_endpoint_cases": 7,
+  "axis_producer_cases": [
+    {
+      "source_89a8": 0,
+      "axis_fault": 0,
+      "axis_9334": 10240,
+      "clear_threshold": 7680
+    },
+    {
+      "source_89a8": 0,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 1,
+      "axis_fault": 0,
+      "axis_9334": 10496,
+      "clear_threshold": 7655
+    },
+    {
+      "source_89a8": 1,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 20,
+      "axis_fault": 0,
+      "axis_9334": 15360,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 20,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 60,
+      "axis_fault": 0,
+      "axis_9334": 25600,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 60,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 100,
+      "axis_fault": 0,
+      "axis_9334": 35840,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 100,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 215,
+      "axis_fault": 0,
+      "axis_9334": 65280,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 215,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 216,
+      "axis_fault": 0,
+      "axis_9334": 0,
+      "clear_threshold": 8960
+    },
+    {
+      "source_89a8": 216,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 255,
+      "axis_fault": 0,
+      "axis_9334": 9984,
+      "clear_threshold": 7723
+    },
+    {
+      "source_89a8": 255,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 256,
+      "axis_fault": 0,
+      "axis_9334": 10240,
+      "clear_threshold": 7680
+    },
+    {
+      "source_89a8": 256,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 511,
+      "axis_fault": 0,
+      "axis_9334": 9984,
+      "clear_threshold": 7723
+    },
+    {
+      "source_89a8": 511,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 512,
+      "axis_fault": 0,
+      "axis_9334": 10240,
+      "clear_threshold": 7680
+    },
+    {
+      "source_89a8": 512,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 32767,
+      "axis_fault": 0,
+      "axis_9334": 9984,
+      "clear_threshold": 7723
+    },
+    {
+      "source_89a8": 32767,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 32768,
+      "axis_fault": 0,
+      "axis_9334": 10240,
+      "clear_threshold": 7680
+    },
+    {
+      "source_89a8": 32768,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 65496,
+      "axis_fault": 0,
+      "axis_9334": 0,
+      "clear_threshold": 8960
+    },
+    {
+      "source_89a8": 65496,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    },
+    {
+      "source_89a8": 65535,
+      "axis_fault": 0,
+      "axis_9334": 9984,
+      "clear_threshold": 7723
+    },
+    {
+      "source_89a8": 65535,
+      "axis_fault": 1,
+      "axis_9334": 30720,
+      "clear_threshold": 7168
+    }
+  ],
+  "interpolation": "Full u16 stock curve verified by verify_software_lookup.py; mixed control cases include interior inputs.",
+  "control_and_paired_actuation_cases": 800,
+  "ecu_tcu_ecu_timeline": [
+    {
+      "ecu_source": 3499,
+      "ecu_invalid": 0,
+      "tcu_fault": 0,
+      "can201_word0": 13996,
+      "received_validity": 2,
+      "scaled_80e8": 8957,
+      "application_status": 1,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "ecu_source": 3500,
+      "ecu_invalid": 0,
+      "tcu_fault": 0,
+      "can201_word0": 14000,
+      "received_validity": 2,
+      "scaled_80e8": 8960,
+      "application_status": 1,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "ecu_source": 3999,
+      "ecu_invalid": 0,
+      "tcu_fault": 0,
+      "can201_word0": 15996,
+      "received_validity": 2,
+      "scaled_80e8": 10237,
+      "application_status": 1,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "ecu_source": 4000,
+      "ecu_invalid": 0,
+      "tcu_fault": 0,
+      "can201_word0": 16000,
+      "received_validity": 2,
+      "scaled_80e8": 10240,
+      "application_status": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ecu_source": 3999,
+      "ecu_invalid": 0,
+      "tcu_fault": 0,
+      "can201_word0": 15996,
+      "received_validity": 2,
+      "scaled_80e8": 10237,
+      "application_status": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ecu_source": 3500,
+      "ecu_invalid": 0,
+      "tcu_fault": 0,
+      "can201_word0": 14000,
+      "received_validity": 2,
+      "scaled_80e8": 8960,
+      "application_status": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ecu_source": 3499,
+      "ecu_invalid": 0,
+      "tcu_fault": 0,
+      "can201_word0": 13996,
+      "received_validity": 2,
+      "scaled_80e8": 8957,
+      "application_status": 1,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "ecu_source": 4000,
+      "ecu_invalid": 0,
+      "tcu_fault": 0,
+      "can201_word0": 16000,
+      "received_validity": 2,
+      "scaled_80e8": 10240,
+      "application_status": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ecu_source": 0,
+      "ecu_invalid": 1,
+      "tcu_fault": 0,
+      "can201_word0": 65535,
+      "received_validity": 1,
+      "scaled_80e8": 10240,
+      "application_status": 2,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ecu_source": 0,
+      "ecu_invalid": 1,
+      "tcu_fault": 1,
+      "can201_word0": 65535,
+      "received_validity": 1,
+      "scaled_80e8": 20480,
+      "application_status": 4,
+      "cut_request": 0,
+      "ecu_commands": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "ecu_source": 4000,
+      "ecu_invalid": 0,
+      "tcu_fault": 0,
+      "can201_word0": 16000,
+      "received_validity": 2,
+      "scaled_80e8": 10240,
+      "application_status": 1,
+      "cut_request": 1,
+      "ecu_commands": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "limits": "Synthetic admitted ECU gates and call order; held invalid input is local behavior, not full fault policy. Source physical units, timer scheduling and actuator hardware remain open."
+}

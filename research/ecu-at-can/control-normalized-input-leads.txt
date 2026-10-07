@@ -1,0 +1,135 @@
+NEXT TRACTION LEAD2026-10-06 (static only, no new model yet):
+30DBA writes6954=(6561 exact1 OR65AA exact1).30DE2 reads that gate plus
+6943/6944/695Bbit3/67CC/7247/6940 andproduces67F4, consumed by30FB6.
+It reads protected2160 withDB240fallback, mapsA3900 into67F8 andcalls2578
+with67C8 before branching tozero/map/other paths. Fulloriginalinstructions
+30DBA..before30FB6 savedin control-target-predecessor-leads-disassembly.txt.
+Do notinfer2578 mathematicalmeaning beforecheckingitsbody. Next modelthese
+predecessors and33BAC, then execute original1B55E..1B576 region with30FB6.
+Current67FC proof uses67F4andflags asfixtures; thatgap remains explicit.
+
+LATEST:30FB6/8BB20 models and executions complete locally; see
+control-upstream-target.txt. The static lead below is superseded by that
+executed record. Next30DBA/30DE2/33BAC,31C36/31662/31D8C and rawinputs/order.
+
+FOLLOW-UP LEAD (2026-10-06, static interpretation; not executed yet)
+30FB6..3127C produces 67FC. Full instructions are already saved in
+control-input-gates-disassembly.txt; helper 8BB20 and its literal pool are now
+saved in control-upstream-target-helper-disassembly.txt. Same stock ECU hash
+as control-secondary-path.txt; GNU SH objdump 2.42, disassemble.py at dis
+0x8bb20 0x8bc1c. No Ghidra annotation added for this unexecuted lead.
+
+30FB6 reads old 67FC, 67E4 and protected 2160 through 15246 (fallback DB240,
+stock 95). It evaluates five 1D maps A3810/A3828/A381C/A3870/A3864 and three
+2D maps A3948/A395C/A3970. Flag precedence at 31054..3116A chooses the
+67F0 target: bit7 of 695B plus zero 6943/6944; exact-one 6943/6944 or bit3;
+bit4; bit2; bit5; bit6; bit0. The final path without any selected branch
+retains old 67F0. Raw-byte equality versus nonzero checks differ by branch.
+This is a proposed model structure, not execution evidence.
+
+3116C caps that target with DB21C (stock about 14.3) into 6904. 9376 exact1
+selects this capped target for the subsequent ramp; other values select
+67F0. Ramp compares old 67FC with the selected target, then applies min of
+old+6908 and target, or max of old-690C and target. 69A4 records the result;
+8BB20 can alter it before the final 67FC store at 31268.
+
+8BB20 uses descriptor AD4BC (AD3CC+F0), bytes
+097c80000000780060e00002ffff9611. Mask byte +8 is 0x60, mode pointer is 9611,
+encoded word is 9642 and scale at 8BC0C is 0.00048828125. Original branches
+appear analogous to the independently verified 8B960 path: no mask bit
+clears mode; mode0 encodes but returns input; modes5/7 substitute the decoded
+word; other modes pass through. This analogy still needs direct execution.
+
+Next: model both complete bodies, map knots and branch priorities, retained
+67F0, ramp edges/raw mode values, protected input validity and checksums.
+Then execute their actual caller segment and replace the 67FC fixture in the
+paired replay. No physical loop identity or full scheduler claim follows.
+
+LATEST2026-10-06: control-secondary-path.txt verifies31A9C/8B960 and the
+entire six-call684Cpath. Next30FB6/8BB20 anddescriptor/inputprovenance.
+Historical static/unexecuted descriptions below are superseded locally.
+
+CURRENT FOLLOW-UP: control-input-gates.txt now executes307EC/30BA4/3174C,
+30C04/30860 and3181C timer.31A9C is684Cproducer;8B960 is a descriptor-based
+encode/override helper, not established nonlinear math. Older lead status
+below is historical. Next31A9C/8B960 and67FCproducer/fulltask input provenance.
+
+UPDATE: the seven requested bodies now execute; see control-normalized-inputs.txt.
+The other producer/caller leads below remain static. Original lead record follows.
+
+2026-10-06 continuation: upstream normalized-contribution inputs
+
+Evidence status: STATIC ORIGINAL-INSTRUCTION INTERPRETATIONS ONLY. These
+bodies have not yet been independently modeled/executed in this follow-up.
+The completed downstream evidence is control-normalized-contribution.txt.
+No new physical source identity or CAN attribution follows from these leads.
+ROM: examples/LFFEEE-stock.bin, SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+
+PRODUCER LEADS
+399B0 copies float6808 into protected6CC8 through15522. Aligned caller literals
+resolve to1693E and199BC; do not assume a periodic publication without tracing
+those callers. The other6CC8 references include a read/check near29CB8 and
+93012; descriptor literalF41C0 may lead to an indirect diagnostic access.
+
+312D4 builds6808: if protected7002 is nonzero, zero it; otherwise add protected
+6818,6820,6824 in that order and clamp between0 and680C using207C.
+
+3153A writes protected6818. It scales6800 withDB190 orDB19C and clamps using
+ROM316F0 as the lower limit and a condition-dependent upper limit.
+31598 adds a similarly selected/clamped increment to6820, then clamps the
+accumulator between0 and6814.31606 scales6804 and clamps into6824.
+The shared branch is6958==0 OR67CC==1 OR7247==1.6939==1 chooses a calibrated
+upper limit within that branch; otherwise the upper limit is125.
+Stock first gainsDB190/DB19C areboth12.5; accumulator gainsDB194/DB1A0
+areboth.78125; delta gainsDB198/DB1A4 arebothzero. Preserve both branches
+and their distinct read addresses even when stock values match.
+First upper limitsDB1BC/DB1C8 are7.8125. Accumulator increment limits
+DB1C0/DB1CC are approximately.03433. Delta limitsDB1C4/DB1D0 are
+approximately249.023. Common lower limit316F0 is-125.
+A proportional/integral/difference interpretation is a HYPOTHESIS, not an
+assigned physical control-loop identity. Complete caller and input provenance
+are needed before naming the loop.
+
+3127E writes6964=6CB4+DB1D4(~.11), then6800=clamp(67FC-6964,-2.5,2.5).
+312AA writes6804=clamp(6800-old6970,-2.5,2.5), then6970=6800.
+Aligned calls:187A4->3127E,187AA->312AA,187C8->3153A,187CE->31598,
+187D4->31606,187E6->312D4. Other calls lie between these and can change
+inputs/limits; do not treat the listed subset as an executed whole task.
+31318 is the680C limit producer,314F8 the6814 target producer. Both remain
+unmodeled here. The producer of67FC calls8BB20 and needs separate math review.
+
+684C has a protected zero initializer inside3009C at301CC..301EC;6818 is
+zeroed immediately afterwards. Its later writer near31B24 follows mapsA38E8
+andA38F4, clamp/min arbitration and helper8B960. Start of that producer is
+before31AE0 and still needs identification. Do not substitute it with the
+initializer or infer constant-zero production. Both nonlinear helper names
+and physical input units are unproved in this follow-up.
+
+72B4/72BC:29D00/29D0C are part of repeated protected-record checking;3E07E/
+3E126 read via154BC before local magnitude consumers. No new writer located.
+F41D8/F41DC descriptor references and possible base-relative stores remain
+open. Existing41A34 zero initializer is verified in control-magnitude.txt.
+
+REPRODUCIBLE STATIC SEARCH
+Use the existing disassemble.py refs/dis commands; GNU SH objdump2.42 setup
+is documented in control-normalized-contribution.txt. Examples:
+  LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+    python research/ecu-at-can/disassemble.py \
+    --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+    at refs 0xffff684c 0xffff6818 0xffff6cc8 0xffff7020
+Use dis ranges3127E..3174C,399B0..39A18,31AE0..31BD0 and3009C..30202.
+Original ROM and reusable disassembler are in this repository; temporary
+objdump is replaceable and is not the sole evidence record.
+
+NEXT CONCRETE ACTION
+Execute independent finite-RTZ models for3127E,312AA,3153A,31598,31606,
+312D4 and399B0, including protected checksums, raw flag values, clamp edges
+and retained accumulation. Then identify the intervening original caller
+steps before claiming full order or replacing the integrated source fixtures.
+Keep6814/680C/67FC/684C provenance explicit until their own producers execute.
+Roof: graphical switch/reversal tables and OEM receiver remain separate open
+work; see roof-fault-recovery.txt. ECU/AT:45BA0/815D upstream state, optional
+44E14/44F5A threshold adjustments and natural overlaps remain open.
+No Ghidra annotations added for these unverified new lead interpretations.
+Saved locally; no staging/commit/push.

@@ -30,8 +30,8 @@ class ObservedTCU(SHRelativeBranch):
         return super().instruction(pc)
 
 
-def fixture():
-    t = ObservedTCU()
+def fixture(t=None):
+    t = ObservedTCU() if t is None else t
     for fn in [0x15D04, 0x1FB18, 0x4C69A, 0x4CA64, 0x4BEF8,
                0x4C0F8, 0x4C288, 0x4C3C0, 0x4CB9C]:
         t.run(fn)

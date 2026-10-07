@@ -1,0 +1,110 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00018830 <.data+0x18830>:
+   18830:	2f e6       	mov.l	r14,@-r15
+   18832:	2f d6       	mov.l	r13,@-r15
+   18834:	2f c6       	mov.l	r12,@-r15
+   18836:	4f 22       	sts.l	pr,@-r15
+   18838:	9d 22       	mov.w	0x18880,r13	! 8aca
+   1883a:	63 d1       	mov.w	@r13,r3
+   1883c:	91 21       	mov.w	0x18882,r1	! 8acc
+   1883e:	62 11       	mov.w	@r1,r2
+   18840:	33 26       	cmp/hi	r2,r3
+   18842:	8b 41       	bf	0x188c8
+   18844:	9e 1e       	mov.w	0x18884,r14	! 8ace
+   18846:	e2 00       	mov	#0,r2
+   18848:	2d 21       	mov.w	r2,@r13
+   1884a:	e2 03       	mov	#3,r2
+   1884c:	65 e0       	mov.b	@r14,r5
+   1884e:	63 5c       	extu.b	r5,r3
+   18850:	33 27       	cmp/gt	r2,r3
+   18852:	8f 25       	bf.s	0x188a0
+   18854:	6c 5c       	extu.b	r5,r12
+   18856:	94 17       	mov.w	0x18888,r4	! fc
+   18858:	a0 23       	bra	0x188a2
+   1885a:	34 5c       	add	r5,r4
+   1885c:	8a bd       	.word 0x8abd
+   1885e:	8a 9c       	.word 0x8a9c
+   18860:	8a 84       	.word 0x8a84
+   18862:	8a 7c       	.word 0x8a7c
+   18864:	8a 6c       	.word 0x8a6c
+   18866:	8a 74       	.word 0x8a74
+   18868:	8a 8c       	.word 0x8a8c
+   1886a:	8a 94       	.word 0x8a94
+   1886c:	8a 34       	.word 0x8a34
+   1886e:	8a 3c       	.word 0x8a3c
+   18870:	8a 64       	.word 0x8a64
+   18872:	8a 44       	.word 0x8a44
+   18874:	8a b4       	.word 0x8ab4
+   18876:	8a b6       	.word 0x8ab6
+   18878:	8a b8       	.word 0x8ab8
+   1887a:	8a ba       	.word 0x8aba
+   1887c:	03 e8       	.word 0x03e8
+   1887e:	8a d8       	.word 0x8ad8
+   18880:	8a ca       	.word 0x8aca
+   18882:	8a cc       	.word 0x8acc
+   18884:	8a ce       	.word 0x8ace
+   18886:	8a d0       	.word 0x8ad0
+   18888:	00 fc       	mov.b	@(r0,r15),r0
+   1888a:	ff ff       	.word 0xffff
+   1888c:	00 05       	mov.w	r0,@(r0,r0)
+   1888e:	f8 7c       	fmov	fr7,fr8
+   18890:	00 05       	mov.w	r0,@(r0,r0)
+   18892:	f8 84       	fcmp/eq	fr8,fr8
+   18894:	00 05       	mov.w	r0,@(r0,r0)
+   18896:	f8 8c       	fmov	fr8,fr8
+   18898:	00 05       	mov.w	r0,@(r0,r0)
+   1889a:	f8 4c       	fmov	fr4,fr8
+   1889c:	ff ff       	.word 0xffff
+   1889e:	8a d4       	.word 0x8ad4
+   188a0:	64 53       	mov	r5,r4
+   188a2:	4c 08       	shll2	r12
+   188a4:	d3 46       	mov.l	0x189c0,r3	! 5c5ec
+   188a6:	3c 3c       	add	r3,r12
+   188a8:	62 c2       	mov.l	@r12,r2
+   188aa:	22 28       	tst	r2,r2
+   188ac:	89 02       	bt	0x188b4
+   188ae:	62 c2       	mov.l	@r12,r2
+   188b0:	42 0b       	jsr	@r2
+   188b2:	00 09       	nop	
+   188b4:	63 e0       	mov.b	@r14,r3
+   188b6:	73 01       	add	#1,r3
+   188b8:	2e 30       	mov.b	r3,@r14
+   188ba:	e3 07       	mov	#7,r3
+   188bc:	62 e0       	mov.b	@r14,r2
+   188be:	62 2c       	extu.b	r2,r2
+   188c0:	32 37       	cmp/gt	r3,r2
+   188c2:	8b 01       	bf	0x188c8
+   188c4:	e1 00       	mov	#0,r1
+   188c6:	2e 10       	mov.b	r1,@r14
+   188c8:	94 6d       	mov.w	0x189a6,r4	! 8ad0
+   188ca:	63 41       	mov.w	@r4,r3
+   188cc:	92 6c       	mov.w	0x189a8,r2	! bb8
+   188ce:	63 3d       	extu.w	r3,r3
+   188d0:	33 27       	cmp/gt	r2,r3
+   188d2:	8b 08       	bf	0x188e6
+   188d4:	93 69       	mov.w	0x189aa,r3	! 8acc
+   188d6:	e0 05       	mov	#5,r0
+   188d8:	e1 0f       	mov	#15,r1
+   188da:	23 11       	mov.w	r1,@r3
+   188dc:	91 66       	mov.w	0x189ac,r1	! 8ab4
+   188de:	21 01       	mov.w	r0,@r1
+   188e0:	90 65       	mov.w	0x189ae,r0	! 8ab6
+   188e2:	e2 fb       	mov	#-5,r2
+   188e4:	20 21       	mov.w	r2,@r0
+   188e6:	63 41       	mov.w	@r4,r3
+   188e8:	73 01       	add	#1,r3
+   188ea:	24 31       	mov.w	r3,@r4
+   188ec:	62 d1       	mov.w	@r13,r2
+   188ee:	72 01       	add	#1,r2
+   188f0:	2d 21       	mov.w	r2,@r13
+   188f2:	4f 26       	lds.l	@r15+,pr
+   188f4:	6c f6       	mov.l	@r15+,r12
+   188f6:	6d f6       	mov.l	@r15+,r13
+   188f8:	00 0b       	rts	
+   188fa:	6e f6       	mov.l	@r15+,r14
+

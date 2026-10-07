@@ -1,0 +1,37 @@
+Control task harness instruction/register sources — 2026-10-06
+
+Primary CPU source: Renesas SH-2E Software Manual REJ09B0316-0200,
+revision2.00,2006-05-31,353 PDF pages.
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+Browser PDF text inspected; attempted urllib download returned HTTP403.
+No local copy of that complete CPU manual was obtained this iteration.
+Sections7.2.19 (printed89/PDFzero102),7.2.27(102/115),7.2.59(154/167),
+7.3.13(195/208): signed32 DMULS.L stores64bits inMACH/MACL; LDS/STS
+transfer system registers; FSTS copies FPUL bits to FRn without conversion.
+T is unchanged for these added operations. Existing rotate/division helpers
+are selectively composed; no new generic fallback or FPU exception support.
+
+Hardware source already saved in sources/:
+renesas-sh7058-hardware-rej09b0046-0300h.pdf and matching provenance JSON.
+SHA256 9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137
+REJ09B0046-0300H revision3.0,09/2004. PyMuPDF text inspection:
+PDFzero848/table22.3: F738=PBDR,R/W,8/16bit.
+PDFzero858/table22.11: F74E=PFDR,R/W,8/16bit.
+PDFzero864/table22.15: F72C=PHDR,R/W,8/16bit.
+PDFzero866/table22.17: F76C=PJDR,R/W,8/16bit.
+PDFzero255/table11.3: F510/F512/F514/F516=BFR6A/B/C/D,section11.2.23.
+PDFzero250/table11.3 and374/section11.2.15: F430=TCNT0H/L,
+32-bit readable/writable up-counter; only longword accesses allowed.
+
+Harness assumptions, NOT hardware evidence: added ports/PWM are word-wide
+software latches only; legal hardware byte access is deliberately unsupported.
+TCNT0 is a frozen longword fixture with no clock, overflow or interrupts.
+Ports do not model direction, external pin samples, alternate functions or
+POD; buffer writes do not simulate timer transfer/physical PWM. Unsupported
+addresses/widths fail closed. No NC wiring or controller identity inferred.
+
+Additional CPU section7.2.62 printed158/PDFzero171 inspected: SUBV subtracts
+signed operands modulo32, setting T on signed overflow. Added implementation
+uses sign-bit test; independent oracle uses unbounded signed-range checking.
+Hardware table15.2 printed466/PDFzero508 identifiesSCR0 F002 R/W;
+harness admits only byte latch accesses, no serial behavior or implicit peer.

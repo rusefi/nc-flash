@@ -1,0 +1,153 @@
+CAN215 primary input and the paired transition-input caller
+Evidence checkpoint: 2026-10-06
+
+RESULT AND SCOPE
+
+Original ECU CAN215 byte6 production now connects to TCU880C/880E and the
+complete22F3C paired caller:22F46 produces809A/933E, then230F0 produces
+809C/9340/9342. Both halves execute with independent output models and a
+balanced stack. This closes the fixed809A/933E gap in the preceding retained
+comparison-input experiment. It does not establish a complete task schedule.
+
+The separate traction bridge executes shared CAN arbitration, ECU control
+publication, CAN215 packing and TCU receipt in one retained six-step trace.
+The published value precedes a later local actuator-command override. Thus
+CAN215 byte6 cannot be equated to the final outgoing actuator command.
+Physical units, CAN211 sender ownership and physical actuation remain open.
+This adds no OEM PRHT CAN identifier or folding/unfolding command.
+
+INPUT IDENTITIES AND REPRODUCTION
+
+ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+
+From repository root:
+  python research/ecu-at-can/verify_tcu_paired_input.py
+  python research/ecu-at-can/verify_traction_can215_input.py
+
+Saved results: tcu-paired-input-verification.json and
+traction-can215-input-verification.json. Original instruction excerpts are
+tcu-paired-input-disassembly.txt, generated with disassemble.py and GNU
+sh4-linux-gnu-objdump -D -b binary -m sh2e -EB. Existing tool installation
+recipe/provenance remains in CHECKPOINT.txt. No shared interpreter or prior
+verifier was modified; no broad regression suite was rerun without a change.
+
+18,216 direct cases pass:288 encoder,768 whole receive callback,
+15,360 selection/fault/history/timer combinations and1,800 randomized paired
+producer calls. Two retained320-call profiles pass, each with321 checks of
+the primary producer, comparison producer, source arbitration, qualification
+limit and tail;320 progress/class/timer checks. There are14 active-ring
+paired ECU checkpoints in total; the legacy freed-record traces are retained
+separately and must not be mistaken for active phase records.
+The additional traction bridge has6 primary/comparison checks and6 retained
+ECU-to-TCU checkpoints. All tests run original bodies; observers check outputs.
+
+ECU ENCODING AND TCU RECEIPT
+
+ECU36BE6 reads6CD4 via154BC, then20B8 computes source/0.5+0.5 using the
+existing exact FPU interpreter, truncates and clamps0..255. The caller caps
+the result at200. Protected flag reader154B0(A3A4) returning exactly1 instead
+publishesFF. Other flag values use the number.36A28 packs6B5E into byte6 of
+the8-byte frame at6B50 when734A hasbit40 or80; neitherbit holds the payload.
+Tests include quarter-unit rounding boundaries, negative and oversized
+sources, invalid flag values and all four publication modes.
+
+TCU complete receive callback1ACF0 calls170E4. Byte6 is8F32:FF retains old
+unsigned880C and sets880E=1; otherwise10F38 uses descriptors5C80E(050A0000)
+and5C59C(010A0000), yielding raw*5, with880E=2. Initializer170D4 loads stock
+5FD18 word0 and clears status. All256 raw bytes run with three old values.
+Transport receipt/freshness and diagnostic fault production remain separate.
+
+PRIMARY SELECTION AND HISTORY
+
+23406 reads92D5bit7, unlike23380 which tests bits3 OR7. It mirrors the fault
+into938Cbit0, preserving the other bits. A0->1 edge resets timer82C4.
+Healthy selection is min(25600, unsigned880C*256/10), through original
+integer division/saturation and software floating-point helper5BBEC.
+Fault selection compares sign-extended82C4 against sign-extendedROM76E0A=31
+using unsignedCMP/HS. Both stock fallback words76DFA and76E0C equal25600;
+therefore the timer branch has no numeric difference in this image.
+82C4 belongs to the earlier traced timer wheel; no wall-clock duration follows.
+
+22F46 shifts four words9346/48/4A/4C and inserts old809A; calls23406, writes
+809A and publishes50F78. A500=floor(809A*10/256) for produced0..25600 values.
+A502=4 when92D5bit7, else1 when880E==2, else2. Invalid received status does
+not itself replace the number: a held value still passes healthy selection.
+
+Categories933D/933C use the same13 bounds5CD1C*128 and640 descending
+hysteresis as the comparison producer.933A mirrors new809A. Short change
+uses the immediately preceding809A; long change uses the four-sample
+reference now at934C. Signed low-word behavior is preserved even for random
+histories outside normal ranges; it is not replaced with unbounded abs().
+Short magnitude>=25600 clears8198, and long magnitude>=2560 then sets
+9344bit0. Long magnitude<2560 plus unsigned8198>=6 clears that bit.
+933E receives0 while latched, otherwise the low16 bits of long change.
+230F0 independently owns9344bit1. The paired caller checks both owners.
+
+Original task excerpt1E938 loads22F3C and1E93A calls it, between21500 and
+2140C. This is static caller-order evidence, not execution of that entire
+task. CAN acquisition timing relative to application updates remains open.
+
+RETAINED TRANSITION EXPERIMENT
+
+Reuse the original selector/progress/selection/limit/manager pipeline from
+verify_tcu_qualification_lifecycle.retained; supply a comparison_update hook
+which transfers full original ECU payloads and executes both input producers.
+CAN201 byte6=156 still supplies809C=19968; CAN4EC stays disabled.
+CAN215 primary model value changes25->100 atcall100, back25 at170.
+Source6CD4 starts97.5:byte195 ->880C975 ->809A24960. It is supplied at the
+encoder input in these two profiles, not claimed as a produced upstream value.
+
+Profile1 holds6CD4. Profile2 changes it to60 atcall110 and restores97.5 at170:
+  call110..113:byte120 ->880C600 ->809A15360,933E=-9600,815A cleared.
+  call114:933E becomes0 once the four-sample history fills.
+  call170..173:809A24960,933E=9600,815A cleared again.
+  call174:933E becomes0.
+In both profiles code1 is replaced by code6/operation8 atcall1, phase1 begins
+80, phase2 begins130, and code6 retires162. Produced939E changes7984->12736
+at100; live80F8 stays7984 through162, updates12736 at163, returns7984 at170.
+Clearing live815A does not retroactively replace previously captured8159;
+these results do not imply every primary-input change cancels phase retention.
+CAN216 numeric spark request remains withdrawn throughout these profiles.
+
+EXPLICIT TRACTION BRIDGE
+
+verify_traction_can215_input.py reuses the six-step fixture documented in
+throttle-candidate.txt. Original shared CAN arithmetic, A477E, publication,
+39B04, local command selection and packing execute, then369D6/36A28 and the
+TCU receive/paired caller. No6CD4, packet-byte or809A output injection occurs.
+
+Step             72FC       6CD4     byte6   880C/status   809A
+inactive         8.395195   8.395195   11hex    85/2        2176
+active           8.063745   8.063745   10hex    80/2        2048
+A3A4 substitute 50        100          FF     80/1        2048
+local override   8.063745   8.063745   10hex    80/2        2048
+override=2       8.063745   8.063745   10hex    80/2        2048
+inactive         8.395195   8.395195   11hex    85/2        2176
+
+With the local override exactly1, final command=30/outgoingword983. With
+override2 the normal command=17.354183/outgoingword569. CAN215 is identical
+in those two steps. The A3A4 substitute writes100 to6CD4, but CAN215 emitsFF;
+the TCU holds its previous numeric while status changes. This is an executed
+software distinction, not proof of whole-vehicle torque or actuator response.
+The TCU92D5 diagnostic summary remains explicit healthy in this bridge.
+
+PERSISTENCE AND NEXT ACTIONS
+
+Ghidra annotations cover the encoder, receive/initialize bodies, complete
+paired caller, selection, history and publication. Both input descriptors
+are explicitly typed to avoid speculative functions in data. Full project
+archive identity and independent restoration results live in snapshot.json,
+restore-verification.json and CHECKPOINT.txt; saved locally, not committed.
+
+Next trace92D5bit7 production, group3D/880E timeout/invalid qualification,
+and its exact relationship to comparison bit3. Then drive both produced
+inputs through invalid/hold/substitute/recovery and overlapping transitions.
+Retain CAN4EC sender/transport admission and full task ordering as open.
+Traction: connect this bridge to the remaining59720/8118 and upstream gate
+producers, then physical recipient/actuation and CAN211 sender evidence.
+Roof: PCM transmission-type publication and OEM PRHT reception remain next;
+both folding/unfolding, interruption/resume/reversal, timeouts and motor/fault
+recovery remain required. No new roof claim follows from this result.

@@ -1,0 +1,91 @@
+2026-10-06: six original upstream ECU control-input producers
+
+Executed original stock LFFEEE SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08;
+paired LFG1TF000 SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Reproduce: python research/ecu-at-can/verify_control_input_gates.py
+Python3.14.3, standard library/assertions on; finite exact rational models,
+binary32 round-toward-zero after each arithmetic operation. Existing emulator
+and downstream checks unchanged. Original disassembly in
+control-input-gates-disassembly.txt; GNU SHobjdump2.42 via disassemble.py,
+setup conventions in control-normalized-contribution.txt.
+
+11,043direct cases:30C04 scaling12,30860 gate320,307EC hysteresis36,
+30BA4 map hysteresis2196,3174C ratio4575,3181C countdown3904.
+72original14-call segments,802retained timer invocations(reload+801calls),
+320serial cycles,36paired CAN updates and320CAN211 latch updates pass.
+No model assertion failures. Earlier five-body iteration passed before adding
+countdown; final JSON is the six-body run and supersedes intermediate output.
+
+SIX BODIES, VERIFIED FINITE INPUT DOMAIN
+30C04:67DC=RTZ(6DB4*ROMDB144), stock factor2.4200000762939453.
+30860:6939=1 iff67D0>=DB1D8(10),6929==0 and permission. Permission is
+(7346==1 and65D0==0) ORDB0B8!=0. StockDB0B8=1 bypasses the first check;
+raw flags0/1/2/255 and exact-neighbor boundary values exercised.
+307EC:6938 clears below RTZ(DB180-DB184), sets at or above DB180, otherwise
+retains the raw old byte. DB180=859.3699951171875,DB184=58.59000015258789.
+Equality at the lower boundary retains; equality at upper sets. Raw old2/255
+can persist inside the band, while downstream314F8 requires exact1.
+30BA4:hi=mapA37E0(6D20),lo=RTZ(hi-mapA37EC(6D20)).693D clears belowlo,
+sets strictly abovehi whenDB0B9==1(stock1), otherwise retains raw oldbyte.
+Unlike307EC, upper equality RETAINS. Every stock axis knot, neighboring input,
+midpoint and extrapolation sample, exact neighboring output boundaries tested.
+3174C:base=mapA37E0(6D20),denom=RTZ(7020-base). Ifabs(denom)>ROM31888
+(approximately1e-5),682C=clamp(RTZ(RTZ(6DB4-base)/denom),0,1); otherwise
+hold682C, including seeded values outside0..1. At these stock base magnitudes,
+neighboring representable denominators exceed epsilon; exact zero holds.
+3181C:7016exact1 clears6910; else73C4bit7 reloads unsigned-word curveA37D4
+from6D20 with finite RTZ interpolation and truncation; else saturating decrement.
+Stock reload table ranges2800..800, with1200/1000intermediateknots. Ataxis80,
+reload800 then799afterfirstcall,1after799calls,0after800and801calls. No time
+unit or full scheduler period is established by these invocation counts.
+
+ORDER AND COUPLED CONSEQUENCES
+Original segment18798..before187EC executes30C04,30860,3127E,312AA,307EC,
+30BA4,3174C,314F8,3153A,31598,31606,3140C,31318,312D4 in that order.
+72cases compare all modeled float outputs/raw gate bytes to the direct
+independent-model sequence, and verify exact observed calls/stack restoration.
+3181C is called earlier at18770 (literal1876E); other intervening producers
+remain unexecuted, so do not claim this as one complete application task.
+
+Retained integration sets mode7016=0,axis6D20=80,7020=1200 and explicit
+source6DB4 regimes299/560/540/250/600 across320calls. An original3181C reload
+in setup produces800; original decrement precedes each local segment, ending480.
+6938/693D transition0->1->retained1->0->1;6939=1in this fixture. Atcall21,
+67DC~1355.2,682C~.0153846,6814~39.0833,680C/6CC8~4.148845. Duringcalls61..70
+protected7002 inhibit clears6CC8 while the accumulator keeps growing and8118
+can remain nonzero through its other history terms. Later input250 clears
+both hysteresis flags and zeroes the limit. Input600 restores them and produces
+680C/6CC8~5.856186. Every downstream original/checksum/serial/CAN model stays
+active; raw upstream inputs, mode/reload pulse and cross-task order remain
+fixtures.67FC,684C and6DB4/6D20/7020physical provenance still unresolved.
+These bodies belong to the shared control chain; this does not identify DSC
+as the sender or establish a physical traction intervention.
+
+NEXT STATIC CORRECTION
+684C's producer entry is31A9C (not31AE0). It zeros69A0 when6808nearzero,
+6937==1 or695Bbit1; else maps6848viaA38E8 and6DB4viaA38F4, clamps/mins, then
+calls8B960 and protected-writes684C.8B960 is not established nonlinear math:
+original code checks a descriptor control atAD3CC+0xC0 and966Cmask; default
+path encodes into963C and returns input; modes5/7 decode963C into replacement.
+Execute its independent descriptor/override model before assigning meaning.
+Raw helpers31A4C/6848,67FCproductionnear30FC4/31266, and6DB4/6D20/7020
+origins remain open. Other intervening18774..18794 producers unexecuted.
+Roof training-table discrepancies are in roof-training-graphics.txt; ECU/AT
+caller49B7E and persistence remain independently open. No completion claim.
+Saved locally; no staging/commit/push or production/ROM changes.
+
+Additional static entry identification:67FC producer30FB6..3127C reads its
+previous67FC,67E4,protected2160 and several mode flags/maps. It eventually
+calls8BB20; model whole30FB6 before replacing67FC fixtures. Saved fullrange
+in control-input-gates-disassembly.txt. No execution claim for this body.
+
+Static8B960 descriptorAD48C bytes16e880000000ffff40a00002ffff960e:
+mask966Cbit0x40,controlbyte960E; conversionfactor8B9C8=.0030517578125.
+Next model raw control0/5/7/other and mask retention/clear with963Cencoding.
+No original helper execution claimed yet.
+
+Ghidra saved and independently restored2026-10-06:1457annotations(625ECU,
+832TCU),720identical exports,11matching project hashes. Archive10,887,787bytes,
+SHA256 38aa166e57c73f4e31bc82ce4017ca5bed612fefc70bb5ae08e07279d739fc35. Both programs reopened/readback verified, no locks.

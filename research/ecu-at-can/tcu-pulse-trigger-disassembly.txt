@@ -1,0 +1,82 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00054ad0 <.data+0x54ad0>:
+   54ad0:	68 f6       	mov.l	@r15+,r8
+   54ad2:	69 f6       	mov.l	@r15+,r9
+   54ad4:	6a f6       	mov.l	@r15+,r10
+   54ad6:	6b f6       	mov.l	@r15+,r11
+   54ad8:	6c f6       	mov.l	@r15+,r12
+   54ada:	6d f6       	mov.l	@r15+,r13
+   54adc:	00 0b       	rts	
+   54ade:	6e f6       	mov.l	@r15+,r14
+   54ae0:	00 92       	.word 0x0092
+   54ae2:	ff ff       	.word 0xffff
+   54ae4:	00 05       	mov.w	r0,@(r0,r0)
+   54ae6:	60 4c       	extu.b	r4,r0
+   54ae8:	00 05       	mov.w	r0,@(r0,r0)
+   54aea:	41 cc       	.word 0x41cc
+   54aec:	00 05       	mov.w	r0,@(r0,r0)
+   54aee:	b7 18       	bsr	0x55922
+   54af0:	ff ff       	.word 0xffff
+   54af2:	61 88       	swap.b	r8,r1
+   54af4:	00 05       	mov.w	r0,@(r0,r0)
+   54af6:	eb 80       	mov	#-128,r11
+   54af8:	00 05       	mov.w	r0,@(r0,r0)
+   54afa:	82 f4       	.word 0x82f4
+   54afc:	2f e6       	mov.l	r14,@-r15
+   54afe:	2f d6       	mov.l	r13,@-r15
+   54b00:	4f 22       	sts.l	pr,@-r15
+   54b02:	ed 00       	mov	#0,r13
+   54b04:	d3 14       	mov.l	0x54b58,r3	! 5604c
+   54b06:	7f fc       	add	#-4,r15
+   54b08:	2f 42       	mov.l	r4,@r15
+   54b0a:	43 0b       	jsr	@r3
+   54b0c:	e4 04       	mov	#4,r4
+   54b0e:	6e 03       	mov	r0,r14
+   54b10:	62 ec       	extu.b	r14,r2
+   54b12:	22 28       	tst	r2,r2
+   54b14:	8b 11       	bf	0x54b3a
+   54b16:	61 f2       	mov.l	@r15,r1
+   54b18:	85 14       	mov.w	@(8,r1),r0
+   54b1a:	20 08       	tst	r0,r0
+   54b1c:	89 01       	bt	0x54b22
+   54b1e:	a0 0c       	bra	0x54b3a
+   54b20:	ee 12       	mov	#18,r14
+   54b22:	d3 0e       	mov.l	0x54b5c,r3	! 53520
+   54b24:	43 0b       	jsr	@r3
+   54b26:	00 09       	nop	
+   54b28:	64 0c       	extu.b	r0,r4
+   54b2a:	24 48       	tst	r4,r4
+   54b2c:	8b 01       	bf	0x54b32
+   54b2e:	a0 04       	bra	0x54b3a
+   54b30:	ee 22       	mov	#34,r14
+   54b32:	d2 0b       	mov.l	0x54b60,r2	! 535b4
+   54b34:	42 0b       	jsr	@r2
+   54b36:	00 09       	nop	
+   54b38:	ed 00       	mov	#0,r13
+   54b3a:	63 ec       	extu.b	r14,r3
+   54b3c:	23 38       	tst	r3,r3
+   54b3e:	89 04       	bt	0x54b4a
+   54b40:	d3 08       	mov.l	0x54b64,r3	! 541cc
+   54b42:	e5 00       	mov	#0,r5
+   54b44:	43 0b       	jsr	@r3
+   54b46:	64 e3       	mov	r14,r4
+   54b48:	6d 03       	mov	r0,r13
+   54b4a:	60 d3       	mov	r13,r0
+   54b4c:	7f 04       	add	#4,r15
+   54b4e:	4f 26       	lds.l	@r15+,pr
+   54b50:	6d f6       	mov.l	@r15+,r13
+   54b52:	00 0b       	rts	
+   54b54:	6e f6       	mov.l	@r15+,r14
+   54b56:	ff ff       	.word 0xffff
+   54b58:	00 05       	mov.w	r0,@(r0,r0)
+   54b5a:	60 4c       	extu.b	r4,r0
+   54b5c:	00 05       	mov.w	r0,@(r0,r0)
+   54b5e:	35 20       	cmp/eq	r2,r5
+   54b60:	00 05       	mov.w	r0,@(r0,r0)
+   54b62:	35 b4       	div1	r11,r5
+

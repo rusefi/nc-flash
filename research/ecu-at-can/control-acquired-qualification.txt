@@ -1,0 +1,160 @@
+Periodic raw publication after queued acquisition — 2026-10-06
+=============================================================
+Objective remains ECU/AT operational CAN integration, deep traction integration,
+and NC roof folding AND unfolding with interruption/reversal, timeout, motor
+synchronization and recovery. None is complete. No extra DSC/roof firmware,
+captures or bench results are available. No staging/commit/push authorization.
+Prior goal turn made progress through original queued acquisition/dispatch.
+
+Critical correction to the preceding continuation
+-------------------------------------------------
+The full3976C decoder is NOT a necessary periodic prerequisite. Its sibling
+39926, called at1B132 in the SAME task before6CD96/countdown/latch/report,
+refreshes exactly the needed channel28/29/31 outputs. Previous caller tracing
+had only watched3976C/39894, thereby missing this actual periodic publisher.
+The prior memory also incorrectly treated FA56 as insideFA0A. OriginalFA0A
+returns atFA2A;FA56 is a separate leaf tailjump toE24C. ItscallerFF4A tests
+51C5 exactly1 and then invokesFA56; alignedcallerDF5E is inearlierstartup.
+No execution/test result supported a backgroundFA0A->FA56 call; that was a
+static interpretation error. The saved disassembly and corrected nextaction
+supersede it. Index8/E458 remains a failed full-decoder lead. Do not pursue
+those startup paths as prerequisites for periodic qualification freshness.
+
+Evidence addresses
+------------------
+Unchanged examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+39926..3994C: word4040(channel28)>>6 ->word6C92;
+word4042(channel29)>>8 ->byte6CAE; word4046(channel31) ->word6C98.
+Final6C98 write is the RTS delay slot. SR and GPR8..15/GBR preserved.
+3072 independent whole-application-RAM cases PASS:1024aligned count inputs
+plus2048deterministic random16-bit triples (seed39926), nonzero output guards.
+Source: control-acquisition-decode-disassembly.txt, new caller disassembly
+control-periodic-raw-decode-disassembly.txt. LiteralFFFF6C92 audit found39928
+in addition to39774;39926 alignedcallee referencepool1B2F4/load1B130.
+Reproduce python research/ecu-at-can/verify_control_periodic_raw_decode.py.
+Result: control-periodic-raw-decode-verification.json.
+
+Retained paired experiment (completed)
+-----------------------------------
+Reuse probe_control_task_dispatch.main via optional machine/before/after hooks;
+its default prior experiments remain intact. Afteroriginal10022/CA94/1619A
+and38C4 queueinit, eachpair enqueues task7/priority3 using391A, dispatches
+3B8A->3D10/RTE->E26C, then observes3CB8->idle3D0C. Next explicitly delivers
+original2BCE6 event2. This1:1 interleave is an experiment, not physical cadence
+or actual producer/interrupt admission proof. No internal flags/input writes.
+ADC1 stays512<<6. ADC28 is0 for60pairs then500<<6 for60pairs; otherresults0.
+Observer checks eachoriginal39926 return against independentwholeRAM oracle,
+recordsactual qualification reports, and retainsall existing activity oracles.
+Enabled downstreamreports outside the prior cache-only oracle remainobserved,
+not claimed as verified stored-DTC effects. Exact failure/limit is saved ifthe
+120pairs do not complete; no taskbody/callee isstubbed or skipped.
+Reproduce python research/ecu-at-can/probe_control_acquired_qualification.py.
+Result: control-acquired-qualification-probe.json; all 120 pairs completed.
+
+Next: return to TCU operational phase0/4 request cancellation/creation at
+1FD24/23BF0 using the complete126EC harness. Admitted report effects remain
+unverified; generic DTC/NVM behavior is not a new completion prerequisite. No invented numerical units,
+physical cadence, controller identities or actuator behavior. TCU operational
+queue/ack/overlap/persistence and remoteDSC execution remainopen independently.
+Roof factory/candidate conflicts persist; both motiondirections interruption/
+resume/reversal/timeout/LRsync/recovery need new applicable source or actual
+OEMcontroller/physicalevidence. Do notrepeat exhausteddownloads/userquestions.
+
+Paired fixture correction (reproduced, not a firmware change)
+-----------------------------------------------------------
+Firstpairedattempt completesone acquisitioncycle, then fails the existing
+74ED2 whole-application-RAM oracle on event2-0. Task7's RTE setsSPFFFF11A8;
+that real-ROM stack liesinside the older oracle's application-address range,
+whereas prior event2 proofs use syntheticFFFED000. An isolated original74ED2
+call withSPFFFF11A8 reproduces exactly five mismatched bytes, all temporary
+stackstorageFFFF119D/11A0..11A3 (savedPR etc.). No activityfield mismatch.
+Saved firstattempt:control-acquired-qualification-stack-oracle-limit.json;
+reproduction:control-acquired-qualification-stack-repro.json.
+The paired callback now uses the SAME explicit syntheticFFFED000 caller stack
+as the earlier event2 experiment, then restores the observed idle stackfor
+nextqueue request. No callee is skipped; original event2 mustreturn withthat
+stackpreserved. Task7 continues to enter via originalRTE andrealROMstack.
+This is an explicit interleave of task7 and independently deliveredcallback,
+not a claimthat physicalOS context switches/thread admission were simulated.
+The application oracle and shared interpreter remain unchanged. The second
+run reached the finite sample limit described below.
+
+Second paired limit: finite sample exhaustion; failed no-receive lead
+--------------------------------------------------------------------
+With independentcallbackstack,48pairs complete and39926/qualification run
+at5/25/45:914B=1 fromactualADC1publication;raw28=0;longcounter49/48/47,
+shortcounter2/1/0,shortfallback8EF8=1 at45. No report yet (longflagsstill0).
+Acquisition49 then event2-48 stops at78DC: Missing explicit SCI0 RDR sample.
+CORRECTION to initial diagnosis: inherited verify_control_task_stop_retained.
+Observed supplies256 explicit zero-valuedRDR samples, not an empty stream.
+The longer experiment EXHAUSTS them. SCI0 statusC0 is already the documented
+bounded synchronous-exchange fixture, not evidence of an actualserialpeer.
+Failure saved incontrol-acquired-qualification-sci-limit.json.
+
+A no-receive SSR80 attempt was not a valid replacement for that synchronous
+fixture: original7884..790A sends a command then waits forRDRF at78CA..78D2.
+It predictably reaches the2M instructionlimit at78CE during CA94(filter).
+No acquisition/taskpair completed. Saved:control-acquired-qualification-sci-wait.json.
+The priorverify_control_task_serial.py already tests this expected80wait;
+this failedlead must not be repeated as a way to complete synchronousexchange.
+Source: savedRenesasSH7058 hardware REJ09B0046-0300H PDFzero518–519,
+printed476–477 section15.2.7; bit7TDRE,bit6RDRF. SourceSHA256
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137,
+sources/renesas-sh7058-hardware-rej09b0046-0300h.pdf andprovenanceJSON.
+
+Current rerun retainsC0 and explicitlyextends the same finite all-zero test
+stream from256 to1024bytes, preserving itsfirst256samples. This is synthetic
+input data only: no realpeer response, electrical identity or physicalprotocol
+success inferred. Strictmissing-sample rejection remains. Actualconsumption
+andremainingcount willbe recorded. Source/script semantics unchanged beyond
+fixturelength; no controllerreply is presented as observedhardwareevidence.
+The fourth run completed all 120 pairs; its first48 event deliveries and
+first49 acquisition rows match the preserved finite256-sample run.
+
+Final executed result and verification
+--------------------------------------
+All120 queued acquisition cycles reached scheduler idle; all120 independently
+supplied event2 calls returned. There were120 actual RTE task entries, six
+whole-application-RAM39926 boundary checks at return1B136, and121 existing
+whole-RAM activity checks. Do not describe scheduler-idle boundaries as normal
+E26C function returns. No original task body or downstream callee was skipped.
+The explicit SCI fixture consumed615 of1024 zero samples (409 remain).
+
+Qualification groups occurred at zero-based pairs5,25,45,65,85,105.
+ADC1 copies at1:400A/40EC=32768,40E8/6CB4=41200000 (float10); original74DF8
+sets914B=1. At5/25/45 raw6C92=0, longcounter8EF4=49/48/47,
+shortcounter8EF6=2/1/0. Short fallback8EF8 becomes1 at45;8EFF stays0;
+no1F/20 report is selected. Recovery ADC28 is first copied to4040=32000
+at64, then39926 publishes6C92=500 and qualification consumes it at65.
+At65/85/105 longcounter=50, shortcounter=3, fallback=0,8EFF=1;
+original6CFD8 selects group1F/mode2 and group20/mode2 each time.
+99D5=1,99D8=8000,9462=0,9A28=0 throughout the six observed groups.
+The report caches973D/973E become2/2 after recovery.
+
+python research/ecu-at-can/verify_control_acquired_qualification.py: PASS.
+Result control-acquired-qualification-verification.json checks all counts,
+exact adjacent decoder/qualifier snapshots, low/recovery transitions, selected
+reports and the earlier finite-stream prefix. First three no-op reports pass
+the prior cache-only wholeRAM oracle; last three admitted paths execute and
+return but are OUTSIDE that independent oracle. Their complete downstream
+RAM/DTC/NVM effects are not independently verified. This limitation is explicit
+in JSON (downstream_report_ram_not_independently_verified=true).
+
+These are executed local firmware results with explicit ADC/SCI/MMIO inputs,
+synthetic event callback stack and supplied1:1 task/event schedule. They do
+not establish physical cadence, actual interrupt/request producer admission,
+CAN211/21A sender identities or units, remote DSC behavior or vehicle actuation.
+All three broader objectives remain open. Primary next work is TCU operational
+request cancellation/creation at1FD24/23BF0 within126EC phase0/4. Roof retains
+both folding and unfolding, interruption/resume/reversal, communication timeout,
+L/R synchronization and fault recovery; applicable full factory sources or OEM
+controller/physical evidence remain missing. User has no additional artifacts.
+
+Ghidra save/restore at this milestone (superseded by tcu-periodic-request.txt): 1908 annotations (833ECU/1075TCU),964 identical
+exports and11 hashes verified before/after independent read-only reopening.
+Both LFFEEE-stock.bin and LFG1TF000.bin; Ghidra12.1.3PUBLIC/Java21.0.10.
+Archive 10,999,252 bytes SHA256
+bff1334d34afad7527fa74e54b3a09ba9d2fabc45d4d14d8c80e84829d310e6b.
+Exact inventory/restore result: ghidra/snapshot.json and restore-verification.json.
+Saved locally only; no staging, commit or push; pre-existing mixed index intact.

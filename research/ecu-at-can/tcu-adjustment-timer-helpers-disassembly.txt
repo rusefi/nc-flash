@@ -1,0 +1,47 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001127e <.data+0x1127e>:
+   1127e:	63 40       	mov.b	@r4,r3
+   11280:	92 1b       	mov.w	0x112ba,r2	! ff
+   11282:	63 3c       	extu.b	r3,r3
+   11284:	33 20       	cmp/eq	r2,r3
+   11286:	89 02       	bt	0x1128e
+   11288:	61 40       	mov.b	@r4,r1
+   1128a:	71 01       	add	#1,r1
+   1128c:	24 10       	mov.b	r1,@r4
+   1128e:	00 0b       	rts	
+   11290:	00 09       	nop	
+   11292:	63 41       	mov.w	@r4,r3
+   11294:	d2 0c       	mov.l	0x112c8,r2	! ffff
+   11296:	63 3d       	extu.w	r3,r3
+   11298:	33 20       	cmp/eq	r2,r3
+   1129a:	89 02       	bt	0x112a2
+   1129c:	61 41       	mov.w	@r4,r1
+   1129e:	71 01       	add	#1,r1
+   112a0:	24 11       	mov.w	r1,@r4
+   112a2:	00 0b       	rts	
+   112a4:	00 09       	nop	
+   112a6:	63 41       	mov.w	@r4,r3
+   112a8:	92 08       	mov.w	0x112bc,r2	! 7fff
+   112aa:	33 20       	cmp/eq	r2,r3
+   112ac:	89 02       	bt	0x112b4
+   112ae:	61 41       	mov.w	@r4,r1
+   112b0:	71 01       	add	#1,r1
+   112b2:	24 11       	mov.w	r1,@r4
+   112b4:	00 0b       	rts	
+   112b6:	00 09       	nop	
+   112b8:	84 9c       	mov.b	@(12,r9),r0
+   112ba:	00 ff       	mac.l	@r15+,@r0+
+   112bc:	7f ff       	add	#-1,r15
+   112be:	ff ff       	.word 0xffff
+   112c0:	00 07       	mul.l	r0,r0
+   112c2:	6d 14       	mov.b	@r1+,r13
+   112c4:	00 07       	mul.l	r0,r0
+   112c6:	6d 18       	swap.b	r1,r13
+   112c8:	00 00       	.word 0x0000
+   112ca:	ff ff       	.word 0xffff
+

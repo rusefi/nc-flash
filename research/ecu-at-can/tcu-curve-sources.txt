@@ -1,0 +1,153 @@
+2026-10-06: primary proposal-curve bank provenance and retained axis choice
+
+Scope and evidence
+------------------
+Stock LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+Uses the existing fault-profile RAM/sample snapshots, SHA256:
+16d58c0427de7905b52531ef943cc01b311d1aeeda511eebf33d525362bda943
+See tcu-fault-selection.txt for their original acquisition and fixture scope.
+
+verify_tcu_curve_sources.py executes original instructions with an independent
+primary-bank model, byte-for-byte dynamic-copy oracle and curve interpolation
+oracle. Read-only instrumentation observes dispatch entry/return and lookup
+arguments/results. No firmware or producer result is replaced. Direct cases
+and the retained bank switch supply explicit RAM inputs; they do not establish
+physical signal identity, actual hardware cadence or remote controller logic.
+
+Reproduce from repository root:
+  python research/ecu-at-can/verify_tcu_curve_sources.py
+Output: tcu-curve-sources-verification.json.
+Result: 2560 primary-producer cases, including 769 early holds and 891 complete
+480-byte dynamic-copy checks; 2934 original interpolation calls across all
+90 ROM curves; three saved-state full44CFE replays; four retained4530C calls.
+All passed. Shared interpreters and prior verifiers were unchanged.
+
+Dispatch and primary producer: executed
+--------------------------------------
+ROM7744E contains count4. Table5DE90 calls46FA0,46200,45AA4,47240 in that order
+from4530C, before its ten108E6 curve lookups. The primary46FA0 produces ten
+pointers at9AEC, operations at9B14, kinds at9B32, and source byte9B40.
+
+8080=FF returns without changing these outputs, flags9AEA/B or dynamic data.
+Otherwise the following candidates are applied in increasing priority; the
+last admitted candidate wins. Addresses are hexadecimal; source/kind values
+are decimal. Every row in a selected bank has the same operation as source.
+
+Condition                                 Base         Source  Kind
+Default                                   7404C          0       0
+9C7C bit0                                 745EC         11       8
+9C7C bit1                                 747CC         12       9
+9C7C bit2                                 749AC         13      10
+9C7C bit3                                 74B8C         14      11
+9E88 bit0                                 FFFF9CA8       1       1
+Fixed-bank admission below                7440C          3       2
+92D7 bit0, !92CA bit7, class8080=6          74D6C         15      12
+Same special admission AND A534 exactly1  74F4C         16      13
+
+Fixed-bank admission is9B5C bit0 OR
+(916F bit0 AND !92D0 bit3 AND ROM77340 exactly1).
+ROM77340 is0 stock, so the latter clause cannot select the bank in this image.
+The verifier leaves ROM unchanged; it does not claim execution of a patched
+calibration-enabled branch. It checks exactA534=1 against0/2 and random bytes.
+All nine selectable source codes appeared in the direct cases.
+
+Pointers are base+48*i for i0..9. All nine ROM banks consist of ten descriptors
+with u16 count11, shift0, eleven unsigned axis words and eleven value words.
+Original108E6 matches independent interpolation at knots, adjacent inputs,
+midpoints and endpoints, including duplicate knots.
+
+Flag9AEB bit0 is forced1. Bits1..4 mirror9C7C bits0..3, bit5 mirrors dynamic
+admission, bit6 mirrors special admission and bit7 its exactA534=1 extension.
+9AEA bit0 mirrors fixed-bank admission; other9AEA bits are preserved. Flags
+record admitted candidates even when a later candidate takes precedence.
+
+Dynamic copy4A634: executed
+--------------------------
+Whenever9E88 bit0 is set and class is notFF,46FA0 calls4A634 before evaluating
+the higher-priority fixed/special choices. All ten48-byte records from7422C
+are copied into RAM9CA8. For i<5, if9F29 bit1 and8081=i, destination rowi gets
+ROM rowi+5 instead. Rows5..9 always use their own source row. All480 resulting
+bytes were checked, including cases where another bank ultimately wins.
+Without dynamic admission, the prefilled480 bytes remain unchanged.
+
+Saved fault-profile replays: executed, bounded
+--------------------------------------------
+The full44CFE body was replayed from calls149,150 and211. After every one of
+the four dispatcher stages, all ten pointers remain7404C+48*i, operations
+and kinds remain0, and source remains0. The three later producer bodies
+execute but do not replace the primary descriptors in these saved states.
+The ten independently checked lookup results equal the published9B1E values.
+Thus the previously verified healthy/fault/recovery threshold difference
+comes from changing axis input within the same bank, not bank replacement.
+This does not prove that later producers never override in other states.
+
+Retained bank switch: executed, explicit controls
+------------------------------------------------
+4530C captures9B3E at45322 and entry source9B40 at45344. Entry source13/14
+substitutes941E at45358. Only afterward does dispatch46FA0 update the source.
+The same invocation uses the newly produced curve pointers and previously
+chosen axis. This creates a one-call axis-selection lag when crossing between
+source13/14 and other sources; it is call ordering, not a timed CAN delay.
+
+Restore call150 RAM once; explicitly set entry source0,9B3E=6400,941E=39936.
+Keep that RAM between four original4530C executions, changing only9C7C:
+
+Call   Supplied9C7C   Produced source   Curve bank   Observed lookup axis
+1      4             13                749AC        6400
+2      4             13                749AC        39936
+3      0              0                7404C        39936
+4      0              0                7404C         6400
+
+All ten lookup arguments/results and pointers were checked on every call.
+The source13 curves yield the same values at both selected axes in this image.
+On return to source0, the axis lag produces different published thresholds:
+call3 [3744,7023,10395,14768,21789,2085,5212,8892,13194,17223]
+call4 [1211,2421,3352,4470,6053,652,1398,2328,3912,5121]
+No actual physical bank-control transition or full scheduler claim follows.
+
+Update2026-10-06:47240 and its four helpers below are now independently
+verified in tcu-class-thresholds.txt, including retained tags and65535
+endpoint behavior.46200/45AA4 and49B08 remain open as stated below.
+
+Static continuation notes: superseded for47240 by the linked result
+--------------------------------------------------------------
+tcu-curve-sources-disassembly.txt preserves46FA0,47240 and its helpers,
+4A634 and initial excerpts of46200/45AA4. The latter excerpts are incomplete;
+extend disassembly before modeling all their overrides.
+
+46200 reads9BF5 bits0..2, calls46580 and46372 admission, then463CC and46402.
+Admitted cases can replace selected descriptor/operation/kind entries.
+45AA4 uses9B64 retained bits, accepted8081 versus history9BEA,45CE4 admission,
+45D30/45DD0, timer815D versus73C34, then46030 and optional45E70.
+
+47240 always calls4726A to publish calibration words9C08/0A/0C/0E/10 from
+75138/34/30/2C/3C selected by916F bit2. Positive signed class calls472A6,
+which builds five constant two-point curves at9C14+12*i.47334 for class1..5
+replaces indices class-1..4 with fixed descriptor5DEAC and corresponding
+indices+5 with those RAM curves; operation4/kind7. Class6 or signed<=0 gives
+no descriptor edits.473A8 on increasing positive classes changes operations
+and kinds for indices previous-1..current-2 without pointer replacement.
+9C12 is updated to current class. Independently model before broader claims.
+
+49B08 was an earlier candidate lead. Static reading instead suggests retained
+proposal/transition monitoring:49BE8 edge flags,49D00 pending latch,49D66
+admission,49E10 initial qualification,49F66/49EE0/49F7A/49FE0 later lifecycle.
+Captures8089/80EA/80EE/phase3159A into9C9E/9CA0/9C9C/9C9A, retains state9C98,
+previous accepted9C99 and pending31720 at9CA2; resets81EB on accepted decrease.
+This family has not been fully modeled and is not established as a bank
+selector. Do not turn that earlier investigation lead into a verified label.
+
+Next work and independent requirements
+--------------------------------------
+Model nondefault46200/45AA4/47240 overrides and primary control producers;
+then actual task/transport order and overlapping/composite transitions.
+Keep later44E14/44F5A threshold adjustments explicitly incomplete.
+The added traction goal still requires upstream gates, CAN sender attribution
+and physical output confirmation. The roof goal still requires PCM type
+publication, OEM PRHT reception and both folding/unfolding, interruption,
+reversal, timeout and fault recovery. See CHECKPOINT.txt and traction-roof.txt.
+
+Ghidra annotations/exports and the independently restored archive are updated
+with this record; exact current identity is in ghidra/snapshot.json and
+ghidra/restore-verification.json. Saved locally; no staging, commit or push.

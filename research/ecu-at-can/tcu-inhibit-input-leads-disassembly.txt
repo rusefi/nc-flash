@@ -1,0 +1,80 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00051300 <.data+0x51300>:
+   51300:	ff ff       	.word 0xffff
+   51302:	88 c8       	cmp/eq	#-56,r0
+   51304:	00 05       	mov.w	r0,@(r0,r0)
+   51306:	fd 35       	fcmp/gt	fr3,fr13
+   51308:	d3 20       	mov.l	0x5138c,r3	! ffffa520
+   5130a:	e4 00       	mov	#0,r4
+   5130c:	d2 20       	mov.l	0x51390,r2	! ffffa521
+   5130e:	23 40       	mov.b	r4,@r3
+   51310:	00 0b       	rts	
+   51312:	22 40       	mov.b	r4,@r2
+   51314:	2f e6       	mov.l	r14,@-r15
+   51316:	e6 01       	mov	#1,r6
+   51318:	d5 1e       	mov.l	0x51394,r5	! ffffa991
+   5131a:	ee 02       	mov	#2,r14
+   5131c:	d2 1e       	mov.l	0x51398,r2	! 5b654
+   5131e:	2f d6       	mov.l	r13,@-r15
+   51320:	4f 22       	sts.l	pr,@-r15
+   51322:	7f fc       	add	#-4,r15
+   51324:	d3 19       	mov.l	0x5138c,r3	! ffffa520
+   51326:	6d 30       	mov.b	@r3,r13
+   51328:	42 0b       	jsr	@r2
+   5132a:	64 f3       	mov	r15,r4
+   5132c:	d3 1b       	mov.l	0x5139c,r3	! ffff88cd
+   5132e:	60 30       	mov.b	@r3,r0
+   51330:	60 0c       	extu.b	r0,r0
+   51332:	88 02       	cmp/eq	#2,r0
+   51334:	8b 08       	bf	0x51348
+   51336:	60 f3       	mov	r15,r0
+   51338:	60 00       	mov.b	@r0,r0
+   5133a:	c9 01       	and	#1,r0
+   5133c:	88 01       	cmp/eq	#1,r0
+   5133e:	8b 03       	bf	0x51348
+   51340:	d3 17       	mov.l	0x513a0,r3	! ffff88cc
+   51342:	6d 30       	mov.b	@r3,r13
+   51344:	a0 18       	bra	0x51378
+   51346:	ee 01       	mov	#1,r14
+   51348:	60 f3       	mov	r15,r0
+   5134a:	60 00       	mov.b	@r0,r0
+   5134c:	c8 04       	tst	#4,r0
+   5134e:	04 29       	movt	r4
+   51350:	74 ff       	add	#-1,r4
+   51352:	64 4b       	neg	r4,r4
+   51354:	60 43       	mov	r4,r0
+   51356:	88 01       	cmp/eq	#1,r0
+   51358:	8b 03       	bf	0x51362
+   5135a:	d2 12       	mov.l	0x513a4,r2	! 5fd38
+   5135c:	6d 20       	mov.b	@r2,r13
+   5135e:	a0 0b       	bra	0x51378
+   51360:	ee 04       	mov	#4,r14
+   51362:	60 f3       	mov	r15,r0
+   51364:	60 00       	mov.b	@r0,r0
+   51366:	c8 02       	tst	#2,r0
+   51368:	00 29       	movt	r0
+   5136a:	70 ff       	add	#-1,r0
+   5136c:	60 0b       	neg	r0,r0
+   5136e:	88 01       	cmp/eq	#1,r0
+   51370:	8b 02       	bf	0x51378
+   51372:	24 48       	tst	r4,r4
+   51374:	8b 00       	bf	0x51378
+   51376:	ee 03       	mov	#3,r14
+   51378:	d2 04       	mov.l	0x5138c,r2	! ffffa520
+   5137a:	22 d0       	mov.b	r13,@r2
+   5137c:	d3 04       	mov.l	0x51390,r3	! ffffa521
+   5137e:	23 e0       	mov.b	r14,@r3
+   51380:	7f 04       	add	#4,r15
+   51382:	4f 26       	lds.l	@r15+,pr
+   51384:	6d f6       	mov.l	@r15+,r13
+   51386:	00 0b       	rts	
+   51388:	6e f6       	mov.l	@r15+,r14
+   5138a:	ff ff       	.word 0xffff
+   5138c:	ff ff       	.word 0xffff
+   5138e:	a5 20       	bra	0x51dd2
+

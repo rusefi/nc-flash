@@ -28,7 +28,7 @@ uint Control_UpdateBaselineInput(void)
     fVar3 = *(float *)PTR_Control_MappedBaselineContribution_00058ffc +
             *(float *)PTR_Control_LatchGatedBaselineContribution_00058ff8 +
             *(float *)PTR_Control_MagnitudeBaselineContribution_00059000 +
-            *(float *)PTR_DAT_00059004 + *(float *)PTR_DAT_00059008 +
+            *(float *)PTR_Control_NormalizedContribution_00059004 + *(float *)PTR_DAT_00059008 +
             *(float *)PTR_Control_BaselineScaledComponent_00058ff4 + *(float *)PTR_DAT_0005900c +
             *(float *)PTR_DAT_00059010;
     fVar6 = (float)(*(code *)puVar1)(PTR_DAT_00059014);

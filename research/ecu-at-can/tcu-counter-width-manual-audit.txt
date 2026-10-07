@@ -1,0 +1,44 @@
+Counter access-width audit — 2026-10-07
+
+New primary-manual finding closes a previously uninspected source lead.
+Manufacturer content mirrored at:
+https://ro.scribd.com/document/307367168/hd64f7055
+Header identifies Hitachi SH7055 F-ZTAT HD64F7055, ADE-602-155C Rev4.0,
+11/10/00; publication footer says fourth edition November2000. Web reader
+retrieved full text (about80,600lines), not only a search snippet. No localPDF
+was downloaded. Header/footer establish document identity, not authenticity
+of every mirrored byte or applicability to the physical TCU.
+
+Section11.2.15 printed326 explicitly states:
+"TCNT0 can only be accessed by a longword read or write. Word reads or writes cannot be used."
+Section11.2.26 printed339 imposes the same restriction on TCNT10A.
+Reproduction: openURL; find TCNT0 can only, TCNT10A can only, ADE-602 and
+4th Edition. Initial text lines29637/30409..10/58..60/79505..06 respectively;
+page numbers and search terms are stable references because web headers shift.
+This is stronger than the earlier table-only snippet and1999 unsignedlong
+header. It provides no exception for stopped-counter CPUword writes.
+
+Independently inspected local primary Renesas SH7055S manual
+sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf
+SHA256359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+PDFindex364/printed325 explicitly prohibits TCNT0 word reads/writes;
+PDFindex377/printed338 does likewise for TCNT10A. This confirms the earlier
+section11.5/table interpretation directly in both register descriptions.
+No Ghidra/code change: existing rejection1461A/F430 and laterTCNT10A conflict
+remain correct boundaries. No hardwarefault claim, no inferred zero epoch.
+
+Searches: "SH7055" "TCNT0H" "access";
+"SH7055" "16-bit access" "TCNT0"; "SH7055" "TCNT0" "errata".
+The full manufacturer mirror was the useful result; unrelated chip-family
+results and third-party disassembly labels are not MCU identity evidence.
+Official SH7055 partdetail/documentation pages were also inspected:
+https://www.renesas.com/en/products/sh7055/part-details/df7055sbp40knv
+https://www.renesas.com/en/products/sh7055
+They expose product attributes and a loading documentation widget, not an
+applicable access-width correction or a physical TCU chip identity.
+
+Disposition: older-manual lead is checked and does not resolve the mismatch.
+Next requires actual chip/revision identification plus applicable behavior
+source, an erratum, or measured register/reset behavior. User has no additional
+artifacts. Repeating the same source search or relaxing the fixture is not
+proof of native full15574/recovery. All three broader scopes remain open.

@@ -1,0 +1,220 @@
+TCU native CMT0 delivery and mixed timer wheel — 2026-10-06
+=========================================================
+Full objective: ECU/AT CAN integration, deep traction logic/integration, and
+NC folding AND unfolding roof with interruption/resume/reversal, timeout,
+L/R synchronization and recovery. All incomplete. User has no furtherDSC/roof
+images/captures/bench results. No staging/commit/push; otherthread remainspaused.
+
+Verified boundary reuse
+-----------------------
+verify_tcu_cmt0_interrupt.execute_prefix extracted for reuse;512 init/516
+prefix cases rerun PASS. Before/after verificationJSON SHA256 identical:
+c0b374f13a436b68aef5e6c8eacdb6c57b1e0731ee9566ff8dc200c378b2a238.
+tcu-cmt0-reuse-verification.json records comparison. Refactor preserves
+isolatedregister seeding; fulltask retainsactualregisters. WholeRAM prediction
+still usesoriginal128B6 clone plusindependentmode/profile equations.
+
+probe_tcu_qualified_receive.py optionalclock_delivery hook preservesdefault
+100direct11864 calls. probe_tcu_cmt0_delivery.py routes100events/pair through
+original16D6C..16DB6 beforeRTE. Original123B0 init resets84D0/84D4/5/6 andsets
+800A1; firstISR promotes3. InitwholeRAM andorderedcompare/startMMIO checked.
+Everyevent: F712 first/second128, profilingF6C0=1000*event_number then+100;
+finiteorderedMMIO, fullapplicationRAM differential, registers andexactnested
+helperentries checked. Original11864,1E506->2094E,11A64 allrun. Eight11014
+primarywheel calls/pair remainexplicit. No physicalclock/RTE/admission claim.
+Samecaptureintervals/CANreceipt/absence inputs ascapture-delivery320 fixture.
+
+Prefix8 passes800 CMT0 ISRprefixes and16captureprefixes. Mode1->3 onfirst;
+tick reaches800.91AC rises100 thenoriginalcapture resets0 eachpair. Phases
+84D4/5 remain0 atpairboundaries;84D6 progresses1..8. Diagnostic8464 advances
+10/pair, unlikepriorfixture0. Full320 running; do notassumeexactpriortrace.
+Commands:
+ python research/ecu-at-can/probe_tcu_cmt0_delivery.py --cycles 8 --filename tcu-cmt0-delivery-prefix8.json
+ python research/ecu-at-can/probe_tcu_cmt0_delivery.py
+
+Correction / independent wheel evidence
+----------------------------------------
+Earlier descriptioncalled11A64 a countdownwheel. Itcontains BOTH saturating
+increment andsentinelpreservingdecrement ranges. Correctedname mustreflect
+mixedtimers; thepriorlabel was overly narrow. Original11D74/11D88 increment
+byte/word toFF/FFFF;11D9C/11DB4 decrementnonzero exceptFF/FFFF sentinel.
+11AEC alwaysservicesbank0;5C170 phase0/5 servicesbank1,phase1 bank2,phase6
+secondary11A94.5C198 secondaryphase0 bank3,phase5 third11AC0;5C1C0 thirdphase0
+bank4. Eachwheel incrementsitsownphase mod10. Range descriptors76D24..76DC3.
+8464 belongsbank2 WORDINCREMENT, so10increments per100events; no physicalunits.
+verify_tcu_cmt0_wheel.py independentlymodelsallranges andphasecascades;8000
+validphasetriple/boundarypattern cases PASS. Selectedbank counts8000/1600/800/80/8.
+Independentposthoc replay ofall100events matchesall recordedtimerbytes and
+clock/phase/elapsedfields foreachof8pairs; verify_tcu_cmt0_delivery.py PASS. Disassembly preserved at
+ tcu-cmt0-wheel-disassembly.txt (11AEC..11DD8), GNUobjdump2.42 same setup as
+ tcu-cmt0-interrupt.txt. No sharedISA/ROM/production changes.
+
+Traction: acquiredinput/freshness evidence; CAN211/21A sender/units, remoteDSC
+internals andactuation unproved. Next relevantlocalCAN/controlboundary.
+Roof: factory/candidate/revision evidence distinctfrommissingOEMreceiverproof;
+bothdirections/interruption/reversal/timeout/sync/recovery open. Nextnewapplicable
+factorysource orOEM/physicalevidence; do notaskagainforunavailableartifacts.
+
+Correction (joinedclock follow-up):11A64 handles BOTHincrement/decrement
+rangebanks; theearlier countdown-only wording istoo narrow. See
+tcu-cmt0-delivery.txt andindependent8000-case tcu-cmt0-wheel-verification.json.
+
+Saved boundary result before the final clock integration refresh
+---------------------------------------------------------------
+Capture delivery/CMT0 prefix annotations were saved to both Ghidra programs,
+archived and independently restored:1929 annotations (833 ECU/1096 TCU),
+984 identical exports,11 file hashes before and after read-only reopening.
+Archive11,010,048 bytes SHA256
+ a00f29c3b744e815739bb8b60e9b89cfaf8e671d34c09ae56b17a890dee54045.
+The subsequent mixed-wheel naming correction is currently inannotations.tsv;
+final application/save/archive/restore must supersede this snapshot before
+handoff. Exact old export names to remove after renaming are:
+ LFG1TF000.bin__Timer_ServiceCountdownWheel.c
+ LFG1TF000.bin__CMT0_AdmitTickAndCountdownService.c
+ LFG1TF000.bin__CMT0_InitializeTickAndCountdownService.c
+No other export is removed. This is a label correction, not a ROM change.
+
+Next distinct boundary: CMT1 (static lead, not executed by this experiment)
+------------------------------------------------------------------------
+The primary11014 wheel is still invoked directly8times per pair. Original
+12374 calls12880->11004 initialization, sets8009=1, then16CE4 compare/start.
+16CE4 writes04FF towordFFFFF71C andORsbit1 inFFFFF710. Original16CF4 ISR tests
+F718bit80, rereads/clearsSECOND&FF7F in12386 call-delay slot, thenprofilingexit
+andregisterrestore before16D3E RTE. Profileindex13.12386 promotes8009=1 to3;
+12886 calls11014 ONLYwhenresultingmode3. Othermodes unchanged/no11014.
+These are static interpretations, not executed CMT1prefix evidence. Exact
+instructions/commands saved in tcu-cmt1-admission-lead-disassembly.txt using
+GNUobjdump2.42 andsame toolsetup asCMT0 report. Literalpools aredata.
+Next: verifyoriginal12374 init/MMIO and16CF4 prefix against independentmode/
+profile equations plusexisting11014 wholeRAM model/reference, thenreplace
+all8 directprimarywheel calls throughoptionalsharedrunner/harness hooks.
+Do notdouble-execute the sharedrunner'sfirst11014 call. Actualclock source,
+compareconfiguration, interruptdelivery/RTE andcadence remainunproved.
+
+Verification and current limits
+-------------------------------
+verify_tcu_cmt0_delivery.py reconstructs all recorded8410..8491 bytes and
+84D4/5/6 phases, independently applies100 mixed-wheel events, increments
+84D0 andsaturates91AC, andcompares the resulting clock-boundary fields.
+Runtime prefix checks additionally compare allapplicationRAM withoriginal
+128B6 plusmode/profile equations andcheckallregisters/orderedfiniteMMIO.
+The posthoc independent clock model is not itself a wholeapplicationRAM
+oracle, since only clock-boundary fields are serialized.
+For prefix8, removing onlyextra.cmt0 andnormalizing the independently checked
+8464 timer at before/after_diagnostic anddiagnostic_boundaries before/after
+locations yields exactprior8 rows. No other data isremoved. Fullruncomparison
+is still pending; additionaldifferences mustbe investigated if present.
+Python compilation andgitdiff --check PASS.19 newreport/script/result files
+checked Git-eligible; preexistingAD ghidra/nc-at-can.tar.gz.tmp unchanged.
+
+Existing CMT1 model to reuse next
+--------------------------------
+verify_tcu_request_timing.py already verifies11014's thirteen independent
+RANGES schedules over1024 calls, mode1->3 at12386 across256 modevalues, and
+12886 directmode3-only admission. Initialization11004/12880 clears long phases
+8494/8498/849C. The512-event schedule combinesphase16/16/2;90C8 increments
+on the primary half-rate without saturation (wraps16bits), unlike most ranges.
+A new ISR proof should reuse/extract this model and verifyits priorresult,
+not duplicate the schedule or label existingmodeadmission as wholly unknown.
+The missing CMT1part is16CF4 hardware-register admission/profile/registerrestore
+throughpreRTE andits integration, plusphysicaldelivery/cadence. The initializer
+12374 andcompare/start16CE4 MMIO also remainunexecutedby thisnewwork.
+
+Ghidra correction: both programs saved and archived; independent extraction
+reopened,11 filehashes checked, but export comparison failed. Investigating
+counts/filenames/content before declaring restoration complete. The immediately
+preceding automated completion wording was premature and is superseded here.
+
+Restore failure and correction
+------------------------------
+First mixed-wheel restore comparison:984 live exports versus983 restored.
+Onlymissing restoredfile wasLFFEEE-stock.bin__Application_InitializeSubsystems.c.
+Both live andrestored readback reports containedDECOMPILE_INCOMPLETE for1619A:
+15-second process timeout. The oldlive export hadbeenretained by the oldtool,
+so counts alone wereinsufficient.11 archivedprojecthashes remainedexact.
+A premature completion paragraph from the automation was immediately removed;
+no final completion orsuccessfulrestore claim is valid fromthat attempt.
+VerifyCanEvidence.java nowallows60seconds perfunction, removes astaleexport
+whenits decompilefails, andthrows aftersavingreadbackreport ifanyexport is
+incomplete. Live/independentrestore arebeingrerun withthat corrected verifier.
+This changesverification tooling only, nottheprogramdatabase orfirmware.
+
+Reproducible restore validation now lives in ghidra/verify_restore.py. It checks
+archive SHA, everylive/restoredprojectfile againstsnapshot.json, thecomplete
+expectedexport set derived fromannotations.tsv, noDECOMPILE_INCOMPLETE, all
+readbackannotationrows/counts andidenticalexport contents. --write-report
+updatesrestore-verification.json only afterallassertions pass. Bothheadless
+retry logs andthe finalreport mustpass; no partialexportset isaccepted.
+
+The60-second live retry also timed out on1619A. The strengthened verifier
+correctly removed the stale startup export and raisedIncomplete decompilation
+exports:1. Headless stillreturnedexit0, confirmingwhylog/readback checks matter.
+BothTCU readbacks arecomplete. RerunonlyECU witha300-second function allowance;
+VerifyCanEvidence.java nowaccepts anoptional third timeout argument (default60).
+No database edits, reducedscope or copiedexports areused toclaimrestoration.
+
+LiveECU300-second retry PASS:833 annotations, startup614-line export regenerated.
+Fresh startup export equals the earlier independently verified capture-delivery
+snapshot export byte-for-byte. RestoredECU300-second retry nowrunning; final
+complete comparison still required. No use of copied exports as verification.
+
+FINAL ARCHIVE STATUS — 2026-10-07
+--------------------------------
+The300-second ECU retries succeeded on both live and independently restored
+programs. Both TCU readbacks also passed. verify_restore.py nowPASS:
+1929 annotations (833 ECU/1096 TCU),984 identical complete exports,11 project
+file hashes checked before/after reopening and againsttheliveproject.
+Archive nc-at-can.tar.gz is11,010,442 bytes; SHA256
+6889fecc740512bfeac28e63330ea643954628d0ef7f5ed4ba132b6eb15f13d3.
+Both .gpr and.rep areincluded. snapshot.json/restore-verification.json own
+inventories. Ghidra12.1.3 PUBLIC, Java21.0.10, Python3.14.3. The earlier timeout
+andpremature completion attempts remain documented above; thissuccess follows
+complete fresh exports, not copied/stale output. The fresh614-line ECUstartup
+export SHA256 is5d4c35b91e520f7d351031cedc602fd95c2e0e6b664850185e65e10cc7a2a818,
+identical to the prior successfully verified capture-delivery export.
+
+Reproduce fromrepositoryroot after independent Ghidra reopening:
+ python research/ecu-at-can/ghidra/verify_restore.py research/ecu-at-can/ghidra/restore-check/cmt0-delivery-20261006 --write-report
+The ignoredrestore path isonlya reproducible extraction, nottheonlyevidence.
+Archive, annotations, exports, scripts, reports andresults areGit-eligible.
+No staging, commit orpush. PreexistingAD ghidra/nc-at-can.tar.gz.tmp unchanged.
+
+FULL CMT0 RESULT — 2026-10-07
+-----------------------------
+The existing process finished successfully:320 task pairs,32000 original
+CMT0 ISR prefixes,560 capture prefixes, two creations and20 acknowledgements.
+verify_tcu_cmt0_delivery.py PASS for runtime differentialRAM/register/MMIO
+checks and320 independent recorded clock/mixed-wheel boundary replays.
+Initial8 rows are exact. Finalphase/listempty, heap007FFFFF; originalcode2
+retirement194, activefaultclear284, inhibitclear288 andnormalinput290 remain.
+
+Full prior-row equality after ONLYclock observations/8464 accounting isFALSE.
+Do not erase or mislabel this result. tcu-cmt0-delivery-differences.json records
+all remaining changed paths:91A6 bit0 and its propagated reference snapshots/
+expected flags/returned flags. At280 original20CBC returns to209D0 after
+changing91A6 from0 to1.209B4 selects HOLD rather than HISTORY, retaining7017
+andperiod21888. At284 discrepancybit4 adds16:flags17 ratherthan16; fallback
+stilltakespriority andreturns0. Theholdbitremains through319, whilecut/inhibit/
+phase/fault recovery outputs agreewiththepreviousfixture. Thisis anobserved
+behaviorchange caused by the newly executed elapsed-counter service.
+
+Clock records prove91AC100 at280, then500 at284 and3700 at316; capturesare
+absentfrom280.20CBC's executed branch andsaveddisassembly use theCURRENT RING
+SAMPLE at91CC[91B4], not selectedreferenceperiod9198, asratio denominator>>2.
+The componentmodel in tcu-reference-source.txt has402 priorcases. A steady
+sample1216 givesfullsum21888<=91643 andratio(100<<16)/(1216>>2)=21557>538,
+consistentwithhold activation. Rawhistory/head and8158 wereNOTserialized at
+actual20CBC entry inthisrun, so this numericalexplanation is acomponent/static
+inference, not a newwholeRAM runtimegate proof. Nextcollectactualentryfields
+andcheckthecomplete20CBC effect withanindependentmodel duringtheCMT1 join.
+Do notrerunthe32k-event trace justtoforceunchangedbehavior orclearthisflag.
+Exact instructions arein tcu-cmt0-hold-disassembly.txt (20CBC..20DF8).
+
+CMT1 model reuse prepared
+-------------------------
+verify_tcu_request_timing.advance_model nowowns the existing independent
+thirteen-range schedule andphase/90C8 equations. Legacy1024-call/mode/request
+suite rerun output isbyte-identical to tcu-request-timing-verification.json:
+SHA2561b1a611036e7acdf8f26bbfeece5f5e1b02975c99faa3c89944aac06ec77f5f2.
+Saved tcu-request-timing-reuse-verification.json. CMT1 ISRprefix implementation
+isnotyetcomplete; firstresolve/recordthe observedhold difference asabove.

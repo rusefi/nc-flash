@@ -1,0 +1,89 @@
+TCU diagnostic timer startup/admission/prefix — 2026-10-07
+
+Executed evidence
+verify_tcu_diagnostic_timer.py PASS:256 original167E4 initializations with18
+ordered finite MMIO accesses each,3072 independent1218E gate cases,20 original
+1682C..1688C pre-RTE prefixes and3 unsupported-width/address rejections.
+Whole application RAM and callee-preserved startup registers checked; prefix
+register restoration and original1218E differential whole RAM checked. Profile
+arithmetic and ordered accesses independently modeled. This is not an independent
+oracle for every nested diagnostic body and not hardware IRQ acceptance.
+
+167E4 stops TSTR1 F401 bit4; clears TSR3 F480 bit0; enables TIER3 F482 bit0;
+sets TIOR3A F4AB low nibble1 by four read/modify/writes; clears TCNT3 F4A0;
+sets GR3A F4A2=15625 (3D09); restarts TSTR1 bit4. Unrelated bits preserved.
+All256 old start/IO bytes paired with status old*257/enable old*131; not an
+exhaustive Cartesian product. Zero-valued callee-saved registers preserved.
+
+1218E reads diagnostic mode8006 and readiness84A0. Mode1 admits1267C only
+when84A0,84D8 and application mode8007 all equal3; after initializer, promotes
+mode3 and calls12682. Mode3 with84A0=4 promotes5; other modes unchanged before
+tail12682. Gate cases cover256modes x8 binary readiness combinations, each
+individual readiness byte0..255 under mode1, and84A0=0..255 under mode3.
+Isolated gate stops at child1267C or12682;20 prefix cases also execute child
+initialization/body across modes0/1/3/5/255, ready/notready, statusbit0 set/clear.
+
+1682C prefix reads GR3A and TCNT3 for profile index9, reads TSR3; bit0 admits
+clearbit0, GR3A+=15625 mod65536 and original1218E call. Always records profiling
+end and restores registers before RTE1688C. Profile index9 table5F624=16;
+latency=min65535(u16(count-compare)*16/10); duration=min65535(u32(end-start)/10).
+Tests include compare wrap, nonzero latency, duration saturation and absentflag.
+F6C0 samples are external fixtures; no physical profiling-clock assertion.
+
+Conditional cadence from existing executed configuration plus primary manual
+verify_tcu_timer_configuration.py already establishes1448E PSCR1=1 and144A2
+TCR3 F4AC=4;1454E TIOR3A=1/TIOR3B=0;14962 TMDR=0. Thus no compare counter
+clear is configured and GR3A remains an output compare. F4AB is TIOR3A, NOT
+TCR3: initial visual arithmetic alone must not be mistaken for a clock setting.
+Compatible SH7055S: PSCR1=1 gives Pphi/2; TCR3 low4=4 selects phi-prime/16,
+therefore TCNT3=Pphi/32. Reload15625 =>500000 peripheral clocks per compare.
+Application interval81920 =>3125/512 application intervals per diagnostic
+compare (~6.1035). Once/application is a retained fixture, not native cadence.
+No relative start epoch, absolute clock, ISR latency, hardware admission, boot
+ordering/readiness or missed-match behavior has been established here.
+
+Primary retained source: Renesas REJ09B0045-0200H rev2.0 July2003,
+sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual
+PDFzero243/244: TSR3/TIER3/TCNT3/GR3A/TIOR3A/TCR3 addresses and widths;
+263:TSTR1 bit4;266:PSCR1 assignment;269/270:TCR3 divider;285/286:TIOR compare
+and counter-clear bits. Timing interpretation conditional on compatible silicon
+and those original configuration paths. Existing configuration report owns
+its original execution scope; this test does not execute full boot.
+
+Reproduce
+ python research/ecu-at-can/verify_tcu_diagnostic_timer.py
+Python3.14.3. Input examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Saved tcu-diagnostic-admission-disassembly.txt (1217C..121F8) and
+tcu-diagnostic-timer-disassembly.txt (167E4..168AC). GNUobjdump2.42 setup and
+package provenance in tcu-pulse-input.txt; disassemble.py tcu dis BEGIN END.
+Aligned refs:12682 literal121F4 user121DA;1267C literal121F0 user121C4;
+1218E literal168A4 user1686C;167E4 literal121E4 user12188. Relative/word refs
+not exhausted by that aligned helper. No production/ROM/shared ISA changes.
+
+Next
+Keep current shared-capture320 run separate. Join original diagnostic ISR into
+the common timeline at conditional500000phi with explicit start/tie assumptions,
+and suppress old once/application direct diagnostic hook without copying the
+task pipeline. Preserve diagnostic boundary and application oracles even when
+diagnostics occur during timeline delivery. Do not force fault ages or old
+recovery dates. Generic DTC/NVM reporting is not a new project prerequisite.
+
+All three broader requirements remain open. CHECKPOINT owns ECU/AT, distinct
+traction/roof status and next actions. User has no additional controller dumps
+or physical evidence; no repeat question. Saved locally, no staging/commit/push.
+
+Saved Ghidra evidence
+Three new function annotations167E4/1218E/1682C applied andsaved toTCU program;
+bothprograms reopened live andfrom independentarchive extraction. Apply58746,
+liveverify77972,snapshot3783,restoredverify69796 allterminalexit0; logs contain
+expected APPLIED/READBACK_OK andnoerrors/incompleteexports. verify_restore.py
+--write-report PASS:1973annotations(865ECU/1108TCU),1017identicalcompleteexports,
+11projecthashes before/afterreopen andagainstlive. Pairedarchive11019988bytes
+SHA2562bb795cad872aac38975bcb3f1176cc5b9b244f9e4d8bead9f637e8308d94764.
+Independentdirectory ghidra/restore-check/capture-timeline-20261007 iscache;
+restorable .gpr/.rep archive, annotations/scripts/exports areGit-eligible.
+Ghidra12.1.3PUBLIC/Java21.0.10,300secondexportallowance. Reproduction in
+ghidra/README.txt; no pendingheadlesssession orprojectedits.

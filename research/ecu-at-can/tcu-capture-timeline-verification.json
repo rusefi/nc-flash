@@ -1,0 +1,645 @@
+{
+  "status": "PASS",
+  "scope": "Independently enumerate arrivals and replay per-interrupt wheel/hold models.\n\nRuntime application/capture prefix checks are differential; wheel and hold\nreplays below use separate arithmetic RAM models. No physical timing claim.\n",
+  "prefix8": {
+    "task_pairs": 8,
+    "application_prefixes": 8,
+    "cmt0_prefixes": 32,
+    "independent_per_interrupt_wheel_replays": 32,
+    "cmt1_prefixes": 16,
+    "capture_prefixes": {
+      "A": 26,
+      "B": 55
+    },
+    "actual_hold_whole_ram_checks": 2,
+    "independent_command_pin_boundaries": 16,
+    "creations": 0,
+    "acks": 0,
+    "hold_events": [],
+    "transitions": [
+      {
+        "call": 0,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 0,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [],
+        "managed": []
+      },
+      {
+        "call": 4,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 1,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [],
+        "managed": []
+      }
+    ],
+    "final": {
+      "0x8007": 3,
+      "0x8080": 6,
+      "0x8081": 0,
+      "0x8084": 0,
+      "0x8088": 1,
+      "0x84f4": 8,
+      "0x84f5": 2,
+      "0x916f": 1,
+      "0x9410": 7,
+      "0x9545": 0,
+      "0x96c4": 0,
+      "0x96c5": 0,
+      "0x96c6": 0,
+      "0x9c87": 255,
+      "0x9c88": 0,
+      "0x9c8a": 0,
+      "0xa1ac": 0,
+      "0xa2b8": 1,
+      "0xa2b9": 0,
+      "0xa2ba": 0,
+      "request_word_915a": 32767,
+      "first_list_count_a202": 0,
+      "ramp_timers_8115": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "primary_timer_phase_8494": 0,
+      "heap_first_header_9f3c": 8388607,
+      "managed": [],
+      "phases": []
+    }
+  },
+  "timeline_boundary_checks": {
+    "arrivals": 4552,
+    "split_and_deepcopy_boundaries": 15
+  },
+  "full320": {
+    "task_pairs": 320,
+    "application_prefixes": 320,
+    "cmt0_prefixes": 1310,
+    "independent_per_interrupt_wheel_replays": 1310,
+    "cmt1_prefixes": 640,
+    "capture_prefixes": {
+      "A": 943,
+      "B": 1659
+    },
+    "actual_hold_whole_ram_checks": 80,
+    "independent_command_pin_boundaries": 640,
+    "creations": 2,
+    "acks": 16,
+    "hold_events": [
+      {
+        "call": 280,
+        "elapsed": 4,
+        "total": 21888,
+        "period": 1216,
+        "ratio": 862,
+        "held": true,
+        "timer": 2,
+        "flags": 1,
+        "summary": 0,
+        "history_reset": false
+      },
+      {
+        "call": 284,
+        "elapsed": 21,
+        "total": 21888,
+        "period": 1216,
+        "ratio": 4527,
+        "held": true,
+        "timer": 4,
+        "flags": 1,
+        "summary": 0,
+        "history_reset": false
+      },
+      {
+        "call": 288,
+        "elapsed": 37,
+        "total": 21888,
+        "period": 1216,
+        "ratio": 7976,
+        "held": true,
+        "timer": 6,
+        "flags": 1,
+        "summary": 0,
+        "history_reset": false
+      },
+      {
+        "call": 292,
+        "elapsed": 54,
+        "total": 21888,
+        "period": 1216,
+        "ratio": 11641,
+        "held": true,
+        "timer": 8,
+        "flags": 1,
+        "summary": 0,
+        "history_reset": false
+      },
+      {
+        "call": 296,
+        "elapsed": 70,
+        "total": 21888,
+        "period": 1216,
+        "ratio": 15090,
+        "held": true,
+        "timer": 10,
+        "flags": 1,
+        "summary": 0,
+        "history_reset": false
+      },
+      {
+        "call": 300,
+        "elapsed": 86,
+        "total": 21888,
+        "period": 1216,
+        "ratio": 18539,
+        "held": true,
+        "timer": 12,
+        "flags": 17,
+        "summary": 0,
+        "history_reset": false
+      },
+      {
+        "call": 304,
+        "elapsed": 103,
+        "total": 21888,
+        "period": 1216,
+        "ratio": 22204,
+        "held": true,
+        "timer": 14,
+        "flags": 17,
+        "summary": 0,
+        "history_reset": false
+      },
+      {
+        "call": 308,
+        "elapsed": 119,
+        "total": 21888,
+        "period": 1216,
+        "ratio": 25653,
+        "held": true,
+        "timer": 16,
+        "flags": 17,
+        "summary": 0,
+        "history_reset": false
+      },
+      {
+        "call": 312,
+        "elapsed": 136,
+        "total": 21888,
+        "period": 1216,
+        "ratio": 29318,
+        "held": true,
+        "timer": 18,
+        "flags": 17,
+        "summary": 0,
+        "history_reset": false
+      },
+      {
+        "call": 316,
+        "elapsed": 152,
+        "total": 21888,
+        "period": 1216,
+        "ratio": 32768,
+        "held": true,
+        "timer": 20,
+        "flags": 17,
+        "summary": 0,
+        "history_reset": false
+      }
+    ],
+    "transitions": [
+      {
+        "call": 0,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 0,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [],
+        "managed": []
+      },
+      {
+        "call": 4,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 1,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [],
+        "managed": []
+      },
+      {
+        "call": 45,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 1,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [
+          {
+            "index": 0,
+            "bytes": [
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "managed": [
+          {
+            "index": 0,
+            "pointer": "0xffff9f40",
+            "entry": [
+              255,
+              255,
+              159,
+              64,
+              0,
+              7,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "record": [
+              2,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              169,
+              196,
+              84,
+              226,
+              169,
+              196
+            ]
+          }
+        ]
+      },
+      {
+        "call": 47,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 1,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [
+          {
+            "index": 0,
+            "bytes": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "managed": []
+      },
+      {
+        "call": 80,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 1,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [
+          {
+            "index": 0,
+            "bytes": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        ],
+        "managed": []
+      },
+      {
+        "call": 96,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 1,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [
+          {
+            "index": 0,
+            "bytes": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              2,
+              0
+            ]
+          }
+        ],
+        "managed": []
+      },
+      {
+        "call": 112,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 1,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [
+          {
+            "index": 0,
+            "bytes": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              3,
+              1
+            ]
+          }
+        ],
+        "managed": []
+      },
+      {
+        "call": 113,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 1,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [],
+        "managed": []
+      },
+      {
+        "call": 124,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 0,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [],
+        "managed": []
+      },
+      {
+        "call": 297,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 0,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [
+          {
+            "index": 1,
+            "bytes": [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              5,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "managed": [
+          {
+            "index": 1,
+            "pointer": "0xffff9f40",
+            "entry": [
+              255,
+              255,
+              159,
+              64,
+              0,
+              8,
+              1,
+              5,
+              1,
+              0,
+              0,
+              0
+            ],
+            "record": [
+              2,
+              5,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "call": 299,
+        "0xa939": 0,
+        "0xa722": 0,
+        "0xa98e": 1,
+        "0x9415": 0,
+        "0x80e8": 10240,
+        "0x9454": 1,
+        "phases": [
+          {
+            "index": 1,
+            "bytes": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              5,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "managed": []
+      }
+    ],
+    "final": {
+      "0x8007": 3,
+      "0x8080": 6,
+      "0x8081": 0,
+      "0x8084": 0,
+      "0x8088": 2,
+      "0x84f4": 64,
+      "0x84f5": 2,
+      "0x916f": 1,
+      "0x9410": 7,
+      "0x9545": 130,
+      "0x96c4": 1,
+      "0x96c5": 1,
+      "0x96c6": 6,
+      "0x9c87": 5,
+      "0x9c88": 0,
+      "0x9c8a": 0,
+      "0xa1ac": 0,
+      "0xa2b8": 1,
+      "0xa2b9": 2,
+      "0xa2ba": 0,
+      "request_word_915a": 32767,
+      "first_list_count_a202": 0,
+      "ramp_timers_8115": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "primary_timer_phase_8494": 0,
+      "heap_first_header_9f3c": 392966,
+      "managed": [],
+      "phases": [
+        {
+          "index": 1,
+          "bytes": [
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            1,
+            5,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  "exact_first8_after_verified_observer_normalization": true,
+  "duplicate_next_interval_observations_removed_for_comparison": 2593,
+  "corrected_observer_exact_prefix9": true
+}

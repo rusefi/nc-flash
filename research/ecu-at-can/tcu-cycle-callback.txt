@@ -1,0 +1,129 @@
+TCU CYCLE CALLBACK AND A518 ACQUISITION — 2026-10-06
+
+Objective remains all open ECU/automatic-transmission CAN integration, deep
+traction-control logic/integration, and NC roof folding AND unfolding including
+interruption/resume/reversal/communication timeout/motor synchronization/fault
+recovery. None is complete. User has no additional DSC/roof firmware, captures
+or physical results. No staging/commit/push authorization; thread owns checkout.
+Previous turn made verified compare-handler/output-task progress.
+
+Executed original examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+verify_tcu_cycle_callback.py adds independent integer/fullRAM/trace oracles
+using existing original-instruction interpreters. Local explicit latches add
+F500/F522 word reads/writes. No ROM/sharedISA/sharedverifier/production edits.
+Both interrupt bodies stop before their originalRTE instructions; no synthetic
+hardware entry, delivery, nesting, clocks, timer counting or pin sideeffects.
+
+169A4 cycle-interrupt body through16A04 (beforeRTE):
+Cycle is a workinglabel; actualconfigured PWMmode andhardwareeventtiming
+are not inferred from this routine alone.
+ReadswordF500, profilesindex11 using lowword(counter-1). ReadsF522 statusbit0.
+If set, rereadsstatus, writesstatus&FFFE; zeroesF600, writesF604=4166 andclears
+87F4; calls11F7C. If clear, skips all those updates/callback. Calls15BF0 and
+restores generalregisters,PR,MACL andstack toentry values beforeRTE. Only SR
+bits other thanQ/M/T compared; RTE state restoration/delivery remains unproved.
+Profiling original15B80/15BF0/15730 execute, with stock5F62C=1. Entrytimestamp
+at8754; u16(counter-1)/10 at86F6/max871A. Exit unsigned32(timestamp-start)/10,
+cap65535 at86AE/max86D2. Explicittimestamps test wrap/saturation/retainedmax;
+no units assigned to this profiling count.
+
+11F7C promotesGBR+2 (8002) exact1 ->3, otherwise retains, then tailcalls124AA.
+124AA mode3 executes in order16F78,50B48,16E80,511CC. All other modes return
+without these input/publication updates. Both originalcallback and direct
+124AA dispatch tested for all256modebytes, includingnonboolean values.
+
+Two ADC conversions and retained filters:
+16F78 reads descriptor5C57C ->F812 through14128; count=unsignedword>>6.
+16E80 similarly5C578 ->F810.16FF6/16EFE use identical numeric conversion:
+ v=300 + signed32((u16(count)*64000) mod2^32) /2976, truncationtowardzero;
+ clamp v to0..22000, return state2 ifunchanged byclamp,else1.
+For actual10bitcounts the productdoesnotoverflow. Separatehelpertests include
+32767/32768/65535 to verify signed32wrap instead of silently assuming unbounded
+arithmetic. All1024 normalcounts execute both originalhelpers. No voltage,
+sensoridentity or physicalunits inferred from this formula.
+
+Let old be unsignedfilteredword, value be convertedword; delta=old-value.
+ -16<delta<-1 becomes-1;1<delta<16 becomes1.
+ -48<delta<=-16 or16<=delta<48 becomes trunc(delta/8).
+ All other deltasretain, including -48/+48 and -1/0/+1.
+Newfiltered=old-adjusted_delta storedword.16F78 publishesfiltered8800,
+rawcount8802,conversionstate8804;16E80 uses87F8/87FA/87FC. Everydelta-60..60
+and random arbitraryoldword/rawsamples tested. Delta bounds are asymmetric
+at -16/-48 relative to inequalities; formulas above preserveexactinstructions.
+
+50B48 copiesfiltered8800 ->A4DC, withstateA4DE fromconversionstate8804 and
+statusbytesA975/A976.511CC copies87F8 ->A518, stateA51A from87FC andA958.
+Statepriority for eitherpublisher:
+ 1 if conversionstate==2 AND allassociatedstatusbytes havebit0set;
+ otherwise4 ifany hasbit2(mask4); otherwise3 ifany hasbit1(mask2); else2.
+Thus firstcondition overridesotherstatusbits when it holds. Numericvalue is
+copied in allcases; state is separate. No external meaning assigned to these
+statuscodes, and their A975/A976/A958 writerstasks remainuntraced here.
+Nestedbytecopy5B654 executes unchanged. PublishedA518 feeds originaloutput
+clamp/scaling, adaptationoffset andfallback logic previously tested; this
+milestone replaces a fixedA518 fixture in the retained outputtask sequence.
+
+Verification:
+ python research/ecu-at-can/verify_tcu_cycle_callback.py
+ python -m py_compile research/ecu-at-can/verify_tcu_cycle_callback.py
+Python3.14.3.3970 positivechecks:2054 conversionhelper,814 filter,440publication,
+512callback/dispatch,150cyclehandler;4 expected unsupported/missingMMIO
+rejections. Finalverifier also regenerates staticconfigleads andsourcehash.
+All initial/finalruns pass; no failedfirmware/ISA lead inthismilestone.
+
+Retained80cyclehandlers, each followed byfourpreviouslyverifiedcomparehandlers
+(320total), execute the completeoutputtask with firmware-producedA518.
+F810 counts600 ->300 ->1023 ->600 produce13203 ->6751 ->22000 ->13203
+in A518 after admittedupdates; F812 counttenlower. Cycle21/22 statusclear
+holds inputpublication andproducesnoADCreads;comparehandlers stillrun using
+retainedA518. Cycle23 publisheslowernewvalue. Cycle41 clampsinputto22000,
+conversionstate1/publishedstate2; cycle61 returnsnormalstate1 withcount600.
+Each cycle's fourcomparecalls servicefourchannels, returningtaskphase3;
+actualbufferwrites and exactRAM compare againstindependent models. JSON
+retains samples, values/status, cycletrace, outputwrites andtimer/taskphases.
+Cycle/fourcompare ordering is EXPLICIT harnessschedule; it is not proof of
+hardware delivery, latency, real PWMperiod or ADCconversion timing.
+
+Factory interpretation (separate from executed code):
+DurableRenesas SH7055S-compatible manual
+sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+Table11.3 PDFzero243 (printed204) identifiesF62C TSR2A; PDFzero245 (printed206)
+identifiesF522 TSR6, F521 TCR6A,F520 TCR6B,F526 PMDR. These arecompatible
+registernames, not physicalchipidentification or proof modeconfigurationran.
+Sourcealreadydurable; read locally withPyMuPDF1.28.2. No new externaldownload.
+
+Next concrete TCUconfiguration leads (STATIC, notexecuted):
+ReproducibleMOV.W PCrelative literal scan saved in config-leads.txt andJSON:
+F520 candidate144C8;F521 nohit;F524 3816/145E4/1585E;
+F526 383C/1496C;F62A 36F0/144B2;F628 nohit. Candidateinstructions maybedata,
+base-relativeaddressing maymissdirectliterals; nohitdoesnotproveabsence.
+Inspect actualboot/init call paths attheseaddresses before modeling mode/pins.
+Cycle/compare bodies nowexecuted; earlierclock/mode/pin initialization, vector/
+interruptreturn/delivery/realcadence remainopen. Upstreamstatuswriters,8AD8,
+89AA/89A8/89AC,rawbase/A654,queues/ack/overlap/persistence andphysicalintegration
+remainseparate. A518 numericalwriter question is now answered, its unitsand
+physicalsource are not. Do not silently keep it as an unexplorednumericwriter.
+Next traction: ECUfulltaskordering/freshness/399B0callers (bodyalreadyexecuted),
+CAN211/21A sender/units, boardidentity/remoteDSCactuation. Nextroof requiresnew
+applicablefullsource orOEMreceiver/physicalevidence; BOTHdirections interruption/
+reversal/timeout/sync/recovery remainopen. User has noextraartifacts; don'taskagain.
+
+Disassemblyinputs preserved with stemtcu-cycle-callback-{input-a,input-b,
+publish-a,publish-b,callback,dispatch}-disassembly.txt. Original169A4 bytes
+arealreadyin tcu-output-timer-initialization-disassembly.txt. Reproducewith
+GNU SHbinutils2.42/disassemble.py, targettcu; setup/provenance inpriorrecords.
+The script reproduces literal scan, noonlycopy in/tmp. All artifacts Git-eligible.
+
+Ghidra save/restore complete:
+9newannotations; bothprogramssaved; independentreadonlyreopen verifies776ECU/
+966TCU (1742total),869byte-identicalexports and11projecthashes before/after.
+Archive10,961,558bytes SHA256
+326352ffec16492ef5aaea75ff422560de7ba6f90fce74f8d00b707d778fe965.
+Paired.gpr/.rep preserved withannotations/scripts/exports andmanifests.
+10newtaskartifacts plus9exports Git-eligible. Initial/finalfullverifiers,
+Pythoncompile, factorysourcehash andGitdiffchecks pass. Noerrors/incomplete
+exports/locks/pendingjobs. No staging/commit/push; mixedindexADarchive.tmp
+preserved. Nextwork is actualmode/pinsetup at savedcandidates, not repeating
+thesecompletedroutinebodies as ifnew. Allthree fullrequirements remainopen.

@@ -23,7 +23,7 @@ undefined * LocalInputDiag_UpdateActivity(void)
       *PTR_DAT_0006c02c = 1;
     }
   }
-  puVar2 = (undefined *)(*(code *)PTR_FUN_0006c03c)(PTR_DAT_0006c038);
+  puVar2 = (undefined *)(*(code *)PTR_FUN_0006c03c)(PTR_SpeedCandidate_ProtectedSelected_0006c038);
   if (extraout_fr0 <= *(float *)PTR_DAT_0006c040) {
     *PTR_DAT_0006c044 = 0;
   }

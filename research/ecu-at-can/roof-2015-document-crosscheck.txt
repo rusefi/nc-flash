@@ -1,0 +1,46 @@
+Late-NC owner-manual crosscheck (2026-10-06)
+==========================================
+Scope remains NC PRHT folding AND unfolding, interruption/resume/reversal,
+communication timeout, motor synchronization and fault recovery. This is
+factory documentation evidence, not controller execution or CAN capture.
+
+Source and durable identity
+---------------------------
+Mazda USA, 2015 MX-5 Owner's Manual, Form8EN7-EA-14E, Edition3;
+printed JapanOct2014(Print3), pageheaders FridaySeptember5,2014.
+https://www.mazdausa.com/siteassets/pdf/owners-optimized/2015/mx-5-miata/2015-mx-5-owners-manual.pdf
+Saved sources/mazda-2015-mx5-owner-manual.pdf,448PDFpages,4,929,282bytes.
+SHA256415389e560193d4c0dbd263e17b078728d9cffdb54fb3008225310267104f7ec.
+Downloaded successfully via Pythonurllib.request.urlopen(timeout=30).
+Poppler pdftotext24.02.0 reproduces the searchable extraction:
+ pdftotext -layout research/ecu-at-can/sources/mazda-2015-mx5-owner-manual.pdf -
+Text pagebreaks map PDFzero-index103/104/105/115 toprinted3-50/3-51/3-52/3-62.
+The sourcePDF, not an external path or searchsnippet, is durable evidence.
+
+Findings (paraphrase)
+--------------------
+Printed3-50 lists automatic-transmission Park ORNeutral among operational
+conditions. Procedures3-51/3-52 direct the operator toPark. ThereforeaPark
+procedure instruction isnot evidence ofaPark-only controllerinterlock.
+Pages3-51/3-52 independently state thatrelease stopsopening/closing and
+repressing the same switch resumes thatdirection.3-62 warnsaboutanunfinished
+operation whena switchisreleased. These agreewith the earlierNCdocuments.
+No explicit release-then-opposite switch admission matrix or numericCANtimeout/
+motor synchronization threshold wasfound inthe roofsection. Searchfor
+'opposite' foundonly tirechocking; no'synchron' match. This doesnotprove
+absence of undocumented firmwarebehavior. Bothdirection/recovery requirements
+remain open.
+
+Search provenance and failed leads
+----------------------------------
+Queries: 'Mazda MX-5 NC power retractable hardtop reverse operation opening
+closing switch interruption manual'; 'Mazda MX5 PRHT roof U0030 timeout
+seconds synchronization hall pulse difference service manual'. Search mixed
+NC material with2017/2018ND/RF pages; thelatterareexcluded fromNC evidence.
+WebPDFopen succeeded, butsubsequentfind/openrequests returned internalerror/
+timeout. ThosefailedquerieswereNOT treatedasno-match evidence; the successful
+localPDF downloadandpdftotextsearch supplied the actualresults above.
+No newDSC/PRHT firmware orvehicle testdata acquired. Userreportednoneavailable.
+Next meaningfulroofstep: receiver/wiringrevision evidence orfactorytechnical
+material with explicit reversal/timeout/synchronization rules. Repeatingthe
+same owner-manual pause/resume statementdoesnotclose thesemissingrequirements.

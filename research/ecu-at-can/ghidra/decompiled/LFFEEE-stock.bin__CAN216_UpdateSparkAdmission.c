@@ -15,7 +15,7 @@ uint CAN216_UpdateSparkAdmission(void)
     uVar1 = (*(code *)PTR_FUN_0003b04c)(PTR_DAT_0003b048);
     uVar1 = uVar1 & 0xff;
     if (((uVar1 == 1) && (*PTR_DAT_0003b050 == '\0')) &&
-       (uVar1 = (uint)(char)*PTR_DAT_0003b054, uVar1 == 0)) {
+       (uVar1 = (uint)(char)*PTR_Control_RawSecondFallbackLatch_0003b054, uVar1 == 0)) {
       uVar1 = (*(code *)PTR_FUN_0003b04c)(PTR_DAT_0003b058);
       uVar1 = uVar1 & 0xff;
       if ((uVar1 == 0) && (*PTR_DAT_0003b05c == '\0')) {

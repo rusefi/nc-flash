@@ -1,7 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Static: calibration76E78/7A/7C and9330 bit0 form factor;10B74 converts80EA and91A2, clampsFF00
-   into932C/932E then50F26. Full execution stops at unsupported MULS.W22DFE; units unproved. */
+/* 512 complete22DDC wholeRAM cases: stockcoefficient703, nonnegative0..32767 sources,
+   floor(x*703/256) cappedFF00 ->932C/932E;800E=first>>8; tail50F26 scales/copiesstatus. Native
+   selectedoutputs agree. Othercalibrations/units unproved; tcu-recovery-reference.txt. */
 
 void Motion_ConvertTwoPeriodDerivedValues(void)
 

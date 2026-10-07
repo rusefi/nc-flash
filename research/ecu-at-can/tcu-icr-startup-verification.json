@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "Documented ICR controls/read-only NMIL and original14422/1442A configuration.\n\nFinite constant NMI input; no pin transitions/interrupt acceptance. Legal\nbyte/long accesses remain outside this word-only fixture. Reserved writes\nrejected without inventing hardware behavior. Optional zero IRQ-status input\nis bounded to no pending flags/pin assertions. Existing INTC owner is reused.\n",
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "icr_control_cases": 2048,
+  "original14422_whole_ram_register_cases": 1024,
+  "rejected_accesses": 14,
+  "original1442a_zero_status_cases": 64,
+  "rejected_irq_status_cases": 6,
+  "source": "SH7055S REJ09B0045-0200H PDFzero136/149/150",
+  "limits": "ICR word accesses with constant external NMIL; optional IRQ-status0 only, no pending flags/pin assertions or read-one clearing semantics. No IRQ/NMI events/full15574 completion."
+}

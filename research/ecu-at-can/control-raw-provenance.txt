@@ -1,0 +1,86 @@
+RAW ACQUISITION AND FALLBACK QUALIFICATION — 2026-10-06
+
+Objective: extend ECU/AT integration and deep traction evidence without losing
+NC roof folding/unfolding interruption/recovery scope. All remain incomplete.
+User has no additional DSC/roof firmware, captures or bench/vehicle results.
+No staging, commit or push authorization. Research-only; no production/ROM edits.
+
+Executed evidence (original LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08):
+6670/6678 map acquisition channel29 word4042 through filter2534, unsigned
+conversion20A8 and lookup22F8 descriptorA3A24 to40E0; filteredword40E4.
+701C/7024 similarly map channel28 word4040 through descriptorA3A30 to40F4,
+filteredword40F8. Stock DC474/DC490 filter gain256 passes rawword unchanged.
+Both scale unsigned16 input by5/65536 before their distinct nonlinear tables.
+Initializer copies rawword before entering updater; stock gain makes oldword
+irrelevant. Full application RAM compared, including both original helpers.
+66B8 returns1 for40E4>=63487,2 for<2047,else0.7064 returns1 for40F8>=58327,
+2 for<2559,else0. These raw classifiers are distinct from byte qualification.
+
+6D876 uses6CAE (full3976C decode of channel29 rawword>>8) and914B exact1.
+Below ROM E03AC=8 sets8F31=1 only when914B==1; aboveE03AD=248 similarly
+sets8F32. Otherwise each flag clears. It always first clears8F38.
+9462 exact1 clears8F37; otherwise an inclusive8..248 sample sets8F37/38=1,
+independently of914B. Out-of-range samples retain8F37 until latch logic.
+6D904 resets8F2C/2D to E03AE=50 and8F2E/2F toE03AF=3 when9462==1 or8F38==1.
+Otherwise8F31 exact1 decrements low counters2C/2E,8F32 exact1 high2D/2F;
+all saturate atzero. Disabled qualification retains counters rather than
+resetting them.6D850 initializes by6D876, reloads counters, tailcalls6D9E6.
+Original caller slice1B17E..1B190 executes6D876 ->6D904 ->6D9E6 in that order.
+This slice executes in all180 retained cycles, with full RAM comparison
+against independently checked component oracles and stack/SR checks.
+
+Correction to scope of prior control-raw-inputs.txt:6D9E6 alone is sticky when
+only the numeric publisher input recovers. The upstream6D876 DOES supply a
+reset on in-range6CAE, so the tested original caller sequence clears fallback
+on recovery. Do not generalize the isolated-latch result into system-wide
+permanent fallback. Inputs40E0/40F4 and byte6CAE share acquisition provenance;
+physical identities/units and actual timing still unproved.
+
+Verification: python research/ecu-at-can/verify_control_raw_provenance.py
+2228 scaling,2228 classification,4096 qualification,2048 countdown and16
+initialization checks pass (10,616 total). All1024 ADC-aligned values tested
+per scale/classifier, plus arbitraryword/boundary/oldstate/init combinations.
+Qualifier exhausts256 samplebytes x4 enablebytes x4 modebytes. Countdown
+uses deterministic seed6D904 and zero,1,2,3,49,50,127,128,255 counter cases.
+180 retained originalADC-copy/decode/scale/caller/publication/target cycles
+verify low and high faults, suspended qualification and recovery endpoints.
+Low starts call1, suspends3..7, fallback starts8; long low latch55; recovery61.
+High starts62, fallback64,long high latch111,recovery126. Mode reset150;
+low fallback resumes153. Full original acquisition slice4B80..4C94 uses
+explicit register samples, with no hardware conversion/interrupt simulation.
+First-channel8EF8 and other target inputs remain fixtures. JSON saves every
+retained result. Partial39894 decoder does not update6CAE (prior evidence).
+Call counts MUST NOT be converted to elapsed time without task evidence.
+
+Reproduce with repository Python3.14.3 and existing shared interpreters.
+SH disassembly uses binutils2.42 extracted path/tool setup recorded in earlier
+acquisition evidence. New disassemblies retain6670/701C/qualifier/caller bytes;
+control-raw-provenance-leads.txt records candidate literal users, not exhaustive
+writer proof. No shared interpreter/verifier changed. Initial verifier passed;
+second run added actual caller-slice execution and also passed.
+
+Next traction:914B enable writer and8EF8 qualification, original scaler/decode
+caller order and399B0 caller regions/cadence (399B0 body already executed).
+Periodic third ADC bank is sampled selectively; do not assume every qualifier
+call sees a fresh channel29 conversion. CAN211/21A sender/units, sensor wiring,
+DSC internals/actuation and physical tests remain missing.
+Next TCU:tcu-output-adaptation.txt clock/mode/pin setup,1692E/169A4 callbacks,
+17B1A/full127BA, upstream writers, queues/ack/overlap/persistence/physical work.
+Next roof:roof-revision-source-audit.txt needs a new applicable source or OEM
+receiver evidence; both directions, interruption/reversal/timeout/sync/recovery
+remain open. Existing exhausted archive listing is not new evidence.
+
+Next caller leads (static literal candidates, not yet executed): E514 loads
+7024; E51A loads6678 (poolsE684/E688).914B candidate users span6CDA4..74DFC;
+see saved leads. Do not treat a lack of32bit literal hits as absence of other
+writers, especially base-relative accesses. Original qualifier slice is
+executed; surrounding1Bxxx task admission and cadence remain unexecuted.
+
+Ghidra completion:10 new annotations plus1 refined latchcomment, bothprograms
+saved and independent restored readback768ECU/948TCU.1716 total annotations,
+846 byte-identical exports,11 projecthashes checked before/afterreadonly reopen.
+Archive10,956,742bytes SHA2568fd38374c8f1fc7f2e17cee076c8f25a2237c7670f03da0781b71948a0225d51.
+Both.gpr/.rep preserved. No locks/errors/incomplete decompiles.8 new evidence
+artifacts plus9 exports Git-eligible; no staging/commit/push. Mixedindex AD
+archive.tmp preserved. No ROM, sharedinterpreter orproductioncode changes.

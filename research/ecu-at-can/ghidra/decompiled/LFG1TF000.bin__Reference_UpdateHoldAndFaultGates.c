@@ -1,8 +1,9 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* 402 tests: holdbit0 if historysum<=91643 and elapsed91AC ratio>538; otherwise
-   clears8158.8158>=244 setsbits1/2 andreset. Low809A/nonzero8080/index0 clearsbit1.9194bit0
-   ORs91A6bit1,92C6bit1,AC87. See tcu-reference-source.txt. */
+/* Independent2048 wholeapplicationRAM cases PASS. Short32 andjoined320 observe8/80actual209D0
+   returns withwholeRAM model. Late280 actualhead9/history18*1216/elapsed100/timer8 ->ratio21557,
+   holdbit0. Currentringsample divisor, notselectedperiod9198. Noresettimeout reached injoinedtrace.
+   Supplied100:8 clocks; tcu-clock-hold.txt andtcu-cmt1-delivery.txt. */
 
 void Reference_UpdateHoldAndFaultGates(void)
 
@@ -32,7 +33,7 @@ void Reference_UpdateHoldAndFaultGates(void)
     *pbVar5 = *pbVar5 | 4;
     Reference_ResetCaptureHistory();
   }
-  if (((DAT_ffff809a < *(short *)PTR_DAT_00020e20) && (TransmissionStateClass != 0)) &&
+  if (((Primary_ApplicationInput < *(short *)PTR_DAT_00020e20) && (TransmissionStateClass != 0)) &&
      (CAN231_SixStateSource == 0)) {
     *pbVar5 = *pbVar5 & 0xfd;
   }

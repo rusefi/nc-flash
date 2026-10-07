@@ -1,0 +1,133 @@
+TCU output correction and peripheral handoff (2026-10-06)
+========================================================
+Objective: close ECU/AT CAN integration, deep traction integration and NCroof
+folding AND unfolding, including interruption/resume/reversal, timeout,
+synchronization andfaultrecovery. Allthree remain incomplete. User has no
+extra controller dumps/captures/bench results. No staging/commit/push authority.
+
+Current progress: complete18A44 correction,18816 wrapper and14280 write now
+execute with original arithmetichelpers and independent RAM/MMIO oracles.
+Final verified results:40 initializers,800 arbitrary handoffs,980 peripheral
+conversions,375 accumulator cases,1152 fallback cases,1088 acquisition cases,
+20 original caller tails,160 retained chains and7 expected access rejections.
+All pass. No test failures or ISA/ROM/shared-verifier modifications.
+
+Executed write path
+-------------------
+ROM5C588 maps zero-based channels0/1/2/3 to peripheralword destinations
+FFFFF510/F512/F516/F514.14280 writes exactly one16-bit word to the selected
+address. This proves softwarewrite address/value, not timerconfiguration,
+electricalwaveform, valveidentity, physicalactuation or CANmessageidentity.
+Local OutputSink accepts only these wordwrites; reads/wrongwidth/other
+peripherals fail. Added explicit resultword reads are the only othernewMMIO.
+
+18A44 independent model (all arithmetic widths follow original opcodes):
+ j=2*channel. s16/s32 are signed reinterpretations, u16/u32 unsigned.
+ D=trunc(s32(u16(A5D4+j)*u16(8A6C+j))/1000).
+ M=u32(u16(8A64+j)*s16(8A4C+j))/1000 (unsigned integer division), then
+ M=u32(M*u16(8AD8))/2946 (unsigned division), plus s16(8A54+j).
+ StorewordM->8A3C+j. E=s16(s16(A5E4+j)-s16(storedM))->8A34+j.
+ P=5AC50 signedword clamp oftrunc(s32(E*u16(8A7C+j))/1000) between-D,D.
+ I=s32(oldlong8A9C+4i + E*u16(8A8C+j));18E48 compares first against
+ -s16(D)*1000 then+s16(D)*1000. Negative bounds are not reordered here.
+ StoreI, correction=trunc(I/1000).32-bit addition wraps beforecomparisons.
+Signedwordclamp helpers compare low16bits, butreturn the original full
+register for the chosen argument; reference preserves that distinction.
+
+If8A60+i==1, reset mode applies when:
+ - raw8A2C+j is outside inclusive68..1000;
+ - or u16(A518)<10500, E>0 ands16(D-200+correction)>=u16(A518);
+ - or A5A0 is exactly1.
+It sets8A5C+i=1. Otherwise that byte is cleared, but a previousnonzero byte
+still requests a reset on thiscall. Reset zeroesP andsets correction to
+trunc(s16(D)*20/80); accumulator becomes s16(correction)*1000.
+If8A60+i!=1 andA5A0==1, P/correction/accumulator insteadbecomezero.
+Otherflag values are not treated as1. Final8AAC+j is signedwordclamp of
+D+P+correction between0 ands16(A518), including helper's sortedbounds.
+18816 takesone-basedchannel, executes18A44 andthen clears8A64+j.
+
+14280: ifA518wordzero, rawoutput=33313. Else letK=s16(8A44+j):
+ raw=u32((33333-K)*s16(argument))/u16(A518) +K.
+ It unsignedword-clamps low16bits to0..33313 andwrites the selectedword.
+Out-of-domain signedword/unsigned-division behavior is tested, not assigned
+physicalmeaning. A518 identity andupstreamproducer remainunverified here.
+
+Initialization/calibration
+--------------------------
+18754 loadsstock8A6C/74=[5500]*4;8A7C/84=[2560,2050,1540,1540];
+8A8C/94=[450,440,660,660]. Initialerror8A34=100;8A3C/64/44 andintegral=0.
+Otherthresholds/counters andpointer5F84C aremodeled; no fullbootclaim.
+Nested18942 checksum is s16(s16(63C8)-1456+sum(s16(63B8..63C6words))).
+Ifit matches63CA, gain8A4C clampsstored63B8..BE to900..1100 andoffset8A54
+clamps63C0..C6 to-100..100;8ABC=0. Otherwisegains1000/offsets0;8ABC=1.
+These RAMinputs/checksum do notprove EEPROM persistence or physicalcalibration.
+
+Executed acquisition and retained recovery
+----------------------------------------
+188FC calls14128 with5C568/56C/570/574 pointers toF800/F802/F804/F806.
+14128 returns10-bit(raw>>6). Application8A2C order mapschannels[0,1,3,2].
+188FC adds eachnewcount intoits8A64word, wrapping;18816 resetsselectedword.
+Final run passed tests of all1024counts, arbitraryrawbits and retainedacquisition before
+handoff. Fouracquisitions perchannel1service areexplicit harnesscadence;
+actual127BA phase/tasktime and18830 adaptation remainunproved.
+
+The retained chain now feeds actual8A34 correction error into the next52EDC
+sign/sticky check. Call1 output395 writes1097 toF512; call2 output888 writes2466.
+Retained integral saturation holds outputzero at calls59..66 even as driver
+recovers. At call110 A5A0==1 forces correction737/integral737000, output3685
+and buffer10236. After inhibit clears at116, previous fallback still resets:
+output3677/buffer10213. At117 normal correction resumes: output2983/buffer8286.
+These are numbered harness calls, not milliseconds. Acquisition executes four
+times before each selected channel1 service; other channel sums wrap without
+service. Full127BA/127FC scheduler, external plant and ADC completion unmodeled.
+
+Factory register evidence (distinct from execution)
+--------------------------------------------------
+Renesas SH7055S manual REJ09B0045-0200H, revision2.00 July2003, table11.3
+(printed206/PDFzero245) identifies F510/F512/F514/F516 as BFR6A/B/C/D.
+Thus firmware channel order0/1/2/3 maps BFR6A/B/D/C under this compatible map.
+Section11.2.23 (printed335-336/PDFzero374-375) describes16-bit PWM buffers
+transferred to duty registers at corresponding cycle-register compare match.
+A write therefore proves buffer content only; timer mode/clock/cycle and pin
+configuration still determine actual behavior. SH7055S-compatible register
+identity is not physical chip identification (TCU XML carries aSH7058 label).
+Durable PDF and provenance: sources/renesas-sh7055s-hardware-rej09b0045-0200h.
+{pdf,json};1004pages,5,102,824bytes,SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+Official source: https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual
+Previously downloaded PDF copied from analysis scratch; official web PDF
+rechecked. Fresh urllib download returned403; no fresh byte-comparison claim.
+
+Sources/reproduce
+-----------------
+TCUexamples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+ python research/ecu-at-can/verify_tcu_output_handoff.py
+Python3.14.3; existingSHExtract interpreter plus localboundedMMIO subclass.
+Disassembly saved as tcu-output-handoff-{body,accumulator,peripheral,
+initialization,acquisition,inhibit,adc}-disassembly.txt. GNU SHbinutils2.42:
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+ python research/ecu-at-can/disassemble.py \
+ --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+ tcu dis 0x18A44 0x18C38
+Nested5AE90 signeddivision,5AF44 unsigneddivision andwordclamps execute;
+no arithmetichelper isstubbed. SharedISA/priorverifiers unchanged.
+AllapplicationRAM compared (syntheticstack excluded), exact MMIOwrites and
+ADCreadorder; actualtimer/ADC status/completion areoutside the model.
+
+Remaining objectives / next
+---------------------------
+TCU: verify peripheral configuration andphysical
+mapping,18830/18C38 adaptation,18E76 offsetlookup, A518/8AD8/8A60 inputs,
+actual127BA/127FC taskorder/cadence. A654 andrawbasewriters, queues/ack/overlap,
+persistence/CAN/physicalintegration remain independent requirements.
+Traction:4DFE followup5E38/5CF4/completioncontract, NCboard/channel1/8 identity,
+raw6Dxx/8F30/399B0 andremoteDSCsender/units/actuation remainopen.
+Roof: factorywiringrecovered but bothdirections reversal/interruption/recovery,
+numericcommunicationtimeout/pulse-synchronization andOEMreceiver remainopen;
+nextapplicable2009technical/multiplex09-02F/G orreceiver evidence. Noextra
+userartifacts. Ghidra saved with20 new annotations; independently restored1,661 annotations,
+820 identical exports and11 hashes before/after reopen. Final archive identity
+is in CHECKPOINT.txt and ghidra/restore-verification.json. Python compilation
+and git diff --check pass;12 new artifacts are Git-eligible. Saved locally,
+not staged/committed/pushed; existing mixed index preserved.

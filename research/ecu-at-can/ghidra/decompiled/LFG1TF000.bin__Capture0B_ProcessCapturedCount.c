@@ -2,7 +2,12 @@
 
 /* Unsigned32 timestamp delta/10 ->8908, calls211DC; clears88F0 and saturating
    increments8900/8902/8904.288 new timestamp/wrap cases connect history/measurement to shift
-   lifecycle/CAN216. Earlier6001-call0722 test in speed-fault.txt; physical mapping open. */
+   lifecycle/CAN216. Earlier6001-call0722 test in speed-fault.txt; physical mapping open.
+   Complete126EC experiment supplies5890 then6490 intervals, no age overrides; measured10865 at24
+   ->9861 at71. See tcu-captured-requests.txt. Joined320 recovery pairs execute560
+   originalcaptureISRprefixes with differentialRAM/register/MMIO checks; exactpriortrace
+   afteronlynewobservations andcallbackPR normalization. See tcu-capture-delivery.txt; no
+   hardwareadmission/cadence proof. */
 
 undefined4 Capture0B_ProcessCapturedCount(int param_1)
 

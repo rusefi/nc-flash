@@ -1,0 +1,172 @@
+{
+  "status": "PASS",
+  "scope": "Verify actual20CBC inputs/returns in the short native-clock loss experiment.",
+  "task_pairs": 32,
+  "cmt0_prefixes": 3200,
+  "capture_prefixes": 40,
+  "actual_hold_whole_application_ram_checks": 8,
+  "exact_prior_first20": true,
+  "events": [
+    {
+      "call": 0,
+      "elapsed": 0,
+      "timer_before": 2,
+      "total": 976064,
+      "period": 1216,
+      "ratio": 0,
+      "held": false,
+      "timer": 0,
+      "flags": 0,
+      "summary": 0,
+      "history_reset": false,
+      "selected_reference": {
+        "branch": "stale",
+        "result": 0,
+        "reference": 0,
+        "period": -1,
+        "flags": 4
+      }
+    },
+    {
+      "call": 4,
+      "elapsed": 0,
+      "timer_before": 8,
+      "total": 807680,
+      "period": 1216,
+      "ratio": 0,
+      "held": false,
+      "timer": 0,
+      "flags": 4,
+      "summary": 2,
+      "history_reset": false,
+      "selected_reference": {
+        "branch": "history",
+        "result": 190,
+        "reference": 190,
+        "period": 807680,
+        "flags": 0
+      }
+    },
+    {
+      "call": 8,
+      "elapsed": 0,
+      "timer_before": 8,
+      "total": 583168,
+      "period": 1216,
+      "ratio": 0,
+      "held": false,
+      "timer": 0,
+      "flags": 0,
+      "summary": 0,
+      "history_reset": false,
+      "selected_reference": {
+        "branch": "history",
+        "result": 263,
+        "reference": 263,
+        "period": 583168,
+        "flags": 0
+      }
+    },
+    {
+      "call": 12,
+      "elapsed": 0,
+      "timer_before": 8,
+      "total": 358656,
+      "period": 1216,
+      "ratio": 0,
+      "held": false,
+      "timer": 0,
+      "flags": 0,
+      "summary": 0,
+      "history_reset": false,
+      "selected_reference": {
+        "branch": "history",
+        "result": 428,
+        "reference": 428,
+        "period": 358656,
+        "flags": 0
+      }
+    },
+    {
+      "call": 16,
+      "elapsed": 0,
+      "timer_before": 8,
+      "total": 134144,
+      "period": 1216,
+      "ratio": 0,
+      "held": false,
+      "timer": 0,
+      "flags": 0,
+      "summary": 0,
+      "history_reset": false,
+      "selected_reference": {
+        "branch": "history",
+        "result": 1145,
+        "reference": 1145,
+        "period": 134144,
+        "flags": 0
+      }
+    },
+    {
+      "call": 20,
+      "elapsed": 100,
+      "timer_before": 8,
+      "total": 21888,
+      "period": 1216,
+      "ratio": 21557,
+      "held": true,
+      "timer": 8,
+      "flags": 1,
+      "summary": 0,
+      "history_reset": false,
+      "selected_reference": {
+        "branch": "hold",
+        "result": 1145,
+        "reference": 1145,
+        "period": 134144,
+        "flags": 1
+      }
+    },
+    {
+      "call": 24,
+      "elapsed": 500,
+      "timer_before": 16,
+      "total": 21888,
+      "period": 1216,
+      "ratio": 107789,
+      "held": true,
+      "timer": 16,
+      "flags": 1,
+      "summary": 0,
+      "history_reset": false,
+      "selected_reference": {
+        "branch": "hold",
+        "result": 1145,
+        "reference": 1145,
+        "period": 134144,
+        "flags": 1
+      }
+    },
+    {
+      "call": 28,
+      "elapsed": 900,
+      "timer_before": 24,
+      "total": 21888,
+      "period": 1216,
+      "ratio": 194021,
+      "held": true,
+      "timer": 24,
+      "flags": 1,
+      "summary": 0,
+      "history_reset": false,
+      "selected_reference": {
+        "branch": "hold",
+        "result": 1145,
+        "reference": 1145,
+        "period": 134144,
+        "flags": 1
+      }
+    }
+  ],
+  "limits": "Early captureloss fixture, not a raw-entry replay of the original320-pair call280."
+}

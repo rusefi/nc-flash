@@ -1,0 +1,113 @@
+TCU CMT configuration and relative timing — 2026-10-07
+======================================================
+Objective remains ECU/AT CAN integration, deep traction control and NC roof
+folding AND unfolding, interruption, reversal/resume, timeout, synchronization
+and recovery. All incomplete. User has no further DSC/roof evidence. Local
+work only; no staging/commit/push. Prior research thread remains paused.
+
+Executed firmware evidence
+--------------------------
+verify_tcu_cmt_configuration.py PASS:96 component cases,32 actual caller-slice
+cases,32 supplied compare/start chains,32 actual start-caller slices and6
+rejected accesses. Original ROM
+examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Original15608..15614 calls14686,1469A,1468E in this order:
+ 14686 writes wordFFFFF710=0 (stop both channels).
+ 1469A writes wordFFFFF714=0,FFFFF71A=0 (both counters).
+ 1468E writes wordFFFFF712=0x41,FFFFF718=0x41 (both control/status).
+Exact ordered MMIO and independently expected register state pass over32
+random initial latch states; applicationRAM/SP/SR preserved. Original16D5C
+then16CE4 compare/start leaves, in explicitly supplied order, set624/1279
+and start bits0/1. Follow-up original11698..116A4 slice calls123B0 then12374 in that order.
+32 cases independently verify all initialized RAM fields, preserved91AC/90C8,
+SP/SR and the same six ordered compare/start accesses. Thus the local
+startup caller order is executed; elapsed offset and fullboot path between
+configuration15608 andstart11698 remain unproved.
+Strict software latches reject wrong widths/unknown registers; hardware status
+side effects and actual clock counting are not modeled.
+
+The aligned-long literal search missed these references: MOV.W loads sign
+extend F710/F712/F718. Reproducible candidate word-reference scan is included
+in the verifier/result; it is not a complete computed-address dataflow search.
+Saved original instruction excerpts: tcu-cmt-configuration-disassembly.txt.
+Other static writers:3A74 clears both control words;1591E stops channels,
+reads/clears controls and zeros counters. Their caller/admission context is
+not executed here. Literal pools in disassembly are data, not instructions.
+
+Conditional hardware interpretation and correction to timing expectations
+------------------------------------------------------------------------
+Official Renesas SH7055S REJ09B0045-0200H Rev2 July2003, sections14.2.2,
+14.2.3 and14.4.2, printed449..453/PDFzero488..492. Official URL rechecked
+2026-10-07: https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual
+Repository source sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+This is a compatible register interpretation, not physical chip identification.
+0x41 enables compare interrupts and selects Pphi/32 for BOTH channels.
+The match flag occurs on the clock after the counter equals the compare:
+period0=(624+1)*32=20000 peripheral clocks;
+period1=(1279+1)*32=40960 peripheral clocks.
+If these configurations are active together without later reconfiguration,
+CMT0:CMT1 event frequency is256:125 =2.048:1, independent of unknown absolute
+Pphi. The previous100:8=12.5:1 supplied ratio is not that relative frequency.
+All previous lifecycle/hold results remain valid for their explicitly supplied
+schedule; they do NOT prove vehicle cadence or behavior at this new ratio.
+No absolute milliseconds, hardware acceptance, initial phase, priority,
+interrupt nesting or application-task frequency is established here.
+
+Next concrete work
+------------------
+Original12374/123B0 local caller11698..116A4 is now executed. Trace its
+parent1168A admission, reset/vector and interrupt-priority producers,
+then build an explicit peripheral-clock event schedule preserving256:125.
+Keep start offset/ties and task/CAN/capture scheduling assumptions explicit;
+do not merely replace8 by49 rounded calls per100ticks. Reuse independent ISR
+models and record actual hold/qualification/retirement behavior; no forced
+internal state or blindly assumed equality with the old schedule.
+Traction next: originalevent2 producer/admission/order vsqueuedtask7;
+CAN211/21A sender/units andremoteDSC/actuation remain missing. Roof next:
+applicable revision/VIN technical source for release/reverse, CANtimeout and
+L/Rpulse mismatch thresholds or OEM/physical evidence; both directions and
+all interruption/recovery cases remain open. Do not repeat unavailable dumps.
+
+Reproduce
+---------
+ python research/ecu-at-can/verify_tcu_cmt_configuration.py
+Python3.14.3. Disassembly GNUobjdump2.42, using existing disassemble.py and
+/tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump with its extracted
+usr/lib/x86_64-linux-gnu in LD_LIBRARY_PATH; setup is in prior timer reports.
+The repository verifier, JSON, original ROM and disassembly retain the proof;
+no temporary path is the sole result. Ghidra update tracked in checkpoint.
+
+Static next leads (not executed admission proof)
+----------------------------------------------
+AlignedROMwords102F0=16D6C and10300=16CF4 are candidate vector entries
+relative to10000: indices188 and192. VBR/reset context still toverify.
+RelativeBSR candidates11586/115C6 call1168A. Saved11528..115D0 shows
+mode dispatch fromGBR+0, GBR+5, byte84A0 andlong6000; interveningcalls and
+modeproducers are notexecuted bythecurrentstartup-slice proof. Do not equate
+these candidates to fullboot admission. Next inspect VBR/INTC setup and
+original11528 state machine before assigning hardware interrupt/task cadence.
+
+Additional static leads preserved for next execution:10400 masksSR interrupts,
+1040C loads10000,1040E setsVBR;10432 calls15574.143DC..14420 configuresINTC,
+includingED12=0x0980 viaED0C+6 at14412. Compatiblemanual table7.3 printed108/
+PDFzero146 assignsCMT0 vector188/IPRJbits11..8 andCMT1 vector192/bits7..4,
+consistent withcandidatepriorities9 and8. Source rechecked2026-10-07.
+These are STATIC interpretations, not executed VBR/priority/acceptance proof.
+ED12 literal-only searchmisses base+6. Alternate15D3C masksinterrupts, setsVBR0
+anddispatchesvector8 usingstackfromvectorC; its triggeringcontext is open.
+Next execute10400..10416 and143DC leaf/caller withstrictINTC latches and
+independentRAM/register models, thenjoinadmission/exactratio schedule.
+
+Verified Ghidra persistence — 2026-10-07
+----------------------------------------
+Bothprograms saved andpairedarchive independentlyextracted/reopened read-only.
+1933annotations(833ECU/1100TCU),988 completeidenticalexports,11filehashes
+verified before/after andagainstliveproject.11,011,949-byte archive SHA256
+59af9265e16f4a0e0af61b535a289ff3921c4b88c3660b631c241d84fe1c0647.
+Ghidra12.1.3 PUBLIC/Java21.0.10,300-second export allowance; noERROR/Exception/
+DECOMPILE_INCOMPLETE inapply/live/restore logs. verify_restore.py --write-report
+PASS for ghidra/restore-check/cmt-config-20261007. JSONmanifests authoritative.
+No liveprobe/headlessprocess. Savedlocally, notstaged/committed/pushed; existing
+mixedindex andAD ghidra/nc-at-can.tar.gz.tmp preserved.

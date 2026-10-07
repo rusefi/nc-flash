@@ -35,9 +35,9 @@ void Request_CaptureSourceAxes(undefined4 param_1)
     SparkRequest_ProduceParameterIndex(param_1);
   }
   FUN_000313d0();
-  DAT_ffff80cc = DAT_ffff809a;
-  DAT_ffff80ce = DAT_ffff809c;
-  DAT_ffff80d0 = *(undefined2 *)PTR_DAT_000314dc;
+  DAT_ffff80cc = Primary_ApplicationInput;
+  DAT_ffff80ce = Comparison_ApplicationInput;
+  DAT_ffff80d0 = *(undefined2 *)PTR_Comparison_HistoryChange_000314dc;
   DAT_ffff808e = *PTR_DAT_000314e0;
   DAT_ffff808f = *PTR_DAT_000314e4;
   DAT_ffff8090 = *PTR_DAT_000314e8;

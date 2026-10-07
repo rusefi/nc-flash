@@ -1,0 +1,57 @@
+ECU outer event admission — work in progress,2026-10-06
+
+Objectives/constraints remain CHECKPOINT.txt: ECU/AT, deeptraction, BOTHroof
+directions all incomplete; user has no extra artifacts; no staging/commit/push.
+
+Prior control-task-stop.txt proves stopconditions and48 fulltaskreturns under
+explicitfixtures. Next step probes original2BCE6 with eventLONGWORD2 at
+FFFFD800, phase651C=0..5/255 andpending652D=2. Note longword, not16bitword.
+OriginalCA94/PFDRbit0=1 initializesfilteredinput; otherRAMzero. SCI0/TCNT0
+fixtures inherited fromverify_control_task_stop_retained. No callee stubs.
+
+First seven runs each entered18282 before any selected18DC8/otherphase body,
+then stoppedE75E whilewriting20 toPLDR F75E via7985A..79874. Saved in
+control-outer-event-pin-limit.json. This is a priorharnessread-only restriction,
+not proofhardware rejects writes or firmware malfunction. CompatibleSH7058
+hardwaremanual table22.21 printed828/PDFzero870 explicitlylistsF75E PLDR
+R/W,byte/word,14pins; readonlyPLPR isF788. AppendixPDFzero1110 shows
+PL13..0 data bits. PDFidentity/provenance incontrol-task-stop.txt/sources.
+
+LocalOuter subclass nowpermitswordPLDR writes with14-bitmask; readuses
+softwarelatch. CheckFFFF->3FFF andexpectedbyteaccessrejection pass. This
+boundedfixture is NOT fullhardware: direction/control/externalpins unmodeled.
+SharedControlApplication retainsits priorread-only sample contract; oldtests
+are unaffected. The newprobe completed allseven cases: phase0..4 selects18DC8,1CAE8,1CAF0,
+1CB04,1CB0C respectively;phase5/255 selectsnone andresets0. Pending652D2->1;
+nonvolatile/stack preserved. Each18282 invocation reaches16172; phase0
+also reaches1616C after18DC8 entry. BothcallbackPRs=DB36. This is actual
+executedhook evidence throughDB32 indirectJSR, not merely table membership.
+StaticDB22..DB38 dispatches directly when descriptorfirstword=FFFF; other
+values callF5A0. That doesnot establish hardware scheduler/queue cadence.
+The first31-case verifier passed21 fresh cases but its secondretainedcall
+failed the hypothesis that16172 runs everyevent. Phase1 had18282 then1CAE8
+without16172; seecontrol-outer-event-oracle-limit.json. This is a failedoracle
+assumption, not a firmwarefailure. Revisedverifier checksmajor dispatch,
+pendingdecrement,phase andpreservedregisters acrossretainedcalls; freshcases
+also independentlycheckhookcounterincrements/wrap. Retainedhookbehavior is
+recorded withoutclaiming anindependentadmissionoracle. Finalrerun PASSES:
+31 complete outercalls,21fresh and10retained; independentphase/decrement/
+majororder andregister/GBR preservation. Retainedmajorphasecycles0..4 twice;
+onlythefirst retainedcall logs16172 and1616C underthesefixtures. No actual
+scheduler rate, hookadmission model,fullstartup orqueue lifecycle proven.
+Nextconcreteaction: tracecondition/caller ofDB32/16172 and1616C versus
+endhooks16178/1617E withretainedstate, withoutassuming eachtask emits a hook.
+
+Reproduce: python research/ecu-at-can/probe_control_outer_event.py
+Disassembly ranges/commands saved incontrol-outer-event-disassembly.txt.
+No newGhidra changes beyond archivedcontrol-task-stop milestone.
+Next: inspectnewprobe result, independentlyverifyouterphase/decrement/order
+withoriginalcallees, thenlifecyclehooks/freshness. CAN211/21A sender/units,
+remoteDSC andphysicalboard remainopen. TCUoperationalqueue/ack/overlap/
+persistence remainsopen. Roofbothdirections interruption/reversal/timeout/
+LRsync/recovery neednewapplicablesource orOEMcontroller/physicalevidence.
+
+Reproduce verification: python research/ecu-at-can/verify_control_outer_event.py
+Pythoncompilation andgit diff --check pass. Reports/scripts are Git-eligible.
+No production/sharedinterpreter/ROM changes; no newGhidraannotation edits.
+Saved locally, notstaged/committed/pushed. Existing mixedindex preserved.

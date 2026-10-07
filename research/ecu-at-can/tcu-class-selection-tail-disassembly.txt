@@ -1,0 +1,62 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00039b56 <.data+0x39b56>:
+   39b56:	97 5c       	mov.w	0x39c12,r7	! 98ae
+   39b58:	d0 2f       	mov.l	0x39c18,r0	! ffff9924
+   39b5a:	60 00       	mov.b	@r0,r0
+   39b5c:	c9 01       	and	#1,r0
+   39b5e:	66 03       	mov	r0,r6
+   39b60:	65 6c       	extu.b	r6,r5
+   39b62:	60 53       	mov	r5,r0
+   39b64:	88 01       	cmp/eq	#1,r0
+   39b66:	8f 07       	bf.s	0x39b78
+   39b68:	64 71       	mov.w	@r7,r4
+   39b6a:	93 53       	mov.w	0x39c14,r3	! 98b2
+   39b6c:	d0 2b       	mov.l	0x39c1c,r0	! 771ec
+   39b6e:	62 31       	mov.w	@r3,r2
+   39b70:	61 01       	mov.w	@r0,r1
+   39b72:	32 13       	cmp/ge	r1,r2
+   39b74:	8b 00       	bf	0x39b78
+   39b76:	e4 02       	mov	#2,r4
+   39b78:	60 53       	mov	r5,r0
+   39b7a:	88 01       	cmp/eq	#1,r0
+   39b7c:	89 0c       	bt	0x39b98
+   39b7e:	d0 28       	mov.l	0x39c20,r0	! ffff9889
+   39b80:	60 00       	mov.b	@r0,r0
+   39b82:	c8 10       	tst	#16,r0
+   39b84:	00 29       	movt	r0
+   39b86:	70 ff       	add	#-1,r0
+   39b88:	60 0b       	neg	r0,r0
+   39b8a:	88 01       	cmp/eq	#1,r0
+   39b8c:	89 04       	bt	0x39b98
+   39b8e:	d0 25       	mov.l	0x39c24,r0	! ffff9860
+   39b90:	60 00       	mov.b	@r0,r0
+   39b92:	c9 01       	and	#1,r0
+   39b94:	88 01       	cmp/eq	#1,r0
+   39b96:	8b 0b       	bf	0x39bb0
+   39b98:	92 3c       	mov.w	0x39c14,r2	! 98b2
+   39b9a:	63 21       	mov.w	@r2,r3
+   39b9c:	d0 22       	mov.l	0x39c28,r0	! 771ee
+   39b9e:	61 01       	mov.w	@r0,r1
+   39ba0:	33 13       	cmp/ge	r1,r3
+   39ba2:	8b 05       	bf	0x39bb0
+   39ba4:	61 21       	mov.w	@r2,r1
+   39ba6:	d2 1d       	mov.l	0x39c1c,r2	! 771ec
+   39ba8:	63 21       	mov.w	@r2,r3
+   39baa:	31 33       	cmp/ge	r3,r1
+   39bac:	89 00       	bt	0x39bb0
+   39bae:	e4 01       	mov	#1,r4
+   39bb0:	93 30       	mov.w	0x39c14,r3	! 98b2
+   39bb2:	62 31       	mov.w	@r3,r2
+   39bb4:	d0 1c       	mov.l	0x39c28,r0	! 771ee
+   39bb6:	61 01       	mov.w	@r0,r1
+   39bb8:	32 13       	cmp/ge	r1,r2
+   39bba:	89 00       	bt	0x39bbe
+   39bbc:	e4 00       	mov	#0,r4
+   39bbe:	00 0b       	rts	
+   39bc0:	27 41       	mov.w	r4,@r7
+

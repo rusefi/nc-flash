@@ -2,7 +2,10 @@
 
 /* Two per-index saturating counters96CF/96DF selected bycode/8086; shared971Abit1 remembers
    measured>=lower. Band path and below-upper-plus-latch path use distinct counttables.22400 cases
-   and111 retainedmanager oraclechecks; tcu-ascending-phase.txt. */
+   and111 retainedmanager oraclechecks; tcu-ascending-phase.txt. Full126EC joinedframe/capture
+   trace: code0/mode0 belowcount92 lacks crossing; inputinterval4430 replaces history, measured14446
+   crosses14327 atcall280, counter93 qualifiesphase2. Phase3 at310, originalack/cleanup311;200idle
+   tasks. See tcu-captured-requests.txt. */
 
 undefined4 Phase_QualifyAscendingTarget(ushort param_1,short param_2,short param_3)
 

@@ -2,9 +2,9 @@
 
 /* WARNING: Removing unreachable block (ram,0x00021068) */
 /* Six raw91A2 samples; oldest-current>=998 setsbit4. Converted-minus-raw >=128 and
-   >=converted5percent resets91C6, else saturating increment. Uninhibited updatedcounter>=7
-   clearsbit4.1764 independent cache/index/age/phase and768 threshold cases now cover
-   active/cached/stale policy; see tcu-reference-policy.txt. */
+   >=converted5percent resets91C6; otherwise saturating increment, uninhibited>=7 clearsbit4.1764
+   policy and768 boundary cases. Actual stoppedcapture task setsbit4 using retained10865/index0;
+   tcu-recovery-reference.txt. */
 
 void Reference_UpdateDiscrepancyLatch(void)
 

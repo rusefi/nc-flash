@@ -1,0 +1,59 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00039b8c <.data+0x39b8c>:
+   39b8c:	89 04       	bt	0x39b98
+   39b8e:	d0 25       	mov.l	0x39c24,r0	! ffff9860
+   39b90:	60 00       	mov.b	@r0,r0
+   39b92:	c9 01       	and	#1,r0
+   39b94:	88 01       	cmp/eq	#1,r0
+   39b96:	8b 0b       	bf	0x39bb0
+   39b98:	92 3c       	mov.w	0x39c14,r2	! 98b2
+   39b9a:	63 21       	mov.w	@r2,r3
+   39b9c:	d0 22       	mov.l	0x39c28,r0	! 771ee
+   39b9e:	61 01       	mov.w	@r0,r1
+   39ba0:	33 13       	cmp/ge	r1,r3
+   39ba2:	8b 05       	bf	0x39bb0
+   39ba4:	61 21       	mov.w	@r2,r1
+   39ba6:	d2 1d       	mov.l	0x39c1c,r2	! 771ec
+   39ba8:	63 21       	mov.w	@r2,r3
+   39baa:	31 33       	cmp/ge	r3,r1
+   39bac:	89 00       	bt	0x39bb0
+   39bae:	e4 01       	mov	#1,r4
+   39bb0:	93 30       	mov.w	0x39c14,r3	! 98b2
+   39bb2:	62 31       	mov.w	@r3,r2
+   39bb4:	d0 1c       	mov.l	0x39c28,r0	! 771ee
+   39bb6:	61 01       	mov.w	@r0,r1
+   39bb8:	32 13       	cmp/ge	r1,r2
+   39bba:	89 00       	bt	0x39bbe
+   39bbc:	e4 00       	mov	#0,r4
+   39bbe:	00 0b       	rts	
+   39bc0:	27 41       	mov.w	r4,@r7
+   39bc2:	93 28       	mov.w	0x39c16,r3	! 98b0
+   39bc4:	60 30       	mov.b	@r3,r0
+   39bc6:	88 01       	cmp/eq	#1,r0
+   39bc8:	89 03       	bt	0x39bd2
+   39bca:	88 02       	cmp/eq	#2,r0
+   39bcc:	89 04       	bt	0x39bd8
+   39bce:	a0 06       	bra	0x39bde
+   39bd0:	00 09       	nop	
+   39bd2:	d2 16       	mov.l	0x39c2c,r2	! 3b4b6
+   39bd4:	42 2b       	jmp	@r2
+   39bd6:	00 09       	nop	
+   39bd8:	d2 15       	mov.l	0x39c30,r2	! 3b336
+   39bda:	42 2b       	jmp	@r2
+   39bdc:	00 09       	nop	
+   39bde:	00 0b       	rts	
+   39be0:	00 09       	nop	
+   39be2:	e2 ff       	mov	#-1,r2
+   39be4:	91 16       	mov.w	0x39c14,r1	! 98b2
+   39be6:	d6 13       	mov.l	0x39c34,r6	! ffff98d4
+   39be8:	d5 13       	mov.l	0x39c38,r5	! ffffae18
+   39bea:	d4 14       	mov.l	0x39c3c,r4	! ffff98b4
+   39bec:	d3 14       	mov.l	0x39c40,r3	! 30454
+   39bee:	43 2b       	jmp	@r3
+   39bf0:	21 21       	mov.w	r2,@r1
+

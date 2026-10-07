@@ -1,0 +1,98 @@
+2026-10-06: timer-produced TCU adjustment capture/abort observations
+
+EXECUTED:926 direct/reset/range/wheel checks,36 timed traces andone1100call
+early-pending trace passed. No failed model assertions. First run covered
+782direct/24timed/early-pending;144reset and12 interval17 traces executed
+separately after extending harness. main reproduces all current checks.
+
+Original inputs/scripts:verify_tcu_adjustment_timers.py plus previous
+verify_tcu_adjustment_lifecycle.py; unchanged TCU LFG1TF000 SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Python3.14.3, standardlibrary/assertions and existing SHRotate interpreter.
+Reproduce: python research/ecu-at-can/verify_tcu_adjustment_timers.py
+GNU SHobjdump2.42/disassemble.py: tcu dis0x1127e..0x112cc saved as
+ tcu-adjustment-timer-helpers-disassembly.txt; range/dispatch instructions in
+ tcu-adjustment-timer-leads-disassembly.txt. InputROM remains Giteligible.
+
+Prior tcu-request-timing.txt already verified generic110B4 ranges and timer
+wheel. The new investigation connects that known service specifically to
+81EB and822C/822D/822F in49B08, with independent full-range guard checks and
+retained application observations. Earlier next-lead wording "not executed"
+referred to this connection, not absence of all prior timer-service evidence.
+
+Direct executed checks:1127E saturates unsignedbyte at255 (all256 inputs);
+11292 saturates unsignedword at65535 (8boundary values).110B4 advances every
+byte8188..8281 end-exclusive and word8330..8372 end-exclusive.6 mixedpatterns
+check all249bytes/33words plus neighboring sentinels. Timer81EB and three
+abort timers are in that byte interval.16 initial wheelphases *32calls to
+original12386 verify primaryphase8494 and allfour timer increments: exactly
+when entryprimaryphase is3or11. Counts are service calls, not milliseconds.
+
+Retained test design: original wheel produces allfour counters from initial0;
+no counter injection aftersetup. Original49B08 executes at explicitinterval1
+or7or17 servicecalls, withgroup0/1/2 andinitialphase0/15. Queuepending appears
+when timer reaches122, disappears at182or183. Models check every full49B08
+call. Capture requires newpending observation plus qualifyingtimer; abort
+requires previouspending/currentnotpending plus qualifyingtimer. Finalstate
+must be checked after an early disappearance as well as on the threshold.
+A separate trace starts pending beforequalification, then removes/reintroduces
+pending later to distinguish heldpending from a fresh event.
+
+These are syntheticqueue/source schedules. Original queue creation/reset
+production, actual outertask cadence, physical adjustment purpose and real
+gear/actuator consequences remain open. No firmware defect is inferred from
+an event combination without evidence that actual producers can generate it.
+ECU traction input/tasklinks and roof folding ANDunfolding/interrupt/resume/
+reverse/timeout/synchronization/recovery remain separate incomplete scopes.
+User has noadditional controller dumps, CANcaptures or benchresults.
+
+Executed reset callback310F8:144 cases cover codes0..10 and0x10001,
+95D0 values0/1/2/255 andcounter values0/200/255.95D0zero leaveseverything;
+nonzero reads table5D446[u16code], clears the selectedcounter andsets95D0=2.
+Stock code->tablegroup is[1,2,3,4,5,0,1,2,3,4,2]. Groups0/1/2/3/4/other
+select8247/822C/822D/822F/8230/8231. Only code1 additionallyclears822E/8160;
+onlycode2 additionallyclears8161. Codes7/8 shareprimarycounter with1/2 but
+lackthoseextra resets. Callbacks already appeared in request-admission work;
+this is an independent numeric/resetmodel, not a newly discovered dispatcher.
+No out-of-domain ROMtable index beyond knowncodes claimed. Resethelper and
+loop main are reproducible in the new script; reset disassembly saved.
+
+RETAINED RESULTS
+All36 scenarios naturally reach capturequalification122 through12386/11014/
+110B4. With initialphase0 andapplicationeveryservicecall, qualification occurs
+at servicecall972. With initialphase15 it occurs at973. Applicationinterval7
+first observes qualification at973 for both tested startingphases.
+
+For intervals1/7, dropping pending atcounter182 is observedbefore183:
+49B08 remainsstate1 throughcounter190, while9CA2 becomes0. A latercounter
+crossing alone doesnotrepeat the pending-disappearance event. Dropping at183
+instead aborts; initialphase0/interval1 observes atcall1460, interval7 at1463.
+For interval17, disappearanceat182 or183 is firstobserved atcall1462 with
+counter183, so bothabort. This is sample/observation timing in the explicit
+fixture, not a contradictory comparator or a proven production schedule.
+Allthree groups behave identically underthese testedstockthresholds.24 of36
+traces abort;12 retainstate1 through190 afterearlydisappearance.
+
+Early-pending trace:pending starts atcall1/counter0 and remains. Reaching122
+atcall972 doesnotcapture, sincepreviouspending is already1. Call1050 removes
+pending;call1051 restoresit atcounter131 andoriginal49B08 captures. No timer
+value is injected aftersetup. This rejects an unconditional "wait until122,
+then capture whatever is pending" interpretation.
+
+Resetcallback tests andwheeltraces are independentlyverified, but these
+retainedscenarios still use rawqueuechanges andinitialcounter0. Next integrate
+original queuecallbacks/reset310F8 andaccepted-decrease81EB reset into event
+schedules; investigate whether producers admit the testedearlydisappearance.
+Actualapplication cadence andphysical consequences remain open. Roof laterNC
+documentation progress is inroof-2010-document-crosscheck.txt; it doesnot
+establish release-then-reverse behavior or resolveDECK_CL versionconflict.
+
+DURABLE SAVE VERIFIED
+Ghidra saved andindependently restored:1501 annotations(650ECU/851TCU),738
+identical export/reportfiles,11 projecthashes. Both.gpr and.rep inarchive,
+10,901,856 bytes, SHA256
+c72539cf05468c581547160ce784f937dc743a6be2833aa9da228a60c6a2f371.
+Read-only reopen/readback passed forbothprograms; noerrors,incompleteexports
+orlivelocks. Commands/inventory in ghidra/README.txt,snapshot.json and
+restore-verification.json. Newfiles Git-eligible;syntax/diffcheck passed.
+Savedlocally; no staging/commit/push orproduction source/inputROM changes.

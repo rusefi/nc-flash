@@ -1,0 +1,60 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001bca8 <.data+0x1bca8>:
+   1bca8:	d5 44       	mov.l	0x1bdbc,r5	! ffff8f6c
+   1bcaa:	64 50       	mov.b	@r5,r4
+   1bcac:	60 4c       	extu.b	r4,r0
+   1bcae:	c8 08       	tst	#8,r0
+   1bcb0:	89 03       	bt	0x1bcba
+   1bcb2:	90 7e       	mov.w	0x1bdb2,r0	! f7
+   1bcb4:	20 49       	and	r4,r0
+   1bcb6:	cb 04       	or	#4,r0
+   1bcb8:	25 00       	mov.b	r0,@r5
+   1bcba:	00 0b       	rts	
+   1bcbc:	00 09       	nop	
+   1bcbe:	d5 3f       	mov.l	0x1bdbc,r5	! ffff8f6c
+   1bcc0:	64 50       	mov.b	@r5,r4
+   1bcc2:	60 4c       	extu.b	r4,r0
+   1bcc4:	c8 02       	tst	#2,r0
+   1bcc6:	89 03       	bt	0x1bcd0
+   1bcc8:	90 74       	mov.w	0x1bdb4,r0	! fd
+   1bcca:	20 49       	and	r4,r0
+   1bccc:	cb 01       	or	#1,r0
+   1bcce:	25 00       	mov.b	r0,@r5
+   1bcd0:	00 0b       	rts	
+   1bcd2:	00 09       	nop	
+   1bcd4:	d5 39       	mov.l	0x1bdbc,r5	! ffff8f6c
+   1bcd6:	64 50       	mov.b	@r5,r4
+   1bcd8:	60 4c       	extu.b	r4,r0
+   1bcda:	c8 04       	tst	#4,r0
+   1bcdc:	89 03       	bt	0x1bce6
+   1bcde:	90 6a       	mov.w	0x1bdb6,r0	! fb
+   1bce0:	20 49       	and	r4,r0
+   1bce2:	cb 08       	or	#8,r0
+   1bce4:	25 00       	mov.b	r0,@r5
+   1bce6:	00 0b       	rts	
+   1bce8:	00 09       	nop	
+   1bcea:	d5 34       	mov.l	0x1bdbc,r5	! ffff8f6c
+   1bcec:	64 50       	mov.b	@r5,r4
+   1bcee:	60 4c       	extu.b	r4,r0
+   1bcf0:	c8 01       	tst	#1,r0
+   1bcf2:	89 03       	bt	0x1bcfc
+   1bcf4:	90 60       	mov.w	0x1bdb8,r0	! fe
+   1bcf6:	20 49       	and	r4,r0
+   1bcf8:	cb 02       	or	#2,r0
+   1bcfa:	25 00       	mov.b	r0,@r5
+   1bcfc:	00 0b       	rts	
+   1bcfe:	00 09       	nop	
+   1bd00:	d3 2e       	mov.l	0x1bdbc,r3	! ffff8f6c
+   1bd02:	00 0b       	rts	
+   1bd04:	60 30       	mov.b	@r3,r0
+   1bd06:	4f 22       	sts.l	pr,@-r15
+   1bd08:	b0 02       	bsr	0x1bd10
+   1bd0a:	00 09       	nop	
+   1bd0c:	a0 47       	bra	0x1bd9e
+   1bd0e:	4f 26       	lds.l	@r15+,pr
+

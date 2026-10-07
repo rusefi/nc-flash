@@ -1,0 +1,135 @@
+Why the CAN input fault replaces the active TCU transition
+Evidence checkpoint: 2026-10-06
+
+RESULT
+
+The produced fault changes the comparison input809C, which changes the
+proposal lookup axis9B3E and the thresholds scanned by4508A. At the same
+measurement80EA=4672, the proposal changes1->4. The normal next-state and
+classification pipeline then accepts2 and createscode1/operation1. Recovery
+restores the threshold axis, changes the proposal4->1 and createscode6/op8.
+This explains the transition changes measured in tcu-input-faults.txt.
+
+Executed chain in the documented fixture:
+  CAN215 byte6 FF ->880E1 ->qualifiedgroup3D ->A98Fbit3 ->92D5mask88
+  ->23380/230F0 publish809C3200 ->44FCE axis6400 ->4530C thresholds
+  ->4508A proposal4 ->48C08 accepts2 ->4744C code1 ->319BC creation.
+
+In the two saved fault/recovery states, changing only809C is sufficient to
+reverse the decision; changing only92D5,809A or8098 is not. This is a bounded
+counterfactual result, not a global claim that those other inputs never affect
+selection. The source-policy gate9316bit0 is clear in these states, so495C0
+does not alter the candidate. Other admission/state histories remain open.
+
+REPRODUCTION AND SAVED INPUTS
+
+  python research/ecu-at-can/verify_tcu_fault_selection.py
+Reexecutes the original320-call fault profile with read-only observation and
+requires its result to match tcu-input-faults-verification.json exactly.
+It saves six entry RAM/peripheral-sample snapshots and215 stage observations,
+then runs2,520 independent axis-rule cases and32 complete decision replays.
+
+  python research/ecu-at-can/verify_tcu_fault_selection.py --replay-only
+Reuses the saved snapshots for the axis cases and counterfactual replays.
+Snapshot and binary identities are checked against the saved result manifest.
+The first capture was followed by the replay-only command after the replay
+checks were added; no unnecessary repeat of the unchanged320-call sequence.
+
+Artifacts:
+  verify_tcu_fault_selection.py
+  tcu-fault-selection-verification.json
+  tcu-fault-selection-snapshots.json
+  tcu-fault-selection-disassembly.txt
+Snapshots are original RAM at entry44CFE on calls149/150/151/210/211/212.
+The synthetic stack and sampled peripheral registers remain explicit harness
+state; these are not a hardware RAM capture or a whole-vehicle simulator.
+No instruction or returned policy value is replaced by the observers.
+
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+The inherited producer/classification/progress/limit models remain enabled.
+The only earlier-verifier edit allows an optional observer instance in
+retained_profile; its actual profile result remains identical.
+
+AXIS PRODUCTION44FCE
+
+Start with low16 bits of twice signed809C. ForceFFFF only if all hold:
+  signed8098 > signedROM772F8 (stock25600),
+  92C5bit1 set,92D5bit7 clear,92D3bit6 clear.
+Publish the word to9B3E.2,520 cases cover signed/wrapped values, threshold
+equality and adjacent values, and each gate. The verified normal21500
+producer caps8098 at25600, so it cannot meet this strict override comparison.
+That does not exclude another writer or malformed externally supplied state.
+
+The ordinary axis is39936 for809C19968; fault substitution809C3200 produces
+6400. Thus the qualified fault affects the proposal through a substituted
+number even if92D5 is subsequently cleared in a replay.
+
+THRESHOLD AND PROPOSAL PIPELINE
+
+Full44CFE runs44FCE,45016,49B08 and4530C before4508A.4530C starts from9B3E
+(sources9B40=13/14 instead use941E), dispatches the configured5DE90 producer
+list, evaluates10 original108E6 curves from9AEC, applies conditional helper
+adjustments and writes9B1E. All these original bodies execute in the retained
+trace/replays. A general independent model of every4530C branch is not claimed.
+The existing4508A model independently checks the resulting five-step scan.
+
+Observed threshold words for the healthy/recovered axis39936:
+  [3744,7023,10395,14768,21789,2085,5212,8892,13194,17223]
+For fault axis6400:
+  [1211,2421,3352,4470,6053,652,1398,2328,3912,5121]
+All ten corresponding operation bytes are0 in these fixtures.
+
+Atcall150, oldproposal1 andmeasurement4672 meet the faulted up thresholds
+atindices1/2/3, but not4; the last down comparison atindex5 does not change
+it. The scan returns[proposal4,operation0].4A5DE,495C0,452DC and45160 all
+preserve that pair. Nested observations also check the seven-rule pipeline.
+Accepted state8081 is initially1. Original48C08 next-state handling steps
+toward4 by one index, to2, as documented in selection-reporting.txt.4744C
+receives operation1/proposed2/accepted1/history1, axes[25600,0,0], produces
+limit12736/flags1/history1 andcode1. Original319BC receives[1,1,0].
+
+Atcall211, recovery restores the healthy thresholds. Starting fromproposal4,
+the scan decrements on downindices8/7/6, stops at5 and returns[1,0]. The later
+proposal stages again preserve it.4744C receives operation8/proposed1/
+accepted2/history1, axes[25600,0,6405], produceslimit9600/flags5/history1
+andcode6. Constructor319BC receives[6,8,0]. History remains1 in this case;
+do not infer a history step from the accepted-state change alone.
+Abstract state/code numbers are not independently identified physical gears.
+
+32 COUNTERFACTUAL REPLAYS
+
+Restore each call150/211 snapshot; vary only these four fields in every
+combination:92D5=0/88hex,809C=3200/19968,809A=24960/25600,8098=0/19968.
+Run whole44CFE, then the original1EAC6 selection-before-limit segment through
+48C08 and23544. Check balanced stack and all inherited instruction oracles.
+The normal producers are not rerun after overrides: these tests deliberately
+isolate downstream causality and are not naturally produced fault states.
+
+For every tested combination:
+  call150 snapshot,809C3200:proposal4,accepted2,creation[1,1,0].
+  call150 snapshot,809C19968:proposal1,accepted1,no new creation.
+  call211 snapshot,809C19968:proposal1,accepted1,creation[6,8,0].
+  call211 snapshot,809C3200:proposal4,accepted2,no new creation.
+Thresholds, classifications and creations are saved for every replay. This
+supports the numeric-axis explanation in these states; it does not make the
+other fault effects or complete transport/task ordering irrelevant.
+
+CONTINUATION AND PERSISTENCE
+
+Next investigate49B08/source selection and configured5DE90 threshold
+producers, curve provenance and nondefault source admission. Then join actual
+task/transport timing and overlapping/composite transition behavior. Existing
+CAN4EC sender/admission, physical axes and actuation remain unproved.
+Traction and roof retain their separate requirements in CHECKPOINT.txt:
+traction upstream gates/59720/8118 and physical recipient; PCM transmission
+type and OEM PRHT reception, both folding/unfolding, interruption/resume,
+reversal, communication timeout and motor/fault recovery. No roof CAN claim
+follows from this result. All three broad objectives remain incomplete.
+
+Ghidra saves the axis producer, threshold producer, axis value and threshold
+constant, with updated proposal evidence. The paired .gpr/.rep archive and
+independent restore/export comparison are recorded in the task manifests.
+All evidence is saved in Git-eligible repository files; no staging/commit/push.

@@ -1,0 +1,116 @@
+ECU target-following countdowns, filtered term and retained flags
+================================================================
+2026-10-06. Advances the shared ECU numeric/control path. ECU/AT integration,
+deep traction-control/DSC integration and NC roof folding AND unfolding are
+all still incomplete. No physical signal identity, actuator or cadence claim.
+
+Reproduction and inputs
+-----------------------
+ python research/ecu-at-can/verify_control_target_followers.py
+Python3.14.3, existing repository SH finite RTZ interpreter/map oracles.
+ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08;
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+JSON: control-target-followers-verification.json; full run passed.
+Direct3,664 cases,54 original eight-call slices and130 retained calls passed.
+No firmware-model discrepancy found in the first run. Original ROM unchanged.
+
+Original instructions: control-target-followers-disassembly.txt (31C36..31E56),
+control-target-third-disassembly.txt (31662..3174C); caller segment in existing
+control-upstream-target-caller-disassembly.txt. Disassembly reproduction:
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+ python research/ecu-at-can/disassemble.py \
+ --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+ at dis 0x31C36 0x31E56
+GNU SH binutils2.42; scripts/input/text results are repository records.
+
+Executed body semantics
+-----------------------
+31C36 updates counter692A and retained flag693E. All RAM suffixes areFFFFxxxx.
+Let enabled=73C4bit4, other=raw6E64, permissive=(7346==0 OR(other==0 AND7010==0)).
+If !enabled ORpermissive, reload692A fromDB0C3(stock20); otherwise decrement
+positive byte692A toward0. The decision below uses the UPDATED counter.
+Let mode=ROMbyteDB0BF(stock0). Clear693E if:
+  reload condition AND(mode==0 OR(permissive ANDmode==1)); OR
+  other==0 ANDmode==2.
+Otherwise, if updated692A>0, read protected2160 (fallback95) and set693E=1 if:
+  reference<=DB238(stock97), AND695Bbit3,
+  AND(734Abit6clear OR717C>=DB0CD(stock3) under the original comparison).
+Otherwise retain693E, including raw prior values2/255. Counter expiry alone
+DOES NOT clear the retained flag. CMP/HS uses sign-extended MOV.B operands
+compared as unsigned32; the oracle models that operation explicitly. With
+stockDB0CD=3, high bytes128..255 pass. Calibrationmode1/2 alternatives are
+static interpretation only; original tests keepstockmode0 (no ROM mutation).
+Either valid checksum at2164/2166 admits protected2160; bothbad choose95 and
+reportFFFF2160 at534C. The report only occurs on paths that actually read it.
+
+31662 filters prior6808 into retained6828. Raw6956==0 choosesDB188(stock
+0.9453099966049194); ANYnonzero choosesDB18C(stock0.9900000095367432).
+This differs from33BAC's exact1 selector even though both read6956.
+Using2508, weight=RTZ(1-RTZ(1-cal)); value=RTZ(input+RTZ(weight*RTZ(old-input))).
+If abs(RTZ(input-value)) < float3172C(125/65536), snap toinput. Each arithmetic
+step rounds towardzero; multiply/add are not fused. No samplingperiod known.
+
+31D8C updates countdown692B and retained693F. upper=RTZ(6814*DB28C), with
+DB28C=0.8999999761581421; lower=RTZ(upper-DB290), DB290=5.
+If695Bbit4set reload692B fromDB0C4(stock100), else decrementpositivebyte to0.
+If6828>=upper ANDupdatedtimer==0, clear693F immediately withoutreading2160.
+Otherwise readprotected2160; if reference>=DB23C(stock93) AND6828<=lower,
+set693F=1. Allotherpaths retain693F. Equality atbothbounds is intentional.
+The counter canexpirewhile693F stays1 ifthe upperclear conditionisabsent.
+Neither20 nor100 is convertedto milliseconds; these are calls ofthebody.
+
+Scope of checks
+---------------
+Directcases:1536firstgate/countdown/history combinations,252first threshold/
+flag/counter boundary cases,140filter cases,1728second hysteresis/countdown/
+reference cases and8checksum permutations. Bothflags' clear/set/hold outcomes
+are covered.54original1B558..1B588 slices execute inthisexactorder:
+31E56 ->30DBA ->30DE2 ->33BAC ->30FB6 ->31C36 ->31662 ->31D8C.
+Compareallprevious target outputs plusnewcounter/flags/filter andstackreturn.
+StockDB0C0=0 continuesforcing6940=0 via31E56; no incremental gate injection.
+130retained calls demonstrate firsttimer expiry holdingflag1 untila distinct
+clearcondition, andsecondtimer expiry holdingflag1 untilupperbound admission.
+
+The pairedreplay usesraw67E4 values20/40/60 (insidecalibrationaxis) ratherthan
+previous600/1200/2400 all-zero adjustmentmap samples. Those previous numerical
+checks remain valid, but didnotexercise nonzero map adjustments inthat replay.
+Newreplay runsfollowers immediatelyaftertarget, beforethe separatelyscheduled
+normalizedcontributionproducer:31662/31D8C thereforeconsumeprior6808/6814.
+No692A/692B/693E/693F/6828 output injectionaftersetup. Cross-task order remains
+an explicit harnessschedule, notproof ofactualECU timing. Flags areverified
+asnumericoutputs; theirnaturalupstreamanddownstream useisnotfullyintegrated.
+
+67E4 producer lead (static, not yet executed here)
+-------------------------------------------------
+Aligned literalreferences ledto30CE4..30D82 writing67E4. Savedoriginalbody:
+control-target-source-disassembly.txt. Candidate2C284 wasonlya reader, notthe
+producer.30CE4 loads6D5C via rawfloatgetter154BC, mapA3804->695C, then33C02
+computes6960 and33C2A filters/clamps67E0. It sums6D40+67E0+6960 into68FC.
+8F30nonzero insteadwritesROMDB15C toboth68FC/67E4. Otherwise stockcalibration
+DB0C1exact1,6D20>DB214 and6920==0 select2508 filtering68FC->67E4 usingDB210;
+else copy68FC directly. Next execute30CE4/33C02/33C2A, replace raw67E4fixture,
+andcheckactualcallerrelationship before claimingnatural input production.
+
+Open requirements and next actions
+-----------------------------------
+Ghidra annotations/archive update andindependentrestore arecomplete. Complete
+693E/693F feedbackconsumers, rawgate/sourceprovenance andactualcross-taskorder.
+ECU/ATfullacks/overlaps/storedsetters/persistence remain independentlyopen.
+DSCsender/units/internal logic/actuation andNCroofreceiver/commands, reversal,
+timeout/synchronization/recovery remain missing. Noextrauserartifacts exist.
+
+Final executed result:3,664 direct cases,54 originaleight-call slices,130
+retainedcalls and320pairedcycles with36CANupdates/320CAN211latchupdatespass.
+No fixture write replaces the five newly produced RAM outputs aftersetup.
+The inputproducer30CE4 andfullfeedbackconsumer closure remain nextwork.
+
+Ghidra save/restore:1,522 annotations(669ECU/853TCU),746 identicalexports,
+11projecthashes verified. Apply/VerifyCanEvidence perghidra/README.txt;
+snapshot.py createdthepaired.gpr/.rep archive. Extractedseparatelyinto
+ghidra/restore-check/target-followers-20261006, allinventoryhasheschecked,
+reopenedbothprograms read-onlywithVerifyCanEvidence andbytecompared every
+export. NoERROR/Exception/incompletedecompile/remainingprojectlocks.
+Archiveidentity in ghidra/snapshot.json andrestore-verification.json.
+Saved locally; no staging,commit,push orproductioncode/inputROMchanges.

@@ -1,0 +1,122 @@
+Initialized acquisition and qualification continuation — 2026-10-06
+=================================================================
+All three user objectives remain open: ECU/AT operational integration, deep
+traction integration, and both NC roof directions with interruption/reversal,
+timeout, synchronization and recovery. No extra DSC/roof firmware, captures
+or bench results are available. No staging, commit or push authorization.
+Previous goal turn made verified reporting/cache progress; this turn addresses
+its zero-input integration gap, not unrelated diagnostics.
+
+Original ROM examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Reproduce:
+ python research/ecu-at-can/probe_control_acquisition_retained.py
+ python research/ecu-at-can/probe_control_acquisition_task.py
+
+Executed event2 observations
+---------------------------
+Original10022->CA94->1619A then40 outer2BCE6 event2 calls, high10/low15/high15
+with two originalCADE samples on each input transition. All40 return and all
+41 pre-existing whole-application-RAM activity oracles pass.
+Initializer calls3976C(full decode),1DF14(initial publication),74DF8(enable),
+6CD96(qualifier). Periodic event2 calls39894(partial decode) on every delivery;
+74DF8/6CD96 occur at outer5/25. None of these40 calls enters4CE2,6710,6718,
+3976C,1DF14,1DF32,E26C,E514,7024,6678. This negative evidence is bounded to
+the explicit initialized fixture and observed calls, not every firmware path.
+The absence explains why ADC samples cannot be introduced merely by changing
+an event2 fixture. Actual acquisition belongs to a separate task. The full
+system timing/order remains unproved; do not invent a task frequency ratio.
+Result: control-acquisition-retained-probe.json, with caller PRs/field snapshots
+and actual input/publication writes. Scope verifier checks the observed40
+partial-decode entries and exact two enable/qualifier pairs.
+
+Source paths must remain distinct: channel28raw>>6 ->3976C ->6C92, versus
+channel1 400A ->6718 ->40E8 ->1DF14/1DF32 ->6CB4 ->74DF8 ->914B. The earlier
+planning draft conflated these and was corrected before continuing; no test
+or execution result depended on that draft.
+
+Static separate-task lead
+-------------------------
+E26C calls104B8, then4CE2 atE278,6718 atE27E,5730,9DB8,5922,6604,BF38,
+C6D8,215B4 (tail17D88). It calls3CB8 atE44E before the RTS atE454; reaching that RTS is unproved. Literal E26C occurs
+atROM4148; no aligned MOV.L user was reported by disassemble.py refs. This
+is a descriptor/caller lead, not proof of scheduler dispatch or interrupts.
+Original instructions retained in control-acquisition-retained-task-disassembly.txt.
+GNUobjdump2.42 setup remains in control-task.txt; command uses disassemble.py
+at dis E26C..E744 (hex explicit in tool invocation). No literal pools treated
+as executed instructions.
+
+Separate-task probe (bounded failure, saved)
+--------------------------------
+AcquisitionTask extends the current initialized observer and reuses the existing
+Acquisition.read/write and ScheduledAcquisition.read/write methods ONLY in
+their handled ADC ranges. Their fallback super paths are never used by this
+adapter. ADC result/control semantics are unchanged:32 word samples plus6
+byte latches, no conversion/status/interrupt simulation. Missing/malformed
+accesses still fail. Original10022,CA94,1619A execute before originalE26C.
+Explicit external results channel1=512<<6, channel28=500<<6; no application
+input, qualification flags or task descriptor is seeded to make a test pass.
+Up to20 complete task invocations attempted; failure PC/tail/results retained.
+
+Next: inspect separate-task result, verify copy/scaling and application
+publication boundaries independently, then execute an explicitly stated
+interleave with event2. Only actual producer/consumer execution supports
+freshness; call counts do not prove milliseconds. Enabled nonempty group1F/20
+reports still need downstream state verification. TCU operational queue/ack/
+overlap/persistence and remote DSC/roof evidence gaps remain independent.
+Roof's next action remains new applicable full source or remote-controller/
+physical evidence; do not repeat exhausted listings or ask again for artifacts.
+
+Executed task prefix and verified limit
+---------------------------------------
+First E26C invocation executes104B8,4CE2,6718 and215B4->17D88->1DF32.
+No ADC result reads occur yet because prior selection counts arezero. The
+manager configures banks0/1 for12/8 results, leavingbank2 unselected. AtE44E
+original3CB8 runs. It reads current descriptor fromFFFF12B0+20 (FFFF12C4),
+which iszero after the selected startup routines. At3CD4 it attempts the
+byte write to descriptor+3 (address00000003); strict memory rejects it.
+Result: ValueError: Non-RAM write 00000003, acquisition-0, ZERO complete task
+returns. This is an incomplete scheduler context in the exploratory fixture,
+not firmware/hardware failure, and not an ADC conversion completion failure.
+No descriptor was fabricated and no original callee or scheduler was stubbed.
+The initial plan's20 task calls did not execute; only first prefix ran.
+
+verify_control_acquisition_retained.py passes:40 event2 observations/41
+activity boundaries, expected first-task limit,158 reusedADC interface cases,
+6 expected shape/write rejections,15 original4CE2 cases with whole application
+RAM, ADC read/control-I/O sequence, stack and interrupt-mask comparisons to
+the existing independent schedule_model. Phase0/3/15/63/255 andoldmodes0/1/2
+cover ordinary/full-bank selection andbytewrap. These direct cases do not
+supply the missing scheduler context or establish physical conversions.
+
+Next concrete scheduler lead (STATIC, not executed)
+--------------------------------------------------
+3D10 takescontextR4 andsigned taskindexR5, computes ROM40D0+16*index, then
+3D28 stores its +4 descriptorpointer to context+20. Index7's ROM4140 record
+has descriptorFFFF11E0 at4144 and entryE26C at4148.3D48 obtains entry;+3D4E
+tailcalls3F34.3DD8 is a separate startup lead: writes initial context fields
+fromROM4054/4078/40D0, then invokes initializers and tails3B8A. Preserve these
+as candidates until original instructions and real call/dispatch conditions
+are checked. Next inspect3B8A/3F34 and verify the actual index7 descriptor
+installation/admission; do not seedFFFF12C4 to bypass the observed gap.
+Full scheduler/reset graph is not an invented separate completion criterion;
+trace only the context/dispatch needed for acquisition-to-qualification work.
+Disassembly: control-acquisition-scheduler-leads.txt (3CB8,taskrecords,3D10/3DD8).
+Ghidra saved and independently restored:1905 annotations (830ECU/1075TCU),
+961 identical exports and11 project hashes checked before/after readonly reopen.
+Archive10,990,502bytes SHA256
+263487cd1b42cbe5aedf171845c490a9d4d4d880515e4927799a1d5bb7f66c41.
+Ghidra12.1.3PUBLIC/Java21.0.10; both LFFEEE-stock.bin andLFG1TF000.bin.
+Manifest/restore evidence in ghidra/snapshot.json andrestore-verification.json.
+Three scripts compile; targeted diff-check passes. All9 new artifacts are
+Git-eligible. Pre-existing AD archive.tmp index preserved. Saved locally only;
+no staging, commit or push. Allthree broader research requirements remainopen.
+
+
+Additional static boundary before continuation:3F34 setsSP=R5, pushesSR0 then
+entryR4 and uses RTE at3F3C. Thus real dispatch involves exception return;
+calling E26C with the normal harness function-call convention does not install
+its task context.3B8A has an idle branch for context+6 ==FFFF, otherwise branches
+3BC8 for selected dispatch. Next first verify3D10 index7 through the RTE
+boundary, then source/test RTE semantics only if needed; do not claim normal
+function RTS proves this scheduler path. These instructions are in savedleads.

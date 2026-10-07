@@ -1,0 +1,66 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000185e4 <.data+0x185e4>:
+   185e4:	92 2d       	mov.w	0x18642,r2	! 8a18
+   185e6:	e3 00       	mov	#0,r3
+   185e8:	90 2c       	mov.w	0x18644,r0	! 8a19
+   185ea:	61 33       	mov	r3,r1
+   185ec:	d4 16       	mov.l	0x18648,r4	! 5c500
+   185ee:	22 30       	mov.b	r3,@r2
+   185f0:	20 10       	mov.b	r1,@r0
+   185f2:	d3 16       	mov.l	0x1864c,r3	! 141bc
+   185f4:	43 2b       	jmp	@r3
+   185f6:	65 13       	mov	r1,r5
+   185f8:	2f e6       	mov.l	r14,@-r15
+   185fa:	2f d6       	mov.l	r13,@-r15
+   185fc:	2f c6       	mov.l	r12,@-r15
+   185fe:	4f 22       	sts.l	pr,@-r15
+   18600:	93 1f       	mov.w	0x18642,r3	! 8a18
+   18602:	6e 30       	mov.b	@r3,r14
+   18604:	6d ec       	extu.b	r14,r13
+   18606:	60 d3       	mov	r13,r0
+   18608:	88 01       	cmp/eq	#1,r0
+   1860a:	8f 03       	bf.s	0x18614
+   1860c:	ec 00       	mov	#0,r12
+   1860e:	d1 10       	mov.l	0x18650,r1	! 1574c
+   18610:	41 0b       	jsr	@r1
+   18612:	ec 01       	mov	#1,r12
+   18614:	93 16       	mov.w	0x18644,r3	! 8a19
+   18616:	60 30       	mov.b	@r3,r0
+   18618:	60 0c       	extu.b	r0,r0
+   1861a:	88 01       	cmp/eq	#1,r0
+   1861c:	8b 04       	bf	0x18628
+   1861e:	2d d8       	tst	r13,r13
+   18620:	8b 02       	bf	0x18628
+   18622:	d3 0c       	mov.l	0x18654,r3	! 1576c
+   18624:	43 0b       	jsr	@r3
+   18626:	00 09       	nop	
+   18628:	92 0c       	mov.w	0x18644,r2	! 8a19
+   1862a:	65 c3       	mov	r12,r5
+   1862c:	d4 06       	mov.l	0x18648,r4	! 5c500
+   1862e:	22 e0       	mov.b	r14,@r2
+   18630:	4f 26       	lds.l	@r15+,pr
+   18632:	6c f6       	mov.l	@r15+,r12
+   18634:	d3 05       	mov.l	0x1864c,r3	! 141bc
+   18636:	6d f6       	mov.l	@r15+,r13
+   18638:	43 2b       	jmp	@r3
+   1863a:	6e f6       	mov.l	@r15+,r14
+   1863c:	93 01       	mov.w	0x18642,r3	! 8a18
+   1863e:	00 0b       	rts	
+   18640:	23 40       	mov.b	r4,@r3
+   18642:	8a 18       	.word 0x8a18
+   18644:	8a 19       	.word 0x8a19
+   18646:	ff ff       	.word 0xffff
+   18648:	00 05       	mov.w	r0,@(r0,r0)
+   1864a:	c5 00       	mov.w	@(0,gbr),r0
+   1864c:	00 01       	.word 0x0001
+   1864e:	41 bc       	.word 0x41bc
+   18650:	00 01       	.word 0x0001
+   18652:	57 4c       	mov.l	@(48,r4),r7
+   18654:	00 01       	.word 0x0001
+   18656:	57 6c       	mov.l	@(48,r6),r7
+

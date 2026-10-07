@@ -21,7 +21,7 @@ void Control_UpdateMagnitudeScales(void)
     *(undefined4 *)PTR_Control_MagnitudePulseScale_0005971c = 0x3f800000;
   }
   else {
-    fVar3 = (float)(*(code *)PTR_FUN_00059698)(PTR_DAT_00059708);
+    fVar3 = (float)(*(code *)PTR_FUN_00059698)(PTR_SpeedCandidate_ProtectedSelected_00059708);
     fVar5 = (fVar3 - *(float *)PTR_DAT_000596f8) / fVar5;
     uVar4 = (*(code *)PTR_FUN_00059710)(fVar5,*(undefined4 *)PTR_DAT_0005970c,uVar6);
     puVar1 = PTR_DAT_00059718;

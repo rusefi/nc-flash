@@ -13,11 +13,11 @@ void Selection_UpdateDelayRowLatch(void)
   iVar3 = (int)DAT_00048acc;
   cVar2 = -(((*(byte *)(iVar3 + 1) & 2) == 0) + -1);
   if ((((*(byte *)(iVar3 + 1) & 4) == 0) && ((*PTR_ApplicationFaultFlags92D5_00048adc & 1) == 1)) ||
-     (*(short *)PTR_DAT_00048ad8 < *(short *)PTR_DAT_00048ae0)) {
+     (*(short *)PTR_Comparison_HistoryChange_00048ad8 < *(short *)PTR_DAT_00048ae0)) {
     cVar2 = '\x01';
   }
   if (((*PTR_ApplicationFaultFlags92D5_00048adc & 1) == 0) &&
-     (*(short *)PTR_DAT_00048ae4 <= *(short *)PTR_DAT_00048ad8)) {
+     (*(short *)PTR_DAT_00048ae4 <= *(short *)PTR_Comparison_HistoryChange_00048ad8)) {
     cVar2 = '\0';
   }
   if (cVar2 == '\0') {

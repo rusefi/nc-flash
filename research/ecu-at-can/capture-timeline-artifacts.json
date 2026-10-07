@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-07",
+  "status": "PASS",
+  "artifacts": {
+    "probe_tcu_capture_timeline.py": {
+      "bytes": 5267,
+      "sha256": "cb69d490bd57cb75356c6b080698b072ee7d54489ecb59cfc7b3010bbd05c82b"
+    },
+    "verify_tcu_capture_timeline.py": {
+      "bytes": 10443,
+      "sha256": "ec21673590b2d7f789c83a2f42fd21209c3fcc3c74d9fc5a0694ab713c20f210"
+    },
+    "verify_tcu_diagnostic_timer.py": {
+      "bytes": 7049,
+      "sha256": "79a0b0cc6777479b3b06729833eebdbd9fe414af906d2aeafc4a3b859803347c"
+    },
+    "tcu-capture-timeline-prefix8.json": {
+      "bytes": 1188906,
+      "sha256": "6b8746f67a9d89bf7c74f4801a529b3db486b644632fc51af48cad693cc2a510"
+    },
+    "tcu-capture-timeline-prefix8-before-observer-fix.json": {
+      "bytes": 1285847,
+      "sha256": "b771ad287e8f116413334d16c6680d21b91ff8f935b29bfdc517913500a86b1b"
+    },
+    "tcu-capture-timeline-observer-fix9.json": {
+      "bytes": 1348321,
+      "sha256": "462ef8d58035d160cef216f42c332f57aaccc0f921b26a044537149f41c51e39"
+    },
+    "tcu-capture-timeline-probe.json": {
+      "bytes": 53455020,
+      "sha256": "b96dbc3aab71b6a345d7de94cb5e24d914679f57665aa00d36a7e45438206f1c"
+    },
+    "tcu-capture-timeline-verification.json": {
+      "bytes": 12339,
+      "sha256": "01070ac96f124b54a77b5fa6dbeb2f2e46eee62808df3f9fa4d90af3759a855e"
+    },
+    "tcu-diagnostic-timer-verification.json": {
+      "bytes": 21283,
+      "sha256": "ea2c938791fec667402fdaf93fc6d6a862766fac7dc20b6ff0ae894b5df0cc8f"
+    },
+    "tcu-capture-timeline.txt": {
+      "bytes": 7198,
+      "sha256": "98a879446d5755c56d2eb5d5b24399588fea616e6f26f11679af36dcaf053f33"
+    },
+    "tcu-diagnostic-timer.txt": {
+      "bytes": 5694,
+      "sha256": "e72996488f00f181149cadb625e993a6d81ad440d0c1d838afd88b07257eeb8c"
+    },
+    "tcu-diagnostic-admission-disassembly.txt": {
+      "bytes": 2377,
+      "sha256": "da24a9b8f235841a73467302bdc2df210035ac08e077d9fed202beddca9f4492"
+    },
+    "tcu-diagnostic-timer-disassembly.txt": {
+      "bytes": 3834,
+      "sha256": "4c2d789f2d517396c0acb752db57c13483d4e01c1b388d6e16fb0826db231cf6"
+    },
+    "verify_tcu_timer_configuration.py": {
+      "bytes": 7968,
+      "sha256": "cefdcc33c6208e0aab76943417c03ff9259ced6e367e472c013a48ec768e9819"
+    },
+    "tcu-timer-configuration-verification.json": {
+      "bytes": 31388,
+      "sha256": "28a2e3d6b7a8364f8af3d35c2e4a0ec6b9e9d3c5986d11baaae248f2532d8a5c"
+    },
+    "ghidra/annotations.tsv": {
+      "bytes": 375983,
+      "sha256": "2bdaa7b666a676b4660d2a62d560253c714557d8ec21f358fb9c2fda548da9ba"
+    },
+    "ghidra/snapshot.json": {
+      "bytes": 1326,
+      "sha256": "008468c5252dd72a794905c974d92655bdf6124b4ea27a14ad9d14b5ce7d32c8"
+    },
+    "ghidra/restore-verification.json": {
+      "bytes": 514,
+      "sha256": "02e1693d5c2c628fa2733a187322b5827a826480df3ad04d6364e68406db7a95"
+    }
+  },
+  "inputs": {
+    "examples/LFFEEE-stock.bin": {
+      "bytes": 1048576,
+      "sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08"
+    },
+    "examples/LFG1TF000.bin": {
+      "bytes": 524288,
+      "sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+    },
+    "research/ecu-at-can/sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf": {
+      "bytes": 5102824,
+      "sha256": "359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c"
+    }
+  },
+  "verification": {
+    "shared_capture_cycles": 320,
+    "capture_prefixes": 2602,
+    "cmt0_prefixes": 1310,
+    "cmt1_prefixes": 640,
+    "hold_checks": 80,
+    "command_pin_checks": 640,
+    "observer_correction": "Raw full320 retained;2593 duplicate next-interval observations independently matched before comparison removal. Corrected8/9 exact normalizedfullfirst9; no full320 rerun after logger-only fix.",
+    "diagnostic_init_cases": 256,
+    "diagnostic_gate_cases": 3072,
+    "diagnostic_isr_prefix_cases": 20
+  },
+  "ghidra": {
+    "archive": {
+      "bytes": 11019988,
+      "sha256": "2bb795cad872aac38975bcb3f1176cc5b9b244f9e4d8bead9f637e8308d94764"
+    },
+    "restore": {
+      "date": "2026-10-07",
+      "archive_sha256": "2bb795cad872aac38975bcb3f1176cc5b9b244f9e4d8bead9f637e8308d94764",
+      "restored_project_files_verified": 11,
+      "restored_annotations_verified": 1973,
+      "identical_export_files": 1017,
+      "restored_programs": [
+        "LFFEEE-stock.bin",
+        "LFG1TF000.bin"
+      ],
+      "method": "Independent Ghidra read-only reopening; verify_restore.py checks archive/live/restored hashes, complete expected export sets, no incomplete readbacks, all annotation rows and identical exports."
+    },
+    "process_results": {
+      "apply58746": 0,
+      "live_verify77972": 0,
+      "snapshot3783": 0,
+      "restore_verify69796": 0
+    }
+  },
+  "save_status": "Locally saved, Git-eligible; no new staging/commit/push. Existing AD archive temporary index entry preserved.",
+  "next_action": "Join original diagnostic1682C/1218E into shared timeline at conditional500000phi; preserve independent boundary models and current fixtures. All ECU/AT, traction and both roof scopes remain open."
+}

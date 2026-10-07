@@ -1,0 +1,104 @@
+Native HCAN and CAN-task initialization — 2026-10-07
+
+Verified result
+Original11FA0 now returns through124F8/19EC4, actualHCAN1B060/1AEAA, CANsoftware
+initializers1D4DA/1C912/1BB30/1BBEA/1BBB0 andtimer16650. Taskmode8003=1 and
+receive/transmitmode8F6C=0A (10) are producedbyoriginalinstructions. No mode8
+orready/faultflags injected. probe_tcu_hcan_startup.py preserves completeordered
+registertrace and finalconfiguration in tcu-hcan-startup-probe.json. The whole
+11FA0 completion is coverage withselectedstate/MMIO assertions, notanindependent
+semantic model ofallchildren. Fullreset/mainloop/physicalCAN remain unproved.
+
+Independent component verification
+verify_tcu_hcan_startup.py terminalPASS4897:256original1AEAA setup-index0 cases,
+256original16650 timer cases and10unsupported-access rejections. Each1AEAA case
+checks wholeapplicationRAM,callee-preserved registers/SRoutsideTQM,344ordered
+HCANaccesses plus2PBCRHaccesses andallretained configurationbytes. Variesinitial
+MCRbyte and16bitPBCRHword; arbitraryreservedbit valuesare arithmeticfixtures,
+notvalidhardwareconfigurations. Original1AEAA RAM changesare8F5C=FF and8F68word
+=0070 onthisboundary. Independentexpectedmodel derivesIDs/lengths fromROM,
+notobservedDUTresults. 1AEAAcalls originalPBCRH1AC70(old|A0); prior256leafchecks
+stillrun inprobe. The CAN timer has18exact accesses andnoapplicationRAM changes.
+
+HCAN setup executed
+FiniteGSR samples8 then0 supply reset/normal observations. MCRrequest andrelease
+code executesoriginal1AE40/1AE76. These samplesareexternal, notsimulatedhardware
+resetcompletion. BCR E402=803E fromROM5C968 atsetup-index0. MC0..15 E420..E49F
+andMD0..15 E4B0..E52F arezeroed; configuredslot1..11 IDs from5C8C0 andlengths
+from5C8E4. FinalMBCR E404=FF0F,MBIMR E414=0070,IMR E416=BCEE,LAFMH E41E=0;
+MC0ID wordE424 from5C96C; MCRfinal80. Wholetrace retains allintermediatewrites.
+No CANbitrateinHz inferred fromBCR alone. Peripheralclock/actualchip remainopen.
+Configuration latches supportonlyexplicitwordregisters andaligned8/16bitmailbox
+accesses. Read-before-write rejects. Command/statuswrites E408/E40A/E412 are
+recorded outputs withnoinventedhardware sideeffects andcannotberead asordinary
+latches. Otheraddresses/widths remainrejected. ExistingMCR owner andHCANtrace
+are reused. PBCRH routesexistingConfigurationRegisters; no genericMMIO escape.
+
+CAN-task timer16650
+F401 bit6 stop/start;F480 bit10 clear;F482 bit10 enable;F4EB RMWmasksF7/FB/FD
+thenOR1; F4E0counter0,F4E2compare625. The diagnosticinitializer's existing
+finiteinput/orderedmodel helper nowtakes explicitaddress/mask/compareparameters;
+defaults unchanged. Timer256cases varyallinputbytes/statuswords andcheckexact
+18MMIO,wholeRAM andcallee registers/SR. Fullinitializer's sourceconfiguration
+comesfromtheexistingoriginalsetup. NativeCAN1669A interrupt/taskadmission and
+physicaltimerdelivery haveNOTyetbeenjoined. Do notsubstituteonce/application
+CANdispatch orforce8003=3 inthenexttest.
+
+Preserved probe boundaries and regressions
+PriorstrictE402stop remains tcu-native-can-startup-probe.json; refactoredfactory
+rerun isbyte-identical to native-capture-startup-artifacts.json. NewHCANsupport
+firstreached16652 withnoF401timer sample: rawresult retained as
+ tcu-hcan-startup-timer-stop.json
+ThatrawREJECTED alreadyhad8003=1/8F6C10; currentcompletedprobe supersedesit.
+No firmwaredefect inferredfromeither unsupportedaccess.
+Diagnostichelper default rerun91518 terminalPASS256init/3072gate/20prefix;
+JSON SHA256 unchanged:
+ ea2c938791fec667402fdaf93fc6d6a862766fac7dc20b6ff0ae894b5df0cc8f
+Probe mainnowaccepts factory/output/scope, preservingonepipeline. A startupcheck
+hook asserts fullconsumption onlyafter return, sofutureunsupportedaccesses can
+stillbesaved without a secondaryevidence-hook assertion maskingthestop.
+
+Primary documentation and reproduction
+Retained sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+PDFzero562/563 registerwidth/address table;566..568 MCR/GSR/reset,BCR;
+572..583 configuration/command/status/mask semantics;588..591 mailboxes;
+948 addresscrosscheck. Relevanttext in tcu-hcan-startup-manual-excerpts.txt.
+Officialsource https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual
+Disassembly tcu-hcan-startup-disassembly.txt; GNUobjdump2.42 setup in
+ tcu-pulse-input.txt
+Python3.14.3/PyMuPDF1.28.2. ROMexamples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Commands:
+ python research/ecu-at-can/verify_tcu_hcan_startup.py
+ python research/ecu-at-can/probe_tcu_hcan_startup.py
+ python research/ecu-at-can/verify_tcu_diagnostic_timer.py
+ python research/ecu-at-can/probe_tcu_native_can_startup.py
+
+Next and remaining scope
+Join completed11FA0 initialization to native readiness/capture/CMT1/diagnostics,
+then1669A..166FA(preRTE)/11FB2 actualCANtaskadmission, scheduledCANreceipts andoriginal
+application consumption. KeepnativeRAM/history, clockepochs andexplicitfinite
+MMIO assumptions. Currentprobe can_timer_active stays true attop-leveltimer tail;
+clearit afterinitializer return beforeoperationaldelivery. Preserveonepipeline
+andactualreturnoracles. Old320requests/recovery remainsdifferentfixture.
+ECU/AT fullreset/mainloop/TCNT10Awidth/TCR10identity andphysicalCAN/actuation open.
+Traction executedtaskpreemption isestablished; startupEC62/hardwareIRQadmission,
+CAN211/21Asender/units andremoteDSCactuation missing. Roof factoryevidence and
+candidate maps arenotOEMexecution; bothfoldingANDunfolding withinterruption/
+reversal/numericalCANtimeout/LRsynchronization/recovery remainopen. User hasno
+extraartifacts; do notaskagain. Allthreegoalsincomplete; no genericDTC/NVM gate.
+Savedlocally; no staging/commit/push. CHECKPOINT ownscurrentGhidra/nextactions.
+
+Ghidra and final local checks
+1999annotations(865ECU/1134TCU),1036completeidenticalexports,11projectfiles.
+Three newfunctions andoneupdatedcomment saved. Apply82531/liveverify43759/
+snapshot49202/restoredverify22782 terminalexit0, cleanlogs. Freshrestoration
+restore-check/hcan-startup-20261007 checkedall11hashes before/after read-only
+reopening andagainstlive; verify_restore.py --write-reportPASS. Archive
+11,024,174bytes SHA256 89879e2b40c3f67a334c13fe6bd9d8e0919839b243525b9789bb730ad6474e78.
+Ghidra12.1.3PUBLIC/Java21.0.10. Reproduceapply/liveverify/snapshot/extract/reopen
+with thecommandpattern in tcu-readiness-admission.txt andthisrestoredirectory.
+Fourmodified/newresearchscriptscompile; gitdiff--checkPASS. Currentartifact
+identities in hcan-startup-artifacts.json. No activeprocess orunsavedproject.
+No newstage/commit/push; existingmixedindex includingADarchive.tmp preserved.

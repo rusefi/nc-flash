@@ -1,0 +1,49 @@
+COMPLETED FOLLOW-UP: tcu-overlay-lifecycle.txt now owns executed45BA0 and
+coupled815D/45AA4 evidence. Historical lead/correction record follows.
+Next optional44E14/44F5A: tcu-optional-threshold-leads.txt.
+
+UPDATE2026-10-06: execution in progress in verify_tcu_overlay_lifecycle.py.
+Initial axis-bias interpretation failed: helper bias cancels on the low word;
+zero history difference yields0, not32768. Do not use the rejected model.
+Original software arithmetic reached XTRCT at5B8AA; isolated sh_extract.py
+implements it from Renesas SH-2E section7.2.68 and has independent ISA cases.
+No completion claim until the verifier and current checkpoint record results.
+
+2026-10-06 continuation: release-overlay history and timer
+
+STATIC FOLLOW-UP, except the previously executed wheel evidence cited below.
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+45BA0 remains unmodeled in this follow-up; do not claim new execution.
+Original instructions saved in tcu-overlay-history-leads-disassembly.txt.
+
+45BA0 shifts five words9BE0..9BE8, calls10FAC with old9BE0,current signed
+80EA and byteROM7730E shifted left7, then writes the return to9BE0. It forms
+old shifted9BE8 minus new9BE0, and uses original double0.5 conversion5BBEC
+for its lower/reset paths.92C5bit2 and the signed comparison of filtered
+history versuscurrent80EA govern whether all five history words reset to
+current80EA.10DD2/10E80 and constants7FFF8000/80008000 encode the final9B66
+word. Exact signed arithmetic/rounding requires independent modeling before
+claiming an axis meaning. No physical deceleration identity is established.
+
+TIMER DISCOVERY / EXISTING EXECUTED EVIDENCE
+815D is inside8158..8188 (end exclusive), serviced by1106A. Existing
+verify_tcu_request_timing.py / tcu-request-timing.txt executed all addresses
+of that range against an independent model over1024 primary-wheel calls.
+1106A is selected on old primary phases1,5,9,13; increment saturatesFF.
+Thus the writer was already present in the general timer evidence. Literal
+FFFF815D search only found45B18 reset and missed the range-based producer.
+Do not continue searching only direct literals or say the increment writer
+is wholly unknown. The integration with45AA4 release remains untested with
+naturally incremented815D: prior release tests supplied explicit timer samples.
+Next run original wheel plus45AA4 or4530C at varied explicit service ratios,
+check first-release reset,122 threshold and delayed observation. Call counts
+must not be translated to milliseconds without hardware/task cadence proof.
+
+Then independently model45BA0 with10FAC/5BBEC/10DD2/10E80 and replay into
+45E70 curves. Preserve actual signed word loads and old/new history order.
+Optional44E14/44F5A, source/class upstream controls and natural overlapping
+transitions remain separate ECU/AT gaps. Traction next caller steps before
+187C2 and input identities; roof retains its independent folding AND unfolding
+receiver/reversal/timeout/synchronization/recovery goals.
+No Ghidra annotations added for these static leads. Saved locally; no commit.

@@ -1,0 +1,92 @@
+Native CAN startup through pulse loss — 2026-10-07
+
+Full objective remains ECU/AT CAN integration, deep traction control, and NC
+roof folding AND unfolding including interruption/resume/reversal, timeout,
+left/right synchronization and recovery. All incomplete. User has no additional
+DSC/roof firmware/captures/bench evidence. No staging/commit/push authorization.
+
+Current experiment
+probe_tcu_native_can_lifecycle.py extends the existing native event loop to320
+application periods (26214400 conditional peripheral cycles). Horizon parameters
+forward through diagnostic/capture/CAN factories; defaults remain4000000phi.
+No new firmware pipeline or post-admission memory reset. Reuse unchanged body
+of existing request creation/ack/retirement observer as observe_initialized;
+original31C18 acknowledgement return still checked against independent wholeRAM
+ack_model. New optional observe_event hook only records/clears Python metadata.
+Every application receives a request snapshot; actual creation/ack/retirement
+observations also preserved if they occur in other events. Prior native state,
+command/pin, capture, diagnostic, receive-watchdog and ISR differential checks
+remain active. Input clocks/GSR/frames/epochs/latency remain explicit fixtures.
+Only CAN201/215 pluszero4EC, not healthy complete traffic or bus transmission.
+
+Run78093 completed all320 firmware periods without runtime rejection. Output:
+ tcu-native-can-lifecycle-probe.json
+Corrected record verification confirms every old field through4000000phi matches the
+50000/epoch7 prior native scenario, not just a selected state projection. The
+old320 forced-mode request trace is compared separately and differences saved,
+not assumed equivalent. Pulse edges use previous24320phi A and B segments
+11780/12980/8860/18240, both stop before280*81920. Exact delivered edges/counts
+are checked against original enable time, not passed off as hardware timing.
+
+Reproduce:
+ python research/ecu-at-can/probe_tcu_native_can_lifecycle.py
+Observer default32-task regression reproduction from repository root:
+ PYTHONPATH=research/ecu-at-can python -c "import probe_tcu_initialized_requests as p; p.main(cycles=32,filename='tcu-native-request-observer-regression.json')"
+ python research/ecu-at-can/verify_tcu_native_request_observer.py
+It writes
+ tcu-native-request-observer-regression.json
+Regression57640 completed32tasks/3creations/25ack RAM checks without runtime
+failures. Initial byte-comparison assertion failed: retained baseline predates
+five existing snapshot fields (request_word_915a,first_list_count_a202,
+ramp_timers_8115,primary_timer_phase_8494,heap_first_header_9f3c). This was a
+comparison-scope error, not an observer/firmware failure. Corrected verifier
+verify_tcu_native_request_observer.py requires all original fields exact and
+allows exactly those five additions only inside snapshots. PASS; baseline
+unchanged. Byte identity is explicitly NOT claimed. Eight scripts compile.
+Ghidra edits were made for the hardware-startup findings (see below).
+Current saved archive/independent restore:2006 annotations/1040 exports/11file
+hashes. Identity in icr-lifecycle-artifacts.json; no headless processes.
+New recovery-flag evidence in tcu-hardware-startup.txt identifies a missing
+full15574 prerequisite; completed320 run deliberately retained existing state.
+
+Other scopes: traction executed task4->7->4 save/resume proof remains in
+control-preemption.txt; hardware admission/startupEC62 identity and remote
+CAN211/21A sender/units/DSC actuation remain next. Roof factory evidence and
+candidate mappings in roof-revision-source-audit.txt, roof-component-inspection.txt
+and traction-roof.txt; missing OEM receiver/physical evidence, edition-specific
+reversal/numericalCANtimeout/LRpulse mismatch remain open for both directions.
+CHECKPOINT owns current status and next action. No production/ROM/ISA changes.
+
+Completed execution and corrected comparison
+78093 firmware statusPASS:320 application/1310 CAN/1310 CMT0/640 CMT1/52
+ diagnostic/2541 capture(923A/1618B) interrupts and960 received frames.525
+foreground/30capture-return/640command-pin/73diagnostic/27ack wholeRAM checks.
+All1184 serialized event rows through4000000phi and both initialization records
+match prior50000/epoch7 native scenario exactly after excluding only new request
+observations. Initial script exited1 after firmware PASS because it compared
+live Python tuples with decoded JSON arrays. Raw completed probe was saved
+before that assertion and preserved unchanged. Corrected --verify-only reads
+both saved JSON records and writes separate tcu-native-can-lifecycle-verification.json;
+no firmware rerun or modified execution state was needed. The first comparison
+failure was tooling, not firmware/runtime failure. Execution hash is recorded
+in the verification JSON and current artifact manifest.
+
+All320 same-ordinal request snapshots differ from the older forced-readiness
+fixture; this is raw ordinal comparison, not phase/time-normalized equivalence.
+Native original event1 creation payloads [0,0,0] atapplication33, [1,0,0] at133,
+[6,9,0] at297. Managed entries empty41/135/299. First phase retires100 (heap
+007FFFFF), second phase retires297 while third is created. Final phaseindex2
+retains payloadgroup6/code9; heap0005FF06 and phasecount1 remain. This is NOT
+complete cleanup/recovery; older code5/pair319 interpretation is not portable.
+Word915A is0 in first30 pre-admission samples and7FFF in all290 later samples;
+not proof of an active physical torque request. Final sources80EA/80EC3070,
+80EE/80F0zero, input ages40; sourcehistories9198FFFFFFFF/92387FFFFFFF preserved.
+CAN mode10/recovery0/faults10117/tick1310 remain. Missing four enabled frames
+and omitted full15574 hardware initializer preclude a healthy-recovery claim.
+
+Reproduce record checks only:
+ python research/ecu-at-can/probe_tcu_native_can_lifecycle.py --verify-only
+Next prioritize full15574 initialization: tcu-icr-startup.txt now reaches UBARH
+EC00 after documented ICR and explicit zero IRQstatus. Do not lengthen this
+partial-startup scenario or force flags merely to retire the pending phase.
+Current authoritative archive/status in CHECKPOINT.txt; no live firmware run.

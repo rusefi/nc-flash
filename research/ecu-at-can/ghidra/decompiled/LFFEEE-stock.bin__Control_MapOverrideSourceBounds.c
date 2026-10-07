@@ -9,7 +9,7 @@ void Control_MapOverrideSourceBounds(void)
   undefined4 uVar1;
   undefined4 uVar2;
   
-  uVar1 = (*(code *)PTR_FUN_0005c57c)(PTR_DAT_0005c578);
+  uVar1 = (*(code *)PTR_FUN_0005c57c)(PTR_Control_RawFirstPublished_0005c578);
   uVar2 = (*(code *)PTR_Lookup_FloatCurve_0005c584)
                     (uVar1,PTR_Control_OverrideLowerMapDescriptor_0005c580);
   uVar1 = (*(code *)PTR_Lookup_FloatCurve_0005c584)

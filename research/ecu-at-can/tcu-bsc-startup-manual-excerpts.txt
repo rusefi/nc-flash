@@ -1,0 +1,827 @@
+Source sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf
+SHA256359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c
+PyMuPDF1.28.2; zero-basedpages
+PDFZERO176
+Rev.2.0, 07/03, page 137 of 960 
+ 
+9.1.3 
+Pin Configuration 
+Table 9.1 shows the bus state controller pin configuration. 
+Table 9.1 
+Pin Configuration 
+Name 
+Abbr. 
+I/O 
+Description 
+Address bus 
+A21–A0 
+O 
+Address output 
+Data bus 
+D15–D0 
+I/O 
+16-bit data bus 
+Chip select 
+CS0–CS3 
+O 
+Chip select signals indicating the area being 
+accessed 
+Read 
+RD 
+O 
+Strobe that indicates the read cycle for ordinary 
+space/multiplex I/O 
+Upper write 
+WRH 
+O 
+Strobe that indicates a write cycle to the upper 8 bits 
+(D15–D8) 
+Lower write 
+WRL 
+O 
+Strobe that indicates a write cycle to the lower 8 bits 
+(D7–D0) 
+Wait 
+WAIT 
+I 
+Wait state request signal 
+Bus request 
+BREQ 
+I 
+Bus release request input 
+Bus acknowledge 
+BACK 
+O 
+Bus use enable output 
+Note: When an 8-bit bus width is selected for external space, WRL is enabled. 
+ 
+When a 16-bit bus width is selected for external space, WRH and WRL are enabled. 
+ 
+9.1.4 
+Register Configuration 
+The BSC has four registers. These registers are used to control wait states, bus width, and 
+interfaces with memories like ROM and SRAM, as well as refresh control. The register 
+configurations are listed in table 9.2. 
+All registers are 16 bits. All BSC registers are all initialized by a power-on reset and in hardware 
+standby mode. Values are retained in a manual reset and in software standby mode. 
+Table 9.2 
+Register Configuration 
+Name 
+Abbr. 
+R/W Initial Value Address 
+Access Size 
+Bus control register 1 
+BCR1 
+R/W H'000F 
+H'FFFFEC20 8, 16, 32 
+Bus control register 2 
+BCR2 
+R/W H'FFFF 
+H'FFFFEC22 8, 16, 32 
+Wait state control register 
+WCR 
+R/W H'7777 
+H'FFFFEC24 8, 16, 32 
+RAM emulation register 
+RAMER 
+R/W H'0000 
+H'FFFFEC26 8, 16, 32 
+Note: In register access, three cycles are required for byte access and word access, and six 
+cycles for longword access. 
+ 
+
+
+PDFZERO179
+Rev.2.0, 07/03, page 140 of 960 
+ 
+9.2 
+Description of Registers 
+9.2.1 
+Bus Control Register 1 (BCR1) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+ 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+— 
+— 
+— 
+A3SZ 
+A2SZ 
+A1SZ 
+A0SZ 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+1 
+1 
+1 
+1 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+BCR1 is a 16-bit readable/writable register that specifies the bus size of the CS spaces. 
+Write bits 15–0 of  BCR1 during the initialization stage after a power-on reset, and do not change 
+the values thereafter. In on-chip ROM enabled mode, do not access any of the CS spaces until 
+after completion of register initialization. In on-chip ROM disabled mode, do not access any CS 
+space other than CS0 until after completion of register initialization. 
+BCR1 is initialized to H'000F by a power-on reset and in hardware standby mode. It is not 
+initialized by a manual reset or in software standby mode. 
+• Bits 15–4—Reserved: The write value should always be 0. Operation cannot be guaranteed if 1 
+is written to these bits. 
+• Bit 3—CS3 Space Size Specification (A3SZ): Specifies the CS3 space bus size. A 0 setting 
+specifies byte (8-bit) size, and a 1 setting specifies word (16-bit) size. 
+ 
+Bit 3: A3SZ 
+Description 
+0 
+Byte (8-bit) size 
+1 
+Word (16-bit) size 
+(Initial value) 
+ 
+• Bit 2—CS2 Space Size Specification (A2SZ): Specifies the CS2 space bus size. A 0 setting 
+specifies byte (8-bit) size, and a 1 setting specifies word (16-bit) size. 
+ 
+Bit 2: A2SZ 
+Description 
+0 
+Byte (8-bit) size 
+1 
+Word (16-bit) size 
+(Initial value) 
+ 
+
+
+PDFZERO180
+Rev.2.0, 07/03, page 141 of 960 
+ 
+• Bit 1—CS1 Space Size Specification (A1SZ): Specifies the CS1 space bus size. A 0 setting 
+specifies byte (8-bit) size, and a 1 setting specifies word (16-bit) size. 
+ 
+Bit 1: A1SZ 
+Description 
+0 
+Byte (8-bit) size 
+1 
+Word (16-bit) size 
+(Initial value) 
+ 
+• Bit 0—CS0 Space Size Specification (A0SZ): Specifies the CS0 space bus size A 0 setting 
+specifies byte (8-bit) size, and a 1 setting specifies word (16-bit) size. 
+ 
+Bit 0: A0SZ 
+Description 
+0 
+Byte (8-bit) size 
+1 
+Word (16-bit) size 
+(Initial value) 
+Note: A0SZ is valid only in on-chip ROM enabled mode. In on-chip ROM disabled mode, the CS0 
+space bus size is specified by the mode pin. 
+ 
+9.2.2 
+Bus Control Register 2 (BCR2) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+ 
+IW31 
+IW30 
+IW21 
+IW20 
+IW11 
+IW10 
+IW01 
+IW00 
+ 
+Initial value: 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+CW3 
+CW2 
+CW1 
+CW0 
+SW3 
+SW2 
+SW1 
+SW0 
+ 
+Initial value: 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+BCR2 is a 16-bit readable/writable register that specifies the number of idle cycles and CS signal 
+assert extension of each CS space. 
+BCR2 is initialized to H'FFFF by a power-on reset and in hardware standby mode. It is not 
+initialized by a manual reset or in software standby mode. 
+• Bits 15–8—Idles between Cycles (IW31, IW30, IW21, IW20, IW11, IW10, IW01, IW00): 
+These bits specify idle cycles inserted between consecutive accesses when the second one is to 
+a different CS area after a read. Idles are used to prevent data conflict between ROM (and 
+other memories, which are slow to turn the read data buffer off), fast memories, and I/O 
+interfaces. Even when access is to the same area, idle cycles must be inserted when a read 
+access is followed immediately by a write access. The idle cycles to be inserted comply with 
+
+
+PDFZERO181
+Rev.2.0, 07/03, page 142 of 960 
+ 
+the area specification of the previous access. Refer to section 9.4, Waits between Access 
+Cycles, for details. 
+IW31, IW30 specify the idle between cycles for CS3 space; IW21, IW20 specify the idle 
+between cycles for CS2 space; IW11, IW10 specify the idle between cycles for CS1 space and 
+IW01, IW00 specify the idle between cycles for CS0 space. 
+ 
+Bit 15: IW31 
+Bit 14: IW30 
+Description 
+0 
+No CS3 space idle cycle  
+0 
+1 
+Inserts one idle cycle 
+0 
+Inserts two idle cycles 
+1 
+1 
+Inserts three idle cycles 
+(Initial value) 
+ 
+Bit 13: IW21 
+Bit 12: IW20 
+Description 
+0 
+No CS2 space idle cycle 
+0 
+1 
+Inserts one idle cycle 
+0 
+Inserts two idle cycles 
+1 
+1 
+Inserts three idle cycles 
+(Initial value) 
+ 
+Bit 11: IW11 
+Bit 10: IW10 
+Description 
+0 
+No CS1 space idle cycle 
+0 
+1 
+Inserts one idle cycle 
+0 
+Inserts two idle cycles 
+1 
+1 
+Inserts three idle cycles 
+(Initial value) 
+ 
+Bit 9: IW01 
+Bit 8: IW00 
+Description 
+0 
+No CS0 space idle cycle 
+0 
+1 
+Inserts one idle cycle 
+0 
+Inserts two idle cycles 
+1 
+1 
+Inserts three idle cycles 
+(Initial value) 
+ 
+• Bits 7–4—Idle Specification for Continuous Access (CW3, CW2, CW1, CW0): The 
+continuous access idle specification makes insertions to clearly delineate the bus intervals by 
+once negating the CSn signal when performing consecutive accesses to the same CS space. 
+When a write immediately follows a read, the number of idle cycles inserted is the larger of the 
+two values specified by IW and CW. Refer to section 9.4, Waits between Access Cycles, for 
+details. 
+
+
+PDFZERO182
+Rev.2.0, 07/03, page 143 of 960 
+ 
+CW3 specifies the continuous access idles for CS3 space; CW2 specifies the continuous access 
+idles for CS2 space; CW1 specifies the continuous access idles for CS1 space and CW0 
+specifies the continuous access idles for CS0 space. 
+ 
+Bit 7: CW3 
+Description 
+0 
+No CS3 space continuous access idle cycles 
+1 
+One CS3 space continuous access idle cycle 
+(Initial value) 
+ 
+Bit 6: CW2 
+Description 
+0 
+No CS2 space continuous access idle cycles 
+1 
+One CS2 space continuous access idle cycle 
+(Initial value) 
+ 
+Bit 5: CW1 
+Description 
+0 
+No CS1 space continuous access idle cycles 
+1 
+One CS1 space continuous access idle cycle 
+(Initial value) 
+ 
+Bit 4: CW0 
+Description 
+0 
+No CS0 space continuous access idle cycles 
+1 
+One CS0 space continuous access idle cycle 
+(Initial value) 
+ 
+• Bits 3–0—CS Assert Extension Specification (SW3, SW2, SW1, SW0): The CS assert cycle 
+extension specification is for making insertions to prevent extension of the RD signal, WRH 
+signal, or WRL signal assert period beyond the length of the CSn signal assert period. 
+Extended cycles insert one cycle before and after each bus cycle, which simplifies interfaces 
+with external devices and also has the effect of extending the write data hold time. Refer to 
+section 9.3.3, CS Assert Period Extension, for details. 
+SW3 specifies the CS assert extension for CS3 space access; SW2 specifies the CS assert 
+extension for CS2 space access; SW1 specifies the CS assert extension for CS1 space access 
+and SW0 specifies the CS assert extension for CS0 space access. 
+ 
+Bit 3: SW3 
+Description 
+0 
+No CS3 space CS assert extension 
+1 
+CS3 space CS assert extension 
+(Initial value) 
+ 
+Bit 2: SW2 
+Description 
+0 
+No CS2 space CS assert extension 
+1 
+CS2 space CS assert extension 
+(Initial value) 
+ 
+
+
+PDFZERO183
+Rev.2.0, 07/03, page 144 of 960 
+ 
+Bit 1: SW1 
+Description 
+0 
+No CS1 space CS assert extension 
+1 
+CS1 space CS assert extension 
+(Initial value) 
+ 
+Bit 0: SW0 
+Description 
+0 
+No CS0 space CS assert extension 
+1 
+CS0 space CS assert extension 
+(Initial value) 
+ 
+
+
+PDFZERO184
+Rev.2.0, 07/03, page 145 of 960 
+ 
+9.2.3 
+Wait Control Register (WCR) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+ 
+W33 
+W32 
+W31 
+W30 
+W23 
+W22 
+W21 
+W20 
+ 
+Initial value: 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+W13 
+W12 
+W11 
+W10 
+W03 
+W02 
+W01 
+W00 
+ 
+Initial value: 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+WCR is a 16-bit readable/writable register that specifies the number of wait cycles for each CS 
+space. 
+WCR is initialized to H'FFFF by a power-on reset and in hardware standby mode. It is not 
+initialized by a manual reset or in software standby mode. 
+• Bits 15–12—CS3 Space Wait Specification (W33, W32, W31, W30): These bits specify the 
+number of waits for CS3 space access. 
+ 
+Bit 15: 
+W33 
+Bit 14:  
+W32 
+Bit 13:  
+W31 
+Bit 12:  
+W30 
+ 
+Description 
+0 
+0 
+0 
+0 
+No wait (external wait input disabled) 
+0 
+0 
+0 
+1 
+1 wait external wait input enabled 
+⋅⋅⋅ 
+ 
+ 
+ 
+ 
+1 
+1 
+1 
+1 
+15 wait external wait input enabled 
+(Initial value) 
+ 
+• Bits 11–8—CS2 Space Wait Specification (W23, W22, W21, W20): These bits specify the 
+number of waits for CS2 space access. 
+ 
+Bit 11:  
+W23 
+Bit 10:  
+W22 
+Bit 9:  
+W21 
+Bit 8:  
+W20 
+ 
+Description 
+0 
+0 
+0 
+0 
+No wait (external wait input disabled) 
+0 
+0 
+0 
+1 
+1 wait external wait input enabled 
+⋅⋅⋅ 
+ 
+ 
+ 
+ 
+1 
+1 
+1 
+1 
+15 wait external wait input enabled 
+(Initial value) 
+ 
+• Bits 7–4—CS1 Space Wait Specification (W13, W12, W11, W10): These bits specify the 
+number of waits for CS1 space access. 
+
+
+PDFZERO185
+Rev.2.0, 07/03, page 146 of 960 
+ 
+ 
+Bit 7:  
+W13 
+Bit 6:  
+W12 
+Bit 5:  
+W11 
+Bit 4: 
+W10 
+ 
+Description 
+0 
+0 
+0 
+0 
+No wait (external wait input disabled) 
+0 
+0 
+0 
+1 
+1 wait external wait input enabled 
+⋅⋅⋅ 
+ 
+ 
+ 
+ 
+1 
+1 
+1 
+1 
+15 wait external wait input enabled 
+(Initial value) 
+ 
+• Bits 3–0—CS0 Space Wait Specification (W03, W02, W01, W00): These bits specify the 
+number of waits for CS0 space access. 
+ 
+Bit 3:  
+W03 
+Bit 2:  
+W02 
+Bit 1:  
+W01 
+Bit 0: 
+W00 
+ 
+Description 
+0 
+0 
+0 
+0 
+No wait (external wait input disabled) 
+0 
+0 
+0 
+1 
+1 wait external wait input enabled 
+⋅⋅⋅ 
+ 
+ 
+ 
+ 
+1 
+1 
+1 
+1 
+15 wait external wait input enabled 
+(Initial value) 
+ 
+9.2.4 
+RAM Emulation Register (RAMER) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+ 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+— 
+— 
+— 
+RAMS 
+RAM2 
+RAM1 
+RAM0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+The RAM emulation register (RAMER) is a 16-bit readable/writable register that selects the RAM 
+area to be used when emulating realtime programming of flash memory.  
+RAMER is initialized to H'0000 by a power-on reset and in hardware standby mode. It is not 
+initialized by a manual reset or in software standby mode. 

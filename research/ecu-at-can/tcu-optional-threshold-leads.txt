@@ -1,0 +1,44 @@
+EXECUTED FOLLOW-UP: tcu-optional-thresholds.txt now owns verified44E14/44F5A
+andadmission evidence. Stored-array setter/initialization leads remain static.
+Original lead record follows.
+
+2026-10-06: optional threshold adjustment continuation
+STATIC ONLY; not independently executed/modeled in this follow-up.
+Input LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Original instructions: tcu-optional-threshold-leads-disassembly.txt.
+
+4530C captures9B3E (or941E for entry source13/14), signed wordROM77372,
+word92F0 andbyte92D1 before four producer dispatches. The second captured
+word is ROM77372=23040, NOT a runtime RAM measurement.44E14 receives its
+left-shifted-by-one low word throughr6. Admission additionally compares
+signed80F2 withROM77370 and checks916Fbit4,92D9bit4,class8080notFF,916Cbit0.
+Then descriptor kind0/1 and slots0,1,2,5,6,7 can call44E14.
+44E14 calls24584 withword73BEE[slot] before selecting upper/lower paths.
+For slots0..4 it looks up the slot's existing curve at the alternate axis,
+adds the signed returned adjustment, clamps0..32767 and caches9B42[slot].
+Selection uses signed809C (GBR offset156), compared withROM77372;
+keep that distinct from the80EA input used by the release overlay.
+For lower slots5..9 it uses cached9B42[slot-5] minusbyte73BE8[slot-5]*64,
+then clamps through original signed-word logic and bounds the incoming value.
+Need independent24584 model and exact unsigned/signed comparisons before
+calling this adjustment understood. Physical units and intended policy open.
+
+44F5A can run on slots2..4 ifcombined mode is nonzero. Combined mode uses
+9AE9bit0 plus92D1bit3*2 (the92D1 value was captured before producer calls).
+Inputs are slot, current threshold, lowword(92F0<<3),combined mode.
+Static body: non-mode2 usesbyte73BEB[slot-2]*64; modes otherthan1 andslots
+otherthan2 additionally map via10764 at73C02+7*(slot-3), shiftresult right2,
+and choose a maximum. Return is at least that lower bound. Need original
+byte-curve interpolation and all4combined modes, and full4530C replays with
+both optional branches. Invalid slots are outside the production domain.
+
+45BA0 scheduling lead:1EC5A calls205FA,3BADA,45BA0,285CC then28720.
+No claim of production timing relative to4530C until the task dispatcher and
+intervening producers execute. Preserve independent traction and roof scopes
+in CHECKPOINT.txt; no new remote-controller evidence was obtained here.
+
+24584 narrowed statically: sign-extended word read atFFFF616A +2*u16(r4),
+with read in the RTS delay slot. It is a getter, not the stored-value producer.
+Stock73BEE entries used by44E14 map to indexed low-RAM words; trace writers
+and initialization separately. No claim that these are EEPROM-backed values.

@@ -1,0 +1,77 @@
+ECU nonidle interrupt context preservation — 2026-10-07
+
+Objective and limits
+Part of the active ECU/automatic-transmission CAN, deep traction control and
+NC roof folding AND unfolding investigation. All three broader requirements
+remain incomplete. User has no additional DSC/roof dumps, captures or bench
+results. No staging/commit/push authorization. Research-only verification;
+ROM, production code and shared instruction emulator are unchanged.
+
+Verified result
+verify_control_interrupt_nonidle.py executes 512 original interrupt entries
+2F78/3290 to F28C, then original epilogues32D8 through nonidle334C to3D10.
+All512 complete RAM maps and architecture states match an independent model.
+The 16 stock tasks with priority below4 are tested across32 seeded register
+patterns: task0,2,3,4,6,7,8,9,10,11,12,13,14,15,16,18. All16 interrupt-entry
+masks are included. All have stock descriptor type4 and byte1=0, allowing
+preemption when an explicit priority4/task17 ready context is supplied.
+Priority4 tasks1/5/17 are excluded: stock scheduler has no higher priority.
+
+The test provides a hardware-shaped PC/SR frame at synthetic taskSPFFFED000-8,
+with interrupted SR mask0 and varying Q/M/T. It perturbs callback-volatile GPRs,
+FR0..11,FPUL/FPSCR and SR after reaching F28C. The callback body is not run;
+the earlier full600 idle-IRQ callback proof remains separate.
+
+Original334C sets nesting12B8=100, restores interrupted R1/R2/PR from the IRQ
+stack and saves task context. It writes descriptor RAM state12, saves context
+SP to12BC, then enters3D10 with R4=FFFF12B0/R5=17 and SR=B0. The saved frame
+is156bytes including the supplied8-byte PC/SR frame. The independent model
+checks all39words and every other RAM byte, plus allGPR/FPU/system state.
+From high to low address, conceptual push order:
+ SR,PC,R0,R8,R9,R10,R11,R12,GBR,R13,MACH,R14,MACL,
+ FR12,FR13,FR14,FR15,FR0..FR10,FPSCR,FR11,FPUL,R1..R7,PR.
+Stock ROM4060=0, so optional3712 context-switch hook is not called. The frame
+does not contain an extra synthetic return address. Stop is before3D10body.
+
+Each case then deliberately corrupts all modeled task registers and invokes
+the original3EB4 restoration with R4=savedSP. Original3F00 RTE reaches the
+explicit returnPC2000. All512 restores recover original R0..15,FR0..15,FPUL,
+FPSCR,GBR,MACH,MACL,PR and SR exactly; fullRAM is unchanged by restoration.
+This directly exercises the restore component. It does NOT claim that task17
+ran, that the scheduler later reselected the preempted task, or that a physical
+interrupt was admitted. No type-other-than4, nested physicalIRQ, elapsed-time,
+remote DSC actuation or CAN signal-unit proof is supplied by these tests.
+
+Reproduction and provenance
+ python research/ecu-at-can/verify_control_interrupt_nonidle.py
+Result: control-interrupt-nonidle-verification.json, PASS512save/512restore.
+Python3.14.3; existing ControlInterrupt and inherited instructions reused with
+no edits. Primary ISA provenance/limitations incontrol-interrupt-timer.txt.
+ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+GNUobjdump2.42 original32D8..3414 and3EB4..3F34 bytes are retained in
+control-scheduler-start-disassembly.txt. Full script and result are Git-eligible.
+No test failures or oracle corrections occurred in this component.
+
+Next concrete action
+Exercise original3D10 selection of a saved state12 task and independently
+check its hook/temporary-stack/context changes before claiming native resume.
+Then join actual higher-priority work and interrupted-task resumption at an
+explicit instruction boundary. Startup trace remains stopped at unidentified
+FFFFEC62 (control-scheduler-start.txt); do not force ready flags or skip callees.
+ECU/TCU capture/diagnostic cadence and physical integration remain separate.
+Traction CAN211/21A sender/units and remoteDSC actuation are unproved. Roof
+folding AND unfolding/interruption/resume/reversal/timeout/synchronization/
+recovery still require applicable OEM edition/controller or physical evidence.
+CHECKPOINT owns current Ghidra archive identity, live sessions and all scopes.
+
+Saved analysis status
+Eight new Ghidra annotations saved to both-program paired archive;1967total,
+1013complete identicalexports/11projectfilehashes independentlyverified.
+Apply70965/liveverify54614/snapshot+restore2569 allterminalexit0; no logerrors.
+Reproduce annotation/save/restore via ghidra/README.txt andverify_restore.py.
+Archive SHA256 f1b9f3c0b4003ad84f53440155adcf11c48c4a0bfc4d863d4e90593b62ca0687
+Size 11018940bytes; restore-check/startup-nonidle-20261007.
+control-scheduler-start-artifacts.json preserves scripts/results/report hashes.
+No pendingprocess orprojectedits. Savedlocally; nothingstaged/committed/pushed
+bythiswork. Existingmixedindex remainsunchanged.

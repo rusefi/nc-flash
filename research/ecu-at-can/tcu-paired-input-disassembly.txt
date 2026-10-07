@@ -1,0 +1,647 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00036be6 <.data+0x36be6>:
+   36be6:	2f e6       	mov.l	r14,@-r15
+   36be8:	2f d6       	mov.l	r13,@-r15
+   36bea:	4f 22       	sts.l	pr,@-r15
+   36bec:	d4 1b       	mov.l	0x36c5c,r4	! ffff6cd4
+   36bee:	d3 19       	mov.l	0x36c54,r3	! 154bc
+   36bf0:	43 0b       	jsr	@r3
+   36bf2:	00 09       	nop
+   36bf4:	c7 1a       	mova	0x36c60,r0
+   36bf6:	f4 0c       	fmov	fr0,fr4
+   36bf8:	d3 1a       	mov.l	0x36c64,r3	! 20b8
+   36bfa:	f6 8d       	fldi0	fr6
+   36bfc:	43 0b       	jsr	@r3
+   36bfe:	f5 08       	fmov	@r0,fr5
+   36c00:	dd 19       	mov.l	0x36c68,r13	! ffff6b5e
+   36c02:	d4 1a       	mov.l	0x36c6c,r4	! ffffa3a4
+   36c04:	d2 1a       	mov.l	0x36c70,r2	! 154b0
+   36c06:	42 0b       	jsr	@r2
+   36c08:	6e 03       	mov	r0,r14
+   36c0a:	60 0c       	extu.b	r0,r0
+   36c0c:	88 01       	cmp/eq	#1,r0
+   36c0e:	8f 03       	bf.s	0x36c18
+   36c10:	00 09       	nop
+   36c12:	92 0d       	mov.w	0x36c30,r2	! ff
+   36c14:	a0 08       	bra	0x36c28
+   36c16:	2d 20       	mov.b	r2,@r13
+   36c18:	94 0b       	mov.w	0x36c32,r4	! c8
+   36c1a:	62 ec       	extu.b	r14,r2
+   36c1c:	32 47       	cmp/gt	r4,r2
+   36c1e:	8f 02       	bf.s	0x36c26
+   36c20:	00 09       	nop
+   36c22:	a0 01       	bra	0x36c28
+   36c24:	2d 40       	mov.b	r4,@r13
+   36c26:	2d e0       	mov.b	r14,@r13
+   36c28:	4f 26       	lds.l	@r15+,pr
+   36c2a:	6d f6       	mov.l	@r15+,r13
+   36c2c:	00 0b       	rts
+   36c2e:	6e f6       	mov.l	@r15+,r14
+   36c30:	00 ff       	mac.l	@r15+,@r0+
+   36c32:	00 c8       	.word 0x00c8
+   36c34:	ff ff       	.word 0xffff
+   36c36:	71 b4       	add	#-76,r1
+   36c38:	c4 00       	mov.b	@(0,gbr),r0
+   36c3a:	00 00       	.word 0x0000
+   36c3c:	00 00       	.word 0x0000
+   36c3e:	20 e8       	tst	r14,r0
+   36c40:	ff ff       	.word 0xffff
+   36c42:	6b 5a       	negc	r5,r11
+   36c44:	ff ff       	.word 0xffff
+   36c46:	6b 62       	mov.l	@r6,r11
+   36c48:	00 00       	.word 0x0000
+   36c4a:	ff ff       	.word 0xffff
+   36c4c:	00 00       	.word 0x0000
+   36c4e:	ff fe       	fmac	fr0,fr15,fr15
+   36c50:	ff ff       	.word 0xffff
+   36c52:	71 c4       	add	#-60,r1
+   36c54:	00 01       	.word 0x0001
+   36c56:	54 bc       	mov.l	@(48,r11),r4
+   36c58:	ff ff       	.word 0xffff
+   36c5a:	6b 5c       	extu.b	r5,r11
+   36c5c:	ff ff       	.word 0xffff
+   36c5e:	6c d4       	mov.b	@r13+,r12
+   36c60:	3f 00       	cmp/eq	r0,r15
+   36c62:	00 00       	.word 0x0000
+   36c64:	00 00       	.word 0x0000
+   36c66:	20 b8       	tst	r11,r0
+   36c68:	ff ff       	.word 0xffff
+   36c6a:	6b 5e       	exts.b	r5,r11
+   36c6c:	ff ff       	.word 0xffff
+   36c6e:	a3 a4       	bra	0x373ba
+   36c70:	00 01       	.word 0x0001
+   36c72:	54 b0       	mov.l	@(0,r11),r4
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000020b8 <.data+0x20b8>:
+    20b8:	c7 0a       	mova	0x20e4,r0
+    20ba:	f4 61       	fsub	fr6,fr4
+    20bc:	95 10       	mov.w	0x20e0,r5	! ff
+    20be:	f4 53       	fdiv	fr5,fr4
+    20c0:	f3 08       	fmov	@r0,fr3
+    20c2:	f2 4c       	fmov	fr4,fr2
+    20c4:	f2 30       	fadd	fr3,fr2
+    20c6:	f2 3d       	ftrc	fr2,fpul
+    20c8:	04 5a       	sts	fpul,r4
+    20ca:	34 57       	cmp/gt	r5,r4
+    20cc:	8f 02       	bf.s	0x20d4
+    20ce:	00 09       	nop
+    20d0:	a0 04       	bra	0x20dc
+    20d2:	64 53       	mov	r5,r4
+    20d4:	44 11       	cmp/pz	r4
+    20d6:	8d 01       	bt.s	0x20dc
+    20d8:	00 09       	nop
+    20da:	e4 00       	mov	#0,r4
+    20dc:	00 0b       	rts
+    20de:	60 43       	mov	r4,r0
+    20e0:	00 ff       	mac.l	@r15+,@r0+
+    20e2:	00 00       	.word 0x0000
+    20e4:	3f 00       	cmp/eq	r0,r15
+	...
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000170d4 <.data+0x170d4>:
+   170d4:	d2 14       	mov.l	0x17128,r2	! 5fd18
+   170d6:	63 21       	mov.w	@r2,r3
+   170d8:	d1 14       	mov.l	0x1712c,r1	! ffff880c
+   170da:	e0 00       	mov	#0,r0
+   170dc:	21 31       	mov.w	r3,@r1
+   170de:	d3 14       	mov.l	0x17130,r3	! ffff880e
+   170e0:	00 0b       	rts
+   170e2:	23 00       	mov.b	r0,@r3
+   170e4:	4f 22       	sts.l	pr,@-r15
+   170e6:	d2 11       	mov.l	0x1712c,r2	! ffff880c
+   170e8:	d0 12       	mov.l	0x17134,r0	! ffff8f32
+   170ea:	65 21       	mov.w	@r2,r5
+   170ec:	60 00       	mov.b	@r0,r0
+   170ee:	65 5d       	extu.w	r5,r5
+   170f0:	91 19       	mov.w	0x17126,r1	! ff
+   170f2:	c9 ff       	and	#255,r0
+   170f4:	64 03       	mov	r0,r4
+   170f6:	63 4d       	extu.w	r4,r3
+   170f8:	33 10       	cmp/eq	r1,r3
+   170fa:	8d 0e       	bt.s	0x1711a
+   170fc:	e6 01       	mov	#1,r6
+   170fe:	d6 0e       	mov.l	0x17138,r6	! 5c59c
+   17100:	d5 0e       	mov.l	0x1713c,r5	! 5c80e
+   17102:	d3 0f       	mov.l	0x17140,r3	! 10f38
+   17104:	43 0b       	jsr	@r3
+   17106:	00 09       	nop
+   17108:	d4 0e       	mov.l	0x17144,r4	! ffff
+   1710a:	65 03       	mov	r0,r5
+   1710c:	35 47       	cmp/gt	r4,r5
+   1710e:	8b 00       	bf	0x17112
+   17110:	65 43       	mov	r4,r5
+   17112:	45 11       	cmp/pz	r5
+   17114:	89 00       	bt	0x17118
+   17116:	e5 00       	mov	#0,r5
+   17118:	e6 02       	mov	#2,r6
+   1711a:	d2 04       	mov.l	0x1712c,r2	! ffff880c
+   1711c:	d3 04       	mov.l	0x17130,r3	! ffff880e
+   1711e:	22 51       	mov.w	r5,@r2
+   17120:	4f 26       	lds.l	@r15+,pr
+   17122:	00 0b       	rts
+   17124:	23 60       	mov.b	r6,@r3
+   17126:	00 ff       	mac.l	@r15+,@r0+
+   17128:	00 05       	mov.w	r0,@(r0,r0)
+   1712a:	fd 18       	fmov	@r1,fr13
+   1712c:	ff ff       	.word 0xffff
+   1712e:	88 0c       	cmp/eq	#12,r0
+   17130:	ff ff       	.word 0xffff
+   17132:	88 0e       	cmp/eq	#14,r0
+   17134:	ff ff       	.word 0xffff
+   17136:	8f 32       	bf.s	0x1719e
+   17138:	00 05       	mov.w	r0,@(r0,r0)
+   1713a:	c5 9c       	mov.w	@(312,gbr),r0
+   1713c:	00 05       	mov.w	r0,@(r0,r0)
+   1713e:	c8 0e       	tst	#14,r0
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00022f3c <.data+0x22f3c>:
+   22f3c:	4f 22       	sts.l	pr,@-r15
+   22f3e:	b0 02       	bsr	0x22f46
+   22f40:	00 09       	nop
+   22f42:	a0 d5       	bra	0x230f0
+   22f44:	4f 26       	lds.l	@r15+,pr
+   22f46:	2f e6       	mov.l	r14,@-r15
+   22f48:	2f d6       	mov.l	r13,@-r15
+   22f4a:	2f c6       	mov.l	r12,@-r15
+   22f4c:	2f b6       	mov.l	r11,@-r15
+   22f4e:	4f 22       	sts.l	pr,@-r15
+   22f50:	9e 72       	mov.w	0x23038,r14	! 9346
+   22f52:	65 e3       	mov	r14,r5
+   22f54:	75 04       	add	#4,r5
+   22f56:	64 e3       	mov	r14,r4
+   22f58:	60 51       	mov.w	@r5,r0
+   22f5a:	74 02       	add	#2,r4
+   22f5c:	81 e3       	mov.w	r0,@(6,r14)
+   22f5e:	63 41       	mov.w	@r4,r3
+   22f60:	25 31       	mov.w	r3,@r5
+   22f62:	65 e3       	mov	r14,r5
+   22f64:	62 51       	mov.w	@r5,r2
+   22f66:	24 21       	mov.w	r2,@r4
+   22f68:	c5 4d       	mov.w	@(154,gbr),r0
+   22f6a:	d3 34       	mov.l	0x2303c,r3	! 23406
+   22f6c:	43 0b       	jsr	@r3
+   22f6e:	25 01       	mov.w	r0,@r5
+   22f70:	d3 33       	mov.l	0x23040,r3	! 50f78
+   22f72:	6d 03       	mov	r0,r13
+   22f74:	43 0b       	jsr	@r3
+   22f76:	c1 4d       	mov.w	r0,@(154,gbr)
+   22f78:	d6 32       	mov.l	0x23044,r6	! 5cd1c
+   22f7a:	84 6c       	mov.b	@(12,r6),r0
+   22f7c:	60 0c       	extu.b	r0,r0
+   22f7e:	67 03       	mov	r0,r7
+   22f80:	47 08       	shll2	r7
+   22f82:	47 08       	shll2	r7
+   22f84:	47 08       	shll2	r7
+   22f86:	47 00       	shll	r7
+   22f88:	65 df       	exts.w	r13,r5
+   22f8a:	67 7f       	exts.w	r7,r7
+   22f8c:	35 73       	cmp/ge	r7,r5
+   22f8e:	8d 0d       	bt.s	0x22fac
+   22f90:	e4 0c       	mov	#12,r4
+   22f92:	a0 01       	bra	0x22f98
+   22f94:	e4 00       	mov	#0,r4
+   22f96:	74 01       	add	#1,r4
+   22f98:	60 4e       	exts.b	r4,r0
+   22f9a:	03 6c       	mov.b	@(r0,r6),r3
+   22f9c:	63 3c       	extu.b	r3,r3
+   22f9e:	43 08       	shll2	r3
+   22fa0:	43 08       	shll2	r3
+   22fa2:	43 08       	shll2	r3
+   22fa4:	43 00       	shll	r3
+   22fa6:	63 3f       	exts.w	r3,r3
+   22fa8:	35 33       	cmp/ge	r3,r5
+   22faa:	89 f4       	bt	0x22f96
+   22fac:	d2 26       	mov.l	0x23048,r2	! 76dfc
+   22fae:	60 4e       	exts.b	r4,r0
+   22fb0:	07 6c       	mov.b	@(r0,r6),r7
+   22fb2:	67 7c       	extu.b	r7,r7
+   22fb4:	47 08       	shll2	r7
+   22fb6:	47 08       	shll2	r7
+   22fb8:	47 08       	shll2	r7
+   22fba:	47 00       	shll	r7
+   22fbc:	63 21       	mov.w	@r2,r3
+   22fbe:	37 38       	sub	r3,r7
+   22fc0:	d6 22       	mov.l	0x2304c,r6	! ffff933d
+   22fc2:	63 4e       	exts.b	r4,r3
+   22fc4:	61 60       	mov.b	@r6,r1
+   22fc6:	33 13       	cmp/ge	r1,r3
+   22fc8:	89 03       	bt	0x22fd2
+   22fca:	67 7f       	exts.w	r7,r7
+   22fcc:	35 73       	cmp/ge	r7,r5
+   22fce:	8b 00       	bf	0x22fd2
+   22fd0:	74 01       	add	#1,r4
+   22fd2:	e2 0a       	mov	#10,r2
+   22fd4:	26 40       	mov.b	r4,@r6
+   22fd6:	66 4e       	exts.b	r4,r6
+   22fd8:	65 63       	mov	r6,r5
+   22fda:	45 21       	shar	r5
+   22fdc:	36 23       	cmp/ge	r2,r6
+   22fde:	8b 01       	bf	0x22fe4
+   22fe0:	65 43       	mov	r4,r5
+   22fe2:	75 fb       	add	#-5,r5
+   22fe4:	d2 1a       	mov.l	0x23050,r2	! ffff933c
+   22fe6:	64 d3       	mov	r13,r4
+   22fe8:	d3 1a       	mov.l	0x23054,r3	! ffff933a
+   22fea:	ec 01       	mov	#1,r12
+   22fec:	22 50       	mov.b	r5,@r2
+   22fee:	2c c8       	tst	r12,r12
+   22ff0:	23 d1       	mov.w	r13,@r3
+   22ff2:	61 e1       	mov.w	@r14,r1
+   22ff4:	34 18       	sub	r1,r4
+   22ff6:	8d 05       	bt.s	0x23004
+   22ff8:	6b 43       	mov	r4,r11
+   22ffa:	e1 00       	mov	#0,r1
+   22ffc:	2f 16       	mov.l	r1,@-r15
+   22ffe:	d1 16       	mov.l	0x23058,r1	! 3fe00000
+   23000:	a0 04       	bra	0x2300c
+   23002:	2f 16       	mov.l	r1,@-r15
+   23004:	e0 00       	mov	#0,r0
+   23006:	2f 06       	mov.l	r0,@-r15
+   23008:	d0 14       	mov.l	0x2305c,r0	! bfe00000
+   2300a:	2f 06       	mov.l	r0,@-r15
+   2300c:	d2 14       	mov.l	0x23060,r2	! 5bbec
+   2300e:	42 0b       	jsr	@r2
+   23010:	00 09       	nop
+   23012:	62 0f       	exts.w	r0,r2
+   23014:	60 4f       	exts.w	r4,r0
+   23016:	30 23       	cmp/ge	r2,r0
+   23018:	8d 01       	bt.s	0x2301e
+   2301a:	85 e3       	mov.w	@(6,r14),r0
+   2301c:	6b 4b       	neg	r4,r11
+   2301e:	64 d3       	mov	r13,r4
+   23020:	34 08       	sub	r0,r4
+   23022:	65 43       	mov	r4,r5
+   23024:	2c c8       	tst	r12,r12
+   23026:	8d 1d       	bt.s	0x23064
+   23028:	63 4f       	exts.w	r4,r3
+   2302a:	e1 00       	mov	#0,r1
+   2302c:	2f 16       	mov.l	r1,@-r15
+   2302e:	d1 0a       	mov.l	0x23058,r1	! 3fe00000
+   23030:	2f 16       	mov.l	r1,@-r15
+   23032:	a0 1b       	bra	0x2306c
+   23034:	00 09       	nop
+   23036:	93 56       	mov.w	0x230e6,r3	! 6bf6
+   23038:	93 46       	mov.w	0x230c8,r3	! d223
+   2303a:	ff ff       	.word 0xffff
+   2303c:	00 02       	stc	sr,r0
+   2303e:	34 06       	cmp/hi	r0,r4
+   23040:	00 05       	mov.w	r0,@(r0,r0)
+   23042:	0f 78       	.word 0x0f78
+   23044:	00 05       	mov.w	r0,@(r0,r0)
+   23046:	cd 1c       	and.b	#28,@(r0,gbr)
+   23048:	00 07       	mul.l	r0,r0
+   2304a:	6d fc       	extu.b	r15,r13
+   2304c:	ff ff       	.word 0xffff
+   2304e:	93 3d       	mov.w	0x230cc,r3	! a004
+   23050:	ff ff       	.word 0xffff
+   23052:	93 3c       	mov.w	0x230ce,r3	! 9
+   23054:	ff ff       	.word 0xffff
+   23056:	93 3a       	mov.w	0x230ce,r3	! 9
+   23058:	3f e0       	cmp/eq	r14,r15
+   2305a:	00 00       	.word 0x0000
+   2305c:	bf e0       	bsr	0x23020
+   2305e:	00 00       	.word 0x0000
+   23060:	00 05       	mov.w	r0,@(r0,r0)
+   23062:	bb ec       	bsr	0x2283e
+   23064:	e2 00       	mov	#0,r2
+   23066:	2f 26       	mov.l	r2,@-r15
+   23068:	d2 36       	mov.l	0x23144,r2	! bfe00000
+   2306a:	2f 26       	mov.l	r2,@-r15
+   2306c:	d0 36       	mov.l	0x23148,r0	! 5bbec
+   2306e:	40 0b       	jsr	@r0
+   23070:	00 09       	nop
+   23072:	60 0f       	exts.w	r0,r0
+   23074:	33 03       	cmp/ge	r0,r3
+   23076:	89 00       	bt	0x2307a
+   23078:	65 4b       	neg	r4,r5
+   2307a:	6b bf       	exts.w	r11,r11
+   2307c:	d3 33       	mov.l	0x2314c,r3	! 76e00
+   2307e:	97 5f       	mov.w	0x23140,r7	! 9344
+   23080:	62 31       	mov.w	@r3,r2
+   23082:	3b 23       	cmp/ge	r2,r11
+   23084:	8f 0a       	bf.s	0x2309c
+   23086:	66 5f       	exts.w	r5,r6
+   23088:	d2 31       	mov.l	0x23150,r2	! ffff8198
+   2308a:	e1 00       	mov	#0,r1
+   2308c:	22 10       	mov.b	r1,@r2
+   2308e:	d1 31       	mov.l	0x23154,r1	! 76dfe
+   23090:	60 11       	mov.w	@r1,r0
+   23092:	36 03       	cmp/ge	r0,r6
+   23094:	8b 02       	bf	0x2309c
+   23096:	60 70       	mov.b	@r7,r0
+   23098:	cb 01       	or	#1,r0
+   2309a:	27 00       	mov.b	r0,@r7
+   2309c:	d3 2d       	mov.l	0x23154,r3	! 76dfe
+   2309e:	62 31       	mov.w	@r3,r2
+   230a0:	36 23       	cmp/ge	r2,r6
+   230a2:	89 08       	bt	0x230b6
+   230a4:	d2 2a       	mov.l	0x23150,r2	! ffff8198
+   230a6:	e0 06       	mov	#6,r0
+   230a8:	61 20       	mov.b	@r2,r1
+   230aa:	61 1c       	extu.b	r1,r1
+   230ac:	31 03       	cmp/ge	r0,r1
+   230ae:	8b 02       	bf	0x230b6
+   230b0:	60 70       	mov.b	@r7,r0
+   230b2:	c9 fe       	and	#254,r0
+   230b4:	27 00       	mov.b	r0,@r7
+   230b6:	60 73       	mov	r7,r0
+   230b8:	60 00       	mov.b	@r0,r0
+   230ba:	c9 01       	and	#1,r0
+   230bc:	88 01       	cmp/eq	#1,r0
+   230be:	8b 0f       	bf	0x230e0
+   230c0:	2c c8       	tst	r12,r12
+   230c2:	89 05       	bt	0x230d0
+   230c4:	e2 00       	mov	#0,r2
+   230c6:	2f 26       	mov.l	r2,@-r15
+   230c8:	d2 23       	mov.l	0x23158,r2	! 3fe00000
+   230ca:	2f 26       	mov.l	r2,@-r15
+   230cc:	a0 04       	bra	0x230d8
+   230ce:	00 09       	nop
+   230d0:	e3 00       	mov	#0,r3
+   230d2:	2f 36       	mov.l	r3,@-r15
+   230d4:	d3 1b       	mov.l	0x23144,r3	! bfe00000
+   230d6:	2f 36       	mov.l	r3,@-r15
+   230d8:	d4 1b       	mov.l	0x23148,r4	! 5bbec
+   230da:	44 0b       	jsr	@r4
+   230dc:	00 09       	nop
+   230de:	64 0f       	exts.w	r0,r4
+   230e0:	d3 1e       	mov.l	0x2315c,r3	! ffff933e
+   230e2:	23 41       	mov.w	r4,@r3
+   230e4:	4f 26       	lds.l	@r15+,pr
+   230e6:	6b f6       	mov.l	@r15+,r11
+   230e8:	6c f6       	mov.l	@r15+,r12
+   230ea:	6d f6       	mov.l	@r15+,r13
+   230ec:	00 0b       	rts
+   230ee:	6e f6       	mov.l	@r15+,r14
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00023406 <.data+0x23406>:
+   23406:	4f 22       	sts.l	pr,@-r15
+   23408:	d0 1e       	mov.l	0x23484,r0	! ffff92d5
+   2340a:	60 00       	mov.b	@r0,r0
+   2340c:	d6 1e       	mov.l	0x23488,r6	! ffff82c4
+   2340e:	c8 80       	tst	#128,r0
+   23410:	95 29       	mov.w	0x23466,r5	! 938c
+   23412:	04 29       	movt	r4
+   23414:	74 ff       	add	#-1,r4
+   23416:	60 53       	mov	r5,r0
+   23418:	60 00       	mov.b	@r0,r0
+   2341a:	c8 01       	tst	#1,r0
+   2341c:	8f 05       	bf.s	0x2342a
+   2341e:	64 4b       	neg	r4,r4
+   23420:	60 4c       	extu.b	r4,r0
+   23422:	88 01       	cmp/eq	#1,r0
+   23424:	8b 01       	bf	0x2342a
+   23426:	e2 00       	mov	#0,r2
+   23428:	26 20       	mov.b	r2,@r6
+   2342a:	63 4c       	extu.b	r4,r3
+   2342c:	23 38       	tst	r3,r3
+   2342e:	8b 02       	bf	0x23436
+   23430:	60 50       	mov.b	@r5,r0
+   23432:	a0 02       	bra	0x2343a
+   23434:	c9 fe       	and	#254,r0
+   23436:	60 50       	mov.b	@r5,r0
+   23438:	cb 01       	or	#1,r0
+   2343a:	64 4c       	extu.b	r4,r4
+   2343c:	24 48       	tst	r4,r4
+   2343e:	8f 42       	bf.s	0x234c6
+   23440:	25 00       	mov.b	r0,@r5
+   23442:	d3 12       	mov.l	0x2348c,r3	! ffff880c
+   23444:	d2 0b       	mov.l	0x23474,r2	! 10d0c
+   23446:	64 31       	mov.w	@r3,r4
+   23448:	64 4d       	extu.w	r4,r4
+   2344a:	44 18       	shll8	r4
+   2344c:	42 0b       	jsr	@r2
+   2344e:	e5 0a       	mov	#10,r5
+   23450:	64 03       	mov	r0,r4
+   23452:	e5 01       	mov	#1,r5
+   23454:	25 58       	tst	r5,r5
+   23456:	8d 1b       	bt.s	0x23490
+   23458:	63 4f       	exts.w	r4,r3
+   2345a:	e1 00       	mov	#0,r1
+   2345c:	2f 16       	mov.l	r1,@-r15
+   2345e:	d1 06       	mov.l	0x23478,r1	! 40d90020
+   23460:	2f 16       	mov.l	r1,@-r15
+   23462:	a0 19       	bra	0x23498
+   23464:	00 09       	nop
+   23466:	93 8c       	mov.w	0x23582,r3	! 7632
+   23468:	00 07       	mul.l	r0,r0
+   2346a:	6d f8       	swap.b	r15,r13
+   2346c:	ff ff       	.word 0xffff
+   2346e:	92 d4       	mov.w	0x2361a,r2	! 34e3
+   23470:	ff ff       	.word 0xffff
+   23472:	89 b0       	bt	0x233d6
+   23474:	00 01       	.word 0x0001
+   23476:	0d 0c       	mov.b	@(r0,r0),r13
+   23478:	40 d9       	.word 0x40d9
+   2347a:	00 20       	.word 0x0020
+   2347c:	40 d8       	.word 0x40d8
+   2347e:	ff e0       	fadd	fr14,fr15
+   23480:	00 05       	mov.w	r0,@(r0,r0)
+   23482:	bb ec       	bsr	0x22c5e
+   23484:	ff ff       	.word 0xffff
+   23486:	92 d5       	mov.w	0x23634,r2	! 4400
+   23488:	ff ff       	.word 0xffff
+   2348a:	82 c4       	.word 0x82c4
+   2348c:	ff ff       	.word 0xffff
+   2348e:	88 0c       	cmp/eq	#12,r0
+   23490:	e2 00       	mov	#0,r2
+   23492:	2f 26       	mov.l	r2,@-r15
+   23494:	d2 12       	mov.l	0x234e0,r2	! 40d8ffe0
+   23496:	2f 26       	mov.l	r2,@-r15
+   23498:	d0 12       	mov.l	0x234e4,r0	! 5bbec
+   2349a:	40 0b       	jsr	@r0
+   2349c:	00 09       	nop
+   2349e:	60 0f       	exts.w	r0,r0
+   234a0:	33 07       	cmp/gt	r0,r3
+   234a2:	8b 19       	bf	0x234d8
+   234a4:	25 58       	tst	r5,r5
+   234a6:	89 05       	bt	0x234b4
+   234a8:	e3 00       	mov	#0,r3
+   234aa:	2f 36       	mov.l	r3,@-r15
+   234ac:	d3 0e       	mov.l	0x234e8,r3	! 40d90020
+   234ae:	2f 36       	mov.l	r3,@-r15
+   234b0:	a0 04       	bra	0x234bc
+   234b2:	00 09       	nop
+   234b4:	e2 00       	mov	#0,r2
+   234b6:	2f 26       	mov.l	r2,@-r15
+   234b8:	d2 09       	mov.l	0x234e0,r2	! 40d8ffe0
+   234ba:	2f 26       	mov.l	r2,@-r15
+   234bc:	d4 09       	mov.l	0x234e4,r4	! 5bbec
+   234be:	44 0b       	jsr	@r4
+   234c0:	00 09       	nop
+   234c2:	a0 09       	bra	0x234d8
+   234c4:	64 0f       	exts.w	r0,r4
+   234c6:	d3 09       	mov.l	0x234ec,r3	! 76dfa
+   234c8:	62 60       	mov.b	@r6,r2
+   234ca:	d0 09       	mov.l	0x234f0,r0	! 76e0a
+   234cc:	61 00       	mov.b	@r0,r1
+   234ce:	32 12       	cmp/hs	r1,r2
+   234d0:	8d 02       	bt.s	0x234d8
+   234d2:	64 31       	mov.w	@r3,r4
+   234d4:	d1 07       	mov.l	0x234f4,r1	! 76e0c
+   234d6:	64 11       	mov.w	@r1,r4
+   234d8:	4f 26       	lds.l	@r15+,pr
+   234da:	00 0b       	rts
+   234dc:	60 43       	mov	r4,r0
+   234de:	ff ff       	.word 0xffff
+   234e0:	40 d8       	.word 0x40d8
+   234e2:	ff e0       	fadd	fr14,fr15
+   234e4:	00 05       	mov.w	r0,@(r0,r0)
+   234e6:	bb ec       	bsr	0x22cc2
+   234e8:	40 d9       	.word 0x40d9
+   234ea:	00 20       	.word 0x0020
+   234ec:	00 07       	mul.l	r0,r0
+   234ee:	6d fa       	negc	r15,r13
+   234f0:	00 07       	mul.l	r0,r0
+   234f2:	6e 0a       	negc	r0,r14
+   234f4:	00 07       	mul.l	r0,r0
+   234f6:	6e 0c       	extu.b	r0,r14
+   234f8:	d3 0c       	mov.l	0x2352c,r3	! ffff8810
+   234fa:	64 31       	mov.w	@r3,r4
+   234fc:	d0 0c       	mov.l	0x23530,r0	! ffff92c9
+   234fe:	44 08       	shll2	r4
+   23500:	60 00       	mov.b	@r0,r0
+   23502:	44 08       	shll2	r4
+   23504:	44 08       	shll2	r4
+   23506:	44 00       	shll	r4
+   23508:	c8 02       	tst	#2,r0
+   2350a:	00 29       	movt	r0
+   2350c:	70 ff       	add	#-1,r0
+   2350e:	60 0b       	neg	r0,r0
+   23510:	88 01       	cmp/eq	#1,r0
+   23512:	8b 01       	bf	0x23518
+   23514:	d1 07       	mov.l	0x23534,r1	! 76e10
+   23516:	64 11       	mov.w	@r1,r4
+   23518:	95 07       	mov.w	0x2352a,r5	! 1400
+   2351a:	35 4c       	add	r4,r5
+   2351c:	d3 06       	mov.l	0x23538,r3	! ffff9390
+   2351e:	45 00       	shll	r5
+   23520:	d2 06       	mov.l	0x2353c,r2	! ffff9392
+   23522:	23 41       	mov.w	r4,@r3
+   23524:	d1 06       	mov.l	0x23540,r1	! 50c3a
+   23526:	41 2b       	jmp	@r1
+   23528:	22 51       	mov.w	r5,@r2
+   2352a:	14 00       	mov.l	r0,@(0,r4)
+   2352c:	ff ff       	.word 0xffff
+   2352e:	88 10       	cmp/eq	#16,r0
+   23530:	ff ff       	.word 0xffff
+   23532:	92 c9       	mov.w	0x236c8,r2	! 8b00
+   23534:	00 07       	mul.l	r0,r0
+   23536:	6e 10       	mov.b	@r1,r14
+   23538:	ff ff       	.word 0xffff
+   2353a:	93 90       	mov.w	0x2365e,r3	! a020
+   2353c:	ff ff       	.word 0xffff
+   2353e:	93 92       	mov.w	0x23666,r3	! e700
+   23540:	00 05       	mov.w	r0,@(r0,r0)
+   23542:	0c 3a       	.word 0x0c3a
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00050f78 <.data+0x50f78>:
+   50f78:	4f 22       	sts.l	pr,@-r15
+   50f7a:	c5 4d       	mov.w	@(154,gbr),r0
+   50f7c:	63 03       	mov	r0,r3
+   50f7e:	40 08       	shll2	r0
+   50f80:	d2 11       	mov.l	0x50fc8,r2	! 5b5ce
+   50f82:	30 3c       	add	r3,r0
+   50f84:	42 0b       	jsr	@r2
+   50f86:	40 00       	shll	r0
+   50f88:	d3 0d       	mov.l	0x50fc0,r3	! ffffa500
+   50f8a:	23 01       	mov.w	r0,@r3
+   50f8c:	d4 0d       	mov.l	0x50fc4,r4	! ffffa502
+   50f8e:	d0 0f       	mov.l	0x50fcc,r0	! ffff92d5
+   50f90:	60 00       	mov.b	@r0,r0
+   50f92:	c8 80       	tst	#128,r0
+   50f94:	8b 0c       	bf	0x50fb0
+   50f96:	d1 0e       	mov.l	0x50fd0,r1	! ffff880e
+   50f98:	60 10       	mov.b	@r1,r0
+   50f9a:	60 0c       	extu.b	r0,r0
+   50f9c:	88 02       	cmp/eq	#2,r0
+   50f9e:	8b 03       	bf	0x50fa8
+   50fa0:	4f 26       	lds.l	@r15+,pr
+   50fa2:	e0 01       	mov	#1,r0
+   50fa4:	00 0b       	rts
+   50fa6:	24 00       	mov.b	r0,@r4
+   50fa8:	4f 26       	lds.l	@r15+,pr
+   50faa:	e2 02       	mov	#2,r2
+   50fac:	00 0b       	rts
+   50fae:	24 20       	mov.b	r2,@r4
+   50fb0:	e1 04       	mov	#4,r1
+   50fb2:	24 10       	mov.b	r1,@r4
+   50fb4:	4f 26       	lds.l	@r15+,pr
+   50fb6:	00 0b       	rts
+   50fb8:	00 09       	nop
+   50fba:	ff ff       	.word 0xffff
+   50fbc:	00 05       	mov.w	r0,@(r0,r0)
+   50fbe:	fd 18       	fmov	@r1,fr13
+   50fc0:	ff ff       	.word 0xffff
+   50fc2:	a5 00       	bra	0x519c6
+   50fc4:	ff ff       	.word 0xffff
+   50fc6:	a5 02       	bra	0x519ce
+   50fc8:	00 05       	mov.w	r0,@(r0,r0)
+   50fca:	b5 ce       	bsr	0x51b6a
+   50fcc:	ff ff       	.word 0xffff
+   50fce:	92 d5       	mov.w	0x5117c,r2	! ffff
+   50fd0:	ff ff       	.word 0xffff
+   50fd2:	88 0e       	cmp/eq	#14,r0
+   50fd4:	d3 36       	mov.l	0x510b0,r3	! ffffa504
+   50fd6:	e4 00       	mov	#0,r4
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001e914 <.data+0x1e914>:
+   1e914:	d1 42       	mov.l	0x1ea20,r1	! 52900
+   1e916:	41 0b       	jsr	@r1
+   1e918:	00 09       	nop
+   1e91a:	d3 42       	mov.l	0x1ea24,r3	! 21c1c
+   1e91c:	43 0b       	jsr	@r3
+   1e91e:	00 09       	nop
+   1e920:	d1 41       	mov.l	0x1ea28,r1	! 21734
+   1e922:	41 0b       	jsr	@r1
+   1e924:	00 09       	nop
+   1e926:	d3 41       	mov.l	0x1ea2c,r3	! 22ecc
+   1e928:	43 0b       	jsr	@r3
+   1e92a:	00 09       	nop
+   1e92c:	d1 40       	mov.l	0x1ea30,r1	! 204ca
+   1e92e:	41 0b       	jsr	@r1
+   1e930:	00 09       	nop
+   1e932:	d3 40       	mov.l	0x1ea34,r3	! 21500
+   1e934:	43 0b       	jsr	@r3
+   1e936:	00 09       	nop
+   1e938:	d1 3f       	mov.l	0x1ea38,r1	! 22f3c
+   1e93a:	41 0b       	jsr	@r1
+   1e93c:	00 09       	nop
+   1e93e:	d3 3f       	mov.l	0x1ea3c,r3	! 2140c
+   1e940:	43 0b       	jsr	@r3
+   1e942:	00 09       	nop

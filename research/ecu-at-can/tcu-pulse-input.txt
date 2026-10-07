@@ -1,0 +1,113 @@
+TCU startup-pulse input and publication freshness — 2026-10-06
+
+Scope and status
+Continue the three incomplete requirements in CHECKPOINT.txt: ECU/AT CAN
+integration, deep traction integration, and roof folding AND unfolding with
+interruption/recovery. This closes one TCU software provenance/order segment.
+It supplies no remote DSC/roof evidence and no hardware or elapsed-time proof.
+User has no additional dumps, captures or bench/vehicle results. No commit,
+staging or push authorized. Findings/scripts saved locally in this repository.
+
+Executed original firmware
+Image examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+verify_tcu_pulse_input.py imports the existing SH interpreter and prior
+full-RAM/peripheral/task-boundary models. No instruction, ROM or helper stubs.
+Python3.14.3. Run from repository root:
+  python research/ecu-at-can/verify_tcu_pulse_input.py
+Results:256 raw-reader cases,2304 publication cases,16 initializer cases;
+80 complete126EC application tasks,20 publication boundaries and48 separately
+invoked original raw-reader bodies. All pass. JSON retains each task boundary.
+Input status/flag/value classes cover all256 diagnostic bytes, statuses0/2/255,
+sourcevalues0/1/255; old publication bytes vary deterministically by seed.
+
+17664 clears88CC/88CD.17670 extracts8F33 bit1 into88CC and writes88CD=2.
+No debounce or physical pin identity is established by this body.
+51308 clearsA520/A521.51314 executes original one-byte-copy helper5B654,
+then publishes in priority order:
+-88CD==2 andA991 bit0: copy88CC toA520;A521=1.
+-otherwiseA991 bit2(mask4): stockROMbyte5FD38=0 toA520;A521=4.
+-otherwiseA991 bit1(mask2): retainA520;A521=3.
+-otherwise: retainA520;A521=2.
+The accepted-source branch wins even if other diagnostic bits are present.
+A520 is not necessarily a fresh sample whenA521 changes. 23DD0 does not test
+A521; it detects the retained A520 byte's transition, subject to its counter.
+
+Complete task execution confirms phase0/4 order23DD0 BEFORE51314 in1E880
+(calls1E88C and1E8CE). The pulse detector sees the prior A520 publication,
+not the value this phase publishes. The independently modeled pulse body,
+publication body, latch writer and inherited downstream boundaries all execute.
+Raw-reader17670 is invoked separately before each retained application call:
+this is an explicit harness ordering, NOT proof of its real scheduler position.
+
+Two24-call retained scenarios hold startupcounter8280 at91 or92. No timerwheel
+is scheduled in this experiment. Calls numbered from0, initialphase0:
+call0: rawbit1,validflag1 publishesA520=1; detector stillsees0.
+call4: detector sees1 and produces9414=1 onlywithcounter91 (<92).
+call8: rawbit0,flags0 retainpublished1; detector sees1.
+call12: flags4 publishfallback0; detector stillsees1.
+call16: validraw1 publishes1; detector sees0.
+call20: detector sees1; second pulse onlywithcounter91.
+Expected samples at0/4/8/12/16/20:1,1,1,0,1,1; detectorhistory:0,1,1,1,0,1.
+Counter92 produces no startup pulse. The4 application-call delay is proved for
+these complete task phases; no milliseconds or physical response is inferred.
+The8:1 originaltimerwheel scenario remains in tcu-inhibit-writers.txt.
+
+Static follow-up leads; not yet executed here
+-17670 is called at1AD1E in the input-reader dispatcher around1ACF0.
+ Its upstream8F33 writer may be indirect; aligned literal references found
+ readers17630/17670/176F0/1772C/17768/184CC, not a writer. Do not confuse ECU
+ address8F33 (different ROM/state) with this TCU bitfield.
+-Actual request entry54AFC calls5604C(argument4); if nonzero, reports error.
+ Then rejects nonzero word atrequestpointer+8 with0x12; rejects53520()==0
+ with0x22; otherwise535B4 tailcalls23DC0 to set9418=1. Error path541CC.
+ tcu-pulse-trigger-disassembly.txt andtcu-pulse-request-gates-disassembly.txt
+ preserve exact bytes. This is static interpretation, not tested admission.
+-53520 readsGBR+0xA4/+0x9E words, thresholdsB128/B12A, flagsA962/A964/A98E,
+ andA4E8. Its full control flow must be independently modeled and executed.
+-5604C calls1D246, searches22 two-byte entries at5EB28, then checks state
+ against the entry mask with560AC.541CC uses1D22A/1D24C/1D26E response helpers.
+ These helpers/response side effects are next concrete request-admission work.
+
+Evidence reproduction
+Disassembly file tcu-pulse-input-disassembly.txt includes exact commands/ranges.
+GNU SH objdump2.42 from the existing extracted toolchain uses:
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu
+ python research/ecu-at-can/disassemble.py --objdump
+ /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis START END
+Original bytes, source script, exports and resultJSON are in this repository;
+that temporary executable path is not the only record of the findings.
+An attempted read of a guessed third-phases filename failed; the actual1E880
+range is now saved directly. No test failure preceded the passing run.
+
+Remaining constraints
+Raw8F33 acquisition, diagnosticA991 writers, real task cadence/startup,
+A735/92C7/92C8/80EA upstream admission, parent47B3C, slot domains, queue/ack/
+overlap, persistence and board outputs remain open. Separate traction ECU
+fulltask/399B0 ordering and remoteDSC gaps remain. Roof source-applicability,
+pin/PID conflicts and both-direction interruption/reversal/timeout/sync/recovery
+remain open; see traction-roof.txt. No additional user artifacts available.
+
+Toolchain reconstruction
+Existing package: binutils-sh4-linux-gnu_2.42-4ubuntu2.10_amd64.deb, SHA256
+b88c9ea788e07da9ae3b423beb0d640eb01f8864c5a20fe5d9c106c7555d5366.
+For an Ubuntu repository carrying that version, reconstruct with:
+  apt download binutils-sh4-linux-gnu=2.42-4ubuntu2.10
+  dpkg-deb -x binutils-sh4-linux-gnu_2.42-4ubuntu2.10_amd64.deb extracted
+Then set LD_LIBRARY_PATH to extracted/usr/lib/x86_64-linux-gnu and pass the
+extracted/usr/bin/sh4-linux-gnu-objdump path. These are reconstruction commands,
+not a claim that the current apt repository was tested this turn. The current
+extracted tool reports GNU objdump2.42. Running without LD_LIBRARY_PATH failed
+for missinglibopcodes-2.42-sh4.so; setting it succeeds. Firmware verifier itself
+requires Python and the saved localmodules, not objdump or thattemporarypath.
+
+Ghidra persistence
+Both programs saved;9 newannotations (4functions,5labels);1,824 total
+(776ECU/1048TCU). Live and independent restoredreadback pass;909 exports
+byte-identical;all11projecthashes match before/afterreadonlyreopen;no errors,
+incomplete decompiles orlocks. Paired.gpr/.rep archive10,973,895bytes SHA256
+0fd6ab4ee7acd19f6fd9c013bc9be251da46ad3a0a3ec2c55c29d56afdfa0eb8.
+Independent restore directory:ghidra/restore-check/pulse-input-20261006;
+durable archive/manifests/annotations/exports remainGiteligible in ghidra/.
+No staging/commit/push; pre-existing mixedindex including stagedtemporary
+archive entry preserved. Six newresearchartifacts verifiednotignored.

@@ -1,0 +1,174 @@
+{
+  "status": "PASS",
+  "scope": "Original CMT1 initialization/ISR prefix against independent whole RAM.\n\nFinite status/profiling inputs; stop before RTE. Reuses the existing independent\nprimary-wheel schedule. No hardware interrupt delivery, clock units or cadence.\n",
+  "initialization_cases": 512,
+  "independent_whole_application_ram_prefix_cases": 1024,
+  "valid_primary_phase_combinations": 512,
+  "access_rejections": 6,
+  "examples": [
+    {
+      "case": 0,
+      "mode": 0,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "phases": [
+        0,
+        0,
+        0
+      ],
+      "counter90c8": 0,
+      "profile_duration": 0
+    },
+    {
+      "case": 2,
+      "mode": 1,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "phases": [
+        1,
+        0,
+        0
+      ],
+      "counter90c8": 65534,
+      "profile_duration": 75
+    },
+    {
+      "case": 3,
+      "mode": 1,
+      "armed": true,
+      "active": true,
+      "entries": [
+        "0x12386",
+        "0x12886",
+        "0x11014"
+      ],
+      "phases": [
+        2,
+        0,
+        0
+      ],
+      "counter90c8": 65535,
+      "profile_duration": 65535
+    },
+    {
+      "case": 6,
+      "mode": 3,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "phases": [
+        3,
+        0,
+        0
+      ],
+      "counter90c8": 65534,
+      "profile_duration": 75
+    },
+    {
+      "case": 7,
+      "mode": 3,
+      "armed": true,
+      "active": true,
+      "entries": [
+        "0x12386",
+        "0x12886",
+        "0x11014"
+      ],
+      "phases": [
+        4,
+        0,
+        0
+      ],
+      "counter90c8": 65535,
+      "profile_duration": 65535
+    },
+    {
+      "case": 510,
+      "mode": 255,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "phases": [
+        15,
+        15,
+        0
+      ],
+      "counter90c8": 65534,
+      "profile_duration": 75
+    },
+    {
+      "case": 511,
+      "mode": 255,
+      "armed": true,
+      "active": false,
+      "entries": [
+        "0x12386",
+        "0x12886"
+      ],
+      "phases": [
+        15,
+        15,
+        0
+      ],
+      "counter90c8": 65535,
+      "profile_duration": 65535
+    },
+    {
+      "case": 512,
+      "mode": 3,
+      "armed": true,
+      "active": true,
+      "entries": [
+        "0x12386",
+        "0x12886",
+        "0x11014"
+      ],
+      "phases": [
+        1,
+        0,
+        0
+      ],
+      "counter90c8": 1,
+      "profile_duration": 0
+    },
+    {
+      "case": 767,
+      "mode": 1,
+      "armed": true,
+      "active": true,
+      "entries": [
+        "0x12386",
+        "0x12886",
+        "0x11014"
+      ],
+      "phases": [
+        0,
+        0,
+        1
+      ],
+      "counter90c8": 65535,
+      "profile_duration": 65535
+    },
+    {
+      "case": 1023,
+      "mode": 1,
+      "armed": true,
+      "active": true,
+      "entries": [
+        "0x12386",
+        "0x12886",
+        "0x11014"
+      ],
+      "phases": [
+        0,
+        0,
+        0
+      ],
+      "counter90c8": 65535,
+      "profile_duration": 65535
+    }
+  ],
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+}

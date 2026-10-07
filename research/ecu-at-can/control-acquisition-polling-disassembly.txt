@@ -1,0 +1,112 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00004b00 <.data+0x4b00>:
+    4b00:	4a 0b       	jsr	@r10
+    4b02:	54 f2       	mov.l	@(8,r15),r4
+    4b04:	65 c3       	mov	r12,r5
+    4b06:	64 f3       	mov	r15,r4
+    4b08:	4b 0b       	jsr	@r11
+    4b0a:	74 04       	add	#4,r4
+    4b0c:	94 a3       	mov.w	0x4c56,r4	! f839
+    4b0e:	60 40       	mov.b	@r4,r0
+    4b10:	c9 df       	and	#223,r0
+    4b12:	24 00       	mov.b	r0,@r4
+    4b14:	9e a0       	mov.w	0x4c58,r14	! f838
+    4b16:	63 e0       	mov.b	@r14,r3
+    4b18:	e2 33       	mov	#51,r2
+    4b1a:	2e 20       	mov.b	r2,@r14
+    4b1c:	60 40       	mov.b	@r4,r0
+    4b1e:	c9 2f       	and	#47,r0
+    4b20:	cb 20       	or	#32,r0
+    4b22:	24 00       	mov.b	r0,@r4
+    4b24:	4a 0b       	jsr	@r10
+    4b26:	54 f1       	mov.l	@(4,r15),r4
+    4b28:	65 c3       	mov	r12,r5
+    4b2a:	4b 0b       	jsr	@r11
+    4b2c:	64 f3       	mov	r15,r4
+    4b2e:	94 94       	mov.w	0x4c5a,r4	! f859
+    4b30:	60 40       	mov.b	@r4,r0
+    4b32:	c9 df       	and	#223,r0
+    4b34:	24 00       	mov.b	r0,@r4
+    4b36:	9c 91       	mov.w	0x4c5c,r12	! f858
+    4b38:	63 c0       	mov.b	@r12,r3
+    4b3a:	e2 2b       	mov	#43,r2
+    4b3c:	2c 20       	mov.b	r2,@r12
+    4b3e:	60 40       	mov.b	@r4,r0
+    4b40:	c9 2f       	and	#47,r0
+    4b42:	cb 20       	or	#32,r0
+    4b44:	24 00       	mov.b	r0,@r4
+    4b46:	4a 0b       	jsr	@r10
+    4b48:	64 f2       	mov.l	@r15,r4
+    4b4a:	e4 00       	mov	#0,r4
+    4b4c:	d3 48       	mov.l	0x4c70,r3	! ffff404b
+    4b4e:	60 43       	mov	r4,r0
+    4b50:	92 85       	mov.w	0x4c5e,r2	! ff
+    4b52:	23 40       	mov.b	r4,@r3
+    4b54:	d1 47       	mov.l	0x4c74,r1	! ffff404c
+    4b56:	21 20       	mov.b	r2,@r1
+    4b58:	d5 47       	mov.l	0x4c78,r5	! ffff404d
+    4b5a:	80 51       	mov.b	r0,@(1,r5)
+    4b5c:	80 54       	mov.b	r0,@(4,r5)
+    4b5e:	80 57       	mov.b	r0,@(7,r5)
+    4b60:	94 7e       	mov.w	0x4c60,r4	! 80
+    4b62:	63 d0       	mov.b	@r13,r3
+    4b64:	63 3c       	extu.b	r3,r3
+    4b66:	23 48       	tst	r4,r3
+    4b68:	8d fb       	bt.s	0x4b62
+    4b6a:	00 09       	nop	
+    4b6c:	62 e0       	mov.b	@r14,r2
+    4b6e:	62 2c       	extu.b	r2,r2
+    4b70:	22 48       	tst	r4,r2
+    4b72:	8d fb       	bt.s	0x4b6c
+    4b74:	00 09       	nop	
+    4b76:	63 c0       	mov.b	@r12,r3
+    4b78:	63 3c       	extu.b	r3,r3
+    4b7a:	23 48       	tst	r4,r3
+    4b7c:	8d fb       	bt.s	0x4b76
+    4b7e:	00 09       	nop	
+    4b80:	d4 3e       	mov.l	0x4c7c,r4	! ffff4008
+    4b82:	92 6e       	mov.w	0x4c62,r2	! f800
+    4b84:	63 21       	mov.w	@r2,r3
+    4b86:	24 31       	mov.w	r3,@r4
+    4b88:	91 6c       	mov.w	0x4c64,r1	! f802
+    4b8a:	60 11       	mov.w	@r1,r0
+    4b8c:	81 41       	mov.w	r0,@(2,r4)
+    4b8e:	93 6a       	mov.w	0x4c66,r3	! f804
+    4b90:	60 31       	mov.w	@r3,r0
+    4b92:	81 42       	mov.w	r0,@(4,r4)
+    4b94:	72 06       	add	#6,r2
+    4b96:	60 21       	mov.w	@r2,r0
+    4b98:	81 43       	mov.w	r0,@(6,r4)
+    4b9a:	71 06       	add	#6,r1
+    4b9c:	60 11       	mov.w	@r1,r0
+    4b9e:	81 44       	mov.w	r0,@(8,r4)
+    4ba0:	73 06       	add	#6,r3
+    4ba2:	60 31       	mov.w	@r3,r0
+    4ba4:	81 45       	mov.w	r0,@(10,r4)
+    4ba6:	72 06       	add	#6,r2
+    4ba8:	60 21       	mov.w	@r2,r0
+    4baa:	81 46       	mov.w	r0,@(12,r4)
+    4bac:	71 06       	add	#6,r1
+    4bae:	60 11       	mov.w	@r1,r0
+    4bb0:	81 47       	mov.w	r0,@(14,r4)
+    4bb2:	73 06       	add	#6,r3
+    4bb4:	60 31       	mov.w	@r3,r0
+    4bb6:	81 48       	mov.w	r0,@(16,r4)
+    4bb8:	72 06       	add	#6,r2
+    4bba:	60 21       	mov.w	@r2,r0
+    4bbc:	81 49       	mov.w	r0,@(18,r4)
+    4bbe:	71 06       	add	#6,r1
+    4bc0:	60 11       	mov.w	@r1,r0
+    4bc2:	81 4a       	mov.w	r0,@(20,r4)
+    4bc4:	73 06       	add	#6,r3
+    4bc6:	60 31       	mov.w	@r3,r0
+    4bc8:	81 4b       	mov.w	r0,@(22,r4)
+    4bca:	72 0e       	add	#14,r2
+    4bcc:	60 21       	mov.w	@r2,r0
+    4bce:	81 4c       	mov.w	r0,@(24,r4)
+

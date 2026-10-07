@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "scope": "Independent whole-RAM proof of event2 enqueue with nonempty/full queue3.\n\nOriginal215C6/1826E/2BC8C/DAE8/F5A0 execute without skipped callees. Queue\ncount1/99/100 and tail0/99 are explicit states. Empty-queue task activation,\ncallback dispatch, native producer scheduling and physical traction remain separate.\nOriginalF6A0 consumer is checked separately across all valid counts0..100.\n",
+  "rom_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "cases": 1536,
+  "counts": {
+    "admitted": 40,
+    "producer_limited": 1476,
+    "queue_full": 20,
+    "tail_wrapped": 20
+  },
+  "consume_cases": 606,
+  "consumed": 600,
+  "empty_rejections": 6,
+  "descriptor_words": "Target,event2,three preserved unused caller-stack words; all five copied."
+}

@@ -1,7 +1,9 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
 /* ROM76D24..76D40 defines four ranges; word countdown8420..844E includes843E/8440. 30000 actual
-   calls executed in verify_selector_recovery.py; wall time and tick ratio not established. */
+   calls executed in verify_selector_recovery.py; wall time and tick ratio not established.
+   Independent8000 mixedwheel wholeRAM cases verifybyte/word saturatingincrement
+   andsentinelpreservingdecrement ranges; tcu-cmt0-delivery.txt. */
 
 void Timer_ServiceFirstRanges(void)
 

@@ -1,0 +1,76 @@
+CURRENT CONTINUATION: tcu-basic-hardware-startup.txt advances the same15574 probe
+through UBC/BSC/DMAOR to ITVRR1 F424. EC00 below remains the earlier boundary.
+CHECKPOINT owns current archive and all three broader requirements.
+
+TCU interrupt-control/status initialization — 2026-10-07
+
+Objective remains ECU/AT CAN integration, deep traction control and NC roof
+folding AND unfolding with interruption/resume/reversal, timeout, left/right
+synchronization and recovery. All incomplete. No additional user artifacts;
+no staging/commit/push. Previous and current goal turns made verified progress.
+
+Existing InterruptRegisters owner now accepts optional constant nmi_level0/1.
+Only then ED18 word accesses are provided. NMILbit15 retains the external input;
+NMIEbit8 and IRQ-sense bits7..0 store written controls. Reserved14..9 writes
+reject, no hardware reserved-bit behavior inferred. Original14422 writes00FF:
+NMI falling-edge selection and IRQ0..7 falling-edge selection, under compatible
+SH7055S documentation. This controls detection; it does not deliver interrupts.
+Default owner still rejects ED18, preserving previous INTC tests and probe.
+
+verify_tcu_icr_startup.py PASS2048 control/read cases,1024 original14422 complete
+wholeRAM/register cases,14 wrong-width/address/reserved rejections. All512
+control patterns, both constant NMI levels, writes with bit15clear/set covered.
+Original function executes its RTS delay-slot write14428; only R0/R3 change,
+RAM/SR/PR/otherregisters preserved. No pin transitions or interrupt entry/RTE.
+
+Full15574 continuation with --nmi-level0 reaches14430 RTSdelay-slot write0 to
+ED1A, preserved as tcu-hardware-startup-icr-probe.json. Optional irq_status=0
+adds ONLY a constant zero status with no pending flags/pin assertions; word0
+commands recorded. Nonzero inputs/commands rejected. No invented flag clearing
+or generic latch: read-one/write-zero IRQ withdrawal remains unmodeled because
+this experiment has no asserted status.64 original1442A wholeRAM/register cases
+and6 unsupported status cases PASS. Compatiblemanual reset/status description
+supports zero status as an explicit input; this is not a vehicle pin claim.
+
+Full15574 --nmi-level0 --irq-status-zero now rejects original14436 wordwrite0
+FFFFEC00. Both recovery flags868C/868D remain0; tail never reached. Result:
+ tcu-hardware-startup-irq-zero-probe.json
+Manualtable8.1/PDFzero160 identifies EC00 as UBARH, word access legal; later
+EC02/04/06/08/0A are UBARL/UBAMRH/UBAMRL/UBBR/UBCR. This is a static/source lead,
+not implemented UBC behavior. Next verify bounded UBC configuration semantics,
+then rerun the SAME15574 probe; preserve every unsupported access. No skipping
+callees or directly enabling868C to force CAN recovery. No production/ROM/ISA edits.
+
+Default regressions rerun after both optional extensions: verify_tcu_interrupt_
+setup.py PASS and JSON byte-identical SHA256
+0c1629f6537053af36a47ccb7cbda584d15ad5cd2247dc2c08f31cb7443cff1e.
+Original no-ICR probe JSON byte-identical SHA256
+81de5a67e627ba417dbfc3f55a1aade8ed862300069d5fc407396543afe59465.
+
+Reproduce:
+ python research/ecu-at-can/verify_tcu_icr_startup.py
+ python research/ecu-at-can/verify_tcu_interrupt_setup.py
+ python research/ecu-at-can/probe_tcu_hardware_startup.py
+ python research/ecu-at-can/probe_tcu_hardware_startup.py --nmi-level 0 --filename tcu-hardware-startup-icr-probe.json
+ python research/ecu-at-can/probe_tcu_hardware_startup.py --nmi-level 0 --irq-status-zero --filename tcu-hardware-startup-irq-zero-probe.json
+Python3.14.3; originalTCU SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Source sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c,
+PDFzero136/149/150 plus160. Excerpts tcu-hardware-startup-manual-excerpts.txt
+and tcu-icr-startup-ubc-lead.txt. Disassembly in tcu-hardware-startup-first-config-
+disassembly.txt. Current Ghidra archive and artifact hashes in CHECKPOINT and
+icr-lifecycle-artifacts.json.
+
+Other scopes: traction EC62 still unidentified (control-ec62-source-followup.txt),
+CAN211/21A sender/units/remoteDSC proof missing. Roof factory documents/candidate
+maps remain separate from absent OEM receiver execution; applicable edition/VIN
+reversal/numericaltimeout/LRsync and both-direction recovery remain unresolved.
+
+Saved analysis verified:2006 annotations/1040 complete identical exports/11project
+hashes before and after read-only reopening both programs from fresh extraction.
+Archive11,025,546bytes SHA256f4c3afbb97b2de33fc9e054cdc198ad7e3981cd81f88a877d4acbefec911b4a8.
+Apply72223/liveverify21554/snapshot89170/restoredverify42250 all exit0/clean logs;
+verify_restore.py --write-report PASS. Ghidra12.1.3PUBLIC/Java21.0.10. Reproduce
+via ghidra/README.txt; restore-check/icr-lifecycle-20261007 is a reproducible
+cache, not sole evidence. No live firmware/headless sessions. No staging/push/commit.

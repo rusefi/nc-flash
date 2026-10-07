@@ -1,0 +1,27 @@
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x1d83a 0x1d85e
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001d83a <.data+0x1d83a>:
+   1d83a:	d3 29       	mov.l	0x1d8e0,r3	! ffff90b6
+   1d83c:	60 30       	mov.b	@r3,r0
+   1d83e:	60 0c       	extu.b	r0,r0
+   1d840:	88 01       	cmp/eq	#1,r0
+   1d842:	8b 07       	bf	0x1d854
+   1d844:	d0 23       	mov.l	0x1d8d4,r0	! ffff90a8
+   1d846:	60 00       	mov.b	@r0,r0
+   1d848:	c8 80       	tst	#128,r0
+   1d84a:	00 29       	movt	r0
+   1d84c:	70 ff       	add	#-1,r0
+   1d84e:	60 0b       	neg	r0,r0
+   1d850:	88 01       	cmp/eq	#1,r0
+   1d852:	8b 02       	bf	0x1d85a
+   1d854:	92 36       	mov.w	0x1d8c4,r2	! 1f4
+   1d856:	d3 23       	mov.l	0x1d8e4,r3	! ffff90c6
+   1d858:	23 21       	mov.w	r2,@r3
+   1d85a:	00 0b       	rts	
+   1d85c:	00 09       	nop	
+

@@ -1,0 +1,1741 @@
+{
+  "status": "PASS",
+  "scope": "Original application timer init/ISR with actual admission and complete task.\n\nFinite peripheral samples, stop before RTE. Differential whole-RAM comparison\nto original1220A plus independent profile/MMIO models. Not hardware cadence.\n",
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "initializer_cases": 256,
+  "independent_admission_gate_cases": 2816,
+  "prefix_cases": 26,
+  "rejected_writes": 3,
+  "rows": [
+    {
+      "initial_mode": 3,
+      "phase": 0,
+      "index": 0,
+      "armed": false,
+      "latency": 65535,
+      "duration": 100,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 0,
+      "entries": [],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          65535
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42240
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          2000
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 0
+    },
+    {
+      "initial_mode": 3,
+      "phase": 0,
+      "index": 0,
+      "armed": true,
+      "latency": 65535,
+      "duration": 100,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 1,
+      "entries": [
+        "0x1220a",
+        "0x126ec",
+        "0x1e5f6"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          65535
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42241
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          48879
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          48878
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          2554
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          2000
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 3,
+      "phase": 1,
+      "index": 1,
+      "armed": false,
+      "latency": 16,
+      "duration": 75,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 1,
+      "entries": [],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          4
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          4294967040
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42240
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          500
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 0
+    },
+    {
+      "initial_mode": 3,
+      "phase": 1,
+      "index": 1,
+      "armed": true,
+      "latency": 16,
+      "duration": 75,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 2,
+      "entries": [
+        "0x1220a",
+        "0x126ec",
+        "0x1e5f6"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          4
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          4294967040
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42241
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          48879
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          48878
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          2554
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          500
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 3,
+      "phase": 2,
+      "index": 2,
+      "armed": false,
+      "latency": 16,
+      "duration": 65535,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 2,
+      "entries": [],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2000
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2010
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          100
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42240
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          900100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 0
+    },
+    {
+      "initial_mode": 3,
+      "phase": 2,
+      "index": 2,
+      "armed": true,
+      "latency": 16,
+      "duration": 65535,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 3,
+      "entries": [
+        "0x1220a",
+        "0x126ec",
+        "0x1e5f6"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2000
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2010
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          100
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42241
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          48879
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          48878
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          2554
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          900100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 3,
+      "phase": 3,
+      "index": 3,
+      "armed": false,
+      "latency": 0,
+      "duration": 0,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 3,
+      "entries": [],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          3000
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          3000
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1234
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42240
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1234
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 0
+    },
+    {
+      "initial_mode": 3,
+      "phase": 3,
+      "index": 3,
+      "armed": true,
+      "latency": 0,
+      "duration": 0,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 4,
+      "entries": [
+        "0x1220a",
+        "0x126ec",
+        "0x1e5f6"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          3000
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          3000
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1234
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42241
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          48879
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          48878
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          2554
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1234
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 3,
+      "phase": 4,
+      "index": 0,
+      "armed": false,
+      "latency": 65535,
+      "duration": 100,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 4,
+      "entries": [],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          65535
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42240
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          2000
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 0
+    },
+    {
+      "initial_mode": 3,
+      "phase": 4,
+      "index": 0,
+      "armed": true,
+      "latency": 65535,
+      "duration": 100,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 5,
+      "entries": [
+        "0x1220a",
+        "0x126ec",
+        "0x1e5f6"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          65535
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42241
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          48879
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          48878
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          2554
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          2000
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 3,
+      "phase": 5,
+      "index": 1,
+      "armed": false,
+      "latency": 16,
+      "duration": 75,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 5,
+      "entries": [],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          4
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          4294967040
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42240
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          500
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 0
+    },
+    {
+      "initial_mode": 3,
+      "phase": 5,
+      "index": 1,
+      "armed": true,
+      "latency": 16,
+      "duration": 75,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 6,
+      "entries": [
+        "0x1220a",
+        "0x126ec",
+        "0x1e5f6"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          4
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          4294967040
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42241
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          48879
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          48878
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          2554
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          500
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 3,
+      "phase": 6,
+      "index": 2,
+      "armed": false,
+      "latency": 16,
+      "duration": 65535,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 6,
+      "entries": [],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2000
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2010
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          100
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42240
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          900100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 0
+    },
+    {
+      "initial_mode": 3,
+      "phase": 6,
+      "index": 2,
+      "armed": true,
+      "latency": 16,
+      "duration": 65535,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 7,
+      "entries": [
+        "0x1220a",
+        "0x126ec",
+        "0x1e5f6"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2000
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2010
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          100
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42241
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          48879
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          48878
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          2554
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          900100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 3,
+      "phase": 7,
+      "index": 4,
+      "armed": false,
+      "latency": 0,
+      "duration": 0,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 7,
+      "entries": [],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          3000
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          3000
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1234
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42240
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1234
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 0
+    },
+    {
+      "initial_mode": 3,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 0,
+      "duration": 0,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 8,
+      "entries": [
+        "0x1220a",
+        "0x126ec",
+        "0x1e5f6"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          3000
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          3000
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1234
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          42241
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          48879
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          48878
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          65530
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          2554
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1234
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 0,
+      "ready": false,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 11,
+      "duration": 10,
+      "mode_after": 0,
+      "stage_after": 2,
+      "phase_after": 7,
+      "entries": [
+        "0x1220a",
+        "0x126ec"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2567
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          5120
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 0,
+      "ready": true,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 11,
+      "duration": 10,
+      "mode_after": 0,
+      "stage_after": 2,
+      "phase_after": 7,
+      "entries": [
+        "0x1220a",
+        "0x126ec"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2567
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          5120
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 1,
+      "ready": false,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 11,
+      "duration": 10,
+      "mode_after": 1,
+      "stage_after": 2,
+      "phase_after": 7,
+      "entries": [
+        "0x1220a",
+        "0x126ec"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2567
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          5120
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 1,
+      "ready": true,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 11,
+      "duration": 10,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 8,
+      "entries": [
+        "0x1220a",
+        "0x126da",
+        "0x126ec"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2567
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          5120
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 2,
+      "ready": false,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 11,
+      "duration": 10,
+      "mode_after": 2,
+      "stage_after": 2,
+      "phase_after": 7,
+      "entries": [
+        "0x1220a",
+        "0x126ec"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2567
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          5120
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 2,
+      "ready": true,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 11,
+      "duration": 10,
+      "mode_after": 2,
+      "stage_after": 2,
+      "phase_after": 7,
+      "entries": [
+        "0x1220a",
+        "0x126ec"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2567
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          5120
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 3,
+      "ready": false,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 11,
+      "duration": 10,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 8,
+      "entries": [
+        "0x1220a",
+        "0x126ec",
+        "0x1e5f6"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2567
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          5120
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 3,
+      "ready": true,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 11,
+      "duration": 10,
+      "mode_after": 3,
+      "stage_after": 2,
+      "phase_after": 8,
+      "entries": [
+        "0x1220a",
+        "0x126ec",
+        "0x1e5f6"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2567
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          5120
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 255,
+      "ready": false,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 11,
+      "duration": 10,
+      "mode_after": 255,
+      "stage_after": 2,
+      "phase_after": 7,
+      "entries": [
+        "0x1220a",
+        "0x126ec"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2567
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          5120
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    },
+    {
+      "initial_mode": 255,
+      "ready": true,
+      "phase": 7,
+      "index": 4,
+      "armed": true,
+      "latency": 11,
+      "duration": 10,
+      "mode_after": 255,
+      "stage_after": 2,
+      "phase_after": 7,
+      "entries": [
+        "0x1220a",
+        "0x126ec"
+      ],
+      "accesses": [
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "read",
+          4294964290,
+          2,
+          2567
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "read",
+          4294964320,
+          2,
+          1
+        ],
+        [
+          "write",
+          4294964320,
+          2,
+          0
+        ],
+        [
+          "read",
+          4294964308,
+          2,
+          2560
+        ],
+        [
+          "write",
+          4294964308,
+          2,
+          5120
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1100
+        ]
+      ],
+      "differential_application_ram_checked": true,
+      "registers_and_mmio_checked": true,
+      "independent_command_pin_boundaries": 2
+    }
+  ],
+  "limits": "Differential original1220A task, independent profile/MMIO and existing command/pin oracles. Not complete semantic oracle, fullboot, actual interrupt delivery, RTE, absolute clock, application/capture/CAN start offset or latency."
+}

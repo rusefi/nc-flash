@@ -1,0 +1,182 @@
+OriginalECU startup/priority/idle boundaries, objdump2.42. Findings incontrol-interrupt-timer.txt.
+
+Command: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 0xf758 0xf768
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000f758 <.data+0xf758>:
+    f758:	d3 42       	mov.l	0xf864,r3	! ffc50
+    f75a:	43 2e       	ldc	r3,vbr
+    f75c:	d2 42       	mov.l	0xf868,r2	! 40001
+    f75e:	42 6a       	lds	r2,fpscr
+    f760:	d1 42       	mov.l	0xf86c,r1	! 11430
+    f762:	d3 43       	mov.l	0xf870,r3	! 4ac2
+    f764:	43 0b       	jsr	@r3
+    f766:	64 12       	mov.l	@r1,r4
+
+
+Command: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 0xaa4a 0xaa98
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000aa4a <.data+0xaa4a>:
+    aa4a:	95 4b       	mov.w	0xaae4,r5	! 999
+    aa4c:	93 4b       	mov.w	0xaae6,r3	! ed00
+    aa4e:	23 51       	mov.w	r5,@r3
+    aa50:	d2 2c       	mov.l	0xab04,r2	! 9000
+    aa52:	91 49       	mov.w	0xaae8,r1	! ed02
+    aa54:	21 21       	mov.w	r2,@r1
+    aa56:	d0 2c       	mov.l	0xab08,r0	! 900b
+    aa58:	92 47       	mov.w	0xaaea,r2	! ed04
+    aa5a:	22 01       	mov.w	r0,@r2
+    aa5c:	d4 2b       	mov.l	0xab0c,r4	! 9099
+    aa5e:	73 06       	add	#6,r3
+    aa60:	23 41       	mov.w	r4,@r3
+    aa62:	91 43       	mov.w	0xaaec,r1	! 990
+    aa64:	90 43       	mov.w	0xaaee,r0	! ed08
+    aa66:	20 11       	mov.w	r1,@r0
+    aa68:	d2 29       	mov.l	0xab10,r2	! 9090
+    aa6a:	91 41       	mov.w	0xaaf0,r1	! ed0a
+    aa6c:	21 21       	mov.w	r2,@r1
+    aa6e:	73 06       	add	#6,r3
+    aa70:	23 41       	mov.w	r4,@r3
+    aa72:	70 06       	add	#6,r0
+    aa74:	d2 27       	mov.l	0xab14,r2	! 9999
+    aa76:	20 21       	mov.w	r2,@r0
+    aa78:	d1 27       	mov.l	0xab18,r1	! 99b0
+    aa7a:	92 3a       	mov.w	0xaaf2,r2	! ed10
+    aa7c:	22 11       	mov.w	r1,@r2
+    aa7e:	73 06       	add	#6,r3
+    aa80:	23 51       	mov.w	r5,@r3
+    aa82:	d4 26       	mov.l	0xab1c,r4	! 9909
+    aa84:	91 36       	mov.w	0xaaf4,r1	! ed14
+    aa86:	21 41       	mov.w	r4,@r1
+    aa88:	72 06       	add	#6,r2
+    aa8a:	22 41       	mov.w	r4,@r2
+    aa8c:	93 33       	mov.w	0xaaf6,r3	! ff
+    aa8e:	70 0a       	add	#10,r0
+    aa90:	00 0b       	rts	
+    aa92:	20 31       	mov.w	r3,@r0
+    aa94:	af d9       	bra	0xaa4a
+    aa96:	00 09       	nop	
+
+
+Command: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 0x3b8a 0x3be0
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00003b8a <.data+0x3b8a>:
+    3b8a:	85 43       	mov.w	@(6,r4),r0
+    3b8c:	88 ff       	cmp/eq	#-1,r0
+    3b8e:	89 01       	bt	0x3b94
+    3b90:	a0 1a       	bra	0x3bc8
+    3b92:	00 09       	nop	
+    3b94:	d0 07       	mov.l	0x3bb4,r0	! 4078
+    3b96:	6f 02       	mov.l	@r0,r15
+    3b98:	d0 07       	mov.l	0x3bb8,r0	! 80000000
+    3b9a:	14 02       	mov.l	r0,@(8,r4)
+    3b9c:	e0 ff       	mov	#-1,r0
+    3b9e:	81 42       	mov.w	r0,@(4,r4)
+    3ba0:	d0 06       	mov.l	0x3bbc,r0	! 40d0
+    3ba2:	14 06       	mov.l	r0,@(24,r4)
+    3ba4:	50 01       	mov.l	@(4,r0),r0
+    3ba6:	14 05       	mov.l	r0,@(20,r4)
+    3ba8:	d5 05       	mov.l	0x3bc0,r5	! 0
+    3baa:	45 0e       	ldc	r5,sr
+    3bac:	d0 05       	mov.l	0x3bc4,r0	! 3d0c
+    3bae:	40 2b       	jmp	@r0
+    3bb0:	00 09       	nop	
+    3bb2:	00 00       	.word 0x0000
+    3bb4:	00 00       	.word 0x0000
+    3bb6:	40 78       	.word 0x4078
+    3bb8:	80 00       	mov.b	r0,@(0,r0)
+    3bba:	00 00       	.word 0x0000
+    3bbc:	00 00       	.word 0x0000
+    3bbe:	40 d0       	.word 0x40d0
+    3bc0:	00 00       	.word 0x0000
+    3bc2:	00 00       	.word 0x0000
+    3bc4:	00 00       	.word 0x0000
+    3bc6:	3d 0c       	add	r0,r13
+    3bc8:	d5 03       	mov.l	0x3bd8,r5	! 0
+    3bca:	45 0e       	ldc	r5,sr
+    3bcc:	55 44       	mov.l	@(16,r4),r5
+    3bce:	45 0e       	ldc	r5,sr
+    3bd0:	d1 02       	mov.l	0x3bdc,r1	! 3d10
+    3bd2:	85 43       	mov.w	@(6,r4),r0
+    3bd4:	41 2b       	jmp	@r1
+    3bd6:	65 03       	mov	r0,r5
+    3bd8:	00 00       	.word 0x0000
+    3bda:	00 00       	.word 0x0000
+    3bdc:	00 00       	.word 0x0000
+    3bde:	3d 10       	cmp/eq	r1,r13
+
+
+STATIC nextlead, Command: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 0xa942 0xa950
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000a942 <.data+0xa942>:
+    a942:	4f 22       	sts.l	pr,@-r15
+    a944:	b0 a6       	bsr	0xaa94
+    a946:	00 09       	nop	
+    a948:	b0 b2       	bsr	0xaab0
+    a94a:	00 09       	nop	
+    a94c:	b0 b2       	bsr	0xaab4
+    a94e:	00 09       	nop	
+
+
+STATIC nextlead, Command: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 0x3a40 0x3a78
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00003a40 <.data+0x3a40>:
+    3a40:	8b 01       	bf	0x3a46
+    3a42:	00 0b       	rts	
+    3a44:	e0 00       	mov	#0,r0
+    3a46:	4f 03       	stc.l	sr,@-r15
+    3a48:	4f 22       	sts.l	pr,@-r15
+    3a4a:	d0 0d       	mov.l	0x3a80,r0	! ffff12d8
+    3a4c:	20 f2       	mov.l	r15,@r0
+    3a4e:	d0 0b       	mov.l	0x3a7c,r0	! 4054
+    3a50:	60 02       	mov.l	@r0,r0
+    3a52:	40 0e       	ldc	r0,sr
+    3a54:	d0 08       	mov.l	0x3a78,r0	! 4078
+    3a56:	6f 02       	mov.l	@r0,r15
+    3a58:	d2 0a       	mov.l	0x3a84,r2	! ffff12b0
+    3a5a:	d0 02       	mov.l	0x3a64,r0	! 100
+    3a5c:	12 02       	mov.l	r0,@(8,r2)
+    3a5e:	d0 05       	mov.l	0x3a74,r0	! 3dd8
+    3a60:	40 2b       	jmp	@r0
+    3a62:	00 09       	nop	
+    3a64:	00 00       	.word 0x0000
+    3a66:	01 00       	.word 0x0100
+    3a68:	d0 05       	mov.l	0x3a80,r0	! ffff12d8
+    3a6a:	6f 02       	mov.l	@r0,r15
+    3a6c:	00 2b       	rte	
+    3a6e:	00 09       	nop	
+    3a70:	00 00       	.word 0x0000
+    3a72:	40 50       	.word 0x4050
+    3a74:	00 00       	.word 0x0000
+    3a76:	3d d8       	sub	r13,r13
+
+
+STATIC nextlead, Command: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at refs 3dd8
+0x3dd8 pools ['0x3a74'] candidate users ['0x3a5e']
+
+STATIC nextlead, Command: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at refs f758
+0xf758 pools ['0xffff8'] candidate users []

@@ -1,0 +1,5035 @@
+{
+  "scope": "Original F28C/1062E timer callback drives acquisition and both event queues.\n\nEach supplied CMT1 status sample executes the complete original timer callback,\nthen the scheduler drains to idle. No direct task7 enqueue or event2 injection.\nAll task stacks use explicit FFFED000 and admission maskF0. No hardware entry,\nRTE interrupt delivery, absolute frequency or remote-controller proof.\n",
+  "rom_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "rows": [
+    {
+      "cycle": 0,
+      "queued": {
+        "wheel": 1,
+        "divider": 1,
+        "selected": 7,
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-0",
+          "pc": 62092,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 0,
+          "divider": 0
+        },
+        {
+          "stage": "queued-event2-timer-0",
+          "pc": 67118,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 0,
+          "divider": 0
+        },
+        {
+          "stage": "queued-event2-timer-0",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 0,
+          "divider": 0
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 13792,
+          "pr": 62974,
+          "argument": 4,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 1,
+          "task": 7
+        },
+        {
+          "pc": 56448,
+          "pr": 58448,
+          "argument": 56448,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 15544,
+          "pr": 56524,
+          "argument": 124,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 56448,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [
+        {
+          "stage": "queued-event2-timer-0",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 1,
+          "head": 0
+        }
+      ],
+      "callbacks": [
+        {
+          "stage": "queued-event2-timer-0",
+          "target": 612850,
+          "words": [
+            612850,
+            124,
+            16,
+            0,
+            228012
+          ]
+        }
+      ],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    },
+    {
+      "cycle": 1,
+      "queued": {
+        "wheel": 2,
+        "divider": 2,
+        "selected": 7,
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-1",
+          "pc": 62092,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 1,
+          "divider": 1
+        },
+        {
+          "stage": "queued-event2-timer-1",
+          "pc": 67118,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 1,
+          "divider": 1
+        },
+        {
+          "stage": "queued-event2-timer-1",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 1,
+          "divider": 1
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [],
+      "callbacks": [],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    },
+    {
+      "cycle": 2,
+      "queued": {
+        "wheel": 3,
+        "divider": 3,
+        "selected": 7,
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-2",
+          "pc": 62092,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 2,
+          "divider": 2
+        },
+        {
+          "stage": "queued-event2-timer-2",
+          "pc": 67118,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 2,
+          "divider": 2
+        },
+        {
+          "stage": "queued-event2-timer-2",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 2,
+          "divider": 2
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 13792,
+          "pr": 64140,
+          "argument": 8,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 179340,
+          "pr": 98650,
+          "argument": 1,
+          "pending": 0,
+          "count": 0,
+          "task": 8
+        },
+        {
+          "pc": 56040,
+          "pr": 98650,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 8
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 0,
+          "task": 8
+        },
+        {
+          "pc": 13792,
+          "pr": 62974,
+          "argument": 4,
+          "pending": 0,
+          "count": 0,
+          "task": 8
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 8
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 1,
+          "task": 8
+        },
+        {
+          "pc": 56448,
+          "pr": 58448,
+          "argument": 56448,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 179430,
+          "pr": 56510,
+          "argument": 4294919612,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        },
+        {
+          "pc": 15544,
+          "pr": 56524,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 58456,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 56448,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [
+        {
+          "stage": "queued-event2-timer-2",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 1,
+          "head": 1
+        }
+      ],
+      "callbacks": [
+        {
+          "stage": "queued-event2-timer-2",
+          "target": 179430,
+          "words": [
+            179430,
+            1,
+            16704,
+            15588,
+            15670
+          ]
+        }
+      ],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    },
+    {
+      "cycle": 3,
+      "queued": {
+        "wheel": 4,
+        "divider": 4,
+        "selected": 7,
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-3",
+          "pc": 62092,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 3,
+          "divider": 3
+        },
+        {
+          "stage": "queued-event2-timer-3",
+          "pc": 67118,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 3,
+          "divider": 3
+        },
+        {
+          "stage": "queued-event2-timer-3",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 3,
+          "divider": 3
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [],
+      "callbacks": [],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    },
+    {
+      "cycle": 4,
+      "queued": {
+        "wheel": 5,
+        "divider": 0,
+        "selected": 7,
+        "queue2": 1,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-4",
+          "pc": 62092,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 4,
+          "divider": 4
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "pc": 67118,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 4,
+          "divider": 4
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 4,
+          "divider": 4
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "pc": 64488,
+          "pr": 13016,
+          "argument": 0,
+          "wheel": 5,
+          "divider": 0
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "pc": 56364,
+          "pr": 58448,
+          "argument": 56364,
+          "wheel": 5,
+          "divider": 0
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "pc": 58876,
+          "pr": 56426,
+          "argument": 4294919592,
+          "wheel": 5,
+          "divider": 0
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 13792,
+          "pr": 64168,
+          "argument": 9,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 56040,
+          "pr": 64504,
+          "argument": 1,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 2,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 13792,
+          "pr": 62974,
+          "argument": 3,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 0,
+          "task": 9
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 0,
+          "task": 9
+        },
+        {
+          "pc": 13792,
+          "pr": 62974,
+          "argument": 4,
+          "pending": 0,
+          "count": 0,
+          "task": 9
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 9
+        },
+        {
+          "pc": 56040,
+          "pr": 151502,
+          "argument": 0,
+          "pending": 0,
+          "count": 1,
+          "task": 9
+        },
+        {
+          "pc": 13792,
+          "pr": 64196,
+          "argument": 18,
+          "pending": 0,
+          "count": 1,
+          "task": 9
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 1,
+          "task": 9
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 1,
+          "task": 9
+        },
+        {
+          "pc": 63136,
+          "pr": 56400,
+          "argument": 2,
+          "pending": 0,
+          "count": 1,
+          "task": 3
+        },
+        {
+          "pc": 136646,
+          "pr": 58908,
+          "argument": 0,
+          "pending": 0,
+          "count": 1,
+          "task": 3
+        },
+        {
+          "pc": 98926,
+          "pr": 58908,
+          "argument": 0,
+          "pending": 0,
+          "count": 1,
+          "task": 3
+        },
+        {
+          "pc": 179340,
+          "pr": 58908,
+          "argument": 2,
+          "pending": 0,
+          "count": 1,
+          "task": 3
+        },
+        {
+          "pc": 56040,
+          "pr": 58908,
+          "argument": 0,
+          "pending": 1,
+          "count": 1,
+          "task": 3
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 1,
+          "count": 1,
+          "task": 3
+        },
+        {
+          "pc": 15544,
+          "pr": 56440,
+          "argument": 0,
+          "pending": 1,
+          "count": 2,
+          "task": 3
+        },
+        {
+          "pc": 56448,
+          "pr": 56440,
+          "argument": 56448,
+          "pending": 1,
+          "count": 2,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 1,
+          "count": 2,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 1,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 179430,
+          "pr": 56510,
+          "argument": 4294919612,
+          "pending": 1,
+          "count": 0,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        },
+        {
+          "pc": 13792,
+          "pr": 62974,
+          "argument": 4,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 2,
+          "task": 4
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 2,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 3,
+          "task": 4
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 3,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 594562,
+          "argument": 0,
+          "pending": 0,
+          "count": 4,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 4,
+          "task": 4
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 4,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 5,
+          "task": 4
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 5,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 6,
+          "task": 4
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 6,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 273554,
+          "argument": 0,
+          "pending": 0,
+          "count": 7,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 7,
+          "task": 4
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 7,
+          "task": 4
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 8,
+          "task": 4
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 8,
+          "task": 4
+        },
+        {
+          "pc": 15544,
+          "pr": 56524,
+          "argument": 0,
+          "pending": 0,
+          "count": 9,
+          "task": 4
+        },
+        {
+          "pc": 15544,
+          "pr": 56524,
+          "argument": 58588,
+          "pending": 0,
+          "count": 9,
+          "task": 18
+        },
+        {
+          "pc": 56448,
+          "pr": 56524,
+          "argument": 56448,
+          "pending": 0,
+          "count": 9,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 9,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 8,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 7,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 6,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 5,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 4,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 3,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 2,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 15544,
+          "pr": 56524,
+          "argument": 117,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 58476,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 56364,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 56448,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 58588,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 56448,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 2,
+          "head": 2
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 1,
+          "head": 3
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 9,
+          "head": 4
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 8,
+          "head": 5
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 7,
+          "head": 6
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 6,
+          "head": 7
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 5,
+          "head": 8
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 4,
+          "head": 9
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 3,
+          "head": 10
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 2,
+          "head": 11
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 1,
+          "head": 12
+        }
+      ],
+      "callbacks": [
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 612850,
+          "words": [
+            612850,
+            118,
+            16,
+            0,
+            0
+          ]
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 179430,
+          "words": [
+            179430,
+            2,
+            4294919638,
+            4294919588,
+            0
+          ]
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 612850,
+          "words": [
+            612850,
+            19,
+            16,
+            0,
+            0
+          ]
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 612850,
+          "words": [
+            612850,
+            119,
+            16,
+            0,
+            0
+          ]
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 612850,
+          "words": [
+            612850,
+            120,
+            16,
+            0,
+            0
+          ]
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 612850,
+          "words": [
+            612850,
+            115,
+            16,
+            0,
+            0
+          ]
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 612850,
+          "words": [
+            612850,
+            125,
+            16,
+            0,
+            0
+          ]
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 612850,
+          "words": [
+            612850,
+            126,
+            16,
+            0,
+            0
+          ]
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 612850,
+          "words": [
+            612850,
+            128,
+            16,
+            0,
+            0
+          ]
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 612850,
+          "words": [
+            612850,
+            116,
+            16,
+            0,
+            4194304
+          ]
+        },
+        {
+          "stage": "queued-event2-timer-4",
+          "target": 612850,
+          "words": [
+            612850,
+            117,
+            16,
+            0,
+            4194304
+          ]
+        }
+      ],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    },
+    {
+      "cycle": 5,
+      "queued": {
+        "wheel": 6,
+        "divider": 1,
+        "selected": 7,
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-5",
+          "pc": 62092,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 5,
+          "divider": 0
+        },
+        {
+          "stage": "queued-event2-timer-5",
+          "pc": 67118,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 5,
+          "divider": 0
+        },
+        {
+          "stage": "queued-event2-timer-5",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 5,
+          "divider": 0
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [],
+      "callbacks": [],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    },
+    {
+      "cycle": 6,
+      "queued": {
+        "wheel": 7,
+        "divider": 2,
+        "selected": 7,
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-6",
+          "pc": 62092,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 6,
+          "divider": 1
+        },
+        {
+          "stage": "queued-event2-timer-6",
+          "pc": 67118,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 6,
+          "divider": 1
+        },
+        {
+          "stage": "queued-event2-timer-6",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 6,
+          "divider": 1
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 13792,
+          "pr": 64140,
+          "argument": 8,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 179340,
+          "pr": 98650,
+          "argument": 1,
+          "pending": 0,
+          "count": 0,
+          "task": 8
+        },
+        {
+          "pc": 56040,
+          "pr": 98650,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 8
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 0,
+          "task": 8
+        },
+        {
+          "pc": 13792,
+          "pr": 62974,
+          "argument": 4,
+          "pending": 0,
+          "count": 0,
+          "task": 8
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 8
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 1,
+          "task": 8
+        },
+        {
+          "pc": 56448,
+          "pr": 58448,
+          "argument": 56448,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 179430,
+          "pr": 56510,
+          "argument": 4294919612,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        },
+        {
+          "pc": 15544,
+          "pr": 56524,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 58456,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 56448,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [
+        {
+          "stage": "queued-event2-timer-6",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 1,
+          "head": 13
+        }
+      ],
+      "callbacks": [
+        {
+          "stage": "queued-event2-timer-6",
+          "target": 179430,
+          "words": [
+            179430,
+            1,
+            16704,
+            15588,
+            15670
+          ]
+        }
+      ],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    },
+    {
+      "cycle": 7,
+      "queued": {
+        "wheel": 8,
+        "divider": 3,
+        "selected": 7,
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-7",
+          "pc": 62092,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 7,
+          "divider": 2
+        },
+        {
+          "stage": "queued-event2-timer-7",
+          "pc": 67118,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 7,
+          "divider": 2
+        },
+        {
+          "stage": "queued-event2-timer-7",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 7,
+          "divider": 2
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [],
+      "callbacks": [],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    },
+    {
+      "cycle": 8,
+      "queued": {
+        "wheel": 9,
+        "divider": 4,
+        "selected": 7,
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-8",
+          "pc": 62092,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 8,
+          "divider": 3
+        },
+        {
+          "stage": "queued-event2-timer-8",
+          "pc": 67118,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 8,
+          "divider": 3
+        },
+        {
+          "stage": "queued-event2-timer-8",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 8,
+          "divider": 3
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 13792,
+          "pr": 64224,
+          "argument": 10,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 3,
+          "pending": 0,
+          "count": 0,
+          "task": 10
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 58602,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [],
+      "callbacks": [],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    },
+    {
+      "cycle": 9,
+      "queued": {
+        "wheel": 10,
+        "divider": 0,
+        "selected": 7,
+        "queue2": 1,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-9",
+          "pc": 62092,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 9,
+          "divider": 4
+        },
+        {
+          "stage": "queued-event2-timer-9",
+          "pc": 67118,
+          "pr": 13016,
+          "argument": 4294906544,
+          "wheel": 9,
+          "divider": 4
+        },
+        {
+          "stage": "queued-event2-timer-9",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 9,
+          "divider": 4
+        },
+        {
+          "stage": "queued-event2-timer-9",
+          "pc": 64488,
+          "pr": 13016,
+          "argument": 0,
+          "wheel": 10,
+          "divider": 0
+        },
+        {
+          "stage": "queued-event2-timer-9",
+          "pc": 56364,
+          "pr": 58448,
+          "argument": 56364,
+          "wheel": 10,
+          "divider": 0
+        },
+        {
+          "stage": "queued-event2-timer-9",
+          "pc": 58876,
+          "pr": 56426,
+          "argument": 4294919592,
+          "wheel": 10,
+          "divider": 0
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 56040,
+          "pr": 64504,
+          "argument": 1,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 2,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 13792,
+          "pr": 62974,
+          "argument": 3,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 63136,
+          "pr": 56400,
+          "argument": 2,
+          "pending": 0,
+          "count": 0,
+          "task": 3
+        },
+        {
+          "pc": 136646,
+          "pr": 58908,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 3
+        },
+        {
+          "pc": 98926,
+          "pr": 58908,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 3
+        },
+        {
+          "pc": 179340,
+          "pr": 58908,
+          "argument": 2,
+          "pending": 0,
+          "count": 0,
+          "task": 3
+        },
+        {
+          "pc": 56040,
+          "pr": 58908,
+          "argument": 0,
+          "pending": 1,
+          "count": 0,
+          "task": 3
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 1,
+          "count": 0,
+          "task": 3
+        },
+        {
+          "pc": 13792,
+          "pr": 62974,
+          "argument": 4,
+          "pending": 1,
+          "count": 0,
+          "task": 3
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 1,
+          "count": 0,
+          "task": 3
+        },
+        {
+          "pc": 15544,
+          "pr": 56440,
+          "argument": 0,
+          "pending": 1,
+          "count": 1,
+          "task": 3
+        },
+        {
+          "pc": 56448,
+          "pr": 56440,
+          "argument": 56448,
+          "pending": 1,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 1,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 179430,
+          "pr": 56510,
+          "argument": 4294919612,
+          "pending": 1,
+          "count": 0,
+          "task": 4
+        },
+        {
+          "pc": 15544,
+          "pr": 56524,
+          "argument": 4294918096,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 56364,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 56448,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [
+        {
+          "stage": "queued-event2-timer-9",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 1,
+          "head": 14
+        }
+      ],
+      "callbacks": [
+        {
+          "stage": "queued-event2-timer-9",
+          "target": 179430,
+          "words": [
+            179430,
+            2,
+            4294919638,
+            4294919588,
+            0
+          ]
+        }
+      ],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    }
+  ],
+  "status": "scheduler idle reached",
+  "stage": "queued-event2-timer-9",
+  "pc": 15628,
+  "tail": [
+    14796,
+    14798,
+    14844,
+    14846,
+    14848,
+    14850,
+    15588,
+    15590,
+    15592,
+    15594,
+    15596,
+    15598,
+    15600,
+    15602,
+    15242,
+    15244,
+    15246,
+    15252,
+    15254,
+    15256,
+    15258,
+    15260,
+    15262,
+    15264,
+    15266,
+    15268,
+    15270,
+    15272,
+    15274,
+    15276,
+    15278,
+    15280
+  ],
+  "registers": [
+    15628,
+    0,
+    15242,
+    4294889472,
+    4294906544,
+    0,
+    0,
+    0,
+    8932,
+    4294919612,
+    4294919641,
+    4294919608,
+    0,
+    4294906312,
+    4294906544,
+    4294906280
+  ],
+  "timer10_accesses": [
+    [
+      "read",
+      4294964968,
+      2,
+      0
+    ],
+    [
+      "write",
+      4294964968,
+      2,
+      11
+    ],
+    [
+      "read",
+      4294964968,
+      2,
+      0
+    ],
+    [
+      "read",
+      4294964970,
+      2,
+      0
+    ],
+    [
+      "write",
+      4294964970,
+      2,
+      4
+    ],
+    [
+      "read",
+      4294964968,
+      2,
+      0
+    ],
+    [
+      "read",
+      4294964968,
+      2,
+      0
+    ]
+  ],
+  "sci4_accesses": [
+    [
+      "write",
+      4294963232,
+      1,
+      128
+    ],
+    [
+      "read",
+      4294963234,
+      1,
+      0
+    ],
+    [
+      "write",
+      4294963234,
+      1,
+      0
+    ],
+    [
+      "write",
+      4294963238,
+      1,
+      250
+    ],
+    [
+      "write",
+      4294963233,
+      1,
+      2
+    ],
+    [
+      "read",
+      4294963234,
+      1,
+      0
+    ],
+    [
+      "write",
+      4294963234,
+      1,
+      48
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "write",
+      4294963236,
+      1,
+      128
+    ],
+    [
+      "write",
+      4294963235,
+      1,
+      17
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "write",
+      4294963236,
+      1,
+      120
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "read",
+      4294963237,
+      1,
+      0
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "write",
+      4294963236,
+      1,
+      184
+    ],
+    [
+      "write",
+      4294963235,
+      1,
+      255
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "write",
+      4294963236,
+      1,
+      120
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "read",
+      4294963237,
+      1,
+      0
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "write",
+      4294963236,
+      1,
+      184
+    ],
+    [
+      "read",
+      4294963234,
+      1,
+      48
+    ],
+    [
+      "write",
+      4294963234,
+      1,
+      0
+    ],
+    [
+      "write",
+      4294963232,
+      1,
+      128
+    ],
+    [
+      "read",
+      4294963234,
+      1,
+      0
+    ],
+    [
+      "write",
+      4294963234,
+      1,
+      0
+    ],
+    [
+      "write",
+      4294963238,
+      1,
+      250
+    ],
+    [
+      "write",
+      4294963233,
+      1,
+      2
+    ],
+    [
+      "read",
+      4294963234,
+      1,
+      0
+    ],
+    [
+      "write",
+      4294963234,
+      1,
+      48
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "write",
+      4294963236,
+      1,
+      128
+    ],
+    [
+      "write",
+      4294963235,
+      1,
+      45
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "write",
+      4294963236,
+      1,
+      120
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "read",
+      4294963237,
+      1,
+      0
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "write",
+      4294963236,
+      1,
+      184
+    ],
+    [
+      "write",
+      4294963235,
+      1,
+      0
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "write",
+      4294963236,
+      1,
+      120
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "read",
+      4294963237,
+      1,
+      0
+    ],
+    [
+      "read",
+      4294963236,
+      1,
+      192
+    ],
+    [
+      "write",
+      4294963236,
+      1,
+      184
+    ],
+    [
+      "read",
+      4294963234,
+      1,
+      48
+    ],
+    [
+      "write",
+      4294963234,
+      1,
+      0
+    ]
+  ],
+  "sci4_transmitted": [
+    17,
+    255,
+    45,
+    0
+  ],
+  "sci4_remaining": 4092,
+  "timer_callback_requests": [
+    {
+      "target": 64104,
+      "argument": 0,
+      "return_pc": 67132
+    },
+    {
+      "target": 64104,
+      "argument": 0,
+      "return_pc": 67132
+    },
+    {
+      "target": 64104,
+      "argument": 0,
+      "return_pc": 67132
+    },
+    {
+      "target": 64132,
+      "argument": 0,
+      "return_pc": 67188
+    },
+    {
+      "target": 64104,
+      "argument": 0,
+      "return_pc": 67132
+    },
+    {
+      "target": 64104,
+      "argument": 0,
+      "return_pc": 67132
+    },
+    {
+      "target": 64160,
+      "argument": 0,
+      "return_pc": 67188
+    },
+    {
+      "target": 64488,
+      "argument": 0,
+      "return_pc": 13016
+    },
+    {
+      "target": 64104,
+      "argument": 0,
+      "return_pc": 67132
+    },
+    {
+      "target": 64104,
+      "argument": 0,
+      "return_pc": 67132
+    },
+    {
+      "target": 64132,
+      "argument": 0,
+      "return_pc": 67188
+    },
+    {
+      "target": 64104,
+      "argument": 0,
+      "return_pc": 67132
+    },
+    {
+      "target": 64104,
+      "argument": 0,
+      "return_pc": 67132
+    },
+    {
+      "target": 64216,
+      "argument": 0,
+      "return_pc": 67188
+    },
+    {
+      "target": 64104,
+      "argument": 0,
+      "return_pc": 67132
+    },
+    {
+      "target": 64488,
+      "argument": 0,
+      "return_pc": 13016
+    }
+  ],
+  "timer_entries": [
+    {
+      "stage": "queued-event2-timer-0",
+      "pc": 62092,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 0,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-0",
+      "pc": 67118,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 0,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-0",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 0,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-1",
+      "pc": 62092,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 1,
+      "divider": 1
+    },
+    {
+      "stage": "queued-event2-timer-1",
+      "pc": 67118,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 1,
+      "divider": 1
+    },
+    {
+      "stage": "queued-event2-timer-1",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 1,
+      "divider": 1
+    },
+    {
+      "stage": "queued-event2-timer-2",
+      "pc": 62092,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 2,
+      "divider": 2
+    },
+    {
+      "stage": "queued-event2-timer-2",
+      "pc": 67118,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 2,
+      "divider": 2
+    },
+    {
+      "stage": "queued-event2-timer-2",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 2,
+      "divider": 2
+    },
+    {
+      "stage": "queued-event2-timer-3",
+      "pc": 62092,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 3,
+      "divider": 3
+    },
+    {
+      "stage": "queued-event2-timer-3",
+      "pc": 67118,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 3,
+      "divider": 3
+    },
+    {
+      "stage": "queued-event2-timer-3",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 3,
+      "divider": 3
+    },
+    {
+      "stage": "queued-event2-timer-4",
+      "pc": 62092,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 4,
+      "divider": 4
+    },
+    {
+      "stage": "queued-event2-timer-4",
+      "pc": 67118,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 4,
+      "divider": 4
+    },
+    {
+      "stage": "queued-event2-timer-4",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 4,
+      "divider": 4
+    },
+    {
+      "stage": "queued-event2-timer-4",
+      "pc": 64488,
+      "pr": 13016,
+      "argument": 0,
+      "wheel": 5,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-4",
+      "pc": 56364,
+      "pr": 58448,
+      "argument": 56364,
+      "wheel": 5,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-4",
+      "pc": 58876,
+      "pr": 56426,
+      "argument": 4294919592,
+      "wheel": 5,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-5",
+      "pc": 62092,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 5,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-5",
+      "pc": 67118,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 5,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-5",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 5,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-6",
+      "pc": 62092,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 6,
+      "divider": 1
+    },
+    {
+      "stage": "queued-event2-timer-6",
+      "pc": 67118,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 6,
+      "divider": 1
+    },
+    {
+      "stage": "queued-event2-timer-6",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 6,
+      "divider": 1
+    },
+    {
+      "stage": "queued-event2-timer-7",
+      "pc": 62092,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 7,
+      "divider": 2
+    },
+    {
+      "stage": "queued-event2-timer-7",
+      "pc": 67118,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 7,
+      "divider": 2
+    },
+    {
+      "stage": "queued-event2-timer-7",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 7,
+      "divider": 2
+    },
+    {
+      "stage": "queued-event2-timer-8",
+      "pc": 62092,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 8,
+      "divider": 3
+    },
+    {
+      "stage": "queued-event2-timer-8",
+      "pc": 67118,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 8,
+      "divider": 3
+    },
+    {
+      "stage": "queued-event2-timer-8",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 8,
+      "divider": 3
+    },
+    {
+      "stage": "queued-event2-timer-9",
+      "pc": 62092,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 9,
+      "divider": 4
+    },
+    {
+      "stage": "queued-event2-timer-9",
+      "pc": 67118,
+      "pr": 13016,
+      "argument": 4294906544,
+      "wheel": 9,
+      "divider": 4
+    },
+    {
+      "stage": "queued-event2-timer-9",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 9,
+      "divider": 4
+    },
+    {
+      "stage": "queued-event2-timer-9",
+      "pc": 64488,
+      "pr": 13016,
+      "argument": 0,
+      "wheel": 10,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-9",
+      "pc": 56364,
+      "pr": 58448,
+      "argument": 56364,
+      "wheel": 10,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-9",
+      "pc": 58876,
+      "pr": 56426,
+      "argument": 4294919592,
+      "wheel": 10,
+      "divider": 0
+    }
+  ],
+  "queue_entries": [
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 13792,
+      "pr": 62974,
+      "argument": 4,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 1,
+      "task": 7
+    },
+    {
+      "pc": 56448,
+      "pr": 58448,
+      "argument": 56448,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 15544,
+      "pr": 56524,
+      "argument": 124,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 13792,
+      "pr": 64140,
+      "argument": 8,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 179340,
+      "pr": 98650,
+      "argument": 1,
+      "pending": 0,
+      "count": 0,
+      "task": 8
+    },
+    {
+      "pc": 56040,
+      "pr": 98650,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 8
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 0,
+      "task": 8
+    },
+    {
+      "pc": 13792,
+      "pr": 62974,
+      "argument": 4,
+      "pending": 0,
+      "count": 0,
+      "task": 8
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 8
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 1,
+      "task": 8
+    },
+    {
+      "pc": 56448,
+      "pr": 58448,
+      "argument": 56448,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 179430,
+      "pr": 56510,
+      "argument": 4294919612,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 15544,
+      "pr": 56524,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 13792,
+      "pr": 64168,
+      "argument": 9,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 56040,
+      "pr": 64504,
+      "argument": 1,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 2,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 13792,
+      "pr": 62974,
+      "argument": 3,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 0,
+      "task": 9
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 0,
+      "task": 9
+    },
+    {
+      "pc": 13792,
+      "pr": 62974,
+      "argument": 4,
+      "pending": 0,
+      "count": 0,
+      "task": 9
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 9
+    },
+    {
+      "pc": 56040,
+      "pr": 151502,
+      "argument": 0,
+      "pending": 0,
+      "count": 1,
+      "task": 9
+    },
+    {
+      "pc": 13792,
+      "pr": 64196,
+      "argument": 18,
+      "pending": 0,
+      "count": 1,
+      "task": 9
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 1,
+      "task": 9
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 1,
+      "task": 9
+    },
+    {
+      "pc": 63136,
+      "pr": 56400,
+      "argument": 2,
+      "pending": 0,
+      "count": 1,
+      "task": 3
+    },
+    {
+      "pc": 136646,
+      "pr": 58908,
+      "argument": 0,
+      "pending": 0,
+      "count": 1,
+      "task": 3
+    },
+    {
+      "pc": 98926,
+      "pr": 58908,
+      "argument": 0,
+      "pending": 0,
+      "count": 1,
+      "task": 3
+    },
+    {
+      "pc": 179340,
+      "pr": 58908,
+      "argument": 2,
+      "pending": 0,
+      "count": 1,
+      "task": 3
+    },
+    {
+      "pc": 56040,
+      "pr": 58908,
+      "argument": 0,
+      "pending": 1,
+      "count": 1,
+      "task": 3
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 1,
+      "count": 1,
+      "task": 3
+    },
+    {
+      "pc": 15544,
+      "pr": 56440,
+      "argument": 0,
+      "pending": 1,
+      "count": 2,
+      "task": 3
+    },
+    {
+      "pc": 56448,
+      "pr": 56440,
+      "argument": 56448,
+      "pending": 1,
+      "count": 2,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 1,
+      "count": 2,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 1,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 179430,
+      "pr": 56510,
+      "argument": 4294919612,
+      "pending": 1,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 13792,
+      "pr": 62974,
+      "argument": 4,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 2,
+      "task": 4
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 2,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 3,
+      "task": 4
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 3,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 594562,
+      "argument": 0,
+      "pending": 0,
+      "count": 4,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 4,
+      "task": 4
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 4,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 5,
+      "task": 4
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 5,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 6,
+      "task": 4
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 6,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 273554,
+      "argument": 0,
+      "pending": 0,
+      "count": 7,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 7,
+      "task": 4
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 7,
+      "task": 4
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 8,
+      "task": 4
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 8,
+      "task": 4
+    },
+    {
+      "pc": 15544,
+      "pr": 56524,
+      "argument": 0,
+      "pending": 0,
+      "count": 9,
+      "task": 4
+    },
+    {
+      "pc": 15544,
+      "pr": 56524,
+      "argument": 58588,
+      "pending": 0,
+      "count": 9,
+      "task": 18
+    },
+    {
+      "pc": 56448,
+      "pr": 56524,
+      "argument": 56448,
+      "pending": 0,
+      "count": 9,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 9,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 8,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 7,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 6,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 5,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 4,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 3,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 2,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 15544,
+      "pr": 56524,
+      "argument": 117,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 13792,
+      "pr": 64140,
+      "argument": 8,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 179340,
+      "pr": 98650,
+      "argument": 1,
+      "pending": 0,
+      "count": 0,
+      "task": 8
+    },
+    {
+      "pc": 56040,
+      "pr": 98650,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 8
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 0,
+      "task": 8
+    },
+    {
+      "pc": 13792,
+      "pr": 62974,
+      "argument": 4,
+      "pending": 0,
+      "count": 0,
+      "task": 8
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 8
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 1,
+      "task": 8
+    },
+    {
+      "pc": 56448,
+      "pr": 58448,
+      "argument": 56448,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 179430,
+      "pr": 56510,
+      "argument": 4294919612,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 15544,
+      "pr": 56524,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 13792,
+      "pr": 64224,
+      "argument": 10,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 3,
+      "pending": 0,
+      "count": 0,
+      "task": 10
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 56040,
+      "pr": 64504,
+      "argument": 1,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 2,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 13792,
+      "pr": 62974,
+      "argument": 3,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 63136,
+      "pr": 56400,
+      "argument": 2,
+      "pending": 0,
+      "count": 0,
+      "task": 3
+    },
+    {
+      "pc": 136646,
+      "pr": 58908,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 3
+    },
+    {
+      "pc": 98926,
+      "pr": 58908,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 3
+    },
+    {
+      "pc": 179340,
+      "pr": 58908,
+      "argument": 2,
+      "pending": 0,
+      "count": 0,
+      "task": 3
+    },
+    {
+      "pc": 56040,
+      "pr": 58908,
+      "argument": 0,
+      "pending": 1,
+      "count": 0,
+      "task": 3
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 1,
+      "count": 0,
+      "task": 3
+    },
+    {
+      "pc": 13792,
+      "pr": 62974,
+      "argument": 4,
+      "pending": 1,
+      "count": 0,
+      "task": 3
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 1,
+      "count": 0,
+      "task": 3
+    },
+    {
+      "pc": 15544,
+      "pr": 56440,
+      "argument": 0,
+      "pending": 1,
+      "count": 1,
+      "task": 3
+    },
+    {
+      "pc": 56448,
+      "pr": 56440,
+      "argument": 56448,
+      "pending": 1,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 1,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 179430,
+      "pr": 56510,
+      "argument": 4294919612,
+      "pending": 1,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 15544,
+      "pr": 56524,
+      "argument": 4294918096,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    }
+  ],
+  "activity": [
+    {
+      "entry": 455368,
+      "return_pc": 94508,
+      "before": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 0,
+        "0x8fe0": 0,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 0,
+        "0x660f": 0,
+        "0x6610": 0,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 0,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 0
+      },
+      "stage": "initializer",
+      "after": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 0,
+        "0x660f": 0,
+        "0x6610": 0,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 0,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 0
+      }
+    },
+    {
+      "entry": 478930,
+      "return_pc": 104240,
+      "before": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 1,
+        "0x660f": 0,
+        "0x6610": 1,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 0,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 1
+      },
+      "stage": "queued-event2-timer-4",
+      "after": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 1,
+        "0x660f": 0,
+        "0x6610": 1,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 0,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 1
+      }
+    },
+    {
+      "entry": 478562,
+      "return_pc": 104246,
+      "before": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 1,
+        "0x660f": 0,
+        "0x6610": 1,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 0,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 1
+      },
+      "stage": "queued-event2-timer-4",
+      "after": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 1,
+        "0x660f": 0,
+        "0x6610": 1,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 1,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 1
+      }
+    },
+    {
+      "entry": 455368,
+      "return_pc": 109126,
+      "before": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 2,
+        "0x660f": 0,
+        "0x6610": 1,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 1,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 1
+      },
+      "stage": "queued-event2-timer-4",
+      "after": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 2,
+        "0x660f": 0,
+        "0x6610": 1,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 1,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 1
+      }
+    },
+    {
+      "entry": 455500,
+      "return_pc": 109138,
+      "before": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 2,
+        "0x660f": 0,
+        "0x6610": 1,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 1,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 1
+      },
+      "stage": "queued-event2-timer-4",
+      "after": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 2,
+        "0x660f": 0,
+        "0x6610": 1,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 1,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 1
+      }
+    },
+    {
+      "entry": 455714,
+      "return_pc": 109538,
+      "before": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 2,
+        "0x660f": 0,
+        "0x6610": 1,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 1,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 1
+      },
+      "stage": "queued-event2-timer-4",
+      "after": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 2,
+        "0x660f": 0,
+        "0x6610": 1,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 1,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 1
+      }
+    }
+  ],
+  "decode": [],
+  "qualification": [
+    {
+      "entry": 445846,
+      "stage": "initializer",
+      "before": {
+        "0x8ef4": 0,
+        "0x8ef5": 0,
+        "0x8ef6": 0,
+        "0x8ef7": 0,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 0,
+        "0x99d8": 0,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "selected": null,
+      "reports": [],
+      "cache_oracle": false,
+      "return": 445814,
+      "after": {
+        "0x8ef4": 0,
+        "0x8ef5": 0,
+        "0x8ef6": 0,
+        "0x8ef7": 0,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 0,
+        "0x99d8": 0,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      }
+    },
+    {
+      "entry": 446214,
+      "stage": "initializer",
+      "before": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 0,
+        "0x99d8": 0,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "selected": null,
+      "reports": [],
+      "cache_oracle": false,
+      "return": 91712,
+      "after": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 0,
+        "0x99d8": 0,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      }
+    }
+  ],
+  "interrupt_scope": "Original idle IRQ wrapper/epilogue replaces direct timer call/explicit dispatch.\n\nExplicit exception frame PC3D0C/SR0, entrySRF0 and native ROM idle stack.\nOriginalidle handler33F0 reaches3D10 directly; task context stackFFFED000 is\nstill the prior fixture. No VBR/INTC acceptance or clock/remote-device proof.\n",
+  "interrupts": [
+    {
+      "cycle": 0,
+      "after_callback_stack": 4294906180,
+      "nesting": 2147483649,
+      "selected": 7,
+      "rte_start": 0,
+      "after_idle_stack": 4294906280,
+      "final_nesting": 2147483648,
+      "queue2_checks": 0
+    },
+    {
+      "cycle": 1,
+      "after_callback_stack": 4294906180,
+      "nesting": 2147483649,
+      "selected": 7,
+      "rte_start": 2,
+      "after_idle_stack": 4294906280,
+      "final_nesting": 2147483648,
+      "queue2_checks": 0
+    },
+    {
+      "cycle": 2,
+      "after_callback_stack": 4294906180,
+      "nesting": 2147483649,
+      "selected": 7,
+      "rte_start": 3,
+      "after_idle_stack": 4294906280,
+      "final_nesting": 2147483648,
+      "queue2_checks": 0
+    },
+    {
+      "cycle": 3,
+      "after_callback_stack": 4294906180,
+      "nesting": 2147483649,
+      "selected": 7,
+      "rte_start": 6,
+      "after_idle_stack": 4294906280,
+      "final_nesting": 2147483648,
+      "queue2_checks": 0
+    },
+    {
+      "cycle": 4,
+      "after_callback_stack": 4294906180,
+      "nesting": 2147483649,
+      "selected": 7,
+      "rte_start": 7,
+      "after_idle_stack": 4294906280,
+      "final_nesting": 2147483648,
+      "queue2_checks": 1
+    },
+    {
+      "cycle": 5,
+      "after_callback_stack": 4294906180,
+      "nesting": 2147483649,
+      "selected": 7,
+      "rte_start": 13,
+      "after_idle_stack": 4294906280,
+      "final_nesting": 2147483648,
+      "queue2_checks": 1
+    },
+    {
+      "cycle": 6,
+      "after_callback_stack": 4294906180,
+      "nesting": 2147483649,
+      "selected": 7,
+      "rte_start": 14,
+      "after_idle_stack": 4294906280,
+      "final_nesting": 2147483648,
+      "queue2_checks": 1
+    },
+    {
+      "cycle": 7,
+      "after_callback_stack": 4294906180,
+      "nesting": 2147483649,
+      "selected": 7,
+      "rte_start": 17,
+      "after_idle_stack": 4294906280,
+      "final_nesting": 2147483648,
+      "queue2_checks": 1
+    },
+    {
+      "cycle": 8,
+      "after_callback_stack": 4294906180,
+      "nesting": 2147483649,
+      "selected": 7,
+      "rte_start": 18,
+      "after_idle_stack": 4294906280,
+      "final_nesting": 2147483648,
+      "queue2_checks": 1
+    },
+    {
+      "cycle": 9,
+      "after_callback_stack": 4294906180,
+      "nesting": 2147483649,
+      "selected": 7,
+      "rte_start": 20,
+      "after_idle_stack": 4294906280,
+      "final_nesting": 2147483648,
+      "queue2_checks": 2
+    }
+  ],
+  "queue2_checks": [
+    {
+      "stage": "queued-event2-timer-4",
+      "return_pc": 56400,
+      "result": 0,
+      "count": 1,
+      "head": 0
+    },
+    {
+      "stage": "queued-event2-timer-9",
+      "return_pc": 56400,
+      "result": 0,
+      "count": 1,
+      "head": 1
+    }
+  ],
+  "queue2_callbacks": [
+    {
+      "stage": "queued-event2-timer-4",
+      "target": 58876,
+      "words": [
+        58876,
+        589824,
+        64168,
+        4294918932,
+        4294906544
+      ]
+    },
+    {
+      "stage": "queued-event2-timer-9",
+      "target": 58876,
+      "words": [
+        58876,
+        458752,
+        64112,
+        4294918932,
+        4294906544
+      ]
+    }
+  ]
+}

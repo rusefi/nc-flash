@@ -1,0 +1,139 @@
+TCU source-1 inhibit, command selection and five GPIO outputs — 2026-10-06
+=======================================================================
+Objective remains all ECU/AT CAN integration, deep traction logic/integration,
+and NC roof folding AND unfolding including interruption/resume/reversal,
+communication timeout,L/R synchronization andfaultrecovery. None complete.
+No extra remotecontroller/capture/bench inputs from user; no staging/commit/push.
+
+Complete original1F3CE model and actual task boundary
+---------------------------------------------------
+verify_tcu_source_inhibit.py independently predicts all applicationRAM changes
+of1F3CE, including itsoriginalhelpers, then compares completeRAM andunchanged
+peripherals. Originalinstructions run. Actualfull126EC/1E5F6 task invokes this
+routine inphase3/7;26 such boundaries in64standalone+40retainedtasks pass the
+same completeoracle. Earlier execution-only coverage is now semantic evidence
+for this body; it doesnot establish everyothernestedbody orreal scheduler.
+
+9415 is read directly by23E7C. If9415 equals exactly1 AND9C58bit0 isclear,
+1F3CE clearsA5A2 (output-inhibit source1). If9C58bit0isset, itsetsA5A2=1,
+setsselectedkey8087=4 and bypasseslookup towritefivezero commands. Otherwise
+A5A2 retains, evenwheninhibitbitclears but9415 is0,2,255 oranyothernon1 byte.
+Do not relabel9415 as a physicalswitch orassume allnonzero values equivalent.
+
+Withoutforcedinhibit, stockenablemask5CCE8 disables slots4/6;1F3CE writesFF
+to910D+4 and910D+6 beforeselection. Eleven910Dslots useFF as sentinel.
+3065A returns LAST eligible nonFF, else default4. This is orderingpriority,
+not min/max. Selectedbyte goes8087. Asearch from70014 finds a6byterow whose
+firstbyte equalsselectedkey; itsfive trailingbytes becomecommands atA5C5..C9
+through52DEE, normalized individuallyto1 iffrowbyte isexactly1,otherwise0.
+Nominal12rows havekeys0..11; exactbytes in tcu-source-inhibit-tables.json.
+Forcedinhibit key4 emitsfivezeros, NOT the ordinary row4 pattern1,0,0,0,1.
+910C retainsupperbits;bit0 becomesboolean9AE8bit6. The old910Cbit0 comparisons
+and duplicatedbit6 branches do notchange the fivecommand formulas in tested
+paths. FullRAMchecking covers arbitraryold910C and9AE8bytes.
+
+1F3A8 initializes8087=4 and11slots=FF.1F3B6 writeslowbyteR5 to910D using
+signedbyteR4 index;1F3C2 writesFF. Validindices0..10 areverified; neitherAPI
+boundschecking nor arbitraryindexreachability is inferred. Theirreal callers
+andvalidkeydomain remain followupleads.52DEE is the originalfivecommandsetter.
+
+Command publication, GPIO and feedback
+-------------------------------------
+Complete52D8C selectsperchannelA5CA override whenA5CF==1,otherwiseA5C5.
+Global84A0 exact1 or4 forces0. Itcopies the rawbyte to8A1C andA5C0 via18728.
+Nonbinarybytes remainraw here. Complete186A4 interprets onlyexact8A1C==1 as
+asserted; otherbytes clear that channel's bit. Original141BC descriptorhelper
+executes exactwordread/modify/write; unrelatedbits retain.
+
+ channel  outputword/bit  compatibleMCU pin  feedbackPADR bit
+ 0        F738/6          PB6                4
+ 1        F738/7          PB7                5
+ 2        F73E/4          PC4                9
+ 3        F738/5          PB5                12
+ 4        F738/4          PB4                7
+Allstockoutput/input descriptor polarities are1. Five triplesat5F7DC contain
+readback,write andexternalfeedback pointers; exactaddresses/bytes retained.
+186EA alternatesreading eachoutputdescriptor into8A21+i andexternalPADR
+F726 into8A26+i. Separatefixture samples verifyfeedback neednotmatchwritten
+command. These are softwarewordvalues, not measuredvoltage oractuation.
+Existing147AA provesPB0..7direction andPB4..7 generalfunction undercompatible
+manual.147C4/PCCRspecificsetup remains staticlead (F73A=10,F73C=0,F73E=0).
+Actualchip/boardconnector/driver/solenoididentities remain unproved.
+
+Allthree outputbodies areindependentlychecked atactualfulltaskboundaries:
+312 checks in104complete126EC calls. Prior529AC/185F8 oracle adds208 command/
+pinchecks. Togetherwith26sourcechecks this is546 semanticboundarychecks.
+The broader task's callorder/phase/event4 checks remainactive. No stubsreplace
+nestedbodyreturns. Unknownperipheraladdresses stillfailclosed.
+
+Retained latch/release result
+----------------------------
+40 completeactive applicationcalls startphase0. Explicit9C58bit0 isasserted
+forzero-based calls4..11, then cleared;9415 becomes1 atcall24. Source1 first
+sets atphase7/call7. Itstays1 throughcall26 despiteinhibitclearing atcall12;
+phase7/call27 sees9415==1 andclearsit.529AC producesA5A0/8A18, so actualpin
+selection follows thatretainedsource. Phase3/7 cadence issoftwarecallorder,
+not elapsedtime oractualtimerfrequency. Upstream9C58/9415 writers arefixtures.
+After9C58clear, fiveA5C5commands repopulate whileA5A2 remainslatched: separate
+command andaggregateinhibit paths mustnot beconflated. Electricaleffect depends
+on board/driver wiring andcannotbe concludedfrom RAM orGPIOlatches alone.
+
+Out-of-nominal-table evidence (not normal-operation reachability)
+----------------------------------------------------------------
+The originalrowsearch hasno12-rowbound. Addresscalculation useslowbyte of
+incrementingindex, hence256distinctsixbyterowaddresses. In thisunchangedROM
+thoseaddresses contain92distinctkeybytes;79 nonnominal/nonFF keys finda row
+outside the nominal12. All79 directinjection cases return and match the
+independentfirst-match oracle, includingexact1 normalization ofrowdata.
+They are NOT documentedadditionalmodes; adjacentROM bytesare not automatically
+legitimatecalibrationrows. FF remains the slotsentinel, so itcannot beselected
+by the ordinarylast-nonFF helper.
+Directkeys31,127,254 (absentfromall256addresses) eachhit the10000instruction
+limit whilePCstays1F4A0..1F4B6. CompleteapplicationRAM matchesonlytheexecuted
+prefix: outputcommands and910C finalupdate have notrun. Staticinterpretation:
+withimmutableROM andthatkey, thebyte-indexedaddresscycle hasno matchingrow.
+This is boundednonreturn evidence plusstaticloopreasoning, notavehiclehang or
+claim that normalcallers can supplythesevalues. Preservecaller-domain question.
+
+Verification and reproduction
+-----------------------------
+Directsource checks:1024 flagcombinations,143 slot/keypriority cases,
+256random validpatterns,148 initializer/set/clear cases,79 nonnominalmatching
+keys =1650positivechecks. Three expectedboundedmissing-key probes separate.
+Outputchecks:320publication,288GPIO,64feedback =672positivechecks.
+Total2322 directpositivechecks;64fulltasks+40retained;26source/312output/
+208existingcommand boundaries =546. Finalenlargedverifier passed.
+python research/ecu-at-can/verify_tcu_source_inhibit.py
+python -m py_compile research/ecu-at-can/verify_tcu_source_inhibit.py
+Python3.14.3; unchangedTCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Syntheticstack belowFFFF0000 excludedfromapplicationRAM; normalreturnscheck
+R8..R15,MACL,SRexceptarithmeticflags. Boundednonreturns donotclaimrestoration.
+No sharedISA/oldverifier/production changes; localresearchscript only.
+
+Disassembly artifacts tcu-source-inhibit-{slots,priority,outputs,gate,publish,
+gpio}-disassembly.txt plusmain-disassembly (without '-main' inname) preserve
+ranges1F3A8..1F3CE,30620..30686,52DEE..52E54,23E7C..23E82,52D8C..52DEE,
+186A4..18740 and1F3CE..1F5E0. GNU SHbinutils2.42 invocation/setup remainsin
+tcu-timer-configuration.txt anddisassemble.py. TablesJSON preservesmask,
+nominalrows anddescriptortriples. No modified ROMused.
+FactorycompatibleSH7055S PDF/hash/provenance remainsin sources; selectedport
+text savedin tcu-source-inhibit-port-manual-excerpts.txt (PyMuPDF1.28.2).
+SourceSHA256359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+RelevantPDFzero685registermap,693..696B,698/699C,745A,747B,749/750C.
+Ghidra comments/data/tables saved; pairedarchive andindependentrestore identity
+recorded inCHECKPOINT.txt andghidra manifests. No staging/commit/push.
+
+Next work and independent open requirements
+------------------------------------------
+TCU: actual9C58 and9415 writer/admission lifecycles; source0 parentconditions;
+1F3B6 slotcaller keydomain; phase0/4 1FD24/23BF0 requestqueue/ack/overlap.
+Fullboot, interruptclock/entry/RTE,PBIR,otherstatus/upstreamsources,persistence
+andphysicalintegration remainopen. FiveGPIOsoftwareproof doesnotidentifyloads.
+Traction retains separateexecutedECU ADC/qualification/ATspark evidence;
+next fulltask ordering/freshness/399B0 callers. FactoryDSC docs/candidate
+CAN211/21A sender/units aredistinctfrommissingremoteDSC andboard/physicalproof.
+Roof factoryrevision/pin/PID conflicts remain; candidateECU/TCU stateinputs
+are notOEMreceiverproof. BOTH folding ANDunfolding interruption/resume/reversal,
+communicationtimeout,L/Rsynchronization/faultrecovery remain open. Nextnew
+applicablesource orOEMreceiver/capture/physical evidence; userhasnoextrainputs.

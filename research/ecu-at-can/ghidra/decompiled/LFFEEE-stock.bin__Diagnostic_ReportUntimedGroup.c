@@ -1,7 +1,7 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Executed tail branch8FB52 withr6=0; groups43/44 reports/cache verified. No generic stored-DTC
-   lifecycle claim. */
+/* Executed tail branch8FB52 withr6=0; groups43/44 and1F/20 reports/cache verified within bounded
+   admission paths. No generic stored-DTC lifecycle claim. */
 
 uint Diagnostic_ReportUntimedGroup(uint param_1,char param_2)
 

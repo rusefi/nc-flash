@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "scope": "Verify retained native event2 queue dispatch, preserving observed differences.",
+  "task_pairs": 120,
+  "actual_event2_callbacks": 120,
+  "independent_consumer_ram_returns": 140,
+  "queue_wraps": 1,
+  "callback_targets": {
+    "0x2bce6": 120,
+    "0x959f2": 19,
+    "0x95afc": 1
+  },
+  "identical_first8_before_added_consumer_observations": true,
+  "monitored_fields_identical_to_prior_direct_event2": true,
+  "monitored_field_differences": [],
+  "decode_checks": 6,
+  "activity_checks": 121,
+  "qualification_observations": 26,
+  "rte_transfers": 244,
+  "final_fields": {
+    "0x400a": 32768,
+    "0x4040": 32000,
+    "0x40ec": 32768,
+    "0x40e8": 1092616192,
+    "0x6c92": 500,
+    "0x6cb4": 1092616192,
+    "0x914b": 1,
+    "0x4048": 120,
+    "0x404c": 1,
+    "0x404f": 12,
+    "0x4052": 8,
+    "0x4055": 0
+  },
+  "limits": "Supplied task7/event2 ratio, ADC/SCI samples, maskF0 and event stackFFFED000. Additional callbacks execute; only F6A0 and existing decode/activity/qualification oracles are independent. No complete all-RAM differential versus prior direct callback trace or native producer cadence."
+}

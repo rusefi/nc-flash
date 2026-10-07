@@ -12,8 +12,8 @@ void CAN215_ConvertFields(void)
   (*(code *)PTR_CAN215_ConvertOffset_0001ad98)();
   (*(code *)PTR_CAN215_ConvertDifference_0001ad9c)();
   (*(code *)PTR_CAN215_ConvertSecondDifference_0001ada0)();
-  (*(code *)PTR_FUN_0001ada4)();
-  (*(code *)PTR_FUN_0001ada8)();
+  (*(code *)PTR_CAN215_DecodePrimaryInput_0001ada4)();
+  (*(code *)PTR_PulseInput_ReadRawBit_0001ada8)();
   (*(code *)PTR_FUN_0001adac)();
                     /* WARNING: Could not recover jumptable at 0x0001ad2a. Too many branches */
                     /* WARNING: Treating indirect jump as call */

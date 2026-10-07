@@ -1,7 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Executed in local-inputs.txt: synchronous SCI0 setup, PHDR bits14/15 bank selection,
-   real786E(FF); physical chip/wiring and timing unproved. */
+/* Executed local-inputs.txt and complete18DC8 tasks in control-task-serial.txt.144 new setup
+   cases:PHDR bits14/15 bank selection, SCR/SMR/BRR/SDCR exactwrites, real786E(FF); syntheticpeer,
+   no physical timing/wiring proof. */
 
 int Input_ReadSerialBank(char param_1)
 

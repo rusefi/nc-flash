@@ -1,0 +1,154 @@
+{
+  "status": "PASS",
+  "scope": "Original CMT0 initialization and interrupt-prefix mode admission.\n\nExplicit status/profiling register samples; stop before RTE. Whole RAM compares\nwith original128B6 plus independent1->3 mode transition and profiling equations.\nThis does not independently model all11A64 timer effects or prove clock units,\nhardware interrupt delivery, timer side effects or application scheduling.\n",
+  "initialization_cases": 512,
+  "differential_whole_application_ram_cases": 516,
+  "examples": [
+    {
+      "mode": 0,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "tick": 0,
+      "elapsed": 0
+    },
+    {
+      "mode": 0,
+      "armed": true,
+      "active": false,
+      "entries": [
+        "0x123c2",
+        "0x128b6"
+      ],
+      "tick": 0,
+      "elapsed": 0
+    },
+    {
+      "mode": 1,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "tick": 100,
+      "elapsed": 65534
+    },
+    {
+      "mode": 1,
+      "armed": true,
+      "active": true,
+      "entries": [
+        "0x123c2",
+        "0x128b6",
+        "0x11864",
+        "0x1e506",
+        "0x11a64"
+      ],
+      "tick": 101,
+      "elapsed": 65535
+    },
+    {
+      "mode": 2,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "tick": 4294967295,
+      "elapsed": 65535
+    },
+    {
+      "mode": 2,
+      "armed": true,
+      "active": false,
+      "entries": [
+        "0x123c2",
+        "0x128b6"
+      ],
+      "tick": 4294967295,
+      "elapsed": 65535
+    },
+    {
+      "mode": 3,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "tick": 0,
+      "elapsed": 0
+    },
+    {
+      "mode": 3,
+      "armed": true,
+      "active": true,
+      "entries": [
+        "0x123c2",
+        "0x128b6",
+        "0x11864",
+        "0x1e506",
+        "0x11a64"
+      ],
+      "tick": 1,
+      "elapsed": 1
+    },
+    {
+      "mode": 255,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "tick": 0,
+      "elapsed": 0
+    },
+    {
+      "mode": 255,
+      "armed": true,
+      "active": false,
+      "entries": [
+        "0x123c2",
+        "0x128b6"
+      ],
+      "tick": 0,
+      "elapsed": 0
+    },
+    {
+      "mode": 1,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "tick": 4294967295,
+      "elapsed": 65535
+    },
+    {
+      "mode": 1,
+      "armed": true,
+      "active": true,
+      "entries": [
+        "0x123c2",
+        "0x128b6",
+        "0x11864",
+        "0x1e506",
+        "0x11a64"
+      ],
+      "tick": 0,
+      "elapsed": 65535
+    },
+    {
+      "mode": 3,
+      "armed": false,
+      "active": false,
+      "entries": [],
+      "tick": 4294967295,
+      "elapsed": 65535
+    },
+    {
+      "mode": 3,
+      "armed": true,
+      "active": true,
+      "entries": [
+        "0x123c2",
+        "0x128b6",
+        "0x11864",
+        "0x1e506",
+        "0x11a64"
+      ],
+      "tick": 0,
+      "elapsed": 65535
+    }
+  ],
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+}

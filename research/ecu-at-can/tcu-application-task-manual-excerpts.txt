@@ -1,0 +1,802 @@
+CompatibleSH7055S localmanual; SHA256359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c
+
+PDF ZERO PAGE 566
+Rev.2.0, 07/03, page 527 of 960 
+ 
+16.2 
+Register Descriptions 
+16.2.1 
+Master Control Register (MCR) 
+The master control register (MCR) is an 8-bit readable/writable register that controls the CAN 
+interface. 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+MCR7 
+— 
+MCR5 
+— 
+— 
+MCR2 
+MCR1 
+MCR0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+1 
+ 
+R/W: 
+R/W 
+R 
+R/W 
+R 
+R 
+R/W 
+R/W 
+R/W 
+ 
+• Bit 7—HCAN Sleep Mode Release (MCR7): Enables or disables HCAN sleep mode release 
+by bus operation. 
+ 
+Bit 7: MCR7 
+Description 
+0 
+HCAN sleep mode release by CAN bus operation disabled 
+(Initial value) 
+1 
+HCAN sleep mode release by CAN bus operation enabled 
+ 
+• Bit 6—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 5—HCAN Sleep Mode (MCR5): Enables or disables HCAN sleep mode transition. 
+ 
+Bit 5: MCR5 
+Description 
+0 
+HCAN sleep mode released 
+(Initial value) 
+1 
+Transition to HCAN sleep mode enabled 
+ 
+• Bits 4 and 3—Reserved: These bits are always read as 0. The write value should always be 0. 
+• Bit 2—Message Transmission Method (MCR2): Selects the transmission method for transmit 
+messages. 
+ 
+Bit 2: MCR2 
+Description 
+0 
+Transmission order determined by message identifier priority (Initial value) 
+1 
+Transmission order determined by mailbox (buffer) number priority  
+(TXPR1 > TXPR15) 
+ 
+
+PDF ZERO PAGE 567
+Rev.2.0, 07/03, page 528 of 960 
+ 
+• Bit 1—Halt Request (MCR1): Controls halting of the HCAN module. 
+ 
+Bit 1: MCR1 
+Description 
+0 
+Normal operating mode 
+(Initial value) 
+1 
+Halt mode transition request 
+ 
+• Bit 0—Reset Request (MCR0): Controls resetting of the HCAN module. 
+ 
+Bit 0: MCR0 
+Description 
+0 
+Normal operating mode (MCR0 = 0 and GSR3 = 0) 
+[Setting condition] 
+When 0 is written after an HCAN reset 
+ 
+1 
+Reset mode transition request 
+(Initial value) 
+ 
+In order for GSR3 to change from 1 to 0 after 0 is written to MCR0, time is required before the 
+HCAN is internally reset. There is consequently a delay before GSR3 is cleared to 0 after 
+MCR0 is cleared to 0. 
+ 
+16.2.2 
+General Status Register (GSR) 
+The general status register (GSR) is an 8-bit readable register that indicates the status of the CAN 
+bus. 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+— 
+— 
+— 
+— 
+GSR3 
+GSR2 
+GSR1 
+GSR0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+1 
+1 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+ 
+• Bits 7 to 4—Reserved: These bits are always read as 0. The write value should always be 0. 
+• Bit 3—Reset Status Bit (GSR3): Indicates whether the HCAN module is in the normal 
+operating state or the reset state. This bit cannot be modified. 
+ 
+Bit 3: GSR3 
+Description 
+0 
+Normal operating state 
+[Setting condition] 
+After an HCAN internal reset 
+ 
+1 
+Configuration mode 
+(Initial value) 
+[Reset condition] 
+MCR0-initiated reset state or sleep mode 
+ 
+
+PDF ZERO PAGE 568
+Rev.2.0, 07/03, page 529 of 960 
+ 
+• Bit 2—Message Transmission Status Flag (GSR2): Flag that indicates whether the module is 
+currently in the message transmission period. The “message transmission period” is the period 
+from the start of message transmission (SOF) until the end of a 3-bit intermission interval after 
+EOF (End of Frame). This bit cannot be modified. 
+ 
+Bit 2: GSR2 
+Description 
+0 
+Transmission in progress  
+1 
+[Reset condition] 
+Idle period 
+(Initial value) 
+ 
+• Bit 1—Transmit/Receive Warning Flag (GSR1): Flag that indicates an error warning. This bit 
+cannot be modified. 
+ 
+it 1: GSR1 
+Description 
+0 
+[Reset condition] 
+When TEC < 96 and REC < 96 or TEC ≥ 256 
+(Initial value) 
+1 
+When TEC ≥ 96 or REC ≥ 96 
+ 
+• Bit 0—Bus Off Flag (GSR0): Flag that indicates the bus off state. This bit cannot be modified. 
+ 
+Bit 0: GSR0 
+Description 
+0 
+[Reset condition] 
+Recovery from bus off state 
+(Initial value) 
+1 
+When TEC ≥ 256 (bus off state) 
+ 
+16.2.3 
+Bit Configuration Register (BCR) 
+The bit configuration register (BCR) is a 16-bit readable/writable register that is used to set CAN 
+bit timing parameters and the baud rate prescaler. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+BCR7 
+BCR6 
+BCR5 
+BCR4 
+BCR3 
+BCR2 
+BCR1 
+BCR0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+BCR15 
+BCR14 
+BCR13 
+BCR12 
+BCR11 
+BCR10 
+BCR9 
+BCR8 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+
+PDF ZERO PAGE 745
+Rev.2.0, 07/03, page 706 of 960 
+ 
+21.2.1 
+Register Configuration 
+The port A register configuration is shown in table 21.1. 
+Table 21.1 Register Configuration 
+Name 
+Abbreviation 
+R/W 
+Initial Value 
+Address 
+Access Size 
+Port A data register 
+PADR 
+R/W 
+H'0000 
+H'FFFFF726 
+8, 16 
+Port A port register 
+PAPR 
+R 
+port A pin 
+values 
+H'FFFFF780 
+8, 16 
+Note: A register access is performed in four or five cycles regardless of the access size. 
+ 
+21.2.2 
+Port A Data Register (PADR) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+PA15 
+DR 
+PA14 
+DR 
+PA13 
+DR 
+PA12 
+DR 
+PA11 
+DR 
+PA10 
+DR 
+PA9 
+DR 
+PA8 
+DR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+PA7 
+DR 
+PA6 
+DR 
+PA5 
+DR 
+PA4 
+DR 
+PA3 
+DR 
+PA2 
+DR 
+PA1 
+DR 
+PA0 
+DR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+The port A data register (PADR) is a 16-bit readable/writable register that stores port A data. Bits 
+PA15DR to PA0DR correspond to pins PA15/RxD0 to PA0/TI0A. 
+When a pin functions as a general output, if a value is written to PADR, that value is output 
+directly from the pin, and if PADR is read, the register value is returned directly regardless of the 
+pin state.  
+When a pin functions as a general input, if PADR is read the pin state, not the register value, is 
+returned directly. If a value is written to PADR, although that value is written into PADR it does 
+not affect the pin state. Table 21.2 summarizes port A data register read/write operations. 
+PADR is initialized to H'0000 by a power-on reset (excluding a WDT power-on reset), and in 
+hardware standby mode. It is not initialized in software standby mode or sleep mode. 
+
+PDF ZERO PAGE 749
+Rev.2.0, 07/03, page 710 of 960 
+ 
+21.3.3 
+Port B Port Register (PBPR) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+PB15
+PR 
+PB14
+PR 
+PB13
+PR 
+PB12
+PR 
+PB11
+PR 
+PB10
+PR 
+PB9 
+PR 
+PB8 
+PR 
+PB7 
+PR 
+PB6 
+PR 
+PB5 
+PR 
+PB4 
+PR 
+PB3 
+PR 
+PB2 
+PR 
+PB1 
+PR 
+PB0 
+PR 
+ 
+Initial value: 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+Note: * The initial value is 1 when the PB15 to PB0 pins are high, and it is 0 when the pins are low. 
+ 
+The port B port register (PBPR) is a 16-bit read-only register that always stores the value of the 
+port B pins. The CPU cannot write data to this register. Bits PB15PR to PB0PR correspond to pins 
+PB15/PULS5/SCK2 to PB0/TO6A. If PBPR is read, the corresponding pin values are returned. 
+• Bits 15 to 0: Port B15 to B0 Port Register (PB15PR to PB0PR) 
+PB15PR to PB0PR 
+Description 
+0 
+Low-level signals are output from or input to the PB15 to PB0 pins. 
+1 
+High-level signals are output from or input to the PB15 to PB0 pins. 
+ 
+21.4 
+Port C 
+Port C is an input/output port with the 5 pins shown in figure 21.3. 
+PC4 (I/O) /
+ (input)
+PC3 (I/O) /RxD2 (input)
+PC2 (I/O) /TxD2 (output)
+PC1 (I/O) /RxD1 (input)
+PC0 (I/O) /TxD1 (output)
+Port C
+ 
+Figure 21.3   Port C 
+21.4.1 
+Register Configuration 
+The port C register configuration is shown in table 21.5. 
+Table 21.5 Register Configuration 
+Name 
+Abbreviation 
+R/W 
+Initial Value 
+Address 
+Access Size 
+Port C data register 
+PCDR 
+R/W 
+H'0000 
+H'FFFFF73E 
+8, 16 
+Note: A register access is performed in four or five cycles regardless of the access size. 
+ 
+
+PDF ZERO PAGE 751
+Rev.2.0, 07/03, page 712 of 960 
+ 
+21.5 
+Port D 
+Port D is an input/output port with the 14 pins shown in figure 21.4. 
+PD13 (I/O) /PULS6 (output) / HTxD0 (output) /HTxD1 (output)
+PD12 (I/O) /PULS4 (output)
+PD11 (I/O) /PULS3 (output)
+PD10 (I/O) /PULS2 (output)
+PD9 (I/O) /PULS1 (output)
+PD8 (I/O) /PULS0 (output)
+PD7 (I/O) /TIO1H (I/O)
+PD6 (I/O) /TIO1G (I/O)
+PD5 (I/O) /TIO1F (I/O)
+PD3 (I/O) /TIO1D (I/O)
+PD2 (I/O) /TIO1C (I/O)
+PD1 (I/O) /TIO1B (I/O)
+PD0 (I/O) /TIO1A (I/O)
+PD4 (I/O) /TIO1E (I/O)
+Port D
+ 
+Figure 21.4   Port D 
+21.5.1 
+Register Configuration 
+The port D register configuration is shown in table 21.7. 
+Table 21.7 Register Configuration 
+Name 
+Abbreviation 
+R/W 
+Initial Value 
+Address 
+Access Size 
+Port D data register 
+PDDR 
+R/W 
+H'0000 
+H'FFFFF746 
+8, 16 
+Port D port register 
+PDPR 
+R 
+port D pin 
+values 
+H'FFFFF784 
+8, 16 
+Note: A register access is performed in four or five cycles regardless of the access size. 
+ 
+
+PDF ZERO PAGE 765
+Rev.2.0, 07/03, page 726 of 960 
+ 
+21.10.1 Register Configuration 
+The port J register configuration is shown in table 21.17. 
+Table 21.17 Register Configuration 
+Name 
+Abbreviation 
+R/W 
+Initial Value 
+Address 
+Access Size 
+Port J data register 
+PJDR 
+R/W 
+H'0000 
+H'FFFFF76C 
+8, 16 
+Port J port register 
+PJPR 
+R 
+port J pin 
+values 
+H'FFFFF786 
+8, 16 
+Note: A register access is performed in four or five cycles regardless of the access size. 
+ 
+21.10.2 Port J Data Register (PJDR) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+PJ15 
+DR 
+PJ14 
+DR 
+PJ13 
+DR 
+PJ12 
+DR 
+PJ11 
+DR 
+PJ10 
+DR 
+PJ9 
+DR 
+PJ8 
+DR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+PJ7 
+DR 
+PJ6 
+DR 
+PJ5 
+DR 
+PJ4 
+DR 
+PJ3 
+DR 
+PJ2 
+DR 
+PJ1 
+DR 
+PJ0 
+DR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+The port J data register (PJDR) is a 16-bit readable/writable register that stores port J data. Bits 
+PJ15DR to PJ0DR correspond to pins PJ15/TI9F to PJ0/TIO2A. 
+When a pin functions as a general output, if a value is written to PJDR, that value is output 
+directly from the pin, and if PJDR is read, the register value is returned directly regardless of the 
+pin state. 
+When a pin functions as a general input, if PJDR is read the pin state, not the register value, is 
+returned directly. If a value is written to PJDR, although that value is written into PJDR it does not 
+affect the pin state. Table 21.18 summarizes port J data register read/write operations. 
+PJDR is initialized to H'0000 by a power-on reset (excluding a WDT power-on reset), and in 
+hardware standby mode. It is not initialized in software standby mode or sleep mode. 
+
+PDF ZERO PAGE 767
+Rev.2.0, 07/03, page 728 of 960 
+ 
+21.11 
+Port K 
+Port K is an input/output port with the 16 pins shown in figure 21.10. 
+PK15 (I/O) /TO8P (output)
+PK14 (I/O) /TO8O (output)
+PK13 (I/O) /TO8N (output)
+PK12 (I/O) /TO8M (output)
+PK11 (I/O) /TO8L (output)
+PK10 (I/O) /TO8K (output)
+PK9 (I/O) /TO8J (output)
+PK8 (I/O) /TO8I (output)
+PK7 (I/O) /TO8H (output)
+PK5 (I/O) /TO8F (output)
+PK4 (I/O) /TO8E (output)
+PK3 (I/O) /TO8D (output)
+PK2 (I/O) /TO8C (output)
+PK1 (I/O) /TO8B (output)
+PK0 (I/O) /TO8A (output)
+PK6 (I/O) /TO8G (output)
+Port K
+ 
+Figure 21.10   Port K 
+21.11.1 Register Configuration 
+The port K register configuration is shown in table 21.19. 
+Table 21.19 Register Configuration 
+Name 
+Abbreviation 
+R/W 
+Initial Value 
+Address 
+Access Size 
+Port K data register 
+PKDR 
+R/W 
+H'0000 
+H'FFFFF778 
+8, 16 
+Note: A register access is performed in four or five cycles regardless of the access size. 
+ 

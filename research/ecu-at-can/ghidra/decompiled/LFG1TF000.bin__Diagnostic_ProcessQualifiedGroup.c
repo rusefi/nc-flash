@@ -23,7 +23,8 @@ void Diagnostic_ProcessQualifiedGroup(uint param_1)
   if ((bVar3) || ((*(byte *)((param_1 & 0xff) * 0x10 + iRam00056a10 + 6) & 0x10) == 0x10)) {
     if ((bVar2 & 4) == 0) {
       if ((bVar2 & 2) == 0) {
-        if (((!bVar4) || (!bVar3)) && (cVar6 = FUN_00056a4a(param_1), cVar6 == '\x01')) {
+        if (((!bVar4) || (!bVar3)) &&
+           (cVar6 = Diagnostic_CheckActiveRecoveryPermission(param_1), cVar6 == '\x01')) {
           iVar8 = 0;
           goto code_r0x000569ea;
         }

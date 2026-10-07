@@ -1,0 +1,114 @@
+Startup timer configuration continuation — 2026-10-06
+
+Full objective remains CHECKPOINT.txt: ECU/AT integration, deep traction,
+and both roof directions, including interruption/recovery, remain incomplete.
+User has no additional artifacts. No staging, commit or push authorization.
+The previous turn made progress: original CPU self-test now executes successfully.
+
+Reproduce from repository root, Python3.14.3:
+python research/ecu-at-can/verify_control_initialize_timer.py
+python research/ecu-at-can/probe_control_initialize_timer.py
+Original ECU SHA2567604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+
+Verified: 520 byte configuration/readback cases, 12 expected width/address
+rejections, and 256 original80D4 whole-application-RAM cases pass. Stock
+ROM DC3A9=0 selects ROM1115D+2*byte4119, masked7F, into OCR10B and shadow414B;
+then TCNT10B=0. Exact two-write order checked. Nonvolatile GPR/stack/GBR
+preserved. All256 byte indices tested as firmware inputs, without assigning
+physical meaning or claiming every index is an intended configuration.
+
+Local TimerStartup extends the existing SelfTest probe. Only F6D8/OCR10B and
+F6C4/TCNT10B byte accesses are newly admitted. Initial FF/00 are explicit
+fixtures matching documented reset values; no AGCK input is supplied.
+Counter increments, comparator events and interrupts are not synthesized.
+Writes/readbacks latch under this no-event fixture; this does not establish
+physical reset, cadence, board wiring or actuator behavior. Shared interpreters,
+production code and ROM remain unchanged. The base probe runner was parameterized
+to reuse the same reporting/execution pipeline; default FPU probe unchanged.
+
+Primary source: retained SH7058 REJ09B0046-0300H manual/provenance JSON in
+sources/renesas-sh7058-hardware-rej09b0046-0300h.{pdf,json}, SHA256
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+Table11.3 printed216/PDF258 and detail printed345/350, PDF387/392.
+TCNT10B counts external TI10/AGCK events even with STR10 clear if input is
+configured. An AGCK event with matching TCNT10B/OCR10B sets CMF10B.
+No-event fixture is explicit; STR10 alone is not assumed to freeze the counter.
+Read using installed PyMuPDF1.28.2. Disassembly80D4 already retained in
+control-initialize-fpu-next-limit.txt; tool setup incontrol-task.txt.
+
+Original1619A extended probe RETURNED after507 observed directcallee entries.
+3598 MMIO accesses recorded. Bank oracle andselftestreturn pass. Entries include
+2C468/PR16EC4 and6F29C/PR1712C, which falls through6F2C8 withsamePR.
+No full reset/physical boot claim; peripheral inputs remain explicit fixtures.
+New verify_control_initialized_activity.py runs originalinitializer withzero
+andseeded activity counters, records actualwritePCs (includingdelay slots),
+and checks firstfive event2 deliveries withexisting fullRAM activity oracles.
+Inspect control-initialized-activity-verification.json beforeclaiming this
+second experiment passes. Broader TCU operational
+queue/ack/overlap/cadence/persistence/physical integration, CAN211/21A sender/
+units/remote DSC actuation, and both roof directions interruption/reversal/
+timeout/synchronization/recovery remain open independently.
+
+Final initialized-activity results:
+python research/ecu-at-can/verify_control_initialized_activity.py
+Both zero and seeded fixtures return from1619A and fiveevent2 deliveries
+without separately callingCA94. Nonvolatile GPR/stack/GBR preserved.
+Twelve wholeRAM returnoracles pass: initializer6F2C8 plusfirsttask74ED2,
+74D62,6F2C8,6F34C,6F422 ineachfixture. StoredJSON also passes explicit
+postcondition validation via validate_rows(rows). Total10 outerreturns.
+
+64 additional original6F29C wholeRAM checks pass: it reloads8FD4=640,
+sets8FD6/8FD7=40, then falls through6F2C8 before returning. This corrects
+any reading of6F2C6's PRrestore as a return by itself. Actual startupcaller
+returnPC1712C matchesbothentries. Exact oldtimer/flag preservation outside
+theseoutputs andhysteresis results checked; noMMIOaccesses inthisroutine.
+
+Initialization writes observed at actual instruction PCs:
+161A2->5360=0;7459C->9125=1;
+42A76/42A80->735A=40;42A82->735C=1;42A94->7358=2;
+42C3A->735B=1;2C470->6605=0;2C474->6606=1;
+6F2B6->8FD4=640;6F2BE/6F2C4->8FD6/8FD7=40;
+6F2E4/6F318->8FE0/8FDF=1.
+Writesoverlapping9158/915E/915C are absent intheseexecutedinitializerpaths.
+Their seedA55A/5A/A5 survives1619A exactly. This is stronger than observing
+zero inzeroRAM, but doesnot establishallotherpossible startupbranches.
+
+Firstcontroltask seesinitializedtimer640 andsets9149=1. Inbothfixtures,
+mode735A=40 and735C=1, so74ED2 leaves9158 unchangedandclears915C;915E
+remains0 or5A (onlyexact1 requestsreset). Event2 phases1/2/3/4/0 follow.
+Hookcounters660E and6610 become1;partner660F/6611 stay0. No CA94 occurred
+within1619A, so44A2 remainsfixture0 despitePFDR=1. Thisseparatesapplication
+initialization fromearlierfilteredinput/RAM/reset prerequisites.
+
+Nextprimaryaction: traceearlierRAM/input initialization before21540->1619A.
+Alignedreference/staticcallerlead:DF66 JSR21540;21542 tailjumps1619A.
+Disassembly incontrol-initialize-prerequisite-leads.txt. Thesearestaticlinks,
+notexecutedfullboot. Resetvectors0/8 pointC0C, stackFFFFBFA0;C0C callsC20,
+C54 then65C. Do not claimbootchainwithoutexecuting/validatingprerequisites.
+Do not expand every peripheral into an unrelated completion requirement.
+Ghidraannotations savedandindependentlyrestored; identitybelow.
+
+Further prerequisite leads (static, not executed):
+DD46 JSR CA94 precedes DF66 JSR21540 in the surrounding startup body. This
+supports sampling before application initialization; complete caller execution
+remains unproved. FA4C is only RTS/NOP, not a RAM initializer (failed lead).
+ROM11444/11448 contain FFFF4000/FFFFBF9F. Candidate100D8 references thisrange,
+writes zero at its start, configures ECC0/ECC4/ECC8/ECCC plus ECB0, thenwaits.
+This suggests hardware-assisted clearing; register identities/modes andactual
+range clearing need manual confirmation and executed fixture proof. Addresses
+9158/915E/915C fallwithinthatcandidate range. Do not claimzeroing fromthis
+staticpattern alone. Instructions/refs preserved inprerequisite-leads.txt.
+Nextconcreteaction: verifycandidate100D8 entry/callers andapplicableDMAC
+registersemantics, thenexecute/testtheboundedclearwithoutskippingthewait.
+
+Finalsaveverification: bothGhidraprograms saved,1899annotations (824ECU/1075TCU),
+955identicalexports,11projecthashes checkedbefore/afterreadonlyrestoration.
+Archiveincludes.gpr/.rep,10,989,925bytes;SHA256:
+70da53fc6683abb7bbb91ddebd7d85012de7499ba187781e68a031e033bc319b
+Independentrestore:ghidra/restore-check/control-initialize-timer-20261006.
+Apply/readback/restorelogs clean; bothREADBACK_OK. Workflowin ghidra/README.txt;
+snapshot.py andsnapshot/restore-verification manifests provide durableidentity.
+Ghidra12.1.3PUBLIC/Java21.0.10. EightnewartifactsGit-eligible;four changed/new
+scripts compile;diff-check clean. MixedindexincludingADarchive.tmp preserved.
+Savedlocally only. No staging,commit,push,productioncode/ROM/sharedISA edits.

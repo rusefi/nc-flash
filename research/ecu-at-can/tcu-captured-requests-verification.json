@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "scope": "Verify callback/task freshness and pairedCAN216 decoding from saved traces.\n\nMeasurement expected values come from an independent24-slot timestamp model,\nnot the observer's expected-result fields. Local execution/fixture scope only.\n",
+  "capture_only": {
+    "task_calls": 96,
+    "capture_returns": 192,
+    "measurement_checks": 96,
+    "paired_packet_decode_checks": 96,
+    "whole_ram_ack_checks": 26,
+    "existing_whole_ram_command_checks": 192,
+    "selected_gate_checks": 48,
+    "input_producer_checks": 0,
+    "creations": [
+      {
+        "call": 17,
+        "payload": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "call": 21,
+        "payload": [
+          1,
+          2,
+          0
+        ]
+      },
+      {
+        "call": 69,
+        "payload": [
+          2,
+          2,
+          0
+        ]
+      }
+    ],
+    "admitted_numeric_requests": []
+  },
+  "received": {
+    "task_calls": 128,
+    "capture_returns": 256,
+    "measurement_checks": 128,
+    "paired_packet_decode_checks": 128,
+    "whole_ram_ack_checks": 7,
+    "existing_whole_ram_command_checks": 256,
+    "selected_gate_checks": 64,
+    "input_producer_checks": 64,
+    "creations": [
+      {
+        "call": 93,
+        "payload": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "admitted_numeric_requests": []
+  },
+  "extended": {
+    "task_calls": 256,
+    "capture_returns": 512,
+    "measurement_checks": 256,
+    "paired_packet_decode_checks": 256,
+    "whole_ram_ack_checks": 7,
+    "existing_whole_ram_command_checks": 512,
+    "selected_gate_checks": 128,
+    "input_producer_checks": 128,
+    "creations": [
+      {
+        "call": 93,
+        "payload": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "admitted_numeric_requests": [
+      {
+        "call": 167,
+        "source": 306,
+        "word": 521,
+        "normalized": 9.0
+      },
+      {
+        "call": 168,
+        "source": 306,
+        "word": 521,
+        "normalized": 9.0
+      }
+    ]
+  },
+  "identical_128_call_prefix": true
+}

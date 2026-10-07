@@ -6,7 +6,9 @@
 /* Stock5CD0C enables slots1/2; later nonsentinel value/mode selected independently. Ignore local
    slot2zero when slot1present. Mode1 givesmax(signed16(92E4-selected),0),else7FFF
    ->915A;80BE=-selected,9158bit0=mode!=0.4900 cases plus paired ramp; see tcu-spark-requests.txt.
-    */
+   Joined originalECU201/215 encodedinputs/capture/full126EC produce915A306 at167/168;
+   actualpreservedflags packet0209 normalizes9 in originalECU35034/34CEC. Clone/receivegates
+   explicit, no fullECU/spark or bus claim. See tcu-captured-requests.txt. */
 
 void SparkRequest_SelectCAN216Source(void)
 

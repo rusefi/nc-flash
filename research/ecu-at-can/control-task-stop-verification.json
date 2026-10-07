@@ -1,0 +1,16 @@
+{
+  "rom_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "checks": {
+    "publisher": 512,
+    "increments": 1024,
+    "producer": 1024,
+    "initializer": 256,
+    "monitor": 900,
+    "monitor_returned": 508,
+    "monitor_terminal": 392,
+    "gate": 1280,
+    "gate_returned": 765,
+    "gate_terminal": 515
+  },
+  "scope": "Original stop-entry decisions, progress counters and hold-flag producer.\n\nTerminal bodies are not stubbed: a distinct observation exception stops at\ntheir entry, so terminal-route cases are not counted as complete returns.\nCore monitor state has independent oracles; auxiliary AA590 effects execute\nbut are outside that state oracle. Explicit TCNT0 samples, no physical peer.\n"
+}

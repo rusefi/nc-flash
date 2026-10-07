@@ -1,8 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
 /* Table5F198 maps8816->3A,AC7A->3B,880A->3C,880E->3D,8812->3E. A939==1 andA977/A978mask08 clear
-   admit.2048 producer cases and timedCAN201 invalid/recovery lifecycles; see can201-invalid.txt and
-   can215-invalid.txt. */
+   admit.2048 original producer cases plus3072 group3D admission/status cases. Timed3D and
+   switched3C/3D recovery now execute through allthreeinputs; tcu-input-faults.txt. */
 
 void CAN_ProduceValidityDiagnosticGroups(void)
 
@@ -27,8 +27,8 @@ void CAN_ProduceValidityDiagnosticGroups(void)
   do {
     uVar7 = 0;
     uVar4 = 0;
-    if (((*PTR_DAT_000584ec == '\x01') && (*(char *)(int)DAT_000584dc == '\0')) &&
-       (*(char *)(int)DAT_000584de == '\0')) {
+    if (((*PTR_Diagnostic_CommunicationAdmission_000584ec == '\x01') &&
+        (*(char *)(int)DAT_000584dc == '\0')) && (*(char *)(int)DAT_000584de == '\0')) {
       uVar7 = 1;
       uVar4 = 1;
       if (*(char *)*puVar5 == '\x01') {

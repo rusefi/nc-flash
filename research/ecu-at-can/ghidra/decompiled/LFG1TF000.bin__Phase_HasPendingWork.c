@@ -1,8 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* 8088 must equal2. Head phase0/1/2 returns1 even count0; otherwise any zero ack in required
-   groups1..7 across count records. Required ROM5D3BC+2 byte equals0.10336 cases;
-   tcu-transition-classification.txt. */
+/* 8088 must equal2. Head phase0/1/2 returns1 even count0; otherwise anyzero ack in
+   requiredgroups1..7 across count records. RequiredROM5D3BC+2 equals0.10336 directcases and actual
+   native-task predicates/cache linkage; tcu-recovery-reference.txt. */
 
 undefined4 Phase_HasPendingWork(void)
 

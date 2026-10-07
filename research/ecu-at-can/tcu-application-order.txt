@@ -1,0 +1,134 @@
+TCU complete application-task execution and verified ordering — 2026-10-06
+=======================================================================
+Full objective remains ECU/automatic-transmission CAN integration, deep
+traction-control logic/integration and NC roof folding AND unfolding,
+including interruption/resume/reversal, timeout, synchronization and recovery.
+All three remain incomplete. No extra DSC/roof dumps/captures/bench results
+are available from the user. No staging/commit/push authorization.
+
+What is now executed and independently checked
+----------------------------------------------
+Original126EC and its complete active1E5F6 body now execute with explicit
+HCAN, ADC, digital-input and output-port fixtures. No ROM/helper substitution.
+This removes the former execution stop at1412A/F810 for these fixtures.
+It does NOT constitute a full semantic oracle for every nested application
+routine, boot state, real scheduler or hardware. Verification scope follows.
+
+verify_tcu_application_order.py checks180 complete126EC calls:
+124 standalone mode/stage/phase/source/ADC/HCAN cases,32 retained taskcalls,
+and24 calls integrated with original cycle/compare callback bodies.
+122 calls execute1E5F6; all4,392 direct callee targets match an independent
+36-target order.3 earlier functionannotations now record execution andlimits.
+90CC increments once per periodicbody with bytewrap.8007 mustequal3 to invoke
+12726.84F5 stage1 setsstage2 andphase7, then incrementsphase to8; first next
+active dispatch isphase0. Stage2 calls1E5F6(old84F4&7) thenincrements84F4;
+otherstagebytes skip1E5F6 butstill increment84F4 inmode3. Nonmode3 preserves
+phase in tested startupstates; mode1's122F4 is tested with its idle84ECfixture,
+not all startup-state paths. Phase255->0 andcounter255->0 covered.
+
+The ordered common30 targets are explicit constants in the verifier:
+19FF0,17250,17418,174A0,175A8,17C20,17C94,17D60,51460,516E6,517B2,216D8,
+588D8,2124C,22B84,3935C,30B9E,30C82,3324C,40544,43130,3E1F8,3E394,3E480,
+3CE00,41988,31524,2C738,2E7CC,4C0F4.
+At31524 entry from1E6A4 the original delay slot setsR4=4 andR5=0. This
+proves event4 occurs at that place in each tested application body.
+Then three original pointer tables select targets fromphase&7:
+ phase  table5CC28  table5CC48  table5CC68
+ 0      1E780       1ED88       1E880
+ 1      1E7DE       1ED88       1EAC4
+ 2      1E780       1ED88       1EB08
+ 3      1E7DE       1EC5A       1EB90
+ 4      1E780       1ED88       1E880
+ 5      1E7DE       1ED88       1EAC4
+ 6      1E780       1ED88       1EB08
+ 7      1E7DE       1ED50       1EB90.
+Final three targets52D8C,186A4,186EA execute, includingoriginaltailcall.
+The pointer-table bytes are independently checked against these constants.
+This establishes relative software order andphase dispatch, not physicaltime.
+
+At actual529AC and185F8 entry/return boundaries, the existing independent
+arbitration/pin models compare complete applicationRAM, configuredportwords,
+exactport traces, ADC/timer state and HCAN/digital traces.360 boundarychecks
+pass. R8..R15,MACL andSR exceptarithmeticflags restore for allfulltask calls.
+Unmodeled portions of nested bodies are executed but not claimed independently
+verified just because the task returns. This distinction matters for broad
+queue/admission/overlap/persistence requirements still open.
+
+Retained integration with feedback
+----------------------------------
+24 explicitly scheduled cycles execute169A4 body,126EC fulltask,thenfour1692E
+bodies (96 compares). Existing completecycle/compare RAM/register/MMIO models
+check eachcallback. StopsbeforeRTE remain unchanged. Source0 is set1 for
+calls4..7 and16..19;529AC now producesA5A0,529EA feeds the existing18A44
+fallback path, and185F8 performsactualpinselection/descriptor writes.
+The JSON records every producedflag and allfourPWMbufferwrites. Both0/1
+inhibit states occur; no directA5A0 fixture injection in this integration.
+ADC count600 forfirst12 cycles producesA518=13203, then400 produces8902.
+Sourcevalues, ADCwords, GSRstatus andtimestamp samples remainfixtures.
+Cycle/application/fourcompare ordering is explicitly imposed; this does NOT
+prove relative realtimer frequencies, interruptdelivery/nesting or pin output.
+Other live acquisition values and most initialapplicationRAM are synthetic.
+
+Exploration history, not false hardware conclusions
+--------------------------------------------------
+probe_tcu_application_task.py firstcomposed existing HCANsamples from
+verify_hcan_recovery.py with ADC/output fixtures. All16 phase/GSR probes
+progressed pastE400 andF810/F812, thenfailedclosed onF778. Existingselector
+word samplesF778=003C,F76C=0,F746=0 thenreachedPCDR F73E. Explicitwordlatch0
+forF73E advanced toF726. ExplicitF726 inputword0 letall16 probes return.
+The condensed failedstages are preserved in task-probe-historyJSON; final
+probeJSON preserves visitedaddresses, samplesandtraces. No genericzero-read
+fallback was added. Five wrong-width/read-only/unknown-MMIO rejections pass
+in the finalverification. Probesuccess is coverage, not semanticproof.
+
+Finalprobe coverage (samefixtures, not independentbranchoracles):1F3CE in
+phases3/7;1FD24 and23BF0 inphases0/4;1E79C callsite inevenphases. Earlier
+claims these paths neverexecute are historical. Next buildtheir actual
+admission/state/lifecycle oracles, not merely rerun these entryaddresses.
+
+Peripheral evidence and limitations
+----------------------------------
+HCAN MCR/GSR reads andMCR/IRR writes use the prior explicitregister model.
+ADC descriptors use existingword samples. DigitalinputsF726/F778/F76C/F746
+are read-onlyword samples; port F73E is an explicitread/writewordlatch.
+Compatible SH7055S manual identifiesF726 PADR,F73E PCDR,F746 PDDR,F76C PJDR,
+F778 PKDR. Real readsemantics dependonpinfunction/direction; this latch model
+is not electricalsimulation or proof ofactualchip/board wiring. No pinidentity
+or physicalactuator inference beyondcompatibleMCU registerattribution.
+Manual selectedpages566/567/568,745,749,751,765,767 are retained in
+ tcu-application-task-manual-excerpts.txt. LocalPDF SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c;
+source sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf.
+Extraction PyMuPDF1.28.2. Priorhcan-recovery.txt preservesofficialprovenance.
+
+Reproduce
+---------
+python research/ecu-at-can/probe_tcu_application_task.py
+python research/ecu-at-can/verify_tcu_application_order.py
+python -m py_compile research/ecu-at-can/probe_tcu_application_task.py research/ecu-at-can/verify_tcu_application_order.py
+Python3.14.3. Finalverifier:124cases,32retained,24integrated,360boundarychecks,
+5expectedrejections.122periodicbodies/4392directtargets,24cycle/96comparebodies.
+Disassembly tcu-application-task-disassembly.txt covers1E5F6..1E77E usingGNU
+SHbinutils2.42; setup/command in tcu-timer-configuration.txt anddisassemble.py.
+TCU unchanged examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+No sharedISA/verifier orproduction edits; newlocal adapters/scripts only.
+Ghidra saved withthreephasetables typed,10newlabels/data and3refinedfunction
+comments. Pairedarchive/independentrestore identity incheckpoint/manifests.
+
+Continuation
+------------
+Next TCU: verified phaseordering now permits1F3CE/9C58 source1 admission/
+release andsystemsource0 lifecycle models at actualboundaries. Link phase0/4
+1FD24/23BF0 requestcancellation/creation to existingqueue/ack/overlap checks.
+Explicit taskinput/startup fixtures remain; fullboot/interrupttimer16A58 and
+clock/PBIR/CPUenable/RTE/physicaloutput evidence remainunproved. Statuswriters,
+otherupstreamsources,persistence andphysicalintegration stayopen.
+Traction next remainsfulltask ordering/admission/freshness and399B0 callers;
+CAN211/21A candidate sender/units, factoryDSC docs andmissingremoteDSC/board
+proof remain distinct. This TCU advance doesnotclose traction integration.
+Roof still needs newapplicablesource/OEMreceiver/physicalevidence; source
+revision/pin/PID conflicts persist. BOTHfolding ANDunfolding interruption,
+resume/reversal,communicationtimeout,L/Rsynchronization andfaultrecovery
+remainopen. Userhasnoadditionalartifacts; do not repeatthatquestion.
+Everything savedlocally; no staging/commit/push. Allthree broadgoals active.

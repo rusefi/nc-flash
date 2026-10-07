@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "scope": "Original TCU vector-base and INTC priority startup slices.\n\nLocal LDC register-form extension only; strict software INTC latches.\nThis does not deliver hardware interrupts, execute RTE or complete reset.\n",
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "counts": {
+    "ldc_register_cases": 512,
+    "boot_prefix_cases": 256,
+    "priority_leaf_cases": 64,
+    "priority_caller_cases": 64,
+    "rejected": 6
+  },
+  "configured_intc": {
+    "0xffffed00": 0,
+    "0xffffed02": 0,
+    "0xffffed04": 13,
+    "0xffffed06": 48,
+    "0xffffed08": 3072,
+    "0xffffed0a": 8256,
+    "0xffffed0c": 20672,
+    "0xffffed0e": 3840,
+    "0xffffed10": 0,
+    "0xffffed12": 2432,
+    "0xffffed14": 6,
+    "0xffffed16": 2560
+  },
+  "vector_base": 65536,
+  "vector_targets": {
+    "188": "0x16d6c",
+    "192": "0x16cf4"
+  },
+  "compatible_manual_priorities": {
+    "cmt0": 9,
+    "cmt1": 8
+  },
+  "limits": "Executed local boot/configuration prefixes, not reset-to-main reachability, unmasking, hardware exception acceptance, RTE, start offset or application-task cadence."
+}

@@ -54,7 +54,7 @@ void Control_CombineCANNumericInputs(void)
        *(float *)puVar3 + *(float *)((int)&fStack_34 + iVar12) * fVar17;
   uVar18 = (*(code *)PTR_FUN_000a65d4)(PTR_DAT_000a65d8);
   *(undefined4 *)((int)local_30 + iVar12) = uVar18;
-  fVar19 = (float)(*(code *)puVar4)(PTR_DAT_000a65dc);
+  fVar19 = (float)(*(code *)puVar4)(PTR_Control_RawSecondPublished_000a65dc);
   uVar18 = (*(code *)puVar4)(PTR_Model_ScaledAuxiliaryOffset_000a65e0);
   *(undefined4 *)(&stack0xfffffff4 + iVar12) = uVar18;
   uVar18 = (*(code *)puVar4)(PTR_Model_ReferenceAuxiliaryOffset_000a65e4);
@@ -76,7 +76,7 @@ void Control_CombineCANNumericInputs(void)
   puVar7 = PTR_DAT_000a6604;
   fVar17 = *(float *)puVar5 - *(float *)((int)local_30 + iVar13 + iVar12);
   *(float *)puVar6 = fVar17;
-  puVar6 = PTR_DAT_000a6610;
+  puVar6 = PTR_SpeedCandidate_ProtectedSelected_000a6610;
   puVar5 = PTR_DAT_000a660c;
   fVar17 = fVar17 + (*(float *)puVar7 - fVar17) * *(float *)puVar8;
   *(float *)(&stack0x00000040 + iVar12) = fVar17;

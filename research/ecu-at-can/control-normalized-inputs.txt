@@ -1,0 +1,96 @@
+2026-10-06: executed upstream normalized-contribution inputs
+
+RESULT AND EVIDENCE BOUNDARY
+Seven original ECU bodies now have independent finite binary32 round-toward-
+zero models: 3127E,312AA,3153A,31598,31606,312D4,399B0. They produce a bounded
+error, its retained difference, three terms, their bounded sum and protected
+6CC8 publication. The integrated replay uses those outputs for the previously
+verified normalized contribution and command/serial/CAN pipeline. This removes
+6818 and 6CC8 output injection after initialization in this replay.
+It does not establish the physical loop identity, real task order or DSC
+behavior. A proportional/integral/difference interpretation is a hypothesis.
+
+REPRODUCTION
+  python research/ecu-at-can/verify_control_normalized_inputs.py
+Python 3.14.3, standard library, assertions enabled; existing SH interpreter,
+finite RTZ helpers, prior lifecycle and input ROMs unchanged.
+Output: control-normalized-inputs-verification.json.
+ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+Passed 6,266 direct checks: error25, difference49, terms5832, sum348,
+publication12. Protected duplicate checksums, stack and interrupt-mask
+preservation checked. Cases include raw nonboolean flags, saturation,
+cancellation-sensitive sum order and three caller interrupt masks.
+Passed 320 retained serial cycles,36 paired ECU/TCU CAN updates and320 CAN211
+latch updates. JSON preserves selected checkpoints, not every cycle.
+Nonfinite exception behavior and arbitrary invalid limits remain untested.
+
+EXECUTED ALGORITHMS
+Short RAM addresses have FFFF prefix. R rounds each operation to binary32 RTZ.
+Clamp(x,l,h) returns l when x<l, otherwise h when x>h, otherwise x.
+3127E: 6964=R(6CB4+ROM DB1D4), stock offset approximately .11;
+  6800=Clamp(R(67FC-6964),-2.5,2.5), constants31474/31470.
+312AA: 6804=Clamp(R(6800-old6970),-2.5,2.5); then6970=6800.
+3153A/31598/31606 share branch predicate:
+  6958==0 OR67CC==1 OR7247==1.
+  Shared gain addresses DB190+4*i; otherwise DB19C+4*i, i=0,1,2.
+  Shared upper bound is DB1BC+4*i when6939==1, otherwise316E4=125.
+  Nonshared upper bound is DB1C8+4*i. Common lower bound316F0=-125.
+  Input6800 for first two terms,6804 for third; scale then clamp.
+  3153A writes protected6818 via15522.
+  31598 adds its increment to old6820 and clamps between0 and6814.
+  31606 writes6824.
+Stock gains in both branches are12.5,.78125,0. Stock calibrated upper bounds
+are7.8125,approximately.03433,approximately249.023. Distinct branch addresses
+are preserved despite matching stock values. Third term is zero in tested
+finite stock cases; no modified-calibration behavior is claimed.
+312D4: protected7002 nonzero ->6808=0; otherwise
+  6808=Clamp(R(R(6818+6820)+6824),0,680C).
+399B0: copy6808 bits into protected6CC8 via15522; checksums updated.
+
+RETAINED FIXTURES AND LIMITATIONS
+The seven bodies execute explicitly in the order above, followed by the
+seven-body normalized group, magnitude group and prior integrated lifecycle.
+This is a controlled scheduling fixture, NOT an executed whole production
+caller. Old6970/6820 start zero;6814=50,680C=80;6958/67CC/7247=0,6939=1.
+Input67FC=8 for calls1..20,10 for21..100,6 for101..180,11 thereafter.
+Input684C=0 for1..20 and141..220,100 otherwise. Protected7002=2 at121..140,
+zero otherwise. Prior lifecycle supplies6CB4=8; target is approximately8.11.
+All third-term checkpoints are zero; all inhibited checkpoints publish6CC8=0.
+Limits, raw gates, input samples, task frequency and serial peer remain
+fixtures. CAN211/21A sender attribution and physical actuation are unproved.
+
+STATIC CALLER EVIDENCE AND NEXT ACTION
+Original caller calls:187A4->3127E,187AA->312AA,187B0->307EC,
+187B6->30BA4,187BC->3174C,187C2->314F8,187C8->3153A,187CE->31598,
+187D4->31606,187DA->3140C,187E0->31318,187E6->312D4,
+187EC->318E4,187F2->31964,187F8->31986,187FE->307C0,18804->31A4C.
+Intervening bodies can change inputs and limits. Next model314F8 (6814),
+31318 (680C), then intervening steps before claiming a whole caller.
+399B0 literal callers1693E/199BC remain static leads; periodic publication
+is not established. Producer67FC uses8BB20;684C writer near31B24 follows
+maps A38E8/A38F4 and8B960; nonlinear helper and source identities remain open.
+Other upstream leads remain in control-normalized-input-leads.txt.
+ECU/AT next45BA0/815D, optional44E14/44F5A and natural overlap; roof separately
+retains both directions, reversal, timeout, synchronization and recovery.
+User confirmed no additional receiver dumps/captures/vehicle results available.
+
+DISASSEMBLY AND SAVE STATUS
+control-normalized-inputs-disassembly.txt preserves original instruction
+ranges3127E..3174C,399B0..39A18 and18790..18810. Reproduce each range:
+  LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+    python research/ecu-at-can/disassemble.py \
+    --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+    at dis START STOP
+GNU SH objdump2.42; replaceable setup documented in prior evidence records.
+Saved locally. No staging, commit, push, production-code or ROM changes.
+Ghidra persistence status is recorded in the checkpoint and manifests.
+
+PERSISTENCE: saved609 ECU/814 TCU annotations; independent normalized-inputs-
+20261006 restoration checks11 project hashes and700 identical exports.
+Archive10,879,875 bytes, SHA256
+296d0ba0d8c1fc7328a084c2e02c2441f96139e4334d72b98161b76a9a6570e4.
+Inhibited retained checkpoints already have a zero uninhibited sum; direct
+cases, rather than that retained interval, establish the inhibit effect.

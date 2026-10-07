@@ -1,0 +1,105 @@
+GNU objdump 2.42, unchanged examples/LFG1TF000.bin; reproduce with disassemble.py.
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001217c <.data+0x1217c>:
+   1217c:	4f 22       	sts.l	pr,@-r15
+   1217e:	d3 18       	mov.l	0x121e0,r3	! 12678
+   12180:	43 0b       	jsr	@r3
+   12182:	00 09       	nop	
+   12184:	e0 01       	mov	#1,r0
+   12186:	c0 06       	mov.b	r0,@(6,gbr)
+   12188:	d3 16       	mov.l	0x121e4,r3	! 167e4
+   1218a:	43 2b       	jmp	@r3
+   1218c:	4f 26       	lds.l	@r15+,pr
+   1218e:	4f 22       	sts.l	pr,@-r15
+   12190:	c4 06       	mov.b	@(6,gbr),r0
+   12192:	64 03       	mov	r0,r4
+   12194:	d3 14       	mov.l	0x121e8,r3	! ffff84a0
+   12196:	60 4c       	extu.b	r4,r0
+   12198:	65 30       	mov.b	@r3,r5
+   1219a:	88 01       	cmp/eq	#1,r0
+   1219c:	8d 06       	bt.s	0x121ac
+   1219e:	65 5c       	extu.b	r5,r5
+   121a0:	88 03       	cmp/eq	#3,r0
+   121a2:	89 14       	bt	0x121ce
+   121a4:	88 05       	cmp/eq	#5,r0
+   121a6:	89 16       	bt	0x121d6
+   121a8:	a0 15       	bra	0x121d6
+   121aa:	00 09       	nop	
+   121ac:	60 53       	mov	r5,r0
+   121ae:	88 03       	cmp/eq	#3,r0
+   121b0:	8b 11       	bf	0x121d6
+   121b2:	d2 0e       	mov.l	0x121ec,r2	! ffff84d8
+   121b4:	60 20       	mov.b	@r2,r0
+   121b6:	60 0c       	extu.b	r0,r0
+   121b8:	88 03       	cmp/eq	#3,r0
+   121ba:	8b 0c       	bf	0x121d6
+   121bc:	c4 07       	mov.b	@(7,gbr),r0
+   121be:	60 0c       	extu.b	r0,r0
+   121c0:	88 03       	cmp/eq	#3,r0
+   121c2:	8b 08       	bf	0x121d6
+   121c4:	d3 0a       	mov.l	0x121f0,r3	! 1267c
+   121c6:	43 0b       	jsr	@r3
+   121c8:	00 09       	nop	
+   121ca:	a0 04       	bra	0x121d6
+   121cc:	e4 03       	mov	#3,r4
+   121ce:	60 53       	mov	r5,r0
+   121d0:	88 04       	cmp/eq	#4,r0
+   121d2:	8b 00       	bf	0x121d6
+   121d4:	e4 05       	mov	#5,r4
+   121d6:	60 43       	mov	r4,r0
+   121d8:	c0 06       	mov.b	r0,@(6,gbr)
+   121da:	d3 06       	mov.l	0x121f4,r3	! 12682
+   121dc:	43 2b       	jmp	@r3
+   121de:	4f 26       	lds.l	@r15+,pr
+   121e0:	00 01       	.word 0x0001
+   121e2:	26 78       	tst	r7,r6
+   121e4:	00 01       	.word 0x0001
+   121e6:	67 e4       	mov.b	@r14+,r7
+   121e8:	ff ff       	.word 0xffff
+   121ea:	84 a0       	mov.b	@(0,r10),r0
+   121ec:	ff ff       	.word 0xffff
+   121ee:	84 d8       	mov.b	@(8,r13),r0
+   121f0:	00 01       	.word 0x0001
+   121f2:	26 7c       	cmp/str	r7,r6
+   121f4:	00 01       	.word 0x0001
+   121f6:	26 82       	mov.l	r8,@r6
+
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00012678 <.data+0x12678>:
+   12678:	00 0b       	rts	
+   1267a:	00 09       	nop	
+   1267c:	d3 09       	mov.l	0x126a4,r3	! 56ce0
+   1267e:	43 2b       	jmp	@r3
+   12680:	00 09       	nop	
+   12682:	c4 06       	mov.b	@(6,gbr),r0
+   12684:	64 03       	mov	r0,r4
+   12686:	60 4c       	extu.b	r4,r0
+   12688:	88 01       	cmp/eq	#1,r0
+   1268a:	89 08       	bt	0x1269e
+   1268c:	88 03       	cmp/eq	#3,r0
+   1268e:	89 03       	bt	0x12698
+   12690:	88 05       	cmp/eq	#5,r0
+   12692:	89 01       	bt	0x12698
+   12694:	00 0b       	rts	
+   12696:	00 09       	nop	
+   12698:	d2 03       	mov.l	0x126a8,r2	! 57002
+   1269a:	42 2b       	jmp	@r2
+   1269c:	00 09       	nop	
+   1269e:	00 0b       	rts	
+   126a0:	00 09       	nop	
+   126a2:	ff ff       	.word 0xffff
+   126a4:	00 05       	mov.w	r0,@(r0,r0)
+   126a6:	6c e0       	mov.b	@r14,r12
+   126a8:	00 05       	mov.w	r0,@(r0,r0)
+   126aa:	70 02       	add	#2,r0
+

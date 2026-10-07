@@ -16,7 +16,7 @@ undefined4 * CAN211_UpdateLocalInhibit(void)
   puVar2 = (undefined4 *)0x1;
   if ((((((cVar4 != '\x01') && (puVar2 = (undefined4 *)0x1, *PTR_DAT_0003fe50 != '\x01')) &&
         (puVar2 = (undefined4 *)0x1, *PTR_DAT_0003fe54 != '\x01')) &&
-       ((puVar2 = (undefined4 *)0x1, *PTR_DAT_0003fe58 != '\x01' &&
+       ((puVar2 = (undefined4 *)0x1, *PTR_Control_RawSecondFallbackLatch_0003fe58 != '\x01' &&
         (puVar2 = (undefined4 *)0x1, *PTR_DAT_0003fe5c != '\x01')))) &&
       ((puVar2 = (undefined4 *)0x1, *PTR_DAT_0003fe60 != '\x01' &&
        ((puVar2 = &DAT_0003fe64, *(float *)PTR_DAT_0003fe68 <= DAT_0003fe64 &&

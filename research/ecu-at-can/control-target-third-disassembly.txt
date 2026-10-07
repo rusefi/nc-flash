@@ -1,0 +1,125 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00031662 <.data+0x31662>:
+   31662:	2f e6       	mov.l	r14,@-r15
+   31664:	ff fb       	fmov	fr15,@-r15
+   31666:	ff eb       	fmov	fr14,@-r15
+   31668:	c7 30       	mova	0x3172c,r0
+   3166a:	fe 9d       	fldi1	fr14
+   3166c:	de 30       	mov.l	0x31730,r14	! ffff6828
+   3166e:	4f 22       	sts.l	pr,@-r15
+   31670:	d4 30       	mov.l	0x31734,r4	! ffff6956
+   31672:	d3 31       	mov.l	0x31738,r3	! 154b0
+   31674:	43 0b       	jsr	@r3
+   31676:	ff 08       	fmov	@r0,fr15
+   31678:	60 0c       	extu.b	r0,r0
+   3167a:	20 08       	tst	r0,r0
+   3167c:	8f 04       	bf.s	0x31688
+   3167e:	f6 ec       	fmov	fr14,fr6
+   31680:	d3 2e       	mov.l	0x3173c,r3	! db188
+   31682:	f3 38       	fmov	@r3,fr3
+   31684:	a0 02       	bra	0x3168c
+   31686:	00 09       	nop	
+   31688:	d3 2d       	mov.l	0x31740,r3	! db18c
+   3168a:	f3 38       	fmov	@r3,fr3
+   3168c:	f5 e8       	fmov	@r14,fr5
+   3168e:	f6 31       	fsub	fr3,fr6
+   31690:	d2 2c       	mov.l	0x31744,r2	! ffff6808
+   31692:	f7 fc       	fmov	fr15,fr7
+   31694:	d1 2c       	mov.l	0x31748,r1	! 2508
+   31696:	41 0b       	jsr	@r1
+   31698:	f4 28       	fmov	@r2,fr4
+   3169a:	fe 0a       	fmov	fr0,@r14
+   3169c:	4f 26       	lds.l	@r15+,pr
+   3169e:	fe f9       	fmov	@r15+,fr14
+   316a0:	ff f9       	fmov	@r15+,fr15
+   316a2:	00 0b       	rts	
+   316a4:	6e f6       	mov.l	@r15+,r14
+   316a6:	00 00       	.word 0x0000
+   316a8:	ff ff       	.word 0xffff
+   316aa:	68 14       	mov.b	@r1+,r8
+   316ac:	ff ff       	.word 0xffff
+   316ae:	69 38       	swap.b	r3,r9
+   316b0:	ff ff       	.word 0xffff
+   316b2:	67 dc       	extu.b	r13,r7
+   316b4:	00 0a       	sts	mach,r0
+   316b6:	38 dc       	add	r13,r8
+   316b8:	00 00       	.word 0x0000
+   316ba:	22 f8       	tst	r15,r2
+   316bc:	ff ff       	.word 0xffff
+   316be:	67 c4       	mov.b	@r12+,r7
+   316c0:	00 0d       	mov.w	@(r0,r0),r0
+   316c2:	b1 e0       	bsr	0x31a86
+   316c4:	00 00       	.word 0x0000
+   316c6:	23 f8       	tst	r15,r3
+   316c8:	ff ff       	.word 0xffff
+   316ca:	68 00       	mov.b	@r0,r8
+   316cc:	ff ff       	.word 0xffff
+   316ce:	69 58       	swap.b	r5,r9
+   316d0:	ff ff       	.word 0xffff
+   316d2:	67 cc       	extu.b	r12,r7
+   316d4:	ff ff       	.word 0xffff
+   316d6:	72 47       	add	#71,r2
+   316d8:	00 0d       	mov.w	@(r0,r0),r0
+   316da:	b1 90       	bsr	0x319fe
+   316dc:	ff ff       	.word 0xffff
+   316de:	69 39       	swap.w	r3,r9
+   316e0:	00 0d       	mov.w	@(r0,r0),r0
+   316e2:	b1 bc       	bsr	0x31a5e
+   316e4:	42 fa       	.word 0x42fa
+   316e6:	00 00       	.word 0x0000
+   316e8:	00 0d       	mov.w	@(r0,r0),r0
+   316ea:	b1 9c       	bsr	0x31a26
+   316ec:	00 0d       	mov.w	@(r0,r0),r0
+   316ee:	b1 c8       	bsr	0x31a82
+   316f0:	c2 fa       	mov.l	r0,@(1000,gbr)
+   316f2:	00 00       	.word 0x0000
+   316f4:	00 00       	.word 0x0000
+   316f6:	20 7c       	cmp/str	r7,r0
+   316f8:	ff ff       	.word 0xffff
+   316fa:	68 18       	swap.b	r1,r8
+   316fc:	00 01       	.word 0x0001
+   316fe:	55 22       	mov.l	@(8,r2),r5
+   31700:	00 0d       	mov.w	@(r0,r0),r0
+   31702:	b1 94       	bsr	0x31a2e
+   31704:	00 0d       	mov.w	@(r0,r0),r0
+   31706:	b1 c0       	bsr	0x31a8a
+   31708:	00 0d       	mov.w	@(r0,r0),r0
+   3170a:	b1 a0       	bsr	0x31a4e
+   3170c:	00 0d       	mov.w	@(r0,r0),r0
+   3170e:	b1 cc       	bsr	0x31aaa
+   31710:	ff ff       	.word 0xffff
+   31712:	68 20       	mov.b	@r2,r8
+   31714:	ff ff       	.word 0xffff
+   31716:	68 04       	mov.b	@r0+,r8
+   31718:	00 0d       	mov.w	@(r0,r0),r0
+   3171a:	b1 98       	bsr	0x31a4e
+   3171c:	00 0d       	mov.w	@(r0,r0),r0
+   3171e:	b1 c4       	bsr	0x31aaa
+   31720:	00 0d       	mov.w	@(r0,r0),r0
+   31722:	b1 a4       	bsr	0x31a6e
+   31724:	00 0d       	mov.w	@(r0,r0),r0
+   31726:	b1 d0       	bsr	0x31aca
+   31728:	ff ff       	.word 0xffff
+   3172a:	68 24       	mov.b	@r2+,r8
+   3172c:	3a fa       	subc	r15,r10
+   3172e:	00 00       	.word 0x0000
+   31730:	ff ff       	.word 0xffff
+   31732:	68 28       	swap.b	r2,r8
+   31734:	ff ff       	.word 0xffff
+   31736:	69 56       	mov.l	@r5+,r9
+   31738:	00 01       	.word 0x0001
+   3173a:	54 b0       	mov.l	@(0,r11),r4
+   3173c:	00 0d       	mov.w	@(r0,r0),r0
+   3173e:	b1 88       	bsr	0x31a52
+   31740:	00 0d       	mov.w	@(r0,r0),r0
+   31742:	b1 8c       	bsr	0x31a5e
+   31744:	ff ff       	.word 0xffff
+   31746:	68 08       	swap.b	r0,r8
+   31748:	00 00       	.word 0x0000
+   3174a:	25 08       	tst	r0,r5
+

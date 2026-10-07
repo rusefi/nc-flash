@@ -1,0 +1,111 @@
+TCU shared capture arrival timeline — 2026-10-07
+
+Objective
+Continue ECU/automatic-transmission integration, deep traction control and NC
+roof folding AND unfolding including interruption, resume/reversal, timeout,
+synchronization and recovery. All remain incomplete. No further user dumps,
+captures or bench results exist. No staging/commit/push authorization.
+
+Fixture correction and scope
+See tcu-capture-clock.txt for executed configuration and primary manual proof:
+compatible TCNT0 is Pphi/2; application/CMT0/CMT1 periods are conditionally
+81920/20000/40960 peripheral cycles. New probe_tcu_capture_timeline.py merges
+actual original ISR prefixes, preserving existing receive/application/diagnostic
+pipeline and arithmetic/differential checks. No ROM, production or shared ISA
+changes. Three diagnostic Ghidra annotations saved and independently restored;
+CHECKPOINT owns the current archive identity and continuation.
+
+Explicit experiment assumptions
+All timers share epoch0; counter_epoch0, zero service/dispatch latency. CaptureA
+first edge24320 and every24320 thereafter. B segments start at application
+boundaries0/48/80/128 with periods11780/12980/8860/18240. Each segment restarts
+phase: first edge one period after its start; last edge strictly before next
+boundary. This drops partial cycles and is an external stimulus convention,
+not measured sensor acceleration or a firmware behavior. Both captures cease
+strictly before280*81920. Timestamps are floor(edge_time/2) modulo2^32.
+Tie order CMT0,CMT1,A,B,application. CAN frames still arrive once/application
+before application; diagnostic body follows once/application. Profiling F6C0
+samples remain synthetic per-prefix counts and are NOT this shared TCNT0.
+Hardware IRQ acceptance/RTE, boot readiness, counter reset/epoch, pin identities,
+absolute frequency and physical interleaving remain unproved.
+
+Implementation and oracle preservation
+Owned Timeline heap merges separate input streams. Old capture hook suppressed
+via existing capture_enabled hook; no copied task pipeline. Capture observer
+boundaries retained inside each interrupt record before the legacy source_rows
+reset. Application deep-copy oracle initially rejected Python generators
+(TypeError: cannot pickle generator); tuple iterators now preserve cursors on
+copy. First attempt terminated before producing JSON. No bypass of that oracle.
+Per-CMT0 before/after snapshots permit independent arithmetic wheel replay even
+when capture interrupts intervene/reset elapsed state. Prior batch replay is
+not valid for this interleaving and is not reused. Hold arithmetic model and
+whole-RAM runtime checks, application command/pin boundaries and original
+capture callback differential checks remain active.
+
+Verified progress
+ python research/ecu-at-can/probe_tcu_capture_timeline.py
+ python research/ecu-at-can/verify_tcu_capture_timeline.py
+Prefix8 PASS:8 application,32 CMT0,16 CMT1,26 A/55 B capture prefixes;
+32 independent per-interrupt wheel replays,2 actual hold checks,16 command/pin
+boundaries. No creations/acks. All capture timestamps, prior-channel timestamps,
+ordered finite MMIO, callbacks and complete arrival ordering independently
+checked. Closed-form arrival enumeration is separate from the heap merge.
+Full timeline enumeration4552 arrivals through320 periods and15 boundary/copy
+checks PASS, including rate-change/loss boundaries and CMT0/CMT1 tie5120000.
+
+Completed long run and observer correction
+ python research/ecu-at-can/probe_tcu_capture_timeline.py --cycles 320 --filename tcu-capture-timeline-probe.json
+Session31291 terminalexit0:320 returned,2 creations/16 acks,no runtime failures.
+All320 arrival/counter/MMIO checks and1310 per-interrupt wheel replays pass;
+640 CMT1,943 A/1659 B capture prefixes,80 actualhold checks and640 application
+command/pin boundaries. No timestamp counter wrap occurs in this320 window.
+
+Initial exact-prefix comparison failed: row7 extra/source_boundaries had1 entry
+in prefix8 but12 in full320. Root cause was observation-list aliasing: next
+interval's captures append source_rows before the old hook replaces that list,
+thus modifying the previous serialized row. This affects observer metadata,
+not firmware RAM or recorded capture interrupt results. Raw full320 preserved
+unchanged; originalprefix8 saved as tcu-capture-timeline-prefix8-before-observer-fix.json.
+Driver now asserts source_pending empty and takes list(source_boundaries) at
+after_task. All boundary dictionaries are already complete then; only future
+list appends needed isolation. No firmware state or interrupt delivery changed.
+Verifier validates every appended tail against the next interval's independently
+recorded capture source boundaries, removes only those exact duplicate observer
+entries for comparison, and retains raw results. New8/9 runs68915/4070 both
+terminalPASS; corrected9 first8 exactlymatch corrected8, no duplicate tails.
+Full320 first9 exactlymatch corrected9 after only verified observer normalization.
+verify_tcu_capture_timeline.py PASS. No rerun of full320 after this logger-only
+change; raw firmware execution and independent full320 checks remain preserved.
+
+Lifecycle results (zero-based application calls)
+First creation45,managedempty47,phaseempty113, compared with57/59/125 in old
+once/application capture fixture. Both have two creations16acks. Captureloss
+remains280; second group8code5 creation297/managedempty299. Phaseindex1 still
+pending319; heap0005FF06 rather than all-free007FFFFF. Hold280elapsed4/ratio862/
+timer2;316elapsed152/ratio32768/timer20; nohistoryreset. A939/A722 remain0,
+9454 remains1 and80E8 remains10240. These are fixture results, not vehicle dates.
+No forced ages/flags/acks/cache/phase. Preserve the unresolved second phase.
+
+Next: tcu-diagnostic-timer.txt grounds conditional500000phi diagnostic period;
+join original1682C into this timeline. Do not extend old phase dates under the
+now-disproven once/application diagnostic assumption. Physical/CAN/boot gaps
+remain independent. Preserve separate trajectory assumptions and source oracles.
+Python3.14.3; input examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+
+Other scopes
+Traction: control-preemption.txt owns executed ECU task4->7->4 resume; physical
+admission, startup EC62 identity, CAN211/21A sender/units and remote DSC actuation
+remain open. Next applicable hardware/source evidence; no guessed EC62 latch.
+Roof: factory descriptions and candidate signals remain separate from absent
+OEM receiver/physical evidence. Applicable edition/VIN reversal behavior,
+numerical CAN timeout and L/R mismatch remain open for both directions and
+interruption/recovery. Do not repeat exhausted downloads or artifact questions.
+
+Save status
+Diagnostic annotations and pairedarchive independentlyrestored; see
+tcu-diagnostic-timer.txt and ghidra/snapshot.json/restore-verification.json.
+1973annotations/1017completeidenticalexports/11projecthashes,11019988bytes,
+SHA2562bb795cad872aac38975bcb3f1176cc5b9b244f9e4d8bead9f637e8308d94764.
+All current probes/headless sessions terminal. No new staging, commit or push;
+existing mixed index includingADnc-at-can.tar.gz.tmp remains intact.

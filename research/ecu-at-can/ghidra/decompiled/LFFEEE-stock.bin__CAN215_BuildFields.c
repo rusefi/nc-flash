@@ -10,7 +10,7 @@ void CAN215_BuildFields(void)
   CAN215_EncodeWord0();
   CAN215_EncodeWord2();
   CAN215_EncodeWord4();
-  FUN_00036be6();
+  CAN215_EncodeSelectedControlByte();
   FUN_00036c74();
   return;
 }

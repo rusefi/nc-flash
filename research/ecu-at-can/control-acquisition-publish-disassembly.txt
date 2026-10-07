@@ -1,0 +1,70 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001df14 <.data+0x1df14>:
+   1df14:	d4 16       	mov.l	0x1df70,r4	! ffff6cb4
+   1df16:	d3 17       	mov.l	0x1df74,r3	! ffff40e8
+   1df18:	d2 17       	mov.l	0x1df78,r2	! ffff6cb8
+   1df1a:	f3 38       	fmov	@r3,fr3
+   1df1c:	f4 3a       	fmov	fr3,@r4
+   1df1e:	f2 3a       	fmov	fr3,@r2
+   1df20:	f3 48       	fmov	@r4,fr3
+   1df22:	d1 16       	mov.l	0x1df7c,r1	! ffff6cb0
+   1df24:	00 0b       	rts	
+   1df26:	f1 3a       	fmov	fr3,@r1
+   1df28:	d3 13       	mov.l	0x1df78,r3	! ffff6cb8
+   1df2a:	f3 38       	fmov	@r3,fr3
+   1df2c:	d2 13       	mov.l	0x1df7c,r2	! ffff6cb0
+   1df2e:	00 0b       	rts	
+   1df30:	f2 3a       	fmov	fr3,@r2
+   1df32:	2f e6       	mov.l	r14,@-r15
+   1df34:	4f 22       	sts.l	pr,@-r15
+   1df36:	de 12       	mov.l	0x1df80,r14	! ffff6cbc
+   1df38:	60 e0       	mov.b	@r14,r0
+   1df3a:	60 0c       	extu.b	r0,r0
+   1df3c:	c8 01       	tst	#1,r0
+   1df3e:	8d 11       	bt.s	0x1df64
+   1df40:	00 09       	nop	
+   1df42:	f6 9d       	fldi1	fr6
+   1df44:	c7 10       	mova	0x1df88,r0
+   1df46:	d3 0b       	mov.l	0x1df74,r3	! ffff40e8
+   1df48:	d2 09       	mov.l	0x1df70,r2	! ffff6cb4
+   1df4a:	f3 38       	fmov	@r3,fr3
+   1df4c:	f2 3a       	fmov	fr3,@r2
+   1df4e:	d1 0d       	mov.l	0x1df84,r1	! bfa7c
+   1df50:	f7 08       	fmov	@r0,fr7
+   1df52:	f3 18       	fmov	@r1,fr3
+   1df54:	d3 08       	mov.l	0x1df78,r3	! ffff6cb8
+   1df56:	f6 31       	fsub	fr3,fr6
+   1df58:	d1 0c       	mov.l	0x1df8c,r1	! 2508
+   1df5a:	f5 38       	fmov	@r3,fr5
+   1df5c:	41 0b       	jsr	@r1
+   1df5e:	f4 28       	fmov	@r2,fr4
+   1df60:	d3 05       	mov.l	0x1df78,r3	! ffff6cb8
+   1df62:	f3 0a       	fmov	fr0,@r3
+   1df64:	62 e0       	mov.b	@r14,r2
+   1df66:	72 01       	add	#1,r2
+   1df68:	2e 20       	mov.b	r2,@r14
+   1df6a:	4f 26       	lds.l	@r15+,pr
+   1df6c:	00 0b       	rts	
+   1df6e:	6e f6       	mov.l	@r15+,r14
+   1df70:	ff ff       	.word 0xffff
+   1df72:	6c b4       	mov.b	@r11+,r12
+   1df74:	ff ff       	.word 0xffff
+   1df76:	40 e8       	.word 0x40e8
+   1df78:	ff ff       	.word 0xffff
+   1df7a:	6c b8       	swap.b	r11,r12
+   1df7c:	ff ff       	.word 0xffff
+   1df7e:	6c b0       	mov.b	@r11,r12
+   1df80:	ff ff       	.word 0xffff
+   1df82:	6c bc       	extu.b	r11,r12
+   1df84:	00 0b       	rts	
+   1df86:	fa 7c       	fmov	fr7,fr10
+   1df88:	39 a0       	cmp/eq	r10,r9
+   1df8a:	00 00       	.word 0x0000
+   1df8c:	00 00       	.word 0x0000
+   1df8e:	25 08       	tst	r0,r5
+

@@ -1,0 +1,68 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00014280 <.data+0x14280>:
+   14280:	2f e6       	mov.l	r14,@-r15
+   14282:	2f 86       	mov.l	r8,@-r15
+   14284:	4f 22       	sts.l	pr,@-r15
+   14286:	4f 12       	sts.l	macl,@-r15
+   14288:	d3 15       	mov.l	0x142e0,r3	! ffffa518
+   1428a:	7f fc       	add	#-4,r15
+   1428c:	66 31       	mov.w	@r3,r6
+   1428e:	62 6d       	extu.w	r6,r2
+   14290:	22 28       	tst	r2,r2
+   14292:	8b 02       	bf	0x1429a
+   14294:	de 13       	mov.l	0x142e4,r14	! 8221
+   14296:	a0 0f       	bra	0x142b8
+   14298:	00 09       	nop	
+   1429a:	67 4c       	extu.b	r4,r7
+   1429c:	90 1e       	mov.w	0x142dc,r0	! 8a44
+   1429e:	65 5f       	exts.w	r5,r5
+   142a0:	d3 12       	mov.l	0x142ec,r3	! 5af44
+   142a2:	47 00       	shll	r7
+   142a4:	d1 10       	mov.l	0x142e8,r1	! 8235
+   142a6:	07 7d       	mov.w	@(r0,r7),r7
+   142a8:	62 7f       	exts.w	r7,r2
+   142aa:	31 28       	sub	r2,r1
+   142ac:	01 57       	mul.l	r5,r1
+   142ae:	01 1a       	sts	macl,r1
+   142b0:	43 0b       	jsr	@r3
+   142b2:	60 6d       	extu.w	r6,r0
+   142b4:	6e 03       	mov	r0,r14
+   142b6:	3e 7c       	add	r7,r14
+   142b8:	d0 0d       	mov.l	0x142f0,r0	! 5c588
+   142ba:	e5 00       	mov	#0,r5
+   142bc:	d3 0d       	mov.l	0x142f4,r3	! 5ac9c
+   142be:	64 4c       	extu.b	r4,r4
+   142c0:	d6 08       	mov.l	0x142e4,r6	! 8221
+   142c2:	44 08       	shll2	r4
+   142c4:	02 4e       	mov.l	@(r0,r4),r2
+   142c6:	2f 22       	mov.l	r2,@r15
+   142c8:	68 23       	mov	r2,r8
+   142ca:	43 0b       	jsr	@r3
+   142cc:	64 e3       	mov	r14,r4
+   142ce:	28 01       	mov.w	r0,@r8
+   142d0:	7f 04       	add	#4,r15
+   142d2:	4f 16       	lds.l	@r15+,macl
+   142d4:	4f 26       	lds.l	@r15+,pr
+   142d6:	68 f6       	mov.l	@r15+,r8
+   142d8:	00 0b       	rts	
+   142da:	6e f6       	mov.l	@r15+,r14
+   142dc:	8a 44       	.word 0x8a44
+   142de:	ff ff       	.word 0xffff
+   142e0:	ff ff       	.word 0xffff
+   142e2:	a5 18       	bra	0x14d16
+   142e4:	00 00       	.word 0x0000
+   142e6:	82 21       	.word 0x8221
+   142e8:	00 00       	.word 0x0000
+   142ea:	82 35       	.word 0x8235
+   142ec:	00 05       	mov.w	r0,@(r0,r0)
+   142ee:	af 44       	bra	0x1417a
+   142f0:	00 05       	mov.w	r0,@(r0,r0)
+   142f2:	c5 88       	mov.w	@(272,gbr),r0
+   142f4:	00 05       	mov.w	r0,@(r0,r0)
+   142f6:	ac 9c       	bra	0x13c32
+

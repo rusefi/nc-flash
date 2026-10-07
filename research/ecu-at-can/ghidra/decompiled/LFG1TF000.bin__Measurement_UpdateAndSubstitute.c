@@ -2,7 +2,9 @@
 
 /* 212F4(ROM76DE2=360)->80EE; normal9234=measurement;92C6bit4 orAC86 selects9218[index],
    uppercap32767, no lowercap.8080FF index6 else8081.9236 retainsmeasurement; tail50D88 executes.392
-   substitution cases. See tcu-measurement.txt. */
+   substitution cases. See tcu-measurement.txt. Full126EC capture/frame experiment verifies
+   everycall measurement/period from independent24-slot timestamp history; firstcall stale reset.
+   See tcu-captured-requests.txt. */
 
 void Measurement_UpdateAndSubstitute(void)
 

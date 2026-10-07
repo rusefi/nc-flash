@@ -1,0 +1,104 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00010700 <.data+0x10700>:
+   10700:	2f e6       	mov.l	r14,@-r15
+   10702:	61 4d       	extu.w	r4,r1
+   10704:	d3 15       	mov.l	0x1075c,r3	! 5ae90
+   10706:	60 6d       	extu.w	r6,r0
+   10708:	4f 22       	sts.l	pr,@-r15
+   1070a:	4f 12       	sts.l	macl,@-r15
+   1070c:	7f fc       	add	#-4,r15
+   1070e:	43 0b       	jsr	@r3
+   10710:	2f 02       	mov.l	r0,@r15
+   10712:	67 03       	mov	r0,r7
+   10714:	26 7e       	mulu.w	r7,r6
+   10716:	6e 7d       	extu.w	r7,r14
+   10718:	06 1a       	sts	macl,r6
+   1071a:	34 68       	sub	r6,r4
+   1071c:	4e 00       	shll	r14
+   1071e:	63 4d       	extu.w	r4,r3
+   10720:	23 38       	tst	r3,r3
+   10722:	8d 08       	bt.s	0x10736
+   10724:	3e 5c       	add	r5,r14
+   10726:	62 7d       	extu.w	r7,r2
+   10728:	d3 0d       	mov.l	0x10760,r3	! ffff
+   1072a:	42 00       	shll	r2
+   1072c:	32 5c       	add	r5,r2
+   1072e:	85 21       	mov.w	@(2,r2),r0
+   10730:	60 0d       	extu.w	r0,r0
+   10732:	30 30       	cmp/eq	r3,r0
+   10734:	8b 01       	bf	0x1073a
+   10736:	a0 0c       	bra	0x10752
+   10738:	60 e1       	mov.w	@r14,r0
+   1073a:	61 4d       	extu.w	r4,r1
+   1073c:	85 e1       	mov.w	@(2,r14),r0
+   1073e:	60 0d       	extu.w	r0,r0
+   10740:	65 e1       	mov.w	@r14,r5
+   10742:	63 5d       	extu.w	r5,r3
+   10744:	30 38       	sub	r3,r0
+   10746:	00 17       	mul.l	r1,r0
+   10748:	d3 04       	mov.l	0x1075c,r3	! 5ae90
+   1074a:	01 1a       	sts	macl,r1
+   1074c:	43 0b       	jsr	@r3
+   1074e:	60 f2       	mov.l	@r15,r0
+   10750:	30 5c       	add	r5,r0
+   10752:	7f 04       	add	#4,r15
+   10754:	4f 16       	lds.l	@r15+,macl
+   10756:	4f 26       	lds.l	@r15+,pr
+   10758:	00 0b       	rts	
+   1075a:	6e f6       	mov.l	@r15+,r14
+   1075c:	00 05       	mov.w	r0,@(r0,r0)
+   1075e:	ae 90       	bra	0x10482
+   10760:	00 00       	.word 0x0000
+   10762:	ff ff       	.word 0xffff
+   10764:	2f e6       	mov.l	r14,@-r15
+   10766:	4f 22       	sts.l	pr,@-r15
+   10768:	7f f8       	add	#-8,r15
+   1076a:	6e 50       	mov.b	@r5,r14
+   1076c:	63 53       	mov	r5,r3
+   1076e:	73 01       	add	#1,r3
+   10770:	2f 32       	mov.l	r3,@r15
+   10772:	62 ec       	extu.b	r14,r2
+   10774:	32 5c       	add	r5,r2
+   10776:	72 01       	add	#1,r2
+   10778:	1f 21       	mov.l	r2,@(4,r15)
+   1077a:	67 23       	mov	r2,r7
+   1077c:	66 33       	mov	r3,r6
+   1077e:	b0 d0       	bsr	0x10922
+   10780:	65 e3       	mov	r14,r5
+   10782:	7f 08       	add	#8,r15
+   10784:	4f 26       	lds.l	@r15+,pr
+   10786:	00 0b       	rts	
+   10788:	6e f6       	mov.l	@r15+,r14
+   1078a:	60 43       	mov	r4,r0
+   1078c:	2f e6       	mov.l	r14,@-r15
+   1078e:	2f d6       	mov.l	r13,@-r15
+   10790:	2f c6       	mov.l	r12,@-r15
+   10792:	2f b6       	mov.l	r11,@-r15
+   10794:	2f a6       	mov.l	r10,@-r15
+   10796:	2f 86       	mov.l	r8,@-r15
+   10798:	4f 22       	sts.l	pr,@-r15
+   1079a:	4f 12       	sts.l	macl,@-r15
+   1079c:	7f ec       	add	#-20,r15
+   1079e:	81 f2       	mov.w	r0,@(4,r15)
+   107a0:	60 53       	mov	r5,r0
+   107a2:	81 f4       	mov.w	r0,@(8,r15)
+   107a4:	6e 60       	mov.b	@r6,r14
+   107a6:	84 61       	mov.b	@(1,r6),r0
+   107a8:	65 03       	mov	r0,r5
+   107aa:	6a 63       	mov	r6,r10
+   107ac:	7a 02       	add	#2,r10
+   107ae:	64 ec       	extu.b	r14,r4
+   107b0:	34 6c       	add	r6,r4
+   107b2:	6d 43       	mov	r4,r13
+   107b4:	7d 02       	add	#2,r13
+   107b6:	67 43       	mov	r4,r7
+   107b8:	64 d0       	mov.b	@r13,r4
+   107ba:	68 5c       	extu.b	r5,r8
+   107bc:	77 03       	add	#3,r7
+   107be:	64 4c       	extu.b	r4,r4
+

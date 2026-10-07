@@ -1,7 +1,9 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Requires8F6C bit08. Consumes per-field freshness via1C018, refreshes record deadline/recovery or
-   checks expiry. Ten record lifecycles verified. */
+/* Requires8F6Cbit08; consumesfieldfreshness, refreshesdeadline/recovery orchecks expiry. Full126EC
+   actualreturn1E60A selected18deadline/sixfreshness/8EE2model checks pass. Original11864
+   tick+withheld201:expirycall105/tick106,receipt112/tick113 clearsbitwith868C1.
+   Downstreamqualifiedpolicy separate; tcu-receive-admission.txt. */
 
 uint CAN_UpdateReceiveDeadlines(void)
 

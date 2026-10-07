@@ -1,0 +1,185 @@
+TCU original receive admission in the captured request lifecycle — 2026-10-06
+============================================================================
+Full objective remains ECU/AT integration, deep traction integration, and NC roof
+folding AND unfolding with interruption/resume/reversal, timeout, L/Rsync and
+recovery. User has no extra DSC/roof dumps/captures/bench results. No staging,
+commit or push; previous research thread paused. Prior turn was progress:
+512 fulltasks closed a supplied-callback numericrequest lifecycle, with verified
+Ghidra archive. This turn replaces those suppliedcallbacks with originalreceipt
+admission/dispatch and examines freshness. No broader completion claim.
+
+Current verified findings and reproducibility
+---------------------------------------------
+tcu_receive_fixture.py reuses the existing fulltask/phase observer. Three
+explicit HCAN mailbox samples execute originalISR1B438 through registerrestore,
+stopping at1B7D4 BEFORE RTE. No instruction/callee skipped in that prefix.
+Finite register reads are explicitfixtures, not a CANcontroller simulation:
+E40E samples [selectedmask,0], E41A=0, configuredDLC/identifier/payload bytes.
+Observed writes toE40E/E41A equal selectedmask; no hardwareclear semantics,
+interrupt delivery, overrun/concurrency or physicalwire proof is inferred.
+Independent expectedmodel compares ALLapplicationRAM (FFFF0000up), restored
+registers/PR/MACL and unaffectedSRbits. Stack isFFFED000 outsideapplicationRAM.
+Supported selected logicalindices1/6/8 map stockfilter/mailboxslots3/8/10,
+respectively CAN4EC/CAN215/CAN201. Buffers8F0D/8F2C/8F39 copy7/8/7 bytes.
+Lengthbelowconfiguredminimum or8F6Cmask0Cclear deniescopy/admission; verified
+matrix checks those boundaries (results below). Selectedstockvalidationcallbacktable5C920 is0.
+Original admission1BF38 sets8F71; originalISR copy sets8F4E/4F pendingbit.
+The scratchpacket8F50..8F5B andpointer8F48 effects are in the wholeRAMoracle.
+
+Three originalprefix samples PASS with mode8, then original1BD10 dispatches
+logicalorder1,6,8 regardless suppliedarrivalorder8,6,1. Actualcallbacks:
+1C10E ->1ADD0,1C20A ->1ACF0,1C264 ->1ACD8. This gives initial89B0=0 while
+8808=780,880C=975: the secondary comparison uses precedingCAN201 data because
+its callback runs first. Oldfixture supplied201/215 beforesecondarywrapper.
+CAN4EC sender is still unknown; zero payload is an explicit alternate-disable
+fixture, not a recovered OEMframe. ECU201/215 bytes are produced by existing
+originalencoder fixtures, with modelinputs78 and97.5/primary25.
+
+Full126EC alreadycalls1BD10 and19AF0 in its original nested path. Therefore
+probe_tcu_admitted_requests.py supplies only ISRprefixes andcapturecallbacks
+before126EC, not another direct1BD10/19AF0 call. The initial32taskprobe has
+completed; tcu-admitted-requests-probe.json verifies32dispatch/watchdog returns. Observe actualcallorder,
+returnPCs, fieldfreshness/deadlines/bitmap andrequesteffects.8F6C=8 is an explicit
+setup gate; otherunreceivedframes/deadlines remain as initialized, not artificially
+heldhealthy. Watchdogmodel independentlychecks18deadlines, sixfreshnessbytes,
+8EE2faultbitmap atactual19AF0 returns; downstreamdiagnostic RAM is not modeled.
+
+Reproduce:
+ python research/ecu-at-can/probe_tcu_admitted_requests.py
+Disassembly (GNUobjdump2.42; previouslydocumented temporarytoolsetup):
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+ python research/ecu-at-can/disassemble.py \
+ --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+ tcu dis START END
+Saved excerpts tcu-receive-admission-{isr,copy,dispatch}-disassembly.txt own
+1B438..1B7D4 and1BD10..1C2C0 instructions/literalpools. Do not treatpoolsascode.
+Correction: disassemble.py alias 'at' selects ENGINE ECU; 'tcu' selectsTCU.
+Firstliteralrefs query accidentallyused'at' andfoundnone; discarded. Actual
+TCUtable5CA14 contains1C10E;1BD10 uses a relativeBSR at1BD08, so lackofliteral
+pools doesnotimplylackofcallers. Existingfreshness.txt/verify_freshness.py own
+priorreceipt watchdogmodels andCAN211-onlydispatcher execution; previous
+integerconversionlimit is obsolete for our current arithmeticinterpreter.
+
+Unchanged inputs examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6;
+examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Python3.14.3. No sharedISA/firmware/application edits.
+Traction andbothroof scopes remain open; see CHECKPOINT.txt andtraction-roof.txt.
+
+32fulltask result and boundarymatrix
+-----------------------------------
+All32tasks return,96 wholeRAMISRprefix checks, callbacks1C10E/1C20A/1C264 every
+task. Dispatcherreturn1BD0C occurs BEFOREwatchdog19AF0 return1E60A, bothinside
+original126EC. Initial89B0=0; nexttask89B0=780; phasedproducer809C stays0until
+call4 then19968.809A24960 throughout.9410initially1 then7 at4. OriginalCAN201
+buffer remains7-bytecopy evenwithDLC8, CAN215copies8, CAN4ECcopies7.
+Nativewatchdog consumesfreshness andsetsunreceivedrecordbits8EE2=2785 atcall0;
+we have NOTheld those otherframeshealthy. Recoverygate868C=0 inthisbaseline.
+84D0 remains0 through32:11014 timerdoesnotadvance thisdeadlineclock.
+Original11864 doesincrementit; annotation/reference-policy alreadyidentified
+theCMT0chain123C2->128B6->11864. Direct11864 calls areexplicitscheduleinputs,
+notphysicalinterruptperiod proof. Parent1BD06 relativeBSR1BD08 calls1BD10.
+
+verify_tcu_receive_admission.py PASS:2816wholeRAMISRprefix cases coverall256
+modebytes,three selectedindices andDLC0/minimum-1/minimum/8 (deduplicated).
+Six actualprefix->dispatcher->watchdog expiry/recovery chains useoriginal11864
+one tickperiteration, recoverygate0/1, otherdeadlines explicitfuture fixtures.
+CAN201/CAN215 expireatequalitytick10,4ECat25. Originalreceiptat11/26 refreshes
+deadline21/51; onlyrecoverygate1 clearsrecordbit. No directfreshnessbitwrite.
+Result tcu-receive-admission-verification.json; scriptimportsafe.
+
+Completed352fulltasks withoriginalreceiptpath +capturetargetapproachat256,
+file tcu-admitted-requests-extended.json. Completed192fulltasks advanceoriginal
+11864 oncebeforeeachtask, explicitrecoverygate1, omitonlyCAN201receiptcalls
+96..111; result tcu-admitted-requests-expiry.json. CAN201deadline106
+expirycall105 andreceiptcall112 recovery are verified below.
+Verifywith verify_tcu_admitted_requests.py; it reconstructswatchdog decisions
+fromentrysnapshots ratherthantrusting storedexpectedfields, checksactualcallback
+order,pendingbits,originaltimestampmeasurement,packetdecode and32exactprefix.
+
+192task expiry result (executed)
+--------------------------------
+All192tasks returned,560wholeRAMISRprefixes,192 nativewatchdog/dispatcher calls.
+CAN201lastreceiptcall95 atoriginaltick96 ->deadline106. NoCAN201 at96..111.
+Exactexpirycall105/tick106 sets8EE2bit1 (2785->2787), refreshesdeadline116.
+Receiptcall112/tick113 clearsbit1 with868C=1,deadline123. Verifiedsavedtrace
+models PASS.809C remains19968 and9410remains7 throughouttheloss; requestcreated
+93,phase1at166,numeric306 at167/168,withdrawal169. No downstreamfallback
+claim fromthisshortexpiry. The two otherframes continuetoarrive.
+
+Existing can201-fault-policy.txt establishes why initial expiry alone isnot
+fullpolicy: group36 needs500 qualificationticks for201/215/4EC, then native
+processing/summary21C1C reaches sharedsubstitution andcutinhibit. Existing
+tcu-input-faults.txt distinguishes500-tick invalidvaluegroups3C/3D from
+5000-tick group36 healthyrecovery. This shortlossdoesnotqualifythosepolicies.
+Next join the actualdiagnostic task56F80 (56658/groupqualification->57F50->
+570F6->57258) to native receive/fullapplication task andoriginalclock input,
+using originalinitialization/admission wherepossible. Preserve everyexplicit
+scheduling/initializationfixture; no neednewunrelatedDTCservices. Applicable
+fullscheduler cadence, remoteDSC androof evidence remainunavailable/unproved.
+
+352task native-receive completion and next action
+-----------------------------------------------
+All352 tasks PASS,1056 wholeRAMISRprefixes,352 native dispatch/watchdogchecks.
+First32 rows exactly match initialprobe. Naturalcreation93, phase1at166,
+map494/base800 ->source306 at167/168 ->CAN2160209 ->ECUnumeric9, withdrawal169.
+Originalcapturetargetapproachat256 givesphase2at280,phase3at310,ack/retirement
+311. Rings/list/queueempty,heap007FFFFF restored;40additional tasks312..351idle.
+This replaces direct201/215/secondarycallback calls with the actualoriginalISR
+copy/admission/pendingpath andfull126EC dispatcher/watchdog. Initialcomparison
+lagdidnotchange thisrequest's creation/active/cleanup calls. Tablefilterselected
+mailboxes, finiteHCAN reads, receive/capture/task ratio, mode8 and preRTEstop
+remainexplicitfixtures. No hardwareinterruptdelivery/physicalCAN claim.
+
+Both verifiers PASS. Standalone2816prefixes plus96initial/1056extended/560expiry
+actualprefixchecks (prefix-overlap is not independent testcoverage). Tenacksin
+352taskrun andsevenacksin192run retain actualwholeRAMoracle. Numeric/phase
+models remainactive duringbothfulltraces; commands/gates/measurement/ECUdecode
+retain their priorchecks. Results in tcu-admitted-requests-verification.json.
+
+Reproduce longer traces (from repo root):
+ python - <<'PYRUN'
+ import sys
+ sys.path.insert(0,'research/ecu-at-can')
+ import probe_tcu_admitted_requests as p
+ p.main(352,'tcu-admitted-requests-extended.json')
+ p.main(192,'tcu-admitted-requests-expiry.json',p.expiry_fixture)
+ PYRUN
+ python research/ecu-at-can/verify_tcu_receive_admission.py
+ python research/ecu-at-can/verify_tcu_admitted_requests.py
+
+Next: verifyactual56F80 diagnostic-task coverage/admission, thenjoinnative
+receive/clock andqualified communicationloss/recovery withtheapplicationtask.
+Reuse existing group36/summary/cutpolicy models; distinguishinitialdeadline
+expiry fromqualifiedfallback andstoredhistory. Do not replace operational
+integration withunrelated diagnosticservices. Moregeneralqueuecapacity/overlap,
+actualcadence/persistence andphysicalintegration remainopen. Tractionneeds
+CAN211/21A sender/units, remoteDSC internals/actuation. Roofneeds bothdirections,
+interruption/reversal,timeout/LRsync/recovery withapplicablecontroller/physical
+evidence; factoryrevision/connector/PID conflicts remainasindexed.
+
+Final script/artifact verification
+----------------------------------
+verify_tcu_receive_admission.py andverify_tcu_admitted_requests.py rerunPASS
+after the saved-state watchdogmodel extraction andexplicitcleanup assertions.
+Fournewscripts compile; all14 new scripts/report/disassemblies/JSONs arepresent
+and Git-eligible (gitcheck-ignore exit1/no matches). Targeteddiff-check passes.
+Pre-existing mixedindex includingADghidra/nc-at-can.tar.gz.tmp preserved.
+No changes tooriginalROMs/sharedISA/application code. Savedlocally, no staging,
+commit orpush. Ghidra three newfunctions andfiveexisting comments nowupdated;
+archive refresh/independent restoration is nowcomplete (below).
+
+Ghidra persistence (verified)
+----------------------------
+Bothprograms savedwith1911annotations (833ECU/1078TCU). Three newfunction
+annotations:1B438,1C10E,1C20A; fiveexistingcomments corrected/updated.
+Ghidra12.1.3PUBLIC,Java21.0.10. Paired.gpr/.rep archive 11,002,741bytes,
+SHA256 d21f4a252a8147ade924c040a28c45b3a8418a6d3a0b3b488c81c887bd83fa78.
+Independent extraction restore-check/tcu-receive-admission-20261006; all11
+projecthashes verifiedbefore/after read-onlyreopen ofbothprograms; all967
+exports/readbacks identical. No ERROR/Exception/DECOMPILE_INCOMPLETE inlogs.
+Exactmanifest/results in ghidra/snapshot.json andrestore-verification.json;
+reproduction commands in ghidra/README.txt. Logs/live/restores remainignored.
+Savedlocally, unstaged/uncommitted/unpushed. Existingmixedindex preserved.
+Meaningfulprogress thisturn; goalactive, allthreebroaderobjectives incomplete.

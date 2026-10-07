@@ -1,0 +1,146 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00004b80 <.data+0x4b80>:
+    4b80:	d4 3e       	mov.l	0x4c7c,r4	! ffff4008
+    4b82:	92 6e       	mov.w	0x4c62,r2	! f800
+    4b84:	63 21       	mov.w	@r2,r3
+    4b86:	24 31       	mov.w	r3,@r4
+    4b88:	91 6c       	mov.w	0x4c64,r1	! f802
+    4b8a:	60 11       	mov.w	@r1,r0
+    4b8c:	81 41       	mov.w	r0,@(2,r4)
+    4b8e:	93 6a       	mov.w	0x4c66,r3	! f804
+    4b90:	60 31       	mov.w	@r3,r0
+    4b92:	81 42       	mov.w	r0,@(4,r4)
+    4b94:	72 06       	add	#6,r2
+    4b96:	60 21       	mov.w	@r2,r0
+    4b98:	81 43       	mov.w	r0,@(6,r4)
+    4b9a:	71 06       	add	#6,r1
+    4b9c:	60 11       	mov.w	@r1,r0
+    4b9e:	81 44       	mov.w	r0,@(8,r4)
+    4ba0:	73 06       	add	#6,r3
+    4ba2:	60 31       	mov.w	@r3,r0
+    4ba4:	81 45       	mov.w	r0,@(10,r4)
+    4ba6:	72 06       	add	#6,r2
+    4ba8:	60 21       	mov.w	@r2,r0
+    4baa:	81 46       	mov.w	r0,@(12,r4)
+    4bac:	71 06       	add	#6,r1
+    4bae:	60 11       	mov.w	@r1,r0
+    4bb0:	81 47       	mov.w	r0,@(14,r4)
+    4bb2:	73 06       	add	#6,r3
+    4bb4:	60 31       	mov.w	@r3,r0
+    4bb6:	81 48       	mov.w	r0,@(16,r4)
+    4bb8:	72 06       	add	#6,r2
+    4bba:	60 21       	mov.w	@r2,r0
+    4bbc:	81 49       	mov.w	r0,@(18,r4)
+    4bbe:	71 06       	add	#6,r1
+    4bc0:	60 11       	mov.w	@r1,r0
+    4bc2:	81 4a       	mov.w	r0,@(20,r4)
+    4bc4:	73 06       	add	#6,r3
+    4bc6:	60 31       	mov.w	@r3,r0
+    4bc8:	81 4b       	mov.w	r0,@(22,r4)
+    4bca:	72 0e       	add	#14,r2
+    4bcc:	60 21       	mov.w	@r2,r0
+    4bce:	81 4c       	mov.w	r0,@(24,r4)
+    4bd0:	71 0e       	add	#14,r1
+    4bd2:	60 11       	mov.w	@r1,r0
+    4bd4:	81 4d       	mov.w	r0,@(26,r4)
+    4bd6:	85 37       	mov.w	@(14,r3),r0
+    4bd8:	81 4e       	mov.w	r0,@(28,r4)
+    4bda:	72 06       	add	#6,r2
+    4bdc:	60 21       	mov.w	@r2,r0
+    4bde:	81 4f       	mov.w	r0,@(30,r4)
+    4be0:	e0 20       	mov	#32,r0
+    4be2:	71 06       	add	#6,r1
+    4be4:	63 11       	mov.w	@r1,r3
+    4be6:	04 35       	mov.w	r3,@(r0,r4)
+    4be8:	e0 22       	mov	#34,r0
+    4bea:	72 04       	add	#4,r2
+    4bec:	63 21       	mov.w	@r2,r3
+    4bee:	04 35       	mov.w	r3,@(r0,r4)
+    4bf0:	e0 24       	mov	#36,r0
+    4bf2:	71 04       	add	#4,r1
+    4bf4:	63 11       	mov.w	@r1,r3
+    4bf6:	04 35       	mov.w	r3,@(r0,r4)
+    4bf8:	e0 26       	mov	#38,r0
+    4bfa:	72 04       	add	#4,r2
+    4bfc:	63 21       	mov.w	@r2,r3
+    4bfe:	04 35       	mov.w	r3,@(r0,r4)
+    4c00:	e0 28       	mov	#40,r0
+    4c02:	71 04       	add	#4,r1
+    4c04:	63 11       	mov.w	@r1,r3
+    4c06:	04 35       	mov.w	r3,@(r0,r4)
+    4c08:	e0 2a       	mov	#42,r0
+    4c0a:	72 04       	add	#4,r2
+    4c0c:	63 21       	mov.w	@r2,r3
+    4c0e:	04 35       	mov.w	r3,@(r0,r4)
+    4c10:	e0 2c       	mov	#44,r0
+    4c12:	71 04       	add	#4,r1
+    4c14:	63 11       	mov.w	@r1,r3
+    4c16:	04 35       	mov.w	r3,@(r0,r4)
+    4c18:	e0 2e       	mov	#46,r0
+    4c1a:	72 04       	add	#4,r2
+    4c1c:	63 21       	mov.w	@r2,r3
+    4c1e:	04 35       	mov.w	r3,@(r0,r4)
+    4c20:	e0 30       	mov	#48,r0
+    4c22:	71 0c       	add	#12,r1
+    4c24:	63 11       	mov.w	@r1,r3
+    4c26:	04 35       	mov.w	r3,@(r0,r4)
+    4c28:	e0 32       	mov	#50,r0
+    4c2a:	72 0c       	add	#12,r2
+    4c2c:	63 21       	mov.w	@r2,r3
+    4c2e:	04 35       	mov.w	r3,@(r0,r4)
+    4c30:	e0 34       	mov	#52,r0
+    4c32:	71 04       	add	#4,r1
+    4c34:	63 11       	mov.w	@r1,r3
+    4c36:	04 35       	mov.w	r3,@(r0,r4)
+    4c38:	e0 36       	mov	#54,r0
+    4c3a:	72 04       	add	#4,r2
+    4c3c:	63 21       	mov.w	@r2,r3
+    4c3e:	04 35       	mov.w	r3,@(r0,r4)
+    4c40:	e0 38       	mov	#56,r0
+    4c42:	71 04       	add	#4,r1
+    4c44:	63 11       	mov.w	@r1,r3
+    4c46:	04 35       	mov.w	r3,@(r0,r4)
+    4c48:	e0 3a       	mov	#58,r0
+    4c4a:	72 04       	add	#4,r2
+    4c4c:	a0 18       	bra	0x4c80
+    4c4e:	00 09       	nop	
+    4c50:	00 e0       	.word 0x00e0
+    4c52:	f8 19       	fmov	@r1+,fr8
+    4c54:	f8 18       	fmov	@r1,fr8
+    4c56:	f8 39       	fmov	@r3+,fr8
+    4c58:	f8 38       	fmov	@r3,fr8
+    4c5a:	f8 59       	fmov	@r5+,fr8
+    4c5c:	f8 58       	fmov	@r5,fr8
+    4c5e:	00 ff       	mac.l	@r15+,@r0+
+    4c60:	00 80       	.word 0x0080
+    4c62:	f8 00       	fadd	fr0,fr8
+    4c64:	f8 02       	fmul	fr0,fr8
+    4c66:	f8 04       	fcmp/eq	fr0,fr8
+    4c68:	00 00       	.word 0x0000
+    4c6a:	22 e4       	mov.b	r14,@-r2
+    4c6c:	00 00       	.word 0x0000
+    4c6e:	22 f4       	mov.b	r15,@-r2
+    4c70:	ff ff       	.word 0xffff
+    4c72:	40 4b       	.word 0x404b
+    4c74:	ff ff       	.word 0xffff
+    4c76:	40 4c       	.word 0x404c
+    4c78:	ff ff       	.word 0xffff
+    4c7a:	40 4d       	.word 0x404d
+    4c7c:	ff ff       	.word 0xffff
+    4c7e:	40 08       	shll2	r0
+    4c80:	63 21       	mov.w	@r2,r3
+    4c82:	04 35       	mov.w	r3,@(r0,r4)
+    4c84:	e0 3c       	mov	#60,r0
+    4c86:	71 04       	add	#4,r1
+    4c88:	63 11       	mov.w	@r1,r3
+    4c8a:	04 35       	mov.w	r3,@(r0,r4)
+    4c8c:	74 3e       	add	#62,r4
+    4c8e:	72 04       	add	#4,r2
+    4c90:	63 21       	mov.w	@r2,r3
+    4c92:	24 31       	mov.w	r3,@r4
+

@@ -1,0 +1,123 @@
+TCU OUTPUT TASK AND COMPARE CALLBACK — 2026-10-06
+
+All three requirements remain open: ECU/automatic-transmission CAN integration,
+deep traction-control logic/integration, NC roof folding AND unfolding including
+interruption/resume/reversal/communication timeout/motor synchronization/fault
+recovery. User has no extra DSC/roof firmware, captures or bench/vehicle results.
+This thread owns checkout; no staging/commit/push authorization. Previous turn
+made verified ECU acquisition/fault/admission progress, not completion.
+
+Executed original examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+verify_tcu_output_task.py uses existing SH interpreter/arithmetic, independent
+whole application-RAM/state models, exact ADC/output/timer traces, register/
+stack checks. Local bounded MMIO covers eight explicitADC words, timer2A
+counter/compare/status words and two explicit profiling timestamps. No stubs,
+ROM changes, shared ISA changes or production changes. RTE is NOT executed.
+
+Wider input history (17AF0/17B1A/14128):
+17AF0 zeros110 history bytes8910..897D,11 counts897E..8988,11 states898A..8994,
+and shared circular index8989.17B1A reads11 descriptor entries at5F7B0:
+ logical0..10 -> F800,F802,F806,F804,F814,ROM400,ROM400,ROM400,F820,F810,F812.
+Eight are physical-register addresses supplied by the harness. Entries5..7
+are zero descriptor pointers:14128 reads ROM[0] long=400 then ROM[400] word
+4F22, shifting6 ->316. This is executed pointer behavior, NOT three sensor
+samples, and no physical input identity is inferred for any slot.
+14128 unsignedword>>6&1023; descriptors/peripheralwords independently checked.
+
+Each slot with count0 fills all five history words with its sample; otherwise
+writes only sharedindex0..4. If old slotstate!=2, increments count withbytewrap;
+then new state2 if count>=5,else3. Oldstate2 can hold a malformed lowcount and
+produce state3 for thatcall; nonboolean states are tested. Sharedindexincrements
+mod5. Tests stay within validindex0..4; arbitrary corruptindex write effects
+are not claimed safe or checked. ADC sample changes and count255wrap covered.
+
+Complete task127BA and callback1227E:
+127BA executes original11484(no-op), then checks byteGBR+8=8008.
+ mode1:17B1A history scan only.
+ mode3:full127FC active task.
+ other modes:no history/acquisition/output work.
+All modes then update84F8:zero ->3,else decrementbyte. Full256 modebytes and
+phases0/1/2/3/4/255 tested; abnormalphasevalues do not cause out-of-range service.
+1227E promotes mode1 ->3 only if84A0==3 AND GBR+7==3 AND84F8==3; it calls
+original127B6(no-op) on promotion, then tailcalls127BA. All other modes retain.
+750 callback condition combinations execute the complete downstream task.
+
+127FC always acquiresfour rawfeedback words through188FC, adding counts into
+8A64 perchannel withwordwrap. For oldphase3 it calls18830 adaptation dispatcher
+then17B1A historyscan. For phases0..3 it executes530C8 record service,52EDC
+rate/lookup driver and18816 correction/peripheral handoff for that phase.
+For phase>=4 it still acquiresfeedback but skips output service. Phase3->2->1
+->0->3 means one servicedchannel pertaskcall and four acquisitions perchannel
+service afterstartup. This ratio is now executed task evidence; previously
+it was an explicit harness schedule. Actual call rate remains unproved.
+Adaptation/history execute only atphase3, so their cadence is one per four
+normal active taskcalls. Prior adaptation interval counts refer to dispatcher
+calls, not timer interrupts or elapsedtime. Do not conflate these counts.
+
+Original1692E compare-interrupt body executes until169A0 RTE:
+- Reads F604compare andF600counter; calls15B80(index10,worddifference).
+- Reads F62C statusbit0. If clear, skipscallback and phase/compare updates.
+- If set, rereadsstatus, writesstatus&FFFE, increments87F4 byte (wrap),
+  writesF604=4166*(2*(new87F4&3)+1), calls1227E includingcomplete127BA.
+- Calls15BF0(index10), restores all sixteen generalregisters,PR,MACL and stack
+  toentry values beforeRTE. SR bits other than Q/M/T retain; actual interrupt
+  entry frame and RTE restoration are NOT simulated or executed.
+Programmedcomparesequence uses12498,20830,29162,4166 for phases1,2,3,0.
+This is register-write evidence, not elapsedtime or real callbackfrequency.
+No statusbit peripheral-clear side effect beyond explicit software latchwrite.
+
+Profiling helpers15B80/15BF0 execute original15730/F6C0 long reads and5AF44
+unsigneddivision. Stock5F628=1; entry stores firsttimestamp at8750, records
+u16(counter-compare)/10 at86F4 and maximum8718. Exit unsigned32 timestamp
+subtraction wraps, divides10 and caps65535 into86AC/max86D0. Timestampunits
+and relation to wallclock remain unproved. Both wrap and saturation are tested.
+
+Verification/reproduction:
+ python research/ecu-at-can/verify_tcu_output_task.py
+ python -m py_compile research/ecu-at-can/verify_tcu_output_task.py
+Python3.14.3; no newdependencies.2538 positivechecks:16historyinitializers,
+200historycases,1536complete tasks,750callbacks,36interruptbodies.7 expected
+MMIO/missingtimestamp/width/read-only rejections. Entirefirst verifier run
+passed, then added explicit oldprofilingmaximum cases and reran finalversion.
+
+160 retained compare-handler bodies provide explicit status/timestamp/ADC
+samples; mode1 staysthroughcall4 thenpromotesat5. Normaloutputs rotate3..0, mappingbufferwrites F514,F516,F512,F510.
+Calls50/51 use clearstatus: noADC/output/taskphaseadvance. Mode2 calls100..104
+suppressesADC/output but stillupdates taskphase. Call105 resumes mode3.
+Historycountslots5..7 reach5 andhold, sample316. Dispatcherage reaches38
+atcall160; this run does not claim every dispatch admits a gainupdate. Fullrows saved in JSON,
+includingADCreadorder,outputwrites,sumwords,adaptationage andprofilevalues.
+Input/control/calibrationfixtures and previous service models are explicit;
+no closed-loopplant, externalCANtiming or arbitraryinterrupt nesting claim.
+
+Disassemblies tcu-output-task-{task,callback,history,profile,timestamp,adc-read}
+retain originalroutines. Existingtcu-output-timer-initialization-disassembly.txt
+retains1692E/169A4 bytes. GNU SHbinutils2.42 setup/provenance remains in prior
+acquisition records. Reproduce with disassemble.py --objdump at extracted
+/tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump, LD_LIBRARY_PATH
+/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu, target tcu, dis START END.
+Relevant evidence/scripts are Git-eligible; transienttools are notsolememory.
+
+Remaining concrete work:
+Next TCU:169A4 cycle callback11F7C/124AA; earlier clock/mode/pin initialization,
+real interrupt entry/vector/task timing, upstream A518/8AD8/89AA/89A8/89AC,
+rawbase/A654, queues/ack/overlap/persistence and physical integration. Some
+consumer bodies are verified elsewhere; inspect evidence before duplicating.
+Timerstart168AC already executed in tcu-output-adaptation.txt; do not claim
+its body new. No clock/pinconfiguration was executed by this milestone.
+Next traction: full ECU taskordering/freshness and399B0 callers (bodyalready
+executed), CAN211/21A sender/units, board/sensoridentity and remoteDSCactuation.
+Next roof: newapplicablefullsource or OEMreceiver/physicalevidence; BOTHdirections
+interruption/reversal/timeout/sync/recovery remainopen. No extra userartifacts;
+exhausted AllCarManuals403 and documentaryconflicts remain preserved separately.
+
+Ghidra saved and independently verified:
+9 newfunctionannotations and1 refinedADCcomment. Bothprograms saved; readonly
+live/restored readback776ECU/957TCU (1733total).860 exports byteidentical,
+11 projecthashes verified before/after independentreopen. Archive10,960,947bytes
+SHA256d60d995ac6297164448cc4c4cbe0b251b7e80e823088052364f862c2fb198fa1.
+Both.gpr/.rep preserved; annotations/scripts/exports andsnapshot/restoremanifest
+are Git-eligible.9 newtaskartifacts/9newexports. No errors/incomplete decompiles/
+locks/pendingjobs. Finalfullverifier, Pythoncompile andGitdiffchecks pass.
+No staging/commit/push; existingmixedindex AD archive.tmp preserved.

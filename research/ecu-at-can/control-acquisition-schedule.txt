@@ -1,0 +1,94 @@
+Periodic acquisition and task-call evidence (2026-10-06)
+======================================================
+Objective: advance deep traction input provenance while preserving ECU/AT
+and both-direction NC roof integration as independent, incomplete goals.
+User has no additional remote-controller dumps/captures/bench results.
+No staging, commit or push authorization. Research only; stock ROM unchanged.
+
+Verification complete: the final direct, retained and paired replay passed.
+Initial direct checks passed, but a retained-sequence summary expected4004=63
+after320calls. Execution correctly gave64: initial404C=0 increments it on
+call1, then every later call. Corrected the summary assertion to320%256=64.
+The independent per-call oracle was already correct; no firmware/ISA change.
+
+Important scope correction: control-acquisition.txt executes4B80..4C94 as a
+full32-word copy slice. The surrounding4B00 polling code is not established
+as an ISR. Its new export is named control-acquisition-polling-disassembly.txt.
+Actual taskE26C calls4CE2 then6718 atE276..E282.4CE2 copies selected previous
+bank counts before scheduling and configuring the next counts. Prior fullcopy
+replay remains valid for its explicit harness order, not proof of real cadence.
+
+4E32/4EE8/4F78 selectively copy bank0/1/2 in descending channel order.
+Counts1/4/8/12 recognized for first two banks; third recognizes1/4/8.
+Zero count leaves flags and data unchanged; positive unrecognized counts
+clear two flags but copy no data. Counts themselves remain until managerwrites.
+The full manager increments4004..4006 according to old404C0/1/2, bytewrap;
+increments4048; nextphase%16==0 selects12/12/8, otherwise12/8/0.
+Mode404C becomes2 for16th,1 for4th,0 otherwise.404A increments only16th;
+newvalue>=4 resets it and sets4049=1. Byte255 wraps0 beforecomparison.
+5018/50E2/527A configure six ADC control/status bytes using realSRhelpers.
+50E2 uses configbit40 only if4049 exactly1. Manager resets404B before50E2.
+These are software register operations, not evidence of analog completion.
+
+Static callers:178C0 calls3976C after42458;183DA calls39894 after2185E.
+17D88 calls1DF32 in both535C branches (17D98..17DA0 or17E84..17E8C).
+Their globaltask order/elapsedtime remain unproved.4DFE conditionally calls
+5E38 or5CF4 using404B/4049; these followup bodies remain unexecuted.
+
+New harness uses explicit32 result words and six software register latches;
+no conversions, interruptions, completion flags, elapsedtime or hardwareeffects
+are generated. SR-zero3894 restore requires an explicit synthetictaskdescriptor
+atFFFF1300 withbyte1=1; SRnonzero bypasses that check. Scheduler3D78 nottested.
+All nested helpers execute fromROM; no stubs or sharedISA/verifier modifications.
+Independent oracle checks all application RAM (synthetic stack excluded), exact
+ADC result read order and control read/write traces. Final results:
+- 768 copy checks (all256 count bytes in eachbank).
+- 3,072 scan-configuration checks (allcounts x3banks xflag0/1/2/255).
+- 2,048 complete manager cases: all256 phases x7 slow-counter values,
+  plus all256 status bytes with an extended scan. Includes all16 SR masks.
+- 32 original E276..E282 manager/scaler call pairs;4 expected access rejections.
+- 320 retained manager/scaler calls, full decoder and alternating publisher.
+- 320 integrated ECU/TCU serial cycles,36 paired CAN and320 CAN211 updates.
+All pass. Python compilation and git diff --check pass. No new ISA support,
+firmware stubs, prior verifier edits, production code or ROM changes.
+
+Retained sequence starts with zero counts: call1 copies no bank, then selects
+12/8/0. Calls2 onward copy channels0..11 and12..19. Call16 selects12/12/8;
+call17 copies all32. Calls18..32 keep channels20..31 fromcall17. Additional
+copies recur at33,49,etc. Register samples are explicitly supplied percall;
+this does not prove the real conversion completed or hardware samples' ages.
+4049 is1 at64/128/192/256/320; the last phase wraps64 after256. Counter4004
+wraps to64 after320calls,4005=79,4006=19. Initial404C=0 accounts forcall1.
+The two input channels1/8 are in bank0's normal12-word selection;6CAC decodes
+channel8 and6CB4 still only publishes onodd1DF32 entryphase. Inter-task order
+is prescribed by the harness except the executed manager/scaler call pair.
+The paired replay replaces ongoing full-copy slices with the real manager;
+initialization retains the earlier explicit full-copy fixture. No claim of
+complete boot, all task scheduling, on-chip interrupt service or real CANbus.
+
+Sources/reproduction: unchanged ECUexamples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+python research/ecu-at-can/verify_control_acquisition_schedule.py
+Python3.14.3; GNU SHbinutils2.42 disassembly setup followscontrol-acquisition.txt.
+Disassemblies: control-acquisition-periodic/start/mask/restore-disassembly.txt,
+control-acquisition-task-driver/task-decode/task-partial/task-publish-
+disassembly.txt andcontrol-acquisition-polling-disassembly.txt.
+OfficialSH7058PDF provenance remainsincontrol-acquisition.txt; no newphysical
+register interpretation claimed. Ghidra saved and independently restored:1,641 annotations (727 ECU/914 TCU),
+811 byte-identical exports and11 project hashes before/after read-only reopen.
+15 annotations added;2 existing comments refined. No errors/incomplete exports
+or pending jobs/locks. Archive10,939,798bytes, SHA256
+9b103a9fec743e917fb44517af7691b230d411fd1462896049f51801eed480e4.
+Manifests and scripts are in ghidra/. All12 new artifacts are Git-eligible.
+Saved locally; no staging/commit/push. Existing mixed index untouched.
+Next concrete action: independent roof0916-a/b andmultiplex09-02F/G technical
+leads; TCU and traction followups below remain active.
+
+Open traction: actual conversion-completion contract, taskorder/cadence,
+NCboard/channel1/8 sensor/units, CAN211/21A sender andphysicalDSCactuation;
+raw6Dxx/8F30 and399B0 remain available firmware leads.
+Open ECU/AT: outputhandoff18816/18A44, feedback/helpers, rawbase/accumulator
+writers, queues/ack/overlap/cadence/persistence andphysicalintegration.
+Open roof: applicable0916-a/b andmultiplex09-02F/G documents, OEMreceiver,
+folding ANDunfolding interruption/resume/reversal, numericaltimeout,
+synchronization andfaultrecovery; do not infer remote behavior fromECUalone.

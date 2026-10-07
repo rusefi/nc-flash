@@ -1,0 +1,124 @@
+Complete ECU mode0 task, SCI0 samples and retained-state limits — 2026-10-06
+
+Scope/objective
+Continue all ECU/AT CAN, deep traction and both NC roof directions, including
+interruption/resume/reversal/timeout/synchronization/recovery. None is complete.
+User has no extra DSC/roof dumps/captures/physical tests; do not ask again.
+This increment extends original ECU18DC8 task execution, not hardware proof.
+Prior control-task.txt remains the arithmetic/activity baseline; its five-of-
+eight mode0 limit is superseded below. No production/ROM edits or staging/commit/push.
+
+Executed checks
+verify_control_task_serial.py:6212 positives =1800 XTRCT,1800 ADDV,320 DT,
+100 original2034 saturated-add cases,2048 original786E exchanges and144
+original76B4 setup cases. Nine expected access/sample rejections pass.
+Original786E also remains in its polling loop when explicitSSR lacksRDRF;
+noRDR read occurs, queuedreply is unconsumed. Limit is intentional, not pass
+of a physical timeout. All byte values tested, including signextendedreturns.
+
+Original76B4 setup changesSCR0,SMR0=80,SDCR0=F2,BRR0=4;PHDR bits14/15
+select0/1/other lowbyte bank; tail transfer sendsFF and returns replybyte.
+Original786E clearsPGDRbit0, handlesSSR writes, sends lowcommandbyte, polls
+SSRbit40, readsRDR and setsPGDRbit0. Tests compare exact read/write order,
+full applicationRAM, preservedR8..15/SR and queue consumption. Prior
+local-inputs.txt already executed these routines in a narrower harness;
+new evidence integrates them into the FPU/integer complete-task harness.
+
+sh_control_task_serial.py extends the prior probe without changing old harnesses.
+ExistingSHExtract suppliesXTRCT; ADDV andDT are independently tested. Typed
+SCI0 byte samples andlow-nibblePGDRwordlatch have noimplicitserialpeer.
+SSRwrites arelogged, notnaivelytreatedasRAM; SSRreads requireanexplicitvalue,
+RDRreads consumeexplicitbytes. Missing/invalidsamples orwrongwidths reject.
+The tests use readySSR=C0; it is an assumption, not controller behavior.
+TCNT0 optionally consumes explicit32bitsamples; absentsequence retains frozen
+fixture. Samplewrap FFFFFFFF->0->1 checked. No oscillator/timer-rate emulation.
+See control-task-serial-source.txt for official CPU/hardware sections/hashes.
+
+probe_control_task_serial.py: all eight initial mode0 phases0..7 return from
+original18DC8. DirectJSR tracecounts729,1257,729,732,729,1257,729,786.
+Phases1/5 consumeone suppliedSCI0reply; otherphasesconsumezero. No callee
+stubs. InitialRAM iszeroexceptphase; actualboot/admission remainsunproved.
+EarlierXTRCT-onlyprobe stopped92CE2/DT and2034/ADDV; rawJSON retained.
+
+verify_control_task_retained.py:35 complete tasks and90 semanticreturnboundaries
+pass.11 isolatedphases(0..7,253,254,255),16 consecutive retainedcalls,8
+retainedcalls startingphase252 coverbytewrap255->0. Ten routine-boundary
+oracles:74DF8,77F62/12/46,6CD96/6CE24/6CF06,6D876/6D904/6D9E6.
+These compareallapplicationRAM andpreservedregisters/SR atactualreturns.
+Existing independentqualifier oracles areevaluated onplainCPUcopies; their
+originalroutine execution mustmatchtheoracle beforecomparison toreal task.
+6CFD8 isobserved inoriginalcallorder, butitsfullarbitrary-inputsemantics
+are notnewlyverified. No unrelatednestedcallee semantics claimed.
+
+Qualifiedblock runswhenpostincrementphase%4==2, including254 and2aroundwrap.
+Nine qualifyingtasks eachconsumeone syntheticSCI0zero reply. In16-call retained
+prefix, both8EF8/8F30 fallbacklatches become1 atphase2 andholdthrough16.
+Zero-initializedcounters andabsentsamples arethefixture; this isnotproof of a
+realvehiclefault or properstartup state. Acquisition freshness/initialization,
+CAN211/21A sender/units, remoteDSC/actuation andNCboard remainopen.
+
+Material retained-state limit and correction
+A32-call attempt returns16times, theninitialphase16/final17 cannotcomplete.
+WithfrozenTCNT0, originalB80A..B814 bit-transfer wait needsdifference>2;
+it stopsB810 underinstructionbound. RawJSON+reproduction script preserved.
+SupplyingTCNT0 samples0,1,2,... gets past thatwait, butcall16 (zero-based)
+thenentersF8D6 fromPR2C5D2 (JSR2C5CE in2C4FC). This routine's
+F96E unconditionallybranchesbackF902 aftertimedcountermaintenance; alternate
+F972 loops atF97C. There is no normalreturn inthisbody. It isincorrectto
+assume advancingTCNT0 alone willmake thetaskreturn. Instructionbound is
+recordedat258A inits repeateddelay(arg2000), notsuppressed orstubbed.
+
+The earliernonzero535C=1 fixture likewiseentersF8D6, viaPR2C624/JSR2C620
+in2C5DE. Explicitcoarsecounter samples0,16000,... stillhitlimit258E;
+21counterreads demonstrateprogress butnotreturn. Earlierfrozen-counterfinding
+wasreal, but incomplete asanexplanation forwhythismode fails toreturn.
+Aterminal-loop interpretation followsstaticcontrolflow, notaphysicalresettest.
+Entrycondition/validstartup/protectedvalues andremotehandshake remainleads.
+
+Static nextlead (not complete execution oracle):2C4FC tests735C,6605 and
+660C againstROMBAE38; then6608 againstBAE3C/8, and660Evs660F,6610vs6611.
+It can set6605=2,protected2110=1,6606=0,3FF9=0 beforeF8D6.
+2C5DE checksprotected722A,thenbothbytecomparisons; zeroRAM takesF8D6.
+Do notlabel thepeer orCANownership withoutfurthertrace. Exactcapturedterminal
+PC/PR, registers and completedprefix are inretained-clock-limit.json and
+nonzero-clock-probe.json; disassembly is saved beside them.
+
+Reproduce fromrepositoryroot (Python3.14.3)
+python research/ecu-at-can/verify_control_task_serial.py
+python research/ecu-at-can/probe_control_task_serial.py
+python research/ecu-at-can/verify_control_task_retained.py
+python research/ecu-at-can/probe_control_task_retained.py
+python research/ecu-at-can/probe_control_task_nonzero_clock.py
+The retainedverifier explicitlyexpects/records theterminal limit AFTER16
+successfulretainedcalls. Its35-task count excludes thatpartialcall.
+ItsTCNT0 samples incrementby1perread, anexplicitfixture,notrealcadence.
+Nonzero probe uses16000perread to testthetimed-loop hypothesis. Both limits
+retainoriginalfirmwareexecution; neitherextendsphysicalcompletionclaims.
+AllsixnewPythonfiles compiled. Baselineharnesses unchanged; old expected
+failures remainreproducible withold scripts. CurrentECU SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Sources/disassembler setup areincontrol-task.txt andREADME.txt; usefuloutputs
+areGiteligible, notonlytemporarytoolpaths. No packages installed thisturn.
+
+Next concretework
+Trace/verify2C4FC/2C5DE counters, protected722A/2110,735C/3FF9 inputs and
+originalinitializer1619A so repeatedtaskadmission isbasedonproducedstate.
+Tracebit-transferB7xx peer/inputprovenance; do notfabricate anOEMreply toforce
+success. Extend6CFD8 diagnosticreportoracles andretainedacquisitionfreshness.
+TCU operationalqueue/ack/overlap, cadence/rawprovenance/persistence/physical
+integration remainopen; priorMode04 diagnosticpath isnotoperationalqueueproof.
+Roof BOTH folding/unfolding interruption/resume/reversal/CANtimeout/LRsync/
+recovery remainopen: factoryPID/pin/versionconflicts unresolved, candidate
+ECU/TCUstates notOEMreceiverproof. Nextroof needsanewapplicablefullsource or
+remotecontroller/capture/physical evidence; exhaustedlistingmustnotberepeated.
+No new externalartifact is available. Allthreegoals remainindependent.
+
+Ghidra saved/restored:1858 annotations (783ECU/1075TCU),929 byte-identical
+exports,11 matchingproject hashesbefore/afterreadonlyindependentreopen.
+Archive nc-at-can.tar.gz:10,981,695bytes,SHA256
+8f3372d09d400c098ff98acea4549a04dc2a76a7d7fec82d9394aace7ca57453
+Bothprogram saves/readbacks/restorepassed; noerrors,incompletedecompiles or
+locks. Ghidra12.1.3PUBLIC/Java21.0.10. Restore scratchcontrol-task-serial-20261006
+isignored; archive/manifests/scripts/exports aredurable.16newtaskartifacts
+areGiteligible; source/ROMhashesagree. Existingmixedindex includingAD temporary
+archiveentry preserved. No newstaging,commit orpush.

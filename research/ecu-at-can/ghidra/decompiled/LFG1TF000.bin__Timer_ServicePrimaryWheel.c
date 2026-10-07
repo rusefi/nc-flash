@@ -1,7 +1,9 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
 /* Original16-slot wheel5C0F0; even old phase also increments90C8.1024 calls verified; no physical
-   period claim. */
+   period claim. Extractedindependent13-range/phase/90C8 model rerunslegacy suite
+   byte-identically;1024 wholeRAMCMT1prefix cases PASS, all512 phasecombinations.
+   tcu-cmt1-delivery.txt. */
 
 void Timer_ServicePrimaryWheel(void)
 

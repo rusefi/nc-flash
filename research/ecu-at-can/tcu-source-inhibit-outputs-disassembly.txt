@@ -1,0 +1,59 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00052dee <.data+0x52dee>:
+   52dee:	64 4c       	extu.b	r4,r4
+   52df0:	90 26       	mov.w	0x52e40,r0	! a5c5
+   52df2:	00 0b       	rts	
+   52df4:	04 54       	mov.b	r5,@(r0,r4)
+   52df6:	60 6c       	extu.b	r6,r0
+   52df8:	97 1f       	mov.w	0x52e3a,r7	! a5cf
+   52dfa:	88 01       	cmp/eq	#1,r0
+   52dfc:	8f 06       	bf.s	0x52e0c
+   52dfe:	61 4c       	extu.b	r4,r1
+   52e00:	90 1c       	mov.w	0x52e3c,r0	! a5ca
+   52e02:	e3 01       	mov	#1,r3
+   52e04:	01 54       	mov.b	r5,@(r0,r1)
+   52e06:	60 13       	mov	r1,r0
+   52e08:	00 0b       	rts	
+   52e0a:	07 34       	mov.b	r3,@(r0,r7)
+   52e0c:	60 13       	mov	r1,r0
+   52e0e:	e3 00       	mov	#0,r3
+   52e10:	07 34       	mov.b	r3,@(r0,r7)
+   52e12:	00 0b       	rts	
+   52e14:	00 09       	nop	
+   52e16:	64 4c       	extu.b	r4,r4
+   52e18:	90 11       	mov.w	0x52e3e,r0	! a5c0
+   52e1a:	00 0b       	rts	
+   52e1c:	00 4c       	mov.b	@(r0,r4),r0
+   52e1e:	4f 22       	sts.l	pr,@-r15
+   52e20:	d3 0a       	mov.l	0x52e4c,r3	! 18730
+   52e22:	43 0b       	jsr	@r3
+   52e24:	00 09       	nop	
+   52e26:	4f 26       	lds.l	@r15+,pr
+   52e28:	00 0b       	rts	
+   52e2a:	00 09       	nop	
+   52e2c:	4f 22       	sts.l	pr,@-r15
+   52e2e:	d3 08       	mov.l	0x52e50,r3	! 18738
+   52e30:	43 0b       	jsr	@r3
+   52e32:	00 09       	nop	
+   52e34:	4f 26       	lds.l	@r15+,pr
+   52e36:	00 0b       	rts	
+   52e38:	00 09       	nop	
+   52e3a:	a5 cf       	bra	0x539dc
+   52e3c:	a5 ca       	bra	0x539d4
+   52e3e:	a5 c0       	bra	0x539c2
+   52e40:	a5 c5       	bra	0x539ce
+   52e42:	ff ff       	.word 0xffff
+   52e44:	ff ff       	.word 0xffff
+   52e46:	84 a0       	mov.b	@(0,r10),r0
+   52e48:	00 01       	.word 0x0001
+   52e4a:	87 28       	.word 0x8728
+   52e4c:	00 01       	.word 0x0001
+   52e4e:	87 30       	.word 0x8730
+   52e50:	00 01       	.word 0x0001
+   52e52:	87 38       	.word 0x8738
+

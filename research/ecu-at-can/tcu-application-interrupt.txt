@@ -1,0 +1,106 @@
+TCU application timer, admission and complete task interrupt — 2026-10-07
+========================================================================
+Objective remainsECU/AT CAN integration, deeptraction control/integration,
+NC roof folding AND unfolding, interruption, resume/reversal, communication
+ timeout, synchronization andrecovery. Allincomplete. NoadditionalDSC/roof
+artifacts fromuser. Localonly; no staging/commit/push. Otherthreadpaused.
+
+Executed evidence
+-----------------
+verify_tcu_application_interrupt.py PASS:256 original16A3C initializations,
+2816 independent1220A admissiongate cases,26 original16A58 ISRprefix cases,
+3 unsupportedwrite rejections. Outputtcu-application-interrupt-verification.json.
+ROM examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Python3.14.3. Originalinstructions saved in
+ tcu-application-clock-lead-disassembly.txt and earlier application reports.
+
+16A3C exactorderedMMIO foralleightbitF401 inputs:
+ readF401; writeold&F7; wordF442=0; wordF454=2560;
+ readF401again; writecurrent|8. Finitefixturesecondread=old&F7.
+ApplicationRAM unchanged; no hardwarecounter/status effects modeled.
+
+1220A gate: byte8007 mustequal1 AND84A0/84D8/84EC all3 tocall126DA.
+Independentgate tests all256modebytes*8ready3/0 combinations, pluseachready
+byteall256values withothertwo3/mode1 (2816 total). Executesoriginalgate to
+126DA or126EC boundary andchecksunchangedapplicationRAM. Doesnotreplaceor
+stub126DA. FullISR cases below executetheentireadmittedcall whenapplicable.
+
+OriginalISR16A58 executes through16B00 immediatelybeforeRTE, saving/restoring
+GPRs/PR/MACL/SRoutside301. ReadsF454compare/F442counter; profileindex fromold
+84F4&7 is[0,1,2,3,0,1,2,4]. All8 phasepositions testedwithbothstatusadmissions.
+15B80(index,count-compare) appliesstockscale16: latency=min65535,
+((count-compare)&FFFF)*16//10; writes86E0+2i andmax8704+2i, start8728+4i.
+F460bit0 admits: secondreadclearedwithFFFE, readsF454again, writesold+2560
+mod65536, executes1220A->126EC. The secondcomparesample isdeliberatelydistinct
+fromfirst inphasecases; proveswriteusesreloadedcompare, notlatencyinput.
+Final15BF0 usespreservedoriginalprofileindex eveniftaskchanges84F4;
+duration=min65535,unsigned32(end-start)//10 ->8698+2i/max86BC+2i.
+Wrap,zero,ordinary andclamp examplesincluded. FiniteexactMMIO sequence checked.
+
+WholeapplicationRAM compared DIFFERENTIALLY againstoriginal1220A execution
+plusindependentprofiling model. Fulltask nestedsemantics arenotallindependently
+modeled. Existingindependent529AC/185F8 command/pin oracles checkactualreturns;
+allobserveddirectcalls, events, peripheraltraces andpendingguards match the
+referenceoriginaltask. Completeactiveapplication bodies execute withoutstubs.
+Mode0/1/2/3/255 testedwithallthree readinessbytes0 or3. Mode1/all3 executes
+126DA anditsoriginal1DFF8 initialization, promotesmode3, stage1->2 andphase8
+through126EC. Nonready mode1 stays1; othermodebytes preserveadmissionmode.
+Threewriterejections coverwrongF454/F460width andunownedF458. Unknownfinite
+reads reject throughsharedCaptureSamples; not a hardwarebus emulator.
+
+Timing consequence and limits
+-----------------------------
+Earlier tcu-timer-configuration.txt executesTCR1B(F45C)=4 andPSCR1..4=1.
+CompatibleRenesasSH7055S manualREJ09B0045-0200H, table11.3/PDFzero241,
+section11.2.3/PDFzero268..269 andprescalers/PDFzero266 identifyTCNT1B(F442),
+OCR1(F454),TSR1B(F460), phi'/16 withphi'=Pphi/2. Officialsource:
+https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual
+RepositoryPDF SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+SteadyOCRadvance2560 atPphi/32 implies81920peripheralclocks perapplication
+compare, conditional onactiveunchangedconfiguration andtimelyservice.
+That corresponds to2CMT1matches and4.096CMT0matches onaverage. Thisisnow
+supported byexecutedcompareupdate, butnotmeasuredcadence/fullboot/hardware
+admission. Firstmatch/startoffset, unmasking, missedcompare, interruptlatency,
+RTE/nesting, physicalsilicon/clock, ADC/CAN/capturetimebases remainopen.
+Do notadd1 tothisrepeatedfree-runningOCRincrement asifitwereCMTcounterreset.
+
+Current experiments and next concrete action
+--------------------------------------------
+Thefull320 tcu-clock-ratio experiment (session80017/PID394730) isstilllive;
+latest160pairs/16000CMT0prefixes. Itkeeps100CMT0/task andonce/taskcapture, so
+itisa sensitivitytest, notnativeapplicationcadence. No restartbasedontime.
+Poll thenverify_tcu_clock_ratio.py whencomplete; preservechangedoutcomes.
+Nextjoin16A58/1220A actualtaskdelivery intotheexistingretainedfixture, with
+exactperipheralclock scheduling forapplication81920/CMT020000/CMT140960.
+Keepdiagnostic/CAN/capture/startoffset assumptions explicit; do notforceold
+recoverydates. Verifyfirstmatchingprefix andactualrequest/hold/ackboundaries.
+Capturetimestampdeliverymusteventuallysharethecountertimebase; currentonce/
+taskcapturefixture andsensorunitsremainunproved. Originalmodeproducer/start
+readiness/unmasking stillopen beyondtheexecutedlocaladmission predicate.
+Traction next: event2producer/admission/order relativequeuedtask7; CAN211/21A
+sender/units andremoteDSC/actuation missing. Roof next: applicableedition/VIN
+source forrelease/reversal, CANtimeout andL/Rmismatchthresholds, orOEM/physical
+evidence. Bothdirections/interruption/resume/recovery remainopen. No repeated
+unavailableartifact question. Ghidrasave/restore complete below; checkpointownsstatus.
+
+Reproduce
+---------
+ python research/ecu-at-can/verify_tcu_application_interrupt.py
+No ROM, productioncode orsharedISA edits. Reusesexistingoriginaltask fixture,
+models andpreRTE executor. Testsapplyonlytotheexplicitcases andlimits above.
+
+Verified persistence — 2026-10-07
+--------------------------------
+Bothprograms saved,1936annotations(833ECU/1103TCU),989completeidenticalexports,
+11projecthashes before/afterindependentread-onlyreopening andagainstliveproject.
+Archive11,012,721bytes SHA256
+65cc45fa38a6af345c10a93044ce7721b1629b432e753433d7042559f89c188f.
+Independentextraction application-isr-20261007; verify_restore.py PASS.
+Ghidra12.1.3 PUBLIC/Java21.0.10,300-secondexportallowance; noERROR/Exception/
+DECOMPILE_INCOMPLETE inapply/live/restorelogs. OldtwoTimerLead generatedexports
+replacedbyverifiedfunctionnames. Manifests containexactfileidentities.
+Newscriptcompiles,gitdiff --check PASS, newartifacts Git-eligible. Localonly;
+no staging/commit/push, mixedindex/ADarchive.tmp preserved. Liveprobe80017
+remainsrunning; no Ghidra/headlessprocess orpendingprojectedits.

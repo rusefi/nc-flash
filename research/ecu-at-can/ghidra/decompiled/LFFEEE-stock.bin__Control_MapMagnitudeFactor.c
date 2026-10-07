@@ -8,7 +8,7 @@ void Control_MapMagnitudeFactor(void)
 {
   undefined4 uVar1;
   
-  uVar1 = (*(code *)PTR_FUN_000594b4)(PTR_DAT_000594b0);
+  uVar1 = (*(code *)PTR_FUN_000594b4)(PTR_Control_RawFirstAlternate_000594b0);
   uVar1 = (*(code *)PTR_Lookup_FloatCurve_000594bc)
                     (uVar1,PTR_Control_MagnitudeFactorDescriptor_000594b8);
   *(undefined4 *)PTR_Control_MagnitudeInputFactor_000594c0 = uVar1;

@@ -1,8 +1,10 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Original aggregate produces916Fbit0
-   from92C6bits2/5,92CAbits0/1,92CCbits1/2,92CDbits3/4,or92D0bit2CLEAR.1280 cases,152 perturbations
-   and9 cancellation lifecycles verified; other outputs not newly fully specified. */
+/* Aggregate916Fbit0 from92C6bits2/5,92CAbits0/1,92CCbits1/2,92CDbits3/4
+   or92D0bit2CLEAR.1280directcases/152perturbations/9lifecycles.24selected-bit checks atactual126EC
+   phase0/4 return1E98C; later event4 service cancels andqueues originalevent3 ack in4
+   retainedfault/recovery traces. Otheraggregate outputs notfullRAM modeled.
+   tcu-periodic-request.txt. */
 
 void Request_AggregateSourceConditions(void)
 
@@ -50,7 +52,7 @@ void Request_AggregateSourceConditions(void)
     bVar6 = puVar3[1] | 4;
   }
   puVar3[1] = bVar6;
-  if ((*PTR_DAT_0001ff34 & 1) == 0) {
+  if ((*PTR_Selection_InhibitFlags_0001ff34 & 1) == 0) {
     bVar6 = puVar3[1] & 0xfd;
   }
   else {

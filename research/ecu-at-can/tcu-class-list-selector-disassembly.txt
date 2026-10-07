@@ -1,0 +1,73 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0003054e <.data+0x3054e>:
+   3054e:	2f e6       	mov.l	r14,@-r15
+   30550:	2f d6       	mov.l	r13,@-r15
+   30552:	2f c6       	mov.l	r12,@-r15
+   30554:	2f b6       	mov.l	r11,@-r15
+   30556:	2f a6       	mov.l	r10,@-r15
+   30558:	2f 96       	mov.l	r9,@-r15
+   3055a:	7f fc       	add	#-4,r15
+   3055c:	85 51       	mov.w	@(2,r5),r0
+   3055e:	6c 03       	mov	r0,r12
+   30560:	63 50       	mov.b	@r5,r3
+   30562:	63 3c       	extu.b	r3,r3
+   30564:	9a 0d       	mov.w	0x30582,r10	! ff
+   30566:	73 ff       	add	#-1,r3
+   30568:	2f 32       	mov.l	r3,@r15
+   3056a:	6b a3       	mov	r10,r11
+   3056c:	a0 24       	bra	0x305b8
+   3056e:	6d 33       	mov	r3,r13
+   30570:	6e d3       	mov	r13,r14
+   30572:	4e 08       	shll2	r14
+   30574:	3e 4c       	add	r4,r14
+   30576:	84 e1       	mov.b	@(1,r14),r0
+   30578:	6e 0c       	extu.b	r0,r14
+   3057a:	3e d0       	cmp/eq	r13,r14
+   3057c:	89 1b       	bt	0x305b6
+   3057e:	a0 11       	bra	0x305a4
+   30580:	e9 00       	mov	#0,r9
+   30582:	00 ff       	mac.l	@r15+,@r0+
+   30584:	61 e3       	mov	r14,r1
+   30586:	41 08       	shll2	r1
+   30588:	31 4c       	add	r4,r1
+   3058a:	6b e3       	mov	r14,r11
+   3058c:	85 11       	mov.w	@(2,r1),r0
+   3058e:	6c 03       	mov	r0,r12
+   30590:	84 11       	mov.b	@(1,r1),r0
+   30592:	6e 0c       	extu.b	r0,r14
+   30594:	85 51       	mov.w	@(2,r5),r0
+   30596:	3c 00       	cmp/eq	r0,r12
+   30598:	8b 01       	bf	0x3059e
+   3059a:	3e d0       	cmp/eq	r13,r14
+   3059c:	8b 01       	bf	0x305a2
+   3059e:	a0 05       	bra	0x305ac
+   305a0:	6a b3       	mov	r11,r10
+   305a2:	79 01       	add	#1,r9
+   305a4:	84 51       	mov.b	@(1,r5),r0
+   305a6:	60 0c       	extu.b	r0,r0
+   305a8:	39 03       	cmp/ge	r0,r9
+   305aa:	8b eb       	bf	0x30584
+   305ac:	85 51       	mov.w	@(2,r5),r0
+   305ae:	3c 00       	cmp/eq	r0,r12
+   305b0:	89 01       	bt	0x305b6
+   305b2:	a0 03       	bra	0x305bc
+   305b4:	6a b3       	mov	r11,r10
+   305b6:	7d ff       	add	#-1,r13
+   305b8:	4d 11       	cmp/pz	r13
+   305ba:	89 d9       	bt	0x30570
+   305bc:	26 c1       	mov.w	r12,@r6
+   305be:	27 a0       	mov.b	r10,@r7
+   305c0:	7f 04       	add	#4,r15
+   305c2:	69 f6       	mov.l	@r15+,r9
+   305c4:	6a f6       	mov.l	@r15+,r10
+   305c6:	6b f6       	mov.l	@r15+,r11
+   305c8:	6c f6       	mov.l	@r15+,r12
+   305ca:	6d f6       	mov.l	@r15+,r13
+   305cc:	00 0b       	rts	
+   305ce:	6e f6       	mov.l	@r15+,r14
+

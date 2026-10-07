@@ -94,7 +94,7 @@ public class ApplyCanEvidence extends GhidraScript {
             curve.add(ByteDataType.dataType, "reserved", null);
             curve.add(new PointerDataType(FloatDataType.dataType, 4), "axis", null);
             curve.add(new PointerDataType(FloatDataType.dataType, 4), "values", null);
-            for (long a : new long[]{0xa2218,0xa2224,0xa2230,0xa2484,0xa2490}) {
+            for (long a : new long[]{0xa2218,0xa2224,0xa2230,0xa2484,0xa2490,0xa36ac,0xa36b8,0xa36c4,0xa36d0,0xa36dc,0xa36e8}) {
                 int n = getShort(at(a)) & 0xffff;
                 long xp = getInt(at(a+4)) & 0xffffffffL, vp = getInt(at(a+8)) & 0xffffffffL;
                 defineTable(a, curve, 1);
@@ -112,6 +112,14 @@ public class ApplyCanEvidence extends GhidraScript {
             defineTable(0x378cc, descriptor, 9);
             defineTable(0x379cc, descriptor, 8);
         } else {
+            // Executed discrete-output slot mask, nominal rows and descriptors.
+            defineTable(0x5cce8, ByteDataType.dataType, 11);
+            defineTable(0x70014, new ArrayDataType(ByteDataType.dataType, 6, 1), 12);
+            defineTable(0x5f7dc, new PointerDataType(null, 4), 15);
+            // Executed periodic task phase tables: three independent rows of 8.
+            defineTable(0x5cc28, new PointerDataType(null, 4), 8);
+            defineTable(0x5cc48, new PointerDataType(null, 4), 8);
+            defineTable(0x5cc68, new PointerDataType(null, 4), 8);
             defineTable(0x5c0f0, new PointerDataType(null, 4), 16);
             defineTable(0x5c130, new PointerDataType(null, 4), 16);
             defineTable(0x76cbc, new PointerDataType(null, 4), 26);
@@ -148,6 +156,18 @@ public class ApplyCanEvidence extends GhidraScript {
             defineTable(0x75144, ByteDataType.dataType, 17);
             defineTable(0x75155, ByteDataType.dataType, 17);
             defineTable(0x75166, ByteDataType.dataType, 7);
+            defineTable(0x5cd1c, ByteDataType.dataType, 13);
+            defineTable(0x5c80e, ByteDataType.dataType, 4);
+            defineTable(0x5c59c, ByteDataType.dataType, 4);
+            defineTable(0x5c826, ByteDataType.dataType, 4);
+            defineTable(0x5c5c0, ByteDataType.dataType, 4);
+            defineTable(0x70320, ByteDataType.dataType, 7);
+            defineTable(0x70327, ByteDataType.dataType, 5);
+            defineTable(0x7032c, ByteDataType.dataType, 5);
+            defineTable(0x70331, ByteDataType.dataType, 43);
+            defineTable(0x7035c, ByteDataType.dataType, 19);
+            defineTable(0x7036f, ByteDataType.dataType, 19);
+            defineTable(0x70382, ByteDataType.dataType, 31);
             defineTable(0x70b24, ByteDataType.dataType, 9);
             defineTable(0x70b2d, ByteDataType.dataType, 7);
             defineTable(0x70b34, ByteDataType.dataType, 5);
@@ -183,6 +203,18 @@ public class ApplyCanEvidence extends GhidraScript {
             defineTable(0x7533c, WordDataType.dataType, 12 * 5 * 24);
             defineTable(0x7532c, WordDataType.dataType, 5);
             defineTable(0x75336, ByteDataType.dataType, 5);
+            // Four threshold producers and nine banks of ten 48-byte curves.
+            defineTable(0x5de90, new PointerDataType(null, 4), 4);
+            defineTable(0x73c34, ByteDataType.dataType, 6);
+            defineTable(0x73c3a, WordDataType.dataType, 370);
+            defineTable(0xffff9b68L, WordDataType.dataType, 60);
+            defineTable(0x73f20, ByteDataType.dataType, 3);
+            defineTable(0x73f24, WordDataType.dataType, 144);
+            defineTable(0x77314, WordDataType.dataType, 8);
+            defineTable(0x5deac, WordDataType.dataType, 6);
+            defineTable(0x7512c, WordDataType.dataType, 10);
+            defineTable(0xffff9c14L, WordDataType.dataType, 30);
+            defineTable(0x7404c, WordDataType.dataType, 9 * 10 * 24);
         }
         int count = 0;
         for (String line : Files.readAllLines(Path.of(getScriptArgs()[0]))) {

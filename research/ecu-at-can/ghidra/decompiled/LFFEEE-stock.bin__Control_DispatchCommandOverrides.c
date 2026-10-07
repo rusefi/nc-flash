@@ -27,7 +27,7 @@ void Control_DispatchCommandOverrides(void)
   float fVar18;
   undefined1 local_2c;
   
-  fVar16 = (float)(*(code *)PTR_FUN_000249f0)(PTR_DAT_000249ec);
+  fVar16 = (float)(*(code *)PTR_FUN_000249f0)(PTR_Control_RawFirstPublished_000249ec);
   fVar17 = (float)(*(code *)PTR_FUN_000249f0)(PTR_DAT_000249f4);
   fVar18 = *(float *)PTR_Control_FilteredLocalSource_000249f8;
   if (fVar18 < *(float *)PTR_DAT_000249fc) {
@@ -71,7 +71,7 @@ void Control_DispatchCommandOverrides(void)
   else {
     *PTR_Control_ThresholdState_568C_00024a28 = 1;
   }
-  uVar6 = (*(code *)PTR_FUN_00024bdc)(PTR_DAT_00024bd8);
+  uVar6 = (*(code *)PTR_FUN_00024bdc)(PTR_Control_FilteredModeInput_00024bd8);
   puVar5 = PTR_Protected_ReadByteOrDefault_00024be4;
   cVar1 = *PTR_Control_QualifiedSerialFeedback_00024be0;
   cVar7 = (*(code *)PTR_Protected_ReadByteOrDefault_00024be4)(PTR_DAT_00024be8,0);

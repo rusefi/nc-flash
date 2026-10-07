@@ -1,0 +1,57 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00052d8c <.data+0x52d8c>:
+   52d8c:	2f e6       	mov.l	r14,@-r15
+   52d8e:	2f d6       	mov.l	r13,@-r15
+   52d90:	2f c6       	mov.l	r12,@-r15
+   52d92:	ec 00       	mov	#0,r12
+   52d94:	2f b6       	mov.l	r11,@-r15
+   52d96:	6e c3       	mov	r12,r14
+   52d98:	d3 2a       	mov.l	0x52e44,r3	! ffff84a0
+   52d9a:	eb 05       	mov	#5,r11
+   52d9c:	2f a6       	mov.l	r10,@-r15
+   52d9e:	2f 96       	mov.l	r9,@-r15
+   52da0:	2f 86       	mov.l	r8,@-r15
+   52da2:	4f 22       	sts.l	pr,@-r15
+   52da4:	6a 30       	mov.b	@r3,r10
+   52da6:	98 48       	mov.w	0x52e3a,r8	! a5cf
+   52da8:	99 4a       	mov.w	0x52e40,r9	! a5c5
+   52daa:	60 e3       	mov	r14,r0
+   52dac:	0d 9c       	mov.b	@(r0,r9),r13
+   52dae:	03 8c       	mov.b	@(r0,r8),r3
+   52db0:	60 3c       	extu.b	r3,r0
+   52db2:	88 01       	cmp/eq	#1,r0
+   52db4:	8f 02       	bf.s	0x52dbc
+   52db6:	64 ac       	extu.b	r10,r4
+   52db8:	90 40       	mov.w	0x52e3c,r0	! a5ca
+   52dba:	0d ec       	mov.b	@(r0,r14),r13
+   52dbc:	60 43       	mov	r4,r0
+   52dbe:	88 01       	cmp/eq	#1,r0
+   52dc0:	89 02       	bt	0x52dc8
+   52dc2:	60 43       	mov	r4,r0
+   52dc4:	88 04       	cmp/eq	#4,r0
+   52dc6:	8b 00       	bf	0x52dca
+   52dc8:	6d c3       	mov	r12,r13
+   52dca:	65 d3       	mov	r13,r5
+   52dcc:	d2 1e       	mov.l	0x52e48,r2	! 18728
+   52dce:	42 0b       	jsr	@r2
+   52dd0:	64 e3       	mov	r14,r4
+   52dd2:	90 34       	mov.w	0x52e3e,r0	! a5c0
+   52dd4:	0e d4       	mov.b	r13,@(r0,r14)
+   52dd6:	7e 01       	add	#1,r14
+   52dd8:	3e b3       	cmp/ge	r11,r14
+   52dda:	8b e6       	bf	0x52daa
+   52ddc:	4f 26       	lds.l	@r15+,pr
+   52dde:	68 f6       	mov.l	@r15+,r8
+   52de0:	69 f6       	mov.l	@r15+,r9
+   52de2:	6a f6       	mov.l	@r15+,r10
+   52de4:	6b f6       	mov.l	@r15+,r11
+   52de6:	6c f6       	mov.l	@r15+,r12
+   52de8:	6d f6       	mov.l	@r15+,r13
+   52dea:	00 0b       	rts	
+   52dec:	6e f6       	mov.l	@r15+,r14
+

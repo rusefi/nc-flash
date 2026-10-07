@@ -1,0 +1,403 @@
+{
+  "status": "PASS",
+  "scope": "Recompute selected actual-return models and verify captured-task trace prefixes.",
+  "baseline": {
+    "task_calls": 256,
+    "capture_returns": 512,
+    "measurement_checks": 256,
+    "paired_packet_decode_checks": 256,
+    "whole_ram_ack_checks": 7,
+    "existing_whole_ram_command_checks": 512,
+    "selected_gate_checks": 128,
+    "input_producer_checks": 128,
+    "creations": [
+      {
+        "call": 93,
+        "payload": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "admitted_numeric_requests": [
+      {
+        "call": 167,
+        "source": 306,
+        "word": 521,
+        "normalized": 9.0
+      },
+      {
+        "call": 168,
+        "source": 306,
+        "word": 521,
+        "normalized": 9.0
+      }
+    ],
+    "boundary_checks": {
+      "0x1fb8c": 128,
+      "0x32614": 80,
+      "0x4e036": 1,
+      "0x4e0ee": 44
+    },
+    "phase_successes": [],
+    "numeric_candidates": [
+      {
+        "call": 167,
+        "inputs": [
+          0,
+          7984,
+          39444,
+          19722,
+          0,
+          0
+        ],
+        "request": 494
+      }
+    ],
+    "state_changes": [
+      {
+        "call": 0,
+        "managed_states": [],
+        "source": 32767,
+        "phases": []
+      },
+      {
+        "call": 93,
+        "managed_states": [
+          2
+        ],
+        "source": 32767,
+        "phases": [
+          0
+        ]
+      },
+      {
+        "call": 166,
+        "managed_states": [
+          2
+        ],
+        "source": 32767,
+        "phases": [
+          1
+        ]
+      },
+      {
+        "call": 167,
+        "managed_states": [
+          3
+        ],
+        "source": 306,
+        "phases": [
+          1
+        ]
+      },
+      {
+        "call": 169,
+        "managed_states": [
+          4
+        ],
+        "source": 32767,
+        "phases": [
+          1
+        ]
+      }
+    ],
+    "final_state": {
+      "0x8007": 3,
+      "0x8080": 6,
+      "0x8081": 1,
+      "0x8084": 1,
+      "0x8088": 2,
+      "0x84f4": 0,
+      "0x84f5": 2,
+      "0x916f": 0,
+      "0x9410": 7,
+      "0x9545": 130,
+      "0x96c4": 0,
+      "0x96c5": 1,
+      "0x96c6": 2,
+      "0x9c87": 0,
+      "0x9c88": 0,
+      "0x9c8a": 0,
+      "0xa1ac": 0,
+      "0xa2b8": 2,
+      "0xa2b9": 0,
+      "0xa2ba": 1,
+      "request_word_915a": 32767,
+      "first_list_count_a202": 1,
+      "ramp_timers_8115": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "primary_timer_phase_8494": 0,
+      "heap_first_header_9f3c": 4278583046,
+      "managed": [
+        {
+          "index": 0,
+          "pointer": "0xffff9f40",
+          "entry": [
+            255,
+            255,
+            159,
+            64,
+            0,
+            7,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "record": [
+            4,
+            0,
+            2,
+            0,
+            0,
+            0,
+            1,
+            238,
+            32,
+            0,
+            238,
+            14,
+            3,
+            0,
+            154,
+            20,
+            77,
+            10,
+            154,
+            20
+          ]
+        }
+      ],
+      "phases": [
+        {
+          "index": 0,
+          "bytes": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  "approach": {
+    "task_calls": 512,
+    "capture_returns": 1024,
+    "measurement_checks": 512,
+    "paired_packet_decode_checks": 512,
+    "whole_ram_ack_checks": 10,
+    "existing_whole_ram_command_checks": 1024,
+    "selected_gate_checks": 256,
+    "input_producer_checks": 256,
+    "creations": [
+      {
+        "call": 93,
+        "payload": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "admitted_numeric_requests": [
+      {
+        "call": 167,
+        "source": 306,
+        "word": 521,
+        "normalized": 9.0
+      },
+      {
+        "call": 168,
+        "source": 306,
+        "word": 521,
+        "normalized": 9.0
+      }
+    ],
+    "boundary_checks": {
+      "0x1fb8c": 256,
+      "0x32614": 93,
+      "0x4e036": 1,
+      "0x4e0ee": 71
+    },
+    "phase_successes": [
+      {
+        "call": 280,
+        "index": 0,
+        "inputs": [
+          0,
+          0,
+          7,
+          0,
+          14446,
+          14327,
+          14583,
+          0,
+          92,
+          0
+        ]
+      }
+    ],
+    "numeric_candidates": [
+      {
+        "call": 167,
+        "inputs": [
+          0,
+          7984,
+          39444,
+          19722,
+          0,
+          0
+        ],
+        "request": 494
+      }
+    ],
+    "state_changes": [
+      {
+        "call": 0,
+        "managed_states": [],
+        "source": 32767,
+        "phases": []
+      },
+      {
+        "call": 93,
+        "managed_states": [
+          2
+        ],
+        "source": 32767,
+        "phases": [
+          0
+        ]
+      },
+      {
+        "call": 166,
+        "managed_states": [
+          2
+        ],
+        "source": 32767,
+        "phases": [
+          1
+        ]
+      },
+      {
+        "call": 167,
+        "managed_states": [
+          3
+        ],
+        "source": 306,
+        "phases": [
+          1
+        ]
+      },
+      {
+        "call": 169,
+        "managed_states": [
+          4
+        ],
+        "source": 32767,
+        "phases": [
+          1
+        ]
+      },
+      {
+        "call": 280,
+        "managed_states": [
+          4
+        ],
+        "source": 32767,
+        "phases": [
+          2
+        ]
+      },
+      {
+        "call": 310,
+        "managed_states": [
+          4
+        ],
+        "source": 32767,
+        "phases": [
+          3
+        ]
+      },
+      {
+        "call": 311,
+        "managed_states": [],
+        "source": 32767,
+        "phases": []
+      }
+    ],
+    "final_state": {
+      "0x8007": 3,
+      "0x8080": 6,
+      "0x8081": 1,
+      "0x8084": 1,
+      "0x8088": 1,
+      "0x84f4": 0,
+      "0x84f5": 2,
+      "0x916f": 0,
+      "0x9410": 7,
+      "0x9545": 130,
+      "0x96c4": 1,
+      "0x96c5": 0,
+      "0x96c6": 0,
+      "0x9c87": 0,
+      "0x9c88": 0,
+      "0x9c8a": 0,
+      "0xa1ac": 0,
+      "0xa2b8": 1,
+      "0xa2b9": 1,
+      "0xa2ba": 0,
+      "request_word_915a": 32767,
+      "first_list_count_a202": 0,
+      "ramp_timers_8115": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "primary_timer_phase_8494": 0,
+      "heap_first_header_9f3c": 8388607,
+      "managed": [],
+      "phases": []
+    },
+    "retirement_call": 311,
+    "further_idle_tasks": 200
+  },
+  "baseline_prior_256_prefix_identical": true,
+  "approach_256_prefix_identical": true
+}

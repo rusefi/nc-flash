@@ -9,7 +9,7 @@ void Control_ScaleRetainedBaselineSource(void)
   undefined4 uVar1;
   float fVar2;
   
-  uVar1 = (*(code *)PTR_FUN_00058c54)(PTR_DAT_00058c50);
+  uVar1 = (*(code *)PTR_FUN_00058c54)(PTR_SpeedCandidate_ProtectedSelected_00058c50);
   fVar2 = (float)(*(code *)PTR_Lookup_FloatCurve_00058c5c)(uVar1,DAT_00058c58);
   *(float *)PTR_Control_BaselineSourceScale_00058c60 = fVar2;
   *(float *)PTR_Control_ScaledRetainedBaselineSource_00058c68 =

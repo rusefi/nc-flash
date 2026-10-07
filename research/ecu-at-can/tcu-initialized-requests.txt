@@ -1,0 +1,198 @@
+TCU initialized groups inside complete application tasks — 2026-10-06
+====================================================================
+All three objectives remain: ECU/AT CAN integration, deep traction integration,
+and NC roof folding AND unfolding including interruption/resume/reversal,
+timeout, L/R synchronization and fault recovery. No extra user DSC/roof images,
+captures or bench evidence. No staging/commit/push authorization.
+
+Verified status:32 baseline tasks and352 timer/task pairs completed; all
+six phase records retire by321 and30 further tasks remain idle.4132 direct
+wholeRAM and85 actual acknowledgement boundaries pass. Details/limits below.
+
+Experiment setup
+----------------
+probe_tcu_initialized_requests.py reuses probe_tcu_periodic_request and its
+complete126EC/1E5F6 task runner. verify_tcu_phase_retirement.full_fixture now
+optionally initializes a provided machine through the existing initializer
+pipeline; its old no-argument fixture remains unchanged. No copied pipeline.
+Original heap/manager initialization, then all62 original functions from
+ROM table1E2B4..1E3A8, execute on the SAME ApplicationRegisters object.
+This class already inherits SHRotate; no new ISA or ROM modification.
+Mode8007=3,stage84F5=2,phase84F4=0 are explicit post-init task-entry fixtures.
+This does not execute the full boot caller or establish physical task cadence.
+
+Observer retains every original31524 event1 six-byte payload at entry and the
+phase/managed ring snapshots before/after its actual return. It also records
+31C18 group/index acknowledgement arguments, retirement callbacks30B82/30A9E/
+31168, and prior selected-field gate and wholeRAM command-boundary checks.
+No creation, acknowledgement or periodic-service event is directly injected.
+Initial uninitialized RAM and explicit HCAN/ADC/GPIO/port fixtures retain their
+prior limitations; no remote-controller or physical-actuator proof follows.
+
+Reproduce: python research/ecu-at-can/probe_tcu_initialized_requests.py
+Result tcu-initialized-requests-probe.json. Initial32-task run completed;
+payloads, admitted records and actual overlap are verified below.
+
+Initial executed result and independent checks
+----------------------------------------------
+All32 complete126EC task calls returned. Original48F20->31524event1 creates:
+ call1 payload[u16 0,0,0], call5 [1,2,0], call9 [2,2,0].
+Actual31524 returns to48FAC. Phase-ring and managed-ring counts increase1/2/3;
+all managed groups are7, request codes0/1/2, allocated at distinct heap records.
+Manager state is2 afterfirst creation,3 aftersecond/third. The message queue
+is empty after each creation/task. These are original policy-generated calls,
+not injected event1. Selector class8080 becomes6, accepted8081 advances0->1->2->3,
+requested8084=5. No mechanical gear attribution is made.
+
+25 original31C18 calls acknowledge various groups for indices0/1/2. No record
+retires in32 tasks; all three managed requests remainstate2. Counts/records
+are stable throughcall31. There is no proof of completed shifts/reductions.
+This corrects any inference from the earlier uninitialized-manager baseline:
+proper initialization now produces real records, not merely messages.
+
+New independent ack_model in verify_tcu_phase_retirement.py implements existing
+verified group mapping and required-group policy, exact1 completion-latch gate,
+head-then-tail retirement and the three capture-state retirement callbacks.
+It is a model only; does not execute ROM or use observed outputs as expected
+values. At each real31C18 return, the observer compares all nonzero application
+RAM (addresses>=FFFF0000, synthetic stack below), R0 return and callback order.
+All25 actual boundaries PASS. Original command-boundary64 and selected-gate16
+checks remain active inthese32 tasks. Direct original31C18 checks PASS4132
+wholeRAM cases:4096 bitmap/index/phase combinations plus36 nonbinary ack/latch/
+code cases. The exact1 latch is distinct from nonzero ack bytes.
+Reproduce python research/ecu-at-can/verify_tcu_initialized_requests.py;
+result tcu-initialized-requests-verification.json.
+
+Separate timer interleave experiment (completed)
+--------------------------------------------
+The32-task baseline does not run the separate11014 primary timer wheel.
+Earlier phase-retirement experiments explicitly called that wheel before
+phase/event service. A160-call experiment now calls original11014 once before
+each complete126EC task on a fresh initialized object. It supplies no phase,
+request, acknowledgement or measurement-state writes. The1:1 timer/task ratio
+is an explicit experiment, NOT measured interrupt/task cadence.
+Result target tcu-initialized-requests-timer-probe.json; reproduce by importing
+probe_tcu_initialized_requests.main and calling cycles=160,timer=True,
+filename='tcu-initialized-requests-timer-probe.json'. Actual31C18 wholeRAM and
+prior task-boundary checks remain enabled. Observed and verified outcomes follow below.
+
+160 timer/task pairs completed; cleanup continuation follows
+-----------------------------------------------------------------
+All160 explicit11014->126EC pairs return; six natural event1 calls and56
+original acknowledgements. All56 actual31C18 wholeRAM/return/callback checks
+pass. Firstthree ascending group7 requests retire together atcall29 when new
+payload[7,10,0] arrives; original acknowledgements and allthree retirement
+callbacks occur for eachcode0/1/2. This new code7/op10 phase record creates
+NO managed numeric request, consistent with existing4C880 operation filtering.
+It advances phase1 at30,phase2 at72, retires102. New payload[6,0,0] at105
+creates group8;[5,1,0] at109 creates a second concurrent group8 request.
+Code6 state3 at145,state5 at147, retires149. Code5 state3 at149,state5 at151,
+still present at159. Observed numeric record+4 values remainzero in these
+fixture inputs; these state transitions do not prove a nonzero reduction.
+The above are observed trace results; additional saved-data assertions follow.
+
+The next256-pair fresh run also captures published915A and first-list count
+A202. It preserves the same external samples and explicit1:1 schedule; no
+measurement/phase/request/ack state injection to force cleanup. Result target
+ tcu-initialized-requests-timer-final.json. Compare common first160 rows to the
+saved shorter run, ignoring only the two newly added snapshot fields. Do not
+rerun the earlier missing-initialization lead or infer real cadence.
+
+256 pairs complete; remaining hold is a bounded timer expectation
+----------------------------------------------------------------
+256/256 returned, six creations,59 wholeRAM-checked acknowledgements. At182,
+phase index5/code5 reachesphase3 with nine of ten acknowledgements; onlygroup5
+is absent. Its managed record remainsstate5 through255. All published915A
+samples are7FFF (withdrawn), first-listcount1 remains; no numeric reduction.
+Do not label this a deadlock or bypass the remaining request.
+
+Original4CF08 compares byte8115[record+12] against4D4CC duration selection.
+Current code5/op1/index0 selects originalROM763FC=55hex=85decimal.
+Original11014 increments these timers on eight of16 slots; state5 entry at151
+resets its timer. Under the explicit1:1 interleave, expected elapsed85 is
+reached at320 and the next manager service is321. This was a prediction at this point; the final
+result below verifies it. The352-pair run records all12 ramp timers,
+primary phase8494 and heap header9F3C as well, so timer expiry/next-service and
+post-release idle can be checked. It retains exact earlier inputs, no forced
+counter/phase/ack writes. Result tcu-initialized-requests-timer-completion.json.
+The previous256 trace tcu-initialized-requests-timer-final.json is retained as
+an intermediate length despite its historical filename; not final closure.
+Source tcu-request-timing.txt and original4CF08/4D4CC disassembly/calibration;
+no physical timer duration inferred. GNU disassembly already in disassembly.txt.
+
+Final352-pair result: predicted release and continued idle VERIFIED
+-----------------------------------------------------------------
+All352 original11014->126EC pairs return. There are six natural creations and
+60 actual31C18 acknowledgements, each checked against independent wholeRAM,
+return-value and ordered-retirement-callback expectations. Actual timer8119
+resets0 atstate5 entry151, increments on even calls, reaches85 at320. The
+request is stillstate5 after320; next manager service at321 releases it and
+queues the final original31524 event3:31C18(index5,group5).
+Allthree retirement callbacks execute forcode5. From321 through351:
+  managerA2B8=1; phase dispatcher8088=1;
+  managercountA2BA=0, phasecount96C5=0, first-listcountA202=0;
+  queueA1AC=0; phasehead96C4=6, periodicphase96C6=0;
+  no managed or phase records remain in membership;
+  free heap9F3C=007FFFFF, identical to initial free heap.
+Thirty further task calls after321 stay idle; no recreation is observed.
+
+All six phase records retire with original acknowledgements:
+ code0/1/2 at29; code7 at102; code6 at149; code5 at321.
+All915A snapshots remain7FFF throughout352 pairs. This verifies overlapping
+allocation, replacement/retirement, timer expiry and cleanup under this input
+fixture, NOT a nonzero CAN216 reduction or vehicle operation. General queue
+saturation/partial admission, arbitrary overlap, real cadence, hardware reset,
+physical sensors/units/actuation and persistence are not established.
+
+Final python research/ecu-at-can/verify_tcu_initialized_requests.py: PASS.
+Saved tcu-initialized-requests-verification.json contains4132 directwholeRAM
+cases,32 no-timer tasks plus352 timer/task pairs,85 actualwholeRAM ack checks,
+768 priorwholeRAM command boundaries,192 selectedgate checks. First160 and256
+rows match the preserved shorter runs, excluding only added snapshot fields.
+Only the new352 trace records elapsed timers; earlier release prediction is
+now independently checked against the actual timer values and manager service.
+To reproduce final trace from repository root:
+ python -c "import sys;sys.path.insert(0,'research/ecu-at-can');import probe_tcu_initialized_requests as p;p.main(cycles=352,timer=True,filename='tcu-initialized-requests-timer-completion.json')"
+Then run the verifier above. Baseline reproduction uses the script's default
+main;160/256 intermediate traces remain reproducible via the same parameters.
+Python3.14.3; unchanged examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+No production code, ROM or shared ISA changes. New model only implements the
+already documented31C18 policy; the original function/callbacks still execute.
+
+Next concrete action and independent broader scopes
+---------------------------------------------------
+ECU/TCU: add original capture-history initializers20658 and211C4 to this
+initialized task fixture, then feed original179A8/17A58 callbacks explicit
+monotonic timestamps. Observe actual2124C/2086C/2117C call order/publication
+inside126EC; reuse measurement/reference-source/reference-policy models.
+The current fixture supplies no capture events and proves no nonzero numeric
+output. Connect nonzero source acquisition to natural requests and CAN216/ECU
+boundaries without direct80EA/80EE/9218/request/phase writes. Existing older
+capture tests explicitly overrode ages810C/810D; do not silently copy these
+into a claimed original-callback/task lifecycle. Begin with existing source
+interval12160 and measured intervals5890/6490 as test inputs only. Physical
+identities, units, real task ratio, queue capacity and persistence remain open.
+
+Traction: control-acquired-qualification.txt owns120 acquired-input/event2
+pairs, six raw publisherwholeRAM and121 activity checks. CAN211/21A sender/
+units, real source cadence, remote DSC internals and physical actuation remain
+unproved. Next relevant local CAN/control-boundary integration; no unsupported
+sender or throttle/fuel/electrical attribution. No extra DSC evidence available.
+Roof: factory documentation, candidate signal mappings and missing OEM receiver
+remain distinct; use roof-revision-source-audit.txt/roof-component-inspection.txt.
+Both folding and unfolding, interruption/resume/reversal, timeout, L/R sync and
+fault recovery remain open. Next new applicable full factory source or OEM
+controller/capture/bench evidence. User has none; do not repeat that question
+or exhausted source listings. This TCU milestone does not close either scope.
+
+Current Ghidra save/restore:1908 annotations (833ECU/1075TCU),964 identical
+exports and11 project hashes verified before/after independent read-only reopen.
+Both LFFEEE-stock.bin and LFG1TF000.bin; Ghidra12.1.3PUBLIC/Java21.0.10.
+Archive 11,000,222 bytes SHA256
+450519af14690999a7069fbc242b17db3f47c473aa75ddc7e7898d7dffea359c.
+Exact inventory/restore result: ghidra/snapshot.json and restore-verification.json.
+Eight new artifacts are Git-eligible; three changed/new scripts compile;
+targeted diff-check passes. Pre-existing mixed index including AD archive.tmp
+preserved. Saved locally; no staging, commit or push performed. Meaningful
+progress this turn; goal remains active, all three broader objectives open.

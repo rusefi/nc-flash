@@ -15,7 +15,7 @@ void Model_CalculateAuxiliaryOffsets(void)
   
   puVar1 = PTR_FUN_00040844;
   uVar3 = (*(code *)PTR_FUN_00040844)(PTR_DAT_00040848);
-  uVar4 = (*(code *)puVar1)(PTR_DAT_0004084c);
+  uVar4 = (*(code *)puVar1)(PTR_Control_RawFirstPublished_0004084c);
   uVar4 = (*(code *)PTR_Lookup_FloatMap2D_00040854)(uVar3,uVar4,PTR_Model_AuxiliaryMap_00040850);
   *(undefined4 *)PTR_Model_CurrentAuxiliaryOffset_00040858 = uVar4;
   uVar4 = (*(code *)PTR_Lookup_FloatMap2D_00040854)

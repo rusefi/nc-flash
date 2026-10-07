@@ -3,9 +3,10 @@
 /* WARNING: Removing unreachable block (ram,0x00020a20) */
 /* WARNING: Removing unreachable block (ram,0x00020a00) */
 /* WARNING: Removing unreachable block (ram,0x00020a9c) */
-/* Runs20CBC/20FAC then fallback(9194bit0/91A6bit4),hold(bit0),stale(ages>=14),or history.
-   Healthy80EA uses18 entries;80EC window extends while cumulative<9238 or selectedcount<5
-   unless92C6bit4.900 branch cases; all original helpers, no stubs. See tcu-reference-source.txt. */
+/* Runs20CBC/20FAC then fallback,hold,stale,history.900 branch cases plus actual task returns in
+   tcu-recovery-reference.txt. Pendingphase retains91A8=10865/index0; captureloss setsbit4,
+   yielding3070 before stale-age branch. Independent entry/cache/register/return checks; fixture
+   cadence only. */
 
 int Reference_SelectMeasuredOrHistorySource(void)
 

@@ -1,0 +1,784 @@
+PDF page 509
+Rev. 3.0, 09/04, page 467 of 1086
+Table 15.2
+Registers (cont)
+ 
+Channel
+ 
+Name
+ 
+Abbreviation
+ 
+R/W
+ Initial
+Value
+ 
+Address*
+2
+ Access
+Size
+ Serial mode register 3
+ SMR3
+ R/W
+ H'00
+ H'FFFFF018
+ Bit rate register 3
+ BRR3
+ R/W
+ H'FF
+ H'FFFFF019
+ Serial control register 3
+ SCR3
+ R/W
+ H'00
+ H'FFFFF01A
+ Transmit data register 3
+ TDR3
+ R/W
+ H'FF
+ H'FFFFF01B
+ Serial status register 3
+ SSR3
+ R/(W) *
+1 H'84
+ H'FFFFF01C
+ Receive data register 3
+ RDR3
+ R
+ H'00
+ H'FFFFF01D
+ 8, 16
+ 3
+ Serial direction control
+register 3
+ SDCR3
+ R/W
+ H'F2
+ H'FFFFF01E
+ 8
+ Serial mode register 4
+ SMR4
+ R/W
+ H'00
+ H'FFFFF020
+ Bit rate register 4
+ BRR4
+ R/W
+ H'FF
+ H'FFFFF021
+ Serial control register 4
+ SCR4
+ R/W
+ H'00
+ H'FFFFF022
+ Transmit data register 4
+ TDR4
+ R/W
+ H'FF
+ H'FFFFF023
+ Serial status register 4
+ SSR4
+ R/(W) *
+1 H'84
+ H'FFFFF024
+ Receive data register 4
+ RDR4
+ R
+ H'00
+ H'FFFFF025
+ 8, 16
+ 4
+ Serial direction control
+register 4
+ SDCR4
+ R/W
+ H'F2
+ H'FFFFF026
+ 8
+Notes: Register access with an internal clock multiplication ratio of 4 requires four or five internal
+clock (φ) cycles for byte access and word access, and eight or nine internal clock (φ) cycles
+for longword access.
+1. Only 0 can be written to clear the flags.
+2. Do not access empty addresses.
+ 
+
+PDF page 787
+Rev. 3.0, 09/04, page 745 of 1086
+Table 21.2
+PFC Registers (cont)
+Name
+Abbreviation
+R/W
+Initial
+Value
+Address
+Access
+Size
+Port L IO register
+PLIOR
+R/W
+H'0000
+H'FFFFF756
+8, 16
+Port L control register H
+PLCRH
+R/W
+H'0000
+H'FFFFF758
+8, 16
+Port L control register L
+PLCRL
+R/W
+H'0000
+H'FFFFF75A
+8, 16
+Port L invert register
+PLIR
+R/W
+H'0000
+H'FFFFF75C
+8, 16
+21.3
+Register Descriptions
+21.3.1
+Port A IO Register (PAIOR)
+Bit:
+15
+14
+13
+12
+11
+10
+9
+8
+PA15
+IOR
+PA14
+IOR
+PA13
+IOR
+PA12
+IOR
+PA11
+IOR
+PA10
+IOR
+PA9
+IOR
+PA8
+IOR
+Initial value:
+0
+0
+0
+0
+0
+0
+0
+0
+R/W:
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+Bit:
+7
+6
+5
+4
+3
+2
+1
+0
+PA7
+IOR
+PA6
+IOR
+PA5
+IOR
+PA4
+IOR
+PA3
+IOR
+PA2
+IOR
+PA1
+IOR
+PA0
+IOR
+Initial value:
+0
+0
+0
+0
+0
+0
+0
+0
+R/W:
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+The port A IO register (PAIOR) is a 16-bit readable/writable register that selects the input/output
+direction of the 16 pins in port A. Bits PA15IOR to PA0IOR correspond to pins PA15/RxD0 to
+PA0/TI0A. PAIOR is enabled when port A pins function as general input/output pins (PA15 to
+PA0) or ATU-II input/output pins, and disabled otherwise. For bits 3 to 0, when ATU-II input
+capture input is selected, the PAIOR bits should be cleared to 0.
+When port A pins function as PA15 to PA0 or ATU-II input/output pins, a pin becomes an output
+when the corresponding bit in PAIOR is set to 1, and an input when the bit is cleared to 0.
+PAIOR is initialized to H'0000 by a power-on reset (excluding a WDT power-on reset), and in
+hardware standby mode. It is not initialized in software standby mode or sleep mode.
+
+PDF page 1110
+Rev. 3.0, 09/04, page 1068 of 1086
+Bit Names
+Register
+Name
+Abbrevi-
+ation
+Bit 7
+Bit 6
+Bit 5
+Bit 4
+Bit 3
+Bit 2
+Bit 1
+Bit 0
+Module
+H'FFFFF73E
+—
+—
+—
+—
+—
+—
+—
+—
+H'FFFFF73F
+PCDR
+—
+—
+—
+PC4DR
+PC3DR
+PC2DR
+PC1DR
+PC0DR
+Port C
+H'FFFFF740
+—
+—
+PD13IOR
+PD12IOR
+PD11IOR
+PD10IOR
+PD9IOR
+PD8IOR
+H'FFFFF741
+PDIOR
+PD7IOR
+PD6IOR
+PD5IOR
+PD4IOR
+PD3IOR
+PD2IOR
+PD1IOR
+PD0IOR
+H'FFFFF742
+—
+—
+—
+—
+PD13MD1
+PD13MD0
+—
+PD12MD
+H'FFFFF743
+PDCRH
+—
+PD11MD
+—
+PD10MD
+—
+PD9MD
+—
+PD8MD
+H'FFFFF744
+—
+PD7MD
+—
+PD6MD
+—
+PD5MD
+—
+PD4MD
+H'FFFFF745
+PDCRL
+—
+PD3MD
+—
+PD2MD
+—
+PD1MD
+—
+PD0MD
+H'FFFFF746
+—
+—
+PD13DR
+PD12DR
+PD11DR
+PD10DR
+PD9DR
+PD8DR
+H'FFFFF747
+PDDR
+PD7DR
+PD6DR
+PD5DR
+PD4DR
+PD3DR
+PD2DR
+PD1DR
+PD0DR
+Port D
+H'FFFFF748
+PF15IOR
+PF14IOR
+PF13IOR
+PF12IOR
+PF11IOR
+PF10IOR
+PF9IOR
+PF8IOR
+H'FFFFF749
+PFIOR
+PF7IOR
+PF6IOR
+PF5IOR
+PF4IOR
+PF3IOR
+PF2IOR
+PF1IOR
+PF0IOR
+H'FFFFF74A
+CKHIZ
+PF15MD
+—
+PF14MD
+—
+PF13MD
+—
+PF12MD
+H'FFFFF74B
+PFCRH
+—
+PF11MD
+—
+PF10MD
+—
+PF9MD
+—
+PF8MD
+H'FFFFF74C
+—
+PF7MD
+—
+PF6MD
+PF5MD1
+PF5MD0
+—
+PF4MD
+H'FFFFF74D
+PFCRL
+—
+PF3MD
+—
+PF2MD
+—
+PF1MD
+—
+PF0MD
+H'FFFFF74E
+PF15DR
+PF14DR
+PF13DR
+PF12DR
+PF11DR
+PF10DR
+PF9DR
+PF8DR
+H'FFFFF74F
+PFDR
+PF7DR
+PF6DR
+PF5DR
+PF4DR
+PF3DR
+PF2DR
+PF1DR
+PF0DR
+Port F
+H'FFFFF750
+PE15IOR
+PE14IOR
+PE13IOR
+PE12IOR
+PE11IOR
+PE10IOR
+PE9IOR
+PE8IOR
+H'FFFFF751
+PEIOR
+PE7IOR
+PE6IOR
+PE5IOR
+PE4IOR
+PE3IOR
+PE2IOR
+PE1IOR
+PE0IOR
+H'FFFFF752
+PE15MD
+PE14MD
+PE13MD
+PE12MD
+PE11MD
+PE10MD
+PE9MD
+PE8MD
+H'FFFFF753
+PECR
+PE7MD
+PE6MD
+PE5MD
+PE4MD
+PE3MD
+PE2MD
+PE1MD
+PE0MD
+H'FFFFF754
+PE15DR
+PE14DR
+PE13DR
+PE12DR
+PE11DR
+PE10DR
+PE9DR
+PE8DR
+H'FFFFF755
+PEDR
+PE7DR
+PE6DR
+PE5DR
+PE4DR
+PE3DR
+PE2DR
+PE1DR
+PE0DR
+Port E
+H'FFFFF756
+—
+—
+PL13IOR
+PL12IOR
+PL11IOR
+PL10IOR
+PL9IOR
+PL8IOR
+H'FFFFF757
+PLIOR
+PL7IOR
+PL6IOR
+PL5IOR
+PL4IOR
+PL3IOR
+PL2IOR
+PL1IOR
+PL0IOR
+H'FFFFF758
+—
+—
+—
+—
+PL13MD1
+PL13MD0
+—
+PL12MD
+H'FFFFF759
+PLCRH
+PL11MD1
+PL11MD0
+PL10MD1
+PL10MD0
+PL9MD1
+PL9MD0
+—
+PL8MD
+H'FFFFF75A
+—
+PL7MD
+—
+PL6MD
+—
+PL5MD
+—
+PL4MD
+H'FFFFF75B
+PLCRL
+—
+PL3MD
+PL2MD1
+PL2MD0
+PL1MD1
+PL1MD0
+—
+PL0MD0
+H'FFFFF75C
+—
+—
+—
+—
+—
+—
+PL9IR
+PL8IR
+H'FFFFF75D
+PLIR
+PL7IR
+—
+—
+—
+—
+—
+—
+—
+H'FFFFF75E
+—
+—
+PL13DR
+PL12DR
+PL11DR
+PL10DR
+PL9DR
+PL8DR
+H'FFFFF75F
+PLDR
+PL7DR
+PL6DR
+PL5DR
+PL4DR
+PL3DR
+PL2DR
+PL1DR
+PL0DR
+Port L
+H'FFFFF760
+—
+—
+—
+—
+—
+—
+—
+—
+H'FFFFF761
+PGIOR
+—
+—
+—
+—
+PG3IOR
+PG2IOR
+PG1IOR
+PG0IOR
+H'FFFFF762
+—
+—
+—
+—
+—
+—
+—
+—
+H'FFFFF763
+PGCR
+PG3MD1
+PG3MD0
+PG2MD1
+PG2MD0
+—
+PG1MD
+PG0MD1
+PG0MD0
+H'FFFFF764
+—
+—
+—
+—
+—
+—
+—
+—
+H'FFFFF765
+PGDR
+—
+—
+—
+—
+PG3DR
+PG2DR
+PG1DR
+PG0DR
+Port G
+
+PDF page 528
+Rev. 3.0, 09/04, page 486 of 1086
+Table 15.6
+Maximum Bit Rates during External Clock Input (Asynchronous Mode)
+ Pφ (MHz)
+ External Input Clock (MHz)
+ Maximum Bit Rate (Bits/s)
+ 10
+ 2.5000
+ 156250
+ 11.0592
+ 2.7648
+ 172800
+ 12
+ 3.0000
+ 187500
+ 12.288
+ 3.0720
+ 192000
+ 14
+ 3.5000
+ 218750
+ 14.7456
+ 3.6864
+ 230400
+ 16
+ 4.0000
+ 250000
+ 17.2032
+ 4.3008
+ 268800
+ 18
+ 4.5000
+ 281250
+ 18.432
+ 4.6080
+ 288000
+ 19.6608
+ 4.9152
+ 307200
+ 20
+ 5.0000
+ 312500
+ 
+Table 15.7
+Maximum Bit Rates during External Clock Input (Clock Synchronous Mode)
+ Pφ (MHz)
+ External Input Clock (MHz)
+ Maximum Bit Rate (Bits/s)
+ 10
+ 1.6667
+ 1666666.7
+ 12
+ 2.0000
+ 2000000.0
+ 14
+ 2.3333
+ 2333333.3
+ 16
+ 2.6667
+ 2666666.7
+ 18
+ 3.0000
+ 3000000.0
+ 20
+ 3.3333
+ 3333333.3
+ 
+15.2.9
+Serial Direction Control Register (SDCR)
+ 
+Bit:
+ 7
+ 6
+ 5
+ 4
+ 3
+ 2
+ 1
+ 0
+ 
+ –
+ –
+ –
+ –
+ DIR
+ –
+ –
+ –
+ 
+Initial value:
+ 1
+ 1
+ 1
+ 1
+ 0
+ 0
+ 1
+ 0
+ 
+R/W:
+ R
+ R
+ R
+ R
+ R/W
+ R
+ R
+ R
+ 
+ The DIR bit in the serial direction control register (SDCR) selects LSB-first or MSB-first transfer.
+With an 8-bit data length, LSB-first/MSB-first selection is available regardless of the
+communication mode. With a 7-bit data length, LSB-first transfer must be selected. The
+description in this section assumes LSB-first transfer.
+
+PDF page 529
+Rev. 3.0, 09/04, page 487 of 1086
+ SDCR is initialized to H'F2 by a power-on reset and in the hardware standby mode. It is not
+initialized by a manual reset and in software standby mode.
+• Bits 7–4—Reserved: The write value should always be 1. If 0 is written to these bits, correct
+operation cannot be guaranteed.
+• Bit 3—Data Transfer Direction (DIR): Selects the serial/parallel conversion format. Valid for
+an 8-bit transmit/receive format.
+ Bit 3: DIR
+ Description
+ 0
+ TDR contents are transmitted in LSB-first order
+(Initial value)
+ Receive data is stored in RDR in LSB-first order
+ 1
+ TDR contents are transmitted in MSB-first order
+ Receive data is stored in RDR in MSB-first order
+ 
+• Bit 2—Reserved: The write value should always be 0. If 1 is written to this bit, correct
+operation cannot be guaranteed.
+• Bit 1—Reserved: This bit is always read as 1, and cannot be modified.
+• Bit 0—Reserved: The write value should always be 0. If 1 is written to this bit, correct
+operation cannot be guaranteed.
+15.2.10 Inversion of SCK Pin Signal
+ The signal input from the SCK pin and the signal output from the SCK pin can be inverted by
+means of a port control register setting. See section 21, Pin function Controller (PFC), for details.

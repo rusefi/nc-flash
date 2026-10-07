@@ -1,0 +1,135 @@
+TCU active/release threshold overlay45AA4
+Verified2026-10-06; Ghidra saved and independently restored
+
+Objective: explain third configured5DE90 threshold producer without losing
+ECU/AT, deep traction, or folding AND unfolding roof requirements. This closes
+the bounded stock45AA4 algorithm/model gap, not upstream inputs, real task
+order, remote controller behavior or physical actuator effects.
+
+IDENTITY AND REPRODUCTION
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Saved synthetic entry44CFE snapshots tcu-fault-selection-snapshots.json SHA256
+16d58c0427de7905b52531ef943cc01b311d1aeeda511eebf33d525362bda943.
+Python3.14.3 standard library, assertions enabled:
+  python research/ecu-at-can/verify_tcu_release_thresholds.py
+Output tcu-release-thresholds-verification.json. Original bounded SHRotate
+interpreter executes every helper; no stubbed pending checks, interpolation,
+software conversion, descriptor builders or selection. Independent models
+observe whole45AA4/46200/47240 inside original4530C and44CFE callers.
+GNU SH objdump2.42 disassembly saved in tcu-release-thresholds-disassembly.txt:
+  LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+    python research/ecu-at-can/disassemble.py \
+    --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+    tcu dis 0x45aa4 0x46200
+Temporary binutils setup/replacement is documented in tcu-class-thresholds.txt;
+no temporary path is the only evidence record.
+
+EXECUTED ADMISSION, ENTRY AND EXIT
+45CE4 admits if class8080 notFF/0/1, signed80EA>=stock7730C=256,
+!(9330&1), and source9B40 not11/12/13/14. Inputs remain numeric identities.
+45D30 calls original31720 pending predicate and31682 on8089.31682 returns0
+for codes0..4 and1 otherwise. Pending and code0..4 blocks the normal entry.
+Normal entry additionally requires !(92D5&80),!(92D3&40),(92D5&1),9338==0,
+and either signed80EA<stock77310=6331 or92C5bit2 set.
+4617C provides alternate entry whenever92D5bit7 AND92C5bit2 are set;
+this bypasses normal entry conditions/pending block, but NOT45CE4 admission.
+45DD0 requests release if no92D5bit7/no92D3bit6 and either
+  no92C5bit2 ANDno92D5bit0, OR9338!=0;
+or461A6 sees92D5bit7 with92C5bit2 clear. No physical fault naming inferred.
+
+EXECUTED RETAINED STATE MACHINE
+45AA4 snapshots active9B64bit0, releasebit1, class8080, accepted8081 and old
+accepted9BEA. If accepted>=old, capture signed80EA bits into9BEC first.
+Admission loss clears active/release. Inactive+entry setsactive andclearsrelease;
+entry and release predicates are NOT both evaluated during that same call.
+Active+release predicate setsrelease; first release resets815D=0. It then
+clears active/release if815D>=ROM73C34[proposal8084] ORaccepted<oldaccepted.
+All six stock duration bytes are122; no milliseconds claim. Active with no
+release predicate clearsrelease immediately. Inactive with false entry holds
+an otherwise inconsistent oldrelease bit: this is covered, not normalized away.
+Preserve other9B64bits. Call46030 withnewactive/release, then45E70 only if
+active1. Finally publish9BEA=accepted and9BF0=class.
+
+46030 HISTORY LATCH
+Keep9BF1bit0 and9BEE when active!=0, signedclass<=signedprevious9BF0,
+accepted<=old9BEA and(accepted==old OR(release!=1 ANDoperation9B3D==5)).
+Otherwise clearbit0 and store0 in9BEE; original5BBEC converts double0.5 to0.
+Then active1, accepted<old, release0 andoperation5 setsbit0 and copies9BEC
+into9BEE, including after the prior reset. Other9BF1bits survive.
+This is a numeric retained-measurement latch, not independently named sensor.
+
+45E70 CURVE CONSTRUCTION
+All ten12byte RAM records9B68+12*i get headers[2,0,0,FFFF].
+release==1: upperi0..4 valuesFFFF/FFFF and install those five pointers,
+operation5/kind6. Lower five values ANDdescriptors remain unchanged, although
+their headers were refreshed. In whole4530C the primary producer previously
+rebuilt lower descriptors; they are not necessarily the prior call's pointers.
+release!=1:460E0 produces each loweri0..4 value, written twice torecordi+5.
+Uppervalue=max_unsigned16((signed(latched9BEE if9BF1bit0 else lower)+192)&FFFF,
+minimum curve(9B3E)). Minimum curve73DCA+16*i; source1 uses73E1A+16*i.
+All ten pointers installed, operation5/kind6. Neither builder nor45AA4 writes
+source9B40. Thus descriptor operation5 is not a source-code5 publication.
+
+460E0 LOWER VALUE
+Arguments:index0..4,flag92D1bit3,axisX9B66,axisY16bit(92F4*2).
+Normal sum: curve73C3A+20*i(axisY) plus
+  if !(9889&20):curve73D02+20*i(axisX)
+  else:curve73E6A+20*i(axisX), pluscurve73ECE+16*i(92F0*2) ifflag==1.
+Source9B40==1 REPLACES that sum with73C9E+20*i(axisY)+73D66+20*i(axisX).
+Original108E6 word interpolation uses unsigned16 axes, clamps endpoints and
+truncates signed interpolation deltas towardzero. Curves have3/4 knots,
+shift0. Builder stores low16 before signed upper baseline calculation.
+
+COVERAGE AND RETAINED EXAMPLE
+5531 direct cases:1323 admission,768 entry/exit/alternate predicates,
+288 history,1800 lower-value calculations,72 builders,1280 whole producers.
+Cases include signed boundaries, exact threshold edges, source priority,
+operation5, active/release combinations and arbitrary preserved descriptor/
+curve contents. All outputs and stack balance match independent models.
+Ten calls retain RAM inside original4530C with class6,previousclass6,
+measurement3000,axis6400,9B66=31,92F4=768, other bank controls explicitlyzero.
+  1 normalentry ->flags1, upper0=1493/lower0=1301.
+  2 release requested with sampled timer50 ->flags3,timerRESET0;
+    upperallFFFF,lower0=652 from rebuilt primary bank.
+  3 release timer121 ->heldflags3.
+  4 timer122 ->flags0,primaryupper0=1211 restored bywhole dispatch.
+  5 normalentry ->flags1 again.
+  6 accepted2->1,operation5 ->historylatch1,saved3000,upper0=3192.
+  7 release withaccepted1->0 ->immediateflags0,timerreset0,latchclear.
+  8 alternatefaultentry(92D5=80,92C5=4) ->flags1.
+  9 alternatefaultrelease(80,0) ->flags3.
+ 10 alternateentrycondition whileactive(81,4) cancelsrelease ->flags1.
+All ten final threshold sets independently match original lookups; fullrows
+include entry/exit fields, descriptors, RAMcurves and allfourproducerstages.
+
+FULL SELECTION CONSEQUENCE
+36 replays:snapshots150/211 xclass0/3/6 xoldflags0/1/3 x92C5=0/4;
+previousclass47240 input9C12 isexplicitlysetequalclass. Whole44CFE then
+original1EAC6 selection-before-limit segment, all inherited checks enabled.
+Fault150/class6/special0: oldflags0 givesproposal4/accepted2/create[1,1,0];
+oldflags1or3 givesproposal1/accepted1/no creation. Special4 retainsproposal4
+andcreation for all three flags. Faultclass3 hasproposal2 or1, no creation;
+class0 unchangedproposal4/create[1,1,0]. Every recovery211 replay gives
+proposal1/accepted1/create[6,8,0]. These bounded injected-state differences
+prove retained overlay CAN change transition selection. Natural entry and
+real scheduler timing are not demonstrated by injecting oldflags/class.
+
+CONTINUATION
+Next ECU/AT:45BA0 ->9B66 history production,815D timer writers, source/class
+and captured-input producers, optional44E14/44F5A adjustments, actual task
+order and naturally produced overlap/composites. Allfour configured threshold
+producers now have independent bounded models; this does not close ECU/AT.
+Advance independent traction59720 ->8118 and72B4/72BC writers; distinguish
+executed ECU/TCU bridge, factory docs, candidate mappings and missing DSC
+sender/logic/physical-output evidence. Roof next PCM transmissiontype and
+matching OEM PRHT receiver evidence; folding ANDunfolding, interruption/resume,
+reversal,timeouts,motor synchronization andfaultrecovery remain open.
+Saved locally, no staging/commit/push. Ghidra persistence verified.
+
+PERSISTENCE
+Ghidra12.1.3 PUBLIC/Java21: ApplyCanEvidence saved572 ECU/814 TCUannotations;
+VerifyCanEvidence readback passed. snapshot.py archived11 files,10,877,242bytes;
+SHA256 f5bed44f8be93d6a3268beb6c2a23b29f5a00b10290392bd6e95f588864b9513.
+Separate release-thresholds-20261006 restore reopenedread-only:all11project
+hashes matched,686 exports(684 functions+2reports) byte-identical.

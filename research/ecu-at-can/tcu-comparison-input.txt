@@ -1,0 +1,188 @@
+TCU comparison input: CAN201/CAN4EC arbitration and retained history
+=================================================================
+2026-10-06. Continues tcu-qualification-lifecycle.txt.
+13,888 direct cases and both320-cycle retained profiles pass. The prior
+320-cycle default baseline matches its saved JSON exactly.
+
+Retained result (both profiles passed)
+-------------------------------------
+Two320-cycle profiles use real ECU CAN201 packing at source/alternate78:
+byte6=156 ->8808=780 ->selected89B0=780 ->809C=19968. CAN215 primary starts25,
+changes100 at cycle100 and returns25 at170. Each preparation and cycle runs
+whole1ADD0 and230F0 before the existing sampled-selector/progress/proposal/
+selection-limit sequence. Original phase manager/timer/request services follow.
+No809C/9340/9342/939E/80F8 result is injected during these profiles.
+
+Without CAN4EC admission, the computed809C stays19968: CAN215939E rises to
+12736 at100 but live80F8 holds7984 through retirement162, updating163. With
+CAN4EC byte0bit2 set and byte2=200 at110,17E74 selects1000 over CAN201780;
+23380 produces25600. The809C jump from19968 to25600 makes2378A reset815B and
+refresh93F0, denying retention for that call. Live80F8 updates to12736 at110
+while phase work is still active. Disabling the remote branch at170 returns
+809C to19968. Both profiles retain the same code1 ->code6/operation8 creation
+and phase retirement sequence, and CAN216 numeric request stays withdrawn.
+
+This distinguishes two ways the previous hold ends: pending work ends, or
+the comparison input changes enough to defeat the timer/capture condition.
+The latter is now driven through real arithmetic and CAN field consumers,
+not by writing the comparison input or capture flags. Sender attribution and
+transport admission for the CAN4EC fixture remain unproved.
+
+Verified source path
+--------------------
+ECU CAN201 byte6 -> original TCU1ACD8/17070 ->8808(value)/880A(validity)
+combines with CAN4EC byte0bit2 and byte2 through175EC/17E74. Selected89B0
+feeds23380 and complete230F0 ->809C, the comparison input used by2378A to
+reset its capture timer and govern live-input retention.
+
+ROM filter/remap/buffer tables independently identify CAN4EC:
+filter index3 at5C8C6 decodes4EC, remap5C8DB=1, copied length5C8E5=7,
+buffer pointer5C8F4=FFFF8F0D. Byte0 is8F0D and byte2 is8F0F. This proves
+which receive buffer is consumed, not the remote sender or physical units.
+The new tests supply received-buffer bytes; controller copy, receipt flags,
+timeout admission and the transmitting module are outside their scope.
+
+175EC sets88C4 to Boolean(buffer byte0 &4),88C5=2 unconditionally.17E74:
+- If88C4==1 AND88C5==2, remote admission is active. Byte2 FF retains old89B0
+  and publishes89B2=1. It does NOT fall back to valid CAN201 in this branch.
+- Otherwise admitted byte2 becomes byte*5 via original10F38 descriptors
+  5C826(5/10,offset0) and5C5C0(1/10,offset0). If880A==2, take the larger of
+  that value and unsigned8808; otherwise use remote alone. Publish89B2=2.
+- Without remote admission, use8808 only when880A==2; otherwise retain old
+  89B0. Copy880A to89B2, including nonstandard input status bytes.
+
+This is a source-selection policy with explicit invalid-value retention.
+Calling175EC is not evidence that a frame was fresh: it always publishes2.
+Full wrapper1ADD0 executes in the retained tests, including all its original
+callees, but only this comparison-source branch is independently modeled.
+Its static caller1C10E marks grouped field flags at8F82/8F88 then tail-calls
+1ADD0. Actual caller/transport admission remains separate work.
+
+Conversion and publication
+--------------------------
+23380 selects constant3200 (ROM76DF8) when92D5 bit3 ORbit7 is set. Otherwise
+it calculates unsigned89B0*256/10 through10D0C signed16 saturation and caps
+at25600. Original5BBEC converts the25600.5 upper-bound constant to25600;
+no helper is stubbed. Healthy0..65535 selected inputs therefore map to
+min(25600,floor(89B0*256/10)). Bit3's CAN201 diagnostic path was previously
+verified; bit7's full producer/qualification path remains open here.
+
+230F0 stores that result to809C at23122, in the delay slot of50AC8 call.
+50AC8 publishesA4D8=floor(809C*10/256),A4DA=4 for either fault bit, otherwise
+1 when89B2==2 and2 for other statuses. Numeric output can remain nonzero while
+status is invalid/held; do not infer validity from the numeric value alone.
+
+Full history and phase policy in230F0
+-----------------------------------
+Before conversion, shift four words934E/9350/9352/9354 and insert OLD809C.
+The13 category thresholds5CD1C are[7,14,22,30,40,50,60,70,85,100,130,170,255]
+multiplied128. Choose the first strictly greater threshold (maxindex12),
+then increment a downward category change once if value>=threshold-640.
+Previous9339 is sign-extended as a byte. Store9339 and compressed9338:
+category/2 when<10, otherwisecategory-5.
+
+short = new809C - signed(old809C)
+long = new809C - signed(old9352), which is now at9354 after shifting.
+Magnitude computation tests the SIGNED LOW16 difference and conditionally
+negates the full subtraction, then sign-extends low16 for comparisons. This
+is not unbounded Python abs(): arbitrary history words can wrap, including
+the negative32768 edge. Randomized checks preserve these exact semantics.
+
+If short magnitude>=25600, clear8199; also set9344 bit1 if long magnitude
+>=2560. If long magnitude<2560 and8199>=6, clear bit1. Other flag bits remain.
+When bit1 is set,9340=0; otherwise store low16 of long difference. Shift25
+words at9358 and insert this new9340 before phase-dependent selection.
+
+For pending phase work with unchanged8089 versus9356:
+  phase>=1 retains9342;
+  phase<1 selects signed maximum(old9342,new9340).
+Otherwise use new9340; when code changed, take the signed maximum of that and
+18 preceding change-history words. Store9342 and update9356 to8089. Both
+current and retained changes are distinct from the qualification limit939E
+and live-input capture93F6/80F8 investigated previously.
+
+Caller and remaining paired-input lead
+-------------------------------------
+A direct-address literal scan alone found no230F0 caller. Original22F3C calls
+22F46, then branches at22F42 to230F0 with PR restoration in the delay slot.
+The first half produces809A/933E from23406 and880C, with history9346 and
+related latch/timer logic. The new verifier executes230F0 separately;809A and
+933E still have their prior explicit lifecycle values. Executing22F3C's whole
+paired update, including23406/880C/92D5bit7 and its task placement, is the next
+concrete step. The disassembly is retained, not just an external scratch path.
+
+Direct validation
+-----------------
+13,888 cases pass:256 enable-byte values,9216 arbitration combinations,
+2816 conversion/flag cases and1600 randomized whole230F0 executions. Whole
+producer assertions cover all history words, categories, change values,
+retained-phase selection, flags, timer and diagnostic publications. Inputs
+include pending/idle work, changed/unchanged code, phase0..3, fault modes,
+arbitrary old words and byte states. This is not full-vehicle simulation.
+
+The first retained test hit a harness counter assertion: source_checks was
+already owned by inherited source-policy observation. Renamed the new counter
+input_source_checks; original source-policy and new arbitration counts stay
+separate. No firmware behavior or helper substitution was changed. Prior to
+that failure all original-body output assertions and manager retirement checks
+had passed. Final retained rerun status is recorded below.
+
+Reproduction and scope
+----------------------
+  python research/ecu-at-can/verify_tcu_comparison_input.py
+Outputs tcu-comparison-input-verification.json. Original excerpts are in
+tcu-comparison-input-disassembly.txt. New observer extends existing integer
+execution; no instruction-emulation changes. The shared retained helper gains
+optional test-instance and pre-policy comparison-update hooks; defaults remain
+unchanged and a complete320-call baseline is compared to the preceding JSON.
+
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+RAM addresses have FFFF prefix. Numeric examples are decimal.
+CAN201 comes from the real ECU encoder using explicit source/alternate78;
+wire byte6=156, converted8808=780 and normal809C=19968. CAN4EC is a separate
+received-buffer fixture whose sender is not identified. CAN201's other
+application consumers, including80E8 production, are not run here;80E8 stays
+at the explicit1000 fixture despite the packet carrying other fields.
+Measurement, references, full-task cadence and other diagnostic inputs remain
+fixtures. No physical selector, throttle or pedal identity is asserted.
+
+The broader ECU/AT goal is not complete. Retain overlap/composite transitions,
+actual task order and physical actuation. Independent traction-control and
+NC PRHT folding/unfolding goals, including interruption/recovery, remain in
+the checkpoint with separate next actions; CAN4EC is not attributed to DSC
+or a roof controller by these tests. No commit/push authorization.
+
+Final retained verification
+---------------------------
+640 new manager cycles include642 original source-arbitration calls and642
+whole230F0 producer checks (each includes preparation), plus642 qualification
+prefix/tail checks.14 paired snapshots follow actual ring/output changes and
+4 legacy first-record snapshots remain in the shared lifecycle output:18 new
+paired ECU checkpoints total. Legacy rows can describe freed RAM; active-ring
+records/counts establish pending work. All18 have CAN216 numeric withdrawn
+and AT spark correction0 under the documented ECU coefficients/gates.
+
+The new CAN4EC increase produces9340=5632 for the history window, while the
+phase-retained9342 stays19968 through retirement and becomes0 at163. On the
+post-retirement decline at170,9340/9342 store59904 (signed-5632). This is a
+separate retained change signal; it must not be confused with the live input
+80F8 or current comparison809C. Both whole-producer and qualification models
+assert these values at their original publication points.
+
+The separate320-cycle default-regression run matches the prior primary25
+trace after JSON normalization of tuple/list representation. No baseline
+expectations were changed. Interpreter and older verifier behavior remain
+unchanged; only optional retained-helper hooks were added.
+
+Persistence
+-----------
+Added25 annotations (including6 function exports) and3 typed ROM tables.
+Closed archive SHA256bb485aa11797cf058a1c93c878901a2d4a006c4efbbec68399174b1ed90f020d,
+10,862,569 bytes. Independent extraction/reopen verifies11 project hashes,
+1,304 annotations(570 ECU/734 TCU) and654 identical exports(652 functions,
+2 readbacks). Apply/readback/restore each completed for both programs, without
+ERROR/Exception or incomplete decompilation. Manifests/scripts are in ghidra/.
+Saved locally; no staging/commit/push, and the mixed pre-existing index remains.

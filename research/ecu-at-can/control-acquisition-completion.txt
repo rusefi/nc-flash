@@ -1,0 +1,143 @@
+ECU alternate acquisition and completion callback (2026-10-06)
+============================================================
+Objective remains all open ECU/AT CAN integration, deep traction integration,
+and NC roof folding AND unfolding, including interruption/resume/reversal,
+timeout, synchronization and fault recovery. All three remain incomplete.
+User has no extra DSC/roof dumps/captures/bench results. No commit/push authority.
+Previous turn made verified TCU handoff progress; no blocked audit applies.
+
+Executed firmware
+-----------------
+4DFE tests software byte404B. Nonzero calls5E38 then clears404B, even when
+5E38 skips capture. Zero calls5CF4 only when4049 is exactly1; otherwise no-op.
+404B is an armed-operation marker, NOT the hardware ADC completion flag.
+531E sets404B=1 after configuring the alternate acquisition. Periodic4CE2
+clears it before starting bank1. Literal references are candidate leads, not
+an exhaustive proof that no other indirect writer exists.
+
+F29C reads FFFFF838, writes its oldbyte&7F, then tailcalls4DFE. All256 old
+bytes are tested, including synthetic states that would not raise an interrupt.
+The callback itself does not gate entry on ADF/ADIE. Live interrupt delivery
+is distinct from executing this entry in a harness.
+
+5E38: if40A1!=0, no changes. Otherwise copies retained4096->4078 and409A->407A,
+then reads F836->4098 and F816->409C and sets409E=1. It does not set40A1 or
+clear409E when skipped. Reads are channels23 and11; no new source identity for
+traction's channel1/8 or CAN211/21A is established by this path.
+
+5CF4 increments byte40A2 with wrap; if newvalue>=2 resets it to0. Newvalue1
+returns immediately; zero performs work (old255 wraps0 and also performs it).
+It reads F836->4096 and F816->409A. Float4068<=1000 sets40A0=1; >1050 sets0;
+(1000,1050] retains oldbyte, including nonboolean values. These stock thresholds
+are ROM DC3EC=1000.0 andDC3F0=50.0. No physical units assigned.
+It calls531E(0), then5D62(40A0), then clears40A1. NaNs are outside tested inputs.
+
+531E argument zero selects ADCSR0/1=0B/4B, nonzero=0A/4A. For each bank it
+clears ADCR bit20, reads priorADCSR, writes selectedADCSR, ORs trigger-register
+bit80, then writes ADCR=(old afterclear&AF)|80. ADTRGR0=F76E, ADTRGR1=F72E.
+Nested22E4/22F4 save/restore masks execute, including all16 mask values with
+an explicit synthetic descriptor for the SR-zero path; no scheduler dispatch.
+
+5D62 uses lowbyte argument (unlike531E's full-register zero test):
+Let B=word(F440)+4. All writes below truncate to16bits. For argumentlowbyte0:
+ F64C=44 twice; F450=B+25; F64E=25 twice; F452=B;
+ F64A=1 twice; F44E=B+20.
+For nonzero lowbyte: F64C=25 twice; F450=B; F64E=14 twice; F452=B+25;
+F64A/F44E unchanged formula. Clears40A3. Duplicate writes execute original
+11070; stock ROM DC3D6/D8/DA/DC=[25,44,14,20]. No counter ticking is simulated.
+
+Static vector provenance (not executed boot/interrupt return)
+------------------------------------------------------------
+F758..F75A loads VBR=FFC50 fromF864. ROMFFF58 (VBR+308) contains2FA8.
+2FA8 wrapper calls3290 then tailjumpsF29C via literal2FB8, restoring PR fromR0.
+The script asserts exact VBR-load bytes and these pointer values. The wrapper,
+3290 context handling, interrupt return, priority and delivery are not executed.
+Prior description as an unspecified task callback is refined by this evidence.
+
+Factory documentation, distinct from execution
+----------------------------------------------
+Renesas SH7058 hardware manual REJ09B0046-0300H revision3.00 September2004:
+ table7.3 printed113/PDFzero155: ADI1 vector194, offset308.
+ section17.2.2 printed627/PDF669: ADCSR ADFbit7 marks completed results;
+ ADIEbit6 enables the completion interrupt. Read-set then writezero clearsADF.
+ section17.2.3 printed631/PDF673: ADCR TRGEbit7 enables trigger use.
+ section17.2.5 printed636/PDF678: ADTRGR EXTRGbit7 selects external-pin trigger.
+ table11.3 printed209/214 (PDF251/256): F440=TCNT1A;F44E/450/452=GR1F/G/H;
+ F64A/C/E=DCNT8F/G/H. Register identities do not establish board wiring.
+Thus this path arms external-triggered single-channel conversions, with ADI1
+completion enabled. Timer writes nearby do not prove the external-pin route.
+The manual's completion semantics explain why parentF29C acknowledgesADF;
+404B remains a distinct software marker. No measured hardware timing claim.
+Durable source sources/renesas-sh7058-hardware-rej09b0046-0300h.{pdf,json};
+SHA256 9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+Official URL: https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+Pages above inspected from retained primary-source PDF this turn.
+
+Verification and limits
+-----------------------
+verify_control_acquisition_completion.py adds a local bounded subclass with
+two byte and seven word peripheral latches, plus inherited explicit ADC inputs.
+All applicationRAM, ADC read order, existingADC register I/O and additional
+register I/O compared with independent formulas. Unsupported widths/addresses
+fail. These latches do not implement reserved bits/read-clear side effects,
+conversion, interrupts, timer counting, pin levels or feedback. Arbitrary
+register values test software bit behavior, not legal hardware states.
+Original helpers execute; no ROM, shared interpreter/verifier or production edit.
+
+Initial test failed because shared run(e,address) called e.run with default
+argumentzero, overriding preloadedR4. Fixed local adapter to pass its explicit
+argument to e.run. This was a harness argument error, not a firmware/model change.
+First complete run passed; final extension tests all256 acknowledgementbytes
+and injects retained callbacks only when software ADIE1 is enabled. Final
+results:256 capture cases,96 arming calls,42 timer cases,5120 alternate
+updates,192 followup+callback pairs,256 acknowledgement bytes,320 retained
+schedule calls,7 injected callbacks and4 expected access rejections pass.
+Results recorded in control-acquisition-completion-verification.json.
+
+Retained320 periodic E276..E282 manager/scaler calls start with zero counters.
+Software enables ADIE1 at calls64/128/192/256/320. Explicit successful-conversion
+callbacks are injected at those points. 5CF4 halfcounter arms at128 and256;
+only then a second explicit conversion/callback is injected with changed11/23
+samples. Result pairs at128=[53824,30016,14592,20992]; at256=
+[62016,38208,22784,29184], ordered4078/407A/4098/409C. This distinguishes the
+saved initial pair from the subsequent pair. Seven total injected callbacks.
+Physical conversion success/delivery is an explicit assumption, not a result;
+128 calls is not milliseconds and does not establish globaltask cadence.
+No integrated engine/TCU/DSC plant or CAN timing closure claimed.
+
+Reproduce and saved state
+-------------------------
+ python research/ecu-at-can/verify_control_acquisition_completion.py
+ python -m py_compile research/ecu-at-can/verify_control_acquisition_completion.py
+Python3.14.3; existing interpreter/stock LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Disassembly saved in control-acquisition-completion{-start,-peripheral,-task,
+-vector}-disassembly.txt; leads in control-acquisition-completion-leads.txt.
+GNU SHbinutils2.42 reproduction example:
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+ python research/ecu-at-can/disassemble.py \
+ --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+ at dis 0x5CC0 0x5F30
+Remaining ranges531E..53C0,53B4..5570,11070..11138,F250..F360,
+2F90..2FD8,F740..F780; refs FFFF404B/40A1/40A3,4DFE,FFC50,2FA8.
+Final verifier and Python compilation pass. Nine new artifacts are Git-eligible;
+git diff --check passes. Ghidra saved bothprograms with15 new annotations and
+1 refined comment. Independent restore:1,676 annotations,826 identical exports,
+11 matching project hashes before/after read-only reopen. Archiveidentity is
+in CHECKPOINT.txt and ghidra/snapshot.json/restore-verification.json.
+Saved locally; no staging/commit/push, existing mixed index preserved.
+
+Remaining goals / concrete next actions
+--------------------------------------
+Traction: source identity/board wiring for channels1/8, actual conversion and
+application cadence, raw6Dxx/8F30/399B0, CAN211/21A units/sender/remoteDSC actuation.
+This alternate11/23 path does not complete those requirements. Follow5Axx
+capture consumers/40A1 indirectwriters if needed, but prioritize raw6Dxx and
+399B0 for control integration rather than labeling this path as traction.
+TCU: timer configuration/physical outputs,18830/18C38 adaptation,18E76 offset,
+A518/8AD8/8A60/A654/rawbase inputs, full127BA/127FC cadence; queue/ack/overlap,
+persistence and physical CAN integration remain open.
+Roof: both folding AND unfolding interruption/resume/reversal, communication
+failure timing, synchronization/recovery and OEM receiver remain incomplete.
+Next roof: applicable2009 technical/multiplex09-02F/G or receiver evidence;
+resolve DECK_CL logical polarity and release-reverse behavior. Noextrauserdata.

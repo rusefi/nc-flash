@@ -1,8 +1,9 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Executedafteracceptedindexchange. MOVA/BRAF48F58/5C jump table; calls4C100 forrecordpointer,
-   writestransition/indexmetadata, calls31524. Fullphysicalactuator meaning unproved;
-   newrelative-branch ISA tests. */
+/* Original transition event1 producer.32 initialized126EC tasks create overlapping group7
+   codes0/1/2 at1/5/9.352 explicit11014/task pairs emit sixpayloads through48FAC; code7/op10 creates
+   phasework without numericrequest; latergroup8 work retires. No forcedevent1/ack, physicalcadence
+   unproved. tcu-initialized-requests.txt. */
 
 undefined * Transition_BuildWorkRecords(void)
 

@@ -1,6 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Returns1 only when92C9bit6,9317bit0,92C6bit1 clear.24FA0 clears9454 when not admitted. */
+/* Returns1 onlyif92C9bit6/9317bit0/92C6bit1 clear.160 actualnative return24FD4 unchangedwholeRAM
+   checks: admittedthrough44, inhibited46..288, readmitted290; separate24FA0 timerpolicy
+   stillforcescut0. tcu-recovery-cut.txt. */
 
 undefined4 CAN216_AdmitCylinderCutRequest(void)
 

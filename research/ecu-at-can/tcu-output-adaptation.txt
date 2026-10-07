@@ -1,0 +1,153 @@
+TCU output adaptation, offset and timer initialization (2026-10-06)
+================================================================
+All three objectives remain active: ECU/automatic-transmission CAN integration,
+deep traction logic/integration, and NC roof folding AND unfolding including
+interruption/resume/reversal, communication timeout, synchronization and fault
+recovery. User has no additional controller images/captures/physical results.
+No staging, commit or push is authorized. This is bounded firmware evidence.
+
+Executed stock TCU evidence
+verify_tcu_output_adaptation.py executes original18830,18C38,18E76 and168AC
+with nested arithmetic/lookup helpers. Independent integer models compare all
+application RAM, output writes and ADC reads; stack/SR checks come from the
+existing execute adapter. Local TimerRegisters compares the exact ordered
+timer accesses and final latches. Hardware counting, reserved bits and pins
+are not simulated. ROM/shared interpreter/prior verifiers remain unchanged.
+
+Pass:1320 adaptation boundary cases,2048 arbitrary/forced-admission cases,
+328 stock offset lookups,1728 dispatcher boundary cases,256 timer initializers
+and8 expected timer-access rejections. Retained3040 dispatcher calls and160
+ADC/correction/adaptation handoffs pass, including19 admitted adaptations.
+Phase domain0..7 and nonzero baseline-gain divisors are explicit constraints.
+No EEPROM persistence or physical signal/actuator identity is established.
+
+18C38 adaptation (zero-based channel i, word offset j=2*i)
+Let B=u16(A5D4+j), E=s16(8A34+j). Normalized error N=s16(trunc(E*1000/B))
+when B nonzero, otherwise0. Admission requires B>=200,8AB6<E<8AB4 and
+8ABA<N<8AB8, all strict signed-word bounds. Rejection retains all state.
+Stock initial bounds are E in(-100,100), N in(-50,50).
+
+On admission:
+ T=signed-word clamp(trunc(trunc(s16(8AAC+j)*80/100)*1000/B),3700,9700).
+ G=s16(8A6C+j); limited step D=signed-word clamp((s16(T)-G)>>4,-100,100).
+ The shifts are arithmetic floor shifts, not truncation toward zero.
+ Difference8AC2+j receives abs(s16(T-G)); it is then read as signedword.
+ If8A60+i is zero and that signed difference<ROM5C5E8=500, set8A60+i=1.
+ This is sticky here. It feeds the reset branch of the earlier18A44 handoff.
+ A stored magnitude32768 is negative on this signed comparison; arbitrary
+ inputs test the behavior without assigning it a physical meaning.
+
+If byte89AC is nonzero, update gain and compensate the retained accumulator:
+ - On first update (8ABD+i==0), use full T-G instead of the limited step.
+   When unsigned89AA lies inclusively within ROM5FCFC..5FCFE=10..1000,
+   replace T by4788+trunc(s16(89A8)*223/10) first. Set8ABD+i=1.
+ - For later nonzero8ABD, use limited D. Nonboolean flags count as nonzero.
+ - Integral8A9C+4*i := old - s16(D)*B, with32-bit wrap.
+ - Gain8A6C+j := G+D, with16-bit wrap.
+Even when89AC is zero, an admitted call still updates the difference/sticky
+qualification and rescales8A8C and8A7C from base gains8A94/8A84 multiplied
+by unsigned current8A6C divided by unsigned8A74. Products wrap32 bits and
+the original5AE90 division treats the product as signed. Bounds/helpers
+retain their actual low-word comparison semantics; no idealized real math.
+
+18E76 offset
+UnsignedA518 clamps to8000..16000, subtracts8000, then10700 interpolates a
+channel-specific five-point table at pointer8AD4+12*i using spacing2000.
+Stock initialized pointer5F84C has a sixth FFFF sentinel per row. The result
+is unsigned-word clamped0..32767 into8A44+j. Original10700/5AC9C execute.
+AtA518=12000 offsets are[1750,1750,1750,1680]. These values subsequently
+affect14280 buffer writes; no voltage units or physical calibration claim.
+
+18830 dispatcher
+The original comparison is unsigned32(s16(8ACA)) > unsigned32(s16(8ACC));
+this matters for raw words>=32768. On true, reset8ACA=0 and dispatch one
+function from ROM5C5EC: phases0..3 call18C38,4..7 call18E76. The latter sees
+arguments256..259 whose low bytes select channels0..3. Increment phase and
+wrap after7. Invalid phase bytes are not claimed tested or safe.
+After dispatch, if unsigned8AD0>3000, set8ACC=15 and signed8AB4/8AB6=5/-5.
+Increment8AD0 and8ACA with16-bit wrap. Threshold comparison uses the old age;
+the changed limits remain after age wraps, because this body has no restore.
+From stock init age0/count1/limit3, first dispatch is call4, then8..3000;
+limit changes on call3002 and next dispatches are3016,3032. Calls are not ms.
+All eight phases are verified through original indirect function calls.
+
+Retained handoff
+The integrated160-call replay takes one sample of all four ADC channels per
+rotating channel service; after startup this gives four accumulated samples
+per service. Then it executes one dispatcher call. This is explicit harness
+scheduling, not proof of complete127BA/127FC cadence. Constant ADCcount368
+produces measured499 after four samples; request500 gives error1.19 admitted
+adaptations alter gains and compensate integral while actual18A44/14280
+continue to execute. At call160 gains=[4769,4742,4733,4703]; selected channel3
+output2773 writes8994 toF514 with offset1680. Full snapshots are in JSON.
+An earlier passing draft used four acquisitions per rotating service, leaving
+sixteen samples for later per-channel services and suppressing adaptation.
+It was replaced by the explicit four-per-channel schedule above and a required
+admitted-count assertion. No failing firmware claim arose from that draft.
+
+168AC timer initialization and factory register interpretation
+All256 initial F401 byte values tested. Exact accesses:
+ read F401; write F401&FB; write F400=0; clear RAM87F4 via original16926;
+ zero F506/F504/F502/F500; write33333 to words in this order:
+ F50A,F508,F50E,F50C,F512,F510,F516,F514,F51A,F518,F51E,F51C;
+ write F400=0 again; F600=0; F604=4166; F400=0F;
+ reread F401 and set bit04. Other F401 bits are preserved.
+The software initializer writes are executed; interrupt bodies1692E/169A4
+in the same disassembly are STATIC leads only, including1227E/11F7C callbacks.
+
+Renesas SH7055S-compatible manual table11.3 identifies F401/F400 as TSTR1/2,
+F500..506 as TCNT6A..D, F508..50E as CYLR6A..D, F510..516 as BFR6A..D,
+F518..51E as DTR6A..D, andF600/F604 as TCNT2A/GR2A. Section11.2.1 identifies
+TSTR1 bit2 as2A start and TSTR2 low four bits as6A..D starts. This supports
+the interpretation of initialized cycles/duty/buffers and enabled channels;
+it does not establish input clock, PWM mode, pin function, interrupt delivery
+or electrical output. TSTR2=0F also leaves channel7 start bits clear.
+Durable source already saved: sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf
+SHA256359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+Table PDFzero240,242,244,245 (printed201,203,205,206); start definitions
+PDFzero262..265 (printed223..226); provenance in corresponding JSON.
+No physical TCU-chip identification is implied by compatible register names.
+
+Reproduction and provenance
+ python research/ecu-at-can/verify_tcu_output_adaptation.py
+ python -m py_compile research/ecu-at-can/verify_tcu_output_adaptation.py
+Stock examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Python3.14.3; no new dependency. Existing SHExtract/OutputSink plus local
+bounded timer latches. PyMuPDF1.28.2 reads the already-durable factory PDF.
+Disassemblies tcu-output-adaptation-{service,body,scale,lookup} cover18830,
+18C38/18E76,5ACE8 and10700. tcu-output-timer-initialization covers168AC and
+static interrupt leads; tcu-output-timer-config-leads is an earlier14140..
+14280 scan of ADC/general bit helpers, not the actual initialization proof.
+All these stems use -disassembly.txt. GNU SHbinutils2.42 reproduction:
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+ python research/ecu-at-can/disassemble.py \
+ --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+ tcu dis 0x168A0 0x16A3C
+
+Failed leads and remaining work
+The existing aligned32-bit literal search found noF500/F400 literal users.
+That does NOT mean absence: MOV.W PC-relative sign-extended literals lead to
+168AC. A reproducible scan is recorded in the verifier JSON. Candidate opcode
+matches can include data, so disassembly/execution must validate every lead.
+Next TCU: earlier TCR6/PMDR/prescaler/pin setup and actual1692E/169A4 callbacks,
+17B1A and complete127BA/127FC task scheduling; A518/8AD8/89AA/89A8/89AC and
+A654/rawbase writers, queues/ack/overlap/persistence and physical integration.
+Traction:40E0/40F4,8F2C..2F and399B0 callers/cadence; board/channel1/8 identity,
+CAN211/21A sender/units and remote DSC actuation remain independent and open.
+Roof: next inspect actual AllCarManuals archive for applicable2009 technical/
+multiplex documentation. Both folding AND unfolding, interruption/reversal,
+numeric timeout, motor synchronization and fault recovery still require OEM
+receiver/physical evidence. No extra artifacts are available from the user.
+
+Ghidra save and independent restore complete
+Both programs saved with14 new annotations and1 refined producer/consumer
+comment. Live and restored readback passed758 ECU/948 TCU annotations;
+837 exports are byte-identical;11 project hashes match before/after reopen.
+Archive10,955,961 bytes SHA256
+ dc73646d93e724ba2e525c6cae121252416362d1aebf71aba27d7677212333dd.
+Independent restore: ghidra/restore-check/output-adaptation-20261006.
+No errors, incomplete decompiles, locks or pending jobs.10 new task artifacts
+and5 new function exports are Git-eligible. Python compilation and git diff
+checks pass. Nothing staged/committed/pushed by this work; pre-existing mixed
+index including AD ghidra/nc-at-can.tar.gz.tmp remains preserved.

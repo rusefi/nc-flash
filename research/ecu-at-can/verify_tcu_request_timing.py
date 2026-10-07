@@ -43,6 +43,26 @@ RANGES = [
 ]
 
 
+def advance_model(t):
+    """Advance the independently specified stock wheel from valid RAM phases."""
+    a, b, c = [r(t, address, 4) for address in [0x8494, 0x8498, 0x849C]]
+    assert 0 <= a < 16 and 0 <= b < 16 and 0 <= c < 2
+    tick = a + 16*b + 256*c
+    for start, end, size, cap, period, positions in RANGES:
+        if tick % period not in positions:
+            continue
+        for address in range(start, end, size):
+            value = r(t, address, size)
+            if value != cap:
+                w(t, address, (value+1) & ((1 << (8*size))-1), size)
+    if tick % 2 == 0:
+        w(t, 0x90C8, (r(t, 0x90C8, 2)+1) & 65535, 2)
+    tick = (tick+1) % 512
+    for address, value in [(0x8494, tick % 16), (0x8498, (tick//16) % 16),
+                           (0x849C, tick//256)]:
+        w(t, address, value, 4)
+
+
 def main():
     t = SHRelativeBranch(TCU)
     helper_cases = 0
@@ -58,26 +78,24 @@ def main():
             assert r(t, 0xA900, size) == expected
             helper_cases += 1
 
-    model = {}
     for start, end, size, cap, _, _ in RANGES:
         for i, addr in enumerate(range(start, end, size)):
             value = [0, cap-1, cap, (1 << (8*size))-1][i % 4]
-            model[addr] = value
             w(t, addr, value, size)
     for addr in [0x8494, 0x8498, 0x849C]:
         w(t, addr, 0xDEADBEEF, 4)
     t.run(0x12880)
     assert all(r(t, a, 4) == 0 for a in [0x8494, 0x8498, 0x849C])
     w(t, 0x90C8, 65534, 2)
+    model = SHRelativeBranch(TCU)
+    model.ram = dict(t.ram)
     wheel_checks = 0
     for tick in range(1024):
         t.run(0x11014)
+        advance_model(model)
         for start, end, size, cap, period, positions in RANGES:
-            due = tick % period in positions
             for addr in range(start, end, size):
-                if due and model[addr] != cap:
-                    model[addr] = (model[addr]+1) & ((1 << (8*size))-1)
-                assert r(t, addr, size) == model[addr], (tick, hex(addr))
+                assert r(t, addr, size) == r(model, addr, size), (tick, hex(addr))
                 wheel_checks += 1
         assert r(t, 0x8494, 4) == (tick+1) % 16
         assert r(t, 0x8498, 4) == ((tick+1)//16) % 16

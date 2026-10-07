@@ -1,0 +1,98 @@
+TCU capture interrupt prefixes — 2026-10-06
+==========================================
+Full objective remains ECU/AT CAN integration, deep traction integration and
+NC roof folding AND unfolding, interruption/resume/reversal, communication
+timeout, L/R synchronization and fault recovery. All remain incomplete. User
+has no additional roof/DSC images, captures or bench results. No commit/push.
+
+Executed result
+---------------
+verify_tcu_capture_interrupts.py:512 differential whole-application-RAM cases
+PASS,256 admitted and256 not admitted, plus6 rejected fixture accesses. Tests
+both channels acrossall256 lowstatus bytes withupperstatusA5; independently
+variedsecond16-bit statusread, captured32-bit timestamp/wrap andpreviouscount,
+profilingtimewrap/saturation andretainedmaximum. OriginalISR instructions and
+nested15B80/15730/15BF0 helpers execute; stopbeforeRTE, no skipped callees.
+
+ChannelA: entry16C7C, stops16CCA, TSR0 FFFFF42C word bit0, ICR0A FFFFF434 long,
+callback179A8, profileindex5. ChannelB: entry16B44, stops16B92, statusbit1,
+ICR0B FFFFF438, callback17A58, profileindex6. Firststatusread controlsadmission.
+If admitted, a SECOND statusread isANDed withFFFE/FFFD andwritten asword;
+the32-bitcapture isread onlythen andpassed inR4. Otherstatusbits preserved
+fromSECOND sample, notfirst. This verifiescode behavior withsuppliedlatches,
+not a hardware race, write-clear/overrun oractualinterrupt admission model.
+No callback orcapture-register read occurswhen firststatusbit isclear.
+
+Bothpaths always calloriginalprofiling entry/exit, readingFFFFF6C0 twice.
+Entry storesstart at8728+4*index. Stock5F600+4*index equals0 for5/6, so latency
+arrays86E0/8704 remainunchanged (unlikethepriorindex10 outputinterrupt).
+Exit computesmin(65535, unsigned32(end-start)//10), stores8698+2*index and
+max with86BC+2*index. Independentprofiling equations andexactorderedMMIO
+accesses agree. Testdurationsinclude0,100,75 acrosswrap and65535 saturation.
+AllGPRs includingSP,PR,MACL andSR bitsoutside mask301 arepreserved byprefix.
+ActualRTE, interruptframe installation, delivery/cadence andhardwaretimer
+behavior are NOT tested. SyntheticstackFFFED000 remainsoutsideapplicationRAM.
+
+Oracle scope
+------------
+The RAMreference executes theALREADY-tested original179A8/17A58 callback on a
+clone onlywhenadmitted, thenaddsindependentprofiling updates. Thereforethisis
+DIFFERENTIAL handler-to-callback equivalence, not a newlyindependenthistory/
+capture arithmeticmodel. Existingindependentcallback/history evidence remains
+in tcu-reference-source.txt andtcu-measurement.txt. Fixture rejectsunspecified
+addresses/widths, exhaustedreads andwrites otherthanwordTSR0; sixnegativecases.
+No sharedISA/interpreter orproduction changes. No physicalunits/pinclaims.
+
+Reproduce / exact artifacts
+----------------------------
+ python research/ecu-at-can/verify_tcu_capture_interrupts.py
+Result tcu-capture-interrupt-verification.json; examplesincludeorderedreads/
+writes andpreRTEstop. Python3.14.3. Inputexamples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Originaldisassembly tcu-capture-interrupt-disassembly.txt containsranges
+16B44..16BAC,16C7C..16CE4 and15B80..15C58. GNUsh4-linux-gnu-objdump2.42:
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis START END
+Temporarytoolsetup retainedinpreviousresearch; saveddisassembly/scripts/ROM
+areGit-eligible, notdependent ontemporarytools forreading findings. Literal
+pools inthese excerpts aredata, notadditionalexecuted instructions.
+
+Next concrete action
+---------------------
+Afterthecurrentcuteligibility trace in tcu-recovery-cut.txt, reuseprefixdelivery
+inside unchanged320-pair recovery task. Addanoptional externalcapture-delivery
+hook toprobe_tcu_captured_requests.before_task, retainingexistingdirectcallback
+default. StrictATU/status/count/profiling samples shouldruntheoriginalISRprefix
+andallowtheinheritedcallbackobserver toclose atactualPRreturn. Verifyprofiling
+RAM andcapture results; compareapplication/diagnostic/phase/CANoutputs withthe
+priortrace whileexplicitlyaccountingforchangedcallbackreturnPCs andnewMMIO/
+profiling observations. Noforcedages/caches/timers/phase/ack flags. A successful
+prefixjoin stillwouldnotprovehardwareRTE/interrupt admission/cadence.
+
+Traction: existingECUacquisition evidence distinctfrommissingCAN211/21A sender/
+units andremoteDSC logic/actuation; next relevantlocalCAN/control boundary.
+Roof: factorysources andcandidateCANinputs retainrevision/PID/connector
+conflicts, missingOEMreceiver evidence. Bothdirections/interruption/reversal/
+timeout/sync/recovery remainopen; nextnewapplicablefactory orOEM/physical
+source. Userhasnothingelse; do notaskagain orrepeat exhaustedfetches.
+Current Ghidra annotation/save/restore status follows.
+
+Saved and independently restored Ghidra milestone
+-------------------------------------------------
+1924 annotations (833ECU/1091TCU),979 identical exports,11 projectfile hashes
+verified before/after independent read-only reopen of both programs. New16B44
+Capture0B label; six existing comments updated (captureA,profilingentry/exit,
+cutroutine,admission and9454). Ghidra12.1.3PUBLIC/Java21.0.10.
+Archive11,005,867bytes SHA256
+f020215807412ae804edcb54e573af019158089f7533334a3e729204785a0a15.
+Exact inventory/verification in ghidra/snapshot.json andrestore-verification.json.
+Independentrestore directory:ghidra/restore-check/tcu-recovery-cut-20261006
+(ignored reproduciblecache). Applied/saved bothprograms, read-only verifiedlive,
+snapshot.py readbackcheckedarchive, extractednewemptydirectory, checked11hashes,
+read-only reopened/exportedboth, comparedentirefilename/SHA maps (979), then
+rechecked11hashes. NoERROR/Exception/DECOMPILE_INCOMPLETE inlogs/readbackfiles.
+Recipe andtools in ghidra/README.txt; archive preserves .gpr AND .rep.
+Four changed/new scripts compile; cut/capture verifiers PASS, targetedgitdiff
+check PASS, both ROM hashes unchanged. All new taskfiles Git-eligible; live/
+logs/restorecache ignored. Savedlocally only; no staging, commit orpush.
+Pre-existingmixedindex including AD archive.tmp preserved. Goalremainsactive;
+thisturnmadeverifiedprogress, allthreebroaderrequirements remainincomplete.

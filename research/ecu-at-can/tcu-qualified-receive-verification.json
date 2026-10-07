@@ -1,0 +1,201 @@
+{
+  "status": "PASS",
+  "scope": "Check native diagnostic admission and communication-policy task traces.\n\nReceive watchdog expectations are recomputed from each saved entry state.\nAdmission whole-RAM equality is checked during execution, not reconstructed\nfrom the selected snapshots here. Other diagnostic bodies are coverage only.\n",
+  "baseline": {
+    "task_pairs": 64,
+    "whole_ram_receive_prefixes": 192,
+    "whole_ram_admission_returns": 16,
+    "diagnostic_boundary_coverage": {
+      "0x1a598": 775,
+      "0x56b06": 16,
+      "0x56658": 64,
+      "0x57f50": 64,
+      "0x570f6": 64,
+      "0x57258": 64,
+      "0x56f80": 64
+    },
+    "transitions": [
+      {
+        "call": 0,
+        "tick": 100,
+        "state": {
+          "0x9415": 0,
+          "0xa939": 0,
+          "0xa76c": 0,
+          "0xa722": 0,
+          "0xa978": 1,
+          "0xa98e": 1,
+          "0x92c9": 0,
+          "0x80e8": 10240,
+          "0x9454": 1
+        }
+      },
+      {
+        "call": 4,
+        "tick": 500,
+        "state": {
+          "0x9415": 1,
+          "0xa939": 0,
+          "0xa76c": 0,
+          "0xa722": 0,
+          "0xa978": 1,
+          "0xa98e": 1,
+          "0x92c9": 0,
+          "0x80e8": 10240,
+          "0x9454": 1
+        }
+      },
+      {
+        "call": 24,
+        "tick": 2500,
+        "state": {
+          "0x9415": 1,
+          "0xa939": 1,
+          "0xa76c": 0,
+          "0xa722": 0,
+          "0xa978": 1,
+          "0xa98e": 1,
+          "0x92c9": 0,
+          "0x80e8": 10240,
+          "0x9454": 1
+        }
+      }
+    ]
+  },
+  "wheel8": {
+    "task_pairs": 96,
+    "whole_ram_receive_prefixes": 288,
+    "whole_ram_admission_returns": 24,
+    "diagnostic_boundary_coverage": {
+      "0x1a598": 1162,
+      "0x56b06": 24,
+      "0x56658": 96,
+      "0x57f50": 96,
+      "0x570f6": 96,
+      "0x57258": 96,
+      "0x56f80": 96
+    },
+    "transitions": [
+      {
+        "call": 0,
+        "tick": 100,
+        "state": {
+          "0x9415": 0,
+          "0xa939": 0,
+          "0xa76c": 0,
+          "0xa722": 0,
+          "0xa978": 1,
+          "0xa98e": 1,
+          "0x92c9": 0,
+          "0x80e8": 10240,
+          "0x9454": 1
+        }
+      },
+      {
+        "call": 4,
+        "tick": 500,
+        "state": {
+          "0x9415": 1,
+          "0xa939": 0,
+          "0xa76c": 0,
+          "0xa722": 0,
+          "0xa978": 1,
+          "0xa98e": 1,
+          "0x92c9": 0,
+          "0x80e8": 10240,
+          "0x9454": 1
+        }
+      },
+      {
+        "call": 24,
+        "tick": 2500,
+        "state": {
+          "0x9415": 1,
+          "0xa939": 1,
+          "0xa76c": 0,
+          "0xa722": 0,
+          "0xa978": 1,
+          "0xa98e": 1,
+          "0x92c9": 0,
+          "0x80e8": 10240,
+          "0x9454": 1
+        }
+      },
+      {
+        "call": 36,
+        "tick": 3700,
+        "state": {
+          "0x9415": 0,
+          "0xa939": 1,
+          "0xa76c": 0,
+          "0xa722": 0,
+          "0xa978": 1,
+          "0xa98e": 1,
+          "0x92c9": 0,
+          "0x80e8": 10240,
+          "0x9454": 1
+        }
+      },
+      {
+        "call": 37,
+        "tick": 3800,
+        "state": {
+          "0x9415": 0,
+          "0xa939": 1,
+          "0xa76c": 1,
+          "0xa722": 0,
+          "0xa978": 1,
+          "0xa98e": 1,
+          "0x92c9": 0,
+          "0x80e8": 10240,
+          "0x9454": 1
+        }
+      },
+      {
+        "call": 42,
+        "tick": 4300,
+        "state": {
+          "0x9415": 0,
+          "0xa939": 1,
+          "0xa76c": 7,
+          "0xa722": 4,
+          "0xa978": 28,
+          "0xa98e": 28,
+          "0x92c9": 0,
+          "0x80e8": 10240,
+          "0x9454": 1
+        }
+      },
+      {
+        "call": 44,
+        "tick": 4500,
+        "state": {
+          "0x9415": 0,
+          "0xa939": 1,
+          "0xa76c": 7,
+          "0xa722": 4,
+          "0xa978": 28,
+          "0xa98e": 28,
+          "0x92c9": 194,
+          "0x80e8": 10240,
+          "0x9454": 1
+        }
+      },
+      {
+        "call": 46,
+        "tick": 4700,
+        "state": {
+          "0x9415": 0,
+          "0xa939": 1,
+          "0xa76c": 7,
+          "0xa722": 4,
+          "0xa978": 28,
+          "0xa98e": 28,
+          "0x92c9": 194,
+          "0x80e8": 20480,
+          "0x9454": 0
+        }
+      }
+    ]
+  }
+}

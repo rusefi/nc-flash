@@ -1,0 +1,542 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00046200 <.data+0x46200>:
+   46200:	2f e6       	mov.l	r14,@-r15
+   46202:	2f d6       	mov.l	r13,@-r15
+   46204:	2f c6       	mov.l	r12,@-r15
+   46206:	2f b6       	mov.l	r11,@-r15
+   46208:	2f a6       	mov.l	r10,@-r15
+   4620a:	2f 96       	mov.l	r9,@-r15
+   4620c:	4f 22       	sts.l	pr,@-r15
+   4620e:	9e 4d       	mov.w	0x462ac,r14	! 9bf5
+   46210:	60 e3       	mov	r14,r0
+   46212:	60 00       	mov.b	@r0,r0
+   46214:	c8 04       	tst	#4,r0
+   46216:	0d 29       	movt	r13
+   46218:	7d ff       	add	#-1,r13
+   4621a:	6d db       	neg	r13,r13
+   4621c:	60 e3       	mov	r14,r0
+   4621e:	60 00       	mov.b	@r0,r0
+   46220:	c8 02       	tst	#2,r0
+   46222:	0b 29       	movt	r11
+   46224:	7b ff       	add	#-1,r11
+   46226:	6b bb       	neg	r11,r11
+   46228:	60 e3       	mov	r14,r0
+   4622a:	60 00       	mov.b	@r0,r0
+   4622c:	c9 01       	and	#1,r0
+   4622e:	b1 a7       	bsr	0x46580
+   46230:	6c 03       	mov	r0,r12
+   46232:	b0 9e       	bsr	0x46372
+   46234:	00 09       	nop
+   46236:	64 03       	mov	r0,r4
+   46238:	6a 4c       	extu.b	r4,r10
+   4623a:	60 a3       	mov	r10,r0
+   4623c:	88 01       	cmp/eq	#1,r0
+   4623e:	89 01       	bt	0x46244
+   46240:	a0 7d       	bra	0x4633e
+   46242:	00 09       	nop
+   46244:	b0 c2       	bsr	0x463cc
+   46246:	00 09       	nop
+   46248:	60 e3       	mov	r14,r0
+   4624a:	60 00       	mov.b	@r0,r0
+   4624c:	c8 08       	tst	#8,r0
+   4624e:	00 29       	movt	r0
+   46250:	70 ff       	add	#-1,r0
+   46252:	60 0b       	neg	r0,r0
+   46254:	88 01       	cmp/eq	#1,r0
+   46256:	8b 72       	bf	0x4633e
+   46258:	62 dc       	extu.b	r13,r2
+   4625a:	22 28       	tst	r2,r2
+   4625c:	8b 02       	bf	0x46264
+   4625e:	b0 d0       	bsr	0x46402
+   46260:	e4 02       	mov	#2,r4
+   46262:	6d 03       	mov	r0,r13
+   46264:	63 bc       	extu.b	r11,r3
+   46266:	23 38       	tst	r3,r3
+   46268:	8b 02       	bf	0x46270
+   4626a:	b0 ca       	bsr	0x46402
+   4626c:	e4 01       	mov	#1,r4
+   4626e:	6b 03       	mov	r0,r11
+   46270:	62 cc       	extu.b	r12,r2
+   46272:	22 28       	tst	r2,r2
+   46274:	8b 02       	bf	0x4627c
+   46276:	b0 c4       	bsr	0x46402
+   46278:	e4 00       	mov	#0,r4
+   4627a:	6c 03       	mov	r0,r12
+   4627c:	61 dc       	extu.b	r13,r1
+   4627e:	21 18       	tst	r1,r1
+   46280:	8b 02       	bf	0x46288
+   46282:	60 e0       	mov.b	@r14,r0
+   46284:	a0 02       	bra	0x4628c
+   46286:	c9 fb       	and	#251,r0
+   46288:	60 e0       	mov.b	@r14,r0
+   4628a:	cb 04       	or	#4,r0
+   4628c:	69 bc       	extu.b	r11,r9
+   4628e:	29 98       	tst	r9,r9
+   46290:	8f 03       	bf.s	0x4629a
+   46292:	2e 00       	mov.b	r0,@r14
+   46294:	60 e0       	mov.b	@r14,r0
+   46296:	a0 02       	bra	0x4629e
+   46298:	c9 fd       	and	#253,r0
+   4629a:	60 e0       	mov.b	@r14,r0
+   4629c:	cb 02       	or	#2,r0
+   4629e:	6d cc       	extu.b	r12,r13
+   462a0:	2d d8       	tst	r13,r13
+   462a2:	8f 04       	bf.s	0x462ae
+   462a4:	2e 00       	mov.b	r0,@r14
+   462a6:	60 e0       	mov.b	@r14,r0
+   462a8:	a0 03       	bra	0x462b2
+   462aa:	c9 fe       	and	#254,r0
+   462ac:	9b f5       	mov.w	0x4649a,r11	! 92c8
+   462ae:	60 e0       	mov.b	@r14,r0
+   462b0:	cb 01       	or	#1,r0
+   462b2:	2e 00       	mov.b	r0,@r14
+   462b4:	dc 3a       	mov.l	0x463a0,r12	! ffff9bf4
+   462b6:	ee 06       	mov	#6,r14
+   462b8:	d7 3a       	mov.l	0x463a4,r7	! ffff9aec
+   462ba:	60 13       	mov	r1,r0
+   462bc:	d6 3a       	mov.l	0x463a8,r6	! ffff9b14
+   462be:	88 01       	cmp/eq	#1,r0
+   462c0:	d4 3a       	mov.l	0x463ac,r4	! ffff9b32
+   462c2:	8d 06       	bt.s	0x462d2
+   462c4:	e5 05       	mov	#5,r5
+   462c6:	60 93       	mov	r9,r0
+   462c8:	88 01       	cmp/eq	#1,r0
+   462ca:	89 02       	bt	0x462d2
+   462cc:	60 d3       	mov	r13,r0
+   462ce:	88 01       	cmp/eq	#1,r0
+   462d0:	8b 35       	bf	0x4633e
+   462d2:	60 c0       	mov.b	@r12,r0
+   462d4:	d2 36       	mov.l	0x463b0,r2	! 73f24
+   462d6:	cb 04       	or	#4,r0
+   462d8:	d3 36       	mov.l	0x463b4,r3	! 73f54
+   462da:	2c 00       	mov.b	r0,@r12
+   462dc:	17 23       	mov.l	r2,@(12,r7)
+   462de:	60 e3       	mov	r14,r0
+   462e0:	80 63       	mov.b	r0,@(3,r6)
+   462e2:	60 53       	mov	r5,r0
+   462e4:	80 43       	mov.b	r0,@(3,r4)
+   462e6:	60 e3       	mov	r14,r0
+   462e8:	17 38       	mov.l	r3,@(32,r7)
+   462ea:	80 68       	mov.b	r0,@(8,r6)
+   462ec:	60 53       	mov	r5,r0
+   462ee:	80 48       	mov.b	r0,@(8,r4)
+   462f0:	60 93       	mov	r9,r0
+   462f2:	88 01       	cmp/eq	#1,r0
+   462f4:	89 02       	bt	0x462fc
+   462f6:	60 d3       	mov	r13,r0
+   462f8:	88 01       	cmp/eq	#1,r0
+   462fa:	8b 20       	bf	0x4633e
+   462fc:	60 c0       	mov.b	@r12,r0
+   462fe:	cb 02       	or	#2,r0
+   46300:	2c 00       	mov.b	r0,@r12
+   46302:	60 e3       	mov	r14,r0
+   46304:	d3 2c       	mov.l	0x463b8,r3	! 73f84
+   46306:	17 32       	mov.l	r3,@(8,r7)
+   46308:	80 62       	mov.b	r0,@(2,r6)
+   4630a:	60 53       	mov	r5,r0
+   4630c:	d3 2b       	mov.l	0x463bc,r3	! 73fb4
+   4630e:	80 42       	mov.b	r0,@(2,r4)
+   46310:	17 37       	mov.l	r3,@(28,r7)
+   46312:	60 e3       	mov	r14,r0
+   46314:	80 67       	mov.b	r0,@(7,r6)
+   46316:	60 53       	mov	r5,r0
+   46318:	80 47       	mov.b	r0,@(7,r4)
+   4631a:	60 d3       	mov	r13,r0
+   4631c:	88 01       	cmp/eq	#1,r0
+   4631e:	8b 0e       	bf	0x4633e
+   46320:	60 c0       	mov.b	@r12,r0
+   46322:	cb 01       	or	#1,r0
+   46324:	2c 00       	mov.b	r0,@r12
+   46326:	60 e3       	mov	r14,r0
+   46328:	d3 26       	mov.l	0x463c4,r3	! 74014
+   4632a:	d2 25       	mov.l	0x463c0,r2	! 73fe4
+   4632c:	17 21       	mov.l	r2,@(4,r7)
+   4632e:	80 61       	mov.b	r0,@(1,r6)
+   46330:	60 53       	mov	r5,r0
+   46332:	80 41       	mov.b	r0,@(1,r4)
+   46334:	17 36       	mov.l	r3,@(24,r7)
+   46336:	60 e3       	mov	r14,r0
+   46338:	80 66       	mov.b	r0,@(6,r6)
+   4633a:	60 53       	mov	r5,r0
+   4633c:	80 46       	mov.b	r0,@(6,r4)
+   4633e:	2a a8       	tst	r10,r10
+   46340:	89 07       	bt	0x46352
+   46342:	90 2c       	mov.w	0x4639e,r0	! 9bf5
+   46344:	60 00       	mov.b	@r0,r0
+   46346:	c8 08       	tst	#8,r0
+   46348:	02 29       	movt	r2
+   4634a:	72 ff       	add	#-1,r2
+   4634c:	62 2b       	neg	r2,r2
+   4634e:	22 28       	tst	r2,r2
+   46350:	8b 07       	bf	0x46362
+   46352:	4f 26       	lds.l	@r15+,pr
+   46354:	69 f6       	mov.l	@r15+,r9
+   46356:	6a f6       	mov.l	@r15+,r10
+   46358:	6b f6       	mov.l	@r15+,r11
+   4635a:	6c f6       	mov.l	@r15+,r12
+   4635c:	6d f6       	mov.l	@r15+,r13
+   4635e:	a0 f2       	bra	0x46546
+   46360:	6e f6       	mov.l	@r15+,r14
+   46362:	4f 26       	lds.l	@r15+,pr
+   46364:	69 f6       	mov.l	@r15+,r9
+   46366:	6a f6       	mov.l	@r15+,r10
+   46368:	6b f6       	mov.l	@r15+,r11
+   4636a:	6c f6       	mov.l	@r15+,r12
+   4636c:	6d f6       	mov.l	@r15+,r13
+   4636e:	00 0b       	rts
+   46370:	6e f6       	mov.l	@r15+,r14
+   46372:	c4 80       	mov.b	@(128,gbr),r0
+   46374:	66 03       	mov	r0,r6
+   46376:	64 6e       	exts.b	r6,r4
+   46378:	60 43       	mov	r4,r0
+   4637a:	88 ff       	cmp/eq	#-1,r0
+   4637c:	8d 0d       	bt.s	0x4639a
+   4637e:	e5 00       	mov	#0,r5
+   46380:	24 48       	tst	r4,r4
+   46382:	89 0a       	bt	0x4639a
+   46384:	60 43       	mov	r4,r0
+   46386:	88 02       	cmp/eq	#2,r0
+   46388:	89 07       	bt	0x4639a
+   4638a:	60 43       	mov	r4,r0
+   4638c:	88 01       	cmp/eq	#1,r0
+   4638e:	89 04       	bt	0x4639a
+   46390:	d0 0d       	mov.l	0x463c8,r0	! ffff9330
+   46392:	60 00       	mov.b	@r0,r0
+   46394:	c8 01       	tst	#1,r0
+   46396:	8b 00       	bf	0x4639a
+   46398:	e5 01       	mov	#1,r5
+   4639a:	00 0b       	rts
+   4639c:	60 53       	mov	r5,r0
+   4639e:	9b f5       	mov.w	0x4658c,r11	! 6731
+   463a0:	ff ff       	.word 0xffff
+   463a2:	9b f4       	mov.w	0x4658e,r11	! c808
+   463a4:	ff ff       	.word 0xffff
+   463a6:	9a ec       	mov.w	0x46582,r10	! 9640
+   463a8:	ff ff       	.word 0xffff
+   463aa:	9b 14       	mov.w	0x463d6,r11	! 8401
+   463ac:	ff ff       	.word 0xffff
+   463ae:	9b 32       	mov.w	0x46416,r11	! 655c
+   463b0:	00 07       	mul.l	r0,r0
+   463b2:	3f 24       	div1	r2,r15
+   463b4:	00 07       	mul.l	r0,r0
+   463b6:	3f 54       	div1	r5,r15
+   463b8:	00 07       	mul.l	r0,r0
+   463ba:	3f 84       	div1	r8,r15
+   463bc:	00 07       	mul.l	r0,r0
+   463be:	3f b4       	div1	r11,r15
+   463c0:	00 07       	mul.l	r0,r0
+   463c2:	3f e4       	div1	r14,r15
+   463c4:	00 07       	mul.l	r0,r0
+   463c6:	40 14       	.word 0x4014
+   463c8:	ff ff       	.word 0xffff
+   463ca:	93 30       	mov.w	0x4642e,r3	! ee01
+   463cc:	d3 30       	mov.l	0x46490,r3	! ffff9336
+   463ce:	64 31       	mov.w	@r3,r4
+   463d0:	d2 30       	mov.l	0x46494,r2	! ffff9390
+   463d2:	d6 31       	mov.l	0x46498,r6	! ffff92c8
+   463d4:	60 63       	mov	r6,r0
+   463d6:	84 01       	mov.b	@(1,r0),r0
+   463d8:	c9 01       	and	#1,r0
+   463da:	88 01       	cmp/eq	#1,r0
+   463dc:	8f 02       	bf.s	0x463e4
+   463de:	65 21       	mov.w	@r2,r5
+   463e0:	d0 2e       	mov.l	0x4649c,r0	! 77320
+   463e2:	64 01       	mov.w	@r0,r4
+   463e4:	60 63       	mov	r6,r0
+   463e6:	84 01       	mov.b	@(1,r0),r0
+   463e8:	c8 02       	tst	#2,r0
+   463ea:	00 29       	movt	r0
+   463ec:	70 ff       	add	#-1,r0
+   463ee:	60 0b       	neg	r0,r0
+   463f0:	88 01       	cmp/eq	#1,r0
+   463f2:	8b 01       	bf	0x463f8
+   463f4:	d2 2a       	mov.l	0x464a0,r2	! 77322
+   463f6:	65 21       	mov.w	@r2,r5
+   463f8:	93 47       	mov.w	0x4648a,r3	! 9bf6
+   463fa:	23 41       	mov.w	r4,@r3
+   463fc:	92 46       	mov.w	0x4648c,r2	! 9bf8
+   463fe:	00 0b       	rts
+   46400:	22 51       	mov.w	r5,@r2
+   46402:	2f e6       	mov.l	r14,@-r15
+   46404:	4f 22       	sts.l	pr,@-r15
+   46406:	ee 00       	mov	#0,r14
+   46408:	7f fc       	add	#-4,r15
+   4640a:	2f 40       	mov.b	r4,@r15
+   4640c:	b0 15       	bsr	0x4643a
+   4640e:	64 f0       	mov.b	@r15,r4
+   46410:	65 f0       	mov.b	@r15,r5
+   46412:	64 03       	mov	r0,r4
+   46414:	d3 23       	mov.l	0x464a4,r3	! 73f20
+   46416:	65 5c       	extu.b	r5,r5
+   46418:	35 3c       	add	r3,r5
+   4641a:	62 50       	mov.b	@r5,r2
+   4641c:	22 28       	tst	r2,r2
+   4641e:	89 06       	bt	0x4642e
+   46420:	60 50       	mov.b	@r5,r0
+   46422:	60 0c       	extu.b	r0,r0
+   46424:	88 01       	cmp/eq	#1,r0
+   46426:	8b 03       	bf	0x46430
+   46428:	60 4c       	extu.b	r4,r0
+   4642a:	88 01       	cmp/eq	#1,r0
+   4642c:	8b 00       	bf	0x46430
+   4642e:	ee 01       	mov	#1,r14
+   46430:	60 e3       	mov	r14,r0
+   46432:	7f 04       	add	#4,r15
+   46434:	4f 26       	lds.l	@r15+,pr
+   46436:	00 0b       	rts
+   46438:	6e f6       	mov.l	@r15+,r14
+   4643a:	2f e6       	mov.l	r14,@-r15
+   4643c:	2f d6       	mov.l	r13,@-r15
+   4643e:	2f c6       	mov.l	r12,@-r15
+   46440:	2f b6       	mov.l	r11,@-r15
+   46442:	2f a6       	mov.l	r10,@-r15
+   46444:	2f 96       	mov.l	r9,@-r15
+   46446:	e9 00       	mov	#0,r9
+   46448:	d3 17       	mov.l	0x464a8,r3	! ffff9b3e
+   4644a:	2f 86       	mov.l	r8,@-r15
+   4644c:	4f 22       	sts.l	pr,@-r15
+   4644e:	7f f8       	add	#-8,r15
+   46450:	6e 31       	mov.w	@r3,r14
+   46452:	c5 75       	mov.w	@(234,gbr),r0
+   46454:	6d 03       	mov	r0,r13
+   46456:	60 4c       	extu.b	r4,r0
+   46458:	d2 14       	mov.l	0x464ac,r2	! ffff9b3c
+   4645a:	88 02       	cmp/eq	#2,r0
+   4645c:	db 14       	mov.l	0x464b0,r11	! 108e6
+   4645e:	68 20       	mov.b	@r2,r8
+   46460:	da 14       	mov.l	0x464b4,r10	! 73f54
+   46462:	8d 06       	bt.s	0x46472
+   46464:	6c 8c       	extu.b	r8,r12
+   46466:	88 01       	cmp/eq	#1,r0
+   46468:	89 26       	bt	0x464b8
+   4646a:	88 00       	cmp/eq	#0,r0
+   4646c:	89 3d       	bt	0x464ea
+   4646e:	a0 5f       	bra	0x46530
+   46470:	00 09       	nop
+   46472:	65 a3       	mov	r10,r5
+   46474:	4b 0b       	jsr	@r11
+   46476:	64 e3       	mov	r14,r4
+   46478:	64 0d       	extu.w	r0,r4
+   4647a:	3d 43       	cmp/ge	r4,r13
+   4647c:	89 57       	bt	0x4652e
+   4647e:	68 8c       	extu.b	r8,r8
+   46480:	e2 04       	mov	#4,r2
+   46482:	38 23       	cmp/ge	r2,r8
+   46484:	89 54       	bt	0x46530
+   46486:	a0 52       	bra	0x4652e
+   46488:	00 09       	nop
+   4648a:	9b f6       	mov.w	0x4667a,r11	! 7404
+   4648c:	9b f8       	mov.w	0x46680,r11	! 64f3
+   4648e:	ff ff       	.word 0xffff
+   46490:	ff ff       	.word 0xffff
+   46492:	93 36       	mov.w	0x46502,r3	! 64e3
+   46494:	ff ff       	.word 0xffff
+   46496:	93 90       	mov.w	0x465ba,r3	! 3e33
+   46498:	ff ff       	.word 0xffff
+   4649a:	92 c8       	mov.w	0x4662e,r2	! 7ff0
+   4649c:	00 07       	mul.l	r0,r0
+   4649e:	73 20       	add	#32,r3
+   464a0:	00 07       	mul.l	r0,r0
+   464a2:	73 22       	add	#34,r3
+   464a4:	00 07       	mul.l	r0,r0
+   464a6:	3f 20       	cmp/eq	r2,r15
+   464a8:	ff ff       	.word 0xffff
+   464aa:	9b 3e       	mov.w	0x4652a,r11	! 3c33
+   464ac:	ff ff       	.word 0xffff
+   464ae:	9b 3c       	mov.w	0x4652a,r11	! 3c33
+   464b0:	00 01       	.word 0x0001
+   464b2:	08 e6       	mov.l	r14,@(r0,r8)
+   464b4:	00 07       	mul.l	r0,r0
+   464b6:	3f 54       	div1	r5,r15
+   464b8:	65 a3       	mov	r10,r5
+   464ba:	4b 0b       	jsr	@r11
+   464bc:	64 e3       	mov	r14,r4
+   464be:	60 0d       	extu.w	r0,r0
+   464c0:	d5 2c       	mov.l	0x46574,r5	! 73fb4
+   464c2:	2f 02       	mov.l	r0,@r15
+   464c4:	4b 0b       	jsr	@r11
+   464c6:	64 e3       	mov	r14,r4
+   464c8:	64 0d       	extu.w	r0,r4
+   464ca:	60 c3       	mov	r12,r0
+   464cc:	88 04       	cmp/eq	#4,r0
+   464ce:	8b 02       	bf	0x464d6
+   464d0:	62 f2       	mov.l	@r15,r2
+   464d2:	3d 23       	cmp/ge	r2,r13
+   464d4:	89 2b       	bt	0x4652e
+   464d6:	60 c3       	mov	r12,r0
+   464d8:	88 03       	cmp/eq	#3,r0
+   464da:	8b 01       	bf	0x464e0
+   464dc:	3d 43       	cmp/ge	r4,r13
+   464de:	89 26       	bt	0x4652e
+   464e0:	e2 03       	mov	#3,r2
+   464e2:	3c 23       	cmp/ge	r2,r12
+   464e4:	89 24       	bt	0x46530
+   464e6:	a0 22       	bra	0x4652e
+   464e8:	00 09       	nop
+   464ea:	65 a3       	mov	r10,r5
+   464ec:	4b 0b       	jsr	@r11
+   464ee:	64 e3       	mov	r14,r4
+   464f0:	d5 20       	mov.l	0x46574,r5	! 73fb4
+   464f2:	60 0d       	extu.w	r0,r0
+   464f4:	2f 02       	mov.l	r0,@r15
+   464f6:	4b 0b       	jsr	@r11
+   464f8:	64 e3       	mov	r14,r4
+   464fa:	60 0d       	extu.w	r0,r0
+   464fc:	d5 1e       	mov.l	0x46578,r5	! 74014
+   464fe:	1f 01       	mov.l	r0,@(4,r15)
+   46500:	4b 0b       	jsr	@r11
+   46502:	64 e3       	mov	r14,r4
+   46504:	64 0d       	extu.w	r0,r4
+   46506:	60 c3       	mov	r12,r0
+   46508:	88 04       	cmp/eq	#4,r0
+   4650a:	8b 02       	bf	0x46512
+   4650c:	62 f2       	mov.l	@r15,r2
+   4650e:	3d 23       	cmp/ge	r2,r13
+   46510:	89 0d       	bt	0x4652e
+   46512:	60 c3       	mov	r12,r0
+   46514:	88 03       	cmp/eq	#3,r0
+   46516:	8b 02       	bf	0x4651e
+   46518:	53 f1       	mov.l	@(4,r15),r3
+   4651a:	3d 33       	cmp/ge	r3,r13
+   4651c:	89 07       	bt	0x4652e
+   4651e:	60 c3       	mov	r12,r0
+   46520:	88 02       	cmp/eq	#2,r0
+   46522:	8b 01       	bf	0x46528
+   46524:	3d 43       	cmp/ge	r4,r13
+   46526:	89 02       	bt	0x4652e
+   46528:	e3 02       	mov	#2,r3
+   4652a:	3c 33       	cmp/ge	r3,r12
+   4652c:	89 00       	bt	0x46530
+   4652e:	e9 01       	mov	#1,r9
+   46530:	60 93       	mov	r9,r0
+   46532:	7f 08       	add	#8,r15
+   46534:	4f 26       	lds.l	@r15+,pr
+   46536:	68 f6       	mov.l	@r15+,r8
+   46538:	69 f6       	mov.l	@r15+,r9
+   4653a:	6a f6       	mov.l	@r15+,r10
+   4653c:	6b f6       	mov.l	@r15+,r11
+   4653e:	6c f6       	mov.l	@r15+,r12
+   46540:	6d f6       	mov.l	@r15+,r13
+   46542:	00 0b       	rts
+   46544:	6e f6       	mov.l	@r15+,r14
+   46546:	94 13       	mov.w	0x46570,r4	! 9bf5
+   46548:	60 40       	mov.b	@r4,r0
+   4654a:	c9 fb       	and	#251,r0
+   4654c:	24 00       	mov.b	r0,@r4
+   4654e:	60 40       	mov.b	@r4,r0
+   46550:	c9 fd       	and	#253,r0
+   46552:	24 00       	mov.b	r0,@r4
+   46554:	60 40       	mov.b	@r4,r0
+   46556:	c9 fe       	and	#254,r0
+   46558:	24 00       	mov.b	r0,@r4
+   4655a:	d4 08       	mov.l	0x4657c,r4	! ffff9bf4
+   4655c:	60 40       	mov.b	@r4,r0
+   4655e:	c9 fb       	and	#251,r0
+   46560:	24 00       	mov.b	r0,@r4
+   46562:	60 40       	mov.b	@r4,r0
+   46564:	c9 fd       	and	#253,r0
+   46566:	24 00       	mov.b	r0,@r4
+   46568:	60 40       	mov.b	@r4,r0
+   4656a:	c9 fe       	and	#254,r0
+   4656c:	00 0b       	rts
+   4656e:	24 00       	mov.b	r0,@r4
+   46570:	9b f5       	mov.w	0x4675e,r11	! 6000
+   46572:	ff ff       	.word 0xffff
+   46574:	00 07       	mul.l	r0,r0
+   46576:	3f b4       	div1	r11,r15
+   46578:	00 07       	mul.l	r0,r0
+   4657a:	40 14       	.word 0x4014
+   4657c:	ff ff       	.word 0xffff
+   4657e:	9b f4       	mov.w	0x4676a,r11	! 8b01
+   46580:	2f e6       	mov.l	r14,@-r15
+   46582:	96 40       	mov.w	0x46606,r6	! 9bf5
+   46584:	93 40       	mov.w	0x46608,r3	! 9bf6
+   46586:	60 63       	mov	r6,r0
+   46588:	92 3f       	mov.w	0x4660a,r2	! 9bf8
+   4658a:	60 00       	mov.b	@r0,r0
+   4658c:	67 31       	mov.w	@r3,r7
+   4658e:	c8 08       	tst	#8,r0
+   46590:	d0 1e       	mov.l	0x4660c,r0	! 77314
+   46592:	05 29       	movt	r5
+   46594:	75 ff       	add	#-1,r5
+   46596:	65 5b       	neg	r5,r5
+   46598:	6e 7f       	exts.w	r7,r14
+   4659a:	61 01       	mov.w	@r0,r1
+   4659c:	3e 13       	cmp/ge	r1,r14
+   4659e:	8d 09       	bt.s	0x465b4
+   465a0:	64 21       	mov.w	@r2,r4
+   465a2:	d3 1b       	mov.l	0x46610,r3	! 77316
+   465a4:	61 31       	mov.w	@r3,r1
+   465a6:	3e 13       	cmp/ge	r1,r14
+   465a8:	8b 05       	bf	0x465b6
+   465aa:	61 4f       	exts.w	r4,r1
+   465ac:	d3 19       	mov.l	0x46614,r3	! 77318
+   465ae:	62 31       	mov.w	@r3,r2
+   465b0:	31 23       	cmp/ge	r2,r1
+   465b2:	8b 00       	bf	0x465b6
+   465b4:	e5 01       	mov	#1,r5
+   465b6:	d2 18       	mov.l	0x46618,r2	! 7731a
+   465b8:	63 21       	mov.w	@r2,r3
+   465ba:	3e 33       	cmp/ge	r3,r14
+   465bc:	8b 08       	bf	0x465d0
+   465be:	d3 17       	mov.l	0x4661c,r3	! 7731c
+   465c0:	61 31       	mov.w	@r3,r1
+   465c2:	3e 13       	cmp/ge	r1,r14
+   465c4:	89 05       	bt	0x465d2
+   465c6:	64 4f       	exts.w	r4,r4
+   465c8:	d1 15       	mov.l	0x46620,r1	! 7731e
+   465ca:	60 11       	mov.w	@r1,r0
+   465cc:	34 03       	cmp/ge	r0,r4
+   465ce:	89 00       	bt	0x465d2
+   465d0:	e5 00       	mov	#0,r5
+   465d2:	64 5c       	extu.b	r5,r4
+   465d4:	24 48       	tst	r4,r4
+   465d6:	8b 02       	bf	0x465de
+   465d8:	60 60       	mov.b	@r6,r0
+   465da:	a0 02       	bra	0x465e2
+   465dc:	c9 f7       	and	#247,r0
+   465de:	60 60       	mov.b	@r6,r0
+   465e0:	cb 08       	or	#8,r0
+   465e2:	26 00       	mov.b	r0,@r6
+   465e4:	60 43       	mov	r4,r0
+   465e6:	88 01       	cmp/eq	#1,r0
+   465e8:	8b 02       	bf	0x465f0
+   465ea:	e3 06       	mov	#6,r3
+   465ec:	d2 0d       	mov.l	0x46624,r2	! ffff9b40
+   465ee:	22 30       	mov.b	r3,@r2
+   465f0:	d5 0d       	mov.l	0x46628,r5	! ffff9aea
+   465f2:	24 48       	tst	r4,r4
+   465f4:	8b 02       	bf	0x465fc
+   465f6:	60 50       	mov.b	@r5,r0
+   465f8:	a0 02       	bra	0x46600
+   465fa:	c9 fb       	and	#251,r0
+   465fc:	60 50       	mov.b	@r5,r0
+   465fe:	cb 04       	or	#4,r0
+   46600:	25 00       	mov.b	r0,@r5
+   46602:	00 0b       	rts
+   46604:	6e f6       	mov.l	@r15+,r14
+   46606:	9b f5       	mov.w	0x467f4,r11	! 84f4
+   46608:	9b f6       	mov.w	0x467f8,r11	! 6bbc
+   4660a:	9b f8       	mov.w	0x467fe,r11	! 8f06
+   4660c:	00 07       	mul.l	r0,r0
+   4660e:	73 14       	add	#20,r3
+   46610:	00 07       	mul.l	r0,r0
+   46612:	73 16       	add	#22,r3
+   46614:	00 07       	mul.l	r0,r0
+   46616:	73 18       	add	#24,r3
+   46618:	00 07       	mul.l	r0,r0
+   4661a:	73 1a       	add	#26,r3
+   4661c:	00 07       	mul.l	r0,r0
+   4661e:	73 1c       	add	#28,r3
+   46620:	00 07       	mul.l	r0,r0
+   46622:	73 1e       	add	#30,r3
+   46624:	ff ff       	.word 0xffff
+   46626:	9b 40       	mov.w	0x466aa,r11	! 6cc8
+   46628:	ff ff       	.word 0xffff
+   4662a:	9a ea       	mov.w	0x46802,r10	! 605f
+

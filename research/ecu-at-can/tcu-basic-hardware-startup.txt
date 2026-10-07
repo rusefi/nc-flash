@@ -1,0 +1,114 @@
+TCU user-break, bus and DMA-operation startup — 2026-10-07
+
+Full objective remains ECU/AT CAN integration, deep traction control and NC
+roof folding AND unfolding with interruption/resume/reversal, timeout, left/right
+synchronization and recovery. All incomplete. User has no additional DSC/roof
+firmware/captures/bench results. No staging/commit/push; this thread owns checkout.
+Previous and current goal turns made verified progress. No ROM/production/shared
+ISA modifications. Current archive/status and separate scope actions in CHECKPOINT.
+
+UBC configuration
+verify_tcu_ubc_startup.py PASS512 original wholeRAM/register/exactMMIO cases:
+14432 and1443E clear respective UBAR andUBAMR word pairs,1444A clearsUBBR,
+14452..14458 clearsUBCR before its BSC writes. Six registersEC00/02/04/06/08/0A,
+writable masksFFFF/FFFF/FFFF/FFFF/00FF/0007.93 control roundtrips and29 strict
+wrong-width/address/reserved rejections PASS. Word-only fixture, although legal
+hardware byte/long accesses exist. No break matching, pin pulses or IRQ events.
+UBCR0 enables user-break requests on matches, but UBBR0 excludes break cycles;
+do NOT describe UBCR0 itself as disabling user-break requests. Compatiblemanual
+PDFzero160..166 sections8.1.3/8.2/8.3.1 supplies this distinction.
+
+Shared bounded configuration owner
+UBC initially had a local latch implementation. When BSC required the same
+strict configuration pipeline, extracted ConfigurationWords in
+ tcu_startup_configuration_words.py
+UBC andBSC use their own owned instances, documented masks and explicit initial
+values; no duplicate MMIO pipeline or shared mutable state. UBC rerun stayed
+byte-identical SHA256f96012757b10877ddb209c3604e965e295a23330adcc1108701481e89cffb4a2.
+No dynamic peripheral effects inferred from these configuration latches.
+
+BSC configuration and source conflict
+verify_tcu_bsc_startup.py PASS256 original14452+14466 function pairs (512wholeRAM/
+register returns),16 unsupported writes rejected. Full14452 clearsUBCR then
+writes BCR1EC20=000F andBCR2EC22=0007.14466 writesWCREC24=3333. Exact MMIO order,
+wholeRAM, allGPRs/SR/PR checked. BCR1low4bits writable, upper12reserved; BCR2/WCR
+fullword configuration. No external bus transactions/CS/pin timing or RAM emulation.
+SH7055S table9.2/PDF176 says WCR reset7777, whereas section9.2.3/PDF184 saysFFFF.
+Both are retained. Do not silently choose a reset value. The BSC owner requires
+an explicit WCR initial input; tests cover0/7777/FFFF/3333. Original14466 overwrites
+without reading it. The fullprobe uses explicit0, not a reset claim. BCR1/BCR2
+start0F/FFFF from documented values; no external-bus accesses are modeled.
+
+DMA-operation behavior
+verify_tcu_dmaor_startup.py PASS64 original14476 wholeRAM/register cases,
+32 seeded-status/read-clear sequences and18 strict rejected writes. Original
+14476 returns via RTSdelay-slot1447C, writes0 to wordDMAOR ECB0. DMEbit0 is
+writable; AEbit2/NMIFbit1 clear only after reading1 then writing0. Original
+initializer does no prior read, so seeded error flags remain; no false clearing.
+Owner rejects status-one/reserved/byte/long/unprovided accesses, does not guess
+hardware behavior for unsupported writes. No DMA transfers, channel reload
+counters or new NMI/address-error events. Fullprobe starts DMAOR0 explicitly
+consistent with documented reset value; that is not a complete hardware reset.
+Source PDFzero199/206/207, table10.1 andsection10.2.5.
+
+Complete15574 bounded continuation
+Same probe, no skipped callees or direct recovery-flag writes. Retained stops:
+ --ubc:1445C wordwriteEC20=15 (tcu-hardware-startup-ubc-probe.json)
+ plus --wcr-initial0:1447C wordwriteECB0=0 (tcu-hardware-startup-bsc-probe.json)
+ plus --dmaor:14602 bytewriteF424=0 (tcu-hardware-startup-dmaor-probe.json)
+The previous ICR/no-ICR probes also remain unchanged. Full15574 now executes
+verified UBC/BSC/DMA configuration and previously supported timer configuration,
+but rejects its next missing timer register. Both868C/868D stay0; the final
+recovery-enable tail has not executed. Fullcaller coverage is not a complete
+independent semantic oracle for every instruction or a reset/physical proof.
+Next inspect original145FE/14602 and compatible ATU-II ITVRR1 configuration;
+add only documented access/semantics, verify original leaf and continue15574.
+Preserve known timestamp reset-width conflict from tcu-timestamp-configuration.txt;
+do not silently treat word accesses as legal for a longword-only register.
+
+Reproduce
+ python research/ecu-at-can/verify_tcu_ubc_startup.py
+ python research/ecu-at-can/verify_tcu_bsc_startup.py
+ python research/ecu-at-can/verify_tcu_dmaor_startup.py
+ python research/ecu-at-can/probe_tcu_hardware_startup.py --nmi-level 0 --irq-status-zero --ubc --filename tcu-hardware-startup-ubc-probe.json
+ python research/ecu-at-can/probe_tcu_hardware_startup.py --nmi-level 0 --irq-status-zero --ubc --wcr-initial 0 --filename tcu-hardware-startup-bsc-probe.json
+ python research/ecu-at-can/probe_tcu_hardware_startup.py --nmi-level 0 --irq-status-zero --ubc --wcr-initial 0 --dmaor --filename tcu-hardware-startup-dmaor-probe.json
+Default no-ICR/IRQzero and intermediate UBC/BSC JSONs rerun byte-identical after
+optional routing changes; exact identities in basic-startup-artifacts.json.
+No earlier stop discarded. Native320 task lifecycle remains different from the
+older forced-readiness fixture; missingfull15574 stillprecludes healthy recovery.
+
+Sources/tooling
+Python3.14.3, GNUobjdump2.42, PyMuPDF1.28.2; setup in tcu-pulse-input.txt.
+TCUexamples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Manualsources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+Saved tcu-ubc-startup-manual-excerpts.txt, tcu-bsc-startup-manual-excerpts.txt,
+tcu-dmaor-startup-manual-excerpts.txt; exact instruction excerpts in
+ tcu-hardware-startup-first-config-disassembly.txt
+ tcu-hardware-startup-disassembly.txt
+
+Other scopes
+Traction executed task4->7->4 proof remains; ECU EC62 hardware identity and
+CAN211/21A sender/units/remoteDSC actuation still missing. Next variant-specific
+register/OEM evidence, without guessing a latch. Roof factory documents/candidate
+mappings are separate from missing OEM receiver/physical proof. Both directions,
+interruption/resume/reversal/numericalCANtimeout/LRsynchronization/recovery remain
+open; next applicable edition/VIN reversal/timeout/synchronization evidence.
+Do not repeat questions about unavailable artifacts or exhausted downloads.
+
+Correction before continuation: an initial next-step note calledF424 TCR0 without
+checking the table. PDFzero240 identifiesF424 as8bit ITVRR1 (timer interval
+interrupt request register1), not TCR0. No model or annotation was based on the
+wrong name. Correct next: original145FE ITVRR1/interval-request setup. Source
+excerpt saved in tcu-startup-interval-lead.txt.
+
+Saved analysis:2012 annotations/1046 complete identical exports/11project hashes
+verified before and after independent read-only reopening both programs. Archive
+11,026,317bytes SHA256fe7b8e183d92771c292f75e3b36d836767cf7d0cb75d8e37e89bc8437eca665a.
+Apply65541/liveverify26638/snapshot23863/restoredverify49301 all exit0/clean logs;
+verify_restore.py --write-report PASS. Ghidra12.1.3PUBLIC/Java21.0.10,300second
+export timeout. Reproduction commands in ghidra/README.txt. All18new files
+Git-eligible; eight scripts compile; diff check PASS. No live probes/headless
+sessions or pending Ghidra edits. No staging/commit/push.

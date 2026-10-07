@@ -66,9 +66,12 @@ class CreationTCU(ObservedTCU):
         return super().instruction(pc)
 
 
-def upstream(code=7, operation=0x17, head=0):
-    t = CreationTCU()
-    t.ram = dict(fixture().ram)
+def upstream(code=7, operation=0x17, head=0, t=None):
+    if t is None:
+        t = CreationTCU()
+        t.ram = dict(fixture().ram)
+    else:
+        fixture(t)
     t.run(0x31524, 0)
     assert r(t, 0x8088) == 1 and r(t, 0x96C5) == 0
     w(t, 0x96C4, head)

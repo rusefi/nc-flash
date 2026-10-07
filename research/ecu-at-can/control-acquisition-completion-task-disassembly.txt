@@ -1,0 +1,144 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000f250 <.data+0xf250>:
+    f250:	61 f6       	mov.l	@r15+,r1
+    f252:	62 f6       	mov.l	@r15+,r2
+    f254:	63 f6       	mov.l	@r15+,r3
+    f256:	64 f6       	mov.l	@r15+,r4
+    f258:	65 f6       	mov.l	@r15+,r5
+    f25a:	66 f6       	mov.l	@r15+,r6
+    f25c:	67 f6       	mov.l	@r15+,r7
+    f25e:	00 2b       	rte	
+    f260:	00 09       	nop	
+    f262:	94 5d       	mov.w	0xf320,r4	! f5ca
+    f264:	63 41       	mov.w	@r4,r3
+    f266:	e2 03       	mov	#3,r2
+    f268:	24 21       	mov.w	r2,@r4
+    f26a:	94 5c       	mov.w	0xf326,r4	! bb
+    f26c:	aa ba       	bra	0xe7e4
+    f26e:	00 09       	nop	
+    f270:	93 5a       	mov.w	0xf328,r3	! f712
+    f272:	d2 35       	mov.l	0xf348,r2	! ff7f
+    f274:	61 31       	mov.w	@r3,r1
+    f276:	21 29       	and	r2,r1
+    f278:	23 11       	mov.w	r1,@r3
+    f27a:	94 56       	mov.w	0xf32a,r4	! bc
+    f27c:	aa b2       	bra	0xe7e4
+    f27e:	00 09       	nop	
+    f280:	93 54       	mov.w	0xf32c,r3	! f818
+    f282:	60 30       	mov.b	@r3,r0
+    f284:	c9 7f       	and	#127,r0
+    f286:	d2 31       	mov.l	0xf34c,r2	! 4dfa
+    f288:	42 2b       	jmp	@r2
+    f28a:	23 00       	mov.b	r0,@r3
+    f28c:	93 4f       	mov.w	0xf32e,r3	! f718
+    f28e:	d2 2e       	mov.l	0xf348,r2	! ff7f
+    f290:	61 31       	mov.w	@r3,r1
+    f292:	21 29       	and	r2,r1
+    f294:	23 11       	mov.w	r1,@r3
+    f296:	d3 2e       	mov.l	0xf350,r3	! 1062e
+    f298:	43 2b       	jmp	@r3
+    f29a:	00 09       	nop	
+    f29c:	93 48       	mov.w	0xf330,r3	! f838
+    f29e:	60 30       	mov.b	@r3,r0
+    f2a0:	c9 7f       	and	#127,r0
+    f2a2:	d2 2c       	mov.l	0xf354,r2	! 4dfe
+    f2a4:	42 2b       	jmp	@r2
+    f2a6:	23 00       	mov.b	r0,@r3
+    f2a8:	93 43       	mov.w	0xf332,r3	! f858
+    f2aa:	60 30       	mov.b	@r3,r0
+    f2ac:	c9 7f       	and	#127,r0
+    f2ae:	d2 2a       	mov.l	0xf358,r2	! 4e2e
+    f2b0:	42 2b       	jmp	@r2
+    f2b2:	23 00       	mov.b	r0,@r3
+    f2b4:	94 3e       	mov.w	0xf334,r4	! f004
+    f2b6:	60 40       	mov.b	@r4,r0
+    f2b8:	c9 07       	and	#7,r0
+    f2ba:	cb c0       	or	#192,r0
+    f2bc:	24 00       	mov.b	r0,@r4
+    f2be:	94 3a       	mov.w	0xf336,r4	! c8
+    f2c0:	aa 90       	bra	0xe7e4
+    f2c2:	00 09       	nop	
+    f2c4:	94 36       	mov.w	0xf334,r4	! f004
+    f2c6:	60 40       	mov.b	@r4,r0
+    f2c8:	c9 07       	and	#7,r0
+    f2ca:	cb b8       	or	#184,r0
+    f2cc:	24 00       	mov.b	r0,@r4
+    f2ce:	94 33       	mov.w	0xf338,r4	! c9
+    f2d0:	aa 88       	bra	0xe7e4
+    f2d2:	00 09       	nop	
+    f2d4:	94 31       	mov.w	0xf33a,r4	! ca
+    f2d6:	aa 85       	bra	0xe7e4
+    f2d8:	00 09       	nop	
+    f2da:	94 2b       	mov.w	0xf334,r4	! f004
+    f2dc:	60 40       	mov.b	@r4,r0
+    f2de:	c9 07       	and	#7,r0
+    f2e0:	cb f8       	or	#248,r0
+    f2e2:	24 00       	mov.b	r0,@r4
+    f2e4:	94 2a       	mov.w	0xf33c,r4	! cb
+    f2e6:	aa 7d       	bra	0xe7e4
+    f2e8:	00 09       	nop	
+    f2ea:	94 28       	mov.w	0xf33e,r4	! f00c
+    f2ec:	60 40       	mov.b	@r4,r0
+    f2ee:	c9 07       	and	#7,r0
+    f2f0:	cb c0       	or	#192,r0
+    f2f2:	24 00       	mov.b	r0,@r4
+    f2f4:	94 24       	mov.w	0xf340,r4	! cc
+    f2f6:	aa 75       	bra	0xe7e4
+    f2f8:	00 09       	nop	
+    f2fa:	94 20       	mov.w	0xf33e,r4	! f00c
+    f2fc:	60 40       	mov.b	@r4,r0
+    f2fe:	c9 07       	and	#7,r0
+    f300:	cb b8       	or	#184,r0
+    f302:	24 00       	mov.b	r0,@r4
+    f304:	94 1d       	mov.w	0xf342,r4	! cd
+    f306:	aa 6d       	bra	0xe7e4
+    f308:	00 09       	nop	
+    f30a:	94 1b       	mov.w	0xf344,r4	! ce
+    f30c:	aa 6a       	bra	0xe7e4
+    f30e:	00 09       	nop	
+    f310:	94 15       	mov.w	0xf33e,r4	! f00c
+    f312:	60 40       	mov.b	@r4,r0
+    f314:	c9 07       	and	#7,r0
+    f316:	cb f8       	or	#248,r0
+    f318:	24 00       	mov.b	r0,@r4
+    f31a:	94 14       	mov.w	0xf346,r4	! cf
+    f31c:	aa 62       	bra	0xe7e4
+    f31e:	00 09       	nop	
+    f320:	f5 ca       	fmov	fr12,@r5
+    f322:	01 01       	.word 0x0101
+    f324:	00 ba       	.word 0x00ba
+    f326:	00 bb       	.word 0x00bb
+    f328:	f7 12       	fmul	fr1,fr7
+    f32a:	00 bc       	mov.b	@(r0,r11),r0
+    f32c:	f8 18       	fmov	@r1,fr8
+    f32e:	f7 18       	fmov	@r1,fr7
+    f330:	f8 38       	fmov	@r3,fr8
+    f332:	f8 58       	fmov	@r5,fr8
+    f334:	f0 04       	fcmp/eq	fr0,fr0
+    f336:	00 c8       	.word 0x00c8
+    f338:	00 c9       	.word 0x00c9
+    f33a:	00 ca       	.word 0x00ca
+    f33c:	00 cb       	.word 0x00cb
+    f33e:	f0 0c       	fmov	fr0,fr0
+    f340:	00 cc       	mov.b	@(r0,r12),r0
+    f342:	00 cd       	mov.w	@(r0,r12),r0
+    f344:	00 ce       	mov.l	@(r0,r12),r0
+    f346:	00 cf       	mac.l	@r12+,@r0+
+    f348:	00 00       	.word 0x0000
+    f34a:	ff 7f       	.word 0xff7f
+    f34c:	00 00       	.word 0x0000
+    f34e:	4d fa       	.word 0x4dfa
+    f350:	00 01       	.word 0x0001
+    f352:	06 2e       	mov.l	@(r0,r2),r6
+    f354:	00 00       	.word 0x0000
+    f356:	4d fe       	.word 0x4dfe
+    f358:	00 00       	.word 0x0000
+    f35a:	4e 2e       	ldc	r14,vbr
+    f35c:	94 87       	mov.w	0xf46e,r4	! f014
+    f35e:	60 40       	mov.b	@r4,r0
+

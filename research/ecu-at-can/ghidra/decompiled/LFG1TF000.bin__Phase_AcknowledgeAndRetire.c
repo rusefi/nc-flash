@@ -1,9 +1,10 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Maps groupID5D3BC to record bytes0..9; metadata0 acknowledgements latch+14. Retires
-   all-ten-acknowledged heads then tails with3 callbacks5D414; middle records wait. Empty
-   returns1/resets96C6.4096 bitmap,975 stateful ack and10 real initialized-group lifecycles
-   verified. */
+/* Group5D3BC ->record ackbytes0..9; requiredmetadata0 latches+14; exact1 latch plusallnonzero
+   permitshead/thentail retirement with3callbacks. Prior4096bitmap/975statefulcases; new4132wholeRAM
+   directcases and85 actualreturn wholeRAM checks in32+352 fulltasks. tcu-initialized-requests.txt.
+   Native-startup320 periods add27 actualreturn wholeRAM checks; thirdphaseindex2/group6/code9
+   remains at320. tcu-native-can-lifecycle.txt. */
 
 undefined4 Phase_AcknowledgeAndRetire(byte param_1,short param_2)
 

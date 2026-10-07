@@ -1,0 +1,145 @@
+ECU local acquisition -> decoded inputs -> retained control replay
+=================================================================
+2026-10-06. Original instructions establish local acquisition provenance for
+6CAC and6CB4. This is not a CAN receiver identification, board-wiring proof,
+physical-unit assignment or DSC actuation test. ECU/AT and NC roof folding
+AND unfolding remain independently incomplete.
+
+Followup: control-acquisition-schedule.txt executes the actual periodic4CE2
+manager and E276..E282 manager/scaler pair. It copies prior bank selections
+and schedules the next scan; the earlier full-copy replay below is explicitly
+a harness choice, not real periodic task cadence. The followup preserves
+slower-bank retention and replaces ongoing full-copy slices in paired replay.
+
+Reproduce:
+ python research/ecu-at-can/verify_control_acquisition.py
+Python3.14.3, existing ControlPolicy interpreter extended locally only for
+explicit read-only ADC result samples. No shared interpreter, existing verifier,
+production or ROM changes. ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Output control-acquisition-verification.json:1,124 copy slices,1,224 decoders,
+1,066 scalers,72 periodic publication cases and4 expected access rejections;
+260 retained calls;320 integrated cycles/36 paired CAN/320 CAN211 updates.
+All pass. No test failure or interpreter opcode addition was needed.
+
+Primary register evidence and durable source
+-------------------------------------------
+Renesas SH-2E SH7058 F-ZTAT hardware manual REJ09B0046-0300H, Rev3.00 Sep2004:
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+Rechecked2026-10-06. Section17.1.4/table17.2 (printed623, zero-based PDF665)
+names FFFFF802 as ADDR1 and FFFFF810 as ADDR8. Section17.2.1 (printed625,
+PDF667) describes read-only16-bit A/D data registers holding10-bit results
+in bits15..6. Thus supported conversion-count fixtures use count<<6.
+This names on-chip registers/channels, not the NC connector, sensor or units.
+
+Full source is now Git-eligible in sources/renesas-sh7058-hardware-
+rej09b0046-0300h.pdf,5,998,523 bytes,1132 pages, SHA256
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+Its adjacent JSON records source/version/pages/provenance. Copied from the
+previous official-source download; hash matches control-serial.txt. The
+relevant conclusions are here, not solely in temporary extraction. An initial
+provenance draft said17.1.3; the local source confirms17.1.4 and JSON is corrected.
+
+Bounded acquisition slice
+------------------------
+4B80..4C94 executes32 original word reads, in channel order, and copies to
+RAM4008+2*channel. Result registers are F800..F816, F820..F836 and F840..F84E,
+all withFFFF prefix. The slice ends before the enclosing epilogue. It does
+not execute conversion start/status waits, initialization or an interrupt.
+Each register read must have an explicit sample and correct16-bit width;
+missing samples, byte reads, status-register access and result writes fail.
+Existing SCI/application peripheral support remains inherited and unchanged.
+
+Harness attachment retains the existing CPU/RAM/serial state and specializes
+only the result-register interface. There is no instruction replacement,
+conversion clock, status generation, voltage model or external controller.
+100 arbitrary-word vectors test copying/decoding;1,024 valid10-bit vectors
+cover all counts, simultaneously on channels1 and8. Arbitrary low-six-bit
+vectors are bit-handling tests, not claimed physical conversion results.
+
+Complete application decoders
+-----------------------------
+3976C decodes17 fields from the copied bank. Word results shifted right6:
+ 6C90<-channel3;6C92<-28;6C94<-7;6C96<-14;6C9E<-30;
+ 6C9A/6C9C<-2;6CA0<-17;6CA2<-18;6CA4<-4;6CA6<-5;6CA8<-19;6CAA<-16.
+6C98 gets channel31's unshifted word. Bytes6CAE/6CAD/6CAC get the high byte
+of channels29/13/8 respectively. Thus6CAC=floor(channel8_count/4), losing
+the low two conversion bits. Full39894 updates only6C94,6C96,6CAC,6CA0,
+6CA2,6CA4,6CA6. Tests assert every byte6C90..6CAF, including retained fields.
+Earlier stores397AC/398BC are now executed as parts of these complete bodies.
+
+Scale and direct/filtered publication
+------------------------------------
+6710 first copies400A (channel1 raw word) to40EC, then falls through6718.
+6718 calls original2534 with input400A, old40EC and stockDC47C=256. The
+helper's old-value coefficient becomes zero, so stock output exactly equals
+the input word;42 boundary/raw-history cases supplement1,024 valid counts.
+It writes40EC and float40E8=RTZ(RTZ(raw/65536)*DC480), stockDC480=20.
+For a valid10-bit count this is count*20/1024. The represented range is
+0..19.98046875; describing a nominal0..20 scale does not assign volts or
+another physical unit. The XML search found no matching calibration-address
+names for these constants; absence is not proof of physical meaning.
+
+1DF14 initializes6CB4,6CB8 and6CB0 from40E8.1DF32 always increments byte6CBC
+with wrap; only an ODD entry count refreshes6CB4 from40E8 and filters6CB8
+through2508. Other calls retain both values. The filter retains approximately
+0.98 of the old difference (BFA7C=0.9800000190734863), with stock epsilon
+1DF88=0.00030517578125; exact finite RTZ operations and snap test are modeled.
+1DF28 then copies filtered6CB8 to6CB0. Direct6CB4 and filtered6CB8 must not
+be conflated.1DED8/1DEE2 remain readers;1DF14/1DF32 are verified writers.
+
+The260-call retained sequence starts phase254, observes255 then0, and wraps
+again after256 calls. A changed sample on21 is held in6CB4 until22; filtered
+6CB8 still differs after the direct update. The original decoder, scaler,
+publication and prior five post-mode bodies all execute between samples.
+
+Integrated replay and limitations
+---------------------------------
+The320-cycle replay supplies raw channel1 counts410/600/350 and channel8
+counts0/480/1023. Original copy/decode/scale/publication now produce6CAC and
+6CB4; those application outputs are not re-fixtured after production. Prior
+post-mode bodies and downstream/CAN/serial assertions remain active. Samples
+and cross-task invocation order are explicit; actual scheduler rates remain
+unproved. Calls161/162 assert held-then-refreshed6CB4 after the input change.
+Other unrelated local inputs and the SCI peer remain fixtures from the
+existing replay. This is not a full MCU, analog circuit or vehicle simulation.
+
+Static caller leads and remaining work
+-------------------------------------
+control-acquisition-caller-leads.txt records literal call-site leads:
+3976C loads164F0/178C8;39894 load183E0;6718 loadE27C;
+1DF32 loads17D98/17E84. Those enclosing tasks are not executed here.
+Acquisition copy is a bounded post-wait fragment, not a full ADC ISR proof.
+Next validate actual acquisition/application task order and event cadence;
+resolve NC board/connector/sensor mappings for channels1/8 before assigning
+units. Raw6Dxx/8F30 and399B0 still need provenance/scheduling. Physical DSC
+sender/actuation evidence remains missing. TCU3AC70/1F2AA androof revision,
+receiver, reversal, timeout, synchronization and recovery remain independent.
+The user has no additional dumps/captures/bench results; do not ask again.
+
+Disassembly and setup
+---------------------
+control-acquisition-copy-disassembly.txt (4B80..4C94), -decode-disassembly.txt
+(3976C..39A12), -scale-disassembly.txt (6708..6778), -publish-disassembly.txt
+(1DF14..1DF90). GNU SH binutils2.42 reproduction:
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis START STOP
+Original helper2534 and2508 execute in the test; no helper is stubbed.
+Saved ROMs/scripts/outputs and source PDF are sufficient durable inputs;
+temporary tool paths and extracted text are not the only evidence record.
+
+Local save and independent archive verification
+----------------------------------------------
+Both Ghidra programs saved. Refreshed .gpr+.rep archive independently restored:
+1,607 annotations (712 ECU/895 TCU), 795 byte-identical exports, 11 matching
+project hashes before and after reopening. No errors, incomplete decompiles,
+locks or pending job. Archive 10,921,992 bytes; SHA256
+4118b7cf0f5448bef6bfd1272df4cbc7ed3213ed3b6dcee0efe7180e5d18dffa.
+Manifests preserve identities/method. All 10 new artifacts, including the
+hardware PDF/provenance, are Git-eligible. py_compile and git diff --check pass.
+Saved locally; no staging, commit, push, production or ROM changes. Existing
+mixed index, including staged archive temporary entry, remains untouched.
+This turn made verified progress. The three broader scopes remain open.
+Next return to roof revision-specific reversal/timeout/synchronization evidence;
+ADC board/caller and TCU3AC70/1F2AA leads remain independent mandatory work.

@@ -89,7 +89,7 @@ uint CAN_EvaluateReceiveQualification(uint param_1,byte param_2,uint param_3)
       local_34 = 0;
       uVar17 = 0;
       cVar5 = (*(code *)PTR_FUN_0001a854)();
-      if ((cVar5 == '\0') && (*PTR_DAT_0001a858 == '\x01')) {
+      if ((cVar5 == '\0') && (*PTR_Diagnostic_CommunicationAdmission_0001a858 == '\x01')) {
         iVar11 = (int)DAT_0001a848;
         uVar2 = 0;
         iVar8 = (int)DAT_0001a84a;

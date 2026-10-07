@@ -1,0 +1,103 @@
+TCU diagnostic startup through native readiness — 2026-10-07
+
+Verified result
+Three retained traces execute original1217C initialization and diagnostic
+1682C..1688C interrupt prefixes alongside the existing original foreground ADC,
+CMT0 and application admission path. No forced application/diagnostic mode3 or
+ready flags. All scenarios PASS (session37167). Totals:600 CMT0,144 application,
+224 foreground,93 capture-return,288 command/pin and24 diagnostic checks.
+Thirteen actual56B06 returns also pass the independent whole-application-RAM
+model. These include calls from application processing; they are NOT thirteen
+returns inside diagnostic ISRs. Complete reset/mainloop and hardware delivery
+remain unproved. ECU/AT, traction and both roof directions remain incomplete.
+
+Original instructions and independent checks
+1217C calls empty12678, writes8006=1, then tail-calls167E4 timer initialization.
+Each scenario checks independent whole application RAM (only8006 changes),
+exact18 MMIO accesses, consumed finite samples and preserved R8..15/SR.
+The initializer runs after the base readiness initializers before the event
+epoch. This is not the native complete1168A ordering or full reset execution.
+1218E mode1 requires84A0=3,84D8=3 and8007=3; it then calls1267C (tail56CE0),
+sets8006=3 and calls12682. Mode3 plus84A0=4 instead becomes5. 12682 returns
+without diagnostic work inmode1 and calls57002/56F80 inmode3 or5. The gate
+predicate and exact observed entry list are checked independently every event.
+Existing execute_prefix supplies the whole-RAM differential, exact MMIO and
+register oracle. observe_diagnostic retains the actual56B06 return oracle.
+
+Measured conditional event times
+Foreground period/epoch:50000/7,50000/0,65536/FFFFFF00. Existing application
+admission occurs at2539520,2621440,2703360 phi (application31/32/33), respectively.
+All three admit diagnostics at the sixth diagnostic event,3000000 phi. Events
+3500000 and4000000 continue inmode3; each trace includes48 application events.
+Before admission, the five diagnostic events have no monitored-field changes.
+Admission changes monitored8006:1->3 andA936/A978/A98E/A98D/A98F:0->1. Later
+two diagnostic events have no monitored-field changes. This is NOT an assertion
+that unmonitored RAM is unchanged.
+
+Explicit fixture limits
+CMT0 period20000, application81920, diagnostic500000 phi; foreground periods
+are selected inputs. Tie order CMT0, diagnostic, application, foreground. No
+application/diagnostic tie occurs in this4-million-phi horizon. Timestamps are
+external(epoch+floor(phi/2)) modulo2^32, profile end+50, zero scheduling latency.
+Diagnostic compare n*15625 modulo65536; finite status/count/reload samples.
+No CAN traffic, CMT1 service or physical pulse captures are delivered here.
+TCNT10A reset-width conflict/TCR10 value and chip revision remain unresolved.
+
+Reuse and regression evidence
+Single readiness event loop gains optional initializer/events/observation hooks
+and configurable end_phi; default remains3 million phi. Diagnostic timer's
+existing initialization oracle is extracted to initialization_inputs. Existing
+qualified-receive actual-return observer is extracted to observe_diagnostic;
+the machine still owns its pending/boundary lists. No duplicate pipeline/mixin,
+production code, ROM or shared ISA change.
+Default readiness rerun27621 PASS, unchanged JSON SHA256:
+db4849a92f29757c856af6a683218ddddd3264f84fba2bb26c69844f45c8f363.
+Diagnostic timer rerun15309 PASS:256init/3072gate/20prefix, unchanged JSON:
+ea2c938791fec667402fdaf93fc6d6a862766fac7dc20b6ff0ae894b5df0cc8f.
+Retained diagnostic timeline prefix8 rerun14314 PASS, byte-identical original:
+08b0c7be5580e563eafb610e27f7ad4b6486b35e216e7d60dbd78dd3ce8b5308.
+New versus old readiness rows through3 million phi match exactly for
+phi/rank/kind/ordinal/state after excluding new diagnostic events. This is NOT
+whole-RAM/configuration equivalence: diagnostic initialization also setsF401bit4.
+verify_tcu_diagnostic_startup_records.py preserves these comparisons.
+
+Reproduce with Python3.14.3
+ python research/ecu-at-can/verify_tcu_diagnostic_startup.py
+ python research/ecu-at-can/verify_tcu_readiness_admission.py
+ python research/ecu-at-can/verify_tcu_diagnostic_timer.py
+ python research/ecu-at-can/probe_tcu_diagnostic_timeline.py --cycles 8 --filename tcu-diagnostic-observer-reuse-prefix8.json
+ python research/ecu-at-can/verify_tcu_diagnostic_startup_records.py
+ROM examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Original excerpts: tcu-diagnostic-startup-disassembly.txt. GNUobjdump2.42 setup
+and package provenance in tcu-pulse-input.txt. Conditional clocks/manual sources
+in tcu-diagnostic-timer.txt andtcu-timestamp-configuration.txt.
+
+Next concrete action and broader requirements
+Join native initialized state to retained CAN/capture/CMT1 delivery without
+forcing8007/8006=3, stage2/phase0, or resetting histories after admission.
+Compare original1DFF8 effects with retirement.full_fixture's62-group setup
+before claiming equivalence. The earlier320 request/loss trajectory remains
+fixture-specific. Fullreset/foreground loop/physical CAN and actuation stay open.
+Traction: executed task4->7->4 preemption is established; startupEC62 identity,
+hardware admission, CAN211/21A sender/units and remoteDSC actuation remain open.
+Roof: factory documentation/candidate maps only; applicableedition/VIN reversal,
+numerical CANtimeout, L/R synchronization and recovery remain open for BOTH
+folding and unfolding, including interruptions. No OEMcontroller execution.
+User has no extra dumps/captures/bench results; do not repeat the question.
+Saved locally only; no staging/commit/push. CHECKPOINT owns current Ghidra status.
+
+Ghidra save and independent restoration
+One new1217C function/three updated comments saved.1992annotations (865ECU/
+1127TCU),1029completeidenticalexports,11projectfiles. Apply88927/liveverify54721/
+snapshot55848/restoredverify84115 terminalexit0, logs checked clean. Fresh
+restore-check/diagnostic-startup-20261007 verified all11hashes before/after
+read-only reopen and againstlive; verify_restore.py --write-report PASS.
+Archive 11,022,956 bytes SHA256
+020d1ec56bca855ebade5f11c2360de29e87e7e83c9e70ccca64359688601d90.
+Ghidra12.1.3PUBLIC/Java21.0.10. Reproduce apply/liveverify/snapshot/independent
+extract/reopen via exact command pattern in tcu-readiness-admission.txt, using
+this restore directory. Five scriptscompile; recordsverifier/gitdiff--checkPASS.
+No liveprocess orunsavedGhidrachanges. Currentidentities in
+ diagnostic-startup-artifacts.json
+Saved locally; no staging/commit/push, existingmixedindex preserved.

@@ -1,0 +1,36 @@
+SUPERSEDED: original bodies and tasktail now executed; see tcu-output-pin-switch.txt
+and verifier/JSON. The historical static-lead record below is retained for provenance.
+
+TCU output-pin switching leads — 2026-10-06 — STATIC ONLY
+========================================================
+Next execution target after tcu-timer-configuration.txt. Original disassembly
+saved as tcu-output-pin-switch-{caller,descriptor}-disassembly.txt and
+ tcu-output-pin-switch-disassembly.txt. Source/ROM identity and tool setup
+are in tcu-timer-configuration.txt. These bodies have not yet been executed.
+
+1574C: F730 |=000F; F734 &=FFAA; F738 &=FFF0 (word read/modify/write).
+1576C: F738 &=FFF0; F730 |=000F; F734 |=0055 (word read/modify/write).
+Compatible manual: switches PB0..3 between general outputs and timer6A..D;
+F736/PBIR not touched. No physical polarity/board identity proof.
+Direct literal refs1574C pool18650/user1860E;1576C pool18654/user18622.
+Original185F8 loads unsigned command8A18, sets localflag0. If command==1,
+executes1574C and localflag1. If previous8A19==1 AND command==0, executes
+1576C. Other command bytes leave selection unchanged; exact values matter.
+Then copies command to8A19, tailcalls141BC with descriptor5C500/flagargument.
+185E4 clears8A18/19 then tailcalls141BC(descriptor5C500,0).
+1863C stores lowbyteR4 to8A18. Need find actual writers/callers/task gating.
+Descriptor5C500 bytes FFFFF74E 0E 00 00 00: wordportF74E,bit14,inversion0,
+interruptmask0.141BC protects according to SRmask versus descriptor+6 then
+1421A reads targetword, calls1423E/5B25C and writes result. Static1423E sets
+bit if flag&1 equals descriptor+5, otherwise clears. Therefore stock local
+flag1 appears to clear F74Ebit14, flag0 sets it. Physical pin identity still
+requires manual mapping and board evidence. Do not call it a solenoid enable
+without evidence. Preserve ordering of all MMIO accesses in the oracle.
+
+Next concrete action: extend configuration harness locally for F74E word;
+execute1574C/1576C and complete185F8 with fullRAM/register/MMIO comparisons,
+all commandbytes and representative previousvalues, then retained1->0 and
+nonbinary transitions. Test185E4/1863C, originalhelper and unrelated-bit
+preservation. Keep sharedISA/verifiers unchanged. Annotate only after proof,
+save both Ghidra programs, archive and independently restore. No staging,
+commit or push authorization. All three broad research scopes remain open.

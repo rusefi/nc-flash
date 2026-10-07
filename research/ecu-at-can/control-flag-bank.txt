@@ -1,0 +1,92 @@
+ECU stock calibration flag-bank publication —2026-10-06
+
+Fullobjective/constraints remain CHECKPOINT.txt: ECU/AT CAN, deeptraction,
+andNCroof folding ANDunfolding/interruption/reversal/timeout/LRsync/recovery
+all incomplete. No extrauserDSC/roof firmware,captures orbenchresults. No
+staging/commit/push. Previousgoalturn madeprogress throughconditions/freshness.
+
+Reproduce (repositoryroot,Python3.14.3):
+python research/ecu-at-can/verify_control_flag_bank.py
+python research/ecu-at-can/verify_control_flag_bank_retained.py
+python research/ecu-at-can/probe_control_application_initialize.py
+ECU SHA2567604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+OriginalROM unchanged. No sharedISA/peripheralfixture changes.
+
+64 seeded wholeapplicationRAM checks verifyoriginal744C6. All38 outputs
+911A..913F arebinaryinversionsof specifiedstockcalibrationbytes (1 iffROM
+bytezero). Explicitindependentmapping is inverify_control_flag_bank.py and
+control-flag-bank-verification.json,includingthenoncontiguoussuffixordering.
+SurroundingRAM remainsunchanged;nonvolatileGPR/stack/GBR/mask preserved.
+No hardware/pin/protocol identity inferred. Stock0/FF branches tested; no
+claimaboutpatchedcalibration images.
+9125 comesfromROM E0CCD=0,thereforepublished1. Thisislocalcalibration
+publication,notasampledexternalinput. Itfeeds6F34C timeradmission.
+Callers:1660A load/1660C JSR/return16610 inside1619A initializer;1B142load/
+1B144 JSR/return1B148 inside18DC8. Exactdisassembly andrefs saved here.
+
+Retained verification PASSES40 complete outer calls and66 wholeapplicationRAM
+boundaries (64 prior oracles,2 bank returns). At outercalls5/25, return1B148,
+the bank publishes9125=1. Eight6F34C consumers see0,0,1,1,1,1,1,1 on
+outercalls0/5/10/15/20/25/30/35. Thus the periodic bank publication follows
+that call's consumer; the next control call sees the new value. These are
+explicit zeroRAM/no-application-initializer fixtures, NOT real boot latency
+or wall-clock cadence. SamePFDR/CADE/SCI0/timer fixtures asconditionsreport.
+
+Original1619A startup prefix executes744C6 withreturn16610. Its fullRAM
+return oracle passes, including9125 changing0->1. After55 directcallee
+entries, the original1F30A path reaches28DFC's processor self-test candidate.
+The first limit was unsupportedSETT at28E1E, saved in
+control-application-initialize-sett-limit.json. Local probe SETT support
+passes1024 SR/GPR/RAM/GBR/PR/MACL preservation cases; sharedISA unchanged.
+Reproduce: python research/ecu-at-can/verify_control_initialize_isa.py
+
+Current probe stops at28F7A opcodeFBA3, FDIV FR10,FR11. Both raw operands
+are0; R14 is55555555. The harness rejects zero division and does not model
+FPSCR or NaN exception behavior. Static instructions subsequently expect
+three unordered comparisons, inspectFPSCR bit40, and clearFPSCR. This supports
+an intentional invalid-operation self-test interpretation, NOT a firmware
+fault or a proven startup return. The exact disassembly and raw operands
+are saved incontrol-initialize-selftest-disassembly.txt and
+control-application-initialize-probe.json. No callee was skipped or stubbed.
+Other observed zero counters are fixture state, not proof of initialization.
+
+Primary instruction source: Renesas SH-2E Software Manual REJ09B0316-0200,
+rev2.00, https://www.renesas.com/en/document/mah/sh-2e-software-manual
+Accessed2026-10-06. Section7.2.50 printed142/PDF155 describesSETT settingT
+and advancingPC2. Section7.3.4 printed179-180/PDF192-193 classifies zero/zero
+FDIV as invalid operation, distinct from finite nonzero/zero. Fullexception
+state/NaN comparisons and FPSCR semantics need source-backed modeling before
+continuing through this self-test. No processor conformance claim.
+
+Next: bound the missing invalid-operation/FPSCR model and verify it independently
+before resuming1619A, or trace the needed activity-counter initializer directly.
+Do not expand unrelated helpers into new completion requirements. KeepTCU
+operationalqueue/ack/overlap/provenance/cadence/persistence/board gaps;
+tractionCAN211/21A sender/units/remoteDSC/actuation; andbothroofdirections/
+interruption/reversal/timeout/LRsync/recovery/receiverproof separate. Nextroof
+requiresnewapplicablesource/OEMcontroller/physicalevidence;userhasnone.
+
+Additional static counter lead (not execution proof):
+control-initialize-counter-leads.txt shows6F29C summing stock timer values
+through2064 into8FD4, then copyingE0860 into8FD6/8FD7. It is a candidate
+initializer for the activity timer, not proof of9158 reset. Alignedliteral
+search finds9158 users within74ED2 and915E users there/later routines; this
+does not prove absence of other writers or bulkRAM initialization.
+
+Ghidra saved and independently restored:
+Revisedexisting744C6 annotation (previousnameDiagnostic_InitializeQualificationOptions)
+retains911A qualification evidence and covers the wholebank. Added9125label.
+Bothprograms saved:1895annotations (820ECU/1075TCU),951identical exports,
+11projecthashes verifiedbefore/after independentreadonly reopen. Superseded
+function-name export removed onlyafter newexport existed. Archive contains
+both.gpr and.rep,10,989,463bytes; SHA256:
+51523783d0a39aaef88fec236151bc1acdec855f1f6daf5385f1f1085d3c8e61
+Restore scratch:ghidra/restore-check/control-flag-bank-20261006 (ignored).
+Reproduceapply/readback via ghidra/README.txt; snapshot.py recordsallhashes.
+Restore intoemptydirectory,verifyallmanifesthashes,runVerifyCanEvidence.java
+readOnly toseparateexports,compareallfiles,thenrecheckprojecthashes.
+Ghidra12.1.3PUBLIC/Java21.0.10. Logscontrol-flag-bank-{apply,readback,restore}.log
+areignored; READBACK_OKbothprograms, noERROR/Exception. Durablemanifestsown
+currentarchiveidentity.13newresearchartifacts checkedGit-eligible;4scripts
+compile. MixedindexincludingADarchive.tmp intact. Locallysaved only; no
+staging,commit,push, productioncode, ROM orsharedinterpreter edits.

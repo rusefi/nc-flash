@@ -1,0 +1,426 @@
+{
+  "status": "PASS",
+  "scope": "Execute original84D8 readiness producer from finite ADC/status/time inputs.\n\nIndependent arithmetic and state-transition whole-RAM model. No sensor identity,\nphysical time, ADC conversion latency, full boot or forced readiness in chains.\n",
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "initializers": 256,
+  "independent_whole_ram_cases": 12544,
+  "initialized_chain": [
+    {
+      "before": {
+        "0x84d8": 1,
+        "0x84da": 0,
+        "0x84dc": 3438351931,
+        "0x84e0": 0,
+        "0x84e4": 0
+      },
+      "count": 600,
+      "now": 1,
+      "time_read": true,
+      "after": {
+        "0x84d8": 1,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 1,
+        "0x84e4": 0
+      },
+      "accesses": [
+        [
+          "read",
+          4294965272,
+          1,
+          0
+        ],
+        [
+          "read",
+          4294965272,
+          1,
+          128
+        ],
+        [
+          "read",
+          4294965266,
+          2,
+          38400
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          1
+        ]
+      ],
+      "whole_application_ram_checked": true
+    },
+    {
+      "before": {
+        "0x84d8": 1,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 1,
+        "0x84e4": 0
+      },
+      "count": 600,
+      "now": 100000,
+      "time_read": true,
+      "after": {
+        "0x84d8": 1,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 1,
+        "0x84e4": 0
+      },
+      "accesses": [
+        [
+          "read",
+          4294965272,
+          1,
+          0
+        ],
+        [
+          "read",
+          4294965272,
+          1,
+          128
+        ],
+        [
+          "read",
+          4294965266,
+          2,
+          38400
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          100000
+        ]
+      ],
+      "whole_application_ram_checked": true
+    },
+    {
+      "before": {
+        "0x84d8": 1,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 1,
+        "0x84e4": 0
+      },
+      "count": 600,
+      "now": 100001,
+      "time_read": true,
+      "after": {
+        "0x84d8": 2,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 0,
+        "0x84e4": 0
+      },
+      "accesses": [
+        [
+          "read",
+          4294965272,
+          1,
+          0
+        ],
+        [
+          "read",
+          4294965272,
+          1,
+          128
+        ],
+        [
+          "read",
+          4294965266,
+          2,
+          38400
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          100001
+        ]
+      ],
+      "whole_application_ram_checked": true
+    },
+    {
+      "before": {
+        "0x84d8": 2,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 0,
+        "0x84e4": 0
+      },
+      "count": 600,
+      "now": 100002,
+      "time_read": true,
+      "after": {
+        "0x84d8": 2,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 0,
+        "0x84e4": 100002
+      },
+      "accesses": [
+        [
+          "read",
+          4294965272,
+          1,
+          0
+        ],
+        [
+          "read",
+          4294965272,
+          1,
+          128
+        ],
+        [
+          "read",
+          4294965266,
+          2,
+          38400
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          100002
+        ]
+      ],
+      "whole_application_ram_checked": true
+    },
+    {
+      "before": {
+        "0x84d8": 2,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 0,
+        "0x84e4": 100002
+      },
+      "count": 600,
+      "now": 200001,
+      "time_read": true,
+      "after": {
+        "0x84d8": 2,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 0,
+        "0x84e4": 100002
+      },
+      "accesses": [
+        [
+          "read",
+          4294965272,
+          1,
+          0
+        ],
+        [
+          "read",
+          4294965272,
+          1,
+          128
+        ],
+        [
+          "read",
+          4294965266,
+          2,
+          38400
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          200001
+        ]
+      ],
+      "whole_application_ram_checked": true
+    },
+    {
+      "before": {
+        "0x84d8": 2,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 0,
+        "0x84e4": 100002
+      },
+      "count": 600,
+      "now": 200002,
+      "time_read": true,
+      "after": {
+        "0x84d8": 3,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 0,
+        "0x84e4": 0
+      },
+      "accesses": [
+        [
+          "read",
+          4294965272,
+          1,
+          0
+        ],
+        [
+          "read",
+          4294965272,
+          1,
+          128
+        ],
+        [
+          "read",
+          4294965266,
+          2,
+          38400
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          200002
+        ]
+      ],
+      "whole_application_ram_checked": true
+    }
+  ],
+  "zero_epoch_chain": [
+    {
+      "before": {
+        "0x84d8": 1,
+        "0x84da": 0,
+        "0x84dc": 3741591886,
+        "0x84e0": 0,
+        "0x84e4": 0
+      },
+      "count": 600,
+      "now": 0,
+      "time_read": true,
+      "after": {
+        "0x84d8": 1,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 0,
+        "0x84e4": 0
+      },
+      "accesses": [
+        [
+          "read",
+          4294965272,
+          1,
+          0
+        ],
+        [
+          "read",
+          4294965272,
+          1,
+          128
+        ],
+        [
+          "read",
+          4294965266,
+          2,
+          38400
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          0
+        ]
+      ],
+      "whole_application_ram_checked": true
+    },
+    {
+      "before": {
+        "0x84d8": 1,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 0,
+        "0x84e4": 0
+      },
+      "count": 600,
+      "now": 100000,
+      "time_read": true,
+      "after": {
+        "0x84d8": 1,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 100000,
+        "0x84e4": 0
+      },
+      "accesses": [
+        [
+          "read",
+          4294965272,
+          1,
+          0
+        ],
+        [
+          "read",
+          4294965272,
+          1,
+          128
+        ],
+        [
+          "read",
+          4294965266,
+          2,
+          38400
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          100000
+        ]
+      ],
+      "whole_application_ram_checked": true
+    },
+    {
+      "before": {
+        "0x84d8": 1,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 100000,
+        "0x84e4": 0
+      },
+      "count": 600,
+      "now": 200000,
+      "time_read": true,
+      "after": {
+        "0x84d8": 2,
+        "0x84da": 13203,
+        "0x84dc": 600,
+        "0x84e0": 0,
+        "0x84e4": 0
+      },
+      "accesses": [
+        [
+          "read",
+          4294965272,
+          1,
+          0
+        ],
+        [
+          "read",
+          4294965272,
+          1,
+          128
+        ],
+        [
+          "read",
+          4294965266,
+          2,
+          38400
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          200000
+        ]
+      ],
+      "whole_application_ram_checked": true
+    }
+  ],
+  "limits": "ADC completion/counts and F6C0 times are external samples. No physical units, timer cadence, caller scheduling or full boot;84A0/84EC producers remain separate."
+}

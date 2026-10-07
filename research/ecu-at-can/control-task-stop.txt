@@ -1,0 +1,128 @@
+ECU stop-entry conditions and filtered mode-input provenance — 2026-10-06
+
+Scope: all ECU/AT CAN, deep traction and both roof directions remain open.
+User has no extra DSC/roof dumps,captures or physical tests. No staging/commit/
+push authorization. This increment explains a retained ECU task limit and
+verifies original logic; it does not prove vehicle shutdown, reset or pin role.
+
+Direct verification
+verify_control_task_stop.py passes4996 checks:512 publisher,1024 callback
+increments,1024 holdproducer,256 localinitializer,900 monitor,1280 gate.
+Monitor outcomes508 returns/392 terminal entries; gate765 returns/515 terminal
+entries. Terminal cases stop via observation exception BEFORE F8D6/F972;
+they are not complete routine returns and no terminal routine is stubbed.
+Those bodies' nonreturning control flow was already preserved last increment.
+
+4105C reads44A2bit0 and tail154C0 writes722A=[flag,flag XOR FF]. This is
+executedfor512wordpatterns, comparingallapplicationRAM/registerpreservation.
+Actualfulltaskwriter PC154CA/return195F8 established its location in18DC8.
+Previous6C9A register value in the trace was stale, not its source.
+CA94 had already been verified to copy PFDR F74Eword to44A2/44AC;
+CADE two-consistent-samplefilter evidence is inlocal-inputs.txt. The new link
+connects that sampled bit to the modeinput/stop logic. No ignition/switch
+identity orboardwiring inferred. Merely naming a register is not physicalproof.
+
+42AA2:722Aexact1 reloads7358=ROMBB25C=2; otherwise positive unsignedbyte
+counts down to0.735C=(7358!=0). 154B0 is a PLAIN BYTE read, no complement
+validation. Earlier references to 'protected722A' describe its storage pair,
+not integrity checking by this consumer. 2C468 sets6605=0,6606=1 only.
+
+Four original entrychains execute for every startingbyte, preservingallother
+applicationRAM and interrupt mask; wrap255->0 isverified:
+1616C->2C384->2C49C increments660E;
+16178->2C3B4->2C4CC increments660F;
+16172->2C39C->2C4B4 increments6610;
+1617E->2C3CC->2C4E4 increments6611.
+The start/end names describe their paired comparison, not a verified eventrole.
+Static table114A4/AC/B4/BC contains these entrypointers at+4; tablebase1146C
+isreferencedbydata112E8. Actual scheduler invocation/order is notexecuted.
+
+2C4FC monitor core-state model (900 cases, all helpers execute normally):
+-735C==1 and6605==0:3FF9=5A,660Cword=0,6606=1.
+-735C==1 and6605!=0:protected2110=0;AA580/AA590;enterF972.
+-735C!=1 and6605==0:if old660C>=stock8,set6605=1,6608=0,6604=1;
+ thenincrement660C modulo16bits. It doesnot testactiveage inthissamecall.
+-Otherwise increment6608 withsaturationFFFFFFFF. Atnewage>=stock72000,or
+ newage>=8 AND660E<=660F AND6610<=6611, executeAA590;set6605=2,
+ protected2110=1,6606=0,3FF9=0;enterF8D6. Otherwise return.
+Tests cover exact8/72000 boundaries, byte127/128ordering andcounterwrap/
+saturation. Core oracle compares all listedmonitorfields; AA590 auxiliary
+RAM/MMIO consequences execute but are outside that oracle. A563=0 is an
+explicit fixture forAA580; no broadclaim about all auxiliarysave semantics.
+2C5DE:722Aexact1 immediately routesF972; else returns iff eitherunsigned
+counterpair first>second; otherwise entersF8D6.1280 combinations checked.
+
+Static surrounding admission
+2BCE6 eventword2 firstcalls215CC->18282, then651C0 chooses215D2->18DC8;
+651C1..4 choose other routines, then it increments/modulo5. Thus a direct
+18DC8 invocation is not the full outer event path. Actual eventqueue, table
+hooks and cadence remainopen. Initializer1619A staticallycalls42A78, which
+sets735C=1/7358=2; full1619A is not newlyexecuted. No normal startup claim.
+
+Retained comparison now passes:48 complete original18DC8 calls and49
+independently checked monitor boundaries. Zero filtered-input initialization
+returns16 calls, then the17th entersF8D6. OriginalCA94 with explicitPFDRbit0=1
+returns all32 calls, with722A/735C=1 eachtime and6605/660C=0 atmonitorreturn.
+All actualpublisher writes are checked by PC/address/value/width; stack and
+GBR are preserved oncompletecalls. This establishes the fixture-sensitive
+stopcondition, not fullboot orvalidphysicalinput. SCI0 SSR=C0/RDR=0 and
+TCNT0 successive+1/read samples remain explicit synthetic assumptions.
+768 GBR-instruction cases,1800 MUL.L cases andsix expected width rejections
+also pass. Separate verify_control_task_stop_initialize.py passes16 original
+977A2 cases with fullapplicationRAM comparison, nonvolatile-register/GBR
+preservation:320bytes2B90..2CCF cleared; words2B8C/2B8E/2CD4=A55A,
+2CD0/2CD2=00FF. No persistence/diagnostic-role claim inferred fromthishelper.
+Finalcontrol-task-stop-retained-verification.json supersedes saved earlier
+control-task-stop-retained-limit.json (98360 unsupportedMUL.L).
+
+Next actions
+Execute actual outerevent2 admission/predecessor18282 and lifecyclehooks;
+trace originalinitialization, samplingcadence and retainedfreshness. Keep
+6CFD8 diagnostic semantics andCAN211/21A sender/units/remoteDSC/actuation open.
+TCU operationalqueue/ack/overlap, provenance/cadence/persistence/physicalboard
+remainseparate. Bothroofdirections interruption/resume/reversal/timeout/LRsync/
+recovery stilllackOEMreceiver evidence; factoryPID/pin/versionconflicts remain.
+Nextroof requiresnewapplicablefullsource orcontroller/physicalevidence;
+exhaustedlistingisnotnewsource. No additional userartifacts areavailable.
+
+Reproduce fromrepositoryroot, Python3.14.3:
+python research/ecu-at-can/verify_control_task_stop.py
+python research/ecu-at-can/verify_control_task_stop_retained.py
+python research/ecu-at-can/verify_control_task_stop_initialize.py
+Sources are original ECU SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+and retainedSH7058hardware PDF/provenance under sources/. Disassembler/setup
+in control-task.txt; newdisassembly and alignedliteral-leads JSON saved here.
+Peripheral extension: SH7058 table11.3 printed215/PDFzero257 identifies
+F69E=TSR9 (16bit R/(W)). Retainedobserver models anexplicitzero status sample;
+writeslogonly. No eventcounter, interrupt delivery orcompleteperipheralmodel.
+ExistinghardwarePDF SHA256
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+Firstinitialized32-call probe reached unsupportedTSR9 oncall31. Thisharness
+limit isrecorded; supportingtypedstatus doesnot provehardwaretiming.
+
+Harness continuation: the initialized call31 subsequently reached original
+977A2 (STC.L GBR/LDC/LDC.L), then98360 MUL.L. The isolated observer now
+implements the three GBR transfers and dispatches MUL.L to the existing
+SHIntegerArithmetic implementation. CPU source: Renesas SH-2E Software Manual
+REJ09B0316-0200 rev2.00, sections7.2.26/7.2.58 (GBR),7.2.36 (MUL.L),
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+printed100/101,152/153,125; PDFzero113/114,165/166,138 respectively.
+GBR transfers preserve SR; MUL.L changes only MACL to the low32 product.
+1800 independent signed-product/aliasing cases and768 GBR transfer cases
+are included in the retained verifier. All32 initialized calls subsequently returned with these fixtures.
+The earlier unsupported instructions were harness limits, not firmware defects.
+
+Additional typed fixtures: SH7058 table11.3 printed211/212 (PDFzero253/254)
+identifies TSR3 F480 and TIER3 F482 words; TCNT5 F4E0, GR5A..D F4E2/4/6/8
+words; TIOR5A F4EB accepts byte access. TSR3/9 read explicit zero and merely
+log writes; the other additions are zero-initialized software latches.
+These are test inputs, NOT peripheral reset emulation (GR5 resets FFFF).
+Six wrong-width reads are expected rejections. No waveform/clock/IRQ proof.
+
+Ghidra saved both programs; independent extraction/reopen verifies1870
+annotations (795 ECU/1075 TCU),938 byte-identical exports,11 matching hashes
+before and after reopen. Archive10983474 bytes, SHA256
+88c260bc52aaf659abcae9d5949f0e9f55a61e50c05a96a08f835b00be6c484f.
+Commands and identity: ghidra/README.txt,snapshot.json,restore-verification.json.
+All work is local and Git-eligible; no staging/commit/push performed.

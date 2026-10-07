@@ -1,0 +1,18 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00014128 <.data+0x14128>:
+   14128:	64 42       	mov.l	@r4,r4
+   1412a:	64 41       	mov.w	@r4,r4
+   1412c:	92 3c       	mov.w	0x141a8,r2	! 3ff
+   1412e:	64 4d       	extu.w	r4,r4
+   14130:	44 09       	shlr2	r4
+   14132:	44 09       	shlr2	r4
+   14134:	44 09       	shlr2	r4
+   14136:	24 29       	and	r2,r4
+   14138:	00 0b       	rts	
+   1413a:	60 43       	mov	r4,r0
+

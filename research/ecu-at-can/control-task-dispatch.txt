@@ -1,0 +1,146 @@
+Acquisition task descriptor and RTE boundary — 2026-10-06
+=======================================================
+Objective remains all three ECU/AT, deep traction and both-direction NC roof
+requirements, including interruption/reversal, timeout, synchronization and
+fault recovery. No extra DSC/roof dumps/captures/bench results exist. Findings
+saved locally only; no staging/commit/push authorization. Prior turn made
+verified progress locating the missing acquisition-task scheduler context.
+
+Unchanged original ECU ROM examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Reproduce:
+ python research/ecu-at-can/probe_control_acquisition_dispatch.py
+ python research/ecu-at-can/verify_control_acquisition_dispatch.py
+ python research/ecu-at-can/probe_control_task_dispatch.py
+
+Original selected-dispatch prefix (executed)
+-------------------------------------------
+Original3D10 receives contextFFFF12B0 andindex7; derivesROM4140 from40D0+16*7.
+It writes currentindex7 tocontext+4, descriptorFFFF11E0 to+20, table4140 to+24,
+clearscontext+8, copies tablebyte4142=3 todescriptor+1 andcontextstack+12 to
+its+4. For idle descriptorbyte0=0 it loads taskentryE26C from4148, tails3F34,
+setsSP tocontextstack, pushesSR0 thenentryE26C, reachingRTE3F3C. The firmware
+installs the descriptor; the test does not writeFFFF12C4 to bypass the gap.
+The original hook36F0->ROM405C(E7D4)->38B4 also publishes currenttaskword7
+toFFFF45CC.64 cases compare ALL application RAM, two explicit aligned stacks,
+four initialSRs andeight nonzero RAM seeds. OriginalTST setsT=1 onthisroute;
+otherSRbits andPR preserved up toRTE. All64 PASS.
+
+First oracle incorrectly omitted45CC and failed withonly45CD 0->7. Its exact
+failure is saved incontrol-acquisition-dispatch-oracle-limit.json. A second
+assertion incorrectly expectedT unchanged; actualTST makes1. Corrected both
+oracle expectations after instruction inspection; no ROM/interpreter edit
+was made to force these assertions. Scope uses realcontextFFFF12B0 because
+hook36F0 addresses that global context regardless of dispatcherargument.
+Result: control-acquisition-dispatch-verification.json; pre-RTE snapshot in
+control-acquisition-dispatch-probe.json. Explicit contextstack/mask samples
+come fromROM4078=FFFF11A8 and4054=000000B0; not fullboot initialization proof.
+
+Bounded RTE instruction support
+------------------------------
+Primary source consulted2026-10-06: Renesas SH-2E Software Manual,
+REJ09B0316-0200 rev2.00(2006-05-31), section7.2.48 printed138–139/PDF151–152:
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+RTE restores PC and maskedSR(0FFF0FFF) from successive stack longwords,
+advancesSP8 and executes the delay slot. Updates precede the slot. Manual
+pseudocode PC+4 is its pipeline convention (JMP/RTS use it too); this harness
+returns the actual destination, consistently with existing delayed branches.
+sh_control_task_dispatch.py adds this only in the local task research subclass.
+Aligned RAM frames, aligned ROM destinations andNOPslots only; other frames,
+targets andslotinstructions are rejected before state updates. This is a
+bounded model, not hardware illegality for every rejected legal instruction.
+No exception delivery/priority/timing/interrupt generation or illegal-slot
+handler is simulated. Existing shared interpreter andROM remain unchanged.
+456 independent instruction cases check allSR bits, PC,SP,otherGPR/GBR/PR,
+unchangedRAM anddelay execution;7 expected rejections also preserve state.
+All PASS. These checks alone do not prove task scheduling or physical ADCs.
+
+Integrated selected-task probe (retained incomplete test)
+---------------------------------------
+After original10022->CA94->1619A, provide selectedindex7 atcontext+6 and
+ROM-defaultstack/mask at+12/+16, then enter original3B8A. Selection is an
+explicit scheduler-input fixture, NOT proved queue/interrupt admission.
+Original3D10 installsdescriptor and3F34/RTE entersE26C; ADC channel1=512<<6,
+channel28=500<<6 supplied at result registers only. Observe scheduleridle3D0C
+as a distinct boundary, never report it as a normal function return. Failures
+retain exact PC/tail/registers; no original callee or yield is skipped.
+Result:control-task-dispatch-probe.json. One RTE entersE26C, thenoriginal
+3988 at39E2 rejects a write to00000BFA because the queue-table pointer is
+uninitialized. This second failure is distinct from the earlier missingcurrent
+descriptor, and both are retained. No complete idle boundary inthisfirstprobe.
+
+Next: inspect integrated dispatch result; if scheduleridle reached, verify
+that boundary's context/descriptor effects and repeat explicitly selected
+acquisition cycles with changingADC samples, then needed full decoder and
+qualification. Preserve explicit interleave versus actual cadence distinction.
+Do not expand unrelated OS routines into new completion requirements. TCU
+queue/ack/overlap/persistence and remoteDSC/bothroof evidence gaps stay open.
+Roof next needs new applicable source or OEMcontroller/physical evidence;
+userhasnone, so do not ask again or repeat exhausted listings.
+
+Original queues and twenty task cycles (executed, PASS)
+-----------------------------------------------------
+Added probe_control_queued_acquisition.py reuses the same task runner:
+38C4 initializes mode0 queue pointers/heads/readybitmap; for eachrequest,
+391A(contextFFFF12B0,index7,priority3) writes/selects the actualqueue;3B8A
+then dispatches. No selectedindex write inthisqueuedexperiment. Contextstack/
+mask remain explicit ROM-defaultfixtures; no claim3DD8/fullboot wasexecuted.
+Original3CB8 consumes the request and reachesidle3D0C for all20 cycles.
+These are observed scheduleridle boundaries, NOT normal function returns.
+No original callee isstubbed andno taskbody/yield is skipped. The twenty
+requests are low-level software-input fixtures, not proof of interrupt/event
+producer admission, descriptor pendingcount semantics or taskfrequency.
+
+Queue-specific independent wholeRAM tests inverify_control_task_queue.py:
+32original38C4 initializations,352original391A enqueues,352original3988
+consumptions PASS. Priority3 recordROM421C givesbufferindices32..37 and
+head/tailstorageFFFF12A6/12A8; data atFFFF1240+2*index. Mode0 tablepointer
+ROM422C=4204. Checks cover empty,fullsix,drain andwrapping whileoneentryremains,
+not overflow/otherpriorities/interrupts. Queueinitializer clears16readybitmap
+bytes12E0..12EF, sets5queueheadsFFFF, preserves tailbytes; publishescontext
+priorityFF/nextindexFFFF andtable/data pointers. Firstenqueue setsreadybit08
+andnexttask7; lastconsume clearsreadybit/nexttask. A first preservation oracle
+incorrectly expected entrySRmask tosurviveemptyqueueconsumption. Original
+3BE0 explicitlyloadscontext+16 (sampleB0); corrected expectedmask ratherthan
+changingfirmware. Other cases check unchanged mask. This is modeledstate,
+not physicalinterrupt acceptance timing.
+
+Retained results verified byverify_control_queued_acquisition.py:
+20RTE entries3F3C targetE26C withSPFFFF11A0,SR0;20idle boundaries. Cycle0
+copiesnoADCresult (previouscounts0). Cycles1..15 and17..19 copy20 results,
+cycle16 copies32 (includingthirdbank). Ordered reads verified byte-for-byte
+against expected bank-reverse order. Channel1 appears atcycle1 as32768 in
+400A/40EC, exactfloat41200000 (10) in40E8/6CB4. Channel28 appears atcycle16
+as32000 in4040. No3976C full decode occurs:6C92 stays0. No74DF8 enablecall:
+914B stays0. Descriptor7 byte3 increments1..20 undertheseexplicitlowlevel
+requests; no claim thisis its real producer's full lifecycle. Allcycles use
+original4CE2->6718->17D88/1DF32 order. Finalcontext is idle/currentindexFFFF,
+nextindexFFFF,flags80000000,table40D0,descriptorFFFF11A8,SPFFFF11A8,SR0.
+
+Artifacts:control-queued-acquisition-probe.json,
+control-queued-acquisition-verification.json,control-task-queue-verification.json.
+Reproduce:
+ python research/ecu-at-can/verify_control_task_queue.py
+ python research/ecu-at-can/probe_control_queued_acquisition.py
+ python research/ecu-at-can/verify_control_queued_acquisition.py
+
+Next concrete action CORRECTED by static reference audit: index8/E458 was a
+failed full-decoder lead. It calls215BA->17FF6, not178C0. Original3976C's only
+aligned literal users are164F0(initializer) and178C8 within178C0. Its periodic
+chain is FA56 ->E24C ->2154C (calls16194 then tails178C0). E030 background
+loop callsFA0A atE044; FA56 lies in that routine. Next inspect/execute this
+actual full-decoder path with acquisition outputs and original scheduling
+conditions. Do not queueindex8 expecting3976C. Failedlead and corrected
+bodies saved incontrol-full-decoder-task-leads.txt. This is staticevidence
+until executed; physical cadence/interruptadmission remainunproved.
+Group1F/20 admitted-report downstream verification remainsneeded once samples
+produce a nonemptyreport. AllTCU/remoteDSC/bothroof requirements stayopen.
+Ghidra saved and independently restored:1907 annotations (832ECU/1075TCU),
+963 identical exports and11 project hashes checked before/after readonly reopen.
+Archive10,998,354bytes SHA256
+bc582d288cc999dd265c2a0c854935ed8a10a033d64301b54a288160fff5310a.
+Bothprograms/Ghidra12.1.3PUBLIC/Java21.0.10. Exactinventory andrestore result
+in ghidra/snapshot.json andrestore-verification.json. Sevenscripts compile;
+targeted diff-check passes. All17 newartifacts Git-eligible. Mixedindex AD
+archive.tmp preserved. Allsavedlocally; no staging, commit or push.
+

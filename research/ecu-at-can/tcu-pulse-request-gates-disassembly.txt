@@ -1,0 +1,313 @@
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x53520 0x535d0
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00053520 <.data+0x53520>:
+   53520:	2f e6       	mov.l	r14,@-r15
+   53522:	7f f8       	add	#-8,r15
+   53524:	d3 28       	mov.l	0x535c8,r3	! ffffa4e8
+   53526:	64 30       	mov.b	@r3,r4
+   53528:	c5 52       	mov.w	@(164,gbr),r0
+   5352a:	2f 01       	mov.w	r0,@r15
+   5352c:	c5 4f       	mov.w	@(158,gbr),r0
+   5352e:	67 03       	mov	r0,r7
+   53530:	d5 26       	mov.l	0x535cc,r5	! ffffa958
+   53532:	60 53       	mov	r5,r0
+   53534:	84 0c       	mov.b	@(12,r0),r0
+   53536:	c9 01       	and	#1,r0
+   53538:	80 f4       	mov.b	r0,@(4,r15)
+   5353a:	60 53       	mov	r5,r0
+   5353c:	d2 24       	mov.l	0x535d0,r2	! ffffa98e
+   5353e:	84 0a       	mov.b	@(10,r0),r0
+   53540:	65 f1       	mov.w	@r15,r5
+   53542:	c9 01       	and	#1,r0
+   53544:	66 03       	mov	r0,r6
+   53546:	60 23       	mov	r2,r0
+   53548:	60 00       	mov.b	@r0,r0
+   5354a:	65 5d       	extu.w	r5,r5
+   5354c:	c9 01       	and	#1,r0
+   5354e:	6e 03       	mov	r0,r14
+   53550:	d0 20       	mov.l	0x535d4,r0	! ffffb128
+   53552:	61 01       	mov.w	@r0,r1
+   53554:	61 1d       	extu.w	r1,r1
+   53556:	35 13       	cmp/ge	r1,r5
+   53558:	8b 02       	bf	0x53560
+   5355a:	61 6c       	extu.b	r6,r1
+   5355c:	21 18       	tst	r1,r1
+   5355e:	8b 08       	bf	0x53572
+   53560:	d1 1d       	mov.l	0x535d8,r1	! ffffb12a
+   53562:	62 7d       	extu.w	r7,r2
+   53564:	63 11       	mov.w	@r1,r3
+   53566:	63 3d       	extu.w	r3,r3
+   53568:	32 33       	cmp/ge	r3,r2
+   5356a:	8b 1c       	bf	0x535a6
+   5356c:	62 ec       	extu.b	r14,r2
+   5356e:	22 28       	tst	r2,r2
+   53570:	89 19       	bt	0x535a6
+   53572:	d3 18       	mov.l	0x535d4,r3	! ffffb128
+   53574:	61 31       	mov.w	@r3,r1
+   53576:	61 1d       	extu.w	r1,r1
+   53578:	35 13       	cmp/ge	r1,r5
+   5357a:	8b 02       	bf	0x53582
+   5357c:	66 6c       	extu.b	r6,r6
+   5357e:	26 68       	tst	r6,r6
+   53580:	8b 13       	bf	0x535aa
+   53582:	67 7d       	extu.w	r7,r7
+   53584:	d2 14       	mov.l	0x535d8,r2	! ffffb12a
+   53586:	63 21       	mov.w	@r2,r3
+   53588:	63 3d       	extu.w	r3,r3
+   5358a:	37 33       	cmp/ge	r3,r7
+   5358c:	89 02       	bt	0x53594
+   5358e:	6e ec       	extu.b	r14,r14
+   53590:	2e e8       	tst	r14,r14
+   53592:	8b 0a       	bf	0x535aa
+   53594:	63 4c       	extu.b	r4,r3
+   53596:	23 38       	tst	r3,r3
+   53598:	89 05       	bt	0x535a6
+   5359a:	60 4c       	extu.b	r4,r0
+   5359c:	88 02       	cmp/eq	#2,r0
+   5359e:	89 02       	bt	0x535a6
+   535a0:	84 f4       	mov.b	@(4,r15),r0
+   535a2:	20 08       	tst	r0,r0
+   535a4:	8b 01       	bf	0x535aa
+   535a6:	a0 01       	bra	0x535ac
+   535a8:	e4 01       	mov	#1,r4
+   535aa:	e4 00       	mov	#0,r4
+   535ac:	60 43       	mov	r4,r0
+   535ae:	7f 08       	add	#8,r15
+   535b0:	00 0b       	rts	
+   535b2:	6e f6       	mov.l	@r15+,r14
+   535b4:	d3 09       	mov.l	0x535dc,r3	! 23dc0
+   535b6:	43 2b       	jmp	@r3
+   535b8:	00 09       	nop	
+   535ba:	ff ff       	.word 0xffff
+   535bc:	00 05       	mov.w	r0,@(r0,r0)
+   535be:	60 4c       	extu.b	r4,r0
+   535c0:	00 00       	.word 0x0000
+   535c2:	ff 00       	fadd	fr0,fr15
+   535c4:	00 05       	mov.w	r0,@(r0,r0)
+   535c6:	41 cc       	.word 0x41cc
+   535c8:	ff ff       	.word 0xffff
+   535ca:	a4 e8       	bra	0x53f9e
+   535cc:	ff ff       	.word 0xffff
+   535ce:	a9 58       	bra	0x52882
+
+
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x5604c 0x56140
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0005604c <.data+0x5604c>:
+   5604c:	4f 22       	sts.l	pr,@-r15
+   5604e:	7f f8       	add	#-8,r15
+   56050:	d3 2b       	mov.l	0x56100,r3	! 1d246
+   56052:	43 0b       	jsr	@r3
+   56054:	2f 40       	mov.b	r4,@r15
+   56056:	80 f4       	mov.b	r0,@(4,r15)
+   56058:	b0 0f       	bsr	0x5607a
+   5605a:	64 f0       	mov.b	@r15,r4
+   5605c:	64 03       	mov	r0,r4
+   5605e:	62 4c       	extu.b	r4,r2
+   56060:	e3 16       	mov	#22,r3
+   56062:	32 33       	cmp/ge	r3,r2
+   56064:	89 04       	bt	0x56070
+   56066:	84 f4       	mov.b	@(4,r15),r0
+   56068:	b0 20       	bsr	0x560ac
+   5606a:	65 03       	mov	r0,r5
+   5606c:	a0 01       	bra	0x56072
+   5606e:	65 03       	mov	r0,r5
+   56070:	e5 11       	mov	#17,r5
+   56072:	7f 08       	add	#8,r15
+   56074:	4f 26       	lds.l	@r15+,pr
+   56076:	00 0b       	rts	
+   56078:	60 53       	mov	r5,r0
+   5607a:	e7 00       	mov	#0,r7
+   5607c:	d0 21       	mov.l	0x56104,r0	! 5eb28
+   5607e:	65 73       	mov	r7,r5
+   56080:	66 73       	mov	r7,r6
+   56082:	a0 0a       	bra	0x5609a
+   56084:	e7 01       	mov	#1,r7
+   56086:	62 4c       	extu.b	r4,r2
+   56088:	63 5c       	extu.b	r5,r3
+   5608a:	43 00       	shll	r3
+   5608c:	01 3c       	mov.b	@(r0,r3),r1
+   5608e:	61 1c       	extu.b	r1,r1
+   56090:	32 10       	cmp/eq	r1,r2
+   56092:	8b 01       	bf	0x56098
+   56094:	a0 01       	bra	0x5609a
+   56096:	66 73       	mov	r7,r6
+   56098:	75 01       	add	#1,r5
+   5609a:	63 6c       	extu.b	r6,r3
+   5609c:	23 38       	tst	r3,r3
+   5609e:	8b 03       	bf	0x560a8
+   560a0:	62 5c       	extu.b	r5,r2
+   560a2:	e3 16       	mov	#22,r3
+   560a4:	32 33       	cmp/ge	r3,r2
+   560a6:	8b ee       	bf	0x56086
+   560a8:	00 0b       	rts	
+   560aa:	60 53       	mov	r5,r0
+   560ac:	7f fc       	add	#-4,r15
+   560ae:	e6 00       	mov	#0,r6
+   560b0:	60 5c       	extu.b	r5,r0
+   560b2:	88 01       	cmp/eq	#1,r0
+   560b4:	8d 06       	bt.s	0x560c4
+   560b6:	67 63       	mov	r6,r7
+   560b8:	88 02       	cmp/eq	#2,r0
+   560ba:	89 05       	bt	0x560c8
+   560bc:	88 04       	cmp/eq	#4,r0
+   560be:	89 05       	bt	0x560cc
+   560c0:	a0 06       	bra	0x560d0
+   560c2:	00 09       	nop	
+   560c4:	a0 05       	bra	0x560d2
+   560c6:	e6 01       	mov	#1,r6
+   560c8:	a0 03       	bra	0x560d2
+   560ca:	e6 02       	mov	#2,r6
+   560cc:	a0 01       	bra	0x560d2
+   560ce:	e6 04       	mov	#4,r6
+   560d0:	e7 11       	mov	#17,r7
+   560d2:	63 7c       	extu.b	r7,r3
+   560d4:	23 38       	tst	r3,r3
+   560d6:	8b 0f       	bf	0x560f8
+   560d8:	d0 0b       	mov.l	0x56108,r0	! 5eb29
+   560da:	63 67       	not	r6,r3
+   560dc:	65 4c       	extu.b	r4,r5
+   560de:	45 00       	shll	r5
+   560e0:	05 5c       	mov.b	@(r0,r5),r5
+   560e2:	66 6c       	extu.b	r6,r6
+   560e4:	64 5c       	extu.b	r5,r4
+   560e6:	26 48       	tst	r4,r6
+   560e8:	8f 06       	bf.s	0x560f8
+   560ea:	2f 30       	mov.b	r3,@r15
+   560ec:	63 3c       	extu.b	r3,r3
+   560ee:	24 38       	tst	r3,r4
+   560f0:	89 01       	bt	0x560f6
+   560f2:	a0 01       	bra	0x560f8
+   560f4:	e7 22       	mov	#34,r7
+   560f6:	e7 11       	mov	#17,r7
+   560f8:	60 73       	mov	r7,r0
+   560fa:	00 0b       	rts	
+   560fc:	7f 04       	add	#4,r15
+   560fe:	ff ff       	.word 0xffff
+   56100:	00 01       	.word 0x0001
+   56102:	d2 46       	mov.l	0x5621c,r2	! 5604c
+   56104:	00 05       	mov.w	r0,@(r0,r0)
+   56106:	eb 28       	mov	#40,r11
+   56108:	00 05       	mov.w	r0,@(r0,r0)
+   5610a:	eb 29       	mov	#41,r11
+   5610c:	93 80       	mov.w	0x56210,r3	! a6e5
+   5610e:	e4 00       	mov	#0,r4
+   56110:	92 7f       	mov.w	0x56212,r2	! a6e8
+   56112:	23 40       	mov.b	r4,@r3
+   56114:	22 42       	mov.l	r4,@r2
+   56116:	91 7d       	mov.w	0x56214,r1	! a6e4
+   56118:	00 0b       	rts	
+   5611a:	21 40       	mov.b	r4,@r1
+   5611c:	2f e6       	mov.l	r14,@-r15
+   5611e:	6e 43       	mov	r4,r14
+   56120:	d3 3e       	mov.l	0x5621c,r3	! 5604c
+   56122:	2f d6       	mov.l	r13,@-r15
+   56124:	2f c6       	mov.l	r12,@-r15
+   56126:	ec 00       	mov	#0,r12
+   56128:	2f b6       	mov.l	r11,@-r15
+   5612a:	4f 22       	sts.l	pr,@-r15
+   5612c:	43 0b       	jsr	@r3
+   5612e:	e4 27       	mov	#39,r4
+   56130:	64 03       	mov	r0,r4
+   56132:	62 4c       	extu.b	r4,r2
+   56134:	22 28       	tst	r2,r2
+   56136:	8b 1f       	bf	0x56178
+   56138:	85 e4       	mov.w	@(8,r14),r0
+   5613a:	eb 01       	mov	#1,r11
+   5613c:	60 0d       	extu.w	r0,r0
+   5613e:	30 b3       	cmp/ge	r11,r0
+
+
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x541cc 0x54260
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000541cc <.data+0x541cc>:
+   541cc:	2f e6       	mov.l	r14,@-r15
+   541ce:	6e 43       	mov	r4,r14
+   541d0:	d3 14       	mov.l	0x54224,r3	! 1d22a
+   541d2:	4f 22       	sts.l	pr,@-r15
+   541d4:	7f fc       	add	#-4,r15
+   541d6:	43 0b       	jsr	@r3
+   541d8:	2f 50       	mov.b	r5,@r15
+   541da:	66 03       	mov	r0,r6
+   541dc:	65 f0       	mov.b	@r15,r5
+   541de:	60 6c       	extu.b	r6,r0
+   541e0:	d3 11       	mov.l	0x54228,r3	! ffff90a7
+   541e2:	65 5c       	extu.b	r5,r5
+   541e4:	88 02       	cmp/eq	#2,r0
+   541e6:	8f 0c       	bf.s	0x54202
+   541e8:	64 30       	mov.b	@r3,r4
+   541ea:	60 ec       	extu.b	r14,r0
+   541ec:	88 22       	cmp/eq	#34,r0
+   541ee:	89 08       	bt	0x54202
+   541f0:	60 53       	mov	r5,r0
+   541f2:	88 01       	cmp/eq	#1,r0
+   541f4:	8b 00       	bf	0x541f8
+   541f6:	e4 00       	mov	#0,r4
+   541f8:	d2 0c       	mov.l	0x5422c,r2	! 1d24c
+   541fa:	42 0b       	jsr	@r2
+   541fc:	00 09       	nop	
+   541fe:	a0 0b       	bra	0x54218
+   54200:	e4 00       	mov	#0,r4
+   54202:	60 53       	mov	r5,r0
+   54204:	88 01       	cmp/eq	#1,r0
+   54206:	8b 02       	bf	0x5420e
+   54208:	65 e3       	mov	r14,r5
+   5420a:	a0 01       	bra	0x54210
+   5420c:	e4 00       	mov	#0,r4
+   5420e:	65 e3       	mov	r14,r5
+   54210:	d3 07       	mov.l	0x54230,r3	! 1d26e
+   54212:	43 0b       	jsr	@r3
+   54214:	00 09       	nop	
+   54216:	e4 02       	mov	#2,r4
+   54218:	60 43       	mov	r4,r0
+   5421a:	7f 04       	add	#4,r15
+   5421c:	4f 26       	lds.l	@r15+,pr
+   5421e:	00 0b       	rts	
+   54220:	6e f6       	mov.l	@r15+,r14
+   54222:	ff ff       	.word 0xffff
+   54224:	00 01       	.word 0x0001
+   54226:	d2 2a       	mov.l	0x542d0,r2	! 3e4c63dc
+   54228:	ff ff       	.word 0xffff
+   5422a:	90 a7       	mov.w	0x5437c,r0	! 6020
+   5422c:	00 01       	.word 0x0001
+   5422e:	d2 4c       	mov.l	0x54360,r2	! 25588d02
+   54230:	00 01       	.word 0x0001
+   54232:	d2 6e       	mov.l	0x543ec,r2	! 5141d209
+   54234:	2f e6       	mov.l	r14,@-r15
+   54236:	2f d6       	mov.l	r13,@-r15
+   54238:	4f 22       	sts.l	pr,@-r15
+   5423a:	ed 00       	mov	#0,r13
+   5423c:	d3 2d       	mov.l	0x542f4,r3	! 5604c
+   5423e:	7f fc       	add	#-4,r15
+   54240:	2f 42       	mov.l	r4,@r15
+   54242:	43 0b       	jsr	@r3
+   54244:	e4 01       	mov	#1,r4
+   54246:	6e 03       	mov	r0,r14
+   54248:	62 ec       	extu.b	r14,r2
+   5424a:	22 28       	tst	r2,r2
+   5424c:	8b 0c       	bf	0x54268
+   5424e:	e3 06       	mov	#6,r3
+   54250:	61 f2       	mov.l	@r15,r1
+   54252:	85 14       	mov.w	@(8,r1),r0
+   54254:	60 0d       	extu.w	r0,r0
+   54256:	30 37       	cmp/gt	r3,r0
+   54258:	89 05       	bt	0x54266
+   5425a:	b0 13       	bsr	0x54284
+   5425c:	64 f2       	mov.l	@r15,r4
+   5425e:	6d 03       	mov	r0,r13
+

@@ -1,0 +1,86 @@
+FOLLOWUP2026-10-06: roof-wiring-swf.txt now recovers2008 factory0916-a/b/c.
+The2008motor diagram alsohas3D/3E; diagnosticpin conflicts therefore coexist
+within the2008mirror.2009a/b sourceimage recovery andVIN applicability remain
+open. See the currentCHECKPOINT forTCU/traction nextactions; olderleads below
+are historical.
+
+2026-10-06 — NC PRHT motor wiring cross-check
+
+DOCUMENTARY RESULT (not controller execution or vehicle validation)
+The saved 2009MY sheet0916-c, printed106, shows these PRHT terminals:
+                    motor pair        pulse input
+Roof LH             3L(W),3D(R)        1M(G/Y)
+Roof RH             3A(L/W),3I(L)      1I(B/O)
+Deck LH             3H(B/W),3P(B/R)    1O(B/G)
+Deck RH             3M(B/Y),3E(B/G)    1K(B/L)
+The four sensor circuits share1G(L/O) and1Q(L/G). Connector3C is vacant.
+Thus this revision supports3D, not the3C in the earlier stop diagnostic,
+and supplies3E for the second RH deck output where the earlier diagnostic
+repeats3M and misnames the motor. These are documentary corrections for this
+sheet, not proof of a particular vehicle harness or command polarity.
+The drawing provides no motor direction voltage table, reversal transitions,
+DECK_CL PID semantics, numerical pulse-difference limit or CAN timeout.
+
+SOURCE IDENTITY
+sources/mazda-2009-prht-wiring-0916-c.pdf; onepage,107210bytes;
+SHA256 c26f1d8c5b138066295b2e38f8e5eafde364c783264e3ed2ba15300b7a851278.
+https://static1.1.sqspcdn.com/static/f/341469/24622211/1395761786727/mazda_mx5_wiring_diagram_011020094.pdf
+Visible heading says2009MY; PDFmetadata title says2009.75MY. Preserve both.
+The hosted basename ends094 but the actual printed page is106; filename is
+not the page identity. No cover/VIN applicability page accompanies this single
+sheet, so a specific market/vehicle match is unverified. A separate indexed
+Scribd wiring compilation mentions5778-10-08J/Oct2008; do not automatically
+assign that form/VIN range to this isolated sheet.
+
+CROSS-CHECK AND FAILED LEADS
+2008 workshop diagnostic B294D/B294E, step4 repeats3M in its RHdeck pair;
+steps5..7 identify1G supply,1Q ground and matching fourpulse inputs:
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902j2861600.html
+The matching signal inputs strengthen the comparison, but do not repair the
+training table's duplicate motor voltage conditions. See roof-training-graphics.txt
+and roof-fault-recovery.txt for the retained contradictions.
+
+Following the2008 roofDTC table through the body index recovered the general
+multiplexDTC table, U0073/U2516 and fault-location procedures:
+https://www.ncmiata-servicemanual.com/src/g5w09/g5w09.html
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902e6800300.html
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902e6901900.html
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902e6830500.html
+None supplied a numericalPRHT communication timeout. This is a checked-source
+limit, not proof no such specification exists. U2197's invalid-speed meaning
+was already recorded in traction-roof.txt; it is not a new discovery.
+The2009MY DTCsheet09-02E-2 similarly redirects communication faults to the
+LHD/RHD multiplex sections; no timeout on this page:
+https://static1.1.sqspcdn.com/static/f/341469/24623624/1395761879463/mazda_mx5_wrm_011020091347.pdf
+The search hit ending011020091307.pdf was a onepage instrument-cluster table,
+not a complete roof manual. The technical-guide483.pdf hit was a onepageDTC
+table. Search for adjacent wiring0916-a/b andembedded105 filename found no
+usable indexed sheet. Embedded links are remote PDFfilenames, not actual
+host URLs; do not invent the numeric CDNdirectory/timestamp.
+
+CHARM2009-2012 id094000104100.html could not be retrieved: web tool internal
+error; urllib network returned no route to host.2009US DTCindex webopen timed
+out. These are access failures, not evidence absence. Initial local parsing
+attempt failed before fetching because bs4 was unavailable; used standard
+library instead, without installing it. RF2015-2018 timing remains excluded.
+
+REPRODUCTION AND STATUS
+Python3.14.3 urllib.request downloaded the public PDF; PyMuPDF1.28.2 opened
+and rendered its singlepage at1.7x; visually inspected allmotor wires and
+connector cavities. Reproduce from the saved PDF:
+ python -c "import pymupdf; d=pymupdf.open('research/ecu-at-can/sources/mazda-2009-prht-wiring-0916-c.pdf'); d[0].get_pixmap(matrix=pymupdf.Matrix(1.7,1.7)).save('wiring-c.png')"
+Rendered cache remains ignored underghidra/restore-check/roof-docs-20261006;
+the source PDF, adjacentJSON and this record are Git-eligible.
+No Ghidra edits, ROMchanges, staging, commit orpush.
+
+OPEN REQUIREMENTS / NEXT ACTION
+Roof folding ANDunfolding still require release-then-reverse admission,
+interruption/recovery, numericaltimeout/synchronization andOEMreceiver/CAN
+proof. Sharedsensor wiring is not the synchronization algorithm. DECK_CL
+revision conflict remains. User has no additional dumps/captures/tests.
+Next roof: obtain an applicable complete2009 wiring/technical source, especially
+0916-a/b andmultiplex09-02F/G, orOEMreceiver evidence. Avoid re-searching the
+sameowner pause/resume text andRFtimeout values as ifnewNC closure.
+Independent next work: TCU3AC70/baseformula and1F2AA/9108consumer; traction
+ADCcaller scheduling/NCboard identity andremoteDSC sender/actuation. Allthree
+scopes remain open. This turn added verified documentary evidence.

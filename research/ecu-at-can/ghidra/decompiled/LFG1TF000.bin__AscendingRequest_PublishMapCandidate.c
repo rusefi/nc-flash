@@ -2,7 +2,12 @@
 
 /* WARNING: Removing unreachable block (ram,0x0004e06c) */
 /* 4E3A8 candidate suppressed by92D5bit0 OR9410bit0clear; positive flag into+8bit80, value+4
-   and4C6DA.120 gate cases and original manager/pairedECU path verified. */
+   and4C6DA.120 gate cases and original manager/pairedECU path verified. OriginalECU201/215 frames +
+   timestampcallbacks + full126EC createcode0 at93; numericstate3 and915A306 at167/168,
+   withdrawal169. CAN2160209 ->originalECUdecode9; supplied cadence/admission. See
+   tcu-captured-requests.txt. Actualreturn model nowchecks code0 x7984/y39444/captured19722 ->494,
+   base800 ->915A306. Fulltask approach retires311 afterphasequalification280; see
+   tcu-captured-requests.txt. */
 
 void AscendingRequest_PublishMapCandidate(undefined4 param_1,int param_2)
 

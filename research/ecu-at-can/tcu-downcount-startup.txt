@@ -1,0 +1,57 @@
+TCU down-count startup — 2026-10-07
+
+Full objective remains ECU/AT CAN integration, deep traction logic/integration,
+and NC roof folding AND unfolding with interruption/resume/reversal, timeout,
+LR synchronization and recovery. All incomplete. No additional user artifacts.
+
+Executed original routines
+verify_tcu_downcount_startup.py:512 original wholeRAM/allGPR/SR/PR returns PASS
+(256each14972 and1460E), exactMMIO.14972 wordwrites0 toDSTR FFFFF666;
+1460E wordwrites0 toTCNR FFFFF662. DSTR retains sampled state; TCNR clears.
+65,536 DSTR states checked for zero-write/read preservation;256TCNR roundtrips;
+20unsupported DSTR writes reject. Nonzero starts require missing DCNT/reload
+state; model rejects them instead of inventing counter effects.
+Strict TCNR owner reuses existing configuration-word pipeline. DSTR owns its
+separate write-one-command behavior. No counters, compare-match, reload,
+terminate, outputpin or interrupt events simulated. Under compatible manual
+only1-writable rules, zeroDSTR is a no-op, not a software halt command.
+Primary excerpt provenance: tcu-downcount-startup-manual-excerpts.txt,
+SH7055S manual sections11.2.11/12, PDFindices348/349/354;16-bit access index428.
+DSTR reset0/TCNR reset0 documented; selected probe startingstate not fullreset.
+
+Full15574 continuation
+python research/ecu-at-can/probe_tcu_hardware_startup.py --nmi-level 0
+  --irq-status-zero --ubc --wcr-initial 0 --dmaor --interval --downcount
+  --filename tcu-hardware-startup-downcount-probe.json
+(join command lines): stops14614 RTSslot14612 wordF6620.
+Add --connection and filename tcu-hardware-startup-connection-probe.json:
+stops1461A wordwriteFFFFF4300. Both868C/D remain0, no injectedrecovery flags.
+This is the previouslystatic TCNT0 width issue now reached by original caller.
+SH7055S table11.3/section11.5.1 require32-bit access; internal16-bit splitting
+is not permission for CPUword stores. No model support added for this conflict.
+Strictfixture rejection is not proof of physicalhardware fault. KnownTCNT10A
+conflict later in same14616 remains unreached in this fullprobe.
+Default, interval and intermediate downcount JSON byte-identical reruns saved
+in tcu-downcount-startup-regressions.json. Prior outputs retained.
+No production/ROM/sharedISA change. Python3.14.3/PyMuPDF1.28.2/GNUobjdump2.42;
+objdump setup in tcu-pulse-input.txt. Relevantinstructions already retained in
+tcu-interval-startup-disassembly.txt.
+
+New primary-source follow-up
+Older official1999 SH7055 application note still declares TCNT0/10A long.
+No differing-width behavior established; download403, webreader succeeded.
+tcu-counter-width-source-followup.txt preserves URL/page/line findings.
+Next actualchip/revision/erratum evidence for splitword writes; do not silently
+skip14616/merge stores/resetepochs to claim native recovery.
+
+Other scopes
+Traction executed task4->7->4 preemption: control-preemption.txt. StartupEC62
+identity/hardwareIRQ and remoteCAN211/21Asender/units/DSCactuation unresolved.
+Next primary silicon evidence; current ECU/TCU images lack remoteDSCexecution.
+Roof factory/candidate maps: roof-revision-source-audit.txt and
+roof-component-inspection.txt. Next applicableedition/VIN reverse/timeout/LR
+mismatch evidence; bothfold/unfold interruption/recovery andOEMexecution absent.
+
+Ghidra14972/1460E saved; downcount-startup-artifacts.json owns refreshed paired
+archive/independentrestore identities. CHECKPOINT owns lateststate/nextsteps.
+Allwork locallysaved; no staging/commit/push, pre-existing index preserved.

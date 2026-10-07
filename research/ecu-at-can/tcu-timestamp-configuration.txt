@@ -1,0 +1,88 @@
+TCU timestamp counter setup and unresolved reset width — 2026-10-07
+
+Verified original execution
+verify_tcu_timestamp_configuration.py passes256 original15544 start cases and
+1024 original15730 read cases.15544 reads byteFFFFF401 and writes old|80;
+all initial byte values tested, exact2 MMIO accesses, unchanged RAM and
+callee-saved registers/SR.15730 returns an explicit longFFFFF6C0 sample with
+one exact read, unchanged RAM/configuration/callee-saved registers/SR. Boundary
+samples include0,1,65535,65536,7FFFFFFF,80000000,FFFFFFFE,FFFFFFFF and1016
+seeded random32-bit values. Six wrong-width accesses are rejected.
+Existing1448E verification establishes writes1 to all four prescalers including
+F40A. Those tests are owned by tcu-capture-clock.txt, not rerun here.
+
+Compatible primary documentation
+Retained Renesas SH7055S manual REJ09B0045-0200H Rev2.0,2003-07, PDF pages
+zero248/262/266/377/386/388/395 (printed209/223/227/338/347/349/356):
+F6C0 is combined32-bit TCNT10AH/AL; F401 bit7 starts channel10; channel10 uses
+PSCR4. Prescaler value1 means conditional Pphi/2. TCNT10A counts internal
+clock and may reset on TI10/AGCK input. TCR10(F6E4) low2 bits zero disable
+TI10; that is the documented power-on value, not yet a verified runtime value.
+This gives a conditional100000 timestamp counts =200000Pphi, provided the
+counter mapping, prescaler and disabled external-clear conditions hold. It
+establishes neither absolute time nor a common epoch with captureTCNT0.
+
+Firmware/manual conflict preserved
+Original14616 reset code contains word0 writes at1465E toF6C2 and14662 toF6C0.
+The companion reset path at158FE/15902 also uses word writes. The manual
+explicitly requires longword TCNT10A access. The verifier executes original
+1465C..14664 withR4=0 under a strict manual-width fixture and preserves the
+expected ValueError at the first write. This is a model/source conflict, NOT
+evidence of a hardware fault. Do not silently combine these two writes into a
+32-bit reset or declare the counter epoch0. Exact chip/revision remains open;
+README notes that local XML's SH7058 label conflicts with the executable map.
+
+Static caller and search leads
+155FC BSR calls14616 during15574 peripheral setup;1571E calls14186 then15544
+then15B32. Neither complete15574 nor1571E was executed in this verifier.
+The reproducible aligned PC-relative word-literal scan findsF6C0 users14660,
+15730,15900,16038,16068,16498,1653C,16560. It finds no directword-literal users
+forF6E2/F6E4. This does NOT exclude computed/indirect control-register writes
+or unaligned/data references. All candidates are retained in the JSON.
+The legacy disassemble.py refs search scans aligned long literals and therefore
+returned noF6C0 references; word-literal scanning was required.
+
+Primary-source follow-up searched on2026-10-07
+Queries: site:renesas.com SH7055 hardware manual TCNT10A word;
+site:renesas.com "SH7055" "Hardware Manual" -SH7055S;
+"ADE-602-155C" hardware manual pdf; "SH7055" "TCNT10A" "Word".
+Renesas official technical update TN-SH7-471A/E identifies older SH7055F manual
+ADE-602-155C Rev4.0 but discusses standby, not this access-width question:
+https://www.renesas.com/en/document/tcu/sh7055f-hardware-manual-hardware-standby-mode
+Official application-note lead, not yet downloaded/relied on for reset widths:
+https://www.renesas.com/en/document/apn/sh7055-chip-io-volume-application-note
+The guessed official older-manual URL /en/document/mah/sh-2e-sh7055-f-ztat-hardware-manual
+returned an internal fetch error. Elenota's catalogue lists an older927page
+manufacturer manual, but /datasheet-pdf/145249/Renesas/MPU failed redirect-loop
+both web and Python urllib (session64983 exit0 reportingHTTP301).
+Search also surfaced manufacturer-manual mirrors on Scribd:
+https://ro.scribd.com/document/307367168/hd64f7055
+https://www.scribd.com/document/522457305/64F7055
+Their snippets show the same32-bit register table, but the relevant access
+paragraph was not verified; no differing-width conclusion drawn. Do not treat
+forum guesses or third-party chip labels as MCU identification evidence.
+
+Reproduction and preserved artifacts
+ python research/ecu-at-can/verify_tcu_timestamp_configuration.py
+PASS starts256/reads1024/rejects6, expected reset-width conflict preserved.
+Python3.14.3, PyMuPDF1.28.2, GNUobjdump2.42. Excerpts in
+ tcu-timestamp-configuration-disassembly.txt
+ tcu-timestamp-manual-excerpts.txt
+ tcu-timestamp-configuration-verification.json
+Tool setup/package provenance is retained in tcu-pulse-input.txt.
+ROM examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Manual sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c;
+https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual .
+No production, ROM or shared-ISA changes. Strict local fixture does not supply
+counter progress or undocumented reset semantics. Future actual-caller tests
+may use explicit externally sampled timestamps, preserving the unknown epoch.
+Next execute readiness caller admission with original initialization and
+explicit ADC/time inputs; separately resolve chip/reset-width evidence. All
+three ECU/AT, traction and both-direction roof scopes remain incomplete.
+Saved locally; no staging, commit or push. CHECKPOINT owns Ghidra state.
+
+Paired Ghidra save/independentrestore PASS:1987annotations/1026identicalexports/
+11filehashes. Exact commands/archiveidentity in tcu-capture-readiness.txt and
+capture-readiness-artifacts.json. No pendingprocess orunsavedproject changes.

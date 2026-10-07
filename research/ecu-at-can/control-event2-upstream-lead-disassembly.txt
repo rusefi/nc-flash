@@ -1,0 +1,275 @@
+STATIC UPSTREAM LEAD; ECU LFFEEE-stock.bin; GNU objdump2.42
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000fbe8 <.data+0xfbe8>:
+    fbe8:	4f 22       	sts.l	pr,@-r15
+    fbea:	e5 0a       	mov	#10,r5
+    fbec:	d2 40       	mov.l	0xfcf0,r2	! dae8
+    fbee:	7f fc       	add	#-4,r15
+    fbf0:	2f 42       	mov.l	r4,@r15
+    fbf2:	66 f3       	mov	r15,r6
+    fbf4:	42 0b       	jsr	@r2
+    fbf6:	e4 01       	mov	#1,r4
+    fbf8:	7f 04       	add	#4,r15
+    fbfa:	4f 26       	lds.l	@r15+,pr
+    fbfc:	00 0b       	rts	
+    fbfe:	00 09       	nop	
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00008238 <.data+0x8238>:
+    8238:	28 20       	mov.b	r2,@r8
+    823a:	bc 81       	bsr	0x7b40
+    823c:	64 23       	mov	r2,r4
+    823e:	a0 35       	bra	0x82ac
+    8240:	00 09       	nop	
+    8242:	63 4c       	extu.b	r4,r3
+    8244:	62 5c       	extu.b	r5,r2
+    8246:	33 20       	cmp/eq	r2,r3
+    8248:	8d 30       	bt.s	0x82ac
+    824a:	00 09       	nop	
+    824c:	93 58       	mov.w	0x8300,r3	! 80
+    824e:	6d 43       	mov	r4,r13
+    8250:	3d 58       	sub	r5,r13
+    8252:	62 dc       	extu.b	r13,r2
+    8254:	32 33       	cmp/ge	r3,r2
+    8256:	8f 01       	bf.s	0x825c
+    8258:	00 09       	nop	
+    825a:	7d 18       	add	#24,r13
+    825c:	d3 2c       	mov.l	0x8310,r3	! 1138c
+    825e:	62 dc       	extu.b	r13,r2
+    8260:	2f 32       	mov.l	r3,@r15
+    8262:	e3 01       	mov	#1,r3
+    8264:	32 37       	cmp/gt	r3,r2
+    8266:	8d 1a       	bt.s	0x829e
+    8268:	00 09       	nop	
+    826a:	61 f2       	mov.l	@r15,r1
+    826c:	71 2c       	add	#44,r1
+    826e:	a0 10       	bra	0x8292
+    8270:	1f 11       	mov.l	r1,@(4,r15)
+    8272:	b1 73       	bsr	0x855c
+    8274:	64 e0       	mov.b	@r14,r4
+    8276:	52 f1       	mov.l	@(4,r15),r2
+    8278:	64 e0       	mov.b	@r14,r4
+    827a:	63 22       	mov.l	@r2,r3
+    827c:	43 0b       	jsr	@r3
+    827e:	64 4c       	extu.b	r4,r4
+    8280:	62 e0       	mov.b	@r14,r2
+    8282:	72 01       	add	#1,r2
+    8284:	2e 20       	mov.b	r2,@r14
+    8286:	63 e0       	mov.b	@r14,r3
+    8288:	63 3c       	extu.b	r3,r3
+    828a:	33 c3       	cmp/ge	r12,r3
+    828c:	8f 01       	bf.s	0x8292
+    828e:	7d ff       	add	#-1,r13
+    8290:	2e b0       	mov.b	r11,@r14
+    8292:	63 dc       	extu.b	r13,r3
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00010620 <.data+0x10620>:
+   10620:	93 46       	mov.w	0x106b0,r3	! c0
+   10622:	90 44       	mov.w	0x106ae,r0	! f718
+   10624:	20 31       	mov.w	r3,@r0
+   10626:	92 44       	mov.w	0x106b2,r2	! 9c3
+   10628:	93 44       	mov.w	0x106b4,r3	! f71c
+   1062a:	00 0b       	rts	
+   1062c:	23 21       	mov.w	r2,@r3
+   1062e:	2f e6       	mov.l	r14,@-r15
+   10630:	2f d6       	mov.l	r13,@-r15
+   10632:	4f 22       	sts.l	pr,@-r15
+   10634:	dd 20       	mov.l	0x106b8,r13	! 1138c
+   10636:	63 d2       	mov.l	@r13,r3
+   10638:	43 0b       	jsr	@r3
+   1063a:	e4 00       	mov	#0,r4
+   1063c:	d4 1f       	mov.l	0x106bc,r4	! ffff51e0
+   1063e:	62 41       	mov.w	@r4,r2
+   10640:	72 01       	add	#1,r2
+   10642:	24 21       	mov.w	r2,@r4
+   10644:	65 41       	mov.w	@r4,r5
+   10646:	60 5d       	extu.w	r5,r0
+   10648:	c8 01       	tst	#1,r0
+   1064a:	8d 19       	bt.s	0x10680
+   1064c:	00 09       	nop	
+   1064e:	64 53       	mov	r5,r4
+   10650:	d5 1b       	mov.l	0x106c0,r5	! 11414
+   10652:	6e 53       	mov	r5,r14
+   10654:	75 09       	add	#9,r5
+   10656:	3e 52       	cmp/hs	r5,r14
+   10658:	8d 12       	bt.s	0x10680
+   1065a:	00 09       	nop	
+   1065c:	64 4d       	extu.w	r4,r4
+   1065e:	44 01       	shlr	r4
+   10660:	60 4d       	extu.w	r4,r0
+   10662:	c8 01       	tst	#1,r0
+   10664:	8d 08       	bt.s	0x10678
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001078c <.data+0x1078c>:
+   1078c:	4a 0b       	jsr	@r10
+   1078e:	54 f1       	mov.l	@(4,r15),r4
+   10790:	7e 02       	add	#2,r14
+   10792:	3e c6       	cmp/hi	r12,r14
+   10794:	8f eb       	bf.s	0x1076e
+   10796:	00 09       	nop	
+   10798:	d4 1a       	mov.l	0x10804,r4	! ffff51f4
+   1079a:	6e 43       	mov	r4,r14
+   1079c:	dc 1f       	mov.l	0x1081c,r12	! 11420
+   1079e:	69 43       	mov	r4,r9
+   107a0:	d8 1f       	mov.l	0x10820,r8	! 1138c
+   107a2:	3e 96       	cmp/hi	r9,r14
+   107a4:	8d 19       	bt.s	0x107da
+   107a6:	00 09       	nop	
+   107a8:	65 d3       	mov	r13,r5
+   107aa:	4b 0b       	jsr	@r11
+   107ac:	64 f3       	mov	r15,r4
+   107ae:	63 e1       	mov.w	@r14,r3
+   107b0:	43 15       	cmp/pl	r3
+   107b2:	8f 0c       	bf.s	0x107ce
+   107b4:	00 09       	nop	
+   107b6:	63 e1       	mov.w	@r14,r3
+   107b8:	73 ff       	add	#-1,r3
+   107ba:	2e 31       	mov.w	r3,@r14
+   107bc:	62 e1       	mov.w	@r14,r2
+   107be:	22 28       	tst	r2,r2
+   107c0:	8f 05       	bf.s	0x107ce
+   107c2:	00 09       	nop	
+   107c4:	60 c2       	mov.l	@r12,r0
+   107c6:	40 08       	shll2	r0
+   107c8:	03 8e       	mov.l	@(r0,r8),r3
+   107ca:	43 0b       	jsr	@r3
+   107cc:	54 c1       	mov.l	@(4,r12),r4
+   107ce:	4a 0b       	jsr	@r10
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000108c4 <.data+0x108c4>:
+   108c4:	73 01       	add	#1,r3
+   108c6:	2e 31       	mov.w	r3,@r14
+   108c8:	4b 0b       	jsr	@r11
+   108ca:	64 f2       	mov.l	@r15,r4
+   108cc:	7e 02       	add	#2,r14
+   108ce:	3e d6       	cmp/hi	r13,r14
+   108d0:	8f ec       	bf.s	0x108ac
+   108d2:	00 09       	nop	
+   108d4:	d4 19       	mov.l	0x1093c,r4	! ffff51f6
+   108d6:	6e 43       	mov	r4,r14
+   108d8:	dd 19       	mov.l	0x10940,r13	! 11428
+   108da:	6c 43       	mov	r4,r12
+   108dc:	db 19       	mov.l	0x10944,r11	! 1138c
+   108de:	3e c6       	cmp/hi	r12,r14
+   108e0:	8d 14       	bt.s	0x1090c
+   108e2:	00 09       	nop	
+   108e4:	63 e1       	mov.w	@r14,r3
+   108e6:	43 15       	cmp/pl	r3
+   108e8:	8f 0c       	bf.s	0x10904
+   108ea:	00 09       	nop	
+   108ec:	63 e1       	mov.w	@r14,r3
+   108ee:	73 ff       	add	#-1,r3
+   108f0:	2e 31       	mov.w	r3,@r14
+   108f2:	62 e1       	mov.w	@r14,r2
+   108f4:	22 28       	tst	r2,r2
+   108f6:	8f 05       	bf.s	0x10904
+   108f8:	00 09       	nop	
+   108fa:	60 d2       	mov.l	@r13,r0
+   108fc:	40 08       	shll2	r0
+   108fe:	03 be       	mov.l	@(r0,r11),r3
+   10900:	43 0b       	jsr	@r3
+   10902:	54 d1       	mov.l	@(4,r13),r4
+   10904:	7e 02       	add	#2,r14
+   10906:	3e c6       	cmp/hi	r12,r14
+   10908:	8f ec       	bf.s	0x108e4
+   1090a:	7d 08       	add	#8,r13
+   1090c:	7f 0c       	add	#12,r15
+   1090e:	4f 26       	lds.l	@r15+,pr
+   10910:	68 f6       	mov.l	@r15+,r8
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00010656 <.data+0x10656>:
+   10656:	3e 52       	cmp/hs	r5,r14
+   10658:	8d 12       	bt.s	0x10680
+   1065a:	00 09       	nop	
+   1065c:	64 4d       	extu.w	r4,r4
+   1065e:	44 01       	shlr	r4
+   10660:	60 4d       	extu.w	r4,r0
+   10662:	c8 01       	tst	#1,r0
+   10664:	8d 08       	bt.s	0x10678
+   10666:	00 09       	nop	
+   10668:	60 e0       	mov.b	@r14,r0
+   1066a:	60 0c       	extu.b	r0,r0
+   1066c:	40 08       	shll2	r0
+   1066e:	03 de       	mov.l	@(r0,r13),r3
+   10670:	43 0b       	jsr	@r3
+   10672:	e4 00       	mov	#0,r4
+   10674:	a0 04       	bra	0x10680
+   10676:	00 09       	nop	
+   10678:	7e 01       	add	#1,r14
+   1067a:	3e 52       	cmp/hs	r5,r14
+   1067c:	8f ee       	bf.s	0x1065c
+   1067e:	00 09       	nop	
+   10680:	d4 10       	mov.l	0x106c4,r4	! ffff51e2
+   10682:	62 40       	mov.b	@r4,r2
+   10684:	72 01       	add	#1,r2
+   10686:	24 20       	mov.b	r2,@r4
+   10688:	63 40       	mov.b	@r4,r3
+   1068a:	e2 05       	mov	#5,r2
+   1068c:	63 3c       	extu.b	r3,r3
+   1068e:	33 23       	cmp/ge	r2,r3
+   10690:	8f 08       	bf.s	0x106a4
+   10692:	00 09       	nop	
+   10694:	e1 00       	mov	#0,r1
+   10696:	24 10       	mov.b	r1,@r4
+   10698:	53 dd       	mov.l	@(52,r13),r3
+   1069a:	64 13       	mov	r1,r4
+   1069c:	4f 26       	lds.l	@r15+,pr
+   1069e:	6d f6       	mov.l	@r15+,r13
+   106a0:	43 2b       	jmp	@r3
+   106a2:	6e f6       	mov.l	@r15+,r14
+   106a4:	4f 26       	lds.l	@r15+,pr
+   106a6:	6d f6       	mov.l	@r15+,r13
+   106a8:	00 0b       	rts	
+   106aa:	6e f6       	mov.l	@r15+,r14
+   106ac:	f7 10       	fadd	fr1,fr7
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000f28c <.data+0xf28c>:
+    f28c:	93 4f       	mov.w	0xf32e,r3	! f718
+    f28e:	d2 2e       	mov.l	0xf348,r2	! ff7f
+    f290:	61 31       	mov.w	@r3,r1
+    f292:	21 29       	and	r2,r1
+    f294:	23 11       	mov.w	r1,@r3
+    f296:	d3 2e       	mov.l	0xf350,r3	! 1062e
+    f298:	43 2b       	jmp	@r3
+    f29a:	00 09       	nop	
+

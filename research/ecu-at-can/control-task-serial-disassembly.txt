@@ -1,0 +1,762 @@
+COMMAND: disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 76b4 7798
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000076b4 <.data+0x76b4>:
+    76b4:	2f e6       	mov.l	r14,@-r15
+    76b6:	60 43       	mov	r4,r0
+    76b8:	d3 41       	mov.l	0x77c0,r3	! 3880
+    76ba:	2f d6       	mov.l	r13,@-r15
+    76bc:	2f c6       	mov.l	r12,@-r15
+    76be:	2f b6       	mov.l	r11,@-r15
+    76c0:	2f a6       	mov.l	r10,@-r15
+    76c2:	2f 96       	mov.l	r9,@-r15
+    76c4:	2f 86       	mov.l	r8,@-r15
+    76c6:	4f 22       	sts.l	pr,@-r15
+    76c8:	94 6a       	mov.w	0x77a0,r4	! b0
+    76ca:	7f ec       	add	#-20,r15
+    76cc:	80 fc       	mov.b	r0,@(12,r15)
+    76ce:	43 0b       	jsr	@r3
+    76d0:	00 09       	nop	
+    76d2:	64 f3       	mov	r15,r4
+    76d4:	1f 04       	mov.l	r0,@(16,r15)
+    76d6:	d8 38       	mov.l	0x77b8,r8	! 22e4
+    76d8:	9b 61       	mov.w	0x779e,r11	! e0
+    76da:	65 b3       	mov	r11,r5
+    76dc:	48 0b       	jsr	@r8
+    76de:	74 08       	add	#8,r4
+    76e0:	9e 5f       	mov.w	0x77a2,r14	! f002
+    76e2:	60 e0       	mov.b	@r14,r0
+    76e4:	c9 0b       	and	#11,r0
+    76e6:	2e 00       	mov.b	r0,@r14
+    76e8:	d3 34       	mov.l	0x77bc,r3	! 22f4
+    76ea:	43 0b       	jsr	@r3
+    76ec:	54 f2       	mov.l	@(8,r15),r4
+    76ee:	65 b3       	mov	r11,r5
+    76f0:	64 f3       	mov	r15,r4
+    76f2:	48 0b       	jsr	@r8
+    76f4:	74 04       	add	#4,r4
+    76f6:	92 55       	mov.w	0x77a4,r2	! 80
+    76f8:	93 55       	mov.w	0x77a6,r3	! f000
+    76fa:	23 20       	mov.b	r2,@r3
+    76fc:	60 e0       	mov.b	@r14,r0
+    76fe:	c9 fc       	and	#252,r0
+    7700:	2e 00       	mov.b	r0,@r14
+    7702:	72 72       	add	#114,r2
+    7704:	91 50       	mov.w	0x77a8,r1	! f006
+    7706:	21 20       	mov.b	r2,@r1
+    7708:	92 4f       	mov.w	0x77aa,r2	! f001
+    770a:	e0 04       	mov	#4,r0
+    770c:	22 00       	mov.b	r0,@r2
+    770e:	d3 2b       	mov.l	0x77bc,r3	! 22f4
+    7710:	43 0b       	jsr	@r3
+    7712:	54 f1       	mov.l	@(4,r15),r4
+    7714:	99 4a       	mov.w	0x77ac,r9	! 4000
+    7716:	da 2b       	mov.l	0x77c4,r10	! 8000
+    7718:	dc 26       	mov.l	0x77b4,r12	! e744
+    771a:	9d 48       	mov.w	0x77ae,r13	! f72c
+    771c:	84 fc       	mov.b	@(12,r15),r0
+    771e:	64 03       	mov	r0,r4
+    7720:	64 4c       	extu.b	r4,r4
+    7722:	24 48       	tst	r4,r4
+    7724:	8f 0a       	bf.s	0x773c
+    7726:	00 09       	nop	
+    7728:	e6 00       	mov	#0,r6
+    772a:	65 93       	mov	r9,r5
+    772c:	4c 0b       	jsr	@r12
+    772e:	64 d3       	mov	r13,r4
+    7730:	e6 00       	mov	#0,r6
+    7732:	65 a3       	mov	r10,r5
+    7734:	4c 0b       	jsr	@r12
+    7736:	64 d3       	mov	r13,r4
+    7738:	a0 12       	bra	0x7760
+    773a:	00 09       	nop	
+    773c:	60 43       	mov	r4,r0
+    773e:	88 01       	cmp/eq	#1,r0
+    7740:	8f 06       	bf.s	0x7750
+    7742:	00 09       	nop	
+    7744:	e6 01       	mov	#1,r6
+    7746:	65 93       	mov	r9,r5
+    7748:	4c 0b       	jsr	@r12
+    774a:	64 d3       	mov	r13,r4
+    774c:	a0 05       	bra	0x775a
+    774e:	e6 00       	mov	#0,r6
+    7750:	e6 00       	mov	#0,r6
+    7752:	65 93       	mov	r9,r5
+    7754:	4c 0b       	jsr	@r12
+    7756:	64 d3       	mov	r13,r4
+    7758:	e6 01       	mov	#1,r6
+    775a:	65 a3       	mov	r10,r5
+    775c:	4c 0b       	jsr	@r12
+    775e:	64 d3       	mov	r13,r4
+    7760:	65 b3       	mov	r11,r5
+    7762:	48 0b       	jsr	@r8
+    7764:	64 f3       	mov	r15,r4
+    7766:	60 e0       	mov.b	@r14,r0
+    7768:	c9 0b       	and	#11,r0
+    776a:	cb 30       	or	#48,r0
+    776c:	2e 00       	mov.b	r0,@r14
+    776e:	d3 13       	mov.l	0x77bc,r3	! 22f4
+    7770:	43 0b       	jsr	@r3
+    7772:	64 f2       	mov.l	@r15,r4
+    7774:	94 1c       	mov.w	0x77b0,r4	! ff
+    7776:	b0 7a       	bsr	0x786e
+    7778:	00 09       	nop	
+    777a:	80 fc       	mov.b	r0,@(12,r15)
+    777c:	d3 12       	mov.l	0x77c8,r3	! 3894
+    777e:	43 0b       	jsr	@r3
+    7780:	54 f4       	mov.l	@(16,r15),r4
+    7782:	84 fc       	mov.b	@(12,r15),r0
+    7784:	7f 14       	add	#20,r15
+    7786:	4f 26       	lds.l	@r15+,pr
+    7788:	68 f6       	mov.l	@r15+,r8
+    778a:	69 f6       	mov.l	@r15+,r9
+    778c:	6a f6       	mov.l	@r15+,r10
+    778e:	6b f6       	mov.l	@r15+,r11
+    7790:	6c f6       	mov.l	@r15+,r12
+    7792:	6d f6       	mov.l	@r15+,r13
+    7794:	00 0b       	rts	
+    7796:	6e f6       	mov.l	@r15+,r14
+
+COMMAND: disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 786e 7978
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000786e <.data+0x786e>:
+    786e:	60 43       	mov	r4,r0
+    7870:	2f e6       	mov.l	r14,@-r15
+    7872:	2f d6       	mov.l	r13,@-r15
+    7874:	2f c6       	mov.l	r12,@-r15
+    7876:	2f b6       	mov.l	r11,@-r15
+    7878:	2f a6       	mov.l	r10,@-r15
+    787a:	4f 22       	sts.l	pr,@-r15
+    787c:	db 32       	mov.l	0x7948,r11	! 794c
+    787e:	7f f0       	add	#-16,r15
+    7880:	4b 0b       	jsr	@r11
+    7882:	80 fc       	mov.b	r0,@(12,r15)
+    7884:	94 4b       	mov.w	0x791e,r4	! f764
+    7886:	e6 00       	mov	#0,r6
+    7888:	d3 2a       	mov.l	0x7934,r3	! e744
+    788a:	43 0b       	jsr	@r3
+    788c:	e5 01       	mov	#1,r5
+    788e:	4b 0b       	jsr	@r11
+    7890:	00 09       	nop	
+    7892:	64 f3       	mov	r15,r4
+    7894:	da 25       	mov.l	0x792c,r10	! 22e4
+    7896:	9d 3a       	mov.w	0x790e,r13	! e0
+    7898:	65 d3       	mov	r13,r5
+    789a:	4a 0b       	jsr	@r10
+    789c:	74 08       	add	#8,r4
+    789e:	9e 3f       	mov.w	0x7920,r14	! f004
+    78a0:	60 e0       	mov.b	@r14,r0
+    78a2:	c9 87       	and	#135,r0
+    78a4:	cb 80       	or	#128,r0
+    78a6:	2e 00       	mov.b	r0,@r14
+    78a8:	dc 21       	mov.l	0x7930,r12	! 22f4
+    78aa:	4c 0b       	jsr	@r12
+    78ac:	54 f2       	mov.l	@(8,r15),r4
+    78ae:	65 d3       	mov	r13,r5
+    78b0:	64 f3       	mov	r15,r4
+    78b2:	4a 0b       	jsr	@r10
+    78b4:	74 04       	add	#4,r4
+    78b6:	84 fc       	mov.b	@(12,r15),r0
+    78b8:	93 33       	mov.w	0x7922,r3	! f003
+    78ba:	23 00       	mov.b	r0,@r3
+    78bc:	60 e0       	mov.b	@r14,r0
+    78be:	c9 7f       	and	#127,r0
+    78c0:	cb 78       	or	#120,r0
+    78c2:	2e 00       	mov.b	r0,@r14
+    78c4:	4c 0b       	jsr	@r12
+    78c6:	54 f1       	mov.l	@(4,r15),r4
+    78c8:	e4 40       	mov	#64,r4
+    78ca:	62 e0       	mov.b	@r14,r2
+    78cc:	62 2c       	extu.b	r2,r2
+    78ce:	22 48       	tst	r4,r2
+    78d0:	8d fb       	bt.s	0x78ca
+    78d2:	00 09       	nop	
+    78d4:	65 d3       	mov	r13,r5
+    78d6:	4a 0b       	jsr	@r10
+    78d8:	64 f3       	mov	r15,r4
+    78da:	93 23       	mov.w	0x7924,r3	! f005
+    78dc:	60 30       	mov.b	@r3,r0
+    78de:	80 fc       	mov.b	r0,@(12,r15)
+    78e0:	60 e0       	mov.b	@r14,r0
+    78e2:	c9 bf       	and	#191,r0
+    78e4:	cb b8       	or	#184,r0
+    78e6:	2e 00       	mov.b	r0,@r14
+    78e8:	4c 0b       	jsr	@r12
+    78ea:	64 f2       	mov.l	@r15,r4
+    78ec:	4b 0b       	jsr	@r11
+    78ee:	00 09       	nop	
+    78f0:	94 15       	mov.w	0x791e,r4	! f764
+    78f2:	e6 01       	mov	#1,r6
+    78f4:	d3 0f       	mov.l	0x7934,r3	! e744
+    78f6:	43 0b       	jsr	@r3
+    78f8:	65 63       	mov	r6,r5
+    78fa:	84 fc       	mov.b	@(12,r15),r0
+    78fc:	7f 10       	add	#16,r15
+    78fe:	4f 26       	lds.l	@r15+,pr
+    7900:	6a f6       	mov.l	@r15+,r10
+    7902:	6b f6       	mov.l	@r15+,r11
+    7904:	6c f6       	mov.l	@r15+,r12
+    7906:	6d f6       	mov.l	@r15+,r13
+    7908:	00 0b       	rts	
+    790a:	6e f6       	mov.l	@r15+,r14
+    790c:	00 b0       	.word 0x00b0
+    790e:	00 e0       	.word 0x00e0
+    7910:	f0 02       	fmul	fr0,fr0
+    7912:	00 80       	.word 0x0080
+    7914:	f0 00       	fadd	fr0,fr0
+    7916:	f0 06       	fmov	@(r0,r0),fr0
+    7918:	f0 01       	fsub	fr0,fr0
+    791a:	40 00       	shll	r0
+    791c:	f7 2c       	fmov	fr2,fr7
+    791e:	f7 64       	fcmp/eq	fr6,fr7
+    7920:	f0 04       	fcmp/eq	fr0,fr0
+    7922:	f0 03       	fdiv	fr0,fr0
+    7924:	f0 05       	fcmp/gt	fr0,fr0
+    7926:	00 00       	.word 0x0000
+    7928:	00 00       	.word 0x0000
+    792a:	38 80       	cmp/eq	r8,r8
+    792c:	00 00       	.word 0x0000
+    792e:	22 e4       	mov.b	r14,@-r2
+    7930:	00 00       	.word 0x0000
+    7932:	22 f4       	mov.b	r15,@-r2
+    7934:	00 00       	.word 0x0000
+    7936:	e7 44       	mov	#68,r7
+    7938:	00 00       	.word 0x0000
+    793a:	80 00       	mov.b	r0,@(0,r0)
+    793c:	ff ff       	.word 0xffff
+    793e:	41 01       	shlr	r1
+    7940:	ff ff       	.word 0xffff
+    7942:	41 00       	shll	r1
+    7944:	00 00       	.word 0x0000
+    7946:	38 94       	div1	r9,r8
+    7948:	00 00       	.word 0x0000
+    794a:	79 4c       	add	#76,r9
+    794c:	00 09       	nop	
+    794e:	00 09       	nop	
+    7950:	00 09       	nop	
+    7952:	00 09       	nop	
+    7954:	00 09       	nop	
+    7956:	00 09       	nop	
+    7958:	00 09       	nop	
+    795a:	00 09       	nop	
+    795c:	00 09       	nop	
+    795e:	00 09       	nop	
+    7960:	00 09       	nop	
+    7962:	00 09       	nop	
+    7964:	00 09       	nop	
+    7966:	00 09       	nop	
+    7968:	00 09       	nop	
+    796a:	00 09       	nop	
+    796c:	00 09       	nop	
+    796e:	00 09       	nop	
+    7970:	00 09       	nop	
+    7972:	00 09       	nop	
+    7974:	00 0b       	rts	
+    7976:	00 09       	nop	
+
+COMMAND: disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 2034 204c
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00002034 <.data+0x2034>:
+    2034:	35 4f       	addv	r4,r5
+    2036:	8f 04       	bf.s	0x2042
+    2038:	60 53       	mov	r5,r0
+    203a:	d0 03       	mov.l	0x2048,r0	! 7fffffff
+    203c:	45 11       	cmp/pz	r5
+    203e:	e5 00       	mov	#0,r5
+    2040:	30 5e       	addc	r5,r0
+    2042:	00 0b       	rts	
+    2044:	00 09       	nop	
+    2046:	00 09       	nop	
+    2048:	7f ff       	add	#-1,r15
+    204a:	ff ff       	.word 0xffff
+
+COMMAND: disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis 92cbe 92d0a
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00092cbe <.data+0x92cbe>:
+   92cbe:	3c 4c       	add	r4,r12
+   92cc0:	63 e6       	mov.l	@r14+,r3
+   92cc2:	43 0b       	jsr	@r3
+   92cc4:	64 d3       	mov	r13,r4
+   92cc6:	3e c2       	cmp/hs	r12,r14
+   92cc8:	8f fa       	bf.s	0x92cc0
+   92cca:	6d 03       	mov	r0,r13
+   92ccc:	4f 26       	lds.l	@r15+,pr
+   92cce:	6c f6       	mov.l	@r15+,r12
+   92cd0:	6d f6       	mov.l	@r15+,r13
+   92cd2:	00 0b       	rts	
+   92cd4:	6e f6       	mov.l	@r15+,r14
+   92cd6:	e3 00       	mov	#0,r3
+   92cd8:	d7 2c       	mov.l	0x92d8c,r7	! ffff3dbb
+   92cda:	d4 2b       	mov.l	0x92d88,r4	! ffff3e88
+   92cdc:	d6 28       	mov.l	0x92d80,r6	! ffff3eb5
+   92cde:	24 32       	mov.l	r3,@r4
+   92ce0:	95 42       	mov.w	0x92d68,r5	! c4
+   92ce2:	45 10       	dt	r5
+   92ce4:	62 64       	mov.b	@r6+,r2
+   92ce6:	27 20       	mov.b	r2,@r7
+   92ce8:	63 42       	mov.l	@r4,r3
+   92cea:	73 01       	add	#1,r3
+   92cec:	24 32       	mov.l	r3,@r4
+   92cee:	8f f8       	bf.s	0x92ce2
+   92cf0:	77 01       	add	#1,r7
+   92cf2:	93 3a       	mov.w	0x92d6a,r3	! c5
+   92cf4:	00 0b       	rts	
+   92cf6:	24 32       	mov.l	r3,@r4
+   92cf8:	4f 22       	sts.l	pr,@-r15
+   92cfa:	7f fc       	add	#-4,r15
+   92cfc:	d1 24       	mov.l	0x92d90,r1	! ffff3a18
+   92cfe:	62 11       	mov.w	@r1,r2
+   92d00:	d3 24       	mov.l	0x92d94,r3	! 90242
+   92d02:	2f 21       	mov.w	r2,@r15
+   92d04:	43 0b       	jsr	@r3
+   92d06:	65 f3       	mov	r15,r5
+   92d08:	7f 04       	add	#4,r15
+
+COMMAND: disassemble.py at dis b7c0 b892
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000b7c0 <.data+0xb7c0>:
+    b7c0:	42 0b       	jsr	@r2
+    b7c2:	e4 02       	mov	#2,r4
+    b7c4:	99 78       	mov.w	0xb8b8,r9	! 1000
+    b7c6:	9a 78       	mov.w	0xb8ba,r10	! 200
+    b7c8:	9c 78       	mov.w	0xb8bc,r12	! f430
+    b7ca:	9e 78       	mov.w	0xb8be,r14	! f74e
+    b7cc:	a0 4f       	bra	0xb86e
+    b7ce:	e3 00       	mov	#0,r3
+    b7d0:	50 f3       	mov.l	@(12,r15),r0
+    b7d2:	e8 00       	mov	#0,r8
+    b7d4:	95 6e       	mov.w	0xb8b4,r5	! e0
+    b7d6:	64 f3       	mov	r15,r4
+    b7d8:	d3 3a       	mov.l	0xb8c4,r3	! 22e4
+    b7da:	60 00       	mov.b	@r0,r0
+    b7dc:	80 f4       	mov.b	r0,@(4,r15)
+    b7de:	43 0b       	jsr	@r3
+    b7e0:	74 08       	add	#8,r4
+    b7e2:	62 83       	mov	r8,r2
+    b7e4:	2f 20       	mov.b	r2,@r15
+    b7e6:	e6 00       	mov	#0,r6
+    b7e8:	65 a3       	mov	r10,r5
+    b7ea:	4d 0b       	jsr	@r13
+    b7ec:	64 e3       	mov	r14,r4
+    b7ee:	84 f4       	mov.b	@(4,r15),r0
+    b7f0:	60 0c       	extu.b	r0,r0
+    b7f2:	c8 80       	tst	#128,r0
+    b7f4:	8f 02       	bf.s	0xb7fc
+    b7f6:	6b c2       	mov.l	@r12,r11
+    b7f8:	a0 01       	bra	0xb7fe
+    b7fa:	e6 00       	mov	#0,r6
+    b7fc:	e6 01       	mov	#1,r6
+    b7fe:	65 93       	mov	r9,r5
+    b800:	4d 0b       	jsr	@r13
+    b802:	64 e3       	mov	r14,r4
+    b804:	84 f4       	mov.b	@(4,r15),r0
+    b806:	40 00       	shll	r0
+    b808:	80 f4       	mov.b	r0,@(4,r15)
+    b80a:	62 c2       	mov.l	@r12,r2
+    b80c:	32 b8       	sub	r11,r2
+    b80e:	e3 02       	mov	#2,r3
+    b810:	32 36       	cmp/hi	r3,r2
+    b812:	8f fa       	bf.s	0xb80a
+    b814:	00 09       	nop	
+    b816:	e6 01       	mov	#1,r6
+    b818:	65 a3       	mov	r10,r5
+    b81a:	4d 0b       	jsr	@r13
+    b81c:	64 e3       	mov	r14,r4
+    b81e:	48 00       	shll	r8
+    b820:	63 e1       	mov.w	@r14,r3
+    b822:	63 3d       	extu.w	r3,r3
+    b824:	d2 2b       	mov.l	0xb8d4,r2	! 8000
+    b826:	23 28       	tst	r2,r3
+    b828:	8d 02       	bt.s	0xb830
+    b82a:	00 09       	nop	
+    b82c:	e0 01       	mov	#1,r0
+    b82e:	28 0b       	or	r0,r8
+    b830:	62 c2       	mov.l	@r12,r2
+    b832:	32 b8       	sub	r11,r2
+    b834:	e3 04       	mov	#4,r3
+    b836:	32 36       	cmp/hi	r3,r2
+    b838:	8f fa       	bf.s	0xb830
+    b83a:	00 09       	nop	
+    b83c:	61 f0       	mov.b	@r15,r1
+    b83e:	e3 08       	mov	#8,r3
+    b840:	71 01       	add	#1,r1
+    b842:	2f 10       	mov.b	r1,@r15
+    b844:	61 1c       	extu.b	r1,r1
+    b846:	31 33       	cmp/ge	r3,r1
+    b848:	8f cd       	bf.s	0xb7e6
+    b84a:	00 09       	nop	
+    b84c:	d3 1f       	mov.l	0xb8cc,r3	! 22f4
+    b84e:	43 0b       	jsr	@r3
+    b850:	54 f2       	mov.l	@(8,r15),r4
+    b852:	52 f4       	mov.l	@(16,r15),r2
+    b854:	d1 1e       	mov.l	0xb8d0,r1	! 2580
+    b856:	22 80       	mov.b	r8,@r2
+    b858:	53 f3       	mov.l	@(12,r15),r3
+    b85a:	73 01       	add	#1,r3
+    b85c:	1f 33       	mov.l	r3,@(12,r15)
+    b85e:	52 f4       	mov.l	@(16,r15),r2
+    b860:	72 01       	add	#1,r2
+    b862:	1f 24       	mov.l	r2,@(16,r15)
+    b864:	41 0b       	jsr	@r1
+    b866:	e4 08       	mov	#8,r4
+    b868:	e0 14       	mov	#20,r0
+    b86a:	03 fc       	mov.b	@(r0,r15),r3
+    b86c:	73 01       	add	#1,r3
+    b86e:	e0 14       	mov	#20,r0
+    b870:	0f 34       	mov.b	r3,@(r0,r15)
+    b872:	e0 14       	mov	#20,r0
+    b874:	02 fc       	mov.b	@(r0,r15),r2
+    b876:	e0 20       	mov	#32,r0
+    b878:	03 fc       	mov.b	@(r0,r15),r3
+    b87a:	32 32       	cmp/hs	r3,r2
+    b87c:	8f a8       	bf.s	0xb7d0
+    b87e:	00 09       	nop	
+    b880:	95 18       	mov.w	0xb8b4,r5	! e0
+    b882:	64 f3       	mov	r15,r4
+    b884:	d2 0f       	mov.l	0xb8c4,r2	! 22e4
+    b886:	42 0b       	jsr	@r2
+    b888:	74 18       	add	#24,r4
+    b88a:	e6 00       	mov	#0,r6
+    b88c:	94 13       	mov.w	0xb8b6,r4	! f754
+    b88e:	4d 0b       	jsr	@r13
+    b890:	e5 01       	mov	#1,r5
+
+COMMAND: disassemble.py at dis f8d6 f9dc
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000f8d6 <.data+0xf8d6>:
+    f8d6:	7f fc       	add	#-4,r15
+    f8d8:	93 5d       	mov.w	0xf996,r3	! ff0f
+    f8da:	00 02       	stc	sr,r0
+    f8dc:	20 39       	and	r3,r0
+    f8de:	cb f0       	or	#240,r0
+    f8e0:	40 0e       	ldc	r0,sr
+    f8e2:	d2 36       	mov.l	0xf9bc,r2	! fa62
+    f8e4:	42 0b       	jsr	@r2
+    f8e6:	00 09       	nop	
+    f8e8:	da 35       	mov.l	0xf9c0,r10	! ffff200c
+    f8ea:	d3 36       	mov.l	0xf9c4,r3	! 2438
+    f8ec:	43 0b       	jsr	@r3
+    f8ee:	e4 00       	mov	#0,r4
+    f8f0:	2a 02       	mov.l	r0,@r10
+    f8f2:	98 51       	mov.w	0xf998,r8	! f430
+    f8f4:	dd 34       	mov.l	0xf9c8,r13	! ffff51a0
+    f8f6:	62 82       	mov.l	@r8,r2
+    f8f8:	2d 22       	mov.l	r2,@r13
+    f8fa:	eb 01       	mov	#1,r11
+    f8fc:	9c 4d       	mov.w	0xf99a,r12	! 3e80
+    f8fe:	d9 2b       	mov.l	0xf9ac,r9	! e744
+    f900:	9e 48       	mov.w	0xf994,r14	! f74e
+    f902:	95 46       	mov.w	0xf992,r5	! e0
+    f904:	d2 28       	mov.l	0xf9a8,r2	! 22e4
+    f906:	42 0b       	jsr	@r2
+    f908:	64 f3       	mov	r15,r4
+    f90a:	e6 00       	mov	#0,r6
+    f90c:	e5 08       	mov	#8,r5
+    f90e:	49 0b       	jsr	@r9
+    f910:	64 e3       	mov	r14,r4
+    f912:	d3 27       	mov.l	0xf9b0,r3	! 22f4
+    f914:	43 0b       	jsr	@r3
+    f916:	64 f2       	mov.l	@r15,r4
+    f918:	94 40       	mov.w	0xf99c,r4	! 7d0
+    f91a:	d2 2c       	mov.l	0xf9cc,r2	! 2580
+    f91c:	42 0b       	jsr	@r2
+    f91e:	00 09       	nop	
+    f920:	d3 2b       	mov.l	0xf9d0,r3	! 110a8
+    f922:	43 0b       	jsr	@r3
+    f924:	00 09       	nop	
+    f926:	60 e1       	mov.w	@r14,r0
+    f928:	60 0d       	extu.w	r0,r0
+    f92a:	20 b9       	and	r11,r0
+    f92c:	20 08       	tst	r0,r0
+    f92e:	00 29       	movt	r0
+    f930:	ca 01       	xor	#1,r0
+    f932:	88 01       	cmp/eq	#1,r0
+    f934:	8f 02       	bf.s	0xf93c
+    f936:	00 09       	nop	
+    f938:	a0 01       	bra	0xf93e
+    f93a:	60 b3       	mov	r11,r0
+    f93c:	e0 00       	mov	#0,r0
+    f93e:	88 01       	cmp/eq	#1,r0
+    f940:	8f 02       	bf.s	0xf948
+    f942:	00 09       	nop	
+    f944:	b0 15       	bsr	0xf972
+    f946:	00 09       	nop	
+    f948:	64 82       	mov.l	@r8,r4
+    f94a:	62 d2       	mov.l	@r13,r2
+    f94c:	34 28       	sub	r2,r4
+    f94e:	34 c2       	cmp/hs	r12,r4
+    f950:	8f d7       	bf.s	0xf902
+    f952:	00 09       	nop	
+    f954:	64 a1       	mov.w	@r10,r4
+    f956:	62 4d       	extu.w	r4,r2
+    f958:	d3 1e       	mov.l	0xf9d4,r3	! ffff
+    f95a:	32 33       	cmp/ge	r3,r2
+    f95c:	8d 01       	bt.s	0xf962
+    f95e:	00 09       	nop	
+    f960:	74 01       	add	#1,r4
+    f962:	d3 18       	mov.l	0xf9c4,r3	! 2438
+    f964:	43 0b       	jsr	@r3
+    f966:	00 09       	nop	
+    f968:	2a 02       	mov.l	r0,@r10
+    f96a:	62 d2       	mov.l	@r13,r2
+    f96c:	32 cc       	add	r12,r2
+    f96e:	af c8       	bra	0xf902
+    f970:	2d 22       	mov.l	r2,@r13
+    f972:	00 02       	stc	sr,r0
+    f974:	93 0f       	mov.w	0xf996,r3	! ff0f
+    f976:	20 39       	and	r3,r0
+    f978:	cb f0       	or	#240,r0
+    f97a:	40 0e       	ldc	r0,sr
+    f97c:	af fe       	bra	0xf97c
+    f97e:	00 09       	nop	
+    f980:	d2 15       	mov.l	0xf9d8,r2	! ffff51a4
+    f982:	00 0b       	rts	
+    f984:	22 40       	mov.b	r4,@r2
+    f986:	d3 14       	mov.l	0xf9d8,r3	! ffff51a4
+    f988:	00 0b       	rts	
+    f98a:	60 30       	mov.b	@r3,r0
+    f98c:	d2 0c       	mov.l	0xf9c0,r2	! ffff200c
+    f98e:	00 0b       	rts	
+    f990:	60 21       	mov.w	@r2,r0
+    f992:	00 e0       	.word 0x00e0
+    f994:	f7 4e       	fmac	fr0,fr4,fr7
+    f996:	ff 0f       	.word 0xff0f
+    f998:	f4 30       	fadd	fr3,fr4
+    f99a:	3e 80       	cmp/eq	r8,r14
+    f99c:	07 d0       	.word 0x07d0
+    f99e:	00 00       	.word 0x0000
+    f9a0:	00 00       	.word 0x0000
+    f9a2:	a9 04       	bra	0xebae
+    f9a4:	00 01       	.word 0x0001
+    f9a6:	00 22       	stc	vbr,r0
+    f9a8:	00 00       	.word 0x0000
+    f9aa:	22 e4       	mov.b	r14,@-r2
+    f9ac:	00 00       	.word 0x0000
+    f9ae:	e7 44       	mov	#68,r7
+    f9b0:	00 00       	.word 0x0000
+    f9b2:	22 f4       	mov.b	r15,@-r2
+    f9b4:	00 00       	.word 0x0000
+    f9b6:	a9 84       	bra	0xecc2
+    f9b8:	00 00       	.word 0x0000
+    f9ba:	3a 38       	sub	r3,r10
+    f9bc:	00 00       	.word 0x0000
+    f9be:	fa 62       	fmul	fr6,fr10
+    f9c0:	ff ff       	.word 0xffff
+    f9c2:	20 0c       	cmp/str	r0,r0
+    f9c4:	00 00       	.word 0x0000
+    f9c6:	24 38       	tst	r3,r4
+    f9c8:	ff ff       	.word 0xffff
+    f9ca:	51 a0       	mov.l	@(0,r10),r1
+    f9cc:	00 00       	.word 0x0000
+    f9ce:	25 80       	mov.b	r8,@r5
+    f9d0:	00 01       	.word 0x0001
+    f9d2:	10 a8       	mov.l	r10,@(32,r0)
+    f9d4:	00 00       	.word 0x0000
+    f9d6:	ff ff       	.word 0xffff
+    f9d8:	ff ff       	.word 0xffff
+    f9da:	51 a4       	mov.l	@(16,r10),r1
+
+COMMAND: disassemble.py at dis 2c5de 2c638
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0002c5de <.data+0x2c5de>:
+   2c5de:	4f 22       	sts.l	pr,@-r15
+   2c5e0:	d3 1a       	mov.l	0x2c64c,r3	! 3880
+   2c5e2:	7f fc       	add	#-4,r15
+   2c5e4:	43 0b       	jsr	@r3
+   2c5e6:	e4 10       	mov	#16,r4
+   2c5e8:	d4 29       	mov.l	0x2c690,r4	! ffff722a
+   2c5ea:	d3 2a       	mov.l	0x2c694,r3	! 154b0
+   2c5ec:	43 0b       	jsr	@r3
+   2c5ee:	2f 02       	mov.l	r0,@r15
+   2c5f0:	60 0c       	extu.b	r0,r0
+   2c5f2:	88 01       	cmp/eq	#1,r0
+   2c5f4:	8f 05       	bf.s	0x2c602
+   2c5f6:	00 09       	nop	
+   2c5f8:	d3 1f       	mov.l	0x2c678,r3	! f972
+   2c5fa:	43 0b       	jsr	@r3
+   2c5fc:	00 09       	nop	
+   2c5fe:	a0 11       	bra	0x2c624
+   2c600:	00 09       	nop	
+   2c602:	d2 13       	mov.l	0x2c650,r2	! ffff660e
+   2c604:	d0 15       	mov.l	0x2c65c,r0	! ffff660f
+   2c606:	63 20       	mov.b	@r2,r3
+   2c608:	61 00       	mov.b	@r0,r1
+   2c60a:	33 16       	cmp/hi	r1,r3
+   2c60c:	8d 0a       	bt.s	0x2c624
+   2c60e:	00 09       	nop	
+   2c610:	d3 11       	mov.l	0x2c658,r3	! ffff6610
+   2c612:	61 30       	mov.b	@r3,r1
+   2c614:	d0 12       	mov.l	0x2c660,r0	! ffff6611
+   2c616:	62 00       	mov.b	@r0,r2
+   2c618:	31 26       	cmp/hi	r2,r1
+   2c61a:	8d 03       	bt.s	0x2c624
+   2c61c:	00 09       	nop	
+   2c61e:	d3 1b       	mov.l	0x2c68c,r3	! f8d6
+   2c620:	43 0b       	jsr	@r3
+   2c622:	00 09       	nop	
+   2c624:	64 f6       	mov.l	@r15+,r4
+   2c626:	d3 0b       	mov.l	0x2c654,r3	! 3894
+   2c628:	43 2b       	jmp	@r3
+   2c62a:	4f 26       	lds.l	@r15+,pr
+   2c62c:	d3 08       	mov.l	0x2c650,r3	! ffff660e
+   2c62e:	00 0b       	rts	
+   2c630:	60 30       	mov.b	@r3,r0
+   2c632:	d2 0a       	mov.l	0x2c65c,r2	! ffff660f
+   2c634:	00 0b       	rts	
+   2c636:	60 20       	mov.b	@r2,r0
+
+COMMAND: disassemble.py at dis 2c4fc 2c5de
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0002c4fc <.data+0x2c4fc>:
+   2c4fc:	2f e6       	mov.l	r14,@-r15
+   2c4fe:	2f d6       	mov.l	r13,@-r15
+   2c500:	4f 22       	sts.l	pr,@-r15
+   2c502:	7f fc       	add	#-4,r15
+   2c504:	d3 51       	mov.l	0x2c64c,r3	! 3880
+   2c506:	43 0b       	jsr	@r3
+   2c508:	e4 10       	mov	#16,r4
+   2c50a:	e6 01       	mov	#1,r6
+   2c50c:	d5 55       	mov.l	0x2c664,r5	! ffff660c
+   2c50e:	2f 02       	mov.l	r0,@r15
+   2c510:	de 49       	mov.l	0x2c638,r14	! ffff6605
+   2c512:	d3 55       	mov.l	0x2c668,r3	! ffff735c
+   2c514:	60 30       	mov.b	@r3,r0
+   2c516:	60 0c       	extu.b	r0,r0
+   2c518:	88 01       	cmp/eq	#1,r0
+   2c51a:	8f 1a       	bf.s	0x2c552
+   2c51c:	ed 00       	mov	#0,r13
+   2c51e:	61 e0       	mov.b	@r14,r1
+   2c520:	21 18       	tst	r1,r1
+   2c522:	8f 07       	bf.s	0x2c534
+   2c524:	00 09       	nop	
+   2c526:	e0 5a       	mov	#90,r0
+   2c528:	d2 50       	mov.l	0x2c66c,r2	! ffff3ff9
+   2c52a:	22 00       	mov.b	r0,@r2
+   2c52c:	25 d1       	mov.w	r13,@r5
+   2c52e:	d1 43       	mov.l	0x2c63c,r1	! ffff6606
+   2c530:	a0 4f       	bra	0x2c5d2
+   2c532:	21 60       	mov.b	r6,@r1
+   2c534:	d4 42       	mov.l	0x2c640,r4	! ffff2110
+   2c536:	d2 43       	mov.l	0x2c644,r2	! 1529c
+   2c538:	42 0b       	jsr	@r2
+   2c53a:	e5 00       	mov	#0,r5
+   2c53c:	d3 4c       	mov.l	0x2c670,r3	! aa580
+   2c53e:	43 0b       	jsr	@r3
+   2c540:	00 09       	nop	
+   2c542:	d2 4c       	mov.l	0x2c674,r2	! aa590
+   2c544:	42 0b       	jsr	@r2
+   2c546:	00 09       	nop	
+   2c548:	d3 4b       	mov.l	0x2c678,r3	! f972
+   2c54a:	43 0b       	jsr	@r3
+   2c54c:	00 09       	nop	
+   2c54e:	a0 40       	bra	0x2c5d2
+   2c550:	00 09       	nop	
+   2c552:	d4 4a       	mov.l	0x2c67c,r4	! ffff6608
+   2c554:	61 e0       	mov.b	@r14,r1
+   2c556:	21 18       	tst	r1,r1
+   2c558:	8f 0e       	bf.s	0x2c578
+   2c55a:	00 09       	nop	
+   2c55c:	60 51       	mov.w	@r5,r0
+   2c55e:	d1 48       	mov.l	0x2c680,r1	! bae38
+   2c560:	62 11       	mov.w	@r1,r2
+   2c562:	30 22       	cmp/hs	r2,r0
+   2c564:	8f 04       	bf.s	0x2c570
+   2c566:	00 09       	nop	
+   2c568:	2e 60       	mov.b	r6,@r14
+   2c56a:	24 d2       	mov.l	r13,@r4
+   2c56c:	d0 45       	mov.l	0x2c684,r0	! ffff6604
+   2c56e:	20 60       	mov.b	r6,@r0
+   2c570:	63 51       	mov.w	@r5,r3
+   2c572:	73 01       	add	#1,r3
+   2c574:	a0 2d       	bra	0x2c5d2
+   2c576:	25 31       	mov.w	r3,@r5
+   2c578:	60 42       	mov.l	@r4,r0
+   2c57a:	88 ff       	cmp/eq	#-1,r0
+   2c57c:	8d 02       	bt.s	0x2c584
+   2c57e:	65 03       	mov	r0,r5
+   2c580:	75 01       	add	#1,r5
+   2c582:	24 52       	mov.l	r5,@r4
+   2c584:	65 42       	mov.l	@r4,r5
+   2c586:	d2 40       	mov.l	0x2c688,r2	! bae3c
+   2c588:	63 22       	mov.l	@r2,r3
+   2c58a:	35 32       	cmp/hs	r3,r5
+   2c58c:	8d 12       	bt.s	0x2c5b4
+   2c58e:	00 09       	nop	
+   2c590:	e0 08       	mov	#8,r0
+   2c592:	35 02       	cmp/hs	r0,r5
+   2c594:	8f 1d       	bf.s	0x2c5d2
+   2c596:	00 09       	nop	
+   2c598:	d3 2d       	mov.l	0x2c650,r3	! ffff660e
+   2c59a:	61 30       	mov.b	@r3,r1
+   2c59c:	d0 2f       	mov.l	0x2c65c,r0	! ffff660f
+   2c59e:	62 00       	mov.b	@r0,r2
+   2c5a0:	31 26       	cmp/hi	r2,r1
+   2c5a2:	8d 16       	bt.s	0x2c5d2
+   2c5a4:	00 09       	nop	
+   2c5a6:	d2 2c       	mov.l	0x2c658,r2	! ffff6610
+   2c5a8:	d0 2d       	mov.l	0x2c660,r0	! ffff6611
+   2c5aa:	61 20       	mov.b	@r2,r1
+   2c5ac:	63 00       	mov.b	@r0,r3
+   2c5ae:	31 36       	cmp/hi	r3,r1
+   2c5b0:	8d 0f       	bt.s	0x2c5d2
+   2c5b2:	00 09       	nop	
+   2c5b4:	d2 2f       	mov.l	0x2c674,r2	! aa590
+   2c5b6:	42 0b       	jsr	@r2
+   2c5b8:	00 09       	nop	
+   2c5ba:	e3 02       	mov	#2,r3
+   2c5bc:	d4 20       	mov.l	0x2c640,r4	! ffff2110
+   2c5be:	2e 30       	mov.b	r3,@r14
+   2c5c0:	d2 20       	mov.l	0x2c644,r2	! 1529c
+   2c5c2:	42 0b       	jsr	@r2
+   2c5c4:	e5 01       	mov	#1,r5
+   2c5c6:	d3 1d       	mov.l	0x2c63c,r3	! ffff6606
+   2c5c8:	d2 28       	mov.l	0x2c66c,r2	! ffff3ff9
+   2c5ca:	23 d0       	mov.b	r13,@r3
+   2c5cc:	d1 2f       	mov.l	0x2c68c,r1	! f8d6
+   2c5ce:	41 0b       	jsr	@r1
+   2c5d0:	22 d0       	mov.b	r13,@r2
+   2c5d2:	64 f6       	mov.l	@r15+,r4
+   2c5d4:	d3 1f       	mov.l	0x2c654,r3	! 3894
+   2c5d6:	4f 26       	lds.l	@r15+,pr
+   2c5d8:	6d f6       	mov.l	@r15+,r13
+   2c5da:	43 2b       	jmp	@r3
+   2c5dc:	6e f6       	mov.l	@r15+,r14

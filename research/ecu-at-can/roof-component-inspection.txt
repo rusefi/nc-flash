@@ -1,0 +1,132 @@
+NC roof component inspection cross-check (2026-10-06)
+====================================================
+Full objective: close ECU/automatic-transmission CAN integration, deep traction
+logic/integration, and roof folding AND unfolding including interruption,
+resume/reversal, communication timeout, motor synchronization and fault recovery.
+All three remain incomplete. No extra user dumps/captures/bench results exist.
+No staging/commit/push authority; the coordinating thread owns this checkout.
+Previous acquisition turn made executed firmware progress. This turn adds
+retained component graphics and documentary recovery distinctions, not runtime.
+
+New documentary evidence
+------------------------
+2008 factory deck-switch inspection graphics:
+ id091600811500, amxuuw00000063.gif (circuit/connector) and
+ amxuuw00000633.gif (continuity table), both visually inspected.
+Deck-close contacts A-B conduct in the normal/unpressed condition and disconnect
+when the rod is pushed. Deck-open contacts C-D conduct only when pushed.
+The drawing alone does not establish installed rod positions or diagnostic PID
+encoding. It explains why four contacts must not be modeled as identically
+polarized. Existing 2008 module voltage/PID references already documented3O
+high and DECK_CL On at fully closed; those facts are corroboration, not new.
+The 2006 training page23 still explicitly says DECK_CL Off when closed; that
+version discrepancy survives. Physical contact, input voltage and PID display
+are separate quantities; do not declare the PID conflict resolved by a diagram.
+
+2008 factory component motor inspection, distinct terminal names:
+ component       Opening A/E       Closing A/E       sensor references
+ roof motor      ground/B+         B+/ground         B supply,F ground,D pulse
+ deck motor      B+/ground         ground/B+         D supply,F ground,B pulse
+Both describe pulse range0..13V and an internal PTC thermal condition that can
+prevent rotation, followed by approximately3 minutes cooling before reinspection.
+This is a component inspection/retest interval, NOT a CAN timeout, firmware
+restart delay, auto-resume guarantee or measured thermal threshold. Actual
+recovery in both opening and closing remains unverified.
+Roof diagram ardjjw00000760.gif and deckdiagram amxuuw00000622.gif visually
+confirm distinct connector layouts and sensor circuits. Deck terminalC is
+marked unused by the inspection text. Do not transfer sensor terminal names
+between roof and deck motors, or equate componentA with module3A.
+Original roof procedure:id091600809800; deck:id091600810200.
+Prior stop-diagnostic references to motorF as a Hall signal conflict with these
+component procedures' F-ground references. Preserve this as another source
+inconsistency; no physical connector mapping has been established on a vehicle.
+
+Corroborated references / limitations
+------------------------------------
+The retained2008 module table provides opposing open/close drive references
+for module motor pairs: roofRH3A/3I,LH3L/3D; deckRH3M/3E,LH3H/3P.
+First in each pair is high for opening, second for closing; opposite leg
+normally <=1V; other-condition reference about2V. Its footnote allows the low
+leg voltage to rise during speed control. This differs from duplicate-polarity
+entries in the2006 training table. It is a factory diagnostic reference, not
+waveform, firmware, duty-cycle or physical-actuation proof.
+The same table's deck-close3O is B+ at closed, <=1V elsewhere, unlike3F/1R/1T.
+No new inference of roof CAN IDs, receiver decoding, timeout or synchronization.
+Raw sources now durable:5 HTMLpages and7 linked GIFs, with exactURLs/SHA256/
+bytes in sources/mazda-2008-prht-inspection.json. Those HTML documents retain
+original relative links; the manifest identifies their locally renamed images.
+
+Search results and applicability
+--------------------------------
+Targeted2009 multiplex09-02F/G search recovered only a onepage LHD index:
+https://static1.1.sqspcdn.com/static/f/341469/24623642/1395761880443/mazda_mx5_wrm_011020091369.pdf
+Saved as sources/mazda-2009-multiplex-lhd-index.pdf,40189bytes,SHA256
+21bb315a4b379eecd7cee189542b84a1b310882341f7a38a117aba9415d2578b.
+Its embedded remote-file links name individualPDFs but omit CDN asset identity;
+index headings are not recovered diagnostic procedures. No numericaltimeout.
+Original hosting site https://rockies-miata.squarespace.com/ returned404 via
+urllib; webtool alsofailed. CHARM2009-2012 index returnedwebinternalerror;
+LEMON2011singlepage redirect loop. These are retrieval failures, not absence.
+Search phrases included MX5 09-02F/U0073/U1900,2009multiplex,roofcommunication
+seconds andtechnicalguide. RF results excluded; old owner pause/resume and
+2007servicehighlights were already covered and not counted as new evidence.
+
+MX5FRBE documentation index led to two downloaded compilations:
+https://www.mx5frbe.com/wp-content/uploads/2026/01/NC-2006-2009-Repair-Manual.pdf
+93,649,279bytes,2348pages,SHA256
+54e48bca00ddb5819fa0871740fff9e3aeaeceb34ef512deaf5a50e713315f9e.
+Host/title says2006-2009, but inspected roof pages explicitlyidentify2007
+Mazda MX-5 Miata Sport, with Mazda-attributed graphics in a reformatted
+compilation. Do not call this an applicable2009multiplex manual. Selected
+PDFzero pages1169,1170,1183,1185,1186 retained in
+sources/mazda-2007-prht-inspection-excerpt.pdf (5pages,111868bytes),SHA256
+c1a4271ff69f951bed4bb589a0412074e2c1b7fad379fa119f7848bc6ed208cf.
+Motor voltage, switch continuity and PTC text corroborate original2008pages.
+The motor/switch diagrams and terminal tables were visually checked, not only
+flattened text. Other pages in the full compilation need independent review.
+https://www.mx5frbe.com/wp-content/uploads/2026/01/NC-2008-Supplement-Repair-Manual.pdf
+32,306,667bytes,697pages,SHA256
+3256a814fae0864efff2457483acaf1e11430d3f9cccaca2d3faf818beddb105.
+Textscan found no target09-02F/G,multiplex orroofDTC headings; no whole-image
+absence claim. Full compilations remain reproducible download caches; relevant
+source pages, identities and conclusions are Git-eligible in this repository.
+A further public lead is AllCarManuals NC archive99.4MB; its download form was
+not followed this turn. Generic advertised2005-2015 coverage is not proof of
+2009applicability. Next roof can inspect archive contents for actual2009pages:
+https://www.allcarmanuals.com/factory-service-manual-415-Mazda-MX5-Miata-Roadster-NC.html
+
+Reproduction / validation
+-------------------------
+Python3.14.3 urllib.request downloads URLs recorded in both sourceJSONs.
+HTMLParser extracts imgsrc, urllib.parse.urljoin resolves it; files remain
+byte-for-byte originals. PyMuPDF1.28.2 opened compilations and rendered selected
+pages at1.8x for visualinspection. No permanent dependency installation.
+verify_roof_inspection_sources.py verifies12 HTML/image hashes and2PDF hashes,
+page identities and optional deterministic extraction of the five2007pages.
+ python research/ecu-at-can/verify_roof_inspection_sources.py
+ python research/ecu-at-can/verify_roof_inspection_sources.py --manual PATH_TO_FULL_2007_COMPILATION.pdf
+ python -m py_compile research/ecu-at-can/verify_roof_inspection_sources.py
+Final run with original downloaded compilation passes, including byte-identical
+excerpt reproduction. This verifies artifacts, not roof logic. Source/derived
+provenance recorded in sources/mazda-prht-inspection-crosscheck.json.
+One initialimageview used an incorrect guessedroofGIFname and failed; manifest
+provided actual ardjjw00000760.gif, subsequently opened. No missingimage assumed.
+
+Scope status / next
+-------------------
+Roof remains incomplete for folding AND unfolding, release-then-reverse,
+interruption/resume, numericalcommunication timeout, synchronization thresholds,
+fault recovery, controller CAN interpretation and physical integration. Current
+ECU/TCU vehicle-state evidence provides candidateinputs, not OEMroofreceiver
+execution. No new firmwaredump,capture or benchresult. Next source lead above;
+DECK_CLversion discrepancy and motorcomponent pin conflicts require validation.
+Traction remains independently open: raw6Dxx/8F30/399B0, actualcadence andboard
+channel1/8 identity, CAN211/21A sender/units andremoteDSC actuation.
+TCU remains independently open: hardwaretimer configuration/output,18830/18C38,
+18E76,A518/8AD8/8A60/A654/rawbasewriters,127BA/127FC cadence,queue/ack/overlap,
+persistence andphysicalCANintegration. Next concretefirmware work: traction
+raw6Dxx/8F30/399B0, thenTCUconfiguration/writers.
+No Ghidra analysis changes this turn; current archiveSHA andall11 liveproject
+hashes verified unchanged, no locks.18newfiles areGit-eligible; Pythoncompilation
+andgit diff --check pass. Savedlocally; no staging/commit/push,ROM orproduction
+changes; existingmixedindex preserved. SeeCHECKPOINT forcurrentarchiveidentity.

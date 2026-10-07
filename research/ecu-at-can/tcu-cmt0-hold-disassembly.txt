@@ -1,0 +1,166 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00020cbc <.data+0x20cbc>:
+   20cbc:	2f e6       	mov.l	r14,@-r15
+   20cbe:	4f 22       	sts.l	pr,@-r15
+   20cc0:	94 24       	mov.w	0x20d0c,r4	! 168
+   20cc2:	7f fc       	add	#-4,r15
+   20cc4:	bd 8b       	bsr	0x207de
+   20cc6:	00 09       	nop	
+   20cc8:	2f 02       	mov.l	r0,@r15
+   20cca:	93 20       	mov.w	0x20d0e,r3	! 91b4
+   20ccc:	d0 15       	mov.l	0x20d24,r0	! ffff91cc
+   20cce:	65 30       	mov.b	@r3,r5
+   20cd0:	92 1e       	mov.w	0x20d10,r2	! 91ac
+   20cd2:	65 5c       	extu.b	r5,r5
+   20cd4:	d3 14       	mov.l	0x20d28,r3	! 10d82
+   20cd6:	45 08       	shll2	r5
+   20cd8:	64 21       	mov.w	@r2,r4
+   20cda:	05 5e       	mov.l	@(r0,r5),r5
+   20cdc:	45 09       	shlr2	r5
+   20cde:	64 4d       	extu.w	r4,r4
+   20ce0:	43 0b       	jsr	@r3
+   20ce2:	44 28       	shll16	r4
+   20ce4:	d5 11       	mov.l	0x20d2c,r5	! ffff8158
+   20ce6:	64 03       	mov	r0,r4
+   20ce8:	9e 0f       	mov.w	0x20d0a,r14	! 91a6
+   20cea:	d1 11       	mov.l	0x20d30,r1	! 76e40
+   20cec:	62 12       	mov.l	@r1,r2
+   20cee:	63 f2       	mov.l	@r15,r3
+   20cf0:	33 26       	cmp/hi	r2,r3
+   20cf2:	89 21       	bt	0x20d38
+   20cf4:	d3 0f       	mov.l	0x20d34,r3	! 76e38
+   20cf6:	62 31       	mov.w	@r3,r2
+   20cf8:	62 2d       	extu.w	r2,r2
+   20cfa:	34 26       	cmp/hi	r2,r4
+   20cfc:	8b 1c       	bf	0x20d38
+   20cfe:	60 e0       	mov.b	@r14,r0
+   20d00:	cb 01       	or	#1,r0
+   20d02:	a0 1e       	bra	0x20d42
+   20d04:	2e 00       	mov.b	r0,@r14
+   20d06:	7f ff       	add	#-1,r15
+   20d08:	91 c7       	mov.w	0x20e9a,r1	! 8900
+   20d0a:	91 a6       	mov.w	0x20e5a,r1	! d240
+   20d0c:	01 68       	.word 0x0168
+   20d0e:	91 b4       	mov.w	0x20e7a,r1	! 420b
+   20d10:	91 ac       	mov.w	0x20e6c,r1	! d339
+   20d12:	ff ff       	.word 0xffff
+   20d14:	00 07       	mul.l	r0,r0
+   20d16:	00 00       	.word 0x0000
+   20d18:	00 01       	.word 0x0001
+   20d1a:	0d 0c       	mov.b	@(r0,r0),r13
+   20d1c:	ff ff       	.word 0xffff
+   20d1e:	91 98       	mov.w	0x20e52,r1	! 644c
+   20d20:	ff ff       	.word 0xffff
+   20d22:	91 94       	mov.w	0x20e4e,r1	! d341
+   20d24:	ff ff       	.word 0xffff
+   20d26:	91 cc       	mov.w	0x20ec2,r1	! 6603
+   20d28:	00 01       	.word 0x0001
+   20d2a:	0d 82       	.word 0x0d82
+   20d2c:	ff ff       	.word 0xffff
+   20d2e:	81 58       	mov.w	r0,@(16,r5)
+   20d30:	00 07       	mul.l	r0,r0
+   20d32:	6e 40       	mov.b	@r4,r14
+   20d34:	00 07       	mul.l	r0,r0
+   20d36:	6e 38       	swap.b	r3,r14
+   20d38:	60 e0       	mov.b	@r14,r0
+   20d3a:	e2 00       	mov	#0,r2
+   20d3c:	c9 fe       	and	#254,r0
+   20d3e:	2e 00       	mov.b	r0,@r14
+   20d40:	25 20       	mov.b	r2,@r5
+   20d42:	63 50       	mov.b	@r5,r3
+   20d44:	d1 35       	mov.l	0x20e1c,r1	! 76e3c
+   20d46:	62 10       	mov.b	@r1,r2
+   20d48:	33 22       	cmp/hs	r2,r3
+   20d4a:	8b 06       	bf	0x20d5a
+   20d4c:	60 e0       	mov.b	@r14,r0
+   20d4e:	cb 02       	or	#2,r0
+   20d50:	2e 00       	mov.b	r0,@r14
+   20d52:	60 e0       	mov.b	@r14,r0
+   20d54:	cb 04       	or	#4,r0
+   20d56:	b0 2d       	bsr	0x20db4
+   20d58:	2e 00       	mov.b	r0,@r14
+   20d5a:	c5 4d       	mov.w	@(154,gbr),r0
+   20d5c:	d2 30       	mov.l	0x20e20,r2	! 76e3e
+   20d5e:	63 21       	mov.w	@r2,r3
+   20d60:	30 33       	cmp/ge	r3,r0
+   20d62:	89 08       	bt	0x20d76
+   20d64:	c4 80       	mov.b	@(128,gbr),r0
+   20d66:	20 08       	tst	r0,r0
+   20d68:	89 05       	bt	0x20d76
+   20d6a:	c4 81       	mov.b	@(129,gbr),r0
+   20d6c:	20 08       	tst	r0,r0
+   20d6e:	8b 02       	bf	0x20d76
+   20d70:	60 e0       	mov.b	@r14,r0
+   20d72:	c9 fd       	and	#253,r0
+   20d74:	2e 00       	mov.b	r0,@r14
+   20d76:	60 e3       	mov	r14,r0
+   20d78:	d4 2a       	mov.l	0x20e24,r4	! ffff9194
+   20d7a:	60 00       	mov.b	@r0,r0
+   20d7c:	c8 02       	tst	#2,r0
+   20d7e:	02 29       	movt	r2
+   20d80:	72 ff       	add	#-1,r2
+   20d82:	62 2b       	neg	r2,r2
+   20d84:	22 28       	tst	r2,r2
+   20d86:	8b 0e       	bf	0x20da6
+   20d88:	d0 27       	mov.l	0x20e28,r0	! ffff92c6
+   20d8a:	60 00       	mov.b	@r0,r0
+   20d8c:	c8 02       	tst	#2,r0
+   20d8e:	01 29       	movt	r1
+   20d90:	71 ff       	add	#-1,r1
+   20d92:	61 1b       	neg	r1,r1
+   20d94:	21 18       	tst	r1,r1
+   20d96:	8b 06       	bf	0x20da6
+   20d98:	d3 24       	mov.l	0x20e2c,r3	! ffffac87
+   20d9a:	62 30       	mov.b	@r3,r2
+   20d9c:	22 28       	tst	r2,r2
+   20d9e:	8b 02       	bf	0x20da6
+   20da0:	60 40       	mov.b	@r4,r0
+   20da2:	a0 02       	bra	0x20daa
+   20da4:	c9 fe       	and	#254,r0
+   20da6:	60 40       	mov.b	@r4,r0
+   20da8:	cb 01       	or	#1,r0
+   20daa:	24 00       	mov.b	r0,@r4
+   20dac:	7f 04       	add	#4,r15
+   20dae:	4f 26       	lds.l	@r15+,pr
+   20db0:	00 0b       	rts	
+   20db2:	6e f6       	mov.l	@r15+,r14
+   20db4:	2f e6       	mov.l	r14,@-r15
+   20db6:	4f 22       	sts.l	pr,@-r15
+   20db8:	b0 16       	bsr	0x20de8
+   20dba:	00 09       	nop	
+   20dbc:	d2 1c       	mov.l	0x20e30,r2	! 15a46
+   20dbe:	42 0b       	jsr	@r2
+   20dc0:	6e 03       	mov	r0,r14
+   20dc2:	64 03       	mov	r0,r4
+   20dc4:	d5 1b       	mov.l	0x20e34,r5	! ffff91cc
+   20dc6:	e7 00       	mov	#0,r7
+   20dc8:	a0 03       	bra	0x20dd2
+   20dca:	66 73       	mov	r7,r6
+   20dcc:	25 e2       	mov.l	r14,@r5
+   20dce:	76 01       	add	#1,r6
+   20dd0:	75 04       	add	#4,r5
+   20dd2:	d3 19       	mov.l	0x20e38,r3	! 77444
+   20dd4:	62 30       	mov.b	@r3,r2
+   20dd6:	62 2c       	extu.b	r2,r2
+   20dd8:	36 23       	cmp/ge	r2,r6
+   20dda:	8b f7       	bf	0x20dcc
+   20ddc:	93 1c       	mov.w	0x20e18,r3	! 91b4
+   20dde:	23 70       	mov.b	r7,@r3
+   20de0:	4f 26       	lds.l	@r15+,pr
+   20de2:	d2 16       	mov.l	0x20e3c,r2	! 15a30
+   20de4:	42 2b       	jmp	@r2
+   20de6:	6e f6       	mov.l	@r15+,r14
+   20de8:	d3 15       	mov.l	0x20e40,r3	! 76e46
+   20dea:	64 30       	mov.b	@r3,r4
+   20dec:	64 4c       	extu.b	r4,r4
+   20dee:	44 18       	shll8	r4
+   20df0:	44 08       	shll2	r4
+   20df2:	44 08       	shll2	r4
+   20df4:	00 0b       	rts	
+   20df6:	60 43       	mov	r4,r0
+

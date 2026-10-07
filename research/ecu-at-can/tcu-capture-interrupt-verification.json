@@ -1,0 +1,419 @@
+{
+  "status": "PASS",
+  "scope": "Original capture ISR prefixes, explicit status/count/profiling samples.\n\nStop before RTE; no interrupt delivery, hardware status-clear semantics, clock\nrate or pin identity. Whole application RAM is compared with the already-tested\noriginal callback plus an independent profiling model: this is differential\nhandler-to-callback evidence, not a new independent capture-history oracle.\n",
+  "differential_whole_application_ram_cases": 512,
+  "predicate_set_cases": 256,
+  "clear_cases": 256,
+  "rejected_accesses": 6,
+  "examples": [
+    {
+      "channel": "A",
+      "status": 42240,
+      "second_status": 55002,
+      "callback": false,
+      "captured": 3698884833,
+      "previous": 3698884833,
+      "profile_duration": 0,
+      "accesses": [
+        [
+          "read",
+          4294964928,
+          4,
+          0
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          42240
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          9
+        ]
+      ],
+      "stopped_before_rte": "0x16cca"
+    },
+    {
+      "channel": "A",
+      "status": 42241,
+      "second_status": 28553,
+      "callback": true,
+      "captured": 2053220066,
+      "previous": 2053220065,
+      "profile_duration": 100,
+      "accesses": [
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          42241
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          28553
+        ],
+        [
+          "write",
+          4294964268,
+          2,
+          28552
+        ],
+        [
+          "read",
+          4294964276,
+          4,
+          2053220066
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          2000
+        ]
+      ],
+      "stopped_before_rte": "0x16cca"
+    },
+    {
+      "channel": "A",
+      "status": 42242,
+      "second_status": 12314,
+      "callback": false,
+      "captured": 1550243153,
+      "previous": 1550243144,
+      "profile_duration": 75,
+      "accesses": [
+        [
+          "read",
+          4294964928,
+          4,
+          4294967040
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          42242
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          500
+        ]
+      ],
+      "stopped_before_rte": "0x16cca"
+    },
+    {
+      "channel": "A",
+      "status": 42243,
+      "second_status": 19168,
+      "callback": true,
+      "captured": 2284750042,
+      "previous": 2284750032,
+      "profile_duration": 65535,
+      "accesses": [
+        [
+          "read",
+          4294964928,
+          4,
+          0
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          42243
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          19168
+        ],
+        [
+          "write",
+          4294964268,
+          2,
+          19168
+        ],
+        [
+          "read",
+          4294964276,
+          4,
+          2284750042
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          4294967295
+        ]
+      ],
+      "stopped_before_rte": "0x16cca"
+    },
+    {
+      "channel": "A",
+      "status": 42495,
+      "second_status": 63660,
+      "callback": true,
+      "captured": 3233106701,
+      "previous": 3233106691,
+      "profile_duration": 65535,
+      "accesses": [
+        [
+          "read",
+          4294964928,
+          4,
+          0
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          42495
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          63660
+        ],
+        [
+          "write",
+          4294964268,
+          2,
+          63660
+        ],
+        [
+          "read",
+          4294964276,
+          4,
+          3233106701
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          4294967295
+        ]
+      ],
+      "stopped_before_rte": "0x16cca"
+    },
+    {
+      "channel": "B",
+      "status": 42240,
+      "second_status": 37805,
+      "callback": false,
+      "captured": 2921188056,
+      "previous": 2921188056,
+      "profile_duration": 0,
+      "accesses": [
+        [
+          "read",
+          4294964928,
+          4,
+          0
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          42240
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          9
+        ]
+      ],
+      "stopped_before_rte": "0x16b92"
+    },
+    {
+      "channel": "B",
+      "status": 42241,
+      "second_status": 42117,
+      "callback": false,
+      "captured": 3638742588,
+      "previous": 3638742587,
+      "profile_duration": 100,
+      "accesses": [
+        [
+          "read",
+          4294964928,
+          4,
+          1000
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          42241
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          2000
+        ]
+      ],
+      "stopped_before_rte": "0x16b92"
+    },
+    {
+      "channel": "B",
+      "status": 42242,
+      "second_status": 62366,
+      "callback": true,
+      "captured": 3202508087,
+      "previous": 3202508078,
+      "profile_duration": 75,
+      "accesses": [
+        [
+          "read",
+          4294964928,
+          4,
+          4294967040
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          42242
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          62366
+        ],
+        [
+          "write",
+          4294964268,
+          2,
+          62364
+        ],
+        [
+          "read",
+          4294964280,
+          4,
+          3202508087
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          500
+        ]
+      ],
+      "stopped_before_rte": "0x16b92"
+    },
+    {
+      "channel": "B",
+      "status": 42243,
+      "second_status": 54168,
+      "callback": true,
+      "captured": 2503162770,
+      "previous": 2503162760,
+      "profile_duration": 65535,
+      "accesses": [
+        [
+          "read",
+          4294964928,
+          4,
+          0
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          42243
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          54168
+        ],
+        [
+          "write",
+          4294964268,
+          2,
+          54168
+        ],
+        [
+          "read",
+          4294964280,
+          4,
+          2503162770
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          4294967295
+        ]
+      ],
+      "stopped_before_rte": "0x16b92"
+    },
+    {
+      "channel": "B",
+      "status": 42495,
+      "second_status": 7181,
+      "callback": true,
+      "captured": 321777813,
+      "previous": 321777803,
+      "profile_duration": 65535,
+      "accesses": [
+        [
+          "read",
+          4294964928,
+          4,
+          0
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          42495
+        ],
+        [
+          "read",
+          4294964268,
+          2,
+          7181
+        ],
+        [
+          "write",
+          4294964268,
+          2,
+          7181
+        ],
+        [
+          "read",
+          4294964280,
+          4,
+          321777813
+        ],
+        [
+          "read",
+          4294964928,
+          4,
+          4294967295
+        ]
+      ],
+      "stopped_before_rte": "0x16b92"
+    }
+  ],
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+}

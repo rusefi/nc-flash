@@ -13,7 +13,7 @@ char Control_UpdateInputCoefficient(void)
   undefined4 uVar5;
   float fVar6;
   
-  uVar5 = (*(code *)PTR_FUN_00058af8)(PTR_DAT_00058af4);
+  uVar5 = (*(code *)PTR_FUN_00058af8)(PTR_Control_RawFirstAlternate_00058af4);
   uVar5 = (*(code *)PTR_Lookup_FloatCurve_00058b00)(uVar5,DAT_00058afc);
   *(undefined4 *)PTR_Control_InputCoefficientThreshold_00058b04 = uVar5;
   puVar2 = PTR_FUN_00058b0c;

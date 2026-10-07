@@ -1,0 +1,176 @@
+CAN215-derived TCU qualification limit and publication order
+==========================================================
+2026-10-06. Continues tcu-transition-progress.txt and can215-feedback.txt.
+
+Verified result and scope
+-------------------------
+The qualification limit939E is produced by23544 from signed92E2 and a factor
+computed from80EE/80E8. Original ECU CAN215 packing, TCU reception, diagnostic
+selection and216D8 conversion supply92E2. Two paired bounded probes produce
+7984 versus12736;474C4 applies its minimum9600, changing qualification flags
+and full48C08 transition selection from code6 to code0 for accepted2->1.
+Code6/operation8 retires the old code1 and suppresses spark-request allocation;
+code0/operation8 preserves code1 and allocates group7 for the second record.
+Neither creation snapshot has an active numeric CAN216 request.
+
+Original caller1EAC6..1EAD0 executes48C08 BEFORE23544. Two further probes change
+CAN215 immediately before that segment: classification uses the previously
+published939E, then23544 publishes the changed value. This is instruction
+order within one caller, not a proved task period, complete task execution,
+or the relative schedule of reception, measurement and progress services.
+
+The probes use an explicit upstream9315 reset gate and bounded32348 calls;
+they do not demonstrate that this reset/scheduling occurs in a vehicle.
+Traction sender attribution and OEM roof reception are not established here.
+Both remain independent goals, with next actions in CHECKPOINT.txt.
+
+Artifacts and reproduction
+--------------------------
+  python research/ecu-at-can/verify_tcu_qualification_limit.py
+Writes tcu-qualification-limit-verification.json. Original disassembly saved
+in tcu-qualification-limit-disassembly.txt; Ghidra labels/exports/archive are
+under ghidra/. Existing SH interpreter runs original arithmetic, curve/map,
+selection and phase-creation helpers. Python models only observe/assert;
+no helper, classifier, limit or request result is substituted.
+
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+RAM addresses below have FFFF prefix; numeric values are decimal unless an
+address. No new instruction emulation or shared verifier changes were needed.
+
+Complete23544 prefix
+-------------------
+Shifts15 unsigned words at93A0 and25 at93BE, inserting the preceding80F6 and
+8108 respectively BEFORE recalculation. All shifted words are checked.
+
+  numerator = u32(s16(80EE) << 15)
+  quotient = original10CE4(numerator, u16(80E8)), capped65535
+  ratio939C = min((quotient * 51200) >> 15, 51200)
+  factor93F2 = curve70331(ratio939C) >> 1
+
+For divisor0, original helper gives0 for0/0 and65535 for nonzero/0. Negative
+80EE becomes a wrapped unsigned numerator; do not reinterpret this as a
+signed division. The21-point byte curve70331 falls from198 to99, with axes
+and values quantized by256 in the lookup machinery.
+
+For each signed input92E4,92E6,92E2:
+  scaled = clamp(2 * trunc(input * factor /12800), -6400,59135)
+  80F6 = u16(scaled92E4 >>1)
+  8108 = u16(scaled92E6 >>1)
+  939E = u16(scaled92E2 +6400)
+The first scaled value plus6400 also becomes a sign-extended16-bit argument
+for the fall-through tail2378A. Correction helper23A44 returns:
+  curve7035C(u16 80E8)/4 -9600,
+  minus (curve7036F(80E8)/4 -9600) when92D1 bit2,
+  minus (map70382(80E8,92F6)/4 -9600) when92D1 bit3,
+  minus unsigned9310*16.
+Each /4 is a right shift. Caller23544 uses signed LOW16 of this returned
+correction for MULS.W, trunc-divides factor product by12800, clamps to
+[-9600,59135], then arithmetic-shifts right1 into9394.
+
+9396 and93F5 classify the high bytes of scaled92E4+6400 and939E using70320
+bounds[33,40,48,55,63,70,255]. At/above final bound choose6; otherwise first
+strictly larger threshold. If category drops and axis>=threshold[category]
+minus76E8C, increment once. Stock hysteresis76E8C is0. Arbitrary previous
+bytes, including out-of-normal states, are covered by randomized checks.
+
+Fault92CB bit1 overrides80F6/8108/9394 to32767,939E to65535 and categories
+to6. Ratio and histories still update. Prefix23544 restores its registers
+at23776..23788 and FALLS THROUGH2378A; it does not return before the tail.
+
+Tail2378A and capture239B2
+-------------------------
+Tail compares signed933E to[-1280,1280): outside clears815A. Exact93F4==1
+copies815A to8159, sets815B=255 and captures809C into93F0.
+Correction discovered by execution: GBR word offset156 is809C, NOT80EA.
+The first provisional tail model used80EA; its assertion failed and the
+model/input fixtures were corrected from original237C0 instructions.
+
+31720 determines pending phase work using its previously verified policy.
+Without pending work, publish input argument to80F8/93F6, preserve9398 and
+publish argument category. With pending work,8089 selects direction and
+5D446 target. Timer thresholds8159/815B are18/49 ascending,12/6 descending.
+Signed16(93F0-809C) >=1280 or <=-1280 clears815B, refreshes93F0 and blocks
+retention for this call. Admission requires both timer thresholds, no such
+change, and either93F4==0 or93F8bit0 set.
+
+When admitted, retain939A. Descending direction slews old93F6 toward the
+argument through239D2 using128*7032C[target]. If3159A reports phase>=1,
+retain old93F6 instead (both directions). Ascending direction mirrors the
+selected value into9398. Alternate max-with-original-argument behavior is
+controlled by70327[target-1]; all five stock flags are0, so that alternative
+is not executed by the stock valid-target cases.
+
+239D2 uses an unsigned16 target-old difference. Step is trunc(diff*128 /
+max(s16 factor,128)), clamped[-32768,32767], with minimum magnitude1 for a
+nonzero difference. Return is sign-extended old plus step; caller stores16.
+
+Fault92CBbit1 makes both outputsFFFF and category6. Tail always publishes
+80F8/93F6/9398/939A, clears93F4 and clears only bit0 of93F8. Timer increments
+and physical timer duration remain open.
+
+239B2 is an original phase-creation callback: always sets93F4=1. Operation
+argument low16==0 also copies939E to93F6 and sets93F8bit0. Other operations
+preserve that capture/flag. Boundary operations including65536 are checked.
+
+Paired probes and exact limits
+------------------------------
+full_fixture initializes the existing original startup set. Cache606F=1 then
+original48BC0 ->32140 sets progress25600/0/0. Explicit selector, measurement,
+reference and admission inputs match the script. Original48C08 accepts2 and
+creates code1. Setting upstream9315=1 for one32348 resets progress/rates;
+clearing it and executing80 original32348 calls produces8400/0/8400. No
+phase/timer service is interleaved during that bounded sequence.
+
+ECU primary71EC values25 and100, secondary71B4=30 and offset71C4=0 go through
+369D6/36A28 packing, TCU1ACF0 reception, explicit healthyA98C=1 admission,
+516E6 selection and216D8 scaling. Only the primary difference path is followed
+here;80B2/92E6 retains its fixture context. At80EE=80E8=1000,939C=51200 and
+93F2=12672. Both limits are produced by whole23544, not assigned directly.
+
+ primary  CAN215 bytes                 92E2 939E 9C52 flags code ring
+ 25       02 19 02 1e 02 00 00 02       800  7984  9600   5    6  [6]
+ 100      02 64 02 1e 02 00 00 02      3200 12736 12736   0    0  [1,0]
+
+Both accepted2->1 selections occur without candidate-delay ticks. Operation
+is8. Code6 retires code1 via30B82/30A9E/31168 and4C880 returnsFFFF. Code0
+preserves the first record and4C880 returns7. Paired creation snapshots both
+show CAN216 startingFF FE, AT correction0 and calculated spark26 per cylinder
+under the existing explicit ECU coefficients/gates. Later active requests,
+retirement, overlap and whole-task scheduling are outside these four probes.
+
+Publication lag: change25->100 immediately before original1EAC6 segment:
+selection still uses9C52=9600/code6, then publishes939E=12736. Reverse100->25:
+selection uses9C52=12736/code0, then publishes939E=7984. Both new inputs passed
+through the real ECU sender and TCU receive/conversion chain first.
+
+Validation and failed probe leads
+---------------------------------
+6,860 direct cases pass:252 correction,200 slew,1800 whole23544 randomized
+prefix/history/fault cases,4536 tail combinations,72 capture cases. Every
+whole23544 run also verifies the tail. Four paired creation/order probes
+verify two limits, both lag directions, ring contents, group selection and
+ECU snapshots. Results include both ROM SHA256 values and scope constraints.
+
+An initial experimental cached0/code0 -> progress8400 -> proposal2 sequence
+was not accepted simply by writing the proposal: original candidate delay
+and phase acceptance intervened. Adding300 timer/selection calls still did
+not create2, and a separate300-call original phase-service attempt did not
+retire that code0 under the supplied measurement fixture. These are failed
+fixture leads, not a firmware defect, completed lifecycle or global deadlock.
+The final reproducible probe uses original cached1 initialization, original
+code1 creation and the explicit9315 reset gate as documented above. It does
+not assert that a real vehicle takes this gate sequence.
+
+Persistence and continuation
+----------------------------
+Added30 Ghidra annotations, five function exports and seven typed ROM tables.
+Refresh/readback/independent restoration results and archive identity are in
+ghidra/snapshot.json, ghidra/restore-verification.json and CHECKPOINT.txt.
+All work saved locally; no staging, commit or push. Existing mixed index is
+preserved. This result closes the939E producer lead, not the broad AT goal.
+Next trace80E8/80EE/809C and9315 gate/task provenance,8159/815A/815B producers,
+then retained overlap/composite lifecycles using this actual limit producer.
+Traction and roof retain separate next actions at the top ofCHECKPOINT.txt.

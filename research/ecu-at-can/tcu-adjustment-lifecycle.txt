@@ -1,0 +1,120 @@
+CORRECTION VERIFIED2026-10-06
+The first8 consumer replays incorrectly calledconfigure() after producing
+stored offsets;configure resetindices6/7/8 to0. Their claimed nonzero-offset
+consumer connection was invalid. The helper now runs BEFORE production;
+explicit consumed_offsets==produced_offsets checks precede consumption.
+All8 corrected replays passed. Direct8988 andretained13 lifecycle checks
+were unaffected. Corrected JSON replaces oldreplayrows andrecords provenance.
+Finalscan/selection outcomes remain asbelow; thatunchanged result didnot by
+itself detect the earlier fixturemistake. Independent numeric thresholds and
+actualstored-input assertions now establish the connection.
+
+2026-10-06: TCU stored-adjustment lifecycle49B08
+
+EXECUTED EVIDENCE
+verify_tcu_adjustment_lifecycle.py runs original49B08 and seven helpers,
+including original queue readers31720/3159A/3206E and update49FE0. Models use
+integer/bit/retained-state rules, not intercepted helper return values.
+TCU SHA2568fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Snapshot input SHA25616d58c0427de7905b52531ef943cc01b311d1aeeda511eebf33d525362bda943.
+Python3.14.3, standardlibrary/assertions; existing SHRotate interpreter.
+Reproduce: python research/ecu-at-can/verify_tcu_adjustment_lifecycle.py
+8988 direct cases pass:4096 event-history,162 transition-history,1550
+admission,1080 capture,36 signedpeak,720 abort,144 completion,1200 fullbody.
+Fullbody outcomes:697 hold,187 abort,14 complete,297 inhibited,5 capture.
+13 retained traces and8 consumer replays pass. No failed model assertion.
+First run covered direct/helpers and3 traces; final fullscript rerun covers
+all current cases, strengthened retained paths and consumer replays.
+
+ADMISSION / EVENTS
+49D66 admits only8080 codes4/5/6,9B40 not10/17, signed809C>=23040,
+signed80F2>=32000,916Fbit4clear,9330bits0/5clear,92D9bit4clear and916Cbit0clear.
+Inputs32768..65535 are negative signedwords, not large valid magnitudes.
+
+49BE8 samples9BFCbit0(a),9C00bit0(b), and c=(9ACDbit4 OR9C00bit4 OR
+NOT9C00bit1). It updates9CA4 bits1/2/3 to a/b/c everycall. Only when8084
+increases versus previous9CA3, it refreshes bits4/5/6 to risinga/risingb/
+fallingc respectively, using entry bits1/2/3 as history. Otherwise bits4/5/6
+retain their values;9CA3 always becomes current8084. Otherbits preserved.
+49D00 sets9CA4bit7 when queue pending and8084!=8081; clears when8084=8081=
+previous9C99; otherwise retains. Both helpers execute before admission.
+Queue pending uses the previously verified pending_model and original31720;
+queue type8088=2, head/count and record-phase/group status drive that reader.
+
+CAPTURE / HOLD / ABORT / COMPLETE
+49B08 entry state9C98=0 can capture when49E10 admits: pendingqueue newly
+observed (9CA2=0),8089 group0..2, corresponding9CA4 bit4/5/6 clear,
+8084=8081,9CA4bit7clear,81EB>=stock122,9B3D=0or1. It stores group8089 in
+9C9E,80EA in9CA0,80EE in9C9C, current group queuephase3159A in9C9A, state1.
+Queuephase reader finds first matching code in queue order, returns its
+signedbytephase or-1 when absent. Tests exercise rawphase0/1/2/127/128/255.
+
+State1 always updates9C9C=max_signed16(old9C9C,current80EE) before abort
+or completion.49EE0 aborts on accepted8081 change versus9C99, or when old
+9CA2 was nonzero, queue now notpending and group-specific822C/822D/822F
+unsignedbyte timer>=table70AAD[group*6+808D]. Testedaxis0..5,stockthreshold183.
+For capturedcode>2, timer822F and tablegroup0 are used. Timer production and
+real elapsed time remain unproved;183 is not labeled milliseconds.
+
+If no abort,49F7A completes when queuephase becomes exact1 from old signed
+phase<=0, OR92D1bit0 rises versus9CA4bit0. It always updates9C9A whencalled.
+On completion49FE0 runs andstate resets0 even when49FE0's own reference-delta
+window rejects the numeric update. The already independently modeled49FE0
+controls whether storedindices6/7/8 actually change; completion alone is not
+proof of a stored write. Loss of top admission resetsstate0 withoutcapture/
+peak/update. Otherrawstatebytes retain while admitted, never enter0/1 paths.
+
+Tail49B84..49BBC clears81EB if previousaccepted9C99>entry8081, storesentry
+8081 in9C99, currentpending result in9CA2 and92D1bit0 in9CA4bit0. History
+updates can happen while top admission is false; no blanket state-freeze claim.
+
+RETAINED AND CONSUMER RESULTS
+Nine traces (groups0..2,measurements15000/15600/17000) capture, retain a peak
+while currentmeasurement decreases100, complete on queuephase0->1, thenhold.
+Four more traces independently exercise accepted-change abort, queuedone/
+timer183 abort, admission loss and92D1bit0 completion. These use explicit
+input changes, not production scheduler or physical gear events.
+
+Eight replay variants start saved call150/211, run stock stored initialization,
+and produce allthree offsets through24 complete capture/update events (8 per
+group,72 full49B08 calls). Each new event includes a no-pending observation,
+then original capture and completion. No storedoffset injection. Raw queue/
+source/state-start fixtures are explicit. Measurement15000 saturates offsets
+[192,256,320];17000 saturates[-512,-512,-512]. Each offset set runs through
+4530C scan or full44CFE plus selection/limit; independent threshold checks pass.
+Four scans give[1,0]. Four fullreplays give proposed0/accepted0,creation[5,1,0].
+Do NOT compare those outcomes causally with older call211 results: the new
+lifecycle scenario also changes accepted/proposed, queue andnumeric inputs.
+This proves connection and consumer consistency, not isolated final-gear effect.
+
+ARTIFACTS / NEXT
+Wholebody/helper instructions:tcu-adjustment-lifecycle-disassembly.txt;
+3159A:tcu-adjustment-phase-reader-disassembly.txt. Otherqueue-reader originals
+are already verified in transition-classification/phase-retirement evidence.
+GNU SHobjdump2.42 via disassemble.py; setup in earlier task records.
+Actual entry49B08 confirmed,49AFC is literalpool. Next upstreamqueue creation/
+81EB and822C/D/F timer production, taskcadence,other2456E setters36D88/36E3C/
+36EBC, and persistence. Physical adjustment identity/actuation remain open.
+Traction rawinputs/tasklinks and NC roof folding AND unfolding, interruption,
+resume/reversal,timeout,synchronization,recovery remain separate open scopes.
+No additional user dumps/captures/benchresults exist. No completion claim.
+Saved locally; no staging/commit/push; production code/ROMs unchanged.
+
+Additional caller evidence: saved tcu-adjustment-caller-disassembly.txt shows
+44D48 calls49B08, immediately followed by44D4E calling4530C. Thus the local
+producer-before-threshold-consumer order is present in the original44CFE
+routine already executed by the four fullreplays. The preparatory72calls are
+still explicitly scheduled fixtures; neither this call order nor the full
+replays establish application cadence. Timer references:822C/D/F reset
+stores near3112C/31134/31148;81EB has no aligned literalwriter besides49B90.
+A base-relative or table-driven timer producer remains the concrete next lead.
+
+DURABLE SAVE VERIFIED
+Both Ghidra programs saved;1496 annotations (650 ECU,846 TCU),737 identical
+export/report files,11 independently restored project hashes. Archive includes
+both.gpr and.rep,10,900,812 bytes, SHA256
+438d74ca323b996577b47c8f222767cb95e757a1fb5915bcd1adf52f9a37a1c1.
+Read-only independent reopen/readback passed for both; no incomplete exports,
+errors or live locks. ghidra/README.txt documents commands; snapshot.json and
+restore-verification.json hold inventory/identity. Allnewfiles Git-eligible;
+syntax and git diff --check pass. No staging,commit,push or production edits.

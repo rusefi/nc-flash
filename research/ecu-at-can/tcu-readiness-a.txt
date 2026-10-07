@@ -1,0 +1,58 @@
+TCU ADC-derived readiness84A0, low-input and recovery — 2026-10-07
+
+Executed evidence
+verify_tcu_readiness_a.py executes112CC initializer and112E6 producer with
+independent whole-RAM arithmetic/state model, exact finite MMIO and callee-saved
+register checks. Initial24832cases PASS(session15513);128mixeddeadline cases
+added, extended24960run56003 terminalPASS.256initializercases and12-step
+initialized low/recovery chain included. No callee/return substitution orforced
+readiness in chain. No ROM/shared ISA/production changes.
+
+112CC sets84A0=1,84A2word0,84A8/84AC/84B0long0; otherRAM includingraw84A4
+unchanged.112E6 descriptor5C578 ->FFFFF810;1413C pollsF818bit7;14128extracts
+rawcountword>>6 &1023;16EFE converts300+count*64000/2976 clamped0..22000.
+Publishesraw84A4long andconverted84A2word. Physicalsensor/voltageunits unproved.
+
+Independent state model (timestamp differences unsigned32)
+State1: high>5525 qualifies84A8 towardstate2; low<=3600 qualifies84B0 toward4;
+midrange clearsboth. State2: high>9000 qualifies84AC toward3; low<=3600 uses
+84B0 toward4; midrange clearsboth. Starting qualification atzero deadline in
+state1/2 also clearsopposingdeadline. An already-started branch preservesother
+deadline untilitsownexplicitclear; do notcollapse this into a genericreset.
+State3: low<=3600 qualifies84B0 toward4; higherinput clears84B0.
+State4: high>5525 qualifies84A8 toward2; lowerinput clears84A8.
+Eachqualification savesnow ifdeadlinezero; otherwiseelapsed>=100000 clears
+thatdeadline andtransitions. Otherstates publishADCvalues butnevertransition.
+Zero timestamp isalso unsetmarker, so periodorigin cannot be assumed harmless.
+
+Coverage
+All1024ADCcounts xstates1..4 xsix(old,now)pairs0/0,0/1,1/100000,1/100001,
+1/100002,FFFF0000/34464; low6ADCresultbitsvary andignored. All256states with
+count600/time200000 plus128mixedzero/nonzerodeadline patterns distinguish
+opposingtimestamp reset frompreservation. Exactpolls[0,128] or[128],countread,
+conditionalF6C0read; no extraMMIOaccepted. Callee-savedR8..14/SP,SRoutsideT/Q/M
+preserved. RAM oracle excludes syntheticstack underexistingproject convention.
+Retained initializedcount600 timestream1,100000,100001,100002,200001,200002
+->states1,1,2,2,2,3. Then count100 attimes200003/300003 ->3/4. Count600 at
+300004/400004/400005/500005 ->4/2/2/3. No readyflag injection betweensteps.
+
+Reproduction and provenance
+ python research/ecu-at-can/verify_tcu_readiness_a.py
+Python3.14.3; inputexamples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+tcu-readiness-a-lead-disassembly.txt112CC..11484 retainsoriginals; GNUobjdump2.42
+setup/packageprovenance in tcu-pulse-input.txt. Disassembler filename retains
+earlierstatic-lead provenance; listed producer isnowexecuted. Reusesstrict
+finiteADCreadmachine fromverify_tcu_readiness_b.py and independentlyverified
+conversionarithmetic fromverify_tcu_cycle_callback.py; no generalready latch.
+
+Next and scope
+Both84A0/84D8 producers nowhave executedproof underexplicitADC/timeinputs.
+Capture84EC fulladmission122F4 andactualcaller/startupinterleave remainopen.
+TracecounterF6C0setup beforeunit/cadence claim; do notforceallthree readiness
+flags inoperationalruns. Currentdiagnostic sharedtimeline stillinheritsmode3
+withreadinessbytes0. Bothproofsdo notestablish fullboot or physicalIRQadmission.
+Allthree ECU/AT, deeptraction androof folding ANDunfolding objectives stayopen;
+remoteDSC/roofreceiver/physical/reversal/timeout/sync/recovery evidence remains
+missing aslistedCHECKPOINT. No additionaluserartifacts; no repeatquestions.
+Savedlocally; no staging/commit/push. CHECKPOINT owns Ghidrasave/restorestatus.

@@ -1,0 +1,64 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00047c9c <.data+0x47c9c>:
+   47c9c:	2f e6       	mov.l	r14,@-r15
+   47c9e:	2f d6       	mov.l	r13,@-r15
+   47ca0:	2f c6       	mov.l	r12,@-r15
+   47ca2:	6d 43       	mov	r4,r13
+   47ca4:	d3 3a       	mov.l	0x47d90,r3	! ffffa735
+   47ca6:	2f b6       	mov.l	r11,@-r15
+   47ca8:	4f 22       	sts.l	pr,@-r15
+   47caa:	dc 38       	mov.l	0x47d8c,r12	! ffff9c58
+   47cac:	d2 39       	mov.l	0x47d94,r2	! 23e7c
+   47cae:	60 c3       	mov	r12,r0
+   47cb0:	60 00       	mov.b	@r0,r0
+   47cb2:	c9 01       	and	#1,r0
+   47cb4:	6e 03       	mov	r0,r14
+   47cb6:	42 0b       	jsr	@r2
+   47cb8:	6b 30       	mov.b	@r3,r11
+   47cba:	63 bc       	extu.b	r11,r3
+   47cbc:	23 38       	tst	r3,r3
+   47cbe:	8d 24       	bt.s	0x47d0a
+   47cc0:	65 03       	mov	r0,r5
+   47cc2:	d0 35       	mov.l	0x47d98,r0	! ffff92c8
+   47cc4:	60 00       	mov.b	@r0,r0
+   47cc6:	c8 20       	tst	#32,r0
+   47cc8:	01 29       	movt	r1
+   47cca:	71 ff       	add	#-1,r1
+   47ccc:	61 1b       	neg	r1,r1
+   47cce:	21 18       	tst	r1,r1
+   47cd0:	8b 1b       	bf	0x47d0a
+   47cd2:	60 dc       	extu.b	r13,r0
+   47cd4:	88 05       	cmp/eq	#5,r0
+   47cd6:	8f 01       	bf.s	0x47cdc
+   47cd8:	62 ec       	extu.b	r14,r2
+   47cda:	ed 04       	mov	#4,r13
+   47cdc:	22 28       	tst	r2,r2
+   47cde:	8b 14       	bf	0x47d0a
+   47ce0:	d0 2e       	mov.l	0x47d9c,r0	! ffff92c7
+   47ce2:	60 00       	mov.b	@r0,r0
+   47ce4:	c8 08       	tst	#8,r0
+   47ce6:	00 29       	movt	r0
+   47ce8:	70 ff       	add	#-1,r0
+   47cea:	60 0b       	neg	r0,r0
+   47cec:	88 01       	cmp/eq	#1,r0
+   47cee:	8b 06       	bf	0x47cfe
+   47cf0:	c5 75       	mov.w	@(234,gbr),r0
+   47cf2:	d2 2b       	mov.l	0x47da0,r2	! 77350
+   47cf4:	63 21       	mov.w	@r2,r3
+   47cf6:	30 33       	cmp/ge	r3,r0
+   47cf8:	8b 06       	bf	0x47d08
+   47cfa:	a0 06       	bra	0x47d0a
+   47cfc:	00 09       	nop	
+   47cfe:	c5 75       	mov.w	@(234,gbr),r0
+   47d00:	d2 28       	mov.l	0x47da4,r2	! 7734e
+   47d02:	63 21       	mov.w	@r2,r3
+   47d04:	30 33       	cmp/ge	r3,r0
+   47d06:	89 00       	bt	0x47d0a
+   47d08:	ee 01       	mov	#1,r14
+   47d0a:	94 3d       	mov.w	0x47d88,r4	! 9c60
+

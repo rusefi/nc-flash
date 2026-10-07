@@ -1,0 +1,1019 @@
+Primary source: Renesas SH7055S REJ09B0045-0200H, SHA256 359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c
+PDF indices are ZERO-BASED; printed pages are 39 lower. Extracted PyMuPDF1.28.2.
+
+PDF index 240 / viewer page 241
+Rev.2.0, 07/03, page 201 of 960 
+ 
+11.1.3 
+Register Configuration 
+Table 11.3 summarizes the ATU-II registers. 
+Table 11.3 ATU-II Registers 
+ 
+Channel 
+ 
+Name 
+Abbrevia-
+tion 
+ 
+R/W 
+Initial  
+Value 
+ 
+Address 
+Access 
+Size (Bits) 
+Section 
+No. 
+Timer start register 1 
+TSTR1 
+R/W 
+H'00 
+H'FFFFF401 
+Timer start register 2 
+TSTR2 
+R/W 
+H'00 
+H'FFFFF400 
+Timer start register 3 
+TSTR3 
+R/W 
+H'00 
+H'FFFFF402 
+8, 16, 32 
+11.2.1 
+Prescaler register 1 
+PSCR1 
+R/W 
+H'00 
+H'FFFFF404 
+Prescaler register 2 
+PSCR2 
+R/W 
+H'00 
+H'FFFFF406 
+Prescaler register 3 
+PSCR3 
+R/W 
+H'00 
+H'FFFFF408 
+Common 
+Prescaler register 4 
+PSCR4 
+R/W 
+H'00 
+H'FFFFF40A 
+8 
+11.2.2 
+Free-running counter 
+0H 
+TCNT0H 
+R/W 
+H'0000 
+Free-running counter  
+0L 
+TCNT0L 
+R/W 
+H'0000 
+H'FFFFF430 
+11.2.15 
+Input capture register 
+0AH 
+ICR0AH 
+R 
+H'0000 
+Input capture register 
+0AL 
+ICR0AL 
+R 
+H'0000 
+H'FFFFF434 
+Input capture register 
+0BH 
+ICR0BH 
+R 
+H'0000 
+Input capture register 
+0BL 
+ICR0BL 
+R 
+H'0000 
+H'FFFFF438 
+Input capture register 
+0CH 
+ICR0CH 
+R 
+H'0000 
+Input capture register 
+0CL 
+ICR0CL 
+R 
+H'0000 
+H'FFFFF43C 
+Input capture register 
+0DH 
+ICR0DH 
+R 
+H'0000 
+Input capture register 
+0DL 
+ICR0DL 
+R 
+H'0000 
+H'FFFFF420 
+32 
+11.2.19 
+Timer interval interrupt  
+request register 1 
+ITVRR1 
+R/W 
+H'00 
+H'FFFFF424 
+0 
+Timer interval interrupt  
+request register 2A 
+ITVRR2A 
+R/W 
+H'00 
+H'FFFFF426 
+8 
+11.2.7 
+ 
+
+PDF index 241 / viewer page 242
+Rev.2.0, 07/03, page 202 of 960 
+ 
+Table 11.3 ATU-II Registers (cont) 
+ 
+Channel 
+ 
+Name 
+Abbrevia-
+tion 
+ 
+R/W 
+Initial  
+Value 
+ 
+Address 
+Access 
+Size (Bits) 
+Section 
+No. 
+Timer interval interrupt  
+request register 2B 
+ITVRR2B 
+R/W 
+H'00 
+H'FFFFF428 
+11.2.7 
+Timer I/O control 
+register 
+TIOR0 
+R/W 
+H'00 
+H'FFFFF42A 
+8 
+11.2.4 
+Timer status register 0 TSR0 
+R/(W)* H'0000 H'FFFFF42C 
+11.2.5 
+0 
+Timer interrupt enable  
+register 0 
+TIER0 
+R/W 
+H'0000 H'FFFFF42E 
+16 
+11.2.6 
+Free-running counter  
+1A 
+TCNT1A 
+R/W 
+H'0000 H'FFFFF440 
+Free-running counter  
+1B 
+TCNT1B 
+R/W 
+H'0000 H'FFFFF442 
+11.2.15 
+General register 1A 
+GR1A 
+R/W 
+H'FFFF H'FFFFF444 
+General register 1B 
+GR1B 
+R/W 
+H'FFFF H'FFFFF446 
+General register 1C 
+GR1C 
+R/W 
+H'FFFF H'FFFFF448 
+General register 1D 
+GR1D 
+R/W 
+H'FFFF H'FFFFF44A 
+General register 1E 
+GR1E 
+R/W 
+H'FFFF H'FFFFF44C 
+General register 1F 
+GR1F 
+R/W 
+H'FFFF H'FFFFF44E 
+General register 1G 
+GR1G 
+R/W 
+H'FFFF H'FFFFF450 
+General register 1H 
+GR1H 
+R/W 
+H'FFFF H'FFFFF452 
+11.2.20 
+Output compare  
+register 1 
+OCR1 
+R/W 
+H'FFFF H'FFFFF454 
+11.2.18 
+Offset base register 1 
+OSBR1 
+R 
+H'0000 H'FFFFF456 
+16 
+11.2.21 
+Timer I/O control 
+register 1A 
+TIOR1A 
+R/W 
+H'00 
+H'FFFFF459 
+Timer I/O control 
+register 1B 
+TIOR1B 
+R/W 
+H'00 
+H'FFFFF458 
+Timer I/O control 
+register 1C 
+TIOR1C 
+R/W 
+H'00 
+H'FFFFF45B 
+Timer I/O control 
+register 1D 
+TIOR1D 
+R/W 
+H'00 
+H'FFFFF45A 
+11.2.4 
+Timer control register 
+1A 
+TCR1A 
+R/W 
+H'00 
+H'FFFFF45D 
+1 
+Timer control register 
+1B 
+TCR1B 
+R/W 
+H'00 
+H'FFFFF45C 
+8, 16 
+11.2.3 
+ 
+
+PDF index 247 / viewer page 248
+Rev.2.0, 07/03, page 208 of 960 
+ 
+Table 11.3 ATU-II Registers (cont) 
+ 
+Channel 
+ 
+Name 
+Abbrevia-
+tion 
+ 
+R/W 
+Initial  
+Value 
+ 
+Address 
+Access 
+Size (Bits) 
+Section 
+No. 
+Reload register 8 
+RLDR8 
+R/W 
+H'0000 H'FFFFF660 
+11.2.25 
+Timer connection 
+register 
+TCNR 
+R/W 
+H'0000 H'FFFFF662 
+11.2.12 
+One-shot pulse 
+terminate register 
+OTR 
+R/W 
+H'0000 H'FFFFF664 
+11.2.13 
+Down-count start 
+register 
+DSTR 
+R/W 
+H'0000 H'FFFFF666 
+16 
+11.2.11 
+Timer control register 8 TCR8 
+R/W 
+H'00 
+H'FFFFF668 8 
+11.2.3 
+Timer status register 8 TSR8 
+R/(W)* H'0000 H'FFFFF66A 
+11.2.5 
+Timer interrupt enable  
+register 8 
+TIER8 
+R/W 
+H'0000 H'FFFFF66C 
+16 
+11.2.6 
+8 
+Reload enable register RLDENR 
+R/W 
+H'00 
+H'FFFFF66E 8 
+11.2.14 
+Event counter 9A 
+ECNT9A 
+R/W 
+H'00 
+H'FFFFF680 
+Event counter 9B 
+ECNT9B 
+R/W 
+H'00 
+H'FFFFF682 
+Event counter 9C 
+ECNT9C 
+R/W 
+H'00 
+H'FFFFF684 
+Event counter 9D 
+ECNT9D 
+R/W 
+H'00 
+H'FFFFF686 
+Event counter 9E 
+ECNT9E 
+R/W 
+H'00 
+H'FFFFF688 
+Event counter 9F 
+ECNT9F 
+R/W 
+H'00 
+H'FFFFF68A 
+11.2.17 
+General register 9A 
+GR9A 
+R/W 
+H'FF 
+H'FFFFF68C 
+General register 9B 
+GR9B 
+R/W 
+H'FF 
+H'FFFFF68E 
+General register 9C 
+GR9C 
+R/W 
+H'FF 
+H'FFFFF690 
+General register 9D 
+GR9D 
+R/W 
+H'FF 
+H'FFFFF692 
+General register 9E 
+GR9E 
+R/W 
+H'FF 
+H'FFFFF694 
+General register 9F 
+GR9F 
+R/W 
+H'FF 
+H'FFFFF696 
+11.2.20 
+Timer control register 
+9A 
+TCR9A 
+R/W 
+H'00 
+H'FFFFF698 
+Timer control register 
+9B 
+TCR9B 
+R/W 
+H'00 
+H'FFFFF69A 
+Timer control register 
+9C 
+TCR9C 
+R/W 
+H'00 
+H'FFFFF69C 
+8 
+11.2.3 
+Timer status register 9 TSR9 
+R/(W)* H'0000 H'FFFFF69E 
+11.2.5 
+9 
+Timer interrupt enable  
+register 9 
+TIER9 
+R/W 
+H'0000 H'FFFFF6A0 
+16 
+11.2.6 
+ 
+
+PDF index 339 / viewer page 340
+Rev.2.0, 07/03, page 300 of 960 
+ 
+11.2.7 
+Interval Interrupt Request Registers (ITVRR) 
+The interval interrupt request registers (ITVRR) are 8-bit registers. The ATU-II has three ITVRR 
+registers in channel 0. 
+Channel 
+Abbreviation 
+Function 
+ITVRR1 
+TCNT0 bit 6 to 9 interval interrupt generation and A/D2 converter 
+activation 
+ITVRR2A 
+TCNT0 bit 10 to 13 interval interrupt generation and A/D0 
+converter activation 
+0 
+ITVRR2B 
+TCNT0 bit 10 to 13 interval interrupt generation and A/D1 
+converter activation 
+ 
+Interval Interrupt Request Register 1 (ITVRR1) 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+ITVA9 
+ITVA8 
+ITVA7 
+ITVA6 
+ITVE9 
+ITVE8 
+ITVE7 
+ITVE6 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ITVRR1 is an 8-bit readable/writable register that detects the rise of bits corresponding to the 
+channel 0 free-running counter (TCNT0) and controls cyclic interrupt output and A/D2 converter 
+activation. 
+ITVRR1 is initialized to H'00 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+• Bit 7—A/D2 Converter Interval Activation Bit 9 (ITVA9): A/D2 converter activation setting 
+bit corresponding to bit 9 in TCNT0. The rise of bit 9 in TCNT0 is ANDed with ITVA9, and 
+the result is output to the A/D2 converter as an activation signal. 
+ 
+Bit 7: ITVA9 
+Description 
+0 
+A/D2 converter activation by rise of TCNT0 bit 9 is disabled 
+(Initial value) 
+1 
+A/D2 converter activation by rise of TCNT0 bit 9 is enabled 
+ 
+
+PDF index 340 / viewer page 341
+Rev.2.0, 07/03, page 301 of 960 
+ 
+• Bit 6—A/D2 Converter Interval Activation Bit 8 (ITVA8): A/D2 converter activation setting 
+bit corresponding to bit 8 in TCNT0. The rise of bit 8 in TCNT0 is ANDed with ITVA8, and 
+the result is output to the A/D2 converter as an activation signal. 
+ 
+Bit 6: ITVA8 
+Description 
+0 
+A/D2 converter activation by rise of TCNT0 bit 8 is disabled 
+(Initial value) 
+1 
+A/D2 converter activation by rise of TCNT0 bit 8 is enabled 
+ 
+• Bit 5—A/D2 Converter Interval Activation Bit 7 (ITVA7): A/D2 converter activation setting 
+bit corresponding to bit 7 in TCNT0. The rise of bit 7 in TCNT0 is ANDed with ITVA7, and 
+the result is output to the A/D2 converter as an activation signal. 
+ 
+Bit 5: ITVA7 
+Description 
+0 
+A/D2 converter activation by rise of TCNT0 bit 7 is disabled 
+(Initial value) 
+1 
+A/D2 converter activation by rise of TCNT0 bit 7 is enabled 
+ 
+• Bit 4—A/D2 Converter Interval Activation Bit 6 (ITVA6): A/D2 converter activation setting 
+bit corresponding to bit 6 in TCNT0. The rise of bit 6 in TCNT0 is ANDed with ITVA6, and 
+the result is output to the A/D2 converter as an activation signal. 
+ 
+Bit 4: ITVA6 
+Description 
+0 
+A/D2 converter activation by rise of TCNT0 bit 6 is disabled 
+(Initial value) 
+1 
+A/D2 converter activation by rise of TCNT0 bit 6 is enabled 
+ 
+• Bit 3—Interval Interrupt Bit 9 (ITVE9): INTC interval interrupt setting bit corresponding to bit 
+9 in TCNT0. The rise of bit 9 in TCNT0 is ANDed with ITVE9, the result is stored in IIF1 in 
+TSR0, and an interrupt request is sent to the CPU. 
+ 
+Bit 3: ITVE9 
+Description 
+0 
+Interrupt request (ITV1) by rise of TCNT0 bit 9 is disabled 
+(Initial value) 
+1 
+Interrupt request (ITV1) by rise of TCNT0 bit 9 is enabled 
+ 
+• Bit 2—Interval Interrupt Bit 8 (ITVE8): INTC interval interrupt setting bit corresponding to bit 
+8 in TCNT0. The rise of bit 8 in TCNT0 is ANDed with ITVE8, the result is stored in IIF1 in 
+TSR0, and an interrupt request is sent to the CPU. 
+ 
+Bit 2: ITVE8 
+Description 
+0 
+Interrupt request (ITV1) by rise of TCNT0 bit 8 is disabled 
+(Initial value) 
+1 
+Interrupt request (ITV1) by rise of TCNT0 bit 8 is enabled 
+ 
+
+PDF index 341 / viewer page 342
+Rev.2.0, 07/03, page 302 of 960 
+ 
+• Bit 1—Interval Interrupt Bit 7 (ITVE7): INTC interval interrupt setting bit corresponding to bit 
+7 in TCNT0. The rise of bit 7 in TCNT0 is ANDed with ITVE7, the result is stored in IIF1 in 
+TSR0, and an interrupt request is sent to the CPU. 
+ 
+Bit 1: ITVE7 
+Description 
+0 
+Interrupt request (ITV1) by rise of TCNT0 bit 7 is disabled 
+(Initial value) 
+1 
+Interrupt request (ITV1) by rise of TCNT0 bit 7 is enabled 
+ 
+• Bit 0—Interval Interrupt Bit 6 (ITVE6): INTC interval interrupt setting bit corresponding to bit 
+6 in TCNT0. The rise of bit 6 in TCNT0 is ANDed with ITVE6, the result is stored in IIF1 in 
+TSR0, and an interrupt request is sent to the CPU. 
+ 
+Bit 0: ITVE6 
+Description 
+0 
+Interrupt request (ITV1) by rise of TCNT0 bit 6 is disabled 
+(Initial value) 
+1 
+Interrupt request (ITV1) by rise of TCNT0 bit 6 is enabled 
+ 
+Interval Interrupt Request Registers 2A and 2B (ITVRR2A, ITVRR2B) 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ ITVA13x ITVA12x ITVA11x ITVA10x ITVE13x ITVE12x ITVE11x ITVE10x 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+x = A or B 
+ 
+• Bit 7—A/D0 / A/D1 Converter Interval Activation Bit 13A/13B (ITVA13A/ITVA13B): A/D0 
+or A/D1 (ITVRR2A: A/D0; ITVRR2B: A/D1) converter activation setting bit corresponding to 
+bit 13 in TCNT0. The rise of bit 13 in TCNT0 is ANDed with ITVA13x, and the result is 
+output to the A/D0 or A/D1 converter as an activation signal. 
+ 
+Bit 7: ITVA13x 
+Description 
+0 
+A/D0 or A/D1 converter activation by rise of TCNT0 bit 13 is disabled
+ 
+(Initial value) 
+1 
+A/D0 or A/D1 converter activation by rise of TCNT0 bit 13 is enabled 
+x = A or B 
+ 
+
+PDF index 342 / viewer page 343
+Rev.2.0, 07/03, page 303 of 960 
+ 
+• Bit 6—A/D0 / A/D1 Converter Interval Activation Bit 12A/12B (ITVA12A/ITVA12B): A/D0 
+or A/D1 (ITVRR2A: A/D0; ITVRR2B: A/D1) converter activation setting bit corresponding to 
+bit 12 in TCNT0. The rise of bit 12 in TCNT0 is ANDed with ITVA12x, and the result is 
+output to the A/D0 or A/D1 converter as an activation signal. 
+ 
+Bit 6: ITVA12x 
+Description 
+0 
+A/D0 or A/D1 converter activation by rise of TCNT0 bit 12 is disabled
+ 
+(Initial value) 
+1 
+A/D0 or A/D1 converter activation by rise of TCNT0 bit 12 is enabled 
+x = A or B 
+ 
+• Bit 5—A/D0 / A/D1 Converter Interval Activation Bit 11A/11B (ITVA11A/ITVA11B): A/D0 
+or A/D1 (ITVRR2A: A/D0; ITVRR2B: A/D1) converter activation setting bit corresponding to 
+bit 11 in TCNT0. The rise of bit 11 in TCNT0 is ANDed with ITVA11x, and the result is 
+output to the A/D0 or A/D1 converter as an activation signal. 
+ 
+Bit 5: ITVA11x 
+Description 
+0 
+A/D0 or A/D1 converter activation by rise of TCNT0 bit 11 is disabled
+ 
+(Initial value) 
+1 
+A/D0 or A/D1 converter activation by rise of TCNT0 bit 11 is enabled 
+x = A or B 
+ 
+• Bit 4—A/D0 / A/D1 Converter Interval Activation Bit 10A/10B (ITVA10A/ITVA10B): A/D0 
+or A/D1 (ITVRR2A: A/D0; ITVRR2B: A/D1) converter activation setting bit corresponding to 
+bit 10 in TCNT0. The rise of bit 10 in TCNT0 is ANDed with ITVA10x, and the result is 
+output to the A/D0 or A/D1 converter as an activation signal. 
+ 
+Bit 4: ITVA10x 
+Description 
+0 
+A/D0 or A/D1 converter activation by rise of TCNT0 bit 10 is disabled
+ 
+(Initial value) 
+1 
+A/D0 or A/D1 converter activation by rise of TCNT0 bit 10 is enabled 
+x = A or B 
+ 
+
+PDF index 343 / viewer page 344
+Rev.2.0, 07/03, page 304 of 960 
+ 
+• Bit 3—Interval Interrupt Bit 13A/13B (ITVE13A/ITVE13B): INTC interval interrupt setting 
+bit corresponding to bit 13 in TCNT0. The rise of bit 13 in TCNT0 is ANDed with ITVE13x, 
+the result is stored in IIF2x in TSR0, and an interrupt request is sent to the CPU. 
+ 
+Bit 3: ITVE13x 
+Description 
+0 
+Interrupt request (ITV2x) by rise of TCNT0 bit 13 is disabled 
+(Initial value) 
+1 
+Interrupt request (ITV2x) by rise of TCNT0 bit 13 is enabled 
+x = A or B 
+ 
+• Bit 2—Interval Interrupt Bit 12A/12B (ITVE12A/ITVE12B): INTC interval interrupt setting 
+bit corresponding to bit 12 in TCNT0. The rise of bit 12 in TCNT0 is ANDed with ITVE12x, 
+the result is stored in IIF2x in TSR0, and an interrupt request is sent to the CPU. 
+ 
+Bit 2: ITVE12x 
+Description 
+0 
+Interrupt request (ITV2x) by rise of TCNT0 bit 12 is disabled 
+(Initial value) 
+1 
+Interrupt request (ITV2x) by rise of TCNT0 bit 12 is enabled 
+x = A or B 
+ 
+• Bit 1—Interval Interrupt Bit 11A/11B (ITVE11A/ITVE11B): INTC interval interrupt setting 
+bit corresponding to bit 11 in TCNT0. The rise of bit 11 in TCNT0 is ANDed with ITVE11x, 
+the result is stored in IIF2x in TSR0, and an interrupt request is sent to the CPU. 
+ 
+Bit 1: ITVE11x 
+Description 
+0 
+Interrupt request (ITV2x) by rise of TCNT0 bit 11 is disabled 
+(Initial value) 
+1 
+Interrupt request (ITV2x) by rise of TCNT0 bit 11 is enabled 
+x = A or B 
+ 
+• Bit 0—Interval Interrupt Bit 10 (ITVE10): INTC interval interrupt setting bit corresponding to 
+bit 10 in TCNT0. The rise of bit 10 in TCNT0 is ANDed with ITVE10x, the result is stored in 
+IIF2x in TSR0, and an interrupt request is sent to the CPU. 
+Bit 0: ITVE10x 
+Description 
+0 
+Interrupt request (ITV2x) by rise of TCNT0 bit 10 is disabled 
+(Initial value) 
+1 
+Interrupt request (ITV2x) by rise of TCNT0 bit 10 is enabled 
+x = A or B 
+ 
+For details, see section 11.3.7, Interval Timer Operation. 
+
+PDF index 425 / viewer page 426
+Rev.2.0, 07/03, page 386 of 960 
+ 
+11.5 
+CPU Interface 
+11.5.1 
+Registers Requiring 32-Bit Access  
+Free-running counters 0 and 10A (TCNT0, TCNT10A), input capture registers 0A to 0D and 10A 
+(ICR0A to ICR0D, ICR10A), and output compare register 10A (OCR10A) are 32-bit registers.  As 
+these registers are connected to the CPU via an internal 16-bit data bus, a read or write (read only, 
+in the case of ICR0A to ICR0D and ICR10A) is automatically divided into two 16-bit accesses. 
+Figure 11.44 shows a read from TCNT0, and figure 11.45 a write to TCNT0. 
+When reading TCNT0, in the first read the TCNT0H (upper 16-bit) value is output to the internal 
+data bus, and at the same time, the TCNT0L (lower 16-bit) value is output to an internal buffer 
+register. Then, in the second read, the TCNT0L (lower 16-bit) value held in the internal buffer 
+register is output to the internal data bus. 
+When writing to TCNT0, in the first write the upper 16 bits are output to an internal buffer 
+register. Then, in the second write, the lower 16 bits are output to TCNT0L, and at the same time, 
+the upper 16 bits held in the internal buffer register are output to TCNT0H to complete the write. 
+The above method performs simultaneous reading and simultaneous writing of 32-bit data, 
+preventing contention with an up-count. 
+1st read operation
+2nd read operation
+CPU
+CPU
+Internal data bus
+H
+H
+Internal data bus
+L
+L
+L
+Bus
+interface
+Internal
+buffer register
+TCNT0H
+TCNT0L
+TCNT0H
+TCNT0L
+Module data bus
+Bus
+interface
+Internal
+buffer register
+Module data
+bus
+Module data
+bus
+ 
+Figure 11.44   Read from TCNT0 
+
+PDF index 426 / viewer page 427
+Rev.2.0, 07/03, page 387 of 960 
+ 
+1st write operation
+2nd write operation
+CPU
+Internal data bus
+H
+H
+L
+H
+Bus
+interface
+Internal buffer
+register
+TCNT0H
+TCNT0L
+TCNT0H
+TCNT0L
+Module data 
+bus
+CPU
+Internal data bus
+L
+Bus
+interface
+Internal buffer
+register
+Module  
+data bus
+Module data bus
+ 
+Figure 11.45   Write to TCNT0 
+
+PDF index348 / viewer page349 (next boundary)
+Rev.2.0, 07/03, page 309 of 960 
+ 
+11.2.11 Down-Count Start Register (DSTR) 
+The down-count start register (DSTR) is a 16-bit register. The ATU-II has one DSTR register in 
+channel 8. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+DST8P 
+DST8O 
+DST8N DST8M 
+DST8L 
+DST8K 
+DST8J 
+DST8I 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+DST8H 
+DST8G 
+DST8F 
+DST8E 
+DST8D 
+DST8C 
+DST8B 
+DST8A 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+Note: * Only 1 can be written. 
+ 
+DSTR is a 16-bit readable/writable register that starts the channel 8 down-counter (DCNT). 
+When the one-shot pulse function is used, a value of 1 can be set in a DST8x bit at any time by the 
+user program, except when the corresponding DCNT8x value is H'0000. The DST8x bits are 
+cleared to 0 automatically when the DCNT value overflows. 
+When the offset one-shot pulse function is used, DST8x is automatically set to 1 (except when the 
+DCNT8x value is H'0000) when a compare-match occurs between the channel 1 or 2 free-running 
+counter (TCNT) and a general register (GR) or the output compare register (OCR1) while the 
+corresponding timer connection register (TCNR) bit is set to 1. As regards DST8I to DST8P, if the 
+RLDEN bit in the reload enable register (RLDENR) is set to 1 and the reload register (RLDR8) 
+value is not H'0000, a reload is performed into the corresponding DCNT8x, and the DST8x bit is 
+set to 1. DST8x is automatically cleared to 0 when the DCNT8x vaue underflows, or by input of a 
+channel 1 or 2 one-shot terminate trigger signal set in the trigger mode register (TRGMDR) while 
+the corresponding one-shot pulse terminate register (OTR) bit is set to 1, whichever occurs first.  
+DCNT8x is cleared to H'0000 when underflow occurs. 
+DSTR is initialized to H'0000 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+For details, see sections 11.3.5, One-Shot Pulse Function, and 11.3.6, Offset One-Shot Pulse 
+Function and Output Cutoff Function. 
+PDF index428 / viewer page429 (DSTR word access)
+Rev.2.0, 07/03, page 389 of 960 
+ 
+1st write operation
+2nd write operation
+CPU
+Internal data bus
+H
+H
+L
+Bus
+interface
+TSTR2
+TSTR1
+TSTR3
+TSTR2
+TSTR1
+TSTR3
+Module data 
+bus
+CPU
+Internal data bus
+L
+Bus
+interface
+Module data bus
+ 
+Figure 11.47   Write to TSTR1, TSTR2, and TSTR3 
+11.5.3 
+Registers Requiring 16-Bit Access  
+The free-running counters (TCNT; but excluding TCNT0, TCNT10A, TCNT10B, TCNT10D, and 
+TCNT10H), the general registers (GR; but excluding GR9A to GR9D), down-counters (DCNT), 
+offset base register (OSBR), cycle registers (CYLR), buffer registers (BFR), duty registers (DTR), 
+timer connection register (TCNR), one-shot pulse terminate register (OTR), down-count start 
+register (DSTR), output compare registers (OCR: but excluding OCR10B), reload registers 
+(RLDR8, RLD10C), correction counter clear register (TCCLR10), timer interrupt enable register 
+(TIER), and timer status register (TSR) are 16-bit registers. These registers are connected to the 
+CPU via an internal 16-bit data bus, and can be read or written (read only, in the case of OSBR) a 
+word at a time. 
+Figure 11.48 shows the operation when performing a word read or write access to TCNT1A. 
+CPU
+Internal data bus
+TCNT1A
+Module data bus
+Bus
+interface
+ 
+Figure 11.48   TCNT1A Read/Write Operation 

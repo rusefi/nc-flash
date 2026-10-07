@@ -8,7 +8,7 @@ char CAN_UpdateATReceiptFault(void)
 {
   char cVar1;
   
-  cVar1 = (*(code *)PTR_FUN_0003487c)(PTR_DAT_00034878);
+  cVar1 = (*(code *)PTR_FUN_0003487c)(PTR_Control_FilteredModeInput_00034878);
   if (cVar1 == '\x01') {
     if (((((*PTR_CAN216_ReceiptCounter_00034894 == '\0') ||
           (*PTR_CAN218_ReceiptCounter_00034898 == '\0')) ||

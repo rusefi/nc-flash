@@ -3,7 +3,8 @@
 /* Seven signed32 references9218[i] = floor(s16(80EC)*s16(70000[i])/4096), original signed-word
    multiply/12 arithmetic shifts;526 inputs/3682 word checks, MACL preserved. Full2086C source now
    executed from capture0A through paired shifts in tcu-reference-source.txt; physical identity
-   open. */
+   open. Full126EC capture experiment observes actualphase0/4 call after2086C; code0 target14455
+   at80EC7017. See tcu-captured-requests.txt. */
 
 void Phase_ProduceSevenReferences(void)
 

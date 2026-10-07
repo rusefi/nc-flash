@@ -1,0 +1,63 @@
+CURRENT CONTINUATION: tcu-icr-startup.txt now verifies documented ICR and explicit
+zero IRQ status; complete15574 reaches UBARH EC00 before rejecting. The ED18
+stop below remains the preserved initial probe, not the current boundary.
+CHECKPOINT owns the current paired Ghidra archive and all three research scopes.
+
+TCU hardware startup and communication recovery enable — 2026-10-07
+
+Finding and evidence status
+Original15574 clears868C/868D at15582/1558A, then runs hardware initialization.
+Static original1570C..1571C is its tail:15710 writes868C=1,15714 writes868D=1,
+then restores PR/R13/R14 and returns. New independent256-case slice executes
+1570C..15716, varies both initial flag bytes across0..255 and checks all
+application RAM against only these two byte writes; neighbouring sentinels
+preserved. This verifies the flag-writing component, not reachability from
+full startup or physical initialization. 868C gates CAN record recovery in
+original19DC0 (existing proof); 868D broader purpose is not established here.
+
+This explains a missing prerequisite in the current native-task timeline:
+its fixture executes selected15574 children/prefixes, not this full initializer,
+and initial recovery868C remains0. Prior CAN recovery traces instead supplied
+868C=1 explicitly. Do not call either complete native reset or force this flag
+to make a recovery trace pass. The new320 run78093 remains an unchanged bounded
+startup fixture and its results must keep this limitation explicit.
+
+Complete15574 probe with only existing INTC/configuration owners
+ python research/ecu-at-can/probe_tcu_hardware_startup.py
+Executes original15574, no skipped callees/recovery writes. INTC143DC succeeds
+with its previously verified12word priority writes. First stop: original14422
+RTS delay-slot14428 writes word00FF toFFFFED18, rejected by strict configuration
+fixture. last_instruction14428 identifies the actual instruction; genericpc
+14426 still points at preceding RTS. Both flags remain0; final tail not reached.
+Result tcu-hardware-startup-probe.json records exact instruction/MMIO/calls and
+256 independent tail cases. Existing native fixture supplies prior register/RAM
+state; this is a full-function probe, not power-on reset. No new MMIO semantics.
+
+Compatible hardware documentation identifies ED18 as ICR, distinct from
+ED00..ED16 priority registers. SH7055S REJ09B0045-0200H table7.2/PDFzero136,
+ICR layout/semantics PDFzero149/150. NMILbit15 is read-only pin state; NMIEbit8
+andIRQ sense bits7..0 are controls, bits14..9 reserved. The final00FF write is
+not sufficient reason to model all16bits as a generic latch or to infer IRQ
+acceptance. Saved source excerpts in tcu-hardware-startup-manual-excerpts.txt.
+Next: add only bounded documented ICR semantics to the existing INTC owner,
+verify original14422 and reserved/read-only bits, then rerun same full15574
+probe and retain the next rejection. ISR ED1A and subsequent UBC/BSC accesses
+are static leads; do not assume supported or invent values.
+
+Sources/artifacts
+ tcu-hardware-startup-disassembly.txt (15574..15732)
+ tcu-hardware-startup-first-config-disassembly.txt (143DC..1447E)
+UnchangedTCU8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Manual359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+Python3.14.3/GNUobjdump2.42/PyMuPDF1.28.2; disassemble.py --objdump path tcu dis
+START END, tool extraction/setup in tcu-pulse-input.txt. No production/ROM/ISA
+changes, no staging/commit/push. CHECKPOINT owns live320 run, Ghidra refresh,
+fullobjective and separate traction/roof next actions. All three remain open.
+
+Saved analysis:2004 annotations/1038 complete identical exports/11 project
+hashes independently verified before and after read-only reopening both programs.
+Archive11,024,892bytes SHA2565a7d80ca5fa1016614a7e43fdb6fa1917e0cf191b481802904d351ce2ae4143b.
+Apply13778/liveverify36947/snapshot80530/restoredverify95138 all exit0 and logs
+clean; verify_restore.py --write-report PASS. Ghidra12.1.3PUBLIC/Java21.0.10.
+Reproduce save/restore via ghidra/README.txt. Native320 probe78093 remains live;
+CHECKPOINT is authoritative for later runtime status. No staging/commit/push.

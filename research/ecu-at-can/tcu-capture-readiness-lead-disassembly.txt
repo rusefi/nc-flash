@@ -1,0 +1,86 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000122d8 <.data+0x122d8>:
+   122d8:	4f 22       	sts.l	pr,@-r15
+   122da:	d3 1d       	mov.l	0x12350,r3	! 128f4
+   122dc:	43 0b       	jsr	@r3
+   122de:	00 09       	nop	
+   122e0:	d3 1c       	mov.l	0x12354,r3	! ffff84ec
+   122e2:	e2 01       	mov	#1,r2
+   122e4:	d1 1c       	mov.l	0x12358,r1	! 16e6c
+   122e6:	41 0b       	jsr	@r1
+   122e8:	23 20       	mov.b	r2,@r3
+   122ea:	90 30       	mov.w	0x1234e,r0	! ff
+   122ec:	d1 1b       	mov.l	0x1235c,r1	! ffff8450
+   122ee:	4f 26       	lds.l	@r15+,pr
+   122f0:	00 0b       	rts	
+   122f2:	21 00       	mov.b	r0,@r1
+   122f4:	2f e6       	mov.l	r14,@-r15
+   122f6:	4f 22       	sts.l	pr,@-r15
+   122f8:	d3 16       	mov.l	0x12354,r3	! ffff84ec
+   122fa:	6e 30       	mov.b	@r3,r14
+   122fc:	60 ec       	extu.b	r14,r0
+   122fe:	88 01       	cmp/eq	#1,r0
+   12300:	89 05       	bt	0x1230e
+   12302:	88 02       	cmp/eq	#2,r0
+   12304:	89 16       	bt	0x12334
+   12306:	88 03       	cmp/eq	#3,r0
+   12308:	89 1b       	bt	0x12342
+   1230a:	a0 1a       	bra	0x12342
+   1230c:	00 09       	nop	
+   1230e:	d2 14       	mov.l	0x12360,r2	! ffff84d8
+   12310:	60 20       	mov.b	@r2,r0
+   12312:	60 0c       	extu.b	r0,r0
+   12314:	88 03       	cmp/eq	#3,r0
+   12316:	8b 14       	bf	0x12342
+   12318:	d1 12       	mov.l	0x12364,r1	! 128f8
+   1231a:	41 0b       	jsr	@r1
+   1231c:	00 09       	nop	
+   1231e:	e3 00       	mov	#0,r3
+   12320:	d2 0e       	mov.l	0x1235c,r2	! ffff8450
+   12322:	22 30       	mov.b	r3,@r2
+   12324:	d3 10       	mov.l	0x12368,r3	! 16c5c
+   12326:	43 0b       	jsr	@r3
+   12328:	ee 02       	mov	#2,r14
+   1232a:	d2 10       	mov.l	0x1236c,r2	! 16b24
+   1232c:	42 0b       	jsr	@r2
+   1232e:	00 09       	nop	
+   12330:	a0 07       	bra	0x12342
+   12332:	00 09       	nop	
+   12334:	d1 09       	mov.l	0x1235c,r1	! ffff8450
+   12336:	e0 14       	mov	#20,r0
+   12338:	62 10       	mov.b	@r1,r2
+   1233a:	62 2c       	extu.b	r2,r2
+   1233c:	32 03       	cmp/ge	r0,r2
+   1233e:	8b 00       	bf	0x12342
+   12340:	ee 03       	mov	#3,r14
+   12342:	d2 04       	mov.l	0x12354,r2	! ffff84ec
+   12344:	d3 0a       	mov.l	0x12370,r3	! 12912
+   12346:	22 e0       	mov.b	r14,@r2
+   12348:	4f 26       	lds.l	@r15+,pr
+   1234a:	43 2b       	jmp	@r3
+   1234c:	6e f6       	mov.l	@r15+,r14
+   1234e:	00 ff       	mac.l	@r15+,@r0+
+   12350:	00 01       	.word 0x0001
+   12352:	28 f4       	mov.b	r15,@-r8
+   12354:	ff ff       	.word 0xffff
+   12356:	84 ec       	mov.b	@(12,r14),r0
+   12358:	00 01       	.word 0x0001
+   1235a:	6e 6c       	extu.b	r6,r14
+   1235c:	ff ff       	.word 0xffff
+   1235e:	84 50       	mov.b	@(0,r5),r0
+   12360:	ff ff       	.word 0xffff
+   12362:	84 d8       	mov.b	@(8,r13),r0
+   12364:	00 01       	.word 0x0001
+   12366:	28 f8       	tst	r15,r8
+   12368:	00 01       	.word 0x0001
+   1236a:	6c 5c       	extu.b	r5,r12
+   1236c:	00 01       	.word 0x0001
+   1236e:	6b 24       	mov.b	@r2+,r11
+   12370:	00 01       	.word 0x0001
+   12372:	29 12       	mov.l	r1,@r9
+

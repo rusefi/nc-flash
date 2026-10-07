@@ -44,7 +44,7 @@ undefined4 * Control_UpdateBaselineSourceTarget(void)
         puVar6 = PTR_Control_BaselineTargetMTOrExtraDescriptor_00058ca0;
       }
       uVar8 = (*(code *)PTR_Lookup_FloatMap2D_00058d9c)(uVar8,uStack_10,puVar6);
-      puVar6 = PTR_DAT_00058da0;
+      puVar6 = PTR_Control_RawFirstAlternate_00058da0;
       *(undefined4 *)puVar3 = uVar8;
       fVar9 = (float)(*(code *)puVar2)(puVar6);
       puVar2 = PTR_Control_BaselineSourceFactorBin_00058da4;

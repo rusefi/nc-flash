@@ -1,0 +1,116 @@
+ECU saved-task dispatcher and actual queued-task preemption — 2026-10-07
+
+Active objective remains ECU/automatic-transmission CAN integration, deep
+traction control and NC roof folding AND unfolding, including interruption,
+resume/reversal, communication timeout, synchronization and fault recovery.
+All three broader scopes remain incomplete. User has no additional DSC/roof
+dumps, CAN captures or bench results. No staging/commit/push authorization.
+Previous goal turn made verified progress; no blocked-condition audit.
+
+Verified saved-task dispatch
+verify_control_scheduler_resume.py:512 original3D10 dispatches of saved state12
+tasks PASS. Reuses the independently verified334C-save/3EB4-directrestore cases
+through an optional after_restore hook inverify_control_interrupt_nonidle.py.
+No fixture state owner or ROM/instruction implementation duplicated.
+Default no-hook result rerun34673 PASS, byte-identical SHA256
+e8dd99bfc8ec8987301526c90145e09550d5926a2608428def2d6f9ab75261b1.
+The prior25-artifact manifest updates only this optional-hook source; allmatch.
+16 stock type4 tasks with priority below4,32 seeded cases each; fullRAM and
+allGPR/FPU/GBR/MACH/MACL/PR/SR/SP checked. Selected index/caller stack explicit.
+
+Original3D10 publishes currenttask12B4,descriptor12C8 andtaskRAM12C4. It calls
+36F0 -> E7D4 ->38B4, which publishes currenttask to45CC while temporarily
+setting nestingbit4000. Then12B8 clears0. State12 minusstocktype4 indexes
+ROM4244 (423C+12-4), selecting3EB4;3F00 RTE restores the interrupted frame.
+FullRAM delta includes exactly two temporary caller-stack longwords (callerPR
+and3D36), the updated context fields and45CC. Savedframe is unchanged;
+taskstate12 andcontextSP12BC remain. No intervening taskbody or native
+reselection is claimed by this component alone.
+
+Current retained preemption probe
+probe_control_preemption.py uses the existing original idleIRQ/timer driver.
+It stops once before task4's first event2 callback JSR atDCBA (target2BCE6),
+provides an explicit PC/SR hardware frame on the actual taskstack, and supplies
+one additional CMT1 status sample. Originaltimer callback should enqueue task7;
+original32D8/334C save is checked against an independent wholeRAM model before
+3D10. The subsequent acquisition body and scheduler must execute until DCBA
+returns with exactly the interrupted register state. No selected-index or
+stack injection occurs between higher-priority execution and resumption.
+Arrival location, entrymaskF0, syntheticbase stack and peripheral samples
+remain explicit assumptions; no physical time/admission claim.
+Initial31789 completed10cycles/onepreemption PASS, buttrigger checked only
+callbacktarget2BCE6. Inspection showed shared dispatcher argumentselector1,
+not2, atoutercycle2. Rawresult retained ascontrol-preemption-first-callback10.json;
+its oldscope string must NOT be treated as proof of selector2 execution.
+This was a trigger/scope correction, not a firmware or context-save failure.
+The corrected trigger also checks the wordpointedbyR9 equals2. Secondprobe85817terminalPASS: selector2 atoutercycle4 (fifthsuppliedtimer).
+The additionaltimer advanceswheel5->6/divider0->1; it enqueues task7. Original
+32D8/334C wholeRAMsave PASS; original3D10 -> E26C acquisition -> termination/
+scheduler ->3EB4/3F00 resumesDCBA/task4 with exactGPR/FPU/system/PR/SR/SP.
+ActualinterruptedSR=1(T1,mask0),PR=DCB0; savedcontextSPFFFECF58. The acquisition
+RTE frame is atFFFECF50, and resumedtask4 frame atFFFECFEC. The actual task4
+stack wasFFFECFF4, hence156-byte savedframe. No selected-index/stackwrites
+were introduced between task7 execution and task4 resumption.
+TenouteridleIRQs plusoneinternalarrival execute11acquisitions,3event1/2event2,
+16queue3 and2queue2 wholeRAMreturns; allqueues drain. Unaffectedfirst4rows
+exactprioridleIRQtrace. VerificationPASS incontrol-preemption-verification.json.
+
+Reproduction options now preserve --selector any for the original sharedtarget
+lead, --selector 1 or2 (default2), --cycles and --filename. The CLI actually uses
+--selector 1 / --selector 2 (space beforevalue). Default rerun71132PASS and
+allpriorselector2 JSON exact after removingonlynewselector metadata. Retained
+control-preemption-selector2-before-options10.json provides that comparison.
+Initialrawfirst-callback result remains unchanged; no failedtrace discarded.
+
+Full600outer-cycle probe8831 completedexit0; verify_control_preemption.py PASS.
+601timerdeliveries/acquisitions,150event1/120event2,298queue3/120queue2actual
+wholeRAMreturns;6decode/121activity/26qualification,300SCI4TX/300RX. Allqueues
+andavailability finishnormally. Exactinitial10 andunaffectedfirst4; all120
+recordedevent2 monitoredfields andfinalmonitoredfields equalprior600idleIRQ
+trace. This is equality ofthe explicitlymonitoredfields, NOT wholetrace/timing
+or allRAM equivalence acrossdifferent schedules. Runtimecomponentoracles
+remainactive andthe actualnonidleepilogue is independentlywholeRAM checked.
+ADC28switchremainsoutercycle300; its timerordinal shifts byone. Chosenarrival,
+SRF0 hardwareentryframe, syntheticbase stack andexternalperipheral samples
+remainfixtures. No physicaladmission, repeatedpreemption/nestedIRQ, remoteDSC
+or absoluteclock claim. The current source exposescycles asanoptionalparameter;
+full600 confirmsitsinitial10 remainexactafterthat plumbingchange.
+No probe process remainslive. Ghidraannotations applied42119exit0 andliveverify18957PASS; snapshot/
+independentrestore59354 completedPASS. Finalidentitybelow.
+
+Reproduction
+ python research/ecu-at-can/verify_control_interrupt_nonidle.py
+ python research/ecu-at-can/verify_control_scheduler_resume.py
+ python research/ecu-at-can/probe_control_preemption.py
+ python research/ecu-at-can/verify_control_preemption.py
+ python research/ecu-at-can/probe_control_preemption.py --cycles 600 --filename control-preemption-probe.json
+ python research/ecu-at-can/probe_control_preemption.py --selector any --filename control-preemption-first-callback-rerun.json
+Python3.14.3; ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+ISA/MMIO provenance and explicit fixtures incontrol-interrupt-timer.txt and
+control-scheduler-start.txt. Production/ROM/sharedISA are unchanged.
+
+Other scope statuses and next actions
+ECU/TCU: capture-counter/arrival anddiagnostic timebase must be grounded before
+lengthening pendingTCUphase. Startup remains at unidentifiedEC62writeA46F6;
+no guessed latch. Traction: after retained preemption verification, test other
+actualinterruption/admission boundaries, keeping hardware/remoteDSC separate.
+CAN211/21Asender/units andDSCactuation lack remote-controller/physicalevidence.
+Roof: factorydocumentation/candidates remaindistinct frommissingOEMexecution;
+next applicableedition/VIN reverse/timeout/LRsync evidence. FoldingANDunfolding
+with interruption/resume/reversal/synchronization/recovery remainsopen.
+CHECKPOINT owns exact currentGhidra archive/restoration status andnextactions.
+
+Saved analysis and verification
+Ghidra12.1.3PUBLIC/Java21.0.10 pairedarchive savedbothprograms andindependently
+restored1970annotations(865ECU/1105TCU),1014identicalcompleteexports,11project
+hashes before/afterread-onlyreopen andagainstlive. Apply42119/liveverify18957/
+snapshot+restore59354 allterminalexit0; noerrors/incompleteexports.
+Archive 11019592bytes SHA256
+c28e5ef54f2db3ecd53563e3eeab6b9e067357212c0b5ca276c3237a8a0fc299
+Reproduction: ghidra/README.txt andverify_restore.py; independentextraction
+restore-check/preemption-capture-20261007 isreproduciblecache, notsoleevidence.
+preemption-capture-artifacts.json owns16currentartifactidentities andinputs.
+Fivechanged/new scriptscompile, gitdiff --checkPASS, allartifactsGit-eligible.
+No pendingprocess/projectedits. Savedlocally; no staging/commit/push. Existing
+mixedindex includingADnc-at-can.tar.gz.tmp preserved. Allbroadergoals incomplete.

@@ -1,0 +1,104 @@
+TCU capture setup and shared-counter timebase — 2026-10-07
+
+Objective and status
+ECU/automatic-transmission CAN integration, deep traction control, and NC roof
+folding AND unfolding/interruption/resume/reversal/timeout/synchronization/
+recovery remain active and incomplete. User has no additional DSC/roof dumps,
+captures or bench results. No staging/commit/push authorization. Findings are
+software execution plus conditional factory-document interpretation, not a
+physical chip/vehicle/timing claim. Previous and current turns made progress.
+
+Executed configuration evidence
+verify_tcu_capture_configuration.py PASS:512 original enable leaves,256 actual
+caller slices,256 prescaler leaves and6 rejected wrong-width accesses.
+Reuses existing ConfigurationRegisters owner and ISA without changes. Exact
+orderedMMIO, completeRAM preservation, callee-savedGPR/SP andSR checked.
+All256 priorTIOR0 bytes, all32 legalTIER0 patterns andall256 priorTSTR1 bytes
+are covered by paired seeds; not their exhaustive Cartesian product.
+
+16C5C enables captureA: TIOR0 F42A bit0 set,bit1 cleared in two separate RMWs;
+TIER0 F42E bit0 set; TSTR1 F401 bit0 set. 16B24 enables captureB: TIOR0 bit2
+set,bit3 cleared;TIER0 bit1 set;TSTR1 bit0 set. Each performs8orderedaccesses.
+Unrelated bits remain intact. Neither writes TCNT0 or capture-register values.
+Actual12324..12330 caller executes both leaves,16accesses,setsR14=2 inJSRdelay;
+no RAMchange. Earlier mode/readiness gate andlaterpublication are excluded.
+Original1448E writes1 to PSCR1..4(F404/F406/F408/F40A),4bytewrites. This leaf
+already had prior configuration evidence; newtests preserve that interpretation.
+
+Conditional manual interpretation
+Retained primary: sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf,
+Renesas REJ09B0045-0200H rev2.0 July2003, SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+Official source:
+https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual
+Companion sources JSON retains downloadprovenance. PDFzero240/241 map TCNT0
+atFFFFF430 and ICR0A/B
+atFFFFF434/438. F420 is ICR0D andF428 isITVRR2B, NOT a TCR0 register.
+PDFzero266 assigns channel0 toPSCR1 and value1 to Pphi/2. PDFzero267 specifies
+channel0 uses phi-prime directly (no second TCR divisor). Thus the configured
+TCNT0 rate is conditionally Pphi/2. PDFzero262 maps TSTR1 bit0 tocounterstart.
+PDFzero277/278 maps A/B field01 to rising-edge capture; PDFzero318 maps TIER0
+bits0/1 to A/B interrupt enables. PDFzero370 says ICR0A/B latch the common
+32-bit TCNT0 on selected externaledges and require32-bit reads. No physical
+pin identity, clock frequency, counter epoch, hardware admission or jitter
+is established by these source/code matches.
+
+Consequence for the retained application-clock fixture
+The application period81920 peripheralclocks is separately grounded in
+tcu-application-interrupt.txt. Continuous TCNT0 would therefore advance40960
+counts perapplication period. Prior once/application capture arrivals with
+timestamp increments12160(A) and5890/6490/4430/9120(B) cannot simultaneously
+represent that same continuous counter/timeline. They remain useful explicit
+software stimulus but are NOT a consistent physical arrival schedule.
+No prior trace is rewritten or relabeled as a vehicle timing result.
+
+If preserving those counter-period stimuli, their conditional peripheral-clock
+periods must be24320(A), and11780/12980/8860/18240(B), respectively. This means
+multiple capture events in most application intervals, not one each. The
+channelB stimulus changes andcapture-loss boundary still need an explicit
+external-time convention. Sharedcounter origin and first-edge offsets must
+be declared; capturetimestamp=(epoch_count+floor(elapsed_phi/2)) mod2^32.
+Changing epochs/pulse phase may affect qualification andrequest lifetime;
+the old pendingphase at319 cannot be resolved by importing old dates.
+
+Next concrete action
+Merge per-channel captureedge times into the existing integerperipheral clock
+timeline with CMT020000,CMT140960,application81920. Suppress oldonce/task
+capture delivery through the existing hook; preserve originalcaptureISRs and
+independentcallback/history/hold/application/command checks. Define tieorder,
+commonorigin/firstedgeoffsets, periodchange andloss times as fixtures. Verify
+timestamps andcounts independently, then inspectphase/communication behavior.
+Diagnosticonce/application cadence remains separate andmustnotbe callednative.
+Actual1230E readinessgate, reset/counterepoch, IRQacceptance andphysicalsensors
+remain open. No guessedtimes/forcedages/phase/ack/cacheflags.
+
+Reproduction and identities
+ python research/ecu-at-can/verify_tcu_capture_configuration.py
+Result tcu-capture-configuration-verification.json, PASS. Python3.14.3.
+Input examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+tcu-capture-clock-disassembly.txt preserves leaf/caller/prescaler originals;
+GNUobjdump2.42 setup/packageidentity/commands in tcu-pulse-input.txt.
+No production/ROM/sharedISA or existing configurationfixture edits.
+
+Other requirements
+Traction actualqueued-task preemption evidence is incontrol-preemption.txt;
+remoteDSC/CAN211/21A sender/units/actuation andphysicalIRQ remainunproved.
+Roof factorydocs/candidates remain distinct frommissingOEMexecution/physical
+evidence; applicableedition/VIN reverse/timeout/LRsync remainsnextfor both
+directions andinterruption/recovery. CHECKPOINT owns allthree scope-specific
+actions andcurrent Ghidra save/archive/restore identity.
+
+Saved analysis and verification
+Ghidra12.1.3PUBLIC/Java21.0.10 pairedarchive savedbothprograms andindependently
+restored1970annotations(865ECU/1105TCU),1014identicalcompleteexports,11project
+hashes before/afterread-onlyreopen andagainstlive. Apply42119/liveverify18957/
+snapshot+restore59354 allterminalexit0; noerrors/incompleteexports.
+Archive 11019592bytes SHA256
+c28e5ef54f2db3ecd53563e3eeab6b9e067357212c0b5ca276c3237a8a0fc299
+Reproduction: ghidra/README.txt andverify_restore.py; independentextraction
+restore-check/preemption-capture-20261007 isreproduciblecache, notsoleevidence.
+preemption-capture-artifacts.json owns16currentartifactidentities andinputs.
+Fivechanged/new scriptscompile, gitdiff --checkPASS, allartifactsGit-eligible.
+No pendingprocess/projectedits. Savedlocally; no staging/commit/push. Existing
+mixedindex includingADnc-at-can.tar.gz.tmp preserved. Allbroadergoals incomplete.

@@ -1,0 +1,147 @@
+Native TCU diagnostic admission and sustained receive-loss policy — 2026-10-06
+============================================================================
+Full objective: ECU/AT CAN integration, deep traction integration, NC roof
+folding AND unfolding with interruption/resume/reversal, timeout, L/Rsync and
+recovery. No additional userDSC/roof dumps/captures/bench evidence. No staging,
+commit orpush. Previousgoalturnwasprogress; thisthread ownscheckout.
+
+Current investigation
+----------------------
+Previous tcu-receive-admission.txt executed nativeISRprefix->full126EC dispatch/
+watchdog. Short201loss expired andclearedits8EE2bit, butdidnotqualifyfallback.
+Freshprobes saved tcu-qualified-receive-initial-probe.json establish126ECdoes
+notexecute56F80/56658/57F50/570F6/57258 inthatfixture. Standalone56F80/57002
+return butA936/A939 remain0: callingthebodyalone isnotadmittedqualification.
+Originaldiagnostic task12682 uses8006:3/5 tail57002;1/othersreturn.57002 reads
+9415 via23E7C; exact1 calls56D64 reset, then56F80. Main56F80 callsall original
+producers,56658,57F50,570F6,57258 andtail57B9C. No callee bypass/stub.
+
+Originalinit1267C->56CE0 returns andsetsA936=1 via565F0->56600. Italsoexecutes
+56AD8->56AE8: clearsA938/A939/A93A andsetsA93C/A944/A94C=2. Doesnotitself
+setA939. tcu-qualified-receive-initialization-probe.json savesactualexecution
+andvisitedaddresses. Initializationisindividualcall, notfullboot.
+
+A939producer is56B06, calledbyfull126EC phase0/4. Ituses56B78 rawconditions and
+three56C3A retainedtimers. A518 isunsignedword;8006 mustbe3. A939 highcondition
+A518>10200, lowconditionA518>9000. State2/high startsdeadline current84D0+2000;
+state1/high publishes1/state0 atunsignednow>=deadline. State0/lowfalse clears
+published0 andreturnsstate2. Losinghighwhilepending resetsstate2, preservesold
+publishedbyte. A938 additionallydepends809E>400 andA98Ebit0; thresholdsame.
+A93A depends thoseinputs withhigh10500/low10000. Allcomparisonsstrict. Reset
+9415exact1 whilepreviousA954zero clearsallpublishedbytes/states2;deadlineshold.
+Independent verify_tcu_diagnostic_admission.py PASSES 1280 whole-application-RAM
+cases, including threshold equality, modes, resets, retained states and deadlines.
+Units ofA518 andactualclockperiod remainunproved. ExistingfixtureA51812000 is
+explicitupstreamsample; notanindependentlyidentifiedphysicalvoltage/sensor.
+
+probe_tcu_qualified_receive.py composes original1267C init, explicit8006=3,
+100 original11864 tickincrements per original11014/capture/nativeISR/126EC/
+12682 pair. OnlyCAN201/215 andzero4EC inputs; otherframes remainabsentandmust
+notbeclaimedhealthy. No writesA936/A939/activegroup/faultsummary/requestflags.
+Originalmode8F6C8/recovery868C1 andperipheralfixtures retained; noRTE/physicalCAN.
+The 64-pair run returns normally with 192 checked ISR prefixes and 16 actual
+56B06 whole-application-RAM checks. Gate A939 sets at call24/tick2500: initial
+deadline2100 restarts at call4/tick500 because original9415 reset becomes1.
+It stays1 through call63; admissionA939 alone does not admit communication
+qualification. Actual1A598 action1 executes for groups36/37/38 every task but
+9415!=0 resets its qualification banks. Rawgroup36/active remain0; A98E=1,
+80E8=10240 and9454=1 throughout. Missing-frame expiry bitmap remains2785.
+
+The independent clock84D0 advance is not the timer-wheel82B9 advance. Original
+11014 increments82B9 only at wheelposition7mod16;23DD0 clears9415 at counter15.
+Baseline has only one wheelcall/task. A second96-pair run supplies eight original
+wheelcalls/task (previous independently tested wheel model), still100 original
+11864 calls/pair. This is an explicit scheduling experiment, not physicalcadence.
+Result PASS: tcu-qualified-receive-wheel8.json. No internalgate writes.
+
+Savedfailure tcu-qualified-receive-sentinel-limit.json: firstpair reachednormal
+returnFFFFFFF0, butobserverwronglyexpected a furtherinstructiontofinish tail56F80
+boundary. Correctedobserverclosesonlythatnormalreturnboundary afterrun; actual
+firmwarecalls unchanged. Thiswasobserverbookkeeping, notfirmwaredeadlock.
+Reproducer inputs andscripts saved; no unsupportedISA/helperreturn substitution.
+
+ROMs unchanged examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6;
+examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Python3.14.3. Disassemblyexcerptstcu-qualified-receive-*-disassembly.txt madeby
+GNUobjdump2.42 via disassemble.py tcu dis START END; toolsetup/LD_LIBRARY_PATH
+command in tcu-receive-admission.txt. Do notinterpret literalpoolsascode.
+The eight-wheel-call trace verifies actual producer admission, qualified
+fallback timing and application lag below. Healthy recovery still needs
+receipt coverage for all enabled missing frames, not artificial fault clearing.
+Traction andbothroofrequirements remainopen as CHECKPOINT/traction-roof specify.
+
+Verified wheel8 result and policy lag
+------------------------------------
+All96 pairs return;288 originalISRprefix wholeRAM checks and24 actual56B06
+wholeRAM checks PASS. Together withbaseline:160pairs,480ISRprefixes,40gatechecks.
+9415 clears in nativephase0 atcall36/tick3700, afterthatcall's1A598 producer.
+Call37/tick3800 first admits group36 andstartsqualification:rawA76C=1.
+CAN200 remainsabsent, withstockrecord0 duration500;CAN201/215/4EC eacharrive.
+CAN240/420/4F1 arealsoabsent (durations2000/2000/5000). Atcall42/tick4300:
+original1A598 raw7 ->56658 group36 activeA7224 ->mappedA978/aggregateA98E1C.
+The application hadalreadyrun beforediagnosticaggregation. Originalphase0/4
+21C1C consumesaggregate atcall44:92C9=C2 includingmask40;92D5=C8.
+Originalphase2/6 conversion/request atcall46 gives80E8=20480 and9454=0;
+cloned originalCAN216 packing clearsbyte7mask20. Before46:80E8=10240/9454=1.
+The policy remainsactive throughcall95/tick9600. DependentA938/A93A clear44,
+whileA939 remains1. No manualadmission/rawfault/activefault/summary injection.
+
+verify_tcu_qualified_receive.py checks eachtrace's receiveorder, dispatcher,
+independently recomputedwatchdog results, gatechecks, originaldiagnosticbody
+returnorder, allthreecommunicationproducers, pulse/gate/qualification/fallback
+boundaries and CAN216 cutbit. Baselinealso reruns independentcapture/history/
+paireddecodechecks. WholeRAM qualification/aggregation oracle has NOT been
+added; selectedpolicy assertions andearlier directfault tests boundtheclaim.
+Actualcount:baseline775 andwheel81162 1A598 returns includeactions1/14/15;
+thereare3 action1 groups/task, notthatmanyqualificationcycles.
+
+Operational observations, notclosure: wheel8 createscode0 at33,8ackboundaries
+matchoriginalarguments; finalmanagedlistempty butphase-record/heapremainactive.
+The fastertimerfixture changesrequestlifecycle; do NOT claimalloperationalwork
+retired orhealthyrecovery fromthisrun. Existing352/512request traces retain
+separatecleanup evidence. RawA518 remainsanupstreamfixture;8464 remains0.
+No physicalCAN, actualtaskcadence, fullboot oractuatorproof.
+
+Reproduce from repository root (Python3.14.3):
+  python research/ecu-at-can/verify_tcu_diagnostic_admission.py
+  python research/ecu-at-can/probe_tcu_qualified_receive.py
+  python research/ecu-at-can/probe_tcu_qualified_receive.py --cycles 96 --wheel-calls 8 --filename tcu-qualified-receive-wheel8.json
+  python research/ecu-at-can/verify_tcu_qualified_receive.py
+Both verifiers PASS. Three scripts compile. Initialcoverage probes canbereplayed
+usingadmitted.expiry_fixture(), thenindividualoriginal126EC/56F80/57002/56D64;
+initializationprobe runsoriginal1267C thenexplicit8006=3/original12682. Inputs
+aretheexistingfixture; savedJSON recordscoverage/state. Theirconclusions are
+supersededbythe160 instrumentedpairs ratherthanclaimedasfullboot evidence.
+
+Next concrete work: extend strict tcu_receive_fixture.py onlyafterinspecting
+native ISR validator/callback behavior forremaining CAN200/240/420/4F1 slots.
+Then supply explicitpayloads throughoriginalISR andverify allenabledrecords'
+healthyreceipt plusqualifiedfault clearing/recovery in thejoinedtaskcontext.
+Do notclear8EE2/groupflags directly. Check80A4 recoverygate and residualphase/
+heapstate explicitly; earlier5000-tick healthyrecovery remainsdirectfixture
+evidence untilnativejoinedrecovery isrun. No DSC/roof hardwareartifacts exist.
+
+Static continuation table (not yet executed extra receipts):
+ logical  mailbox  CAN ID  minimumDLC  bufferFFFFxxxx  callback
+ 0        2        4F1     8           8F05            1C0EC
+ 4        6        420     1           8F23            1C18A
+ 5        7        240     8           8F24            1C1E8
+ 9        11       200     7           8F40            1C286
+Allfour validator pointers at5C920+4*logical arezero. Recompute fromunchangedTCU:
+mailbox=logical+2; CANID=u16little(5C8C0+2*mailbox)>>5;
+minimumDLC=byte(5C8E4+logical), buffer=u32big(5C8F0+4*logical),
+callback=u32big(5CA10+4*logical). Inspectcallbackeffectsbeforechoosingpayloads.
+
+Durable save/verification
+-------------------------
+Ghidra annotations now1918 (833ECU/1085TCU); paired .gpr/.rep archive refreshed
+and independently extracted/reopened read-only. All11 projecthashes match
+before/after; all973 exports identical. Archive11,003,211bytes SHA256
+f0f757066744675462982a0693340593267a2f0074113c174d33315c16e68ed1.
+Ghidra12.1.3PUBLIC/Java21.0.10; snapshot.json andrestore-verification.json own
+inventory/result. All19 taskartifacts Git-eligible; transientlogs ignored.
+Three scripts compile; targetedgitdiffcheck PASS. Existingmixedindex including
+AD ghidra/nc-at-can.tar.gz.tmp preserved. Savedlocally only; no stage/commit/push.
+Allthreebroaderobjectives remainopen; thisturnmadeverifiedprogress.

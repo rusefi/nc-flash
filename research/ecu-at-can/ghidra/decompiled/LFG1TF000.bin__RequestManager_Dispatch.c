@@ -1,8 +1,9 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Generic manager executed using stock first-list descriptor. Event2 schedules group8 update
-   callbacks; completion/cancel removes ring entries andfrees allocated record. Other
-   descriptors/concurrency unverified. See tcu-request-dispatch.txt. */
+/* Generic manager; original allocation/dispatch/release/cleanup. Initialized126EC plus
+   explicit11014 nowexecutes overlappinggroup7 andgroup8 lifecycles, natural event1 andevent3 ack;
+   finalrings/listempty andfreeheap restored at321,30moreidle tasks. No
+   generalcapacity/physicalcadence claim. tcu-initialized-requests.txt. */
 
 void RequestManager_Dispatch(short param_1,short *param_2,char *param_3,int *param_4)
 

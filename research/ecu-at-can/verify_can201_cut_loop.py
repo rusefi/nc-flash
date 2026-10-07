@@ -61,6 +61,35 @@ def engine_response(t):
     return commands
 
 
+def reference(t):
+    # State equations derived from control branches, independent of the SH runner.
+    selector_a = bool(r(t, 0x9317) & 4)
+    selector_b = bool(r(t, 0x9316) & 4)
+    flag = bool(r(t, 0x94F4) & 1)
+    history = r(t, 0x9455)
+    timers = [r(t, a) for a in [0x82A5, 0x82A6, 0x82A7]]
+    for i, present in enumerate([selector_a, selector_b, flag]):
+        if not present and history & (1 << i):
+            timers[i] = 0
+    a, b, c = timers
+    phase = r(t, 0x828B)
+    speed = r(t, 0x80E8, 2)
+    threshold = expected_curve(r(t, 0x9334, 2))
+    output = r(t, 0x9454)
+    enabled = not (r(t, 0x92C9) & 64 or r(t, 0x9317) & 1 or r(t, 0x92C6) & 2)
+    if enabled:
+        if not (phase > 31 and c > 31) and speed >= threshold+1280:
+            if (r(t, 0x800E) < 11 or a <= 31 or b <= 31) and not flag:
+                output = 1
+        if phase >= 61 and c >= 61 or r(t, 0x9317) & 8 or speed < threshold:
+            output = 0
+    else:
+        output = 0
+    history = (history & 0xF8) | selector_a | (selector_b << 1) | (flag << 2)
+    return output, history, timers
+
+
+
 def main():
     # Numeric receive -> application conversion; invalid raw holds old number.
     numeric_cases = 0
@@ -119,34 +148,6 @@ def main():
         engine_response(t)
         axis_cases.append({"source_89a8": source, "axis_fault": fault,
                            "axis_9334": axis, "clear_threshold": threshold})
-
-
-    def reference(t):
-        # State equations derived from control branches, independent of the SH runner.
-        selector_a = bool(r(t, 0x9317) & 4)
-        selector_b = bool(r(t, 0x9316) & 4)
-        flag = bool(r(t, 0x94F4) & 1)
-        history = r(t, 0x9455)
-        timers = [r(t, a) for a in [0x82A5, 0x82A6, 0x82A7]]
-        for i, present in enumerate([selector_a, selector_b, flag]):
-            if not present and history & (1 << i):
-                timers[i] = 0
-        a, b, c = timers
-        phase = r(t, 0x828B)
-        speed = r(t, 0x80E8, 2)
-        threshold = expected_curve(r(t, 0x9334, 2))
-        output = r(t, 0x9454)
-        enabled = not (r(t, 0x92C9) & 64 or r(t, 0x9317) & 1 or r(t, 0x92C6) & 2)
-        if enabled:
-            if not (phase > 31 and c > 31) and speed >= threshold+1280:
-                if (r(t, 0x800E) < 11 or a <= 31 or b <= 31) and not flag:
-                    output = 1
-            if phase >= 61 and c >= 61 or r(t, 0x9317) & 8 or speed < threshold:
-                output = 0
-        else:
-            output = 0
-        history = (history & 0xF8) | selector_a | (selector_b << 1) | (flag << 2)
-        return output, history, timers
 
 
     rng = random.Random(0x201216)

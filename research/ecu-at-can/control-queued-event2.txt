@@ -1,0 +1,99 @@
+ECU original queued event2 dispatch — completed 2026-10-07
+
+Objective remains ECU/AT CAN integration, deep traction, and NC roof folding
+AND unfolding with interruption/reversal/timeout/synchronization/recovery.
+All three remain incomplete. User has no additional controller/capture/bench
+artifacts. Files are saved locally; no stage/commit/push authorization.
+
+Original ROM examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Python3.14.3; existing bounded SH-2E task/RTE model. No shared ISA or ROM edit.
+Reproduce:
+ python research/ecu-at-can/verify_control_event2_enqueue.py
+ python research/ecu-at-can/verify_control_event2_activation.py
+ python research/ecu-at-can/probe_control_queued_event2.py
+ python research/ecu-at-can/probe_control_queued_event2.py --cycles 120 --filename control-queued-event2-probe.json
+ python research/ecu-at-can/verify_control_queued_event2.py
+
+Independent component proof
+1536 nonempty/full queue3 producer cases PASS: all256 pending652D values,
+queue counts1/99/100, tails0/99;40 admitted,1476 producerlimited,20 full,
+20 tailwraps. Original215C6->1826E->2BC8C(event2)->DAE8(bank0,index4)->F5A0
+executes without skipped callees. Producer pendingcounter>=10 blocks dispatch.
+Below10 it increments even when queuefull subsequently rejects admission.
+DAE8 uses row1148C(selector3,oneargument,target2BCE6). F5A0 copiesfivewords:
+target,event2,three unused caller-stack words (all preservation checked).
+
+606 consumer F6A0 wholeRAM cases PASS: counts0..100 xheads0/99 xSRmasks0/70/F0.
+600 consumes/6 emptyreturn3. Queue3 is100 entries of20bytes at49C4; state45D9
+writehead/tail,45DA readhead,45DB count. Consume copiesallfivewords to45B8,
+advancesreadheadmod100/decrementscount. Callback execution is separate.
+Extracted consumer_model reran all1536+606 cases PASS, then reused at actual
+F6A0 returns in the full sequence.
+
+128 original3F40 task-availability initializer cases PASS: mode0..3 with32
+seededdescriptor sets. Stock19 mode-maskwords are1; mode0 initializes each
+RAMdescriptorbyte0=0,byte2=FF,byte3=ROMdefault; other tested modes preserve.
+Task4 descriptor4110 ->RAM11C8, prioritybyte4112=1, body4118=DC80,
+availability411C=2. Queue descriptor11374 word4 is taskindex, not priority.
+192 emptyqueue admissions PASS with nonzeroSRmasks10/70/F0 andtail0/99.
+Original35E0 decrementsavailability2->1 and391A selects task4/priority1,
+scheduler queueindices2..21 at12A0/129E, readybitmap02. Nonzero masks suppress
+inlinecontextswitch; its alternate preemption path is not covered here.
+All component checks compare wholeapplicationRAM, savedregisters/GBR/SRmask.
+
+Retained execution and verification
+Reuse10022->CA94->1619A initialization, acquiredADC fixture and task7 enqueue/
+RTE/acquisition/idle path. Original3F40 additionally initializes taskavailability.
+After eachacquisition, original215C6 queues event2, then3B8A/RTE entersDC80.
+DC80 calls F6A0 tocopy and invokes2BCE6 withargument45BC, returnDCBE. Original
+callback/yield/scheduler execute fully toidle3D0C; no callee or yield skipped.
+Each event admission count1/pending1/availability1 selects task4priority1;
+each idle hascount0/pending0/availability2. Head/tail retain andwrap naturally.
+
+Full120 pairs PASS (session8519 exit0), exact initial8 before addedobservations:
+-120 actualqueued2BCE6 callbacks;140 actualF6A0 wholeRAM returns independently
+ checked, including1 ringwrap. Event-stage callbacktargets:2BCE6 x120,
+ 959F2 x19,95AFC x1. Additional queuedcallbacks werepreviously leftpending.
+-244 totalRTE transfers (task7 plus task4); this includes an initialqueue drain
+ during firstacquisition. Firstacquisition's queueconsumer isobserved butnot
+ included in140 synthetic-stack wholeRAM consumerchecks.
+-6 existing39926 wholeRAM decodes,121 activitychecks,26 qualification
+ observations pass. Everypair's monitoredinput/qualificationfields equals
+ prior direct-event2 trace. No claimallRAM equalsoldtrace: queue/scheduler/
+ callback sideeffects intentionally differ.
+-ADC28 low/recovery schedule still0 before60,500<<6 from60. Acquiredvalue
+ stillcopied64 andqualification65; oldmonitored outcomes remain verified by
+ exact120fieldcomparison, not assumedfromprefix8. Final6C92=500/914B=1.
+
+Explicit limitations
+Task7:event2 ratio1:1 is supplied; actualupstreamproducerperiod not executed.
+EventdeliverymaskF0 is supplied. Task7 usesROMdefaultstackFFFF11A8; eventtask
+contextstack temporarilyFFFED000 so existing applicationRAM oracles exclude
+callstackstorage. Contextstack restoredaftereach event. This testsoriginal
+scheduler/queue logic with an explicitstackfixture, not fullbootstacklayout.
+ADCresult/SCIstatusC0/zeroSCIstream are explicit; no analog/serialpeer model.
+The140 consumer checks apply toF6A0, not an independentoracle forall nested
+959F2/95AFC or reporting bodies. Generic downstream DTC/NVM reporting remains
+outside new prerequisites. CAN211/21A sender/units/remoteDSC actuation unproved.
+
+Next: original upstreamFBE8->DAE8(bank1,index10 row11344,selector2,zeroargs,
+targetE5FC) queues task3/DC2C; E5FC calls215C6. FBE8 isreferencedin callback
+array at113C0, apparentlybase1138C/index13; nativecaller/timebase stillstatic.
+Trace actualarraydispatch/producer andjoin without pretending a supplied
+period isfirmware cadence. Originaldisassembly/provenance in
+control-event2-producer-lead-disassembly.txt and control-event2-producer-lead.txt.
+Roof next remains applicableedition/VIN technical evidence forreversal,
+numericalCANtimeout andL/Rpulse-mismatch, orOEMreceiver/physical evidence;
+userhasnone andexhausteddownloads mustnot be repeated. CHECKPOINT owns status.
+
+Further nextlead:1062E binarywheel also increments51E2byte; at>=5 itresets0
+andtailscallbackarray1138C+52=FBE8. ParentF28C clearsF718bit80 then tails1062E
+viaF296/poolF350. ThisisSTATIC cadence/admission lead, not executed evidence.
+Exactinstructions retainedin control-event2-upstream-lead-disassembly.txt.
+
+Persistence verified2026-10-07: Ghidra12.1.3PUBLIC/Java21.0.10,
+1944annotations(841ECU/1103TCU),997completeidenticalexports,11projecthashes
+before/afterindependentread-onlyreopen andagainstlive. Pairedarchive11,014,570
+bytes SHA25695812a459ec27c16dc1795998ff3521a82d3c75159279f82670385d90ab9c864. Bothprograms saved;
+verify_restore.py PASS. No pendingGhidra process orprojectedits. No commit/push.

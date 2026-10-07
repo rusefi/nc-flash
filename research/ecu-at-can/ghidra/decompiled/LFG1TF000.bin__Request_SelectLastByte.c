@@ -1,7 +1,7 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Walk signed-byte count r5, overwrite default r6 with each nonFF byte. Returns LAST nonsentinel,
-   not numerical min/max. Called1FB8C withcount5. */
+/* Walk signed-byte countR5; returnLAST nonFF byte ordefaultR6. Also executed1F3CE count11/default4
+   afterdisabledslots4/6clear. See tcu-source-inhibit.txt andprior1FB8C count5. */
 
 int Request_SelectLastByte(byte *param_1,char param_2,int param_3)
 

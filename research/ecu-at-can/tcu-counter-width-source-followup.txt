@@ -1,0 +1,29 @@
+SH7055 counter width source follow-up — 2026-10-07
+Primary source: SH7055 On-Chip I/O Volume Application Note Rev1.0 April1999.
+https://www.renesas.com/en/document/apn/sh7055-chip-io-volume-application-note
+Web PDF reader succeeded:222pages,7238 extractedlines. Direct urllib download
+returned HTTP403; no localPDF was created or claimed. Page numbers below are
+zero-basedPDF indices, with printedpage given separately.
+Section2.27 header page164(printed157), lines4917..4935: ATU0 struct has TCNT0
+as unsignedlong, startsFFFFF420; intervening fields place counter atFFFFF430.
+Page171(printed164), lines5198..5227: ATU10 TCNT10A unsignedlong atFFFFF6C0.
+Exact small excerpts:
+  unsigned long TCNT0;
+  unsigned long TCNT10A;
+These older manufacturer declarations support32-bit programming, but do not
+specify effects of forbidden CPUword accesses. They neither identify the
+physicalTCU silicon nor reconcile original1461A wordF430 and1465E/14662
+wordF6C2/F6C0. No permissive fixture introduced. Prior failed older-manual leads
+remain in tcu-timestamp-configuration.txt; do not repeat blindly.
+Next actual chip/revision or primary erratum/manual covering splitword writes;
+absent that, nativefull15574 remains rejected and recovery not proven.
+Reproduce source read: openURL, inspectPDFindices164/171 section2.27. Source
+retrieved2026-10-07. Durable conclusions retained here despite downloadfailure.
+
+Additional official-domain searches2026-10-07:
+site:renesas.com SH7055 TCNT0 "16-bit" access
+site:renesas.com SH7055 "TCNT0" "write" correction
+site:renesas.com SH7055 "TCNT10A" "access"
+Returned SH7011/H8TimerZ/LCDC material, generic learning pages and SH7055
+partdetail, but no applicable splitword erratum. Different peripheral families
+are not substituted. Search non-findings do not prove no erratum exists.

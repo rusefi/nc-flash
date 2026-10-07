@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "scope": "Verify retained preemption, actual task resumption and queue drain evidence.",
+  "prefix10": {
+    "outer_idle_interrupts": 10,
+    "extra_nonidle_interrupts": 1,
+    "acquisitions": 11,
+    "event1": 3,
+    "event2": 2,
+    "queue3_whole_ram_returns": 16,
+    "queue2_whole_ram_returns": 2,
+    "exact_unaffected_first4": true,
+    "exact_interrupted_register_restoration": true,
+    "decode_checks": 0,
+    "activity_checks": 6,
+    "qualification_observations": 2
+  },
+  "exact_default_after_reproduction_options": true,
+  "limits": "Explicit arrival atDCBA/selector2, entrySRF0, syntheticstack and suppliedperipherals. No physicalclock/admission/remoteDSC proof.",
+  "full600": {
+    "outer_idle_interrupts": 600,
+    "extra_nonidle_interrupts": 1,
+    "acquisitions": 601,
+    "event1": 150,
+    "event2": 120,
+    "queue3_whole_ram_returns": 298,
+    "queue2_whole_ram_returns": 120,
+    "exact_unaffected_first4": true,
+    "exact_interrupted_register_restoration": true,
+    "decode_checks": 6,
+    "activity_checks": 121,
+    "qualification_observations": 26
+  },
+  "exact_initial10": true,
+  "exact_120_event2_monitored_fields": true,
+  "exact_final_monitored_fields": true
+}

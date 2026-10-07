@@ -1,0 +1,157 @@
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x16ce4 0x16d5c
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00016ce4 <.data+0x16ce4>:
+   16ce4:	93 2d       	mov.w	0x16d42,r3	! 4ff
+   16ce6:	92 2d       	mov.w	0x16d44,r2	! f71c
+   16ce8:	22 31       	mov.w	r3,@r2
+   16cea:	94 2c       	mov.w	0x16d46,r4	! f710
+   16cec:	60 41       	mov.w	@r4,r0
+   16cee:	cb 02       	or	#2,r0
+   16cf0:	00 0b       	rts	
+   16cf2:	24 01       	mov.w	r0,@r4
+   16cf4:	2f 76       	mov.l	r7,@-r15
+   16cf6:	2f 66       	mov.l	r6,@-r15
+   16cf8:	2f 56       	mov.l	r5,@-r15
+   16cfa:	e5 00       	mov	#0,r5
+   16cfc:	2f 46       	mov.l	r4,@-r15
+   16cfe:	2f 36       	mov.l	r3,@-r15
+   16d00:	2f 26       	mov.l	r2,@-r15
+   16d02:	2f 16       	mov.l	r1,@-r15
+   16d04:	2f 06       	mov.l	r0,@-r15
+   16d06:	4f 22       	sts.l	pr,@-r15
+   16d08:	d3 10       	mov.l	0x16d4c,r3	! 15b80
+   16d0a:	43 0b       	jsr	@r3
+   16d0c:	e4 0d       	mov	#13,r4
+   16d0e:	94 1b       	mov.w	0x16d48,r4	! f718
+   16d10:	60 41       	mov.w	@r4,r0
+   16d12:	c9 80       	and	#128,r0
+   16d14:	65 0d       	extu.w	r0,r5
+   16d16:	25 58       	tst	r5,r5
+   16d18:	89 05       	bt	0x16d26
+   16d1a:	d3 0d       	mov.l	0x16d50,r3	! ff7f
+   16d1c:	62 41       	mov.w	@r4,r2
+   16d1e:	22 39       	and	r3,r2
+   16d20:	d1 0c       	mov.l	0x16d54,r1	! 12386
+   16d22:	41 0b       	jsr	@r1
+   16d24:	24 21       	mov.w	r2,@r4
+   16d26:	d3 0c       	mov.l	0x16d58,r3	! 15bf0
+   16d28:	43 0b       	jsr	@r3
+   16d2a:	e4 0d       	mov	#13,r4
+   16d2c:	4f 26       	lds.l	@r15+,pr
+   16d2e:	60 f6       	mov.l	@r15+,r0
+   16d30:	61 f6       	mov.l	@r15+,r1
+   16d32:	62 f6       	mov.l	@r15+,r2
+   16d34:	63 f6       	mov.l	@r15+,r3
+   16d36:	64 f6       	mov.l	@r15+,r4
+   16d38:	65 f6       	mov.l	@r15+,r5
+   16d3a:	66 f6       	mov.l	@r15+,r6
+   16d3c:	67 f6       	mov.l	@r15+,r7
+   16d3e:	00 2b       	rte	
+   16d40:	00 09       	nop	
+   16d42:	04 ff       	mac.l	@r15+,@r4+
+   16d44:	f7 1c       	fmov	fr1,fr7
+   16d46:	f7 10       	fadd	fr1,fr7
+   16d48:	f7 18       	fmov	@r1,fr7
+   16d4a:	ff ff       	.word 0xffff
+   16d4c:	00 01       	.word 0x0001
+   16d4e:	5b 80       	mov.l	@(0,r8),r11
+   16d50:	00 00       	.word 0x0000
+   16d52:	ff 7f       	.word 0xff7f
+   16d54:	00 01       	.word 0x0001
+   16d56:	23 86       	mov.l	r8,@-r3
+   16d58:	00 01       	.word 0x0001
+   16d5a:	5b f0       	mov.l	@(0,r15),r11
+
+
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x12374 0x123b0
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00012374 <.data+0x12374>:
+   12374:	4f 22       	sts.l	pr,@-r15
+   12376:	d3 0b       	mov.l	0x123a4,r3	! 12880
+   12378:	43 0b       	jsr	@r3
+   1237a:	00 09       	nop	
+   1237c:	e0 01       	mov	#1,r0
+   1237e:	c0 09       	mov.b	r0,@(9,gbr)
+   12380:	d3 09       	mov.l	0x123a8,r3	! 16ce4
+   12382:	43 2b       	jmp	@r3
+   12384:	4f 26       	lds.l	@r15+,pr
+   12386:	c4 09       	mov.b	@(9,gbr),r0
+   12388:	64 03       	mov	r0,r4
+   1238a:	60 4c       	extu.b	r4,r0
+   1238c:	88 01       	cmp/eq	#1,r0
+   1238e:	89 03       	bt	0x12398
+   12390:	88 03       	cmp/eq	#3,r0
+   12392:	89 02       	bt	0x1239a
+   12394:	a0 01       	bra	0x1239a
+   12396:	00 09       	nop	
+   12398:	e4 03       	mov	#3,r4
+   1239a:	60 43       	mov	r4,r0
+   1239c:	d3 03       	mov.l	0x123ac,r3	! 12886
+   1239e:	43 2b       	jmp	@r3
+   123a0:	c0 09       	mov.b	r0,@(9,gbr)
+   123a2:	ff ff       	.word 0xffff
+   123a4:	00 01       	.word 0x0001
+   123a6:	28 80       	mov.b	r8,@r8
+   123a8:	00 01       	.word 0x0001
+   123aa:	6c e4       	mov.b	@r14+,r12
+   123ac:	00 01       	.word 0x0001
+   123ae:	28 86       	mov.l	r8,@-r8
+
+
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x12880 0x128a8
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00012880 <.data+0x12880>:
+   12880:	d3 07       	mov.l	0x128a0,r3	! 11004
+   12882:	43 2b       	jmp	@r3
+   12884:	00 09       	nop	
+   12886:	c4 09       	mov.b	@(9,gbr),r0
+   12888:	64 03       	mov	r0,r4
+   1288a:	60 4c       	extu.b	r4,r0
+   1288c:	88 01       	cmp/eq	#1,r0
+   1288e:	89 04       	bt	0x1289a
+   12890:	88 03       	cmp/eq	#3,r0
+   12892:	8b 02       	bf	0x1289a
+   12894:	d2 03       	mov.l	0x128a4,r2	! 11014
+   12896:	42 2b       	jmp	@r2
+   12898:	00 09       	nop	
+   1289a:	00 0b       	rts	
+   1289c:	00 09       	nop	
+   1289e:	ff ff       	.word 0xffff
+   128a0:	00 01       	.word 0x0001
+   128a2:	10 04       	mov.l	r0,@(16,r0)
+   128a4:	00 01       	.word 0x0001
+   128a6:	10 14       	mov.l	r1,@(16,r0)
+
+
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x11004 0x11014
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00011004 <.data+0x11004>:
+   11004:	93 71       	mov.w	0x110ea,r3	! 8494
+   11006:	e4 00       	mov	#0,r4
+   11008:	92 70       	mov.w	0x110ec,r2	! 8498
+   1100a:	23 42       	mov.l	r4,@r3
+   1100c:	22 42       	mov.l	r4,@r2
+   1100e:	91 6e       	mov.w	0x110ee,r1	! 849c
+   11010:	00 0b       	rts	
+   11012:	21 42       	mov.l	r4,@r1
+

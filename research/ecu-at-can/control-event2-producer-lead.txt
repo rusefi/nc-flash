@@ -1,0 +1,119 @@
+ECU event2 nativeproducer/queue lead — 2026-10-07
+=================================================
+Fullobjective unchanged: ECU/AT, deeptraction integration, roof foldingAND
+unfolding/interruption/reversal/timeout/sync/recovery. Allincomplete. Userhasno
+extraOEMcontroller/capture/bench evidence. No stage/commit/push authorization.
+
+STATIC originalfirmware interpretation, not executed queue/admission proof:
+ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+1826E reads535Clong, testsit, thenunconditionallytails2BC8C withR4=2 at18278.
+2BC8C event1usescounter652C,event2uses652D. For1/2, ifunsignedcounter>=10,
+returns withoutdispatch; otherwiseincrementsbyte. Other eventvalues bypass
+thesetwocounters. AdmittedpathwritesR4longto6520, callsDAE8(bank0,index4,
+args6520). Descriptor1146C+4*8=1148C words0003/0001,target2BCE6 at11490.
+DAE8 banktablebase112E8 selects1146C; descriptorselector3 routesF5A0, unlike
+prioractivityhook selectorFFFF directcalls. Oneargumentwordcopied. F5A0 uses
+selector3 descriptor1135C+3*8=11374 bytesFFFF49C400046400; rawfields arequeue
+baseFFFF49C4, word4, byte100, byte0. Queuefieldroles stilltoexecute; do not
+callword4 apriority fromdataalone. Priorcontroltask7queue isaseparate path.
+
+Thisidentifies a specificreplacement forsupplied2BCE6 eventword2 calls, but
+producer/scheduler invocation andqueueconsumption stillunexecuted. Native
+caller1826E hasalignedreferences determinedbyreprocommand below; nexttrace
+thatproducer andexecute2BC8C->DAE8->F5A0 withindependentcounter/queue models,
+thenactualconsumer->2BCE6/39926 alongsidequeuedtask7. Keeprealstackstorage
+outsideexistingapplicationRAMoracle consistent withpriorstackcorrection;
+do notskipqueueorinjectcallback directly whileclaimingnativeadmission.
+CAN211/21A sender/units, remoteDSC/physicalactuation remainmissing. Roofboth
+directions/recovery andTCUintegration remainopen inCHECKPOINT.txt.
+
+Reproduce(candidatealignedliteralrefs are notcompletecomputedaddressaudit):
+ python research/ecu-at-can/disassemble.py at refs 2bce6
+ python research/ecu-at-can/disassemble.py at refs 112e8
+ python research/ecu-at-can/disassemble.py at refs 2bc8c
+ python research/ecu-at-can/disassemble.py at refs 1826e
+Originalinstructions: control-event2-producer-lead-disassembly.txt, GNUobjdump
+2.42 usingexistingdisassemble.py/extractedSHtoolchainsetup frompriorreports.
+Thisleadbuildsoncontrol-activity-hooks.txt/directdescriptor interpretation;
+itsqueuedselector3 branch isdistinctandnotcoveredbythatolderhookproof.
+
+Aligned1826E pool216D8/load215C6 nowlocated. Nextinspectwrapperaround215C6
+anditscaller/scheduler descriptor. Thisisstaticreferenceevidence only.
+
+FOLLOWUP 2026-10-07 — executed nonempty/full admission
+verify_control_event2_enqueue.py now executes original215C6->1826E->2BC8C->
+DAE8->F5A0,1536 wholeapplicationRAM cases PASS: all256 pending652D values,
+queue counts1/99/100, tails0/99.40 admitted,1476 producerlimited,20 queuefull,
+20 wrappedtails. Originalemptyqueue scheduler activation remains untested here.
+Queue3 state:45D9 tail,45DA head,45DB count; capacity100,20-byte entries at
+49C4. F5A0 copies allfivewords: target2BCE6,event2,three unused caller-stack
+words (preservation explicitly checked). Pending652D increments even if the
+queue isfull; at>=10 no descriptor call. Fullqueue DAE8 returns1, admitted0.
+All callee-saved registers/GBR/SRmask preserved; no callback skipped.
+
+STATIC next chain:215C6 is called atE618 withinE5FC; poolE6F4. E5FC has
+aligned descriptor reference11348. Its body callsCADE/B31C/D3FC/D770, then
+215C6, tailsD02E. Do not yet infer native period from this reference alone.
+Descriptor11374 word4 feeds35E0 as task index4, not priority directly:
+35E0 resolves descriptor40D0+4*16, whose byte2 is the scheduler priority.
+F6A0 is queue consumer; DC80 selectsqueue3, copies into45B8 and dispatches
+its target withargument45BC. Consumer/admission lifecycle still tojoin.
+Producer wrapper andF5A0/35E0 originalinstructions appended to disassembly.
+
+Consumer followup COMPLETE:606 F6A0 wholeRAM cases PASS, all validcounts0..100
+xheads0/99 xSRmasks0/70/F0.600 consume/6 emptyreturn3. Nonemptycopiesexact
+fivewords to45B8, decrementscount, advancesheadmod100; targetnotexecuted by
+thisleaf. Savedregisters/GBR/SRmask preserved. DC80 actualcallbackdispatch and
+emptyqueueactivation remain next. ScriptJSON scope metadata updated afterward
+to distinguish verifiedconsumer from unexecutedcallbackdispatch; counts intact.
+Reproduce: python research/ecu-at-can/verify_control_event2_enqueue.py
+Python3.14.3; no sharedISA/production edits or staging/commit/push.
+
+2026-10-07 NEW ACTIVATION AND DISPATCH PROGRESS
+verify_control_event2_activation.py PASS:128 original3F40 wholeRAM initcases
+(modes0..3,32seeded descriptor sets),192 emptyqueue admissions through215C6/
+1826E/2BC8C/DAE8/F5A0/35E0/391A (SRmasks10/70/F0, tails0/99). Stocktask4
+availability2 decrements1; priority1 queueindices2..21 startsat2, task4 selected.
+No inlinepreemption atthese nonzero masks. Word4 in11374 is taskindex4;
+priority1 comes fromROM4112, taskbodyDC80 from4118. Original3F40 initializes
+19descriptors for stockmode0; other tested modes preserve them.
+
+probe_control_queued_event2.py initial8 pairs PASS,19totalRTE:8 acquisition,
+11task4 dispatches includingthree additional callbacks batches. Monitored
+qualification/input fields equal prior directevent2 aftereachpair; noallRAM
+comparison claim. Availabilityinitializer also permitsqueuedcallbacks during
+first acquisition todrain beforeevent2. The eventtask usesFFFED000 synthetic
+stack so existing independentRAM oracles exclude temporarycallstack; acquisition
+retainsROMdefaultFFFF11A8. Contextstack restoredaftereach event; maskF0explicit.
+Originalevent2 receivesargument45BC fromDC80/returnDCBE. Queue3 drains;
+pending652D returns0; task4availability returns2. Nestedcallbacks not skipped.
+
+Full120 newrun addsindependentconsumer_model checksat every F6A0 actualreturn
+in queued-event2 stage plus target/fiveword callback records. Extractedconsumer
+model reruns1536enqueue/606consume tests PASS. Firstacquisition's real-stack
+queueconsumer isobserved butnotcheckedbythis synthetic-stack wholeRAM oracle.
+Session8519 live; nextpoll, thenverify_control_queued_event2.py. Producerperiod
+E5FC/descriptor11348 stillstaticnextlead. CAN211/21A sender/units/remoteDSC and
+bothroof gaps unchanged. NoGhidra projectedit yet fornewqueueproof.
+
+NEXT PRODUCER STATIC REFINEMENT: bank1 base112F4 from112EC. Index10
+row11344 hasselector2/zeroargumentwords/targetE5FC at11348. WrapperFBE8
+setsR5=10,R4=1 andcallsDAE8; its suppliedargument isnotcopiedbecausewords0.
+Thus upstream path usesqueue2/task3/DC2C ->E5FC ->215C6 ->queue3/task4/DC80
+->2BCE6. FBE8 nativecaller/timebase remains next; notyetexecuted chain.
+
+STATIC nativeperiod refinement:1062E loads1138C, callsindex0, increments
+51E0word anduses11414 ninebyte table[1,2,4,5,6,7,8,9,10] forbinarywheel.
+Crucially10680 increments51E2byte; at>=5 resets0 and10698 loadsarray+52
+(index13=FBE8),106A0tails it afterrestoringframe. Therefore event2 upstream
+request every5 calls of1062E underthisstaticreading. Otherarrayusers825C/
+107A0/108DC donot alone proveindex13. Next execute1062E anditsparent ISR,
+thenqueue2/DC2C/E5FC->queue3/DC80 withoriginaladmission. Freshdisassembly in
+control-event2-upstream-lead-disassembly.txt. No executedcadenceclaim yet.
+
+Parent located STATIC:1062E literalF350 isloaded atF296 withinF28C. F28C
+readswordF718, clearsbit80 usingFF7F andtails1062E. ThisisCMT1status-clear
+callbackcandidate; hardwarevector/admission/clockconfiguration stillneed
+execution/contextproof. Next verified5-invocation producersequence can use
+originalF28C/1062E withstrictF718 latch thenqueue2andqueue3 scheduling.

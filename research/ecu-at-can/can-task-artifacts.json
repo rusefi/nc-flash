@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-07",
+  "status": "PASS",
+  "artifacts": {
+    "verify_tcu_can_task_interrupt.py": {
+      "bytes": 6151,
+      "sha256": "031946da19864f7cd633ce051faa26cf5cf02ea8775ac2d538fab18d1a0b476c"
+    },
+    "verify_tcu_native_can_timeline.py": {
+      "bytes": 5361,
+      "sha256": "23ebf744014eebe04ef76459bc3f7e0f83a964ea81c327c8e93197c0421fc566"
+    },
+    "verify_tcu_diagnostic_timer.py": {
+      "bytes": 8074,
+      "sha256": "57fad6d9915d7fa85ad341223f361d24a5c70ca5f0964d1941629d158b41bd66"
+    },
+    "tcu_receive_fixture.py": {
+      "bytes": 7146,
+      "sha256": "f51a41f07c0b3dec6afba45775541c201bc3d74bc8529535a46e44d9d10dd756"
+    },
+    "tcu-can-task-interrupt.txt": {
+      "bytes": 6344,
+      "sha256": "dc68552a2ac4c160893b1f587b553b375d9d70aa833ebac01712cebf1ad26d34"
+    },
+    "tcu-can-task-interrupt-manual-excerpts.txt": {
+      "bytes": 13690,
+      "sha256": "6f60719b437657be4e409830034159304a0ea6b631cc7b52a03e4d089e28ea9d"
+    },
+    "tcu-can-task-interrupt-verification.json": {
+      "bytes": 20251,
+      "sha256": "94e72b0f140d5749e2f3aa40ad80d925a512fd8d57c03f76528d696bd2459983"
+    },
+    "tcu-can-task-interrupt-txpr-stop.json": {
+      "bytes": 17252,
+      "sha256": "7e4f2a64157b7582269f57b6ac7b22cc21856a5f9c994b3b6bd92f6f3a986aee"
+    },
+    "tcu-native-can-timeline-verification.json": {
+      "bytes": 16372281,
+      "sha256": "b2d9be48416aba62dd371db7ac082502b270ace4ee47cee4c07c9b063c74d87e"
+    },
+    "tcu-diagnostic-timer-verification.json": {
+      "bytes": 21283,
+      "sha256": "ea2c938791fec667402fdaf93fc6d6a862766fac7dc20b6ff0ae894b5df0cc8f"
+    },
+    "tcu-receive-admission-verification.json": {
+      "bytes": 3731,
+      "sha256": "4422f494c43d327a9a91666f67041972f42d7a772be95547261c7f690ce29e89"
+    },
+    "ghidra/annotations.tsv": {
+      "bytes": 385266,
+      "sha256": "d28903181c550aede59d47d2e448f36ddf2fed71d80c3bd8b290a0a2d8d988a5"
+    },
+    "ghidra/README.txt": {
+      "bytes": 6075,
+      "sha256": "212effae5783684a466fb9eb3285d44f38c8b73e965e566326994d2cb5884752"
+    },
+    "ghidra/snapshot.json": {
+      "bytes": 1326,
+      "sha256": "aaf168cf1d27f1e33cd794701c2d940037e14fcdfb8ea461196efc9f081b34db"
+    },
+    "ghidra/restore-verification.json": {
+      "bytes": 514,
+      "sha256": "00133bc39f15d3470955a8148eb27fbc293a322919080f36ece74e06de321b5a"
+    }
+  },
+  "inputs": {
+    "examples/LFG1TF000.bin": {
+      "bytes": 524288,
+      "sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+    },
+    "examples/LFFEEE-stock.bin": {
+      "bytes": 1048576,
+      "sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08"
+    },
+    "research/ecu-at-can/sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf": {
+      "bytes": 5102824,
+      "sha256": "359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c"
+    }
+  },
+  "archive": {
+    "bytes": 11024497,
+    "sha256": "e64db351e264af7d9e1613beca9a3c193a8bb3fbdb15a43ee57e28a82086db5a"
+  },
+  "restoration": {
+    "date": "2026-10-07",
+    "archive_sha256": "e64db351e264af7d9e1613beca9a3c193a8bb3fbdb15a43ee57e28a82086db5a",
+    "restored_project_files_verified": 11,
+    "restored_annotations_verified": 2001,
+    "identical_export_files": 1038,
+    "restored_programs": [
+      "LFFEEE-stock.bin",
+      "LFG1TF000.bin"
+    ],
+    "method": "Independent Ghidra read-only reopening; verify_restore.py checks archive/live/restored hashes, complete expected export sets, no incomplete readbacks, all annotation rows and identical exports."
+  },
+  "checks": {
+    "independent_gate_cases": 3072,
+    "complete_prefix_cases": 20,
+    "native_scenarios": 3,
+    "can_interrupts": 600,
+    "received_frames": 432,
+    "application_interrupts": 144,
+    "foreground_ram_checks": 224,
+    "capture_return_ram_checks": 93,
+    "command_pin_checks": 288,
+    "diagnostic_default_hash_matches_retained": true,
+    "receive_default_cases": 2816,
+    "receive_expiry_chains": 6,
+    "receive_prior_byte_identity": "Not established: no retained earlier hash"
+  },
+  "limits": "External GSR/timing/mailbox fixtures; TXPR commands only. Original ISR prefixes stop before RTE. Not full boot, hardware IRQ entry or physical CAN/actuation. Missing frames retain faults10117. All three broader requirements remain incomplete; no staging/commit/push."
+}

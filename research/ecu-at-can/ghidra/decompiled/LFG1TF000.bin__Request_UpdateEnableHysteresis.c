@@ -22,8 +22,8 @@ undefined * Request_UpdateEnableHysteresis(void)
   uint uVar13;
   
   sVar2 = DAT_ffff80f6;
-  uVar7 = DAT_ffff809c;
-  uVar6 = DAT_ffff809a;
+  uVar7 = Comparison_ApplicationInput;
+  uVar6 = Primary_ApplicationInput;
   puVar5 = PTR_Lookup_ByteCurveToFixedPoint_00023d7c;
   puVar4 = PTR_Request_EnableFallbackCalibration_2__00023d74;
   puVar3 = PTR_Request_EnableFlags_00023d6c;

@@ -1,0 +1,95 @@
+{
+  "status": "superseded by executed event2 absence and E26C scheduler limit; see control-acquisition-retained.txt",
+  "fixture_class_chain": [
+    {
+      "class": "SystemStartup",
+      "source": "research/ecu-at-can/sh_control_initialize_syscr.py"
+    },
+    {
+      "class": "RamFillStartup",
+      "source": "research/ecu-at-can/sh_control_initialize_dma.py"
+    },
+    {
+      "class": "TimerStartup",
+      "source": "research/ecu-at-can/probe_control_initialize_timer.py"
+    },
+    {
+      "class": "SelfTest",
+      "source": "research/ecu-at-can/probe_control_initialize_fpu.py"
+    },
+    {
+      "class": "Initialize",
+      "source": "research/ecu-at-can/probe_control_application_initialize.py"
+    },
+    {
+      "class": "Hooks",
+      "source": "research/ecu-at-can/probe_control_activity_hooks.py"
+    },
+    {
+      "class": "Outer",
+      "source": "research/ecu-at-can/probe_control_outer_event.py"
+    },
+    {
+      "class": "Observed",
+      "source": "research/ecu-at-can/verify_control_task_stop_retained.py"
+    },
+    {
+      "class": "StopProbe",
+      "source": "research/ecu-at-can/verify_control_task_stop.py"
+    },
+    {
+      "class": "TaskSerial",
+      "source": "research/ecu-at-can/sh_control_task_serial.py"
+    },
+    {
+      "class": "Probe",
+      "source": "research/ecu-at-can/probe_control_task.py"
+    },
+    {
+      "class": "ControlTaskArithmetic",
+      "source": "research/ecu-at-can/sh_control_task.py"
+    },
+    {
+      "class": "ControlApplication",
+      "source": "research/ecu-at-can/verify_control_reply.py"
+    },
+    {
+      "class": "ControlSerial",
+      "source": "research/ecu-at-can/verify_control_serial.py"
+    },
+    {
+      "class": "SHControlFloat",
+      "source": "research/ecu-at-can/sh_control_float.py"
+    },
+    {
+      "class": "SHModelFloat",
+      "source": "research/ecu-at-can/sh_model_float.py"
+    },
+    {
+      "class": "SHNormalRTZFloat",
+      "source": "research/ecu-at-can/sh_rtz_float.py"
+    },
+    {
+      "class": "SHExactFloat",
+      "source": "research/ecu-at-can/sh_exact_float.py"
+    },
+    {
+      "class": "SH",
+      "source": "research/ecu-at-can/sh_subset.py"
+    }
+  ],
+  "required_raw_source": "channel28 raw >>6 ->3976C ->6C92",
+  "required_enable_source": "channel1 400A ->6718 ->40E8 ->1DF14/1DF32 ->6CB4 ->74DF8 ->914B",
+  "next": "Verify original3D10 contextR4/index7 installsFFFF11E0 fromROM4144 and passesE26C to3F34; inspect/test RTE3F3C boundary before continuation. Do not fabricate current descriptor or skip scheduler.",
+  "prior_models": [
+    "verify_control_acquisition.py",
+    "verify_control_acquisition_schedule.py",
+    "verify_control_raw_enable.py"
+  ],
+  "evidence": [
+    "control-acquisition-retained-probe.json",
+    "control-acquisition-task-probe.json",
+    "control-acquisition-retained-verification.json",
+    "control-acquisition-scheduler-leads.txt"
+  ]
+}

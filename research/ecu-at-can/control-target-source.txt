@@ -1,0 +1,113 @@
+ECU target-map input production:30CE4,33C02,33C2A
+================================================
+2026-10-06. ECU/AT, deeptraction/DSC integration andNCroof folding/unfolding
+remainopen. This record advances numeric inputproduction, not physicalunits,
+remotecontroller behavior, actuation oractualcross-taskperiod/order.
+
+Inputs and reproduction
+-----------------------
+ python research/ecu-at-can/verify_control_target_source.py
+Python3.14.3, repositoryfiniteRTZ interpreter andindependent Fraction/map
+oracles. ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08;
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+JSON control-target-source-verification.json; fullrun passed.
+1,275 directcases,36originalcallerslices and80retainedcalls passed.
+
+Disassembly: control-target-source-disassembly.txt, source-helpers,
+source-caller1 andsource-caller2 withthe samecontrol-target- prefix.
+Sourceentry30CE4 ends30D82. Helpers33C02..33C28 and33C2A..33C58. Twooriginal
+caller sites16A70..16A76 and1C9B4..1C9BA, notthetargetregion1B558..1B588.
+ GNU SH binutils2.42 via:
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+ python research/ecu-at-can/disassemble.py \
+ --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+ at dis 0x30CE4 0x30DBA
+Repositoryscripts/inputROM/textdisassembly preserve reproducibility beyondthe
+machine-specifictemporary executable. NoROM orproduction application change.
+
+Executed semantics
+------------------
+AllRAMsuffixes belowareFFFFxxxx.154BC isarawfloatgetter:RTS154BC withFMov
+@R4,FR0 initsdelayslot154BE. No checksumvalidation on6D20/6D40/6D5C here.
+
+33C02:6960=RTZ(max(0,RTZ(6D20-DB154))*DB158), withstockDB154=86.0999984741211,
+DB158=0.5600000023841858. Equal/less inputsproduce0; firstrepresentablefloat
+aboveDB154 producespositive correction. Testsstraddlethreshold inbinary32.
+
+33C2A:target695C andold67E0 feed2508. coefficientDB148=0.9951000213623047;
+retention=RTZ(1-RTZ(1-coefficient)); filtered=RTZ(target+RTZ(retention*
+RTZ(old-target))). Ifabs(RTZ(target-filtered)) <33CA4(0.0048828125), snapto
+rawtarget. Then207C clampsbetweenDB14C=7 andDB150=16, publishing67E0.
+Thefloor appliesevenwhen old/filterarebelow7. Neithercoefficient isconverted
+to aphysical timeconstant; taskperiod hasnotbeenestablished.
+
+30CE4 firsttestsrawbyte8F30forANYnonzero, notexact1. Nonzero forces68FC and
+67E4 toDB15C=66.25 anddoesnotrecompute695C,6960 or67E0; thoseintermediatesretain.
+With8F30zero:mapA3804(raw6D5C)->695C, execute33C02 then33C2A, andpublish
+68FC=RTZ(RTZ(raw6D40+new67E0)+new6960). StockDB0C1=0 selects directcopy68FC
+into67E4. Thestockcode stillcontainsthe followinginactive branch:DB0C1exact1,
+raw6D20>DB214(80),word6920==0 ->2508filter68FC/old67E4 usingDB210~.95 and
+epsilon30F20~1e-5. ThatbranchisSTATICINTERPRETATION, notexecutedstockevidence.
+NoROMpatch usedtoforceit; verifiersassertstockcallsarecopyorfallback only.
+
+Verification and integration
+----------------------------
+1,275 directcases:11thresholdcorrection,48filter/clamp,696map/entryinputcrosses,
+120rawinhibit/count/thresholdcombinations,400seededrandomfinitecases. Thetwo
+originalcallers eachhave18slices; internalhelperorder andoutputRAM/stack
+matchthebodyoracles.80retainedcalls showfilterhistoryholdingthrough10fallback
+calls, thenresumingfrompreserved67E0; thefinaloutput66.25 isnotfed backinto
+thatcorrectionhistory. Nofirmware/model discrepancyfound ininitialdirectrun.
+
+Newcoupled replay suppliesraw6D40/6D5C/6D20 and8F30, executes30CE4, then
+originaltarget/followersequence andexistingnormalizedcontribution/CANchain.
+No67E4,695C,6960,67E0 or68FC fixture writeaftersetup. Anoptionalinput_producer
+callbackinverify_control_target_followers.step replaces itsoldraw67E4fixture;
+defaultNone preserves itspriorfixture behavior andavoidsa duplicatedpipeline.
+This schedulesseparateapplicationregions explicitly, notacompleteECUtaskrun.
+Raw6Dxx provenance and8F30reachability remainopen evenwhen allnumericchecks
+pass. Supplementalflags/countdowns andTCUeventsremainmodeledasinpriorrecords.
+
+Next leads and limitations
+--------------------------
+control-target-feedback-leads.txt containsalignedliteralreference candidates,
+notread/writeproof.693E readerat3042A and693F readerat30492 lieinthe30202body;
+control-target-feedback-disassembly.txt preserves30202..30512 fornexttrace.
+Next execute30202/695Bfeedback, raw6D40/6D5Csourceand8F30provenance, andactual
+scheduler relationship of16A72/1C9B6 production to1Btarget and18798consumer.
+ECU/ATfullacks/overlaps/storedsetters/persistence remainopen independently.
+Roofbothdirections retainreversal/timeout/synchronization/receiverrequirements
+inCHECKPOINT.txt andtraction-roof.txt; userhasnoadditionalartifacts. Thelatest
+factoryPDF evidence isroof-2015-document-crosscheck.txt; noCANroofcommandproof.
+Ghidra save andindependentrestore are complete afterthefullcoupledreplaypassed.
+
+Finalnewpath result:1,275 directcases,36originalcallerslices,80retainedcalls,
+320coupledcycles/36pairedCANupdates/320CAN211latchupdatespassed. Thecallback
+reuses theexistingtarget/follower/downstreampipeline. Aseparateunchanged-
+input regressionrerantheentirepriorfollowerverifier andcompareditsJSON
+byte-for-byte; identical. defaultNone retainedthepriorbehavior.
+
+Additional staticfeedback lead:30202 emits oneof695B=80/40/20/10/08/04/02/01
+(hex), byorderedpriority. Thepriorarbitraryflagcombinationtestsestablishbody
+priority butdonotshowthosecombinationsarenaturallyproduced. Itreads693E/693F
+at3042A/30492 andusespositive6914/6916;69BB/693B/6945admission alsoapplies.
+Itwritesprotectedbyte6956 via154C0, whose16bitstoreincludesbyte6957complement;
+allmodegettersabove readthefirstbyteonly.30500updates69ADfromentry6560.
+Nextverifiermustpreserveentryhistory/read-before-write timingandfullpriority.
+
+Compatibility regression: fullverify_control_target_followers.py rerunpassed
+3,664direct/54caller/130retained/320pairedcycles; outputJSON SHA256
+cf47f86b217daa42f625c45636953ca3cf25782f3927bd3a487dc8ecf60d299a unchanged.
+Seecontrol-target-source-compatibility.json. Thisadditionalrun wasjustified
+bytheoptionalcallback change tothatsharedreplay, notabroaderapplicationtest.
+
+Ghidra save/restore:1,530 annotations(677ECU/853TCU),749 identicalexports,
+11projecthashes verified. Apply/VerifyCanEvidence perghidra/README.txt;
+snapshot.py createdthepaired.gpr/.rep archive. Extractedseparatelyinto
+ghidra/restore-check/target-source-20261006, allinventoryhasheschecked,
+reopenedbothprograms read-onlywithVerifyCanEvidence andbytecompared every
+export. NoERROR/Exception/incompletedecompile/remainingprojectlocks.
+Archiveidentity in ghidra/snapshot.json andrestore-verification.json.
+Saved locally; no staging,commit,push orproductioncode/inputROMchanges.

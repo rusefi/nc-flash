@@ -1,0 +1,144 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00006600 <.data+0x6600>:
+    6600:	00 0b       	rts	
+    6602:	6e f6       	mov.l	@r15+,r14
+    6604:	4f 22       	sts.l	pr,@-r15
+    6606:	7f fc       	add	#-4,r15
+    6608:	95 14       	mov.w	0x6634,r5	! e0
+    660a:	d3 16       	mov.l	0x6664,r3	! 22e4
+    660c:	43 0b       	jsr	@r3
+    660e:	64 f3       	mov	r15,r4
+    6610:	d4 12       	mov.l	0x665c,r4	! ffff40d8
+    6612:	62 41       	mov.w	@r4,r2
+    6614:	d3 14       	mov.l	0x6668,r3	! ffff
+    6616:	62 2d       	extu.w	r2,r2
+    6618:	32 33       	cmp/ge	r3,r2
+    661a:	8d 03       	bt.s	0x6624
+    661c:	00 09       	nop	
+    661e:	61 41       	mov.w	@r4,r1
+    6620:	71 01       	add	#1,r1
+    6622:	24 11       	mov.w	r1,@r4
+    6624:	d3 11       	mov.l	0x666c,r3	! 22f4
+    6626:	43 0b       	jsr	@r3
+    6628:	64 f2       	mov.l	@r15,r4
+    662a:	7f 04       	add	#4,r15
+    662c:	4f 26       	lds.l	@r15+,pr
+    662e:	00 0b       	rts	
+    6630:	00 09       	nop	
+    6632:	f7 26       	fmov	@(r0,r2),fr7
+    6634:	00 e0       	.word 0x00e0
+    6636:	00 00       	.word 0x0000
+    6638:	ff ff       	.word 0xffff
+    663a:	40 d6       	.word 0x40d6
+    663c:	00 0d       	mov.w	@(r0,r0),r0
+    663e:	c3 c4       	trapa	#196
+    6640:	00 0d       	mov.w	@(r0,r0),r0
+    6642:	c3 c2       	trapa	#194
+    6644:	ff ff       	.word 0xffff
+    6646:	40 cc       	.word 0x40cc
+    6648:	ff ff       	.word 0xffff
+    664a:	40 d4       	.word 0x40d4
+    664c:	00 0b       	rts	
+    664e:	ac d4       	bra	0x5ffa
+    6650:	00 0b       	rts	
+    6652:	ac d0       	bra	0x5ff6
+    6654:	ff ff       	.word 0xffff
+    6656:	40 d0       	.word 0x40d0
+    6658:	ff ff       	.word 0xffff
+    665a:	40 da       	.word 0x40da
+    665c:	ff ff       	.word 0xffff
+    665e:	40 d8       	.word 0x40d8
+    6660:	00 00       	.word 0x0000
+    6662:	ff fd       	.word 0xfffd
+    6664:	00 00       	.word 0x0000
+    6666:	22 e4       	mov.b	r14,@-r2
+    6668:	00 00       	.word 0x0000
+    666a:	ff ff       	.word 0xffff
+    666c:	00 00       	.word 0x0000
+    666e:	22 f4       	mov.b	r15,@-r2
+    6670:	d3 1c       	mov.l	0x66e4,r3	! ffff4042
+    6672:	62 31       	mov.w	@r3,r2
+    6674:	d1 1c       	mov.l	0x66e8,r1	! ffff40e4
+    6676:	21 21       	mov.w	r2,@r1
+    6678:	2f e6       	mov.l	r14,@-r15
+    667a:	4f 22       	sts.l	pr,@-r15
+    667c:	d3 19       	mov.l	0x66e4,r3	! ffff4042
+    667e:	7f fc       	add	#-4,r15
+    6680:	de 19       	mov.l	0x66e8,r14	! ffff40e4
+    6682:	62 31       	mov.w	@r3,r2
+    6684:	d1 1a       	mov.l	0x66f0,r1	! 2534
+    6686:	2f 21       	mov.w	r2,@r15
+    6688:	d2 18       	mov.l	0x66ec,r2	! dc474
+    668a:	66 21       	mov.w	@r2,r6
+    668c:	65 e1       	mov.w	@r14,r5
+    668e:	65 5d       	extu.w	r5,r5
+    6690:	64 f1       	mov.w	@r15,r4
+    6692:	41 0b       	jsr	@r1
+    6694:	64 4d       	extu.w	r4,r4
+    6696:	f5 8d       	fldi0	fr5
+    6698:	d3 17       	mov.l	0x66f8,r3	! 20a8
+    669a:	2e 01       	mov.w	r0,@r14
+    669c:	c7 15       	mova	0x66f4,r0
+    669e:	f4 08       	fmov	@r0,fr4
+    66a0:	43 0b       	jsr	@r3
+    66a2:	64 e1       	mov.w	@r14,r4
+    66a4:	d4 15       	mov.l	0x66fc,r4	! a3a24
+    66a6:	d2 16       	mov.l	0x6700,r2	! 22f8
+    66a8:	42 0b       	jsr	@r2
+    66aa:	f4 0c       	fmov	fr0,fr4
+    66ac:	d3 15       	mov.l	0x6704,r3	! ffff40e0
+    66ae:	f3 0a       	fmov	fr0,@r3
+    66b0:	7f 04       	add	#4,r15
+    66b2:	4f 26       	lds.l	@r15+,pr
+    66b4:	00 0b       	rts	
+    66b6:	6e f6       	mov.l	@r15+,r14
+    66b8:	d2 0b       	mov.l	0x66e8,r2	! ffff40e4
+    66ba:	65 21       	mov.w	@r2,r5
+    66bc:	d1 12       	mov.l	0x6708,r1	! dc472
+    66be:	64 5d       	extu.w	r5,r4
+    66c0:	63 11       	mov.w	@r1,r3
+    66c2:	63 3d       	extu.w	r3,r3
+    66c4:	34 33       	cmp/ge	r3,r4
+    66c6:	8f 02       	bf.s	0x66ce
+    66c8:	00 09       	nop	
+    66ca:	a0 09       	bra	0x66e0
+    66cc:	e4 01       	mov	#1,r4
+    66ce:	d0 0f       	mov.l	0x670c,r0	! dc470
+    66d0:	63 01       	mov.w	@r0,r3
+    66d2:	63 3d       	extu.w	r3,r3
+    66d4:	34 33       	cmp/ge	r3,r4
+    66d6:	8d 02       	bt.s	0x66de
+    66d8:	00 09       	nop	
+    66da:	a0 01       	bra	0x66e0
+    66dc:	e4 02       	mov	#2,r4
+    66de:	e4 00       	mov	#0,r4
+    66e0:	00 0b       	rts	
+    66e2:	60 43       	mov	r4,r0
+    66e4:	ff ff       	.word 0xffff
+    66e6:	40 42       	.word 0x4042
+    66e8:	ff ff       	.word 0xffff
+    66ea:	40 e4       	.word 0x40e4
+    66ec:	00 0d       	mov.w	@(r0,r0),r0
+    66ee:	c4 74       	mov.b	@(116,gbr),r0
+    66f0:	00 00       	.word 0x0000
+    66f2:	25 34       	mov.b	r3,@-r5
+    66f4:	38 a0       	cmp/eq	r10,r8
+    66f6:	00 00       	.word 0x0000
+    66f8:	00 00       	.word 0x0000
+    66fa:	20 a8       	tst	r10,r0
+    66fc:	00 0a       	sts	mach,r0
+    66fe:	3a 24       	div1	r2,r10
+    6700:	00 00       	.word 0x0000
+    6702:	22 f8       	tst	r15,r2
+    6704:	ff ff       	.word 0xffff
+    6706:	40 e0       	.word 0x40e0
+    6708:	00 0d       	mov.w	@(r0,r0),r0
+    670a:	c4 72       	mov.b	@(114,gbr),r0
+    670c:	00 0d       	mov.w	@(r0,r0),r0
+    670e:	c4 70       	mov.b	@(112,gbr),r0
+

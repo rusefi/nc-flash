@@ -1,0 +1,125 @@
+Follow-up correction: control-raw-provenance.txt executes upstream6D876/
+6D904 and the original three-call sequence. Inclusive6CAE8..248 DOES clear
+fallback. Statements here about recovery-alone apply to isolated6D9E6 with
+fixed reset inputs, not the complete upstream path.
+
+ECU raw-input publication and retained fallback (2026-10-06)
+==========================================================
+
+Objective and scope
+Continue all three open requirements: ECU/automatic-transmission CAN
+integration, deep traction-control logic/integration, and NC roof folding
+AND unfolding including interruption/reversal/timeout/sync/recovery.
+This milestone closes bounded ECU input-publication questions only. User
+has no additional DSC/roof dumps, captures or physical test results. No
+commit/push authorization; work is saved locally without staging.
+
+Executed evidence
+Unmodified examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+verify_control_raw_inputs.py checks original instructions against independent
+finite binary32 RTZ arithmetic, complete application-RAM comparisons (excluding
+the synthetic stack), protected-record checksum words, stack restoration and
+SR interrupt-mask preservation. It does not simulate the ECU or real time.
+576 first-publisher cases, 9,216 second-publisher cases, 6,912 selection/history
+cases, six initializations, 2,048 fallback-latch cases and 320 retained cycles
+pass. Selected output and fallback flag each cover all 256 raw flag bytes;
+other flags include nonboolean 2/255. JSON records counts and boundary states.
+
+39E7C:
+- If byte8EF8 is zero, protected6D20 and6D28 receive float40F4. Protected6D38
+  receives max(6D20, ROM B814C=90) only when byte6565 equals1; otherwise6D20.
+- If8EF8 is any nonzero byte,6D20=ROM B8144=40,6D28=6D38=B8148=80.
+- When getter154B0(7016) returns zero, protected6D30 captures6D20. Any nonzero
+  return retains the previous6D30. Initializer39E74 writes protected zero.
+  The physical meaning of these numbers is not established by this test.
+
+39F48:
+- If byte8F30 is zero, protected6D40 receives float40E0; any nonzero byte
+  selects ROM B8158=20. When7016 is zero, raw float6D48 captures6D40;
+  otherwise6D48 is retained.6D48 has no checksum write here.
+
+3A156:
+- Protected6D5C receives6D58 unless8EC6 equals1 or6D58 exceeds65536;
+  either condition publishes zero. Exactly65536 and negative values pass.
+  Nonboolean8EC6 values other than1 do not independently force zero.
+- Protected6D68 = RTZ(RTZ(abs(RTZ(old6D88-new6D5C))*20)/3).
+  This is a numeric difference, not a demonstrated physical acceleration.
+- Six raw floats at6D74..6D88 shift one position toward higher addresses;
+  new6D5C enters6D74. Difference uses the OLD oldest sample before shifting.
+- Initializer3A044 zeros both protected6D5C and6D68, leaving history alone.
+
+6D9E6 produces the8F30 fallback latch:
+- If getter154B0(9462)==1 OR byte8F38==1, clear8F33..8F36 and8F30.
+  This branch retains8F37.
+- Otherwise each zero input byte8F2C..8F2F sets corresponding8F33..8F36=1;
+  a nonzero input retains that latch. Only8F35==1 OR8F36==1 sets8F30=1
+  and clears8F37. With neither exactly1,8F30 and8F37 retain their old values.
+- Thus recovered input bytes alone do not clear an already set fallback.
+  This is a firmware latch rule, not proof of a particular sensor fault/DTC.
+  Diagnostic follower6DAB8 and input-producing predecessors remain static leads.
+
+Retained integration and relationship to earlier work
+320 explicitly ordered cycles execute6D9E6,39E7C,39F48, actual CAN4B0
+unpack35FA6/validity35EBA/selection3A05E,3A156, then30CE4 with its original
+33C02/33C2A helpers and stock maps. The pre-existing target-source oracle
+checks every produced target component. No6D20/6D40/6D5C or67E4 output is
+injected in this retained chain. Raw40F4/40E0, CAN payloads, latch inputs,
+cached452C and fallback6E18 remain fixtures. D504 executes its cached branch
+(4564=0); its live timer/peripheral path is outside this proof.
+
+The replay covers both invalid CAN4B0 words, single valid words, valid pair
+averaging, MT cached fallback, AT numeric/sentinel fallback, invalid8EC6=1
+then nonboolean2, and snapshot hold/release.6D9E6 sets fallback at cycle181;
+restored raw input at182 leaves it latched through200;9462=1 clears at201.
+30CE4 consequently publishes fallback67E4=66.25 during181..200. The separate
+39F48 publication becomes20 during fallback, but30CE4 bypasses its normal
+calculation then. No implication that fallback67E4 equals6D40.
+
+Prior verify_can201_speed.py/can201-speed.txt already proved3A05E and cached
+D504 selection; this milestone adds its protected6D5C/history consumer and
+connection to target calculation. Prior control-normalized-inputs.txt already
+executed399B0; do not describe that body as newly verified or still unexecuted.
+Its original1693E/199BC caller regions/task cadence remain separate leads.
+
+Reproduction and artifacts
+  python research/ecu-at-can/verify_control_raw_inputs.py
+Output: control-raw-inputs-verification.json. Python3.14.3; existing strict
+SH interpreter and binary-search RTZ reference, no dependency/ROM modifications.
+Disassemblies: control-raw-input-temperature (39D90..39F48), publication
+(39EF0..3A280), max (23E8..23F8), difference (2578..2580), flag-leads
+(6D9D0..6DB20). Address ranges include literal data and partial neighbors;
+not every printed line is executable code. helper (D504..D530) is an earlier
+PARTIAL live-peripheral lead only, not an executed body or new finding.
+All filenames above have '-disassembly.txt' suffix after their listed stem.
+Disassembler setup already documented in repository task records:
+  LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+  python research/ecu-at-can/disassemble.py \
+    --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+    at dis 0xSTART 0xEND
+GNU SH binutils2.42. The durable original ROM, script and text exports permit
+reproduction even if that temporary tool installation disappears.
+
+Limits and next actions
+No subnormal/nonfinite/FPSCR exception cases, physical units, hardware timing,
+ADC-to-40E0/40F4 provenance, upstream8EF8/8F2C..2F writers, actual scheduler,
+DSC sender or remote actuation claim. No physical test was performed.
+Next traction: acquisition-to40E0/40F4 and8F2C..2F input qualification, then
+original399B0 caller regions/cadence; channel1/8 board identity and CAN211/21A
+units/sender remain open. TCU timer configuration/adaptation/writers and
+queue/ack/overlap/cadence/persistence/physical integration remain independent.
+Roof next: inspect actual AllCarManuals NC archive for applicable2009 technical
+and multiplex sections; preserve both directions and the missing OEM receiver
+evidence. Factory/component pin/PID conflicts remain unresolved.
+
+Ghidra save and independent restore completed
+Six function and ten RAM labels added; both programs saved. Live and restored
+readback:758 ECU/934 TCU annotations,832 byte-identical exports and11 matching
+project hashes before/after read-only reopen. Archive10,953,851 bytes SHA256
+0d9663c3bb7dc2ca8bb24b3e0f350bbd521ab770689ce82662286b1ef083463b.
+Restored into ghidra/restore-check/raw-inputs-20261006. No errors, incomplete
+decompiles or remaining locks. snapshot.json/restore-verification.json hold
+identities. Python compilation and git diff --check pass. All nine new task
+artifacts are Git-eligible; six new decompiled function exports are durable.
+No shared interpreter/verifier, ROM or production code changes. Nothing staged,
+committed or pushed; pre-existing mixed index including AD archive.tmp preserved.

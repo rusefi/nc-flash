@@ -1,0 +1,131 @@
+2026-10-06: executed optional proposal-threshold adjustments
+
+RESULT / BOUNDARY
+Original44E14 modifies selected4530C thresholds using a stored signed offset,
+an alternate lookup axis and cached upper thresholds. Original44F5A applies
+a mode-selected floor, but all its stock constants/map values arezero, so it
+preserves the incoming threshold in this image. Both admission paths now
+execute in whole4530C and44CFE replays. Stored-value provenance, natural input
+production, complete scheduling and physical behavior remain open.
+
+REPRODUCTION
+  python research/ecu-at-can/verify_tcu_optional_thresholds.py
+Python3.14.3 standard library, assertions enabled. No input ROM, application
+code, shared interpreter or prior verifier changes.
+Output: tcu-optional-thresholds-verification.json.
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Synthetic snapshots150/211 from tcu-fault-selection-snapshots.json SHA256
+16d58c0427de7905b52531ef943cc01b311d1aeeda511eebf33d525362bda943.
+Independent observers record/check arguments and returns; original helpers,
+all four descriptor producers and selection stages execute without stubs.
+
+VALIDATION
+3,283 direct cases: signed getter20, upper modifier2500, lower175, floor588.
+Upper direct cases use synthetic constant word curves in RAM to exercise
+original interpolation and clamp edges. Stock tables remain unchanged.
+72 whole4530C admission cases cover signed80F2 threshold/equality/negative
+boundary, individual inhibit bits, nonblocking neighboring bits,classFF and
+normal/dynamic/fixed descriptor sources. Observed calls match expected gates.
+48 threshold-and-proposal-scan replays cross admission, four combined modes,
+stored offsets-1000/0/+1000 and809C below/equal23040.
+16 full44CFE and qualification replays cover fault/recovery snapshots with
+admissionoff/on, combined mode0/3 andoffset-1000/+1000. Stack and complete
+threshold outputs are checked; inherited producer/selection models also run.
+The72 admission cases were added and executed separately after the main run;
+saved output includes them and main() reproduces all cases. No repeat of the
+unchanged long traces was needed. Initial script syntax error used reserved
+keyword return as a dict argument; corrected to return_pc before execution.
+No firmware-model assertion failed in this milestone.
+
+4530C ADMISSION AND CALL ORDER
+Short RAM addresses omitFFFF prefix. Entry captures:
+ axis9B3E, or941E when ENTRY source9B40 is13/14;
+ signedROM77372=23040, word92F0, byte92D1.
+After four producers46FA0/46200/45AA4/47240, adjustment44E14 is admitted when:
+ signed80F2 >=ROM77370=32000,
+916Fbit4 clear,92D9bit4 clear,class8080 notFF,916Cbit0 clear.
+It additionally requires descriptor kind0/1 andslot0/1/2/5/6/7.
+Eachslot first interpolates its published descriptor at the entry-captured
+axis.44E14, when admitted, receives alternate axis lowword(23040*2)=46080.
+This second lookup axis comes from ROM, not a runtime measurement.
+Then44F5A can run onslots2/3/4 if combined mode is nonzero:
+ mode=(current9AE9bit0)+2*(entry-captured92D1bit3).
+It receives lowword(entry92F0<<3). The two modifiers can apply sequentially
+to slot2. The final threshold is published at9B1E+2*slot.
+
+GETTER24584 / OFFSET MAPPING
+24584 sign-extends word[616A+2*u16(index)], in its RTS delay slot.
+44E14 indexes using wordROM73BEE[slot]. Stock mapping forslots0..9:
+6,7,8,0,0,6,7,8,0,0. Production uses words6176/6178/617A for its six slots.
+Getter execution does not prove these values are EEPROM-backed or calibrated
+on a vehicle; the new tests explicitly supply the stored words.
+
+44E14 ALGORITHM
+All incoming thresholds are compared as unsigned16 unless stated otherwise.
+Upper slots0..4:
+ bound=clamp(curve(slot,alternate_axis)+signed stored_offset,0,32767).
+ Write bound to cache9B42+2*slot, even if it is not selected as final output.
+ Ifsigned809C>=23040, returnbound unconditionally; otherwise return
+ min(incoming,bound). Thus this path can RAISE a threshold when809C qualifies.
+Lower slots5..9:
+ bound=max(0,signed16(signed16(cache[slot-5])-byteROM73BE8[slot-5]*64)).
+ Returnmin(incoming,bound); do not modify the cache.
+Stock subtractor forproduction lower slots5/6/7 is512. Other two valueszero.
+The signed low-word reinterpretation matters for arbitrary seeded cache
+values; production upper bounds are0..32767. Tests preserve that distinction.
+The upper slots execute first, so admitted matching lower slots normally see
+this call's cache. Kind/admission changes can leave cached values from earlier
+calls; no blanket claim of fresh cache under arbitrary descriptor combinations.
+
+44F5A ALGORITHM / STOCK NEUTRALITY
+For slots2..4, initialfloor=0 ifmode==2, otherwisebyteROM73BEB[slot-2]*64.
+Unlessmode==1 orslot==2, raise floor to at least
+ bytecurve(73C02+7*(slot-3),axis)>>2.
+Returnmax(unsigned incoming,floor).
+All three bytes at73BEB arezero. Both byte curves haveaxes32/40/48 (scaled
+by256 for10764) andallzero values. Therefore the floor iszero in this stock
+ROM, including modes0..3. Direct execution includes all modes and axis knots,
+neighbors, endpoints andincoming0..65535 samples. No altered ROM was tested.
+
+OBSERVED CONSEQUENCES
+For standalone4530C fixture withcomparison809C=23040 andoffset0:
+ admissionoff upper slots0..2 are1211,2421,3352; proposal scan returns[4,0].
+ admissionon upper slots0..2 become4004,7542,11174; scan returns[2,0].
+With809C=3200, min-selection keeps these original upper thresholds and the
+scan remains[4,0], despite the refreshed higher cache.
+Withadmissionon and809C=23040, offsets-1000/+1000 shift those cached/selected
+uppers by-1000/+1000; proposal remains[2,0] at this measurement.
+The16 full44CFE replays all finish proposal1/accepted1 in these fixtures;
+snapshot150 has no new creation, snapshot211 creates[6,8,0]. Thus the local
+scan difference does not demonstrate a changed final application transition.
+Intermediate thresholds are checked even when later policy masks their effect.
+
+PROVENANCE / NEXT ACTION
+Literal search found616A references at137B8 and indexed setters/getters.
+Static24562 and2456E both writeword616A+2*u16(index) fromr5 andreturnzero;
+2457A is a second signed getter. Setter caller leads:
+24562:3688C (pool368F8).
+2456E:36D88,36E3C,36EBC,4A0DC (pools36E70/36F94/4A13C).
+Next execute these stored-adjustment producers and initialization137B8,
+then naturally generated changes through4530C/selection. No persistent-storage
+identity follows merely from the lowRAM array or table-driven accesses.
+Also retain upstream class/source controls, natural overlap/composites and
+actual timer/application order. Local optional-modifier proof is not complete
+ECU/AT integration or a physical transmission validation.
+Traction next307EC/30BA4/3174C, input/gate provenance and399B0 scheduling.
+Roof independently retains folding ANDunfolding, interruption/resume/reversal,
+timeout, motor synchronization and fault recovery. Documentation is in
+roof-fault-recovery.txt; missing receiver/hardware proof stays explicitly open.
+
+DISASSEMBLY / SAVE STATUS
+tcu-optional-threshold-leads-disassembly.txt preserves44E14/44F5A/4530C and
+24584. Existing disassemble.py with GNU SH objdump2.42 reproduces these ranges.
+New results/script Git-eligible; syntax anddiff checks passed. Ghidra
+annotation/save/archive/independent restore status is in CHECKPOINT.txt and
+the paired manifests. Saved locally; no staging, commit or push.
+
+Ghidra saved2026-10-06:1436annotations(613ECU/823TCU),708identical exports;
+independent restored project hashes11/11 and both program readbacks pass.
+Archive10,881,161bytes, SHA256 969353c93d5afc6a522415a428564ba119150bf14d5b3bdc0cc9e922a4e5f501.
+Saved locally; no staging, commit or push. Allthree research goals remain open.

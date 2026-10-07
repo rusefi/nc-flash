@@ -1,0 +1,23 @@
+Unidentified ECU EC62 source follow-up — 2026-10-07
+
+Scope: resolve the native task17 startup stop atA46F6 wordwriteFFFFEC62.
+Prior executed/static context is authoritative in control-scheduler-start.txt.
+No fixture or register identity has been guessed; no firmware was skipped.
+
+New primary-source lead checked:
+Renesas SH-2E SH7059/SH7058S Hardware Manual REJ09B0177-0500, rev5.00
+Feb24,2010,1050 PDF pages, browser extraction59907 lines:
+https://www.renesas.com/en/document/mah/sh-2e-sh7059-f-ztattm-sh7058s-f-ztattm-hardware-manual
+Browser find EC62 and EC64 both returned no matching text. This is only a
+text-search failure, not proof that the address is absent on every variant.
+Direct Python3.14 urllib.request.urlopen download returnedHTTP403; no PDF was
+saved. This source does not identify EC62 or justify an MMIO latch.
+Queries Renesas "EC62" "RAM", SH7058 "FFFFEC60", SH7058 RAM emulation address
+mapping control register, "FFFFEC62" SH7059, "SH7058" "EC64" yielded no applicable
+register definition. Ignore unrelated x86 dump hits. Official manual title
+search with domains=[renesas.com] found the newer manual above.
+Existing SH7058 manual RAMER isFFFFEC26, still notEC62. Prior E6000H failedlead
+already recorded; do not repeat it. EC62 identity remains open; next needs a
+variant-specific register definition or OEM hardware evidence. No extra user
+artifacts available. Executed traction behavior and missing remoteDSC/CAN211/
+21A sender/units remain separately recorded in control-preemption.txt.

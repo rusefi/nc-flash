@@ -1,0 +1,90 @@
+TCU retained application interrupt and configured relative clocks — 2026-10-07
+
+Objective and scope
+Close ECU/AT integration while preserving deep traction and both NC roof
+folding/unfolding requirements. All remain incomplete. User has no additional
+DSC/roof images, captures or bench results. No commit or push authorized.
+This report joins the verified application ISR to retained tasks; it does not
+establish full boot, hardware interrupt acceptance or a physical vehicle clock.
+
+Inputs and reproducibility
+examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+Python3.14.3, repository local SH interpreters; no shared ISA/production edits.
+python research/ecu-at-can/probe_tcu_application_clock.py
+python research/ecu-at-can/verify_tcu_application_clock.py
+python research/ecu-at-can/probe_tcu_cmt1_delivery.py --cycles 8 --filename tcu-application-hook-reuse-prefix8.json
+python research/ecu-at-can/probe_tcu_application_clock.py --cycles 320 --filename tcu-application-clock-probe.json
+
+Implementation and evidence
+The optional application_delivery hook in verify_tcu_application_order.run
+replaces direct126EC with original16A58 through16B00 beforeRTE, calling
+1220A->126EC->1E5F6. Existing task direct-call, event, phase/counter and
+independent529AC/185F8 command/pin assertions remain active. Original16A3C
+initializes application MMIO with explicitF401 samples7/7, six ordered accesses
+and unchanged application RAM. Mode8007=3 is still the initialized fixture;
+this join does not establish its readiness producers or native boot admission.
+
+Conditional periods follow tcu-cmt-configuration.txt and
+ tcu-application-interrupt.txt: CMT020000, CMT140960, application81920
+peripheral clocks. The fixture merges these exact integer periods from a
+common epoch0, CMT0 thenCMT1 thenapplication on simultaneous matches, zero
+compare latency. Application compare increments2560 modulo65536. This ordering
+is supplied; CMT0/1 priority9/8 has separate executed configuration evidence,
+but application-priority/enable/hardware acceptance is not proved here.
+Old8/100 primary/clock hook requests are suppressed; no double delivery.
+Capture and CAN arrivals still follow the prior once/task external fixtures;
+capture counter differences are not derived from the new peripheral timeline.
+Diagnostic task still runs once/application. Profiling samples1000*n/+100
+are explicit samples, not instruction timing. No asynchronous nesting/RTE.
+
+Independent posthoc verification reuses verify_tcu_clock_ratio.check with an
+explicit application option. It enumerates closed-form timestamps separately
+from the runtime merge, replays the independent mixed clock wheel at each
+boundary, replays actual hold-entry RAM through the independent20CBC model,
+checks every CMT1 phase/access, and checks application compare/profile accesses,
+entry chain, phase progression and existing runtime check markers. Application
+whole-RAM equality is differential against original1220A plus independent
+profiling, not an independent oracle for every nested task body.
+
+Completed: prefix8 PASS,8 application/32 CMT0/16 CMT1/16capture prefixes,
+2 actualhold wholeRAM checks,16 independent command/pin boundaries. Existing
+default8-pair CMT1 trace is byte-identical after the hooks (SHA recorded in
+ tcu-application-clock-verification.json). Ratio-only prefix verification also
+passes after the optional posthoc-verifier parameter was added. Native-period
+results are not asserted equal to old100:8 lifecycle dates.
+
+Full320 started; CHECKPOINT.txt owns the live handle. Next verify its output,
+including compare wrap and variable4/5 CMT0 counts, then record observed
+request/ack/communication/capture-loss behavior without importing old dates.
+No Ghidra edits yet for this joined result; prior1936-annotation paired archive
+remains valid and contains the isolated application ISR proof.
+
+FULL320 COMPLETED, independently verified (2026-10-07)
+Session35285 exited0; verify_tcu_application_clock.py PASS:320application/
+1310CMT0/640CMT1/560capture prefixes,80actualhold wholeRAM checks,640existing
+command/pin independentboundaries,320independentCMT0wheel replays,12application
+comparewraps. Exactfirst8 anddefault-hook byteidentity preserved. Two request
+creations/16acks, noassertionfailure. JSON contains fulltransitions/differences.
+This is a complete320-pair test, NOT completed ECU/AT integration.
+
+Observed zero-based milestones differ fromboth oldtiming experiments:
+requestcreated57/managedempty59/phaseempty125; captureloss280 setsactualhold
+withhead9/history18*1216/elapsed4/ratio862/timer2. At316 elapsed152/ratio32768/
+timer20; nohistoryreset. Anothergroup8code5 requestcreated297/managedempty299,
+but phaseindex1 remains at319 and heap header0005FF06, not free007FFFFF.
+A939 remains0 andA722 remains0 throughout; previouscommunicationqualified
+fault/recovery dates do NOT transfer.9454 remains1 and80E8 remains10240.
+No phasecleanup or communicationrecovery claim for this newer schedule.
+
+Next prioritize consistentcapture countertimebase/arrivals anddiagnostic
+admission/timebase, then remainingphase lifecycle. Do not blindly lengthen or
+claim physicalbehavior from once/task externalcaptureintervals undernewclock.
+Ghidra annotations now torecord this boundedresult anditsremainingphase;
+CHECKPOINT owns subsequentarchive identity. No probe process remainslive.
+
+Persistence verified2026-10-07: Ghidra12.1.3PUBLIC/Java21.0.10,
+1944annotations(841ECU/1103TCU),997completeidenticalexports,11projecthashes
+before/afterindependentread-onlyreopen andagainstlive. Pairedarchive11,014,570
+bytes SHA25695812a459ec27c16dc1795998ff3521a82d3c75159279f82670385d90ab9c864. Bothprograms saved;
+verify_restore.py PASS. No pendingGhidra process orprojectedits. No commit/push.

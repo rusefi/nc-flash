@@ -17,7 +17,7 @@ uint SparkRequest_CalculateRecordOneValue(void)
   short local_14 [6];
   
   psVar5 = local_14;
-  puVar1 = (undefined *)(int)DAT_ffff809a;
+  puVar1 = (undefined *)(int)Primary_ApplicationInput;
   if ((int)puVar1 < 0) {
     puVar1 = (undefined *)0x0;
   }

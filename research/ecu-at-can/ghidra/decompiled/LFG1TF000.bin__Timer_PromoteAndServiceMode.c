@@ -1,6 +1,7 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Promotes8009 from1 to3 then calls12886; every byte mode executed. */
+/* Promotes8009 from1 to3 then calls12886; every byte mode executed. NativeCMT1prefix nowverifies
+   status/mode admission andwholeRAM primarywheel effects; tcu-cmt1-delivery.txt. */
 
 void Timer_PromoteAndServiceMode(void)
 

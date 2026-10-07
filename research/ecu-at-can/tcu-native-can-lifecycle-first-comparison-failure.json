@@ -1,0 +1,18 @@
+{
+  "session": 78093,
+  "process_exit_code": 1,
+  "firmware_status": "PASS",
+  "completed_application_periods": 320,
+  "failure": "AssertionError comparing raw Python event rows containing MMIO tuples to decoded baseline JSON arrays; probe_tcu_native_can_lifecycle.py verify() line69.",
+  "raw_execution_sha256": "df9c4135d9ff1f43ecf962712b45bd581df5220ab386c32553d273edebee600f",
+  "executed_driver_identity": {
+    "bytes": 5457,
+    "sha256": "ddc6642955bcb1cb52f267c3b8acb5ad6a08f09fa3e790dda4e35d148e25ed90"
+  },
+  "correction": "Serialize both sides by reading the already saved execution JSON in verify_saved(); runtime body and data unchanged. --verify-only PASS1184 oldprefix rows plusinitializers; writes separate verification JSON.",
+  "result_files": [
+    "tcu-native-can-lifecycle-probe.json",
+    "tcu-native-can-lifecycle-verification.json"
+  ],
+  "no_firmware_rerun": true
+}

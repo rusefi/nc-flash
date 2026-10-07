@@ -1,0 +1,113 @@
+RAW QUALIFICATION ENABLE AND SELECTIVE ACQUISITION — 2026-10-06
+
+Full objective remains ECU/automatic-transmission CAN integration, deep
+traction-control logic/integration, and NC roof folding AND unfolding CAN
+integration including interruption/resume/reversal/timeout/synchronization/
+fault recovery. All remain incomplete. No additional user DSC/roof dumps,
+captures or physical results exist. No staging/commit/push authorization.
+Prior turn made verified progress; this is additional executed ECU evidence.
+
+Unchanged input: examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Original instructions execute in existing bounded SH interpreters; independent
+whole application-RAM oracles, stack/mask checks and existing ADC access
+models. No shared interpreter, prior verifier, ROM or production edits.
+
+74DF8 copies float6CB4 to9108 and writes914B=1 only when8<6CB4<200,
+using ROM E0CEC/E0CF0; endpoints disable. All other finite tested values
+write0, regardless previous flag. Channel1 provenance was already executed:
+400A ->6718 ->40E8 ->1DF14/1DF32 ->6CB4. All1024 alignedADCcounts now
+execute scaling/initial publication/74DF8; enable iff count>=410. This numeric
+threshold does not identify a physical sensor, voltage or units. Maximum
+stock channel1 scale is below20, so upper200 is not reached by these samples.
+1B14E..1B154 original single-call site executes74DF8; site16616 also loads
+74DF8 via pool167FC (static candidate only). Relative task order below is
+explicit; intervening routines are omitted, not declared irrelevant.
+
+First raw input qualification:
+6CD96 uses unsignedword6C92=channel28raw>>6, already decoded by3976C.
+ROM E02BE=40 andE02C0=939 define inclusive recovery range. Outside it,
+914B exact1 sets low8EF9/high8EFA flag, else each flag clears. Always clears
+8F00 first.9462 exact1 clears8EFF; otherwise an in-range sample sets8EFF
+and8F00=1 independently of914B; out-of-range retains8EFF until latch logic.
+6CE24 reloads8EF4/5=50 (E02BC) and8EF6/7=3 (E02BD) for9462 exact1 OR
+8F00 exact1. Otherwise corresponding exact1 low/high flags decrement each
+counter tozero with saturation. Disabled qualification holds counters.
+6CF06 clears8EFB..8EFE and8EF8 for either reset; otherwise zero counters
+set matching sticky flags1.8EFD or8EFE exact1 sets8EF8=1 and8EFF=0;
+otherwise both retain. Nonboolean flags2/255 are explicitly tested.
+6CD70 calls qualifier, reloads counters, tailcalls latch;20 wrapper checks.
+Original caller1B166..1B178 executes qualifier ->countdown ->latch.
+Original E514..E520 executes7024 channel28 mapping then6678 channel29 mapping.
+These slices are compared against independent checked component oracles.
+
+Reproduction: python research/ecu-at-can/verify_control_raw_enable.py
+Python3.14.3; prior SH helper implementations and exact finite RTZ arithmetic.
+21,580 checks pass:40 enable boundary/oldflag cases,16,400 first-qualifier
+cases (all1024 normalcounts plus65535,4 enablebytes,4 modebytes),2048 countdown,
+2048 latch,20 initializers,1024 real channel1-scale-to-enable cases.
+Counter/latch cases use deterministic seed6CE24 with boundaries0/1/2/3/49/50/
+127/128/255 and nonboolean mode/reset/qualifier/oldlatch bytes.
+
+320 retained cycles execute previous4CE2 selective manager through original
+E276..E282 manager/channel1-scaler pair; full3976C decode; phased1DF32
+publication;74DF8 caller slice; E514 scales; first/second qualifier caller
+slices;39E7C/39F48 publishers;30CE4 target;3AEEC ATspark admission.
+All other3AEEC prerequisites are explicit GATES fixtures from the prior
+spark interaction verifier. Admission is recomputed from actual produced
+8EF8/8F30; complete application RAM compared. No CAN sender or actuator claim.
+
+Observed harness transitions (all320 rows saved in verificationJSON):
+- Zero initial acquisition bank means both raw inputs initiallyzero; channel1
+  gate enables atcall3, both shortfallbacks at5. Thirdbankfirstcopy17 clears
+  channel29 fallback; channel28 suppliedzero remainsfaulted. These are fixture
+  startup effects, NOT actual ECU boot behavior or proof of spurious vehicle faults.
+- Enable disables41..64; firstcounters freeze, firstfallback stayslatched.
+- Channel28 recovery supplied after80 appears in copiedbank81 (value40),
+  clearsfallback, allows6E2F=1. Thirdbank copying selected every16managercalls.
+- High samples supplied after112 appear113; bothfallbacks set115 and6E2F=0.
+- Gate disables145..170; counters hold and both existingfallbacks remain.
+- Recovery225 givescount28=939/byte29=248, clearsboth;6E2F=1 again.
+The original phased publisher updates on odd retained-call numbers in this
+fixture because initialization does NOT increment its phase. First draft
+asserted a transition one call late; fullRAM/routine checks already passed,
+but that derived assertion failed. Corrected to actual phase rule and reran
+allcases; no firmware/interpreter change. Initial call does no conversioncopy.
+
+Limits and next actions:
+Callcounts are not milliseconds. The full task scheduler, cross-task frequency,
+conversion completion/interrupt delivery and interleaving are not executed.
+Intervening1B154/15A/160/178 routines are omitted;6CFD8 diagnostic publication
+is a separate open path. Analog conversions are explicit result-latch fixtures.
+No sensor identity inferred from8/200 or mapped temperatures/numeric values.
+Current evidence proves enable -> both qualification paths -> publishers/target
+and ATspark admission under explicit call order, not DSC brake/torque behavior.
+Next traction: full caller ordering/conditional admission/freshness,399B0
+callers (body already executed), CAN211/21A sender/units and remoteDSC evidence.
+Next ECU/AT: TCU clock/mode/pin setup,1692E/169A4 callback effects,17B1A/full
+127BA tasks, upstream writers, queues/ack/overlap/persistence/physical validation.
+Next roof: new applicable fullsource or OEMreceiver evidence; both directions'
+interruption/reversal/timeout/sync/recovery unresolved. Source conflicts and
+exhausted access lead remain in roof-revision-source-audit.txt. Do not ask
+again for nonexistent user dumps or turn that missing evidence into completion.
+
+Disassembly reproduction uses binutils2.42:
+LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu
+python research/ecu-at-can/disassemble.py --objdump
+/tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis START END
+Saved ranges:74DF8..74E9C,6CD70..6CFD8,1B14E..1B190,E50C..E530.
+Tool setup provenance is already saved in acquisition research; disassemblies
+and scripts are Git-eligible inputs, not dependent solely on temporary tools.
+
+Saved/verified Ghidra completion:
+8 new annotations; bothprograms saved; independent restored readback776ECU/
+948TCU.1724 total annotations,851 byte-identical exports and11 projecthashes
+match before/afterreadonly reopen. Archive10,957,985bytes SHA256
+2680b3ab8213eb6ca58a453e52db3084a77470d74711c77c79a9ccf31c44436f.
+Both.gpr/.rep preserved at ghidra/nc-at-can.tar.gz; manifests/saved annotation
+script and text exports reproduce the evidence. Restore directoryraw-enable-
+20261006 is scratch; archive and records are durable.7 new artifacts plus5
+functionexports Git-eligible, Pythoncompile/fullfinalrerun/gitdiffcheck pass.
+No errors/incomplete decompiles/locks/jobs. Nothing staged/committed/pushed;
+pre-existing mixedindex AD archive.tmp preserved. Next concrete work is TCU
+clock/mode/pin and callback/task scheduling, preserving all three open scopes.

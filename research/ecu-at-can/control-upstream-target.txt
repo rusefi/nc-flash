@@ -1,0 +1,100 @@
+2026-10-06: upstream 67FC target selection, ramp and substitution
+
+EXECUTED EVIDENCE
+verify_control_upstream_target.py executes unmodified stock ECU instructions
+30FB6 and8BB20 against independent finite binary32 RTZ models. Original ECU
+SHA2567604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Python3.14.3, standard library and existing interpreters, assertions enabled.
+Reproduce: python research/ecu-at-can/verify_control_upstream_target.py
+6081 direct cases pass:2112 helper,2448 branch-priority/raw-flag,697 map,
+320 ramp,4 protected-record validity,500 deterministic random cases.
+54 original caller invocations and32 retained calls also pass. All eight
+selection branches observed. No failed model assertion in this milestone.
+Combined320cycle/36pairedCAN/320CAN211 replay also passes. No67FC fixture
+write after setup; original producer runs each explicitly scheduled cycle.
+67E4/flags/steps and protected2160 remain fixtures. Original downstream
+producers and paired checks are retained. Direct checks ran before extending
+the harness; caller/retained/integrated checks ran separately; main reproduces
+all checks. JSON preserves results and execution provenance.
+
+30FB6 reads protected2160 using15246; either matching checksum copy admits
+the value. Both invalid copies useDB240(stock95), and534C recordsFFFF2160.
+This is numeric read/fallback evidence, not proof of physical sensor identity.
+Five1D maps of67E4 populate67EC/697C/6980/6984/6988. Three2D maps of protected
+2160 and67E4 populate698C/6990/6994. All outputs checked, including branches
+that do not consume a particular map. Knot/midpoint/outside cases sampled.
+
+Verified target67F0 precedence (base=67EC):
+1.695Bbit7 AND6943=6944=0:base+697C when67CC or7247 is exact1, elsebase+6980.
+2.6943 or6944 exact1 OR695Bbit3:base+67F4.
+3.695Bbit4:base+6984 when67CC or7247 exact1, elsebase+6988.
+4.695Bbit2:base+698C.
+5.695Bbit5:base+6990 if67CC=7247=0, elsebase.
+6.695Bbit6:base+6994 if67CC=7247=0, elsebase.
+7.695Bbit0:base.
+8.No branch:retain old67F0 (not zero or unconditional base).
+All additions are individually rounded toward zero. Raw2/255 flags are not
+silently normalized into true/false where original code checks equality.
+
+6904=min(67F0,DB21C~14.30000019).9376 exact1 chooses6904 for the ramp;
+other values choose67F0. If old67FC>selected, candidate=max(old67FC-690C,
+selected); otherwise candidate=min(old67FC+6908,selected).69A4 stores this
+candidate. Negative step fixtures are tested without inventing an absolute
+value clamp.8BB20 then supplies final67FC, so override affects next-call ramp.
+
+8BB20 descriptorAD4BC bytes097c80000000780060e00002ffff9611. Any bit in
+mask0x60 at966C admits existing mode9611; neither bit clears mode. Mode0
+encodes candidate inBEword9642 using scale1/2048 and rounded/truncated/clamped
+conversion, but returns the original float. Modes5/7 decode the retained word
+and substitute it; other nonzero modes pass through without updating word.
+Operational descriptor/diagnostic access and mode producer remain unproved.
+
+Retained32call trace: initialtarget2/rise.25 reaches2 atcall8; newtarget6
+reaches4 atcall16. Calls17..24 explicitly selectmode5/raw30000, yielding
+14.6484375 each time. Call25 clears mask; original helper clearsmode and
+normal falling ramp resumes from overridden history at14.1484375.
+
+In the paired replay, call100 reaches target14.25; calls101..140 substitute
+14.6484375 even though ramp candidate remains14.25. Call141 clears the mode
+and final67FC returns14.25. Atcall241 all selection flags clear, retaining
+13.850000381469727 throughcall320. This fixture also exercises downstream
+684C/6CC8/8118 and pairedECU/TCU checks; it does not establish that a particular
+changed downstream output is caused only by this new input. Other raw inputs
+and flags deliberately change across the same scheduled scenario.
+
+CALLER / LIMITS
+Original caller1B570..before1B576 invokes30FB6;54 cases compare outputs,
+mode/encodedword, call identity and stack. It is in a different task region
+from the consumer18798..18810. No claim that producer and consumer are one
+contiguous original segment or run at a verified cadence.
+Caller disassembly:control-upstream-target-caller-disassembly.txt.
+Wholebody30FB6..3127C:control-input-gates-disassembly.txt.
+Helper/pool:control-upstream-target-helper-disassembly.txt.
+GNU SH objdump2.42 via disassemble.py; replaceable temporary setup documented
+in control-normalized-contribution.txt. Inputs/scripts remain in repository.
+
+Next: preceding1B55E/1B564/1B56A bodies30DBA/30DE2/33BAC, then31C36/31662/
+31D8C and cross-task publication/order;67E4/67F4/6908/690C/695B and protected
+2160 source. TCU49B7E caller and roof both-direction receiver/reversal/timeout/
+synchronization/recovery evidence remain separate open requirements. User has
+no additional dumps/captures/hardware results. No physical DSC actuation claim.
+Saved locally; no staging/commit/push.
+
+Protection validation refinement: first fixtures used input95, identical to
+fallback95. Reran all4 cases with input40 and directly checked original15246
+return40 unless both checksums invalid, then95. Stock map outputs coincide
+for40/95, so a downstream-only comparison was insufficient for this detail.
+All4 strengthened cases pass; main includes the direct return assertion.
+The first direct-reader attempt failed because generic run() resets argument
+r4 to0; corrected to e.run(0x15246,0xFFFF2160), checking stack/SR explicitly.
+This was a harness-call mistake, not a firmware/model discrepancy.
+
+Ghidra save independently verified:1482 annotations (650 ECU/832 TCU),729
+identical export/report files,11 project hashes. Both.gpr and.rep archived,
+10,898,498 bytes, SHA256
+b14106069cc8fbdf3e1990328a4adc49a89bdc8377e6ce6e3874d3f61a870954.
+Both programs reopened read-only after independent extraction, annotation
+readback passed, no errors/incomplete decompilations or live locks. Commands
+in ghidra/README.txt; snapshot.json and restore-verification.json identify
+archive and inventory. New files Git-eligible; syntax/diff checks passed.
+Saved locally only; no staging/commit/push. No production source/ROM change.

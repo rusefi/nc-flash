@@ -1,0 +1,101 @@
+NC PRHT source retrieval and indicator revision check (2026-10-06)
+================================================================
+Objective remains ECU/AT CAN integration, deep traction integration, and NC
+roof folding AND unfolding with interruption/resume/reversal, communication
+timeout, synchronization and recovery. All are incomplete. No additional
+OEM roof/DSC dumps, captures or physical results are available from the user.
+No staging/commit/push authorization. This turn adds documentary evidence only.
+
+Archive lead disposition
+The public AllCarManuals listing advertises a99.4MB ZIP for2005..2015 NC:
+https://www.allcarmanuals.com/factory-service-manual-415-Mazda-MX5-Miata-Roadster-NC.html
+Web tool reads the listing, but Pythonurllib and curl withMozilla/5.0 both
+returned403. Curl received a5631-byte Cloudflare challenge, not the form or
+archive. No ZIP content or actual year applicability was verified. Do not
+keep treating this as a retrieved manual; retry only with changed access or
+a new public direct link. No purchase/account or challenge bypass attempted.
+Initial parsing also found bs4 unavailable; subsequent work uses stdlib
+html.parser, without installing a package. Challenge/session tokens were
+not copied into durable memory; status/URL/result suffice for this failed lead.
+
+Search queries covered MX5 09-02F/U0100,2009 technical-guide/fail-safe and
+numeric roof CAN timeout/pulse mismatch. Results repeatedly returned known
+one-page technical-guide483 and workshop1347/1307 extracts. Their contents
+were rechecked but add no new timeout, reversal or synchronization threshold.
+The2009..2012 CHARM index timed out again; this is access failure, not absence.
+The2011 Scribd full-manual search text points to general fault-location tables;
+no full PDF was retrieved and no new timing claim is based on that snippet.
+Later RF timing remains excluded from NC evidence, as in roof-fault-recovery.txt.
+
+New durable mirror evidence
+Publicly indexed factory-document mirror pages fetched successfully byurllib:
+https://mazdamanuals.com/Mazda/m5/25/html/id091600101400.html
+https://mazdamanuals.com/Mazda/m5/25/html/id091600102200.html
+https://mazdamanuals.com/Mazda/m5/25/html/id092200110300.html
+All three HTTrack provenance comments identify the original Mazda Australia
+path as D9G4-1A-22C_Ver17, copied April2,2025. CHARM's2013 catalog associates
+that identifier with09/2012..04/2015 NC. This is catalog corroboration, not a
+factory VIN applicability check. Do not rename these as2009 documents.
+The mirror's generic product-page metadata incorrectly mentionsCX5; use the
+actual document title and embedded source identity, not marketing metadata.
+Catalog: https://charm.li/Mazda/2013/
+
+Saved sources/mazda-d9g4-prht-{function,pid,warning}.html, three original
+indicator PNGs amxzzn00000599/600/601 and warning diagram amxzzn00000498.
+Exact URLs, byte lengths and SHA256 identities are in adjacent
+sources/mazda-d9g4-prht-crosscheck.json. No only-in-scratch evidence dependency.
+All graphics inspected. They distinguish operating blink, steady paused
+indicator and malfunction blink. The warning schematic depicts the cluster
+microcomputer/CAN circuit/buzzer path; it supplies no CAN identifier or payload.
+These corroborate earlier material; do not claim a newly decoded CAN path.
+
+Verified documentary discrepancy
+The original saved2007 service highlights3422-1u-06g, PDFzero56/printed09-16-12,
+gives two paused/half-open indicator clearing conditions: another switch
+operation, or locking the top after closing. The D9G4 mirror instead lists
+completion of opening or closing for that same row. The original page was
+rendered and visually checked; the mirror's four-cell HTML row was parsed
+directly, so this is not an OCR column-collapse inference. Both show a steady
+indicator for the paused state. Saved original PDF remains authoritative for
+its own edition. This difference could be a revision or documentation defect;
+no physical or firmware evidence establishes changed clearing behavior.
+Do not merge the two into a universal light-clear or reversal rule.
+
+The D9G4 fail-safe table otherwise corroborates the already recorded switch,
+supply, pulse and communication recovery descriptions. Its DTC/PID table
+retains the U294B spelling in the left-roof pulse row, while other sources
+useB294B. This is retained source wording, not a new validated diagnostic ID.
+It lists DECK_CL/3O but no state-to-On/Off truth table, so it does not settle
+the2006 training versus2008 workshop PID conflict. These are confirmations
+and source limits, not new receiver behavior. The30s switch/window conditions
+still must not be called CAN timeouts; pulse-difference magnitude stays absent.
+
+Reproduce/verify
+ python research/ecu-at-can/verify_roof_revision_sources.py
+ python -m py_compile research/ecu-at-can/verify_roof_revision_sources.py
+Optional --download refetches only the seven known public assets and requires
+their saved hashes before overwriting. Python3.14.3, PyMuPDF1.28.2. Script
+verifies all seven asset hashes, original PDF hash and distinct indicator-row
+text. It is a source-integrity check, not an executable PRHT model/test.
+Original2007 PDF rendering:
+ import pymupdf
+ d=pymupdf.open('research/ecu-at-can/sources/mazda-2007-service-highlights-3422-1u-06g-mx5.pdf')
+ d[56].get_pixmap(matrix=pymupdf.Matrix(1.3,1.3)).save('indicator.png')
+The rendered image is a reproducible cache; original PDF is already durable.
+
+Remaining status and next action
+Factory descriptions cover operation and selected recovery conditions; ECU/
+TCU executed sender paths remain candidate roof inputs. No OEM roof receiver
+image/capture/bench test has appeared. BOTH folding and unfolding still need
+release-then-reverse admission, numerical communication timeout, numerical
+left/right mismatch thresholds and recovery validation. CAN mapping, PID,
+connector and now indicator-row conflicts remain explicitly unresolved.
+Next roof action requires a new applicable full technical/diagnostic source
+or OEM receiver/physical evidence. The current AllCarManuals access route is
+exhausted for this environment; repeating identical listings is not progress.
+Independent next concrete work: traction40E0/40F4 acquisition and8F2C..2F
+qualification, then399B0 callers/cadence; TCU clock/mode/pin/task setup and
+input writers remain open. Continue these actionable firmware leads without
+marking the external roof gaps complete or asking again for unavailable dumps.
+No Ghidra changes; current saved/restored project identity stays in CHECKPOINT
+and Ghidra manifests.10 new Git-eligible source/manifest/script/record files.

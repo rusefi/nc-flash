@@ -1,0 +1,63 @@
+Concurrent research session coordination, 2026-10-06
+
+FINAL STATUS, verified14:54:02UTC
+The older session acknowledged and completed the handoff. Live thread/read
+now reports idle; its latest turn is completed. The agent paused its own
+automatic goal and wrote session-handoff-reply.txt. No save job remains.
+This coordinating session now owns the shared research/Ghidra checkout.
+The shared server and other clients remain alive; no process was killed.
+A fresh local check confirmed all11 closed live-project file hashes match
+snapshot.json and archive SHA256
+04677479ded251318bfef0d4b508929e06e32838ece76e5d8e2c6b1e97969fb4.
+The independent restoration manifest records1344 annotations/665 exports.
+session-status.json preserves the final runtime response. No staging,
+commit or push. The earlier pending status below is historical.
+
+User request: "negotiate, I am not sure on status. it was within IDEA which
+was since closed. is it still alive?"
+
+At14:51:38UTC, a read-only query of the existing Codex app-server confirmed
+thread01a10e81-61f6-7013-a9d4-10f2f3acdb21 was active/inProgress in this
+checkout. Its active turn was01a111b2-5ee3-7cf3-a5ba-5872caa05bea. The two
+previous verifier PIDs170892/171124 had exited. Closing the editor therefore
+did not establish that the older agent was finished. Attribution to IDEA is
+based on the user's report; the server itself identifies the stored source
+as vscode and originator codex-tui, so that metadata alone cannot prove which
+editor UI originally owned it.
+
+The existing shared server PID11765 remains alive. Separate CLI PID169447
+has cwd/home/snow/nc-flash; its process parent is node169436/bash169405 on
+/dev/pts/7. This is a client process, not proof of an additional active
+research turn. Other project clients/server jobs were left untouched.
+
+The user authorized negotiation. inspect_research_session.py used the
+existing Unix WebSocket control socket, initialize/initialized, thread/read,
+thread/turns/list, and turn/steer. The server acknowledged the handoff message
+for the active turn. Exact message, runtime status and receipt are saved in
+session-handoff-request.json. Acceptance is not yet acknowledgement by the
+agent, nor proof it has finished its current save.
+
+Request: finish persistence/independent Ghidra restore, record pending work,
+report automatic-goal status, then stand down from research/editing. No commit,
+push, process kill, server restart or thread resume was requested/performed.
+Current session will avoid Ghidra/shared research mutations until the handoff
+is acknowledged. Expected reply: session-handoff-reply.txt.
+
+Reproduction: Python3 with websockets15.0.1. Temporary dependency setup:
+  python -m pip install --quiet --target /tmp/nc-codex-coordination websockets==15.0.1
+  PYTHONPATH=/tmp/nc-codex-coordination python research/ecu-at-can/inspect_research_session.py --socket SOCKET
+Find the current existing socket with ss -xlpn; do not assume a historical
+socket or PID still belongs to this daemon. Add--handoff only with explicit
+user authorization; it sends a message if the target thread is active.
+No credentials are read or stored by the script. Scripts and conclusions
+are repository-owned; temporary dependencies are replaceable.
+
+Official protocol reference:
+https://learn.chatgpt.com/docs/app-server
+Sections Protocol, Read a stored thread, List thread turns, Steer an active
+turn. Runtime state in this record comes from local inspection, not docs.
+
+Research scope remains unchanged: ECU/AT integration, deep traction-control
+integration and NC roof folding/unfolding including interruption/recovery.
+Their distinct evidence, gaps and next actions remain in CHECKPOINT.txt and
+traction-roof.txt. This status check supplies no new firmware/vehicle claim.

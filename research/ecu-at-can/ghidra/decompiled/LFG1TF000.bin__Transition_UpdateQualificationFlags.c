@@ -17,7 +17,7 @@ void Transition_UpdateQualificationFlags(void)
   ushort uVar9;
   byte *pbVar10;
   
-  uVar9 = *(ushort *)PTR_DAT_000475b4;
+  uVar9 = *(ushort *)PTR_Qualification_ProducedLimit_000475b4;
   if (uVar9 < *(ushort *)PTR_Transition_MinimumQualificationLimit_000475b8) {
     uVar9 = *(ushort *)PTR_Transition_MinimumQualificationLimit_000475b8;
   }

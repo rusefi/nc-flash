@@ -1,0 +1,858 @@
+{
+  "status": "passed",
+  "helper_cases": 270,
+  "timer_wheel_calls": 1024,
+  "timer_value_checks": 624640,
+  "mode_cases": 512,
+  "periodic_cases": [
+    {
+      "state": 0,
+      "old_phase": 0,
+      "new_phase": 0,
+      "groups": []
+    },
+    {
+      "state": 0,
+      "old_phase": 1,
+      "new_phase": 1,
+      "groups": []
+    },
+    {
+      "state": 0,
+      "old_phase": 2,
+      "new_phase": 2,
+      "groups": []
+    },
+    {
+      "state": 0,
+      "old_phase": 3,
+      "new_phase": 3,
+      "groups": []
+    },
+    {
+      "state": 0,
+      "old_phase": 4,
+      "new_phase": 4,
+      "groups": []
+    },
+    {
+      "state": 0,
+      "old_phase": 5,
+      "new_phase": 5,
+      "groups": []
+    },
+    {
+      "state": 0,
+      "old_phase": 6,
+      "new_phase": 6,
+      "groups": []
+    },
+    {
+      "state": 0,
+      "old_phase": 7,
+      "new_phase": 7,
+      "groups": []
+    },
+    {
+      "state": 1,
+      "old_phase": 0,
+      "new_phase": 0,
+      "groups": []
+    },
+    {
+      "state": 1,
+      "old_phase": 1,
+      "new_phase": 1,
+      "groups": []
+    },
+    {
+      "state": 1,
+      "old_phase": 2,
+      "new_phase": 2,
+      "groups": []
+    },
+    {
+      "state": 1,
+      "old_phase": 3,
+      "new_phase": 3,
+      "groups": []
+    },
+    {
+      "state": 1,
+      "old_phase": 4,
+      "new_phase": 4,
+      "groups": []
+    },
+    {
+      "state": 1,
+      "old_phase": 5,
+      "new_phase": 5,
+      "groups": []
+    },
+    {
+      "state": 1,
+      "old_phase": 6,
+      "new_phase": 6,
+      "groups": []
+    },
+    {
+      "state": 1,
+      "old_phase": 7,
+      "new_phase": 7,
+      "groups": []
+    },
+    {
+      "state": 2,
+      "old_phase": 0,
+      "new_phase": 1,
+      "groups": [
+        32,
+        11,
+        2,
+        37,
+        20,
+        26
+      ]
+    },
+    {
+      "state": 2,
+      "old_phase": 1,
+      "new_phase": 2,
+      "groups": [
+        5,
+        6,
+        38,
+        41
+      ]
+    },
+    {
+      "state": 2,
+      "old_phase": 2,
+      "new_phase": 3,
+      "groups": []
+    },
+    {
+      "state": 2,
+      "old_phase": 3,
+      "new_phase": 4,
+      "groups": [
+        5,
+        6,
+        38,
+        41
+      ]
+    },
+    {
+      "state": 2,
+      "old_phase": 4,
+      "new_phase": 5,
+      "groups": [
+        32,
+        11,
+        2,
+        37,
+        20,
+        26
+      ]
+    },
+    {
+      "state": 2,
+      "old_phase": 5,
+      "new_phase": 6,
+      "groups": [
+        5,
+        6,
+        38,
+        41
+      ]
+    },
+    {
+      "state": 2,
+      "old_phase": 6,
+      "new_phase": 7,
+      "groups": []
+    },
+    {
+      "state": 2,
+      "old_phase": 7,
+      "new_phase": 0,
+      "groups": [
+        5,
+        6,
+        38,
+        41
+      ]
+    }
+  ],
+  "explicit_call_order_lifecycles": [
+    {
+      "code": 6,
+      "service_every_timer_calls": 1,
+      "initial_phase": 0,
+      "transitions": [
+        {
+          "tick": 2,
+          "state": 3,
+          "hold": 0,
+          "ramp": 1,
+          "value": 1024
+        },
+        {
+          "tick": 4,
+          "state": 5,
+          "hold": 0,
+          "ramp": 0,
+          "value": 1024
+        },
+        {
+          "tick": 102,
+          "state": "released",
+          "hold": 12,
+          "ramp": 49,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 6,
+      "service_every_timer_calls": 1,
+      "initial_phase": 15,
+      "transitions": [
+        {
+          "tick": 2,
+          "state": 3,
+          "hold": 0,
+          "ramp": 1,
+          "value": 1024
+        },
+        {
+          "tick": 4,
+          "state": 5,
+          "hold": 0,
+          "ramp": 0,
+          "value": 1024
+        },
+        {
+          "tick": 102,
+          "state": "released",
+          "hold": 13,
+          "ramp": 49,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 6,
+      "service_every_timer_calls": 3,
+      "initial_phase": 0,
+      "transitions": [
+        {
+          "tick": 6,
+          "state": 3,
+          "hold": 1,
+          "ramp": 3,
+          "value": 1024
+        },
+        {
+          "tick": 12,
+          "state": 5,
+          "hold": 0,
+          "ramp": 0,
+          "value": 1024
+        },
+        {
+          "tick": 114,
+          "state": "released",
+          "hold": 12,
+          "ramp": 51,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 6,
+      "service_every_timer_calls": 3,
+      "initial_phase": 15,
+      "transitions": [
+        {
+          "tick": 6,
+          "state": 3,
+          "hold": 1,
+          "ramp": 3,
+          "value": 1024
+        },
+        {
+          "tick": 12,
+          "state": 5,
+          "hold": 0,
+          "ramp": 0,
+          "value": 1024
+        },
+        {
+          "tick": 114,
+          "state": "released",
+          "hold": 13,
+          "ramp": 51,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 6,
+      "service_every_timer_calls": 7,
+      "initial_phase": 0,
+      "transitions": [
+        {
+          "tick": 14,
+          "state": 3,
+          "hold": 2,
+          "ramp": 7,
+          "value": 1024
+        },
+        {
+          "tick": 28,
+          "state": 5,
+          "hold": 0,
+          "ramp": 0,
+          "value": 1024
+        },
+        {
+          "tick": 126,
+          "state": "released",
+          "hold": 12,
+          "ramp": 49,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 6,
+      "service_every_timer_calls": 7,
+      "initial_phase": 15,
+      "transitions": [
+        {
+          "tick": 14,
+          "state": 3,
+          "hold": 2,
+          "ramp": 7,
+          "value": 1024
+        },
+        {
+          "tick": 28,
+          "state": 5,
+          "hold": 0,
+          "ramp": 0,
+          "value": 1024
+        },
+        {
+          "tick": 126,
+          "state": "released",
+          "hold": 13,
+          "ramp": 49,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 7,
+      "service_every_timer_calls": 1,
+      "initial_phase": 0,
+      "transitions": [
+        {
+          "tick": 2,
+          "state": 3,
+          "hold": 0,
+          "ramp": 1,
+          "value": 576
+        },
+        {
+          "tick": 4,
+          "state": 4,
+          "hold": 0,
+          "ramp": 2,
+          "value": 576
+        },
+        {
+          "tick": 28,
+          "state": 5,
+          "hold": 3,
+          "ramp": 0,
+          "value": 576
+        },
+        {
+          "tick": 64,
+          "state": "released",
+          "hold": 7,
+          "ramp": 18,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 7,
+      "service_every_timer_calls": 1,
+      "initial_phase": 15,
+      "transitions": [
+        {
+          "tick": 2,
+          "state": 3,
+          "hold": 0,
+          "ramp": 1,
+          "value": 576
+        },
+        {
+          "tick": 4,
+          "state": 4,
+          "hold": 0,
+          "ramp": 2,
+          "value": 576
+        },
+        {
+          "tick": 22,
+          "state": 5,
+          "hold": 3,
+          "ramp": 0,
+          "value": 576
+        },
+        {
+          "tick": 58,
+          "state": "released",
+          "hold": 7,
+          "ramp": 18,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 7,
+      "service_every_timer_calls": 3,
+      "initial_phase": 0,
+      "transitions": [
+        {
+          "tick": 6,
+          "state": 3,
+          "hold": 1,
+          "ramp": 3,
+          "value": 576
+        },
+        {
+          "tick": 12,
+          "state": 4,
+          "hold": 0,
+          "ramp": 6,
+          "value": 576
+        },
+        {
+          "tick": 36,
+          "state": 5,
+          "hold": 3,
+          "ramp": 0,
+          "value": 576
+        },
+        {
+          "tick": 72,
+          "state": "released",
+          "hold": 7,
+          "ramp": 18,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 7,
+      "service_every_timer_calls": 3,
+      "initial_phase": 15,
+      "transitions": [
+        {
+          "tick": 6,
+          "state": 3,
+          "hold": 1,
+          "ramp": 3,
+          "value": 576
+        },
+        {
+          "tick": 12,
+          "state": 4,
+          "hold": 0,
+          "ramp": 6,
+          "value": 576
+        },
+        {
+          "tick": 30,
+          "state": 5,
+          "hold": 3,
+          "ramp": 0,
+          "value": 576
+        },
+        {
+          "tick": 66,
+          "state": "released",
+          "hold": 7,
+          "ramp": 18,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 7,
+      "service_every_timer_calls": 7,
+      "initial_phase": 0,
+      "transitions": [
+        {
+          "tick": 14,
+          "state": 3,
+          "hold": 2,
+          "ramp": 7,
+          "value": 576
+        },
+        {
+          "tick": 28,
+          "state": 4,
+          "hold": 0,
+          "ramp": 14,
+          "value": 576
+        },
+        {
+          "tick": 56,
+          "state": 5,
+          "hold": 3,
+          "ramp": 0,
+          "value": 576
+        },
+        {
+          "tick": 98,
+          "state": "released",
+          "hold": 8,
+          "ramp": 21,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "code": 7,
+      "service_every_timer_calls": 7,
+      "initial_phase": 15,
+      "transitions": [
+        {
+          "tick": 14,
+          "state": 3,
+          "hold": 2,
+          "ramp": 7,
+          "value": 576
+        },
+        {
+          "tick": 28,
+          "state": 4,
+          "hold": 0,
+          "ramp": 14,
+          "value": 576
+        },
+        {
+          "tick": 56,
+          "state": 5,
+          "hold": 4,
+          "ramp": 0,
+          "value": 576
+        },
+        {
+          "tick": 98,
+          "state": "released",
+          "hold": 9,
+          "ramp": 21,
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "released_CAN216_ECU_paths": [
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "limits": "No hardware ISR, physical frequency, or full application scheduling claim."
+}

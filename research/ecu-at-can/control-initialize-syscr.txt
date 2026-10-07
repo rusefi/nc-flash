@@ -1,0 +1,91 @@
+SYSCR2 and parent RAM-test continuation — 2026-10-06
+
+Full objective/constraints remain CHECKPOINT.txt: ECU/AT, deeptraction and
+both roof directions with interruption/recovery remain incomplete. No extra
+user artifacts, staging, commit or push. Previous turn made progress on DMA
+clear; this turn advances the actual parent10022 instead of skipping it.
+
+Reproduce, repositoryroot/Python3.14.3:
+python research/ecu-at-can/verify_control_initialize_syscr.py
+python research/ecu-at-can/probe_control_initialize_syscr.py
+python research/ecu-at-can/verify_control_ramtest_parent.py
+ECU SHA2567604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+
+Verified1024 register-write cases,1024 originalE7B6 writer cases,64 original
+F52C classifier cases and14 expected rejections. E7B6 addskey3C and executes
+fourNOPs afterwrite. F52C savesSYSCR2, clearsH-UDI-stop bit2, readsSDSRword,
+thenrestoresSYSCR2. Withdocumented0B00/0B01 samples itreturnsclass0. Whole
+applicationRAM/nonvolatileGPR/stack/GBR verified. Firstclassifieroracle
+incorrectly requiredT unchanged; actualCMP0B setsT=1. CorrectedexpectedSR
+preservesotherbits andsetsT. No model/ROM change wasusedtohidefailure.
+
+SystemStartup supportsbyte readF70B,wordwriteF70A keyed3C, rejectsreserved
+bits/otherwidths/wrongkeys. Bit1 FPUstop isstickyuntilnewresetfixture; FPU
+instructions whileclockstopped are rejected. Clockchange duringenabledDMA
+isrejected. No actualclockrate/AUD/UBC/TAP/resetbehavior simulated. Only
+SDSRwordreads with explicit0B00/0B01 samplesare admitted; haltedH-UDI or
+unsupportedSDSRwrites/shapes reject. Hardwarehaswideraccesssupport; fixture
+rejectionsdoNOTclaim those documentedhardwareaccesses areillegal.
+
+Primarysource: retainedofficialSH7058 REJ09B0046-0300H rev3.00,
+sources/renesas-sh7058-hardware-rej09b0046-0300h.{pdf,json}; SHA256
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+Table5.2/PDF116 and25.2.3/PDF989-990: SYSCR2 access andmodulestop fields.
+MSTOP1 stopsFPU untilpower-onreset; MSTOP2 controlsH-UDI. Section19.1.4,
+table19.2/PDF739 and19.3.2/PDF743: SDSR atF7C2, fixedhighbyte0B,lowbitSDTRF;
+0B01 isTRST state, notCPUreset/standby initialization. Valuesareexplicit
+fixtures, notphysicalchipidentification orobservedTAPactivity. Reservedbits
+inappendixare notallzero; the detailedSDSR description specifiesfixedones.
+ReadlocallywithPyMuPDF1.28.2; priorofficialURL recheck retained.
+
+Parent10022 probe now RETURNS undertheseexplicitfixtures. No helperstubs.
+Three seededwholeRAM parent10022 checks PASS. Low0000..3FFF is restored/
+preserved,4000..BF9F clearsincluding51C1=0,guardBFA0..BFA3 retained.
+NonvolatileGPR/stack/GBR andinterruptmask preserved; SYSCR2 restored1 and
+oneDMAclear completedperrun. Thiscoversnormalmemory behavior; no injected
+RAMfault/errorbranch orphysicalmemory proof. Exactartifacts inJSON.
+Retainedsequence10022->CA94->1619A->40events (high10/low15/high15) running;
+originalCADE samples eachtransitiontwice. Inspect itsJSON beforeclaimingpass. Parentwasnot
+previouslycompleteatSYSCR2, andtheoldlimitJSON ispreserved.
+NextfinishparentRAMpostcondition checks, thencarry neededstartup/input
+provenance intoretainedcontroltask work. Do notexpandunrelatedperipherals
+intonewrequirements. Physicalreset/timing/remoteDSC,CAN211/21A units,
+TCUoperationalqueue/ack/persistence andbothroof scopes remainopen.
+
+Retained parent-startup sequence now PASSES40outerreturns/41wholeRAM activity
+boundaries. Explicit high10/low15/high15 input, originalCADEtwicepertransition.
+Original10022 runs beforeCA94/1619A; nofactoryclock orfullreset claim.
+Atcontrolcalls0/5/10/15/20/25/30/35, post-timer values are640/640/640/639/
+638/640/640/640. Mode40 becomes80 at15/20 then40 at25. Independentcounter
+9158 is0/0/0/0/1/2/2/2;915C assertedat20/25 thenoff. Hold9149 stays1,
+includingfirstcall becauseinitialtimeris640. Bothhookpairsremain1/0; no
+end eventisfabricated. Currentdata iscontrol-ramtest-startup-verification.json.
+The sharedsequence runner/observer wereextended once, notduplicated; old
+10event/rawclear experiment remainsreproducible with itsdefaultentry.
+
+Source nuance: SYSCR2 table5.2 andbitdiagram giveinitial01, butMSTOP2's
+per-bitdescriptionmarksstopped1 initial. Fixtureusesexplicit01; all32legal
+oldvaluesincludingbothMSTOP2 valuesaretested. No hardwaredefaultinference
+restsonthecontradictoryper-bitinitiallabel. SDSRfixed0B comesfromthe detailed
+registerdescription, despiteappendixdashlabelsforreservedhighbits.
+
+Startup-provenance milestone is now bounded andexecuted throughparentRAMtest,
+inputsample/applicationinitializer andretainedtask transitions. Fullreset
+callerjoining,actualinterruptcadence,boardclock/physicalproof remainopen;
+theseare not inferredfrom routinecounts orfixtures.
+NextPRIMARYACTION:return to6CFD8 qualification reporting andactualsame-task
+freshness using thisinitializedfixture. Staticbody incontrol-qualification-
+report-leads.txt:8EFFexact1 reports(mode2,index1Fthen20);else8EFB/8EFCexact1
+reportmode1 totheirrespectiveindices via8FAC8->8FB52. Otherbytevalues skip.
+Thisisstaticinterpretation until independentlyexecuted. Existing8FAC8 report
+model/evidence forothergroups isverify_local_input_faults.py/local-input-faults.txt;
+reuse/extendcarefully,do not assumeallgroups orstoredDTC/physicalroles.
+Followwithretainedacquisition freshness, notunrelateddiagnosticserviceexpansion.
+TCUoperationalqueue/ack/overlap,cadence/persistence andbothroof/remoteDSC
+evidence gaps remainindependent asCHECKPOINT/traction-roof preserve.
+Ghidra saved and independently restored:1903 annotations (828ECU/1075TCU),
+959 identical exports and11 project hashes before/after readonly reopen.
+Archive10,990,060bytes SHA256 a75aacf82ffe4f6ba2d87edfee85d2d362d7d3e19948b63becd1fa19d95ea25c.
+Restore method and identities in ghidra/snapshot.json and restore-verification.json.
+All findings saved locally; no staging, commit or push.

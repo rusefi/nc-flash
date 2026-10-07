@@ -1,0 +1,110 @@
+2026-10-06: normalized8118 contribution and its local history group
+
+VERIFIED RESULT AND BOUNDARY
+Original seven-body group597B6,597E2,5980E,598B4,598EA,59924,59720 produces
+8118 for the shared ECU baseline/ratio pipeline. It combines a mode-selected
+map with the larger of two history-dependent terms, then divides by a scaled
+7020. Near zero divisor retains the prior output while refreshing its map.
+This is ECU shared-control evidence; source units, CAN/DSC attribution and
+physical traction actuation remain unproved. Allthree research goals stayopen.
+
+REPRODUCTION AND IDENTITIES
+  python research/ecu-at-can/verify_control_normalized_contribution.py
+Output control-normalized-contribution-verification.json contains exactROM
+hashes, constants, maps, counts and retained checkpoints. Python3.14.3 standard
+library; original SHModelFloat/finite RTZ helpers unchanged. Assertionsenabled.
+ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+No application, interpreter, ROM or prior lifecycle implementation edits.
+Original direct and retained checks passed first attempt. Additional caller
+segment checks were added andrunseparately; the savedJSON incorporates them.
+No need to rerununchanged320cycles solely for that addedindependentcheck.
+
+VALIDATION
+10,034 direct cases:filter25,hysteresis20,countdown80,firstterm405,
+secondgate1080,secondterm324,normalizedoutput8100. Boundary cases include
+both signs andnearestbinary32samples surrounding the denominator deadband,
+rawnonbooleanflagvalues, modepriority, curveknots/interpolation/clamps and
+countdownexpiry. Originalhelpers run; finiteRTZ/state oracles check outputs,
+stack andinterruptmask preservation. Nonfinite exceptionbehavior remainsopen.
+12 additional cases execute ORIGINALcaller1A598 throughbefore1A5C2. The
+sevenfunction sequence, stack balance andalloutputbytes match independently
+checked sequentialbodies. This verifies a localcaller segment, notfulltask
+frequency orcross-taskorder.
+320 retained serialcycles,36 pairedCAN updates and320 CAN211latchupdates:
+originalsevenbodygroup runsbefore prior six-body magnitude group andprior
+baseline/ratio/command/serialpipeline. TCU18F10/191A8packers and ECUdecode/
+fullA477E remaininherited. Numericupstream684C/6818/6CC8samples andzero local
+startinghistory areexplicitfixtures; normalboot andremotepeer aren'texecuted.
+Allpairedprotectedwrites, CAN andserialchecks pass. No direct8118 injection
+occursafter explicitinitialization. Physicaltaskcadence andactuation stayopen.
+
+ALGORITHM (SHORT RAM ADDRESSES HAVE FFFF PREFIX)
+R denotes binary32 rounding towardzero after EACH operation; decimals denote
+stored constants, exactbitpatterns areinROM. No inferredphysicalunits.
+
+597B6 filtered8120:
+  k=R(1-R(1-ROM[DA774])); stockDA774 approximately.85.
+  v=R(input684C+R(k*R(old8120-input684C))).
+  If abs(R(input684C-v))<ROM59880(~.00001), useinput684C; elsestorev.
+Original2508executes. Finitevaluesonly; itsnonfiniteoldvaluebranch nottested.
+
+597E2 hysteresis812A:
+  filtered8120<69 ->0; >75 ->1; otherwiseholdrawoldbyte.
+Both exact69 and75 hold. ConstantsDA764=75,DA768=6.
+5980E: ifcurrent812A==1 ANDprevious8134==0, reload8128=ROMDA760=120;
+otherwisedecrementnonzero8128. Publishprevious8134=currentraw812A.
+598B4: while8128>0 set811C=curveA36C4(filtered8120);
+otherwise811C=max(R(old811C-ROMDA778~.001),0).
+
+598EA gate812B:
+  input6818<ROMDA77C=0 ->clear;
+  otherwiseinput6818>=curveA36E8(filtered8120) ->set1;
+  otherwiseholdrawoldbyte.
+59924:
+  exactmode7012==1 selectsA36D0,elseA36DC onfiltered8120; alwayswrite8130.
+  currentgate812B==1 andprevious8135==0 ->capture8130 into8124,
+    reload8129=ROMDA761=0.
+  Otherwise decrementpositive8129; ifresultzero,decay8124 towardzero by
+    ROMDA76C=1 formode1,otherwiseROMDA770~.00075.
+  Publishprevious8135=rawcurrent812B. Captureanddecaydonotoccursamecall.
+
+59720:
+  mapA36AC(input6CC8) if7012exact1,elsemapA36B8;alwaysstore812C.
+  divisor=R(R(R(R(ROMCC028*ROMCA974)/2)*input7020)/60).
+  StockCC028~.0012,CA974=1998.
+  If abs(divisor)>2^-17,8118=R(R(812C+max(811C,8124))/divisor).
+  Otherwise8118retainsitsoldvalue. Equalityholds;negativevaliddivisorallowed.
+No saturationorphysicalvalidityguardisaddedbytheverifier.
+
+PROVENANCE AND CONTINUATION
+Literal59720callat1A5BC follows those sixproducers inexactorder from1A598;
+59504/magnitudegroup follows1A5C2. Originalcallersegment nowexecutes12cases.
+8118consumers51286 orderedsum and58F60baseline alreadyexecute inpriorpipeline;
+43F9C isanotheralignedlead, notnewlytracedhere. Inputs6CC8/684C/6818/7020
+andmode7012 produceridentity/staleness remainopen, alongwith72B4/72BC
+indirectwriters,67AC/7242/7016/A3A4, nonzero2310,240xxenable andtaskorder.
+TractioncompletionstillrequiresCAN211/21Asenders, units/validity/timing,
+DSCtraction-vs-stabilitylogic, throttle/spark/fuel arbitration andphysicalproof.
+Roofcompletion separatelyrequiresPCMtype/OEMPRHTreceiver,foldingANDunfolding,
+interruption/resume/reversal, timeouts,synchronization andfaultrecovery.
+ECU/AT completion retainsTCUupstreamthresholdinputs,timers,optionaladjustments
+andnaturallyproducedoverlap/composites. CHECKPOINT.txt ownsnextactions.
+
+DISASSEMBLY
+control-normalized-contribution-disassembly.txt preserves59720..59A20.
+GNU SHobjdump2.42 through disassemble.py (binutilssetup inpriorTCUrecords):
+  LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+    python research/ecu-at-can/disassemble.py \
+    --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+    at dis 0x59720 0x59a20
+Savedlocally; nostaging/commit/push. Ghidra persistence verified.
+
+PERSISTENCE
+Ghidra12.1.3 PUBLIC/Java21 saved591 ECU/814 TCUannotations andreadbackpassed.
+snapshot.py archived11 files,10,877,642bytes; SHA256
+0589a5f7db1a89a26cd0c026e4149aec7c28557bff85036f19844ded6a1d3936.
+Separate normalized-contribution-20261006 restore reopenedread-only:
+all11projecthashes matched;693exports(691functions+2reports) byte-identical.

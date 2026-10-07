@@ -1,0 +1,213 @@
+TCU original capture callbacks in the complete initialized task — 2026-10-06
+==========================================================================
+Full goal remains ECU/AT CAN integration, deep traction integration and NC roof
+folding AND unfolding with interruption/resume/reversal, timeout, L/R sync and
+recovery. No extra user DSC/roof firmware, captures or bench results. No staging,
+commit or push. Previous turn made verified request-overlap/cleanup progress.
+
+Experiment and reproducibility
+-------------------------------
+probe_tcu_captured_requests.py reuses probe_tcu_initialized_requests.main via
+optional machine_factory/before_task/after_task hooks. Defaults retain the
+previous experiment. No duplicated application-task/initializer pipeline.
+Same62 original group initializers, plus original20658 reference-history and
+211C4 measurement-history initializers. These are individual calls, not full
+boot. After each original11014 timer call, explicit capture timestamps enter
+original179A8 then17A58; then original126EC executes completely. Fixedreference
+interval12160, measured interval5890 for calls0..47 then6490 for48..95.
+These timestamps and the1:1 timer/capture/task interleave are test inputs, not
+physical units, sensor identities or real interrupt cadence. No writes to
+810C/810D ages,80EA/80EC/80EE/9218, phase state, requests or acknowledgements.
+
+Observer records original capture callbacks and actual2124C/2086C/2117C entries
+and returns. At2124C, independent measurement.model with the current24-entry
+history/head/freshness predicts80EE and9238 period; stale ages predict0/max.
+Prior actual31C18 wholeRAM, selected-gate and command checks remain enabled.
+After every task, a separate RAM clone executes original18F10/18F8C mode1.
+It preserves the actual source915A,9454 cut and92C6 flags; it does NOT invoke
+the old paired helper which overrides92C6bit5. The actual eight payload bytes
+are copied to a separate ECU fixture; original35034/34CEC execute with explicit
+receive gates734A=80,734C=1,6A5D=1. Independent word0 encoding and normalized
+word0 checks run. No physical CAN bus, ECU fulltask or spark output is claimed.
+Clones prevent packet/ECU fixture mutations from contaminating retained TCU.
+
+Run python research/ecu-at-can/probe_tcu_captured_requests.py.
+Result tcu-captured-requests-probe.json; verified96-call results below.
+
+96-callback/task result (executed)
+---------------------------------
+All96 calls returned;192 originalcapture callbacks,96 selectedmeasurement/
+period checks,26 actualwholeRAM acknowledgement checks.2124C runs everytask;
+2086C then2117C run oncalls0mod4, after2124C. No age overrides were required.
+Reference80EA/80EC settles7017 at20; measurement80EE settles10865 at24.
+Changing measured interval at48 replaces the24-entry history gradually,
+settling9861 at71. Naturalgroup7 event1 calls occur17/21/69 withcodes0/1/2.
+Code0 advancesstate3 at57,state4 at59, retires91; code1 reachesstate3 at95.
+Numeric915A stays7FFF and clonedword0FFFE decodesECU65022 throughout96.
+The actual CAN216 byte4 responds to measured input (e.g.113 at24,102 at71).
+Packet transfer/ECU normalization is a fixture, not physical delivery proof.
+
+Live enable input source correction and joined-frame experiment
+---------------------------------------------------------------
+The9410 gate remains0. Its comparison809C is NOT an ADC channel: prior
+ tcu-comparison-input.txt establishes CAN201byte6 ->8808, secondary source
+17E74 ->89B0,230F0 ->809C. Primary809A comes from CAN215byte6 via880C/22F46.
+No new direct809A/809C or gate write is used to make the request active.
+
+probe_tcu_received_captured_requests.py supplies original ECU-produced frames:
+CAN201 from ecu_payload(78,78,0), CAN215 from packet(primary25,source97.5).
+Those ECU model sources are explicit fixtures; original ECU encoders execute.
+Original1ACD8/1ACF0 receive callbacks then full1ADD0 secondary wrapper run;
+seven explicit zero CAN4EC buffer bytes disable that alternate source.
+This supplied wrapper order is not hardware receive/freshness admission proof.
+Then the same captured/timer/fulltask sequence executes. Existing independent
+primary/comparison producer models check all their selected outputs at real
+22F46/230F0 returns; prior measurement/ack/command/gate checks stay active.
+Initial128-call run saved in tcu-received-captured-requests-probe.json.
+Reproduce python research/ecu-at-can/probe_tcu_received_captured_requests.py.
+
+Joined128-frame/capture result and independent verifier
+------------------------------------------------------
+All128 calls return. Everytask ends809A=24960,809C=19968,9410=7. Those values
+come from the supplied original ECU frames and TCU receiver/producer bodies,
+not internal-state injection.22F46/230F0 run oncalls0mod4:64 selectedoutput
+model checks.128 measurement/period and128 clonedpacket/ECUnormalization
+checks pass, plus7 actualwholeRAM acknowledgements. Naturalcode0/op0 created
+at93, remainsstate2 through127; published915A remains7FFF. This is not an
+active numeric intervention yet. The256-call continuation of exactly the same
+inputs completed: tcu-received-captured-requests-extended.json (results below).
+
+verify_tcu_captured_requests.py independently reconstructs the24-entry measured
+history from timestamp increments, including first-call stale reset. It does
+not trust the observer's stored expected fields. It checks actual producer
+order, ages (255 firstcapture, then0/1 from the timer before capture), measured
+values/period/head, settledreference, CAN216 firstword/byte4 andECUword0 decode,
+actualack checks and CAN201/215 selected-input models.96+128 calls PASS.
+Result tcu-captured-requests-verification.json. Both96 and128 results remain
+saved;96-run metadata scope was corrected to the actual captureexperiment
+rather than the generic sharedrunner's default docstring. No numeric trace was
+changed. Additional809A/809C/source fields were added for the128-run snapshot.
+
+Exact unchanged inputs:
+ examples/LFG1TF000.bin SHA256
+ 8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6;
+ examples/LFFEEE-stock.bin SHA256
+ 7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Python3.14.3; existing integer/FPU interpreters, no new ISA or firmware edits.
+
+Extended256 result and next experiment
+--------------------------------------
+All256 calls return; first128 rows are exactly identical to the initial128.
+Phase0 advances to1 at166. Numericrequest state3 at167, source915A306 at167/168,
+CAN216word0=521 (0209), ECUdecoded numeric9. State4/withdrawal at169; phase1
+and managedrecord remain through255. Thus a nonwithdrawn numeric request is
+now executed from supplied original ECU201/215 frames and capture timestamps
+through fulltask and clonedCAN216/ECUdecode. No request/gate/phase/age injection.
+512capture returns,256measurement/packet checks,128inputproducer checks,
+7actualwholeRAMack checks,512command and128selectedgate checks PASS.
+verify_tcu_captured_requests.py now checks96+128+256 and exact128 prefix.
+
+Next probe_tcu_captured_phase.py observes actual32614/4E036/4E0EE/1FB8C returns
+using existing independent phase/map/release/source-selection models. Default
+256calls repeat prior inputs. Optional --approach runs512calls and changes only
+the supplied measured capture interval to4430 fromcall256; original history
+then approaches14446. Original code0 target reference is14455 (reference7017
+scaled by ROM70002); prior9861 input is below its lower14327 bound. This is
+a test-input choice, not evidence of physical motion or actual vehicle cadence.
+Baseline256 and approach512 have completed successfully; results below.
+
+Actual-return model result (baseline256)
+---------------------------------------
+probe_tcu_captured_phase.py completed256 without rejected calls. Independent
+models pass128 actual1FB8C source-selection returns,80 actual32614 qualifiers,
+one4E036 map-publication return and44 actual4E0EE release returns.
+At167: code0 map inputs x80F8=7984, captured+18=39444,+16=19722, flags0,
+timer8276=0 produce494. Permission9410=7 and inhibit92D5bit0clear admit it.
+Actual slot2 value494/mode1 and base92E4=800 produce800-494=306; 80BE=-494.
+At169: measurement9861, target14455 and captured signederror=-4594 cause
+releasevalue0, capturedvalue494 retained, flags32; source-selection withdraws.
+Thus the observed306 is independently explained by original map and selection.
+No phase-qualifier successes: code0 mode8086=0, below-uppercounter reaches80
+at254, but measured9861 never crosses lower14327 so global971Abit1 remains0.
+A counter alone cannot qualify phase2. The approach experiment should test
+actual original callback-driven lower crossing; do not substitute100-band
+threshold assumptions (that route requires8086=1, observedmodeis0).
+
+Ghidra persistence (verified)
+----------------------------
+Eightexisting TCU comments updated for capture/fulltask/numericCAN andphase
+qualification/retirement evidence; finalmap comment includes494/base800.
+Bothprograms saved. Ghidra12.1.3PUBLIC/Java21.0.10;1908annotations
+(833ECU/1075TCU),964exports. Refreshedpaired.gpr/.rep archive11,001,488bytes,
+SHA256 ca422219c0e8606c323dfcb9de368dc09d4466f75f4678ab33210cd18339d871.
+Independentextract inignoredrestore-check/tcu-captured-phase-20261006;
+all11hashes verified before/after read-only reopening bothprograms; all964
+exports/readbacks identical. snapshot.json andrestore-verification.json retain
+identity/results. No ERROR/Exception/DECOMPILE_INCOMPLETE in verification logs.
+Snapshot.py commands/setup documented in ghidra/README.txt. ADarchive.tmp
+remains unchanged. Findings savedlocally; no staging/commit/push.
+
+Next transport boundary (candidate, not executed here)
+-----------------------------------------------------
+After resolving the approach trace, investigate original receive admission and
+freshness for CAN201/215 and the secondary wrapper. Existing comparison report
+and disassembly record1C10E calling1B9F6, setting grouped flags8F82/8F88,
+calling1BA24, then tail1ADD0 (instructions1C10E..1C144). This static caller
+is not yet established as a fresh-frame dispatch: trace its caller/context
+before treating it as receipt proof. Preserve the fulltask/numeric experiment
+and explicit hardware/cadence/physical limitations. Generic DTC services do
+not become additional integration requirements merely because they are nearby.
+
+Approach512 completion (executed and independently checked)
+----------------------------------------------------------
+All512 fulltasks return, one naturalrequest created93,10 actualwholeRAMacks.
+First256 rows exactly equal observerbaseline; thatbaseline minusonlyitsadded
+numeric_checks exactly equals the prior256 joinedtrace. Instrumentation has
+not changed those saved task/peripheral/source/packet outcomes.
+Measuredcaptureinterval4430 fromcall256 gradually replaces24samples;
+measurement14172 at278,14446 at279. Next originalphase service280 sees
+code0/mode0,permission7,lower14327/upper14583,previousbelowcounter92/flags0;
+measurement14446 sets crossing, counter93 qualifies and consumes crossing.
+Phase2 at280, phase3 at310. Originalacks[0,2]/[0,25hex] at310, [0,5] at311;
+retirementcallbacks30B82/30A9E/31168 allreceivecode0. At311 both managedand
+phase rings empty, A2B8/8088=1, A2BA/96C5/96C6/A1AC/A202=0,
+heapfirstheader9F3C=007FFFFF, source915A=7FFF. All200 additionaltasks312..511
+retain those idle/free states. This closes this explicit single-request fixture
+through creation, numeric response, withdrawal, qualification and cleanup.
+It does not close all ECU/TCU integration, remoteDSC or eitherroof direction.
+
+Approach counts:1024 capture returns,512 measurement/packetdecode checks,
+256 pairedinput producer checks,1024 priorwholeRAMcommand boundaries,
+256 selectedgate checks,10 wholeRAMacks. Actualnumeric/phase returnchecks:
+256 source-selection1FB8C,93 qualifiers32614,1 map4E036,71 release4E0EE.
+Recompute selected models/prefixes/finalcleanup with
+  python research/ecu-at-can/verify_tcu_captured_phase.py
+  python research/ecu-at-can/verify_tcu_captured_requests.py
+Reproduce observer traces with
+  python research/ecu-at-can/probe_tcu_captured_phase.py
+  python research/ecu-at-can/probe_tcu_captured_phase.py --approach
+Results: tcu-captured-phase-probe.json, tcu-captured-phase-approach.json,
+tcu-captured-phase-verification.json. Bothverifiers PASS.
+
+Limits/next: receive callback/wrapper execution order, zeroCAN4EC bytes, ECU
+encoder model inputs, ECU receive flags, peripheral samples, timestampincrements
+and timer/task interleave remain fixtures. PairedECU runs35034/34CEC only;
+no full ECU spark, physical CAN, sensorunits or mechanical response inferred.
+Next trace actual receive-admission/freshness callers before replacing direct
+1ACD8/1ACF0/1ADD0 dispatch. Preserve operational overlap/cadence/persistence
+and physical integration gaps. Traction needs CAN211/21A sender/units/remote
+DSC actuation evidence. Roof needs applicable revision/receiver evidence for
+bothfold/unfold, interruption/reversal, timeout, L/Rsync and recovery.
+
+Final artifact checks
+---------------------
+Six changed/new research scripts compile. Both captured verifiers PASS after
+adding explicit phase-success, retirementcallback, ring/list/queue/freeheap and
+200furtheridle assertions. All13 new scripts/reports/JSON artifacts are present
+and Git-eligible (git check-ignore returned1 with no matches). Targeted git
+diff --check passed. OriginalROMs and sharedISA/application code unchanged.
+Pre-existing mixed index including ADghidra/nc-at-can.tar.gz.tmp preserved.
+Meaningfulprogress; goal remainsactive, notcomplete orblocked.
+
+Finalpaired archive refreshed after phase/retirement annotations; independent
+restore/reopen repeated successfully with all11hashes and964identicalexports.

@@ -1,0 +1,7153 @@
+{
+  "scope": "Original output task, ADC history scan and compare-interrupt callback body.\n\nExplicit result/status/timestamp latches; stop before RTE. No interrupt delivery,\nclock rate, PWM pin behavior, peripheral side effects or physical actuator proof.\n",
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "counts": {
+    "history_init": 16,
+    "history": 200,
+    "task": 1536,
+    "callback": 750,
+    "interrupt": 36,
+    "rejected": 7
+  },
+  "descriptors": [
+    "0x5c568",
+    "0x5c56c",
+    "0x5c574",
+    "0x5c570",
+    "0x5c580",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x5c584",
+    "0x5c578",
+    "0x5c57c"
+  ],
+  "sources": [
+    "0xfffff800",
+    "0xfffff802",
+    "0xfffff806",
+    "0xfffff804",
+    "0xfffff814",
+    "0x400",
+    "0x400",
+    "0x400",
+    "0xfffff820",
+    "0xfffff810",
+    "0xfffff812"
+  ],
+  "zero_descriptor_sample": 316,
+  "retained": [
+    {
+      "call": 1,
+      "mode": 1,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 1,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [],
+      "sums": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "adaptation_age": 0,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 2,
+      "mode": 1,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 2,
+      "compare": 20830,
+      "history_index": 2,
+      "history_counts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [],
+      "sums": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "adaptation_age": 0,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 3,
+      "mode": 1,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 3,
+      "compare": 29162,
+      "history_index": 3,
+      "history_counts": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [],
+      "sums": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "adaptation_age": 0,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 4,
+      "mode": 1,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 4,
+      "compare": 4166,
+      "history_index": 4,
+      "history_counts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [],
+      "sums": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "adaptation_age": 0,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 5,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 5,
+      "compare": 12498,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          3519
+        ]
+      ],
+      "sums": [
+        368,
+        368,
+        368,
+        0
+      ],
+      "adaptation_age": 1,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 6,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 6,
+      "compare": 20830,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          2749
+        ]
+      ],
+      "sums": [
+        737,
+        737,
+        0,
+        369
+      ],
+      "adaptation_age": 1,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 7,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 7,
+      "compare": 29162,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1847
+        ]
+      ],
+      "sums": [
+        1107,
+        0,
+        370,
+        739
+      ],
+      "adaptation_age": 1,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 8,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 8,
+      "compare": 4166,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          541
+        ]
+      ],
+      "sums": [
+        0,
+        371,
+        741,
+        1110
+      ],
+      "adaptation_age": 1,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 9,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 9,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          1347
+        ]
+      ],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 2,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 10,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 10,
+      "compare": 20830,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1119
+        ]
+      ],
+      "sums": [
+        740,
+        1111,
+        0,
+        368
+      ],
+      "adaptation_age": 2,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 11,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 11,
+      "compare": 29162,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          755
+        ]
+      ],
+      "sums": [
+        1109,
+        0,
+        369,
+        737
+      ],
+      "adaptation_age": 2,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 12,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 12,
+      "compare": 4166,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          155
+        ]
+      ],
+      "sums": [
+        0,
+        370,
+        739,
+        1107
+      ],
+      "adaptation_age": 2,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 13,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 13,
+      "compare": 12498,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          802
+        ]
+      ],
+      "sums": [
+        371,
+        741,
+        1110,
+        0
+      ],
+      "adaptation_age": 3,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 14,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 14,
+      "compare": 20830,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          561
+        ]
+      ],
+      "sums": [
+        743,
+        1113,
+        0,
+        372
+      ],
+      "adaptation_age": 3,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 15,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 15,
+      "compare": 29162,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          386
+        ]
+      ],
+      "sums": [
+        1111,
+        0,
+        368,
+        740
+      ],
+      "adaptation_age": 3,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 16,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 16,
+      "compare": 4166,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        369,
+        737,
+        1109
+      ],
+      "adaptation_age": 3,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 17,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 17,
+      "compare": 12498,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          244
+        ]
+      ],
+      "sums": [
+        370,
+        739,
+        1107,
+        0
+      ],
+      "adaptation_age": 4,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 18,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 18,
+      "compare": 20830,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          19
+        ]
+      ],
+      "sums": [
+        741,
+        1110,
+        0,
+        371
+      ],
+      "adaptation_age": 4,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 19,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 19,
+      "compare": 29162,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          8
+        ]
+      ],
+      "sums": [
+        1113,
+        0,
+        372,
+        743
+      ],
+      "adaptation_age": 4,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 20,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 20,
+      "compare": 4166,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        368,
+        740,
+        1111
+      ],
+      "adaptation_age": 4,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 21,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 21,
+      "compare": 12498,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        369,
+        737,
+        1109,
+        0
+      ],
+      "adaptation_age": 5,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 22,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 22,
+      "compare": 20830,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        739,
+        1107,
+        0,
+        370
+      ],
+      "adaptation_age": 5,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 23,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 23,
+      "compare": 29162,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1110,
+        0,
+        371,
+        741
+      ],
+      "adaptation_age": 5,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 24,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 24,
+      "compare": 4166,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        372,
+        743,
+        1113
+      ],
+      "adaptation_age": 5,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 25,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 25,
+      "compare": 12498,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        368,
+        740,
+        1111,
+        0
+      ],
+      "adaptation_age": 6,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 26,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 26,
+      "compare": 20830,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        737,
+        1109,
+        0,
+        369
+      ],
+      "adaptation_age": 6,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 27,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 27,
+      "compare": 29162,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1107,
+        0,
+        370,
+        739
+      ],
+      "adaptation_age": 6,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 28,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 28,
+      "compare": 4166,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        371,
+        741,
+        1110
+      ],
+      "adaptation_age": 6,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 29,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 29,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 7,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 30,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 30,
+      "compare": 20830,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        740,
+        1111,
+        0,
+        368
+      ],
+      "adaptation_age": 7,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 31,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 31,
+      "compare": 29162,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1109,
+        0,
+        369,
+        737
+      ],
+      "adaptation_age": 7,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 32,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 32,
+      "compare": 4166,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        370,
+        739,
+        1107
+      ],
+      "adaptation_age": 7,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 33,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 33,
+      "compare": 12498,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        371,
+        741,
+        1110,
+        0
+      ],
+      "adaptation_age": 8,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 34,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 34,
+      "compare": 20830,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        743,
+        1113,
+        0,
+        372
+      ],
+      "adaptation_age": 8,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 35,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 35,
+      "compare": 29162,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1111,
+        0,
+        368,
+        740
+      ],
+      "adaptation_age": 8,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 36,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 36,
+      "compare": 4166,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        369,
+        737,
+        1109
+      ],
+      "adaptation_age": 8,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 37,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 37,
+      "compare": 12498,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        370,
+        739,
+        1107,
+        0
+      ],
+      "adaptation_age": 9,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 38,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 38,
+      "compare": 20830,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        741,
+        1110,
+        0,
+        371
+      ],
+      "adaptation_age": 9,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 39,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 39,
+      "compare": 29162,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1113,
+        0,
+        372,
+        743
+      ],
+      "adaptation_age": 9,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 40,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 40,
+      "compare": 4166,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        368,
+        740,
+        1111
+      ],
+      "adaptation_age": 9,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 41,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 41,
+      "compare": 12498,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        369,
+        737,
+        1109,
+        0
+      ],
+      "adaptation_age": 10,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 42,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 42,
+      "compare": 20830,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        739,
+        1107,
+        0,
+        370
+      ],
+      "adaptation_age": 10,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 43,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 43,
+      "compare": 29162,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1110,
+        0,
+        371,
+        741
+      ],
+      "adaptation_age": 10,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 44,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 44,
+      "compare": 4166,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        372,
+        743,
+        1113
+      ],
+      "adaptation_age": 10,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 45,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 45,
+      "compare": 12498,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        368,
+        740,
+        1111,
+        0
+      ],
+      "adaptation_age": 11,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 46,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 46,
+      "compare": 20830,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        737,
+        1109,
+        0,
+        369
+      ],
+      "adaptation_age": 11,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 47,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 47,
+      "compare": 29162,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1107,
+        0,
+        370,
+        739
+      ],
+      "adaptation_age": 11,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 48,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 48,
+      "compare": 4166,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        371,
+        741,
+        1110
+      ],
+      "adaptation_age": 11,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 49,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 49,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 12,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 50,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 2,
+      "timer_phase": 49,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [],
+      "outputs": [],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 12,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 51,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 2,
+      "timer_phase": 49,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [],
+      "outputs": [],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 12,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 52,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 50,
+      "compare": 20830,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        742,
+        1113,
+        0,
+        370
+      ],
+      "adaptation_age": 12,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 53,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 51,
+      "compare": 29162,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1113,
+        0,
+        371,
+        741
+      ],
+      "adaptation_age": 12,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 54,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 52,
+      "compare": 4166,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        372,
+        743,
+        1113
+      ],
+      "adaptation_age": 12,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 55,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 53,
+      "compare": 12498,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        368,
+        740,
+        1111,
+        0
+      ],
+      "adaptation_age": 13,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 56,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 54,
+      "compare": 20830,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        737,
+        1109,
+        0,
+        369
+      ],
+      "adaptation_age": 13,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 57,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 55,
+      "compare": 29162,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1107,
+        0,
+        370,
+        739
+      ],
+      "adaptation_age": 13,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 58,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 56,
+      "compare": 4166,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        371,
+        741,
+        1110
+      ],
+      "adaptation_age": 13,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 59,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 57,
+      "compare": 12498,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 14,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 60,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 58,
+      "compare": 20830,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        740,
+        1111,
+        0,
+        368
+      ],
+      "adaptation_age": 14,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 61,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 59,
+      "compare": 29162,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1109,
+        0,
+        369,
+        737
+      ],
+      "adaptation_age": 14,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 62,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 60,
+      "compare": 4166,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        370,
+        739,
+        1107
+      ],
+      "adaptation_age": 14,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 63,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 61,
+      "compare": 12498,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        371,
+        741,
+        1110,
+        0
+      ],
+      "adaptation_age": 15,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 64,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 62,
+      "compare": 20830,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        743,
+        1113,
+        0,
+        372
+      ],
+      "adaptation_age": 15,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 65,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 63,
+      "compare": 29162,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1111,
+        0,
+        368,
+        740
+      ],
+      "adaptation_age": 15,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 66,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 64,
+      "compare": 4166,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        369,
+        737,
+        1109
+      ],
+      "adaptation_age": 15,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 67,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 65,
+      "compare": 12498,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        370,
+        739,
+        1107,
+        0
+      ],
+      "adaptation_age": 16,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 68,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 66,
+      "compare": 20830,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        741,
+        1110,
+        0,
+        371
+      ],
+      "adaptation_age": 16,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 69,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 67,
+      "compare": 29162,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1113,
+        0,
+        372,
+        743
+      ],
+      "adaptation_age": 16,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 70,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 68,
+      "compare": 4166,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        368,
+        740,
+        1111
+      ],
+      "adaptation_age": 16,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 71,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 69,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        369,
+        737,
+        1109,
+        0
+      ],
+      "adaptation_age": 17,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 72,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 70,
+      "compare": 20830,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        739,
+        1107,
+        0,
+        370
+      ],
+      "adaptation_age": 17,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 73,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 71,
+      "compare": 29162,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1110,
+        0,
+        371,
+        741
+      ],
+      "adaptation_age": 17,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 74,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 72,
+      "compare": 4166,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        372,
+        743,
+        1113
+      ],
+      "adaptation_age": 17,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 75,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 73,
+      "compare": 12498,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        368,
+        740,
+        1111,
+        0
+      ],
+      "adaptation_age": 18,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 76,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 74,
+      "compare": 20830,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        737,
+        1109,
+        0,
+        369
+      ],
+      "adaptation_age": 18,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 77,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 75,
+      "compare": 29162,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1107,
+        0,
+        370,
+        739
+      ],
+      "adaptation_age": 18,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 78,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 76,
+      "compare": 4166,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        371,
+        741,
+        1110
+      ],
+      "adaptation_age": 18,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 79,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 77,
+      "compare": 12498,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 19,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 80,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 78,
+      "compare": 20830,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        740,
+        1111,
+        0,
+        368
+      ],
+      "adaptation_age": 19,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 81,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 79,
+      "compare": 29162,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1109,
+        0,
+        369,
+        737
+      ],
+      "adaptation_age": 19,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 82,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 80,
+      "compare": 4166,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          0
+        ]
+      ],
+      "sums": [
+        0,
+        370,
+        739,
+        1107
+      ],
+      "adaptation_age": 19,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 83,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 81,
+      "compare": 12498,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        371,
+        741,
+        1110,
+        0
+      ],
+      "adaptation_age": 20,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 84,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 82,
+      "compare": 20830,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        743,
+        1113,
+        0,
+        372
+      ],
+      "adaptation_age": 20,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 85,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 83,
+      "compare": 29162,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1111,
+        0,
+        368,
+        740
+      ],
+      "adaptation_age": 20,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 86,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 84,
+      "compare": 4166,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        369,
+        737,
+        1109
+      ],
+      "adaptation_age": 20,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 87,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 85,
+      "compare": 12498,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        370,
+        739,
+        1107,
+        0
+      ],
+      "adaptation_age": 21,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 88,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 86,
+      "compare": 20830,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        741,
+        1110,
+        0,
+        371
+      ],
+      "adaptation_age": 21,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 89,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 87,
+      "compare": 29162,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1113,
+        0,
+        372,
+        743
+      ],
+      "adaptation_age": 21,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 90,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 88,
+      "compare": 4166,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        368,
+        740,
+        1111
+      ],
+      "adaptation_age": 21,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 91,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 89,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        369,
+        737,
+        1109,
+        0
+      ],
+      "adaptation_age": 22,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 92,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 90,
+      "compare": 20830,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        739,
+        1107,
+        0,
+        370
+      ],
+      "adaptation_age": 22,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 93,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 91,
+      "compare": 29162,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1110,
+        0,
+        371,
+        741
+      ],
+      "adaptation_age": 22,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 94,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 92,
+      "compare": 4166,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        372,
+        743,
+        1113
+      ],
+      "adaptation_age": 22,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 95,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 93,
+      "compare": 12498,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        368,
+        740,
+        1111,
+        0
+      ],
+      "adaptation_age": 23,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 96,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 94,
+      "compare": 20830,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        737,
+        1109,
+        0,
+        369
+      ],
+      "adaptation_age": 23,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 97,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 95,
+      "compare": 29162,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          0
+        ]
+      ],
+      "sums": [
+        1107,
+        0,
+        370,
+        739
+      ],
+      "adaptation_age": 23,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 98,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 96,
+      "compare": 4166,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        371,
+        741,
+        1110
+      ],
+      "adaptation_age": 23,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 99,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 97,
+      "compare": 12498,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 24,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 100,
+      "mode": 2,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 98,
+      "compare": 20830,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [],
+      "outputs": [],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 24,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 101,
+      "mode": 2,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 99,
+      "compare": 29162,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [],
+      "outputs": [],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 24,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 102,
+      "mode": 2,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 100,
+      "compare": 4166,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [],
+      "outputs": [],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 24,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 103,
+      "mode": 2,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 101,
+      "compare": 12498,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [],
+      "outputs": [],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 24,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 104,
+      "mode": 2,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 102,
+      "compare": 20830,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [],
+      "outputs": [],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 24,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 105,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 103,
+      "compare": 29162,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        740,
+        0,
+        1481,
+        368
+      ],
+      "adaptation_age": 24,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 106,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 104,
+      "compare": 4166,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        369,
+        1850,
+        737
+      ],
+      "adaptation_age": 24,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 107,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 105,
+      "compare": 12498,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        370,
+        739,
+        2220,
+        0
+      ],
+      "adaptation_age": 25,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 108,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 106,
+      "compare": 20830,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        741,
+        1110,
+        0,
+        371
+      ],
+      "adaptation_age": 25,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 109,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 107,
+      "compare": 29162,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1113,
+        0,
+        372,
+        743
+      ],
+      "adaptation_age": 25,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 110,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 108,
+      "compare": 4166,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        368,
+        740,
+        1111
+      ],
+      "adaptation_age": 25,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 111,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 109,
+      "compare": 12498,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        369,
+        737,
+        1109,
+        0
+      ],
+      "adaptation_age": 26,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 112,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 110,
+      "compare": 20830,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        739,
+        1107,
+        0,
+        370
+      ],
+      "adaptation_age": 26,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 113,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 111,
+      "compare": 29162,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1110,
+        0,
+        371,
+        741
+      ],
+      "adaptation_age": 26,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 114,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 112,
+      "compare": 4166,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        372,
+        743,
+        1113
+      ],
+      "adaptation_age": 26,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 115,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 113,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        368,
+        740,
+        1111,
+        0
+      ],
+      "adaptation_age": 27,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 116,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 114,
+      "compare": 20830,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          0
+        ]
+      ],
+      "sums": [
+        737,
+        1109,
+        0,
+        369
+      ],
+      "adaptation_age": 27,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 117,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 115,
+      "compare": 29162,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1107,
+        0,
+        370,
+        739
+      ],
+      "adaptation_age": 27,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 118,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 116,
+      "compare": 4166,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        371,
+        741,
+        1110
+      ],
+      "adaptation_age": 27,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 119,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 117,
+      "compare": 12498,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 28,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 120,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 118,
+      "compare": 20830,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        740,
+        1111,
+        0,
+        368
+      ],
+      "adaptation_age": 28,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 121,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 119,
+      "compare": 29162,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1109,
+        0,
+        369,
+        737
+      ],
+      "adaptation_age": 28,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 122,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 120,
+      "compare": 4166,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        370,
+        739,
+        1107
+      ],
+      "adaptation_age": 28,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 123,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 121,
+      "compare": 12498,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        371,
+        741,
+        1110,
+        0
+      ],
+      "adaptation_age": 29,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 124,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 122,
+      "compare": 20830,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        743,
+        1113,
+        0,
+        372
+      ],
+      "adaptation_age": 29,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 125,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 123,
+      "compare": 29162,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1111,
+        0,
+        368,
+        740
+      ],
+      "adaptation_age": 29,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 126,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 124,
+      "compare": 4166,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        369,
+        737,
+        1109
+      ],
+      "adaptation_age": 29,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 127,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 125,
+      "compare": 12498,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        370,
+        739,
+        1107,
+        0
+      ],
+      "adaptation_age": 30,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 128,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 126,
+      "compare": 20830,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        741,
+        1110,
+        0,
+        371
+      ],
+      "adaptation_age": 30,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 129,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 127,
+      "compare": 29162,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1113,
+        0,
+        372,
+        743
+      ],
+      "adaptation_age": 30,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 130,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 128,
+      "compare": 4166,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        368,
+        740,
+        1111
+      ],
+      "adaptation_age": 30,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 131,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 129,
+      "compare": 12498,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          0
+        ]
+      ],
+      "sums": [
+        369,
+        737,
+        1109,
+        0
+      ],
+      "adaptation_age": 31,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 132,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 130,
+      "compare": 20830,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        739,
+        1107,
+        0,
+        370
+      ],
+      "adaptation_age": 31,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 133,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 131,
+      "compare": 29162,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1110,
+        0,
+        371,
+        741
+      ],
+      "adaptation_age": 31,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 134,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 132,
+      "compare": 4166,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        372,
+        743,
+        1113
+      ],
+      "adaptation_age": 31,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 135,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 133,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          1680
+        ]
+      ],
+      "sums": [
+        368,
+        740,
+        1111,
+        0
+      ],
+      "adaptation_age": 32,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 136,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 134,
+      "compare": 20830,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        737,
+        1109,
+        0,
+        369
+      ],
+      "adaptation_age": 32,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 137,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 135,
+      "compare": 29162,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1107,
+        0,
+        370,
+        739
+      ],
+      "adaptation_age": 32,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 138,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 136,
+      "compare": 4166,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        371,
+        741,
+        1110
+      ],
+      "adaptation_age": 32,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 139,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 137,
+      "compare": 12498,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          1680
+        ]
+      ],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 33,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 140,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 138,
+      "compare": 20830,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        740,
+        1111,
+        0,
+        368
+      ],
+      "adaptation_age": 33,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 141,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 139,
+      "compare": 29162,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1109,
+        0,
+        369,
+        737
+      ],
+      "adaptation_age": 33,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 142,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 140,
+      "compare": 4166,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        370,
+        739,
+        1107
+      ],
+      "adaptation_age": 33,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 143,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 141,
+      "compare": 12498,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          1680
+        ]
+      ],
+      "sums": [
+        371,
+        741,
+        1110,
+        0
+      ],
+      "adaptation_age": 34,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 144,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 142,
+      "compare": 20830,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        743,
+        1113,
+        0,
+        372
+      ],
+      "adaptation_age": 34,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 145,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 143,
+      "compare": 29162,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1111,
+        0,
+        368,
+        740
+      ],
+      "adaptation_age": 34,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 146,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 144,
+      "compare": 4166,
+      "history_index": 3,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        369,
+        737,
+        1109
+      ],
+      "adaptation_age": 34,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 147,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 145,
+      "compare": 12498,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          1680
+        ]
+      ],
+      "sums": [
+        370,
+        739,
+        1107,
+        0
+      ],
+      "adaptation_age": 35,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 148,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 146,
+      "compare": 20830,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        741,
+        1110,
+        0,
+        371
+      ],
+      "adaptation_age": 35,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 149,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 147,
+      "compare": 29162,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1113,
+        0,
+        372,
+        743
+      ],
+      "adaptation_age": 35,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 150,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 148,
+      "compare": 4166,
+      "history_index": 4,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        368,
+        740,
+        1111
+      ],
+      "adaptation_age": 35,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 151,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 149,
+      "compare": 12498,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          1680
+        ]
+      ],
+      "sums": [
+        369,
+        737,
+        1109,
+        0
+      ],
+      "adaptation_age": 36,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 152,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 150,
+      "compare": 20830,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        739,
+        1107,
+        0,
+        370
+      ],
+      "adaptation_age": 36,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 153,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 151,
+      "compare": 29162,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1110,
+        0,
+        371,
+        741
+      ],
+      "adaptation_age": 36,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 154,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 152,
+      "compare": 4166,
+      "history_index": 0,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        372,
+        743,
+        1113
+      ],
+      "adaptation_age": 36,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 155,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 153,
+      "compare": 12498,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          1680
+        ]
+      ],
+      "sums": [
+        368,
+        740,
+        1111,
+        0
+      ],
+      "adaptation_age": 37,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 156,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 154,
+      "compare": 20830,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        737,
+        1109,
+        0,
+        369
+      ],
+      "adaptation_age": 37,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 157,
+      "mode": 3,
+      "old_phase": 1,
+      "next_phase": 0,
+      "timer_phase": 155,
+      "compare": 29162,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964498,
+          1750
+        ]
+      ],
+      "sums": [
+        1107,
+        0,
+        370,
+        739
+      ],
+      "adaptation_age": 37,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 158,
+      "mode": 3,
+      "old_phase": 0,
+      "next_phase": 3,
+      "timer_phase": 156,
+      "compare": 4166,
+      "history_index": 1,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964496,
+          1750
+        ]
+      ],
+      "sums": [
+        0,
+        371,
+        741,
+        1110
+      ],
+      "adaptation_age": 37,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 159,
+      "mode": 3,
+      "old_phase": 3,
+      "next_phase": 2,
+      "timer_phase": 157,
+      "compare": 12498,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806",
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff806",
+        "0xfffff804",
+        "0xfffff814",
+        "0xfffff820",
+        "0xfffff810",
+        "0xfffff812"
+      ],
+      "outputs": [
+        [
+          4294964500,
+          1680
+        ]
+      ],
+      "sums": [
+        372,
+        743,
+        1113,
+        0
+      ],
+      "adaptation_age": 38,
+      "profile_latency": 0,
+      "profile_duration": 12
+    },
+    {
+      "call": 160,
+      "mode": 3,
+      "old_phase": 2,
+      "next_phase": 1,
+      "timer_phase": 158,
+      "compare": 20830,
+      "history_index": 2,
+      "history_counts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adc_reads": [
+        "0xfffff800",
+        "0xfffff802",
+        "0xfffff804",
+        "0xfffff806"
+      ],
+      "outputs": [
+        [
+          4294964502,
+          1750
+        ]
+      ],
+      "sums": [
+        740,
+        1111,
+        0,
+        368
+      ],
+      "adaptation_age": 38,
+      "profile_latency": 0,
+      "profile_duration": 12
+    }
+  ],
+  "retained_calls": 160,
+  "limits": "No RTE/context entry, real interrupt timing, timer hardware side effects, PWM pin output, physical units or remote-controller proof;169A4/full clock/mode/pin setup remain open."
+}

@@ -1,0 +1,160 @@
+CORRECTION/ADDITIONAL VERSION2026-10-06: roof-training-graphics.txt documents
+an opposite DECK_CL PID polarity in the October2006 training table. The later
+page's On-at-closed claim below is version-specific, not universal. Physical
+3Oclosed=B+ is corroborated, but actual PID behavior remains unproved.
+
+LATEST2026-10-06: roof-switch-graphics.txt resolves the graphical switch-table
+retrieval gap and documents both-direction conflicting-input stops and pause
+behavior. Public source PDF is saved in sources/. Historical failed retrievals
+below no longer mean graphics are unavailable. Receiver/reversal-after-release
+and numerical timeout/pulse thresholds remain open.
+
+2026-10-06: PRHT interruption and fault recovery documentation
+
+Scope: factory NC folding AND unfolding. This is documentation evidence,
+not executed PRHT firmware, a vehicle test, or decoded CAN receiver behavior.
+It advances the independent roof requirement while ECU/AT and traction work
+continue. No proposed CAN open/close command or validated wiring change.
+
+PRIMARY OWNER DOCUMENTATION
+Mazda 2007 MX-5 owner's manual, September2006 Print3; official Mazda source:
+https://www.mazdausa.com/siteassets/global-resources/vehicle-resources/owner-manuals/2007/mx-5/2007-mx-5-owners-manual.pdf
+Read2026-10-06; PDF407pages. Printed3-58/3-59 correspond to zero-based PDF
+pages116/117. Releasing the open switch stops opening; pressing it again
+resumes opening. Closing has the same release/press behavior. This establishes
+factory documentation of pause/resume in BOTH directions. It does not describe
+opposite-direction reversal at every intermediate roof/deck position.
+Printed3-57/3-59 operating steps recommend AT Park and MT Neutral. This is not
+a contradiction of the workshop permission table allowing AT P/N: driver
+instructions and electronic permission criteria need not be identical.
+
+FACTORY SERVICE HIGHLIGHTS: NEW FINDINGS
+The mirror's book title incorrectly says SPEED6; pages themselves say Mazda
+MX-5. Same underlying 2007 service highlights as traction-roof.txt source[B].
+Read2026-10-06. Printed09-16-11, onlinepage56:
+https://mazda.manymanuals.fr/cars/speed6-2007/specifications-17571/56
+Supply fault: <=7.5V or >=17.5V inhibits/stops operation; recovery8.5..16.5V.
+Hall supply <=5V or motor supply reduction stops motors; recovery requires
+ignition OFF/ON. Missing Hall pulses temporarily stop motion; another switch
+operation permits retry, with pulse detection listed as recovery. Excessive
+left/right pulse-count difference stops either roof or deck motors. Retry uses
+the switch; after at least three detections, recovery requires ignition OFF/ON.
+The numerical mismatch threshold is unspecified. Invalid limit-switch logic
+inhibits operation until normal logic returns. Window-notification faults
+have asymmetric closing/folding restrictions, including a final permitted
+close; refer to the table and existing U0030/U0031 evidence before modeling.
+Printed09-16-19, onlinepage64:
+https://mazda.manymanuals.fr/cars/speed6-2007/specifications-17571/64
+A new switch operation requires detecting release first. Stored DTCs survive
+ignition LOCK and battery disconnection. Therefore a recovery action and
+clearing diagnostic memory are distinct concepts.
+
+INTERPRETATION AND STILL-OPEN TESTS
+Verified documentation now covers user pause/resume in both directions and
+specific synchronization/fault recovery policies. It does not close receiver
+logic, numerical pulse limits, debounce or CAN timeout durations. Do not call
+these newly executed or hardware-verified facts. Documented direction-dependent
+window behavior needs a receiver trace before a complete roof state model.
+
+Next concrete actions:
+1. Resolve simultaneous/opposite switch behavior from the graphical switch
+   tables, onlinepages63/64, and the close timing chart onlinepage53. Extracted
+   table text loses column relationships; do not infer a reversal state matrix
+   from its flattened OCR. Onlinepage49 is the opening timing counterpart.
+2. Obtain/locate OEM PRHT receiver evidence or captures for PCM transmission
+   type, speed and neutral/selector candidates in mt-can231.txt, can201-speed.txt
+   and selector-inputs.txt. Sender tests and aftermarket code do not prove OEM
+   reception. No OEM roof firmware has been identified among current inputs.
+3. Trace communication loss/recovery and distinguish timeouts from the
+   documented motor/window faults. Keep folding, unfolding, interruption,
+   resume, reversal, synchronization and recovery separately tracked.
+4. Resolve connector/year conflicts in traction-roof.txt before physical use.
+
+RETRIEVAL NOTES / FAILED LEADS
+Web search located the MX-5 service highlights under a misleading Mazda3 title
+at manualslib.com/manual/804936/Mazda-3-2007.html. Direct page49/53/56/57/61/64
+opens failed with this tool. The ManyManuals mirror's text opened successfully;
+its image links failed. Direct Python urllib retrieval of page53 returned403,
+so no graphical table evidence was inspected or silently reconstructed.
+The official Mazda owner's PDF opened successfully and its opening/closing
+notes were read directly. No source binary, firmware or vehicle state changed.
+Saved locally; no staging/commit/push. No Ghidra change follows from these
+factory documents alone; firmware persistence is tracked separately.
+
+2026-10-06 FOLLOW-UP: COMMUNICATION AND SWITCH FAULTS
+Factory service highlights printed09-16-12 (same misleading mirror title):
+https://mazda.manymanuals.fr/cars/speed6-2007/specifications-17571/57
+PRHT CAN-system, PCM-link, TCM-link and vehicle-speed communication faults
+inhibit operation; normal communication restores permission. No duration is
+specified. Switch voltage <=1V inhibits until normal voltage returns. A switch
+held on for >=30s after ignition ON, or both directions asserted for >=30s,
+inhibits until release. Top-lock ON with roof open allows one close, then
+inhibits until lock OFF. Lock OFF with roof closed and detected speed has no
+action listed and recovers at zero speed. These are documented conditions,
+not an executed reversal matrix or CAN timeout model.
+Printed09-16-18 states continuous press qualification100ms:
+https://mazda.manymanuals.fr/cars/speed6-2007/specifications-17571/63
+Its flattened state table still does not justify reconstructing all columns.
+
+2008 NC workshop manual, www host accessible for these pages:
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902j2862000.html
+B296C corroborates low switch voltage/stuck input and simultaneous >=30s.
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902j2860600.html
+U0030 means missing window-open notification during roof operation; U0031
+means notification continuously received >=30s while roof is not operating.
+Neither is a CAN timeout. This page repeats1E->window1A and1C->window1H;
+retain the existing pin-variant conflict. Page heading says2008 but copyright
+2012: retain provenance rather than assigning one exact production revision.
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902j2861600.html
+B294D/E still omit the numerical left/right pulse difference threshold.
+Diagnostic rows contain apparent inconsistencies (mechanical Yes/No actions
+and repeated3M/mixed roof/deck wording); do not silently fix them or treat as
+a validated wiring plan. Graphical/original revision corroboration needed.
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902j2860500.html
+B296D detection says Hall supply <=5V, whereas its final inspection accepts
+>=5V. Exact equality cannot be settled from these diagnostic statements.
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902j2347100.html
+The DTC table says B1318 below7.5V, versus service-highlights <=7.5V.
+Preserve the boundary discrepancy. Communication codes link onward to the
+multiplex diagnostic section, not a roof-specific timeout specification.
+
+FAILED/EXCLUDED LEADS
+The following indexed page is2015-2018 ND/RF; its PCM5s/TCM1s/cluster2s
+figures MUST NOT be assigned to NC PRHT:
+https://charm.li/Mazda/MX-5%2005%2F2015%20-%2004%2F2018%20%28d9h6-1a-22c_ver15%29/esicont/srvc/html/id091600020041.html
+mx5manual.com search hits were likewise later-generation material.
+https://static1.1.sqspcdn.com/static/f/341469/24621792/1395761758733/mazda_mx5_technical_guide_01102009290.pdf
+is only a one-page2009MY SJ6A-EL fail-safe extract, not a full roof manual.
+2010 charm.li U0100 diagnostic page timed out. No new finding from it.
+id0903j2851400.html (roof stops) remained inaccessible on both host variants.
+The www host recovered U0030/U0031 and the body index; start there for future
+NC pages rather than assuming every earlier unprefixed-host failure persists:
+https://www.ncmiata-servicemanual.com/src/g5w09/g5w09.html
+User replied "nothing": no other dumps, captures or bench/vehicle results
+are available. Receiver execution, reversal, timeout, synchronization and
+recovery remain independently open for BOTH folding and unfolding.
+
+RETRIEVAL CORRECTION: navigating the body index link subsequently recovered
+id0903j2851400.html on the www host. Earlier direct-open failures are not
+evidence that the document is unavailable. Read2026-10-06:
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0903j2851400.html
+No.5 covers stops during BOTH opening and closing, separates deck/roof motion
+and switch interruption, and recommends Hall pulse checks. Its pin references
+conflict internally/with the terminal table: deck close3F versus table3O;
+roof close1F versus table1R; left roof motor3C versus table3D. Retain these as
+document inconsistencies, not alternate wiring proven on a vehicle.
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id091600809600.html
+The module terminal table corroborates1S/1U CAN-H/L,1C window input and1E
+window request output. Hall supply1G is low when stopped andB+ during motion;
+therefore an unconditional stationary <=5V test would misapply the fault
+criterion. This is an inference from the documented operating conditions;
+the receiver's fault-qualification logic still needs execution evidence.
+Switch1H has approximate open2.5V/close3.4V/other5V references. These are
+documentation values, not measured voltages or a permission to inject signals.
+
+The module table lists deck-close3O high in the closed position, unlike the
+other limit inputs that become low at their endpoint. PID table corroborates
+DECK_CL On when the physical deck-close switch is OFF:
+https://www.ncmiata-servicemanual.com/src/g5w09/html/id0902j2345900.html
+Thus PID On cannot be assumed to mean low voltage for all four limits.
+Factory reference only; polarity has not been checked on hardware.

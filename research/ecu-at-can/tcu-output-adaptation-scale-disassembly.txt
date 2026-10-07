@@ -1,0 +1,52 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0005ace8 <.data+0x5ace8>:
+   5ace8:	4f 22       	sts.l	pr,@-r15
+   5acea:	61 4f       	exts.w	r4,r1
+   5acec:	d3 05       	mov.l	0x5ad04,r3	! 5ae90
+   5acee:	65 5d       	extu.w	r5,r5
+   5acf0:	4f 12       	sts.l	macl,@-r15
+   5acf2:	01 57       	mul.l	r5,r1
+   5acf4:	01 1a       	sts	macl,r1
+   5acf6:	43 0b       	jsr	@r3
+   5acf8:	60 6d       	extu.w	r6,r0
+   5acfa:	4f 16       	lds.l	@r15+,macl
+   5acfc:	4f 26       	lds.l	@r15+,pr
+   5acfe:	00 0b       	rts	
+   5ad00:	00 09       	nop	
+   5ad02:	ff ff       	.word 0xffff
+   5ad04:	00 05       	mov.w	r0,@(r0,r0)
+   5ad06:	ae 90       	bra	0x5aa2a
+   5ad08:	34 52       	cmp/hs	r5,r4
+   5ad0a:	89 01       	bt	0x5ad10
+   5ad0c:	00 0b       	rts	
+   5ad0e:	60 43       	mov	r4,r0
+   5ad10:	60 53       	mov	r5,r0
+   5ad12:	00 0b       	rts	
+   5ad14:	00 09       	nop	
+   5ad16:	ff ff       	.word 0xffff
+   5ad18:	2f e6       	mov.l	r14,@-r15
+   5ad1a:	67 4d       	extu.w	r4,r7
+   5ad1c:	4f 22       	sts.l	pr,@-r15
+   5ad1e:	47 19       	shlr8	r7
+   5ad20:	4f 12       	sts.l	macl,@-r15
+   5ad22:	64 4c       	extu.b	r4,r4
+   5ad24:	67 7d       	extu.w	r7,r7
+   5ad26:	47 00       	shll	r7
+   5ad28:	62 4d       	extu.w	r4,r2
+   5ad2a:	22 28       	tst	r2,r2
+   5ad2c:	8d 1e       	bt.s	0x5ad6c
+   5ad2e:	35 7c       	add	r7,r5
+   5ad30:	67 55       	mov.w	@r5+,r7
+   5ad32:	6e 7d       	extu.w	r7,r14
+   5ad34:	63 51       	mov.w	@r5,r3
+   5ad36:	63 3d       	extu.w	r3,r3
+   5ad38:	33 e3       	cmp/ge	r14,r3
+   5ad3a:	89 0c       	bt	0x5ad56
+   5ad3c:	63 51       	mov.w	@r5,r3
+   5ad3e:	61 4d       	extu.w	r4,r1
+

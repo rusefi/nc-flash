@@ -1,0 +1,59 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00030620 <.data+0x30620>:
+   30620:	60 5e       	exts.b	r5,r0
+   30622:	40 15       	cmp/pl	r0
+   30624:	8f 05       	bf.s	0x30632
+   30626:	e7 00       	mov	#0,r7
+   30628:	24 60       	mov.b	r6,@r4
+   3062a:	77 01       	add	#1,r7
+   3062c:	37 03       	cmp/ge	r0,r7
+   3062e:	8f fb       	bf.s	0x30628
+   30630:	74 01       	add	#1,r4
+   30632:	00 0b       	rts	
+   30634:	00 09       	nop	
+   30636:	60 5e       	exts.b	r5,r0
+   30638:	40 15       	cmp/pl	r0
+   3063a:	8f 05       	bf.s	0x30648
+   3063c:	e7 00       	mov	#0,r7
+   3063e:	77 01       	add	#1,r7
+   30640:	24 61       	mov.w	r6,@r4
+   30642:	37 03       	cmp/ge	r0,r7
+   30644:	8f fb       	bf.s	0x3063e
+   30646:	74 02       	add	#2,r4
+   30648:	00 0b       	rts	
+   3064a:	00 09       	nop	
+   3064c:	60 5e       	exts.b	r5,r0
+   3064e:	00 0b       	rts	
+   30650:	04 64       	mov.b	r6,@(r0,r4)
+   30652:	60 5e       	exts.b	r5,r0
+   30654:	40 00       	shll	r0
+   30656:	00 0b       	rts	
+   30658:	04 65       	mov.w	r6,@(r0,r4)
+   3065a:	e7 00       	mov	#0,r7
+   3065c:	91 56       	mov.w	0x3070c,r1	! ff
+   3065e:	60 5e       	exts.b	r5,r0
+   30660:	2f e6       	mov.l	r14,@-r15
+   30662:	37 4c       	add	r4,r7
+   30664:	ee 00       	mov	#0,r14
+   30666:	40 15       	cmp/pl	r0
+   30668:	8f 0a       	bf.s	0x30680
+   3066a:	64 73       	mov	r7,r4
+   3066c:	62 70       	mov.b	@r7,r2
+   3066e:	62 2c       	extu.b	r2,r2
+   30670:	32 10       	cmp/eq	r1,r2
+   30672:	8d 01       	bt.s	0x30678
+   30674:	7e 01       	add	#1,r14
+   30676:	66 40       	mov.b	@r4,r6
+   30678:	74 01       	add	#1,r4
+   3067a:	3e 03       	cmp/ge	r0,r14
+   3067c:	8f f6       	bf.s	0x3066c
+   3067e:	77 01       	add	#1,r7
+   30680:	60 63       	mov	r6,r0
+   30682:	00 0b       	rts	
+   30684:	6e f6       	mov.l	@r15+,r14
+

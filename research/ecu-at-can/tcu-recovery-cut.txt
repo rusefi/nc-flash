@@ -1,0 +1,131 @@
+TCU cut-request eligibility after native communication recovery
+Evidence checkpoint:2026-10-06; completed; all320 pairs verified.
+
+Full objective remains ECU/AT CAN integration, deep traction integration and
+NC roof folding AND unfolding, interruption/resume/reversal, timeout, L/Rsync
+and fault recovery. Allthree incomplete; no extra user DSC/roof dumps/captures/
+bench results. No staging/commit/push. Previous goalturn made verifiedprogress.
+
+Starting evidence: tcu-recovery-reference.txt owns736 nativepairs; second320
+trace retirescode2 at194, remainsidle/freeheap126pairs; captureabsence280
+allowscachezero/activecommunicationfaultclear284, inhibitclear288, normalinput
+290.9454/CAN216bit5 remains0. Actualcut eligibility wasnotrecorded.
+
+Extracted existing nestedreference(t) fromverify_can201_cut_loop.py toimportsafe
+module helper withunchanged equations. Original800controlcases/pairedECUpath
+rerun output byte-identical tocan201-cut-loop-verification.json (PASS), retained
+ascan201-cut-loop-reuse-verification.json. No firmware/modelarithmetic change.
+
+probe_tcu_recovery_cut.py reusestheSAME recovery/reference/task pipeline and
+320-pair externalinputs. Observesactual24FA0/2513E entries andPRreturns.
+Existingreference predicts9454/9455 and82A5..A7; allotherapplicationRAM must
+remainunchanged.2513E predicates92C9bit6/9317bit0/92C6bit1 andwholeRAMunchanged.
+Records828B,edge timers,9316/17,94F4,9334,800E,80E8 andlookupthreshold.
+No internalstate/timer/phase/ack/cut injection; no instruction orcallee skip.
+Compareall320rows afterremovingonlyextra.cut_checks withpriorsecondapproach.
+Do notassumetimerforce-off untilactualfields supportit.
+
+Commands:
+ python research/ecu-at-can/verify_can201_cut_loop.py > research/ecu-at-can/can201-cut-loop-reuse-verification.json
+ cmp research/ecu-at-can/can201-cut-loop-verification.json research/ecu-at-can/can201-cut-loop-reuse-verification.json
+ python research/ecu-at-can/probe_tcu_recovery_cut.py
+Output tcu-recovery-cut-probe.json completed; Python3.14.3, unchangedROMidentities
+andexplicitMMIO/cadenceinputs inprecedingreport. Current Ghidra save/restore is recorded below.
+
+Traction: acquired-input firmware proof remainsdistinctfrommissingCAN211/21A
+sender/units, remoteDSC internals/actuation. Next localCAN/controlboundaries.
+Roof: factorydocs/candidatemaps/revisionconflicts remain distinctfrommissing
+OEMexecution/physicalevidence. Bothdirections andinterruption/reversal/timeout/
+synchronization/recovery remainopen; nextnewapplicablesource orOEMevidence.
+Userhasnothingelse; no repeatquestions orfailedfetches. Goalactive.
+
+Independent next-boundary evidence completed while trace runs
+-----------------------------------------------------------
+tcu-capture-interrupts.txt owns512 originalcaptureA/B ISRprefix differential
+RAM cases and6strictregister-rejection cases. Originalprofilinghelpers execute,
+withindependenttiming-record equations; allregister/MMIO expectations agree.
+StopsbeforeRTE, nohardware admission/cadence. NewCapture0B label andexisting
+A/profilecomments edited; pairedsave/restore pending finalcutresults.
+Cutmodel rerun SHA256 (bothoriginalandreuseJSON):
+d8b082997e432dd991c69194a1a8c6e293b04a05859ce1f8c1d58a91ecfb750f.
+
+Post-run verifier correction (no firmware/probe change)
+------------------------------------------------------
+All320pairs completed with160 actual24FA0 and160 actual2513E wholeRAM checks.
+Initialpost-run verifier wronglyassumed24FA0 onlyphase2/6 (onceper4pairs).
+Actualcalltrace shows everyevenpair from0 (bothphase0/4 and2/6), return1E7AE;
+2513E returns24FD4. Fixedcadenceassertion toobservedoriginalcaller schedule.
+Exact320row comparison hadalreadyPASSED beforethisassertionfailed. No rerun
+orfirmwarechange wasneeded; failurewasanunsupportedverification assumption.
+
+Verified result: cut admission and independent timeout
+------------------------------------------------------
+All 320 task pairs returned. Removing ONLY extra.cut_checks makes every row
+identical to tcu-recovery-reference-second-approach.json. All earlier phase,
+cache, diagnostic, receive and CAN results are therefore preserved. Actual
+24FA0 and nested2513E execute 160 times each, every even pair from0 to318.
+Both complete application-RAM checks pass at actual PR returns;2513E also
+matches its independent return predicate. No state is changed by observations.
+verify_tcu_recovery_cut.py independently reconstructs the existing model from
+recorded entry fields and validates outputs/timers/history and cadence.
+
+At call0 the threshold is8960, source80E8=10240, timers1;9454 becomes1.
+Subsequent stock curve axis9334=54016 selects7168. At44 cut admission still
+sees old92C9=0; later in that pair the application publishes inhibit. At46
+original2513E returns0 with92C9=C2;24FA0 clears9454. Thus cut routine execution
+is every even pair, while later producers determine the observed task lag.
+The initial once-per-four guess was a verifier error, preserved above.
+
+All four observed timers828B/82A5/82A6/82A7 equal call//2+1 at even entries;
+none of the three falling-edge resets occurs, and9455 stays0. Call62 closes
+the set window at32. From120 timers61 meet the independent force-off branch.
+At286,800E has fallen to0 after the earlier284 conversion, allowing the motion
+subcondition; communication admission still fails. At288 cut runs BEFORE the
+application clears92C9, so its admission stillreturns0 that pair.
+
+At290,2513E returns1:92C9=0,92C6=1,9317=72hex (bit0 clear).80E8=10240 isabove
+7168+1280,800E=0,94F4bit0 clear, selector force-off bit3 clear. However828B
+and82A7 are146, so the set window isclosed and the >=61 force-off condition
+sets9454=0. The same condition remains through318, timers160. CAN216byte7bit5
+therefore staysclear after communication recovery by verified original policy.
+This closes the unexplained retained-cut-output question for this fixture;
+it doesnot mean the communication fault failed toclear or that a physical
+engine must cut cylinders after stopped captures. No actual-time units assigned.
+
+Reproduce final verification:
+ python research/ecu-at-can/verify_tcu_recovery_cut.py
+ python -m py_compile research/ecu-at-can/verify_can201_cut_loop.py research/ecu-at-can/probe_tcu_recovery_cut.py research/ecu-at-can/verify_tcu_recovery_cut.py research/ecu-at-can/verify_tcu_capture_interrupts.py
+Result tcu-recovery-cut-verification.json retains six condition transitions.
+Unchanged TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6;
+paired ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+
+Next primary action: integrate verified originalcaptureISR prefixes into this
+same full-task fixture via an optional delivery hook, as specified in
+ tcu-capture-interrupts.txt.
+Keep differential profiler/callback proof distinct from independently modeled
+application results and missing hardware interrupt delivery/RTE/cadence. Do
+not extend this successful local result to remoteDSC or PRHT operation. Their
+separate statuses and next actions above remain open. No extra user artifacts.
+
+Saved and independently restored Ghidra milestone
+-------------------------------------------------
+1924 annotations (833ECU/1091TCU),979 identical exports,11 projectfile hashes
+verified before/after independent read-only reopen of both programs. New16B44
+Capture0B label; six existing comments updated (captureA,profilingentry/exit,
+cutroutine,admission and9454). Ghidra12.1.3PUBLIC/Java21.0.10.
+Archive11,005,867bytes SHA256
+f020215807412ae804edcb54e573af019158089f7533334a3e729204785a0a15.
+Exact inventory/verification in ghidra/snapshot.json andrestore-verification.json.
+Independentrestore directory:ghidra/restore-check/tcu-recovery-cut-20261006
+(ignored reproduciblecache). Applied/saved bothprograms, read-only verifiedlive,
+snapshot.py readbackcheckedarchive, extractednewemptydirectory, checked11hashes,
+read-only reopened/exportedboth, comparedentirefilename/SHA maps (979), then
+rechecked11hashes. NoERROR/Exception/DECOMPILE_INCOMPLETE inlogs/readbackfiles.
+Recipe andtools in ghidra/README.txt; archive preserves .gpr AND .rep.
+Four changed/new scripts compile; cut/capture verifiers PASS, targetedgitdiff
+check PASS, both ROM hashes unchanged. All new taskfiles Git-eligible; live/
+logs/restorecache ignored. Savedlocally only; no staging, commit orpush.
+Pre-existingmixedindex including AD archive.tmp preserved. Goalremainsactive;
+thisturnmadeverifiedprogress, allthreebroaderrequirements remainincomplete.

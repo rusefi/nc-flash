@@ -1,0 +1,105 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00018754 <.data+0x18754>:
+   18754:	2f e6       	mov.l	r14,@-r15
+   18756:	e4 00       	mov	#0,r4
+   18758:	96 80       	mov.w	0x1885c,r6	! 8abd
+   1875a:	ee 00       	mov	#0,r14
+   1875c:	95 7f       	mov.w	0x1885e,r5	! 8a9c
+   1875e:	67 e3       	mov	r14,r7
+   18760:	2f d6       	mov.l	r13,@-r15
+   18762:	ed 64       	mov	#100,r13
+   18764:	2f c6       	mov.l	r12,@-r15
+   18766:	ec 04       	mov	#4,r12
+   18768:	2f b6       	mov.l	r11,@-r15
+   1876a:	2f a6       	mov.l	r10,@-r15
+   1876c:	2f 96       	mov.l	r9,@-r15
+   1876e:	2f 86       	mov.l	r8,@-r15
+   18770:	4f 22       	sts.l	pr,@-r15
+   18772:	98 75       	mov.w	0x18860,r8	! 8a84
+   18774:	99 75       	mov.w	0x18862,r9	! 8a7c
+   18776:	da 45       	mov.l	0x1888c,r10	! 5f87c
+   18778:	9b 74       	mov.w	0x18864,r11	! 8a6c
+   1877a:	60 43       	mov	r4,r0
+   1877c:	92 73       	mov.w	0x18866,r2	! 8a74
+   1877e:	61 43       	mov	r4,r1
+   18780:	03 ad       	mov.w	@(r0,r10),r3
+   18782:	32 0c       	add	r0,r2
+   18784:	31 bc       	add	r11,r1
+   18786:	22 31       	mov.w	r3,@r2
+   18788:	21 31       	mov.w	r3,@r1
+   1878a:	61 03       	mov	r0,r1
+   1878c:	d2 40       	mov.l	0x18890,r2	! 5f884
+   1878e:	63 03       	mov	r0,r3
+   18790:	02 2d       	mov.w	@(r0,r2),r2
+   18792:	31 9c       	add	r9,r1
+   18794:	33 8c       	add	r8,r3
+   18796:	23 21       	mov.w	r2,@r3
+   18798:	21 21       	mov.w	r2,@r1
+   1879a:	91 65       	mov.w	0x18868,r1	! 8a8c
+   1879c:	92 65       	mov.w	0x1886a,r2	! 8a94
+   1879e:	31 4c       	add	r4,r1
+   187a0:	d0 3c       	mov.l	0x18894,r0	! 5f88c
+   187a2:	32 4c       	add	r4,r2
+   187a4:	03 4d       	mov.w	@(r0,r4),r3
+   187a6:	22 31       	mov.w	r3,@r2
+   187a8:	21 31       	mov.w	r3,@r1
+   187aa:	90 5f       	mov.w	0x1886c,r0	! 8a34
+   187ac:	04 d5       	mov.w	r13,@(r0,r4)
+   187ae:	90 5e       	mov.w	0x1886e,r0	! 8a3c
+   187b0:	04 e5       	mov.w	r14,@(r0,r4)
+   187b2:	90 5d       	mov.w	0x18870,r0	! 8a64
+   187b4:	04 e5       	mov.w	r14,@(r0,r4)
+   187b6:	25 e2       	mov.l	r14,@r5
+   187b8:	26 e0       	mov.b	r14,@r6
+   187ba:	77 01       	add	#1,r7
+   187bc:	90 59       	mov.w	0x18872,r0	! 8a44
+   187be:	76 01       	add	#1,r6
+   187c0:	04 e5       	mov.w	r14,@(r0,r4)
+   187c2:	75 04       	add	#4,r5
+   187c4:	63 7d       	extu.w	r7,r3
+   187c6:	33 c3       	cmp/ge	r12,r3
+   187c8:	8f d7       	bf.s	0x1877a
+   187ca:	74 02       	add	#2,r4
+   187cc:	93 52       	mov.w	0x18874,r3	! 8ab4
+   187ce:	23 d1       	mov.w	r13,@r3
+   187d0:	91 51       	mov.w	0x18876,r1	! 8ab6
+   187d2:	e2 9c       	mov	#-100,r2
+   187d4:	21 21       	mov.w	r2,@r1
+   187d6:	e0 32       	mov	#50,r0
+   187d8:	92 4e       	mov.w	0x18878,r2	! 8ab8
+   187da:	22 01       	mov.w	r0,@r2
+   187dc:	90 4d       	mov.w	0x1887a,r0	! 8aba
+   187de:	e3 ce       	mov	#-50,r3
+   187e0:	b0 af       	bsr	0x18942
+   187e2:	20 31       	mov.w	r3,@r0
+   187e4:	d2 2c       	mov.l	0x18898,r2	! 5f84c
+   187e6:	d1 2d       	mov.l	0x1889c,r1	! ffff8ad4
+   187e8:	93 48       	mov.w	0x1887c,r3	! 3e8
+   187ea:	21 22       	mov.l	r2,@r1
+   187ec:	90 47       	mov.w	0x1887e,r0	! 8ad8
+   187ee:	e2 01       	mov	#1,r2
+   187f0:	20 31       	mov.w	r3,@r0
+   187f2:	e1 03       	mov	#3,r1
+   187f4:	93 44       	mov.w	0x18880,r3	! 8aca
+   187f6:	23 21       	mov.w	r2,@r3
+   187f8:	92 43       	mov.w	0x18882,r2	! 8acc
+   187fa:	22 11       	mov.w	r1,@r2
+   187fc:	90 42       	mov.w	0x18884,r0	! 8ace
+   187fe:	20 e0       	mov.b	r14,@r0
+   18800:	93 41       	mov.w	0x18886,r3	! 8ad0
+   18802:	23 e1       	mov.w	r14,@r3
+   18804:	4f 26       	lds.l	@r15+,pr
+   18806:	68 f6       	mov.l	@r15+,r8
+   18808:	69 f6       	mov.l	@r15+,r9
+   1880a:	6a f6       	mov.l	@r15+,r10
+   1880c:	6b f6       	mov.l	@r15+,r11
+   1880e:	6c f6       	mov.l	@r15+,r12
+   18810:	6d f6       	mov.l	@r15+,r13
+   18812:	00 0b       	rts	
+   18814:	6e f6       	mov.l	@r15+,r14
+

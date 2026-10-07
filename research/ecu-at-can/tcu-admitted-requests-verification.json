@@ -1,0 +1,464 @@
+{
+  "status": "PASS",
+  "scope": "Verify native receive/capture/fulltask traces with saved independent models.",
+  "initial": {
+    "task_calls": 32,
+    "capture_returns": 64,
+    "measurement_checks": 32,
+    "paired_packet_decode_checks": 32,
+    "whole_ram_ack_checks": 0,
+    "existing_whole_ram_command_checks": 64,
+    "selected_gate_checks": 16,
+    "input_producer_checks": 16,
+    "creations": [],
+    "admitted_numeric_requests": [],
+    "whole_ram_receive_prefixes": 96,
+    "native_dispatch_calls": 32,
+    "native_watchdog_checks": 32,
+    "transitions": [
+      {
+        "call": 0,
+        "managed": [],
+        "source": 32767,
+        "phases": [],
+        "faults": 10117
+      }
+    ],
+    "final": {
+      "0x8007": 3,
+      "0x8080": 6,
+      "0x8081": 0,
+      "0x8084": 1,
+      "0x8088": 1,
+      "0x84f4": 32,
+      "0x84f5": 2,
+      "0x916f": 0,
+      "0x9410": 7,
+      "0x9545": 0,
+      "0x96c4": 0,
+      "0x96c5": 0,
+      "0x96c6": 0,
+      "0x9c87": 255,
+      "0x9c88": 0,
+      "0x9c8a": 0,
+      "0xa1ac": 0,
+      "0xa2b8": 1,
+      "0xa2b9": 0,
+      "0xa2ba": 0,
+      "request_word_915a": 32767,
+      "first_list_count_a202": 0,
+      "ramp_timers_8115": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "primary_timer_phase_8494": 0,
+      "heap_first_header_9f3c": 8388607,
+      "managed": [],
+      "phases": []
+    },
+    "actual_numeric_boundary_checks": {
+      "0x1fb8c": 16
+    }
+  },
+  "extended": {
+    "task_calls": 352,
+    "capture_returns": 704,
+    "measurement_checks": 352,
+    "paired_packet_decode_checks": 352,
+    "whole_ram_ack_checks": 10,
+    "existing_whole_ram_command_checks": 704,
+    "selected_gate_checks": 176,
+    "input_producer_checks": 176,
+    "creations": [
+      {
+        "call": 93,
+        "payload": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "admitted_numeric_requests": [
+      {
+        "call": 167,
+        "source": 306,
+        "word": 521,
+        "normalized": 9.0
+      },
+      {
+        "call": 168,
+        "source": 306,
+        "word": 521,
+        "normalized": 9.0
+      }
+    ],
+    "whole_ram_receive_prefixes": 1056,
+    "native_dispatch_calls": 352,
+    "native_watchdog_checks": 352,
+    "transitions": [
+      {
+        "call": 0,
+        "managed": [],
+        "source": 32767,
+        "phases": [],
+        "faults": 10117
+      },
+      {
+        "call": 93,
+        "managed": [
+          2
+        ],
+        "source": 32767,
+        "phases": [
+          0
+        ],
+        "faults": 10117
+      },
+      {
+        "call": 166,
+        "managed": [
+          2
+        ],
+        "source": 32767,
+        "phases": [
+          1
+        ],
+        "faults": 10117
+      },
+      {
+        "call": 167,
+        "managed": [
+          3
+        ],
+        "source": 306,
+        "phases": [
+          1
+        ],
+        "faults": 10117
+      },
+      {
+        "call": 169,
+        "managed": [
+          4
+        ],
+        "source": 32767,
+        "phases": [
+          1
+        ],
+        "faults": 10117
+      },
+      {
+        "call": 280,
+        "managed": [
+          4
+        ],
+        "source": 32767,
+        "phases": [
+          2
+        ],
+        "faults": 10117
+      },
+      {
+        "call": 310,
+        "managed": [
+          4
+        ],
+        "source": 32767,
+        "phases": [
+          3
+        ],
+        "faults": 10117
+      },
+      {
+        "call": 311,
+        "managed": [],
+        "source": 32767,
+        "phases": [],
+        "faults": 10117
+      }
+    ],
+    "final": {
+      "0x8007": 3,
+      "0x8080": 6,
+      "0x8081": 1,
+      "0x8084": 1,
+      "0x8088": 1,
+      "0x84f4": 96,
+      "0x84f5": 2,
+      "0x916f": 0,
+      "0x9410": 7,
+      "0x9545": 130,
+      "0x96c4": 1,
+      "0x96c5": 0,
+      "0x96c6": 0,
+      "0x9c87": 0,
+      "0x9c88": 0,
+      "0x9c8a": 0,
+      "0xa1ac": 0,
+      "0xa2b8": 1,
+      "0xa2b9": 1,
+      "0xa2ba": 0,
+      "request_word_915a": 32767,
+      "first_list_count_a202": 0,
+      "ramp_timers_8115": [
+        176,
+        176,
+        176,
+        176,
+        176,
+        176,
+        176,
+        176,
+        176,
+        176,
+        176,
+        176
+      ],
+      "primary_timer_phase_8494": 0,
+      "heap_first_header_9f3c": 8388607,
+      "managed": [],
+      "phases": []
+    },
+    "actual_numeric_boundary_checks": {
+      "0x1fb8c": 176,
+      "0x32614": 93,
+      "0x4e036": 1,
+      "0x4e0ee": 71
+    },
+    "further_idle_tasks": 40
+  },
+  "expiry": {
+    "task_calls": 192,
+    "capture_returns": 384,
+    "measurement_checks": 192,
+    "paired_packet_decode_checks": 192,
+    "whole_ram_ack_checks": 7,
+    "existing_whole_ram_command_checks": 384,
+    "selected_gate_checks": 96,
+    "input_producer_checks": 96,
+    "creations": [
+      {
+        "call": 93,
+        "payload": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "admitted_numeric_requests": [
+      {
+        "call": 167,
+        "source": 306,
+        "word": 521,
+        "normalized": 9.0
+      },
+      {
+        "call": 168,
+        "source": 306,
+        "word": 521,
+        "normalized": 9.0
+      }
+    ],
+    "whole_ram_receive_prefixes": 560,
+    "native_dispatch_calls": 192,
+    "native_watchdog_checks": 192,
+    "transitions": [
+      {
+        "call": 0,
+        "managed": [],
+        "source": 32767,
+        "phases": [],
+        "faults": 10117
+      },
+      {
+        "call": 93,
+        "managed": [
+          2
+        ],
+        "source": 32767,
+        "phases": [
+          0
+        ],
+        "faults": 10117
+      },
+      {
+        "call": 105,
+        "managed": [
+          2
+        ],
+        "source": 32767,
+        "phases": [
+          0
+        ],
+        "faults": 10119
+      },
+      {
+        "call": 112,
+        "managed": [
+          2
+        ],
+        "source": 32767,
+        "phases": [
+          0
+        ],
+        "faults": 10117
+      },
+      {
+        "call": 166,
+        "managed": [
+          2
+        ],
+        "source": 32767,
+        "phases": [
+          1
+        ],
+        "faults": 10117
+      },
+      {
+        "call": 167,
+        "managed": [
+          3
+        ],
+        "source": 306,
+        "phases": [
+          1
+        ],
+        "faults": 10117
+      },
+      {
+        "call": 169,
+        "managed": [
+          4
+        ],
+        "source": 32767,
+        "phases": [
+          1
+        ],
+        "faults": 10117
+      }
+    ],
+    "final": {
+      "0x8007": 3,
+      "0x8080": 6,
+      "0x8081": 1,
+      "0x8084": 1,
+      "0x8088": 2,
+      "0x84f4": 192,
+      "0x84f5": 2,
+      "0x916f": 0,
+      "0x9410": 7,
+      "0x9545": 130,
+      "0x96c4": 0,
+      "0x96c5": 1,
+      "0x96c6": 2,
+      "0x9c87": 0,
+      "0x9c88": 0,
+      "0x9c8a": 0,
+      "0xa1ac": 0,
+      "0xa2b8": 2,
+      "0xa2b9": 0,
+      "0xa2ba": 1,
+      "request_word_915a": 32767,
+      "first_list_count_a202": 1,
+      "ramp_timers_8115": [
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96
+      ],
+      "primary_timer_phase_8494": 0,
+      "heap_first_header_9f3c": 4278583046,
+      "managed": [
+        {
+          "index": 0,
+          "pointer": "0xffff9f40",
+          "entry": [
+            255,
+            255,
+            159,
+            64,
+            0,
+            7,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "record": [
+            4,
+            0,
+            2,
+            0,
+            0,
+            0,
+            1,
+            238,
+            32,
+            0,
+            238,
+            14,
+            3,
+            0,
+            154,
+            20,
+            77,
+            10,
+            154,
+            20
+          ]
+        }
+      ],
+      "phases": [
+        {
+          "index": 0,
+          "bytes": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      ]
+    },
+    "actual_numeric_boundary_checks": {
+      "0x1fb8c": 96,
+      "0x32614": 48,
+      "0x4e036": 1,
+      "0x4e0ee": 12
+    }
+  },
+  "identical_initial32_prefix": true
+}

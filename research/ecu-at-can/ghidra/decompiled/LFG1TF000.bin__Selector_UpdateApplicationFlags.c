@@ -4,7 +4,9 @@
 /* WARNING: Removing unreachable block (ram,0x000226a6) */
 /* 88B4..B7 feed9314 bit0,9317 bit2,9314 bit1,9316 bit2. Updates class8080 through22D08. Physical
    input names not yet proven. Also5120 cases verify89A4 nonzero ->9316bit0 via22CFE;
-   completeinput25 producer/manager chain intcu-source-selection.txt. */
+   completeinput25 producer/manager chain intcu-source-selection.txt. Also publishes one-hot9315
+   fromclass8080;lowbits reset32348 forclassFF/0.256 filtered transitions and3 ADC hold/recovery
+   chains; tcu-qualification-lifecycle.txt. */
 
 void Selector_UpdateApplicationFlags(void)
 

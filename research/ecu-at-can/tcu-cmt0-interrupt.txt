@@ -1,0 +1,109 @@
+TCU CMT0 initialization and interrupt admission — 2026-10-06
+============================================================
+Objective remains ECU/AT CAN integration, deep traction integration, and NC
+roof folding AND unfolding with interruption/resume/reversal, timeout, L/Rsync
+and recovery. Allthree remain incomplete; no extra user DSC/roof dumps/captures/
+bench evidence. No staging/commit/push. This independent boundary check runs
+alongside the full capture-delivery experiment, not as a replacement for it.
+
+Verified scope
+--------------
+verify_tcu_cmt0_interrupt.py:512 initialization cases and516 differential
+whole-application-RAM interrupt-prefix cases PASS. All256 modebytes withboth
+statusadmission states, plus four mode1/3 tick-wrap/elapsed-saturation cases.
+Original16D6C executes through16DB6 beforeRTE, withall nestedhelpers intact.
+Finite wordFFFFF712 status samples andlongFFFFF6C0 profiling samples; no
+hardwaretimer/interruptdelivery/clockperiod/RTE model orphysicalunits claimed.
+
+16D5C writes624 (0270) towordFFFFF716, readsFFFFF710 andwritesold|1 inRTS
+delay slot.256 lowbytes withupperA5 confirmorderedaccesses andunchangedRAM.
+This verifiesconfiguration code, not actual timepercompareevent.
+
+ISR16D6C recordsprofileindex12, testsfirststatusbit80. Ifclear, no123C2 call.
+Ifset, readsstatusagain andwritesSECOND&FF7F, preservingotherbits fromthat
+sample, thenoriginal123C2. Mode800A==1 changes to3; mode3 stays3; allothers
+remainunchanged.128B6 calls11864,1E506 and11A64 ONLYfor resultingmode3.
+Independentselectedchecks:84D0 unsigned32 increment/wrap,91AC u16saturating
+increment; exacthelperentry list andmode update. Mode1 thereforeadmits through
+123C2 butdoesNOTadmit when128B6 iscalled directly withmode1.
+
+Profile12 stock5F630 scale0: startstored8758, latencyarrays86F8/871C unchanged;
+exitunsignedduration/10 ->86B0,max86D4. ExactMMIOtrace/finiteconsumption and
+GPR/PR/MACL plusSR bitsoutside301 preservedbeforeRTE. Independentprofiling
+andmode equations plus the original128B6 onaclone predictwholeapplicationRAM.
+Thus fullRAM comparison isDIFFERENTIAL for128B6 effects, not a newindependent
+11A64 countdown-wheel oracle. Counter/predicate checks are independently
+specified. Seeded firstwheelphase84D4 varies0..9; secondaryphasesstart0.
+
+Integration consequence
+------------------------
+The current recovery harness invokes11864 directly100times perpair. Replacing
+itwiththeoriginalCMT0 path additionally calls1E506->2094E (captureelapsed91AC)
+and11A64 (countdownwheel withphase84D4). It isnot anequivalentcounter-only
+substitution andmustnot silentlyskipthese effects. Nativecapture callbacks
+reset91AC whilepresent; theirabsence leaveselapsedactivityobservable.
+Actualperiod, sourceclock/divider andrelationship withCMT1/application tasks
+remain unproved. The separateCMT1 path owns11014's saturatingincrement wheel.
+
+Next: aftercurrentcapture-delivery320 verification, observecompleteCMT0 path
+within the sameapplication/diagnostic fixture, usingoriginalinitializer when
+possible, explicitmode/status/profiling inputs, andretaining11A64 effects.
+First record relevant11A64 countdown/phase fields andevaluatechangedoutcome;
+do notforceequivalence withtheearlierdirecttickfixture. CMT1 delivery andreal
+interrupt admission/cadence remain separate open boundaries.
+
+Reproduce / identities
+------------------------
+ python research/ecu-at-can/verify_tcu_cmt0_interrupt.py
+Result tcu-cmt0-interrupt-verification.json; Python3.14.3. Unchanged
+examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+tcu-cmt0-interrupt-disassembly.txt: original16D5C..16DD4,123B0..123EC,
+128B6..128F4 and11A54..11B3A usingGNUsh4-linux-gnu-objdump2.42. Samecommand/
+setup provenance asin tcu-capture-interrupts.txt. Literalpools aredata.
+
+Traction remainslocalECU evidence withmissingCAN211/21A sender/units and
+remoteDSC internals/physicalactuation. Next relevantlocalcontrol/CANboundary.
+Roof factory/candidate/revision evidence distinctfrommissingOEMreceiver proof:
+bothdirections/interruption/reversal/timeout/sync/recovery open. Nextnew
+applicablefactory orOEM/physicalsource; userhasnothingelse, do notaskagain.
+Ghidra annotations/save/restore tobe finalized withcapture-delivery result.
+
+Full service initialization also verified
+-----------------------------------------
+Additional256 original123B0 wholeRAM cases seednonzero tick/phase fields and
+all800A modebytes. Original128A8->1185C/11A54 resets84D0 and84D4/5/6, then
+800A=1 and16D5C compare/start.91AC remains1234; allotherapplicationRAM preserved.
+Bothinitializer paths haveexactorderedMMIO. Total512 initialization cases.
+Nativeclock integration canuse123B0 instead of directlyforcing800A=3; the
+firstadmittedoriginalISR thenpromotes1->3. No fullboot orphysicalclock claim.
+
+Correction (joinedclock follow-up):11A64 handles BOTHincrement/decrement
+rangebanks; theearlier countdown-only wording istoo narrow. See
+tcu-cmt0-delivery.txt andindependent8000-case tcu-cmt0-wheel-verification.json.
+
+Ghidra correction: both programs saved and archived; independent extraction
+reopened,11 filehashes checked, but export comparison failed. Investigating
+counts/filenames/content before declaring restoration complete. The immediately
+preceding automated completion wording was premature and is superseded here.
+
+FINAL ARCHIVE STATUS — 2026-10-07
+--------------------------------
+The300-second ECU retries succeeded on both live and independently restored
+programs. Both TCU readbacks also passed. verify_restore.py nowPASS:
+1929 annotations (833 ECU/1096 TCU),984 identical complete exports,11 project
+file hashes checked before/after reopening and againsttheliveproject.
+Archive nc-at-can.tar.gz is11,010,442 bytes; SHA256
+6889fecc740512bfeac28e63330ea643954628d0ef7f5ed4ba132b6eb15f13d3.
+Both .gpr and.rep areincluded. snapshot.json/restore-verification.json own
+inventories. Ghidra12.1.3 PUBLIC, Java21.0.10, Python3.14.3. The earlier timeout
+andpremature completion attempts remain documented above; thissuccess follows
+complete fresh exports, not copied/stale output. The fresh614-line ECUstartup
+export SHA256 is5d4c35b91e520f7d351031cedc602fd95c2e0e6b664850185e65e10cc7a2a818,
+identical to the prior successfully verified capture-delivery export.
+
+Reproduce fromrepositoryroot after independent Ghidra reopening:
+ python research/ecu-at-can/ghidra/verify_restore.py research/ecu-at-can/ghidra/restore-check/cmt0-delivery-20261006 --write-report
+The ignoredrestore path isonlya reproducible extraction, nottheonlyevidence.
+Archive, annotations, exports, scripts, reports andresults areGit-eligible.
+No staging, commit orpush. PreexistingAD ghidra/nc-at-can.tar.gz.tmp unchanged.

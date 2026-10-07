@@ -1,0 +1,199 @@
+{
+  "status": "PASS",
+  "scope": "Verify actual cut boundaries and exact unchanged320-pair recovery trace.",
+  "task_pairs": 320,
+  "exact_prior320": true,
+  "whole_application_ram_checks": {
+    "cut": 160,
+    "admission": 160
+  },
+  "condition_transitions": [
+    {
+      "call": 0,
+      "conditions": {
+        "admitted": true,
+        "timer_force_off": false,
+        "selector_force_off": false,
+        "below_threshold": false,
+        "set_window": true,
+        "set_threshold": true,
+        "set_motion": true,
+        "set_flag_clear": true,
+        "output": 1
+      },
+      "inputs": {
+        "0x9454": 0,
+        "0x9455": 0,
+        "0x828b": 1,
+        "0x82a5": 1,
+        "0x82a6": 1,
+        "0x82a7": 1,
+        "0x9316": 0,
+        "0x9317": 0,
+        "0x94f4": 0,
+        "0x92c9": 0,
+        "0x92c6": 0,
+        "0x9334": 0,
+        "0x800e": 0,
+        "0x80e8": 10240
+      },
+      "threshold": 8960
+    },
+    {
+      "call": 46,
+      "conditions": {
+        "admitted": false,
+        "timer_force_off": false,
+        "selector_force_off": false,
+        "below_threshold": false,
+        "set_window": true,
+        "set_threshold": true,
+        "set_motion": true,
+        "set_flag_clear": true,
+        "output": 0
+      },
+      "inputs": {
+        "0x9454": 1,
+        "0x9455": 0,
+        "0x828b": 24,
+        "0x82a5": 24,
+        "0x82a6": 24,
+        "0x82a7": 24,
+        "0x9316": 0,
+        "0x9317": 0,
+        "0x94f4": 0,
+        "0x92c9": 194,
+        "0x92c6": 1,
+        "0x9334": 54016,
+        "0x800e": 75,
+        "0x80e8": 20480
+      },
+      "threshold": 7168
+    },
+    {
+      "call": 62,
+      "conditions": {
+        "admitted": false,
+        "timer_force_off": false,
+        "selector_force_off": false,
+        "below_threshold": false,
+        "set_window": false,
+        "set_threshold": true,
+        "set_motion": false,
+        "set_flag_clear": true,
+        "output": 0
+      },
+      "inputs": {
+        "0x9454": 0,
+        "0x9455": 0,
+        "0x828b": 32,
+        "0x82a5": 32,
+        "0x82a6": 32,
+        "0x82a7": 32,
+        "0x9316": 0,
+        "0x9317": 0,
+        "0x94f4": 0,
+        "0x92c9": 194,
+        "0x92c6": 1,
+        "0x9334": 54016,
+        "0x800e": 75,
+        "0x80e8": 20480
+      },
+      "threshold": 7168
+    },
+    {
+      "call": 120,
+      "conditions": {
+        "admitted": false,
+        "timer_force_off": true,
+        "selector_force_off": false,
+        "below_threshold": false,
+        "set_window": false,
+        "set_threshold": true,
+        "set_motion": false,
+        "set_flag_clear": true,
+        "output": 0
+      },
+      "inputs": {
+        "0x9454": 0,
+        "0x9455": 0,
+        "0x828b": 61,
+        "0x82a5": 61,
+        "0x82a6": 61,
+        "0x82a7": 61,
+        "0x9316": 0,
+        "0x9317": 0,
+        "0x94f4": 0,
+        "0x92c9": 194,
+        "0x92c6": 1,
+        "0x9334": 54016,
+        "0x800e": 75,
+        "0x80e8": 20480
+      },
+      "threshold": 7168
+    },
+    {
+      "call": 286,
+      "conditions": {
+        "admitted": false,
+        "timer_force_off": true,
+        "selector_force_off": false,
+        "below_threshold": false,
+        "set_window": false,
+        "set_threshold": true,
+        "set_motion": true,
+        "set_flag_clear": true,
+        "output": 0
+      },
+      "inputs": {
+        "0x9454": 0,
+        "0x9455": 0,
+        "0x828b": 144,
+        "0x82a5": 144,
+        "0x82a6": 144,
+        "0x82a7": 144,
+        "0x9316": 0,
+        "0x9317": 114,
+        "0x94f4": 0,
+        "0x92c9": 194,
+        "0x92c6": 1,
+        "0x9334": 54016,
+        "0x800e": 0,
+        "0x80e8": 20480
+      },
+      "threshold": 7168
+    },
+    {
+      "call": 290,
+      "conditions": {
+        "admitted": true,
+        "timer_force_off": true,
+        "selector_force_off": false,
+        "below_threshold": false,
+        "set_window": false,
+        "set_threshold": true,
+        "set_motion": true,
+        "set_flag_clear": true,
+        "output": 0
+      },
+      "inputs": {
+        "0x9454": 0,
+        "0x9455": 0,
+        "0x828b": 146,
+        "0x82a5": 146,
+        "0x82a6": 146,
+        "0x82a7": 146,
+        "0x9316": 0,
+        "0x9317": 114,
+        "0x94f4": 0,
+        "0x92c9": 0,
+        "0x92c6": 1,
+        "0x9334": 54016,
+        "0x800e": 0,
+        "0x80e8": 10240
+      },
+      "threshold": 7168
+    }
+  ],
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+}

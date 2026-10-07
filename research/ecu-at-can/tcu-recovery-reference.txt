@@ -1,0 +1,269 @@
+Follow-up: tcu-recovery-cut.txt verifiesactualcut eligibility. Admissionrecovers
+at290 buttimerforce-off keeps9454=0; priorunknown belowisresolvedfor thisfixture.
+
+TCU retained reference and phase activity during communication recovery
+Evidence checkpoint: 2026-10-06
+Status: completed three experiments (736 task pairs); broader goals open.
+
+Full objective remains ECU/AT CAN integration, deep traction integration, and
+NC roof folding AND unfolding with interruption/resume/reversal, timeout,
+left/right synchronization and fault recovery. None is complete. User has no
+additional DSC/roof dumps, captures or bench results. No stage/commit/push.
+Previous goal turn made verified progress; this thread owns the checkout.
+
+Starting evidence
+------------------
+tcu-receive-recovery.txt owns the320 native task pairs and6144 ISR cases.
+All seven enabled class0 CAN IDs restored64; group36 recovery ready116.
+Stopping both external capture callbacks120 yields measurement0 butreference
+3070/scaled80A4=329 at124, retaining activefault84 through159. An allocated
+phase record remains, but causality between phase/cache/fault is not yet
+established in that trace. Do not replace that gap with internal state writes.
+
+Implemented observation and branch-oracle reuse
+------------------------------------------------
+Extracted the existing900-case branch oracle from inside
+verify_tcu_reference_source.py main into import-safe branch_model(g,regs).
+Its observation boundary is original20AAC, after20CBC/20FAC gate producers.
+The same test now calls the helper. Rerun output saved as
+ tcu-reference-source-reuse-verification.json
+and byte-compared identical to tcu-reference-source-verification.json (PASS).
+No model arithmetic or firmware implementation changed.
+
+probe_tcu_recovery_reference.py subclasses the existing recovery observer,
+reusing the SAME original receive/capture/application/diagnostic pipeline and
+inputs. Observes actual209B4/20CBC/20FAC/31720 entries and PR returns;20AAC
+captures branch inputs andselected registers.209B4 selectedresult/80EC/period/
+flags use extracted branch_model.20FAC selectedstate/history use existing
+verify_tcu_reference_policy.discrepancy(t,actual-state-model).31720 return uses
+existing verify_tcu_transition_classification.pending_model(t). These are
+selected-output checks, not wholeRAM models for allreference helpers.
+No phase(t,active) injection helper is used. No new capture orCAN input.
+
+Completed160 pairs: tcu-recovery-reference-probe.json. All rows match the prior
+stopped-capture trace after removing only reference_checks. Verified findings
+and the target-approach results are recorded below.
+
+Reproduce:
+ python research/ecu-at-can/verify_tcu_reference_source.py > research/ecu-at-can/tcu-reference-source-reuse-verification.json
+ cmp research/ecu-at-can/tcu-reference-source-verification.json research/ecu-at-can/tcu-reference-source-reuse-verification.json
+ python research/ecu-at-can/probe_tcu_recovery_reference.py
+Python3.14.3; exact unchangedROM identities/toolsetup in tcu-receive-recovery.txt.
+Current paired Ghidra save/restore is recorded at the end of this report.
+
+Phase lead (existing evidence, not new execution): remaining record hasphase1
+andunacknowledged recordbytes4/5 (groups02/25).31720 returns1 forheadphase0/1/2
+evenwithouttestingacks.31A78 event2 invokes321AE phase predicates; inherited
+observer already checks32614 targetqualification. Existing targetapproach
+fixture changedmeasuredcaptureinterval to4430 at256 andretired311 in a
+separate1-wheelcall schedule. Changingtheexternalcapture intervalearlier could
+exercisephasecompletion beforecaptureloss; do not assume outcome or overwrite
+phase/ack state. Inspect currentreference trace first.
+
+Distinct remaining scopes
+---------------------------
+Traction: ECU acquired-input/freshness evidence exists; CAN211/21A sender,
+units, remoteDSC execution andphysicalactuation remainunproved. Next relevant
+localCAN/control boundaries; do notassignphysicalpin roles fromRAM alone.
+Roof: factoryevidence/revision conflicts in traction-roof.txt remain distinct
+fromcandidateCAN mappings andmissingOEMcontroller evidence. Bothdirections,
+interruption/reversal, timeout, synchronization andfaultrecovery remainopen.
+Next applicablecompletefactorysource orOEM/physicalevidence; do notrepeat
+exhausted downloads oraskagain forunavailableuserartifacts.
+
+First target-approach prediction (superseded by results below)
+------------------------------------------------------------
+Existing stoppedcapture trace confirms32614 qualifier code0/mode0/enable7:
+measured9861 remains belowlower14327, belowcounterincrements butcrossingbit2
+never sets; at124 measurement0 isstillbelow. Phase1 therefore doesnotqualify.
+ROM70B11 belowcounterminimum is25. Thisexplainslackoftargetqualification,
+notyetwhyremainingreferencefallback uses3070.
+
+Second256-pair experiment changes ONLYexternalmeasuredtimestamp interval to
+4430 at80, keepingreference12160, thenstopsbothcaptures at220. Thisadvances
+thepreviouslyverified targetapproach input, giving the24-entryhistory and
+25-count qualifier timetocomplete beforecaptureloss. Predictqualification
+around104 after24historysamples, thenoriginalphasecompletion/acks; actualresults pending. Do not
+write phase2/3, acknowledgements orsourcezero. Scope stillfixturecadence.
+Reproduce:
+ python research/ecu-at-can/probe_tcu_recovery_reference.py --approach
+Result: tcu-recovery-reference-target-approach.json. Comparefirst80 pairs with
+thenew160-pair reference-observedbaseline; before80 noinputschange.
+
+Prediction correction: initial80-count guess waswrong; direct stockbyte70B11
+is25. Old512trace counted93 atitslatecrossing, notaminimumof80. Thecurrent
+tracealreadyhasbelowcounter23at80, sofirstcrossingnear104 shouldqualify ifthe
+otherobservedconditionshold. Inputs unchanged; inspectactualoutcome.
+
+Verified baseline result
+-------------------------
+All160 taskpairs return; first160rows identical to priorstoppedcapturetrace
+onceonlyreference_checks removed. Actualboundaries:2912 checked31720 returns,
+40checked20FAC discrepancyreturns,40checked209B4 branchreturns;40 original
+20CBC entry/return observations (no newindependent20CBC oracle). Branches:
+1stale,30history,9fallback. Existing40scaling/40admission/864ISRprefix checks
+remain. verify_tcu_recovery_reference.py baselinePASS.
+
+Cache91A8=10865/index91C7=0 waslastrefreshed whileidle beforecode0 creation33.
+From36, actual31720 seesdispatcher8088=2/headphase0, laterphase1, andreturns1.
+209B4 resetssettling8196 to0 andretainsbothcachedmeasurement andindex despite
+acceptedindex8081=1. At124, raw91A2=0 andmeasured80EE=0;20FAC sets91A6bit4
+fromthehistorydrop, keepsdiscrepancycache10865/index0 andresetscounter91C6=0.
+Postgate20AAC has9194=0,91A6=16,reg5=1(cached),reg9=10865,reg10=1(currentindex).
+Cachedselection usesstack-savedindex0 instead ofcurrentindex1. Stock70000[0]
+coefficient14492; trunc(10865*4096/14492)=3070. Independentbranchoracle andactual
+returnsagree. Fallbacktakespriority overstale ages, so80EC=3070 andperiod=-1.
+Thelater40scalecheck path gives80A4=329 andretainsactivefault. Thisnowestablishes
+thephase/cache/fallback link inthisfixture; itdoesnotprovephysicalmotion.
+
+The first target-approach run completed. Its transient phase cleanup and
+second natural request are recorded below; active fault release did not occur.
+
+Verified first target approach and next external-input experiment
+----------------------------------------------------------------
+All256 pairs PASS, first80 rows exactbaseline. Original32614 code0 returns1
+at104 (measurement14446 in14327..14583, belowcounter34->35). At108 original
+groups02/25 acknowledge; code0 retires, ringempty andheap007FFFFF through112.
+At113 originalcreation makescode2/acceptedindex3. At116 idle settling resets
+before reaching10;91A8=10865/index0 persists. Code2 target6889..7145 requires
+in-band samples; measurement14446 isaboveband through219. Captureabsence220
+yieldsmeasurement0 at224, belowband; fallback3070/scaled329 stillholdsactive84.
+Thus predicted permanentcleanup/recovery waswrong; transientcleanup verified,
+newnaturalphase explains failure.64reference/discrepancy and4580pendingchecks,
+64scale/64admission/1536ISRprefixchecks;18acks. Noactivefaultrelease.
+
+Next experiment --second-approach (320pairs) changes external measuredinterval
+from4430 to9120 at128, yielding eventualmeasurement7017 insidecode2band.
+Keepsallotherinputs, thenstopsbothcaptures280. First128 rows mustmatchprior.
+No internalphase/cache/source/ack writes. The prediction was qualification after
+the24-entryhistory fills plus stockin-bandcount; final results follow below.
+Saved result:
+ tcu-recovery-reference-second-approach.json
+ python research/ecu-at-can/probe_tcu_recovery_reference.py --second-approach
+
+Additional independent cache-policy verification
+------------------------------------------------
+verify_tcu_recovery_reference.py now derives cache/timer/index updates from
+209B4 entry state and the actual31720 return to209DA: active clears8196;
+idle with4*timer>=37 refreshes91A8 from80EE (zero if810C>=5) and91C7 from8081.
+It checks actual return state plus selected registers5(cached flag) and9(value)
+at20AAC. All104 reference boundaries in the160/256 runs pass. This closes the
+cache-retention inference with a selected-output check; it is not wholeRAM.
+Independent24-entry measurement history is reconstructed from external capture
+timestamps, including saturation to stale period7FFFFFFF/measurement0 after
+capture loss; all416 pair snapshots agree. Baseline160 and firstapproach80
+prefix comparisons also pass. Source-branch reuse JSON remains byte-identical.
+
+Full stock conversion: additional bounded execution
+--------------------------------------------------
+verify_tcu_motion_conversion.py:512 whole-application-RAM original22DDC cases
+PASS (256 edge pairs +256 deterministic random pairs, seed22DDC). All256
+9330 selector bytes covered. Source domain0..32767 matches209B4/20DF8 clamps;
+negative/out-of-domain inputs and other calibrations are not included.
+Stock76E78=299,76E7A=4100, literal22E62=9651 gives trunc(299*9651/4100)=703;
+10CE4 unsigned *1000/denominator preserves703 for both9330bit0 branches because
+stock76E7C also1000. Original10B74 softwarebinary64 path yieldsfloor(x*703/256)
+for this domain: nonnegativeproduct<2**25 and power-of-two division are exact.
+22DDC caps each channel atFF00 (firstcappedinput23772), writes932C/932E and
+800E=first>>8, then50F26 writes80A4/80BA=floor(raw*10/256), A4FC=A4FA.
+The independent model checks allapplicationRAM at the complete22DDC return;
+no softwarefloat helper or instruction is mocked. This supersedes the older
+full22DDC-unverified limit for the stated stock/nonnegative domain only.
+Physicalunits and arbitrary softwarefloat behavior remain unproved.
+
+Saved originaldisassembly: tcu-motion-conversion-disassembly.txt, ranges
+22DDC..22E94 and10B74..10D70 (literalpools aredata, notinstructions). GNU
+sh4-linux-gnu-objdump2.42 setup is retained in priorreport; Python3.14.3.
+ python research/ecu-at-can/verify_tcu_motion_conversion.py
+Result: tcu-motion-conversion-verification.json, exactTCU SHA included.
+The joined verifier independently applies this formula toactual22DDC source
+observations and subsequent50F26 entry/return values (184 boundaries across allthree experiments),
+inadditionto theexisting50F26 wholeRAM checks. These joined22DDC checks are
+selectedoutputs, not a wholeRAM observation of complete22DDC in the fulltask.
+
+Final second-approach result: communication fault recovery
+---------------------------------------------------------
+All320 pairs return, first128 rows exactlymatch the256-pair approach. Actual
+31720 checks5699;80 each209B4/20FAC selectedoutput checks,20CBC observations,
+cache-policy checks, conversion/50F26 anddiagnosticadmission checks.1984
+nativeISRprefix wholeRAMchecks,20 actualack checks; two naturalcreations only.
+Together thethree current experiments total736 pairs,4384 ISRprefix checks,
+184 reference/discrepancy/cache/conversion/diagnosticadmission boundaries and
+46 acknowledgement checks. No directinternalcache/phase/ack/faultwrites; changedexternalinputs are explicit.
+
+Measuredhistory reaches7017 at151. Code2 firstin-band32614 call152 starts
+counter1; call190 returns1 atcounter20 (prior19), target6889<=7017<7145.
+At194 groups02/25 acknowledge originalphaseindex1, retirecode2 through
+30B82/30A9E/31168 andfreeheap007FFFFF. From194 through319 (126pairs), phase and
+managedlist remainempty,96C5/A2BA/first-listcount0, no newcreation. A2B9=2 is
+retainedringposition, notlivecount. The earliercode0 retired108 asbefore.
+
+Idle settling8196 reaches12 at204, and209B4 refreshes91A8=7017/index3 onthat
+return. IMPORTANT observationorder: the20AAC branch snapshot stillshows old
+RAMcache10865/index0; selectedregs5=0,9=7017 alreadychoosefreshvalue. Cache
+storesoccur after20AAC, so do notdate refresh208 fromthenextentrysnapshot.
+Aftercapturesstop280, ages20 at284, measured80EE/raw91A2=0. Original20FAC
+setsbit4 butrefreshesdiscrepancycache0;209B4 idlecache refresh selectsreg9=0,
+returns0 andstores91A8=0/index3. This isfallback with freshzero, notthe stale
+branch (which islower priority). Original22DDC/50F26 produce932C/80A4=0.
+
+Samepair284 diagnostic recovery clearsA722 from84 to0; A978 andaggregateA98E
+become11 from1C. RawA76C stays81 at284 andbecomes1 at285. Applicationphase0/4
+clears92C9/92D5 at288; phase2/6 restores80E8 from20480 to10240 at290. These
+selectedlag/policy assertions pass through319. Storedsummaryhistorybit10
+persists; this experiment didnot independentlyserialize C100FF orproveNVM
+persistence. A99B/A735 stay1 (alreadyset40), so no globalfault-free claim.
+
+CAN216 byte7bit5 remainsclear through319 and9454 remains0 after46, including
+aftercommunicationinhibit clears. This is NOT a failed activefaultclear and
+NOT proof that a cutrequest should automaticallyreassert. Static24FA0 has
+independentselector94F4/9316/9317, timers828B/82A5..A7, curve9334,800E and
+hysteresis conditions. For example828B>=61 AND82A7>=61 forces0. Thoseactual
+entryfields were notrecorded here, so timereligibility is a candidateexplanation,
+notanexecutedfinding. The scalar9410 permissiondropto5 at292 isnotbyitself a
+24FA0 eligibilityproof. Existing800-case model inverify_can201_cut_loop.py
+main's nestedreference(t) is reusable afterimportsafeextraction/identicalrerun.
+
+Next concrete work: observeactual24FA0/2513E entries/returns in thissame
+320-pair fixture; reuse thatmodel for9454/9455 andthree edge-reset timers,
+record admission/timer/selector/curveinputs, andcompare unchanged320prefix.
+Do notmanuallyreset82A7 orforce9454=1. Then originalcaptureISR prefixes and
+CMT0 admission canreplace remainingcallback/tick fixtureboundaries; actual
+physicalcadence, senderunits, continuousECUactuation andpersistence stayopen.
+Traction andbothroof distinctstatus/nextactions above remainunchanged.
+
+Final reproduction / saved status
+---------------------------------
+ python research/ecu-at-can/verify_tcu_reference_source.py > research/ecu-at-can/tcu-reference-source-reuse-verification.json
+ cmp research/ecu-at-can/tcu-reference-source-verification.json research/ecu-at-can/tcu-reference-source-reuse-verification.json
+ python research/ecu-at-can/probe_tcu_recovery_reference.py
+ python research/ecu-at-can/probe_tcu_recovery_reference.py --approach
+ python research/ecu-at-can/probe_tcu_recovery_reference.py --second-approach
+ python research/ecu-at-can/verify_tcu_motion_conversion.py
+ python research/ecu-at-can/verify_tcu_recovery_reference.py
+Four changed/new Pythonfiles compile; targetedgitdiffcheck PASS.512 conversion
+cases andallthree savedtrace verifications PASS. Branch-oracle extraction
+retainsbyteidentical JSON SHA256
+f141b1ee1dde66fc637596634aa20e41a268440065f3f9067c693284f75bbe9b.
+Unchanged examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6;
+examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+
+EightexistingTCU annotations updated, bothprograms saved inGhidra12.1.3PUBLIC/
+Java21.0.10.1923annotations (833ECU/1090TCU),978exports identical afterseparate
+read-only restoration. All11 projecthashes checkedbefore/after independent
+reopen, logs/readbackreports noERROR/Exception/DECOMPILE_INCOMPLETE.
+Archive11,005,125bytes SHA256
+9e5c7f9e29985393f223009e8b6bc98167aeb04d5c11d0f60bca84866b72f2c4.
+Exactinventory: ghidra/snapshot.json andrestore-verification.json. Restorepath
+(ignoredcache):ghidra/restore-check/tcu-recovery-reference-20261006. Commands
+arethepairedapply/verify/snapshot/restore recipe in ghidra/README.txt; exports
+werecompared byentirefilename/SHA256maps before checkingall11projecthashesagain.
+Initialapply redirection foundmissingignoredlogs directory; createddirectory
+andreran. No projectmutation occurred inthat failedshell redirection.
+
+Allnew scripts/results/disassembly/report files areGit-eligible; logs/live/
+restorecacheignored. Savedlocally only; nothingstaged, committedorpushed.
+Pre-existingmixedindex includingAD archive.tmp preserved. Goal remainsactive;
+thisturnmadeexecutedprogress. Allthreebroaderrequirements remainincomplete.

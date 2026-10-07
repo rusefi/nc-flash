@@ -1,0 +1,48 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00002118 <.data+0x2118>:
+    2118:	f3 5c       	fmov	fr5,fr3
+    211a:	f3 61       	fsub	fr6,fr3
+    211c:	f3 45       	fcmp/gt	fr4,fr3
+    211e:	8d 07       	bt.s	0x2130
+    2120:	00 09       	nop	
+    2122:	f3 5c       	fmov	fr5,fr3
+    2124:	f3 60       	fadd	fr6,fr3
+    2126:	f4 35       	fcmp/gt	fr3,fr4
+    2128:	8d 02       	bt.s	0x2130
+    212a:	00 09       	nop	
+    212c:	a0 01       	bra	0x2132
+    212e:	e4 00       	mov	#0,r4
+    2130:	e4 01       	mov	#1,r4
+    2132:	00 0b       	rts	
+    2134:	60 43       	mov	r4,r0
+
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000023e8 <.data+0x23e8>:
+    23e8:	f4 55       	fcmp/gt	fr5,fr4
+    23ea:	8f 02       	bf.s	0x23f2
+    23ec:	00 09       	nop	
+    23ee:	a0 01       	bra	0x23f4
+    23f0:	f6 4c       	fmov	fr4,fr6
+    23f2:	f6 5c       	fmov	fr5,fr6
+    23f4:	00 0b       	rts	
+    23f6:	f0 6c       	fmov	fr6,fr0
+    23f8:	f5 45       	fcmp/gt	fr4,fr5
+    23fa:	8f 02       	bf.s	0x2402
+    23fc:	00 09       	nop	
+    23fe:	a0 01       	bra	0x2404
+    2400:	f6 4c       	fmov	fr4,fr6
+    2402:	f6 5c       	fmov	fr5,fr6
+    2404:	00 0b       	rts	
+    2406:	f0 6c       	fmov	fr6,fr0
+

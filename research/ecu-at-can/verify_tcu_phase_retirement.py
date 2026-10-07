@@ -33,9 +33,12 @@ class RetirementTCU(SHRotate):
         return super().instruction(pc)
 
 
-def full_fixture():
-    t = RetirementTCU()
-    t.ram = dict(fixture().ram)
+def full_fixture(t=None):
+    if t is None:
+        t = RetirementTCU()
+        t.ram = dict(fixture().ram)
+    else:
+        fixture(t)
     entries = [int.from_bytes(TCU[a:a+4], 'big') for a in range(0x1E2B4, 0x1E3AC, 4)]
     assert len(entries) == 62 and entries[:4] == [0x30A80, 0x30B20, 0x310F0, 0x31524]
     assert entries[-1] == 0x34290
@@ -51,6 +54,50 @@ def ack(t, index, group):
     t.write(p+2, index, 1)
     t.r[5] = p
     t.run(0x31524, 3, limit=100000)
+
+
+def ack_model(t, index, group):
+    """Independent31C18 RAM/return model for valid0..15 record indices.
+
+    Uses the same group/required-bit policy as the existing bitmap and ring
+    tests. Includes the three retirement callbacks, without executing ROM.
+    The outer31524 state update is outside this function boundary.
+    """
+    assert 0 <= index < 16
+    base = 0x95D4+15*index
+    if group in GROUPS:
+        w(t, base+GROUPS.index(group), 1)
+    if r(t, base+14) == 0 and all(r(t, base+j) for j in REQUIRED):
+        w(t, base+14, 1)
+    retired = []
+
+    def ready(slot):
+        address = 0x95D4+15*slot
+        return r(t, address+14) == 1 and all(r(t, address+j) for j in range(10))
+
+    def retire(slot):
+        code = r(t, 0x95D4+15*slot+10)
+        if r(t, 0x95C2) and r(t, 0x95C4, 2) == code:
+            w(t, 0x95C2, 1)
+        if r(t, 0x95BE) and r(t, 0x95BF) == code:
+            w(t, 0x95BE, 1)
+        if r(t, 0x95D0):
+            w(t, 0x95D0, 1)
+        retired.extend((fn, code) for fn in CALLBACKS)
+        w(t, 0x96C5, r(t, 0x96C5)-1)
+
+    while r(t, 0x96C5) and ready(r(t, 0x96C4)):
+        retire(r(t, 0x96C4))
+        w(t, 0x96C4, (r(t, 0x96C4)+1) % 16)
+    while r(t, 0x96C5):
+        tail = (r(t, 0x96C4)+r(t, 0x96C5)-1) % 16
+        if not ready(tail):
+            break
+        retire(tail)
+    if not r(t, 0x96C5):
+        w(t, 0x96C6, 0)
+        return 1, retired
+    return 0xFFFFFFFF, retired
 
 
 def seed(t, head, codes, state=3):

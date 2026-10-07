@@ -1,0 +1,185 @@
+CAN201/CAN215 input faults, shared substitution and recovery
+Evidence checkpoint: 2026-10-06
+
+VERIFIED RESULT
+
+An invalid CAN215 byte6 can substitute three TCU application inputs, including
+ones sourced from a healthy CAN201 message. Immediate received-value holding
+and later diagnostic substitution are separate stages. A return to valid
+payloads restores the decoded numbers before the application substitutions
+clear. CAN201 byte6 invalidity has the same shared application consequence.
+
+This extends tcu-paired-input.txt through produced diagnostic state instead
+of an injected92D5 fault flag. Existing can201-byte6/selection-pipeline work
+already established aggregate-to-flag mapping. The new evidence executes
+group3D qualification/recovery and both paired input producers together,
+including independent and simultaneous faults, interrupted recovery and
+switching the failing message while the shared application fault stays set.
+
+REPRODUCTION AND IDENTITIES
+
+  python research/ecu-at-can/verify_tcu_input_faults.py
+Results: tcu-input-faults-verification.json.
+Original binaries, unchanged:
+  examples/LFFEEE-stock.bin
+  7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+  examples/LFG1TF000.bin
+  8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+Existing bounded SH/FPU interpreters execute original bodies unchanged. The
+shared retained lifecycle helper now accepts profile-specific transition
+checks while preserving its default healthy-sequence assertions. Physical source
+units, real tick duration and execution of the complete scheduler remain open.
+
+3,072 cases verify all256 input-validity bytes, A939 admission0/1/2 and both
+dependency masks for group3D.292 cases run every diagnostic group0..48 with
+states0/2/4/10hex through summary production and all three application inputs.
+Additional retained diagnostic sequences:54 base checkpoints,10 switching
+source checkpoints,16 interrupted-recovery,7 interrupted-qualification and
+10 producer-dependency gate checkpoints. All pass.
+
+ORIGINAL DIAGNOSTIC CONFIGURATION
+
+583DC table5F198 maps880A togroup3C and880E togroup3D. The group3D record at
+5EF48 is000101F4000111000000000029002700: type0, invalid interval500,
+qualification count1, healthy index29hex, summary index27hex. The healthy
+record at5F120 is2900010001F40001:500 healthy ticks/count1. These constants
+are independently checked in the binary; the older group36 healthy interval
+5000 is different and must not be applied to group3D.
+
+Group3D memory:
+  A773 raw producer status; A729 active diagnostic state;
+  A874 qualification deadline; A91E qualification count;
+  A97F mapped summary; A98F combined summary.
+Group3C uses the preceding entries A772/A728/A870/A91C/A97E and aggregateA98D.
+
+Producer admission requiresA939 exactly1 and A977/A978 bit3 clear. Fresh
+group state plus validity880E1 publishes raw3; other validity values publish
+raw1. Validity2 additionally drives the healthy-recovery path for an already
+active fault, eventually publishing raw81hex when recovery is ready.
+The complete configured-group dispatcher56658 requiresA936 exactly1.
+Tests execute56658,57F50,570F6,57258 and21C1C in that order after583DC.
+
+57258 combines groups35/36/3D intoA98F; groups35/36/3C intoA98D.21C1C sets
+BOTH92D5bit3 andbit7 from A98Dbit3 OR A98Fbit3. Thus the two consumer masks
+differ in code, but the tested diagnostic publisher drives them together.
+History bit4 without active bits does not trigger these substitutions.
+
+For the produced fixture values, healthy and faulted results are:
+                        healthy       qualified shared fault
+  8098 (CAN201)          19968                   0
+  809A (CAN215)          15360               25600
+  809C (comparison)      19968                3200
+All three published statuses become4 in the faulted case. The underlying
+decoded values8808=780 and880C=600 remain intact during invalid reception.
+Only groups35,36,3C,3D in active states2 or4 induce the shared substitution
+in the exhaustive group mapping test; unrelated groups do not.
+
+TIMED INVALIDITY AND RECOVERY
+
+The encoder fixture supplies CAN201 source78 and CAN215 source60. It runs
+both original ECU encoders on one ECU instance, changing A3A4 between the
+two publications for isolated-invalid tests. That explicitly represents a
+change between message publications; it does not assert two independent
+A3A4 values at one instant. Shared-invalid tests keep it1 for both encoders.
+Other CAN215 numeric words remain valid because their6E2E invalid flag is
+separate. Payload buffers are transferred explicitly; no CAN ISR is simulated.
+
+With only CAN215 byte6 invalid and recovery gate80A4=0:
+  tick0: valid, decoded600, application15360/status1.
+  tick100: FF received, decoded600 held, status2, deadline600, active01.
+  tick599: still only holding; CAN201/comparison statuses stay1.
+  tick600: active05, A98F1C,92D5 mask88, all three substitutes/status4.
+  tick601: valid payload returns, active44, substitutions remain.
+  tick1100: recovery not ready yet; still substituted.
+  tick1101 first pass:500 healthy ticks reach readiness, still active44.
+  tick1101 second pass: raw81, active0, A98F11(history), healthy inputs return.
+If80A4 is nonzero, the second pass retains activeC4 and substitutions.
+Both isolated CAN201 and simultaneous faults follow the same shared policy.
+
+Switching from qualified CAN215 invalidity to CAN201 invalidity at601 lets
+group3C qualify at1101 while3D is recovering. Clearing3D on the second1101
+pass leaves the shared fault asserted by3C. Only after3C's healthy period
+and next producer pass do all three healthy application values return.
+
+A valid sample before qualification cancels that invalid interval. A fresh
+invalid sample at600 then qualifies at1100, not the abandoned600 deadline.
+Invalid or explicitly injected unready validity3 during recovery restarts
+the healthy interval. Dependency masksA977/A978 bit3 suppress the group3D
+producer, cancel pending qualification and require a new500-tick period
+when admission returns. These are producer-gate fixtures, not claims about
+the complete communication-loss/recovery controller in the same test.
+
+No serialized558CC report, CAN216 reportbit1 or CAN231 byte1bit6 appears in
+these isolated data-invalidity lifecycles. That limited absence does not
+mean normal application control or absence from every diagnostic service.
+
+RETAINED MANAGER FAULT PROFILE
+
+The full retained selector/progress/selection/limit/manager pipeline runs320
+calls with both original paired input producers and produced diagnostic
+summaries. The hook owns allCAN215 deliveries. Source97.5 gives880C975 and
+809A24960. CAN215 byte6 is invalid duringcalls100..159; primary CAN215 model
+value changes25->100 at100 and back25 at170, independently of byte6 validity.
+Every pass asserts that decoded880C stays975, including invalid reception.
+CAN201 remains valid and supplies809C19968 while fault-free.
+
+Each manager call supplies diagnostic tick10*call; this is a scheduling
+fixture, not a physical cadence. Qualification matures atcall150; valid
+reception returns160; readiness occurs210 and the next producer clears211.
+Thus the three application inputs are[19968,24960,19968] before qualification,
+[0,25600,3200] while qualified, and the healthy values again at211.
+The primary change signal933E is640 on substitution and-640 on recovery;
+the larger comparison-input change is independently checked by its model.
+
+Observed active-ring sequence in the fault profile:
+  call1:code6/operation8 replaces initialcode1; phase0.
+  call80:code6 phase1; call130:phase2.
+  call150:code1/operation1 replaces code6, phase0; live80F8 releases to12736.
+  call170:code1 remains; live80F8 andlimit939E return7984.
+  call211:recovery produces anothercode6/operation8, already phase1.
+  call261:that code6 reachesphase2; call290:the active ring becomes empty.
+Creation codes/operations are[1/0,6/8,1/1,6/8]. Request-group selection is
+[7,FFFF,7,FFFF]; despite group7 admission for the two code1 records, the
+sampled CAN216 numeric spark request stays withdrawn and paired ECU AT
+correction stays0. This does not prove that every diagnostic fault suppresses
+all torque requests or identify these abstract codes as physical gears.
+
+The profile passes321 checks each of primary input, comparison input, source
+arbitration, qualification limit and qualification tail, plus320 each of
+progress, selector-class and timer production. The shared helper's original
+320-call healthy baseline still matches its saved JSON exactly. A matched
+healthy control runs the identical new diagnostic/input pipeline with no
+invalid frames: it creates only[1/0,6/8], retires code6 at162, and releases
+live80F8 at163. Its primary/comparison input checkpoints first differ from
+the fault profile at150, exactly when the diagnostic qualifies. It passes
+the same instruction check counts. The two new profiles total640 manager
+cycles and16 active-ring paired ECU checkpoints; a further320-call run
+checks the unchanged older baseline. Saved profile sequences are also
+explicitly asserted for future regression checks.
+
+HARNESS CORRECTION
+
+The first retained-manager experiment also passed original instruction
+observers but failed the older healthy-sequence assertion. Inspecting its
+trace exposed an extra validCAN215 byte6=0 reception from the helper before
+the intended invalid frame atcall100. That overwrote the value being held.
+The corrected hook owns every CAN215 update; it asserts880C remains975 on
+every pass and checks the pre-qualification application value. The earlier
+trace is rejected as evidence for uninterrupted invalid-value retention.
+The matched healthy control uses the same full diagnostic/input pipeline.
+
+CONTINUATION AND PERSISTENCE
+
+Ghidra labels/comments now preserve group3D configuration, state and shared
+substitution. Current closed-project archive identity and independent
+restoration results are recorded in snapshot.json, restore-verification.json
+and CHECKPOINT.txt. Scripts and result files are Git-eligible; nothing is
+staged, committed or pushed by this work.
+
+Retain complete task/transport admission, CAN4EC ownership, overlapping and
+composite transitions, physical control units and actuator effects as open.
+Traction next steps remain59720/8118, indirect source/gate producers and
+CAN211 sender/physical recipient. Roof next steps remain PCM transmission
+type publication and matching OEM PRHT reception, with folding/unfolding,
+interruption/resume/reversal, timeout and motor/fault recovery all required.
+No new roof message or controller transition follows from this result.

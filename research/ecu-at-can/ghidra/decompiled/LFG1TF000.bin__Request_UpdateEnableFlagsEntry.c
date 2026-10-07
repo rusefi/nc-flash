@@ -1,6 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* STATIC caller1E99E enters here; falls through23BF6 after clearing argument registers. */
+/* Original126EC phase0/4 enters23BF0, falls through23BF6; updates9410 enable hysteresis, NOT
+   request creation.24 selected-byte actual-return checks across96 fulltasks; prior direct gate
+   model reused. Actualrequest creation is31524event1. tcu-periodic-request.txt. */
 
 undefined * Request_UpdateEnableFlagsEntry(void)
 
@@ -20,8 +22,8 @@ undefined * Request_UpdateEnableFlagsEntry(void)
   uint uVar13;
   
   sVar2 = DAT_ffff80f6;
-  uVar7 = DAT_ffff809c;
-  uVar6 = DAT_ffff809a;
+  uVar7 = Comparison_ApplicationInput;
+  uVar6 = Primary_ApplicationInput;
   puVar5 = PTR_Lookup_ByteCurveToFixedPoint_00023d7c;
   puVar4 = PTR_Request_EnableFallbackCalibration_2__00023d74;
   puVar3 = PTR_Request_EnableFlags_00023d6c;

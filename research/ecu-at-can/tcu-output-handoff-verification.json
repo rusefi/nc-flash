@@ -1,0 +1,6972 @@
+{
+  "scope": "Execute TCU feedback correction through the original peripheral word write.\n\nFour write-only MMIO sinks and four explicit ADC words are added locally. No physical actuator,\ntimer behavior or feedback source is simulated. ROM, shared ISA and existing\nverifiers remain unchanged. Reference formulas independently predict all RAM\nand the exact output address/value; nested arithmetic executes from ROM.\n",
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "counts": {
+    "initialization": 40,
+    "handoff_arbitrary": 800,
+    "peripheral": 980,
+    "accumulator": 375,
+    "fallback_boundaries": 1152,
+    "acquisition": 1088,
+    "original_caller_tails": 20,
+    "integrated_retained": 160,
+    "rejected": 7
+  },
+  "retained": [
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5108,
+      "published": 5108,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5108,
+        "scaled": 1995,
+        "slot0": 5108,
+        "slot1": 32767
+      },
+      "call": 1,
+      "service": {
+        "accepted": true,
+        "value": 1995,
+        "tag": 256
+      },
+      "driver": {
+        "value": 288,
+        "previous": 200,
+        "sticky": 0
+      },
+      "handoff": {
+        "base": 1584,
+        "measured": 678,
+        "error": -478,
+        "proportional": -979,
+        "correction": -210,
+        "reset": false,
+        "accumulator": -210320,
+        "output": 395,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1097
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5140,
+      "published": 5140,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5140,
+        "scaled": 2007,
+        "slot0": 5140,
+        "slot1": 32767
+      },
+      "call": 2,
+      "service": {
+        "accepted": true,
+        "value": 2007,
+        "tag": 256
+      },
+      "driver": {
+        "value": 376,
+        "previous": 288,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2068,
+        "measured": 678,
+        "error": -390,
+        "proportional": -799,
+        "correction": -381,
+        "reset": false,
+        "accumulator": -381920,
+        "output": 888,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 2466
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5140,
+      "published": 5140,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5140,
+        "scaled": 2007,
+        "slot0": 5140,
+        "slot1": 32767
+      },
+      "call": 3,
+      "service": {
+        "accepted": true,
+        "value": 2007,
+        "tag": 256
+      },
+      "driver": {
+        "value": 464,
+        "previous": 376,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2552,
+        "measured": 678,
+        "error": -302,
+        "proportional": -619,
+        "correction": -514,
+        "reset": false,
+        "accumulator": -514800,
+        "output": 1419,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 3941
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5172,
+      "published": 5172,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5172,
+        "scaled": 2020,
+        "slot0": 5172,
+        "slot1": 32767
+      },
+      "call": 4,
+      "service": {
+        "accepted": true,
+        "value": 2020,
+        "tag": 256
+      },
+      "driver": {
+        "value": 486,
+        "previous": 464,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2673,
+        "measured": 678,
+        "error": -214,
+        "proportional": -438,
+        "correction": -608,
+        "reset": false,
+        "accumulator": -608960,
+        "output": 1627,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 4519
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5172,
+      "published": 5172,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5172,
+        "scaled": 2020,
+        "slot0": 5172,
+        "slot1": 32767
+      },
+      "call": 5,
+      "service": {
+        "accepted": true,
+        "value": 2020,
+        "tag": 256
+      },
+      "driver": {
+        "value": 486,
+        "previous": 486,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2673,
+        "measured": 678,
+        "error": -192,
+        "proportional": -393,
+        "correction": -693,
+        "reset": false,
+        "accumulator": -693440,
+        "output": 1587,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 4408
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5204,
+      "published": 5204,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5204,
+        "scaled": 2032,
+        "slot0": 5204,
+        "slot1": 32767
+      },
+      "call": 6,
+      "service": {
+        "accepted": true,
+        "value": 2032,
+        "tag": 256
+      },
+      "driver": {
+        "value": 487,
+        "previous": 486,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2678,
+        "measured": 678,
+        "error": -192,
+        "proportional": -393,
+        "correction": -777,
+        "reset": false,
+        "accumulator": -777920,
+        "output": 1508,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 4188
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5204,
+      "published": 5204,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5204,
+        "scaled": 2032,
+        "slot0": 5204,
+        "slot1": 32767
+      },
+      "call": 7,
+      "service": {
+        "accepted": true,
+        "value": 2032,
+        "tag": 256
+      },
+      "driver": {
+        "value": 487,
+        "previous": 487,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2678,
+        "measured": 678,
+        "error": -191,
+        "proportional": -391,
+        "correction": -861,
+        "reset": false,
+        "accumulator": -861960,
+        "output": 1426,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 3961
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5236,
+      "published": 5236,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5236,
+        "scaled": 2045,
+        "slot0": 5236,
+        "slot1": 32767
+      },
+      "call": 8,
+      "service": {
+        "accepted": true,
+        "value": 2045,
+        "tag": 256
+      },
+      "driver": {
+        "value": 488,
+        "previous": 487,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2684,
+        "measured": 678,
+        "error": -191,
+        "proportional": -391,
+        "correction": -946,
+        "reset": false,
+        "accumulator": -946000,
+        "output": 1347,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 3741
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5236,
+      "published": 5236,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5236,
+        "scaled": 2045,
+        "slot0": 5236,
+        "slot1": 32767
+      },
+      "call": 9,
+      "service": {
+        "accepted": true,
+        "value": 2045,
+        "tag": 256
+      },
+      "driver": {
+        "value": 488,
+        "previous": 488,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2684,
+        "measured": 678,
+        "error": -190,
+        "proportional": -389,
+        "correction": -1029,
+        "reset": false,
+        "accumulator": -1029600,
+        "output": 1266,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 3516
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5268,
+      "published": 5268,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5268,
+        "scaled": 2057,
+        "slot0": 5268,
+        "slot1": 32767
+      },
+      "call": 10,
+      "service": {
+        "accepted": true,
+        "value": 2057,
+        "tag": 256
+      },
+      "driver": {
+        "value": 489,
+        "previous": 488,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2689,
+        "measured": 678,
+        "error": -190,
+        "proportional": -389,
+        "correction": -1113,
+        "reset": false,
+        "accumulator": -1113200,
+        "output": 1187,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 3297
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5268,
+      "published": 5268,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5268,
+        "scaled": 2057,
+        "slot0": 5268,
+        "slot1": 32767
+      },
+      "call": 11,
+      "service": {
+        "accepted": true,
+        "value": 2057,
+        "tag": 256
+      },
+      "driver": {
+        "value": 489,
+        "previous": 489,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2689,
+        "measured": 678,
+        "error": -189,
+        "proportional": -387,
+        "correction": -1196,
+        "reset": false,
+        "accumulator": -1196360,
+        "output": 1106,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 3072
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5300,
+      "published": 5300,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5300,
+        "scaled": 2070,
+        "slot0": 5300,
+        "slot1": 32767
+      },
+      "call": 12,
+      "service": {
+        "accepted": true,
+        "value": 2070,
+        "tag": 256
+      },
+      "driver": {
+        "value": 490,
+        "previous": 489,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2695,
+        "measured": 678,
+        "error": -189,
+        "proportional": -387,
+        "correction": -1279,
+        "reset": false,
+        "accumulator": -1279520,
+        "output": 1029,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 2858
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5300,
+      "published": 5300,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5300,
+        "scaled": 2070,
+        "slot0": 5300,
+        "slot1": 32767
+      },
+      "call": 13,
+      "service": {
+        "accepted": true,
+        "value": 2070,
+        "tag": 256
+      },
+      "driver": {
+        "value": 490,
+        "previous": 490,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2695,
+        "measured": 678,
+        "error": -188,
+        "proportional": -385,
+        "correction": -1362,
+        "reset": false,
+        "accumulator": -1362240,
+        "output": 948,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 2633
+      }
+    },
+    {
+      "base": 5120,
+      "detail": {
+        "mode": 1,
+        "ratio": 0,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5332,
+      "published": 5332,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5332,
+        "scaled": 2082,
+        "slot0": 5332,
+        "slot1": 32767
+      },
+      "call": 14,
+      "service": {
+        "accepted": true,
+        "value": 2082,
+        "tag": 256
+      },
+      "driver": {
+        "value": 491,
+        "previous": 490,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2700,
+        "measured": 678,
+        "error": -188,
+        "proportional": -385,
+        "correction": -1444,
+        "reset": false,
+        "accumulator": -1444960,
+        "output": 871,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 2419
+      }
+    },
+    {
+      "base": 4971,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 299,
+        "bonus": 0
+      },
+      "applied": 5183,
+      "published": 5183,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5183,
+        "scaled": 2024,
+        "slot0": 5183,
+        "slot1": 32767
+      },
+      "call": 15,
+      "service": {
+        "accepted": true,
+        "value": 2024,
+        "tag": 256
+      },
+      "driver": {
+        "value": 486,
+        "previous": 491,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2673,
+        "measured": 678,
+        "error": -187,
+        "proportional": -383,
+        "correction": -1527,
+        "reset": false,
+        "accumulator": -1527240,
+        "output": 763,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 2119
+      }
+    },
+    {
+      "base": 4985,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 313,
+        "bonus": 0
+      },
+      "applied": 5229,
+      "published": 5229,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5229,
+        "scaled": 2042,
+        "slot0": 5229,
+        "slot1": 32767
+      },
+      "call": 16,
+      "service": {
+        "accepted": true,
+        "value": 2042,
+        "tag": 256
+      },
+      "driver": {
+        "value": 488,
+        "previous": 486,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2684,
+        "measured": 678,
+        "error": -192,
+        "proportional": -393,
+        "correction": -1611,
+        "reset": false,
+        "accumulator": -1611720,
+        "output": 680,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1888
+      }
+    },
+    {
+      "base": 4999,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 327,
+        "bonus": 0
+      },
+      "applied": 5243,
+      "published": 5243,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5243,
+        "scaled": 2048,
+        "slot0": 5243,
+        "slot1": 32767
+      },
+      "call": 17,
+      "service": {
+        "accepted": true,
+        "value": 2048,
+        "tag": 256
+      },
+      "driver": {
+        "value": 488,
+        "previous": 488,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2684,
+        "measured": 678,
+        "error": -190,
+        "proportional": -389,
+        "correction": -1695,
+        "reset": false,
+        "accumulator": -1695320,
+        "output": 600,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1666
+      }
+    },
+    {
+      "base": 5013,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 341,
+        "bonus": 0
+      },
+      "applied": 5289,
+      "published": 5289,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5289,
+        "scaled": 2066,
+        "slot0": 5289,
+        "slot1": 32767
+      },
+      "call": 18,
+      "service": {
+        "accepted": true,
+        "value": 2066,
+        "tag": 256
+      },
+      "driver": {
+        "value": 490,
+        "previous": 488,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2695,
+        "measured": 678,
+        "error": -190,
+        "proportional": -389,
+        "correction": -1778,
+        "reset": false,
+        "accumulator": -1778920,
+        "output": 528,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1466
+      }
+    },
+    {
+      "base": 5027,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 355,
+        "bonus": 0
+      },
+      "applied": 5303,
+      "published": 5303,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5303,
+        "scaled": 2071,
+        "slot0": 5303,
+        "slot1": 32767
+      },
+      "call": 19,
+      "service": {
+        "accepted": true,
+        "value": 2071,
+        "tag": 256
+      },
+      "driver": {
+        "value": 490,
+        "previous": 490,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2695,
+        "measured": 678,
+        "error": -188,
+        "proportional": -385,
+        "correction": -1861,
+        "reset": false,
+        "accumulator": -1861640,
+        "output": 449,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1247
+      }
+    },
+    {
+      "base": 5041,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 369,
+        "bonus": 0
+      },
+      "applied": 5349,
+      "published": 5349,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5349,
+        "scaled": 2089,
+        "slot0": 5349,
+        "slot1": 32767
+      },
+      "call": 20,
+      "service": {
+        "accepted": true,
+        "value": 2089,
+        "tag": 256
+      },
+      "driver": {
+        "value": 492,
+        "previous": 490,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2706,
+        "measured": 678,
+        "error": -188,
+        "proportional": -385,
+        "correction": -1944,
+        "reset": false,
+        "accumulator": -1944360,
+        "output": 377,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1047
+      }
+    },
+    {
+      "base": 5055,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 383,
+        "bonus": 0
+      },
+      "applied": 5363,
+      "published": 5363,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5363,
+        "scaled": 2094,
+        "slot0": 5363,
+        "slot1": 32767
+      },
+      "call": 21,
+      "service": {
+        "accepted": true,
+        "value": 2094,
+        "tag": 256
+      },
+      "driver": {
+        "value": 492,
+        "previous": 492,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2706,
+        "measured": 678,
+        "error": -186,
+        "proportional": -381,
+        "correction": -2026,
+        "reset": false,
+        "accumulator": -2026200,
+        "output": 299,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 830
+      }
+    },
+    {
+      "base": 5069,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 397,
+        "bonus": 0
+      },
+      "applied": 5409,
+      "published": 5409,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5409,
+        "scaled": 2112,
+        "slot0": 5409,
+        "slot1": 32767
+      },
+      "call": 22,
+      "service": {
+        "accepted": true,
+        "value": 2112,
+        "tag": 256
+      },
+      "driver": {
+        "value": 494,
+        "previous": 492,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2717,
+        "measured": 678,
+        "error": -186,
+        "proportional": -381,
+        "correction": -2108,
+        "reset": false,
+        "accumulator": -2108040,
+        "output": 228,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 633
+      }
+    },
+    {
+      "base": 5083,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 411,
+        "bonus": 0
+      },
+      "applied": 5423,
+      "published": 5423,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5423,
+        "scaled": 2118,
+        "slot0": 5423,
+        "slot1": 32767
+      },
+      "call": 23,
+      "service": {
+        "accepted": true,
+        "value": 2118,
+        "tag": 256
+      },
+      "driver": {
+        "value": 494,
+        "previous": 494,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2717,
+        "measured": 678,
+        "error": -184,
+        "proportional": -377,
+        "correction": -2189,
+        "reset": false,
+        "accumulator": -2189000,
+        "output": 151,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 419
+      }
+    },
+    {
+      "base": 5097,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 425,
+        "bonus": 0
+      },
+      "applied": 5469,
+      "published": 5469,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5469,
+        "scaled": 2136,
+        "slot0": 5469,
+        "slot1": 32767
+      },
+      "call": 24,
+      "service": {
+        "accepted": true,
+        "value": 2136,
+        "tag": 256
+      },
+      "driver": {
+        "value": 496,
+        "previous": 494,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2728,
+        "measured": 678,
+        "error": -184,
+        "proportional": -377,
+        "correction": -2269,
+        "reset": false,
+        "accumulator": -2269960,
+        "output": 82,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 227
+      }
+    },
+    {
+      "base": 5111,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 439,
+        "bonus": 0
+      },
+      "applied": 5483,
+      "published": 5483,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5483,
+        "scaled": 2141,
+        "slot0": 5483,
+        "slot1": 32767
+      },
+      "call": 25,
+      "service": {
+        "accepted": true,
+        "value": 2141,
+        "tag": 256
+      },
+      "driver": {
+        "value": 497,
+        "previous": 496,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2733,
+        "measured": 678,
+        "error": -182,
+        "proportional": -373,
+        "correction": -2350,
+        "reset": false,
+        "accumulator": -2350040,
+        "output": 10,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 27
+      }
+    },
+    {
+      "base": 5125,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 453,
+        "bonus": 0
+      },
+      "applied": 5529,
+      "published": 5529,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5529,
+        "scaled": 2159,
+        "slot0": 5529,
+        "slot1": 32767
+      },
+      "call": 26,
+      "service": {
+        "accepted": true,
+        "value": 2159,
+        "tag": 256
+      },
+      "driver": {
+        "value": 498,
+        "previous": 497,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2739,
+        "measured": 678,
+        "error": -181,
+        "proportional": -371,
+        "correction": -2429,
+        "reset": false,
+        "accumulator": -2429680,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5139,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 467,
+        "bonus": 0
+      },
+      "applied": 5543,
+      "published": 5543,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5543,
+        "scaled": 2165,
+        "slot0": 5543,
+        "slot1": 32767
+      },
+      "call": 27,
+      "service": {
+        "accepted": true,
+        "value": 2165,
+        "tag": 256
+      },
+      "driver": {
+        "value": 499,
+        "previous": 498,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2744,
+        "measured": 678,
+        "error": -180,
+        "proportional": -369,
+        "correction": -2508,
+        "reset": false,
+        "accumulator": -2508880,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5153,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 481,
+        "bonus": 0
+      },
+      "applied": 5589,
+      "published": 5589,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5589,
+        "scaled": 2183,
+        "slot0": 5589,
+        "slot1": 32767
+      },
+      "call": 28,
+      "service": {
+        "accepted": true,
+        "value": 2183,
+        "tag": 256
+      },
+      "driver": {
+        "value": 500,
+        "previous": 499,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2750,
+        "measured": 678,
+        "error": -179,
+        "proportional": -366,
+        "correction": -2587,
+        "reset": false,
+        "accumulator": -2587640,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5167,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 495,
+        "bonus": 0
+      },
+      "applied": 5603,
+      "published": 5603,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5603,
+        "scaled": 2188,
+        "slot0": 5603,
+        "slot1": 32767
+      },
+      "call": 29,
+      "service": {
+        "accepted": true,
+        "value": 2188,
+        "tag": 256
+      },
+      "driver": {
+        "value": 501,
+        "previous": 500,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2755,
+        "measured": 678,
+        "error": -178,
+        "proportional": -364,
+        "correction": -2665,
+        "reset": false,
+        "accumulator": -2665960,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4655,
+      "detail": {
+        "mode": 1,
+        "ratio": 62,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5123,
+      "published": 5123,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5123,
+        "scaled": 2001,
+        "slot0": 5123,
+        "slot1": 32767
+      },
+      "call": 30,
+      "service": {
+        "accepted": true,
+        "value": 2001,
+        "tag": 256
+      },
+      "driver": {
+        "value": 484,
+        "previous": 501,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2662,
+        "measured": 678,
+        "error": -177,
+        "proportional": -362,
+        "correction": -2662,
+        "reset": false,
+        "accumulator": -2662000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4625,
+      "detail": {
+        "mode": 1,
+        "ratio": 66,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5093,
+      "published": 5093,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5093,
+        "scaled": 1989,
+        "slot0": 5093,
+        "slot1": 32767
+      },
+      "call": 31,
+      "service": {
+        "accepted": true,
+        "value": 1989,
+        "tag": 256
+      },
+      "driver": {
+        "value": 483,
+        "previous": 484,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2656,
+        "measured": 678,
+        "error": -194,
+        "proportional": -397,
+        "correction": -2656,
+        "reset": false,
+        "accumulator": -2656000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4595,
+      "detail": {
+        "mode": 1,
+        "ratio": 70,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5095,
+      "published": 5095,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5095,
+        "scaled": 1990,
+        "slot0": 5095,
+        "slot1": 32767
+      },
+      "call": 32,
+      "service": {
+        "accepted": true,
+        "value": 1990,
+        "tag": 256
+      },
+      "driver": {
+        "value": 483,
+        "previous": 483,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2656,
+        "measured": 678,
+        "error": -195,
+        "proportional": -399,
+        "correction": -2656,
+        "reset": false,
+        "accumulator": -2656000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4565,
+      "detail": {
+        "mode": 1,
+        "ratio": 74,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5065,
+      "published": 5065,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5065,
+        "scaled": 1978,
+        "slot0": 5065,
+        "slot1": 32767
+      },
+      "call": 33,
+      "service": {
+        "accepted": true,
+        "value": 1978,
+        "tag": 256
+      },
+      "driver": {
+        "value": 482,
+        "previous": 483,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2651,
+        "measured": 678,
+        "error": -195,
+        "proportional": -399,
+        "correction": -2651,
+        "reset": false,
+        "accumulator": -2651000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4535,
+      "detail": {
+        "mode": 1,
+        "ratio": 78,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5067,
+      "published": 5067,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5067,
+        "scaled": 1979,
+        "slot0": 5067,
+        "slot1": 32767
+      },
+      "call": 34,
+      "service": {
+        "accepted": true,
+        "value": 1979,
+        "tag": 256
+      },
+      "driver": {
+        "value": 482,
+        "previous": 482,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2651,
+        "measured": 678,
+        "error": -196,
+        "proportional": -401,
+        "correction": -2651,
+        "reset": false,
+        "accumulator": -2651000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4505,
+      "detail": {
+        "mode": 1,
+        "ratio": 82,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5037,
+      "published": 5037,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5037,
+        "scaled": 1967,
+        "slot0": 5037,
+        "slot1": 32767
+      },
+      "call": 35,
+      "service": {
+        "accepted": true,
+        "value": 1967,
+        "tag": 256
+      },
+      "driver": {
+        "value": 481,
+        "previous": 482,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2645,
+        "measured": 678,
+        "error": -196,
+        "proportional": -401,
+        "correction": -2645,
+        "reset": false,
+        "accumulator": -2645000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4475,
+      "detail": {
+        "mode": 1,
+        "ratio": 86,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5039,
+      "published": 5039,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5039,
+        "scaled": 1968,
+        "slot0": 5039,
+        "slot1": 32767
+      },
+      "call": 36,
+      "service": {
+        "accepted": true,
+        "value": 1968,
+        "tag": 256
+      },
+      "driver": {
+        "value": 481,
+        "previous": 481,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2645,
+        "measured": 678,
+        "error": -197,
+        "proportional": -403,
+        "correction": -2645,
+        "reset": false,
+        "accumulator": -2645000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4438,
+      "detail": {
+        "mode": 1,
+        "ratio": 91,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5002,
+      "published": 5002,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5002,
+        "scaled": 1953,
+        "slot0": 5002,
+        "slot1": 32767
+      },
+      "call": 37,
+      "service": {
+        "accepted": true,
+        "value": 1953,
+        "tag": 256
+      },
+      "driver": {
+        "value": 480,
+        "previous": 481,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2640,
+        "measured": 678,
+        "error": -197,
+        "proportional": -403,
+        "correction": -2640,
+        "reset": false,
+        "accumulator": -2640000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4408,
+      "detail": {
+        "mode": 1,
+        "ratio": 95,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5004,
+      "published": 5004,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5004,
+        "scaled": 1954,
+        "slot0": 5004,
+        "slot1": 32767
+      },
+      "call": 38,
+      "service": {
+        "accepted": true,
+        "value": 1954,
+        "tag": 256
+      },
+      "driver": {
+        "value": 480,
+        "previous": 480,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2640,
+        "measured": 678,
+        "error": -198,
+        "proportional": -405,
+        "correction": -2640,
+        "reset": false,
+        "accumulator": -2640000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4378,
+      "detail": {
+        "mode": 1,
+        "ratio": 99,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4974,
+      "published": 4974,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4974,
+        "scaled": 1942,
+        "slot0": 4974,
+        "slot1": 32767
+      },
+      "call": 39,
+      "service": {
+        "accepted": true,
+        "value": 1942,
+        "tag": 256
+      },
+      "driver": {
+        "value": 479,
+        "previous": 480,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2634,
+        "measured": 678,
+        "error": -198,
+        "proportional": -405,
+        "correction": -2634,
+        "reset": false,
+        "accumulator": -2634000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4348,
+      "detail": {
+        "mode": 1,
+        "ratio": 103,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4976,
+      "published": 4976,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4976,
+        "scaled": 1943,
+        "slot0": 4976,
+        "slot1": 32767
+      },
+      "call": 40,
+      "service": {
+        "accepted": true,
+        "value": 1943,
+        "tag": 256
+      },
+      "driver": {
+        "value": 479,
+        "previous": 479,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2634,
+        "measured": 678,
+        "error": -199,
+        "proportional": -407,
+        "correction": -2634,
+        "reset": false,
+        "accumulator": -2634000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4318,
+      "detail": {
+        "mode": 1,
+        "ratio": 107,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4946,
+      "published": 4946,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4946,
+        "scaled": 1932,
+        "slot0": 4946,
+        "slot1": 32767
+      },
+      "call": 41,
+      "service": {
+        "accepted": true,
+        "value": 1932,
+        "tag": 256
+      },
+      "driver": {
+        "value": 478,
+        "previous": 479,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2629,
+        "measured": 678,
+        "error": -199,
+        "proportional": -407,
+        "correction": -2629,
+        "reset": false,
+        "accumulator": -2629000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4288,
+      "detail": {
+        "mode": 1,
+        "ratio": 111,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4948,
+      "published": 4948,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4948,
+        "scaled": 1932,
+        "slot0": 4948,
+        "slot1": 32767
+      },
+      "call": 42,
+      "service": {
+        "accepted": true,
+        "value": 1932,
+        "tag": 256
+      },
+      "driver": {
+        "value": 478,
+        "previous": 478,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2629,
+        "measured": 678,
+        "error": -200,
+        "proportional": -410,
+        "correction": -2629,
+        "reset": false,
+        "accumulator": -2629000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4258,
+      "detail": {
+        "mode": 1,
+        "ratio": 115,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4918,
+      "published": 4918,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4918,
+        "scaled": 1921,
+        "slot0": 4918,
+        "slot1": 32767
+      },
+      "call": 43,
+      "service": {
+        "accepted": true,
+        "value": 1921,
+        "tag": 256
+      },
+      "driver": {
+        "value": 477,
+        "previous": 478,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2623,
+        "measured": 678,
+        "error": -200,
+        "proportional": -410,
+        "correction": -2623,
+        "reset": false,
+        "accumulator": -2623000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 4220,
+      "detail": {
+        "mode": 1,
+        "ratio": 120,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4912,
+      "published": 4912,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4912,
+        "scaled": 1918,
+        "slot0": 4912,
+        "slot1": 32767
+      },
+      "call": 44,
+      "service": {
+        "accepted": true,
+        "value": 1918,
+        "tag": 256
+      },
+      "driver": {
+        "value": 476,
+        "previous": 477,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2618,
+        "measured": 678,
+        "error": -201,
+        "proportional": -412,
+        "correction": -2618,
+        "reset": false,
+        "accumulator": -2618000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5391,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 719,
+        "bonus": 0
+      },
+      "applied": 6083,
+      "published": 6083,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6083,
+        "scaled": 2376,
+        "slot0": 6083,
+        "slot1": 32767
+      },
+      "call": 45,
+      "service": {
+        "accepted": true,
+        "value": 2376,
+        "tag": 256
+      },
+      "driver": {
+        "value": 518,
+        "previous": 476,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2849,
+        "measured": 678,
+        "error": -202,
+        "proportional": -414,
+        "correction": -2706,
+        "reset": false,
+        "accumulator": -2706880,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5405,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 733,
+        "bonus": 0
+      },
+      "applied": 6129,
+      "published": 6129,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6129,
+        "scaled": 2394,
+        "slot0": 6129,
+        "slot1": 32767
+      },
+      "call": 46,
+      "service": {
+        "accepted": true,
+        "value": 2394,
+        "tag": 256
+      },
+      "driver": {
+        "value": 519,
+        "previous": 518,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2854,
+        "measured": 678,
+        "error": -160,
+        "proportional": -328,
+        "correction": -2777,
+        "reset": false,
+        "accumulator": -2777280,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5419,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 747,
+        "bonus": 0
+      },
+      "applied": 6143,
+      "published": 6143,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6143,
+        "scaled": 2399,
+        "slot0": 6143,
+        "slot1": 32767
+      },
+      "call": 47,
+      "service": {
+        "accepted": true,
+        "value": 2399,
+        "tag": 256
+      },
+      "driver": {
+        "value": 519,
+        "previous": 519,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2854,
+        "measured": 678,
+        "error": -159,
+        "proportional": -325,
+        "correction": -2847,
+        "reset": false,
+        "accumulator": -2847240,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5433,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 761,
+        "bonus": 0
+      },
+      "applied": 6189,
+      "published": 6189,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6189,
+        "scaled": 2417,
+        "slot0": 6189,
+        "slot1": 32767
+      },
+      "call": 48,
+      "service": {
+        "accepted": true,
+        "value": 2417,
+        "tag": 256
+      },
+      "driver": {
+        "value": 521,
+        "previous": 519,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2865,
+        "measured": 678,
+        "error": -159,
+        "proportional": -325,
+        "correction": -2865,
+        "reset": false,
+        "accumulator": -2865000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5447,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 775,
+        "bonus": 0
+      },
+      "applied": 6219,
+      "published": 6219,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6219,
+        "scaled": 2429,
+        "slot0": 6219,
+        "slot1": 32767
+      },
+      "call": 49,
+      "service": {
+        "accepted": true,
+        "value": 2429,
+        "tag": 256
+      },
+      "driver": {
+        "value": 522,
+        "previous": 521,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2871,
+        "measured": 678,
+        "error": -157,
+        "proportional": -321,
+        "correction": -2871,
+        "reset": false,
+        "accumulator": -2871000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5461,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 789,
+        "bonus": 0
+      },
+      "applied": 6249,
+      "published": 6249,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6249,
+        "scaled": 2441,
+        "slot0": 6249,
+        "slot1": 32767
+      },
+      "call": 50,
+      "service": {
+        "accepted": true,
+        "value": 2441,
+        "tag": 256
+      },
+      "driver": {
+        "value": 523,
+        "previous": 522,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2876,
+        "measured": 678,
+        "error": -156,
+        "proportional": -319,
+        "correction": -2876,
+        "reset": false,
+        "accumulator": -2876000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5475,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 803,
+        "bonus": 0
+      },
+      "applied": 6279,
+      "published": 6279,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6279,
+        "scaled": 2452,
+        "slot0": 6279,
+        "slot1": 32767
+      },
+      "call": 51,
+      "service": {
+        "accepted": true,
+        "value": 2452,
+        "tag": 256
+      },
+      "driver": {
+        "value": 524,
+        "previous": 523,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2882,
+        "measured": 678,
+        "error": -155,
+        "proportional": -317,
+        "correction": -2882,
+        "reset": false,
+        "accumulator": -2882000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5489,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 817,
+        "bonus": 0
+      },
+      "applied": 6309,
+      "published": 6309,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6309,
+        "scaled": 2464,
+        "slot0": 6309,
+        "slot1": 32767
+      },
+      "call": 52,
+      "service": {
+        "accepted": true,
+        "value": 2464,
+        "tag": 256
+      },
+      "driver": {
+        "value": 525,
+        "previous": 524,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2887,
+        "measured": 678,
+        "error": -154,
+        "proportional": -315,
+        "correction": -2887,
+        "reset": false,
+        "accumulator": -2887000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5503,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 831,
+        "bonus": 0
+      },
+      "applied": 6339,
+      "published": 6339,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6339,
+        "scaled": 2476,
+        "slot0": 6339,
+        "slot1": 32767
+      },
+      "call": 53,
+      "service": {
+        "accepted": true,
+        "value": 2476,
+        "tag": 256
+      },
+      "driver": {
+        "value": 526,
+        "previous": 525,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2893,
+        "measured": 678,
+        "error": -153,
+        "proportional": -313,
+        "correction": -2893,
+        "reset": false,
+        "accumulator": -2893000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5517,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 845,
+        "bonus": 0
+      },
+      "applied": 6385,
+      "published": 6385,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6385,
+        "scaled": 2494,
+        "slot0": 6385,
+        "slot1": 32767
+      },
+      "call": 54,
+      "service": {
+        "accepted": true,
+        "value": 2494,
+        "tag": 256
+      },
+      "driver": {
+        "value": 528,
+        "previous": 526,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2904,
+        "measured": 678,
+        "error": -152,
+        "proportional": -311,
+        "correction": -2904,
+        "reset": false,
+        "accumulator": -2904000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5531,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 859,
+        "bonus": 0
+      },
+      "applied": 6399,
+      "published": 6399,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6399,
+        "scaled": 2499,
+        "slot0": 6399,
+        "slot1": 32767
+      },
+      "call": 55,
+      "service": {
+        "accepted": true,
+        "value": 2499,
+        "tag": 256
+      },
+      "driver": {
+        "value": 528,
+        "previous": 528,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2904,
+        "measured": 678,
+        "error": -150,
+        "proportional": -307,
+        "correction": -2904,
+        "reset": false,
+        "accumulator": -2904000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5545,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 873,
+        "bonus": 0
+      },
+      "applied": 6445,
+      "published": 6445,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6445,
+        "scaled": 2517,
+        "slot0": 6445,
+        "slot1": 32767
+      },
+      "call": 56,
+      "service": {
+        "accepted": true,
+        "value": 2517,
+        "tag": 256
+      },
+      "driver": {
+        "value": 530,
+        "previous": 528,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2915,
+        "measured": 678,
+        "error": -150,
+        "proportional": -307,
+        "correction": -2915,
+        "reset": false,
+        "accumulator": -2915000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5559,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 887,
+        "bonus": 0
+      },
+      "applied": 6459,
+      "published": 6459,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6459,
+        "scaled": 2523,
+        "slot0": 6459,
+        "slot1": 32767
+      },
+      "call": 57,
+      "service": {
+        "accepted": true,
+        "value": 2523,
+        "tag": 256
+      },
+      "driver": {
+        "value": 530,
+        "previous": 530,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2915,
+        "measured": 678,
+        "error": -148,
+        "proportional": -303,
+        "correction": -2915,
+        "reset": false,
+        "accumulator": -2915000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5573,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 901,
+        "bonus": 0
+      },
+      "applied": 6505,
+      "published": 6505,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6505,
+        "scaled": 2541,
+        "slot0": 6505,
+        "slot1": 32767
+      },
+      "call": 58,
+      "service": {
+        "accepted": true,
+        "value": 2541,
+        "tag": 256
+      },
+      "driver": {
+        "value": 532,
+        "previous": 530,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2926,
+        "measured": 678,
+        "error": -148,
+        "proportional": -303,
+        "correction": -2926,
+        "reset": false,
+        "accumulator": -2926000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5587,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 915,
+        "bonus": 0
+      },
+      "applied": 6519,
+      "published": 6519,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6519,
+        "scaled": 2546,
+        "slot0": 6519,
+        "slot1": 32767
+      },
+      "call": 59,
+      "service": {
+        "accepted": true,
+        "value": 2546,
+        "tag": 256
+      },
+      "driver": {
+        "value": 532,
+        "previous": 532,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2926,
+        "measured": 678,
+        "error": -146,
+        "proportional": -299,
+        "correction": -2926,
+        "reset": false,
+        "accumulator": -2926000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3725,
+      "detail": {
+        "mode": 1,
+        "ratio": 186,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4979,
+      "published": 4979,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 0,
+        "scaled": 0,
+        "slot0": 4979,
+        "slot1": 32767
+      },
+      "call": 60,
+      "service": {
+        "accepted": true,
+        "value": 0,
+        "tag": 256
+      },
+      "driver": {
+        "value": 444,
+        "previous": 532,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2442,
+        "measured": 678,
+        "error": -146,
+        "proportional": -299,
+        "correction": -2442,
+        "reset": false,
+        "accumulator": -2442000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3695,
+      "detail": {
+        "mode": 1,
+        "ratio": 190,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4995,
+      "published": 4995,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 0,
+        "scaled": 0,
+        "slot0": 4995,
+        "slot1": 32767
+      },
+      "call": 61,
+      "service": {
+        "accepted": true,
+        "value": 0,
+        "tag": 256
+      },
+      "driver": {
+        "value": 356,
+        "previous": 444,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 1958,
+        "measured": 678,
+        "error": -234,
+        "proportional": -479,
+        "correction": -1958,
+        "reset": false,
+        "accumulator": -1958000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3665,
+      "detail": {
+        "mode": 1,
+        "ratio": 194,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5011,
+      "published": 5011,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 0,
+        "scaled": 0,
+        "slot0": 5011,
+        "slot1": 32767
+      },
+      "call": 62,
+      "service": {
+        "accepted": true,
+        "value": 0,
+        "tag": 256
+      },
+      "driver": {
+        "value": 268,
+        "previous": 356,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 1474,
+        "measured": 678,
+        "error": -322,
+        "proportional": -660,
+        "correction": -1474,
+        "reset": false,
+        "accumulator": -1474000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3635,
+      "detail": {
+        "mode": 1,
+        "ratio": 198,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5027,
+      "published": 5027,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 0,
+        "scaled": 0,
+        "slot0": 5027,
+        "slot1": 32767
+      },
+      "call": 63,
+      "service": {
+        "accepted": true,
+        "value": 0,
+        "tag": 256
+      },
+      "driver": {
+        "value": 200,
+        "previous": 268,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 1100,
+        "measured": 678,
+        "error": -410,
+        "proportional": -840,
+        "correction": -1100,
+        "reset": false,
+        "accumulator": -1100000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3605,
+      "detail": {
+        "mode": 1,
+        "ratio": 202,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5043,
+      "published": 5043,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 0,
+        "scaled": 0,
+        "slot0": 5043,
+        "slot1": 32767
+      },
+      "call": 64,
+      "service": {
+        "accepted": true,
+        "value": 0,
+        "tag": 256
+      },
+      "driver": {
+        "value": 200,
+        "previous": 200,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 1100,
+        "measured": 678,
+        "error": -478,
+        "proportional": -979,
+        "correction": -1100,
+        "reset": false,
+        "accumulator": -1100000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3568,
+      "detail": {
+        "mode": 1,
+        "ratio": 207,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5059,
+      "published": 5059,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 0,
+        "scaled": 0,
+        "slot0": 5059,
+        "slot1": 32767
+      },
+      "call": 65,
+      "service": {
+        "accepted": true,
+        "value": 0,
+        "tag": 256
+      },
+      "driver": {
+        "value": 200,
+        "previous": 200,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 1100,
+        "measured": 678,
+        "error": -478,
+        "proportional": -979,
+        "correction": -1100,
+        "reset": false,
+        "accumulator": -1100000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3538,
+      "detail": {
+        "mode": 1,
+        "ratio": 211,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5075,
+      "published": 5075,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5075,
+        "scaled": 1982,
+        "slot0": 5075,
+        "slot1": 32767
+      },
+      "call": 66,
+      "service": {
+        "accepted": true,
+        "value": 1982,
+        "tag": 256
+      },
+      "driver": {
+        "value": 288,
+        "previous": 200,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 1584,
+        "measured": 678,
+        "error": -478,
+        "proportional": -979,
+        "correction": -1310,
+        "reset": false,
+        "accumulator": -1310320,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3508,
+      "detail": {
+        "mode": 1,
+        "ratio": 215,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5091,
+      "published": 5091,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5091,
+        "scaled": 1988,
+        "slot0": 5091,
+        "slot1": 32767
+      },
+      "call": 67,
+      "service": {
+        "accepted": true,
+        "value": 1988,
+        "tag": 256
+      },
+      "driver": {
+        "value": 376,
+        "previous": 288,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2068,
+        "measured": 678,
+        "error": -390,
+        "proportional": -799,
+        "correction": -1481,
+        "reset": false,
+        "accumulator": -1481920,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3478,
+      "detail": {
+        "mode": 1,
+        "ratio": 219,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5107,
+      "published": 5107,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5107,
+        "scaled": 1994,
+        "slot0": 5107,
+        "slot1": 32767
+      },
+      "call": 68,
+      "service": {
+        "accepted": true,
+        "value": 1994,
+        "tag": 256
+      },
+      "driver": {
+        "value": 464,
+        "previous": 376,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2552,
+        "measured": 678,
+        "error": -302,
+        "proportional": -619,
+        "correction": -1614,
+        "reset": false,
+        "accumulator": -1614800,
+        "output": 319,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 886
+      }
+    },
+    {
+      "base": 3448,
+      "detail": {
+        "mode": 1,
+        "ratio": 223,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5123,
+      "published": 5123,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5123,
+        "scaled": 2001,
+        "slot0": 5123,
+        "slot1": 32767
+      },
+      "call": 69,
+      "service": {
+        "accepted": true,
+        "value": 2001,
+        "tag": 256
+      },
+      "driver": {
+        "value": 484,
+        "previous": 464,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2662,
+        "measured": 678,
+        "error": -214,
+        "proportional": -438,
+        "correction": -1708,
+        "reset": false,
+        "accumulator": -1708960,
+        "output": 516,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1433
+      }
+    },
+    {
+      "base": 3418,
+      "detail": {
+        "mode": 1,
+        "ratio": 227,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5139,
+      "published": 5139,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5139,
+        "scaled": 2007,
+        "slot0": 5139,
+        "slot1": 32767
+      },
+      "call": 70,
+      "service": {
+        "accepted": true,
+        "value": 2007,
+        "tag": 256
+      },
+      "driver": {
+        "value": 484,
+        "previous": 484,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2662,
+        "measured": 678,
+        "error": -194,
+        "proportional": -397,
+        "correction": -1794,
+        "reset": false,
+        "accumulator": -1794320,
+        "output": 471,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1308
+      }
+    },
+    {
+      "base": 3388,
+      "detail": {
+        "mode": 1,
+        "ratio": 231,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5155,
+      "published": 5155,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5155,
+        "scaled": 2013,
+        "slot0": 5155,
+        "slot1": 32767
+      },
+      "call": 71,
+      "service": {
+        "accepted": true,
+        "value": 2013,
+        "tag": 256
+      },
+      "driver": {
+        "value": 485,
+        "previous": 484,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2667,
+        "measured": 678,
+        "error": -194,
+        "proportional": -397,
+        "correction": -1879,
+        "reset": false,
+        "accumulator": -1879680,
+        "output": 391,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1086
+      }
+    },
+    {
+      "base": 3350,
+      "detail": {
+        "mode": 1,
+        "ratio": 236,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5171,
+      "published": 5171,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5171,
+        "scaled": 2019,
+        "slot0": 5171,
+        "slot1": 32767
+      },
+      "call": 72,
+      "service": {
+        "accepted": true,
+        "value": 2019,
+        "tag": 256
+      },
+      "driver": {
+        "value": 485,
+        "previous": 485,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2667,
+        "measured": 678,
+        "error": -193,
+        "proportional": -395,
+        "correction": -1964,
+        "reset": false,
+        "accumulator": -1964600,
+        "output": 308,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 855
+      }
+    },
+    {
+      "base": 3320,
+      "detail": {
+        "mode": 1,
+        "ratio": 240,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5187,
+      "published": 5187,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5187,
+        "scaled": 2026,
+        "slot0": 5187,
+        "slot1": 32767
+      },
+      "call": 73,
+      "service": {
+        "accepted": true,
+        "value": 2026,
+        "tag": 256
+      },
+      "driver": {
+        "value": 486,
+        "previous": 485,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2673,
+        "measured": 678,
+        "error": -193,
+        "proportional": -395,
+        "correction": -2049,
+        "reset": false,
+        "accumulator": -2049520,
+        "output": 229,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 636
+      }
+    },
+    {
+      "base": 3290,
+      "detail": {
+        "mode": 1,
+        "ratio": 244,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5203,
+      "published": 5203,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5203,
+        "scaled": 2032,
+        "slot0": 5203,
+        "slot1": 32767
+      },
+      "call": 74,
+      "service": {
+        "accepted": true,
+        "value": 2032,
+        "tag": 256
+      },
+      "driver": {
+        "value": 487,
+        "previous": 486,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2678,
+        "measured": 678,
+        "error": -192,
+        "proportional": -393,
+        "correction": -2134,
+        "reset": false,
+        "accumulator": -2134000,
+        "output": 151,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 419
+      }
+    },
+    {
+      "base": 5811,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1139,
+        "bonus": 0
+      },
+      "applied": 6999,
+      "published": 6999,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6999,
+        "scaled": 2733,
+        "slot0": 6999,
+        "slot1": 32767
+      },
+      "call": 75,
+      "service": {
+        "accepted": true,
+        "value": 2733,
+        "tag": 256
+      },
+      "driver": {
+        "value": 549,
+        "previous": 487,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 3019,
+        "measured": 678,
+        "error": -191,
+        "proportional": -391,
+        "correction": -2218,
+        "reset": false,
+        "accumulator": -2218040,
+        "output": 410,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1138
+      }
+    },
+    {
+      "base": 5825,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1153,
+        "bonus": 0
+      },
+      "applied": 7045,
+      "published": 7045,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 7045,
+        "scaled": 2751,
+        "slot0": 7045,
+        "slot1": 32767
+      },
+      "call": 76,
+      "service": {
+        "accepted": true,
+        "value": 2751,
+        "tag": 256
+      },
+      "driver": {
+        "value": 551,
+        "previous": 549,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 3030,
+        "measured": 678,
+        "error": -129,
+        "proportional": -264,
+        "correction": -2274,
+        "reset": false,
+        "accumulator": -2274800,
+        "output": 492,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1366
+      }
+    },
+    {
+      "base": 5839,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1167,
+        "bonus": 0
+      },
+      "applied": 7059,
+      "published": 7059,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 7059,
+        "scaled": 2757,
+        "slot0": 7059,
+        "slot1": 32767
+      },
+      "call": 77,
+      "service": {
+        "accepted": true,
+        "value": 2757,
+        "tag": 256
+      },
+      "driver": {
+        "value": 551,
+        "previous": 551,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 3030,
+        "measured": 678,
+        "error": -127,
+        "proportional": -260,
+        "correction": -2330,
+        "reset": false,
+        "accumulator": -2330680,
+        "output": 440,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1222
+      }
+    },
+    {
+      "base": 5853,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1181,
+        "bonus": 0
+      },
+      "applied": 7105,
+      "published": 7105,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 7105,
+        "scaled": 2775,
+        "slot0": 7105,
+        "slot1": 32767
+      },
+      "call": 78,
+      "service": {
+        "accepted": true,
+        "value": 2775,
+        "tag": 256
+      },
+      "driver": {
+        "value": 553,
+        "previous": 551,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 3041,
+        "measured": 678,
+        "error": -127,
+        "proportional": -260,
+        "correction": -2386,
+        "reset": false,
+        "accumulator": -2386560,
+        "output": 395,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1097
+      }
+    },
+    {
+      "base": 5867,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1195,
+        "bonus": 0
+      },
+      "applied": 7119,
+      "published": 7119,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 7119,
+        "scaled": 2780,
+        "slot0": 7119,
+        "slot1": 32767
+      },
+      "call": 79,
+      "service": {
+        "accepted": true,
+        "value": 2780,
+        "tag": 256
+      },
+      "driver": {
+        "value": 554,
+        "previous": 553,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 3047,
+        "measured": 678,
+        "error": -125,
+        "proportional": -256,
+        "correction": -2441,
+        "reset": false,
+        "accumulator": -2441560,
+        "output": 350,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 972
+      }
+    },
+    {
+      "base": 5881,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1209,
+        "bonus": 0
+      },
+      "applied": 7149,
+      "published": 7149,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 7149,
+        "scaled": 2792,
+        "slot0": 7149,
+        "slot1": 32767
+      },
+      "call": 80,
+      "service": {
+        "accepted": true,
+        "value": 2792,
+        "tag": 256
+      },
+      "driver": {
+        "value": 555,
+        "previous": 554,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 3052,
+        "measured": 678,
+        "error": -124,
+        "proportional": -254,
+        "correction": -2496,
+        "reset": false,
+        "accumulator": -2496120,
+        "output": 302,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 838
+      }
+    },
+    {
+      "base": 5895,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1223,
+        "bonus": 0
+      },
+      "applied": 6671,
+      "published": 6671,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6671,
+        "scaled": 2605,
+        "slot0": 6671,
+        "slot1": 32767
+      },
+      "call": 81,
+      "service": {
+        "accepted": true,
+        "value": 2605,
+        "tag": 256
+      },
+      "driver": {
+        "value": 538,
+        "previous": 555,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2959,
+        "measured": 814,
+        "error": -259,
+        "proportional": -530,
+        "correction": -2610,
+        "reset": false,
+        "accumulator": -2610080,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5909,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1237,
+        "bonus": 0
+      },
+      "applied": 6685,
+      "published": 6685,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6685,
+        "scaled": 2611,
+        "slot0": 6685,
+        "slot1": 32767
+      },
+      "call": 82,
+      "service": {
+        "accepted": true,
+        "value": 2611,
+        "tag": 256
+      },
+      "driver": {
+        "value": 538,
+        "previous": 538,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2959,
+        "measured": 814,
+        "error": -276,
+        "proportional": -565,
+        "correction": -2731,
+        "reset": false,
+        "accumulator": -2731520,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5923,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1251,
+        "bonus": 0
+      },
+      "applied": 6667,
+      "published": 6667,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6667,
+        "scaled": 2604,
+        "slot0": 6667,
+        "slot1": 32767
+      },
+      "call": 83,
+      "service": {
+        "accepted": true,
+        "value": 2604,
+        "tag": 256
+      },
+      "driver": {
+        "value": 538,
+        "previous": 538,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2959,
+        "measured": 814,
+        "error": -276,
+        "proportional": -565,
+        "correction": -2852,
+        "reset": false,
+        "accumulator": -2852960,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5937,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1265,
+        "bonus": 0
+      },
+      "applied": 6681,
+      "published": 6681,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6681,
+        "scaled": 2609,
+        "slot0": 6681,
+        "slot1": 32767
+      },
+      "call": 84,
+      "service": {
+        "accepted": true,
+        "value": 2609,
+        "tag": 256
+      },
+      "driver": {
+        "value": 538,
+        "previous": 538,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2959,
+        "measured": 814,
+        "error": -276,
+        "proportional": -565,
+        "correction": -2959,
+        "reset": false,
+        "accumulator": -2959000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5951,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1279,
+        "bonus": 0
+      },
+      "applied": 6663,
+      "published": 6663,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6663,
+        "scaled": 2602,
+        "slot0": 6663,
+        "slot1": 32767
+      },
+      "call": 85,
+      "service": {
+        "accepted": true,
+        "value": 2602,
+        "tag": 256
+      },
+      "driver": {
+        "value": 538,
+        "previous": 538,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2959,
+        "measured": 814,
+        "error": -276,
+        "proportional": -565,
+        "correction": -2959,
+        "reset": false,
+        "accumulator": -2959000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5965,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1293,
+        "bonus": 0
+      },
+      "applied": 6677,
+      "published": 6677,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6677,
+        "scaled": 2608,
+        "slot0": 6677,
+        "slot1": 32767
+      },
+      "call": 86,
+      "service": {
+        "accepted": true,
+        "value": 2608,
+        "tag": 256
+      },
+      "driver": {
+        "value": 538,
+        "previous": 538,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2959,
+        "measured": 814,
+        "error": -276,
+        "proportional": -565,
+        "correction": -2959,
+        "reset": false,
+        "accumulator": -2959000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5979,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1307,
+        "bonus": 0
+      },
+      "applied": 6659,
+      "published": 6659,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6659,
+        "scaled": 2601,
+        "slot0": 6659,
+        "slot1": 32767
+      },
+      "call": 87,
+      "service": {
+        "accepted": true,
+        "value": 2601,
+        "tag": 256
+      },
+      "driver": {
+        "value": 538,
+        "previous": 538,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2959,
+        "measured": 814,
+        "error": -276,
+        "proportional": -565,
+        "correction": -2959,
+        "reset": false,
+        "accumulator": -2959000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 5993,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1321,
+        "bonus": 0
+      },
+      "applied": 6673,
+      "published": 6673,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6673,
+        "scaled": 2606,
+        "slot0": 6673,
+        "slot1": 32767
+      },
+      "call": 88,
+      "service": {
+        "accepted": true,
+        "value": 2606,
+        "tag": 256
+      },
+      "driver": {
+        "value": 538,
+        "previous": 538,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2959,
+        "measured": 814,
+        "error": -276,
+        "proportional": -565,
+        "correction": -2959,
+        "reset": false,
+        "accumulator": -2959000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6007,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1335,
+        "bonus": 0
+      },
+      "applied": 6655,
+      "published": 6655,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6655,
+        "scaled": 2599,
+        "slot0": 6655,
+        "slot1": 32767
+      },
+      "call": 89,
+      "service": {
+        "accepted": true,
+        "value": 2599,
+        "tag": 256
+      },
+      "driver": {
+        "value": 537,
+        "previous": 538,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2953,
+        "measured": 814,
+        "error": -276,
+        "proportional": -565,
+        "correction": -2953,
+        "reset": false,
+        "accumulator": -2953000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5139,
+      "published": 5139,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5139,
+        "scaled": 2007,
+        "slot0": 5139,
+        "slot1": 32767
+      },
+      "call": 90,
+      "service": {
+        "accepted": true,
+        "value": 2007,
+        "tag": 256
+      },
+      "driver": {
+        "value": 484,
+        "previous": 537,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2662,
+        "measured": 814,
+        "error": -277,
+        "proportional": -567,
+        "correction": -2662,
+        "reset": false,
+        "accumulator": -2662000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5123,
+      "published": 5123,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5123,
+        "scaled": 2001,
+        "slot0": 5123,
+        "slot1": 32767
+      },
+      "call": 91,
+      "service": {
+        "accepted": true,
+        "value": 2001,
+        "tag": 256
+      },
+      "driver": {
+        "value": 484,
+        "previous": 484,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2662,
+        "measured": 814,
+        "error": -330,
+        "proportional": -676,
+        "correction": -2662,
+        "reset": false,
+        "accumulator": -2662000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5107,
+      "published": 5107,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5107,
+        "scaled": 1994,
+        "slot0": 5107,
+        "slot1": 32767
+      },
+      "call": 92,
+      "service": {
+        "accepted": true,
+        "value": 1994,
+        "tag": 256
+      },
+      "driver": {
+        "value": 483,
+        "previous": 484,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2656,
+        "measured": 814,
+        "error": -330,
+        "proportional": -676,
+        "correction": -2656,
+        "reset": false,
+        "accumulator": -2656000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5091,
+      "published": 5091,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5091,
+        "scaled": 1988,
+        "slot0": 5091,
+        "slot1": 32767
+      },
+      "call": 93,
+      "service": {
+        "accepted": true,
+        "value": 1988,
+        "tag": 256
+      },
+      "driver": {
+        "value": 483,
+        "previous": 483,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2656,
+        "measured": 814,
+        "error": -331,
+        "proportional": -678,
+        "correction": -2656,
+        "reset": false,
+        "accumulator": -2656000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5075,
+      "published": 5075,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5075,
+        "scaled": 1982,
+        "slot0": 5075,
+        "slot1": 32767
+      },
+      "call": 94,
+      "service": {
+        "accepted": true,
+        "value": 1982,
+        "tag": 256
+      },
+      "driver": {
+        "value": 482,
+        "previous": 483,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2651,
+        "measured": 814,
+        "error": -331,
+        "proportional": -678,
+        "correction": -2651,
+        "reset": false,
+        "accumulator": -2651000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5059,
+      "published": 5059,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5059,
+        "scaled": 1976,
+        "slot0": 5059,
+        "slot1": 32767
+      },
+      "call": 95,
+      "service": {
+        "accepted": true,
+        "value": 1976,
+        "tag": 256
+      },
+      "driver": {
+        "value": 482,
+        "previous": 482,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2651,
+        "measured": 814,
+        "error": -332,
+        "proportional": -680,
+        "correction": -2651,
+        "reset": false,
+        "accumulator": -2651000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5043,
+      "published": 5043,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5043,
+        "scaled": 1969,
+        "slot0": 5043,
+        "slot1": 32767
+      },
+      "call": 96,
+      "service": {
+        "accepted": true,
+        "value": 1969,
+        "tag": 256
+      },
+      "driver": {
+        "value": 481,
+        "previous": 482,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2645,
+        "measured": 814,
+        "error": -332,
+        "proportional": -680,
+        "correction": -2645,
+        "reset": false,
+        "accumulator": -2645000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5027,
+      "published": 5027,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5027,
+        "scaled": 1963,
+        "slot0": 5027,
+        "slot1": 32767
+      },
+      "call": 97,
+      "service": {
+        "accepted": true,
+        "value": 1963,
+        "tag": 256
+      },
+      "driver": {
+        "value": 481,
+        "previous": 481,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2645,
+        "measured": 814,
+        "error": -333,
+        "proportional": -682,
+        "correction": -2645,
+        "reset": false,
+        "accumulator": -2645000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 5011,
+      "published": 5011,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 5011,
+        "scaled": 1957,
+        "slot0": 5011,
+        "slot1": 32767
+      },
+      "call": 98,
+      "service": {
+        "accepted": true,
+        "value": 1957,
+        "tag": 256
+      },
+      "driver": {
+        "value": 480,
+        "previous": 481,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2640,
+        "measured": 814,
+        "error": -333,
+        "proportional": -682,
+        "correction": -2640,
+        "reset": false,
+        "accumulator": -2640000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4995,
+      "published": 4995,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4995,
+        "scaled": 1951,
+        "slot0": 4995,
+        "slot1": 32767
+      },
+      "call": 99,
+      "service": {
+        "accepted": true,
+        "value": 1951,
+        "tag": 256
+      },
+      "driver": {
+        "value": 480,
+        "previous": 480,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2640,
+        "measured": 814,
+        "error": -334,
+        "proportional": -684,
+        "correction": -2640,
+        "reset": false,
+        "accumulator": -2640000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4979,
+      "published": 4979,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4979,
+        "scaled": 1944,
+        "slot0": 4979,
+        "slot1": 32767
+      },
+      "call": 100,
+      "service": {
+        "accepted": true,
+        "value": 1944,
+        "tag": 256
+      },
+      "driver": {
+        "value": 479,
+        "previous": 480,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2634,
+        "measured": 814,
+        "error": -334,
+        "proportional": -684,
+        "correction": -2634,
+        "reset": false,
+        "accumulator": -2634000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4963,
+      "published": 4963,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4963,
+        "scaled": 1938,
+        "slot0": 4963,
+        "slot1": 32767
+      },
+      "call": 101,
+      "service": {
+        "accepted": true,
+        "value": 1938,
+        "tag": 256
+      },
+      "driver": {
+        "value": 478,
+        "previous": 479,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2629,
+        "measured": 814,
+        "error": -335,
+        "proportional": -686,
+        "correction": -2629,
+        "reset": false,
+        "accumulator": -2629000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4947,
+      "published": 4947,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4947,
+        "scaled": 1932,
+        "slot0": 4947,
+        "slot1": 32767
+      },
+      "call": 102,
+      "service": {
+        "accepted": true,
+        "value": 1932,
+        "tag": 256
+      },
+      "driver": {
+        "value": 478,
+        "previous": 478,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2629,
+        "measured": 814,
+        "error": -336,
+        "proportional": -688,
+        "correction": -2629,
+        "reset": false,
+        "accumulator": -2629000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4931,
+      "published": 4931,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4931,
+        "scaled": 1926,
+        "slot0": 4931,
+        "slot1": 32767
+      },
+      "call": 103,
+      "service": {
+        "accepted": true,
+        "value": 1926,
+        "tag": 256
+      },
+      "driver": {
+        "value": 477,
+        "previous": 478,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2623,
+        "measured": 814,
+        "error": -336,
+        "proportional": -688,
+        "correction": -2623,
+        "reset": false,
+        "accumulator": -2623000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4915,
+      "published": 4915,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4915,
+        "scaled": 1919,
+        "slot0": 4915,
+        "slot1": 32767
+      },
+      "call": 104,
+      "service": {
+        "accepted": true,
+        "value": 1919,
+        "tag": 256
+      },
+      "driver": {
+        "value": 476,
+        "previous": 477,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2618,
+        "measured": 814,
+        "error": -337,
+        "proportional": -690,
+        "correction": -2618,
+        "reset": false,
+        "accumulator": -2618000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6231,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1559,
+        "bonus": 0
+      },
+      "applied": 6623,
+      "published": 6623,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6623,
+        "scaled": 2587,
+        "slot0": 6623,
+        "slot1": 32767
+      },
+      "call": 105,
+      "service": {
+        "accepted": true,
+        "value": 2587,
+        "tag": 256
+      },
+      "driver": {
+        "value": 536,
+        "previous": 476,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2948,
+        "measured": 814,
+        "error": -338,
+        "proportional": -692,
+        "correction": -2766,
+        "reset": false,
+        "accumulator": -2766720,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6245,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1573,
+        "bonus": 0
+      },
+      "applied": 6637,
+      "published": 6637,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6637,
+        "scaled": 2592,
+        "slot0": 6637,
+        "slot1": 32767
+      },
+      "call": 106,
+      "service": {
+        "accepted": true,
+        "value": 2592,
+        "tag": 256
+      },
+      "driver": {
+        "value": 537,
+        "previous": 536,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2953,
+        "measured": 814,
+        "error": -278,
+        "proportional": -569,
+        "correction": -2889,
+        "reset": false,
+        "accumulator": -2889040,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6259,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1587,
+        "bonus": 0
+      },
+      "applied": 6619,
+      "published": 6619,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6619,
+        "scaled": 2585,
+        "slot0": 6619,
+        "slot1": 32767
+      },
+      "call": 107,
+      "service": {
+        "accepted": true,
+        "value": 2585,
+        "tag": 256
+      },
+      "driver": {
+        "value": 536,
+        "previous": 537,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2948,
+        "measured": 814,
+        "error": -277,
+        "proportional": -567,
+        "correction": -2948,
+        "reset": false,
+        "accumulator": -2948000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6273,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1601,
+        "bonus": 0
+      },
+      "applied": 6617,
+      "published": 6617,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6617,
+        "scaled": 2584,
+        "slot0": 6617,
+        "slot1": 32767
+      },
+      "call": 108,
+      "service": {
+        "accepted": true,
+        "value": 2584,
+        "tag": 256
+      },
+      "driver": {
+        "value": 536,
+        "previous": 536,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2948,
+        "measured": 814,
+        "error": -278,
+        "proportional": -569,
+        "correction": -2948,
+        "reset": false,
+        "accumulator": -2948000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6287,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1615,
+        "bonus": 0
+      },
+      "applied": 6615,
+      "published": 6615,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6615,
+        "scaled": 2583,
+        "slot0": 6615,
+        "slot1": 32767
+      },
+      "call": 109,
+      "service": {
+        "accepted": true,
+        "value": 2583,
+        "tag": 256
+      },
+      "driver": {
+        "value": 536,
+        "previous": 536,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2948,
+        "measured": 814,
+        "error": -278,
+        "proportional": -569,
+        "correction": -2948,
+        "reset": false,
+        "accumulator": -2948000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6301,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1629,
+        "bonus": 0
+      },
+      "applied": 6613,
+      "published": 6613,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6613,
+        "scaled": 2583,
+        "slot0": 6613,
+        "slot1": 32767
+      },
+      "call": 110,
+      "service": {
+        "accepted": true,
+        "value": 2583,
+        "tag": 256
+      },
+      "driver": {
+        "value": 536,
+        "previous": 536,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2948,
+        "measured": 814,
+        "error": -278,
+        "proportional": 0,
+        "correction": 737,
+        "reset": true,
+        "accumulator": 737000,
+        "output": 3685,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 10236
+      }
+    },
+    {
+      "base": 6315,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1643,
+        "bonus": 0
+      },
+      "applied": 6611,
+      "published": 6611,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6611,
+        "scaled": 2582,
+        "slot0": 6611,
+        "slot1": 32767
+      },
+      "call": 111,
+      "service": {
+        "accepted": true,
+        "value": 2582,
+        "tag": 256
+      },
+      "driver": {
+        "value": 536,
+        "previous": 536,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2948,
+        "measured": 814,
+        "error": -278,
+        "proportional": 0,
+        "correction": 737,
+        "reset": true,
+        "accumulator": 737000,
+        "output": 3685,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 10236
+      }
+    },
+    {
+      "base": 6329,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1657,
+        "bonus": 0
+      },
+      "applied": 6609,
+      "published": 6609,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6609,
+        "scaled": 2581,
+        "slot0": 6609,
+        "slot1": 32767
+      },
+      "call": 112,
+      "service": {
+        "accepted": true,
+        "value": 2581,
+        "tag": 256
+      },
+      "driver": {
+        "value": 536,
+        "previous": 536,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2948,
+        "measured": 814,
+        "error": -278,
+        "proportional": 0,
+        "correction": 737,
+        "reset": true,
+        "accumulator": 737000,
+        "output": 3685,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 10236
+      }
+    },
+    {
+      "base": 6343,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1671,
+        "bonus": 0
+      },
+      "applied": 6591,
+      "published": 6591,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6591,
+        "scaled": 2574,
+        "slot0": 6591,
+        "slot1": 32767
+      },
+      "call": 113,
+      "service": {
+        "accepted": true,
+        "value": 2574,
+        "tag": 256
+      },
+      "driver": {
+        "value": 535,
+        "previous": 536,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2942,
+        "measured": 814,
+        "error": -278,
+        "proportional": 0,
+        "correction": 735,
+        "reset": true,
+        "accumulator": 735000,
+        "output": 3677,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 10213
+      }
+    },
+    {
+      "base": 6357,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1685,
+        "bonus": 0
+      },
+      "applied": 6605,
+      "published": 6605,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6605,
+        "scaled": 2580,
+        "slot0": 6605,
+        "slot1": 32767
+      },
+      "call": 114,
+      "service": {
+        "accepted": true,
+        "value": 2580,
+        "tag": 256
+      },
+      "driver": {
+        "value": 536,
+        "previous": 535,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2948,
+        "measured": 814,
+        "error": -279,
+        "proportional": 0,
+        "correction": 737,
+        "reset": true,
+        "accumulator": 737000,
+        "output": 3685,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 10236
+      }
+    },
+    {
+      "base": 6371,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1699,
+        "bonus": 0
+      },
+      "applied": 6587,
+      "published": 6587,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6587,
+        "scaled": 2573,
+        "slot0": 6587,
+        "slot1": 32767
+      },
+      "call": 115,
+      "service": {
+        "accepted": true,
+        "value": 2573,
+        "tag": 256
+      },
+      "driver": {
+        "value": 535,
+        "previous": 536,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2942,
+        "measured": 814,
+        "error": -278,
+        "proportional": 0,
+        "correction": 735,
+        "reset": true,
+        "accumulator": 735000,
+        "output": 3677,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 10213
+      }
+    },
+    {
+      "base": 6385,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1713,
+        "bonus": 0
+      },
+      "applied": 6601,
+      "published": 6601,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6601,
+        "scaled": 2578,
+        "slot0": 6601,
+        "slot1": 32767
+      },
+      "call": 116,
+      "service": {
+        "accepted": true,
+        "value": 2578,
+        "tag": 256
+      },
+      "driver": {
+        "value": 535,
+        "previous": 535,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2942,
+        "measured": 814,
+        "error": -279,
+        "proportional": 0,
+        "correction": 735,
+        "reset": true,
+        "accumulator": 735000,
+        "output": 3677,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 10213
+      }
+    },
+    {
+      "base": 6399,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1727,
+        "bonus": 0
+      },
+      "applied": 6583,
+      "published": 6583,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6583,
+        "scaled": 2571,
+        "slot0": 6583,
+        "slot1": 32767
+      },
+      "call": 117,
+      "service": {
+        "accepted": true,
+        "value": 2571,
+        "tag": 256
+      },
+      "driver": {
+        "value": 535,
+        "previous": 535,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2942,
+        "measured": 814,
+        "error": -279,
+        "proportional": -571,
+        "correction": 612,
+        "reset": false,
+        "accumulator": 612240,
+        "output": 2983,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 8286
+      }
+    },
+    {
+      "base": 6413,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1741,
+        "bonus": 0
+      },
+      "applied": 6597,
+      "published": 6597,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6597,
+        "scaled": 2576,
+        "slot0": 6597,
+        "slot1": 32767
+      },
+      "call": 118,
+      "service": {
+        "accepted": true,
+        "value": 2576,
+        "tag": 256
+      },
+      "driver": {
+        "value": 535,
+        "previous": 535,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2942,
+        "measured": 814,
+        "error": -279,
+        "proportional": -571,
+        "correction": 489,
+        "reset": false,
+        "accumulator": 489480,
+        "output": 2860,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 7944
+      }
+    },
+    {
+      "base": 6427,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1755,
+        "bonus": 0
+      },
+      "applied": 6579,
+      "published": 6579,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6579,
+        "scaled": 2569,
+        "slot0": 6579,
+        "slot1": 32767
+      },
+      "call": 119,
+      "service": {
+        "accepted": true,
+        "value": 2569,
+        "tag": 256
+      },
+      "driver": {
+        "value": 534,
+        "previous": 535,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2937,
+        "measured": 814,
+        "error": -279,
+        "proportional": -571,
+        "correction": 366,
+        "reset": false,
+        "accumulator": 366720,
+        "output": 2732,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 7588
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4659,
+      "published": 4659,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4659,
+        "scaled": 1819,
+        "slot0": 4659,
+        "slot1": 32767
+      },
+      "call": 120,
+      "service": {
+        "accepted": true,
+        "value": 1819,
+        "tag": 256
+      },
+      "driver": {
+        "value": 466,
+        "previous": 534,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2563,
+        "measured": 814,
+        "error": -280,
+        "proportional": -574,
+        "correction": 243,
+        "reset": false,
+        "accumulator": 243520,
+        "output": 2232,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 6199
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4643,
+      "published": 4643,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4643,
+        "scaled": 1813,
+        "slot0": 4643,
+        "slot1": 32767
+      },
+      "call": 121,
+      "service": {
+        "accepted": true,
+        "value": 1813,
+        "tag": 256
+      },
+      "driver": {
+        "value": 466,
+        "previous": 466,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2563,
+        "measured": 814,
+        "error": -348,
+        "proportional": -713,
+        "correction": 90,
+        "reset": false,
+        "accumulator": 90400,
+        "output": 1940,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 5388
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4627,
+      "published": 4627,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4627,
+        "scaled": 1807,
+        "slot0": 4627,
+        "slot1": 32767
+      },
+      "call": 122,
+      "service": {
+        "accepted": true,
+        "value": 1807,
+        "tag": 256
+      },
+      "driver": {
+        "value": 465,
+        "previous": 466,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2557,
+        "measured": 814,
+        "error": -348,
+        "proportional": -713,
+        "correction": -62,
+        "reset": false,
+        "accumulator": -62720,
+        "output": 1782,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 4949
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4611,
+      "published": 4611,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4611,
+        "scaled": 1801,
+        "slot0": 4611,
+        "slot1": 32767
+      },
+      "call": 123,
+      "service": {
+        "accepted": true,
+        "value": 1801,
+        "tag": 256
+      },
+      "driver": {
+        "value": 465,
+        "previous": 465,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2557,
+        "measured": 814,
+        "error": -349,
+        "proportional": -715,
+        "correction": -216,
+        "reset": false,
+        "accumulator": -216280,
+        "output": 1626,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 4516
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4595,
+      "published": 4595,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4595,
+        "scaled": 1794,
+        "slot0": 4595,
+        "slot1": 32767
+      },
+      "call": 124,
+      "service": {
+        "accepted": true,
+        "value": 1794,
+        "tag": 256
+      },
+      "driver": {
+        "value": 464,
+        "previous": 465,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2552,
+        "measured": 814,
+        "error": -349,
+        "proportional": -715,
+        "correction": -369,
+        "reset": false,
+        "accumulator": -369840,
+        "output": 1468,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 4077
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4579,
+      "published": 4579,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4579,
+        "scaled": 1788,
+        "slot0": 4579,
+        "slot1": 32767
+      },
+      "call": 125,
+      "service": {
+        "accepted": true,
+        "value": 1788,
+        "tag": 256
+      },
+      "driver": {
+        "value": 463,
+        "previous": 464,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2546,
+        "measured": 814,
+        "error": -350,
+        "proportional": -717,
+        "correction": -523,
+        "reset": false,
+        "accumulator": -523840,
+        "output": 1306,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 3627
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4563,
+      "published": 4563,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4563,
+        "scaled": 1782,
+        "slot0": 4563,
+        "slot1": 32767
+      },
+      "call": 126,
+      "service": {
+        "accepted": true,
+        "value": 1782,
+        "tag": 256
+      },
+      "driver": {
+        "value": 463,
+        "previous": 463,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2546,
+        "measured": 814,
+        "error": -351,
+        "proportional": -719,
+        "correction": -678,
+        "reset": false,
+        "accumulator": -678280,
+        "output": 1149,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 3191
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4547,
+      "published": 4547,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4547,
+        "scaled": 1776,
+        "slot0": 4547,
+        "slot1": 32767
+      },
+      "call": 127,
+      "service": {
+        "accepted": true,
+        "value": 1776,
+        "tag": 256
+      },
+      "driver": {
+        "value": 462,
+        "previous": 463,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2541,
+        "measured": 814,
+        "error": -351,
+        "proportional": -719,
+        "correction": -832,
+        "reset": false,
+        "accumulator": -832720,
+        "output": 990,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 2749
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4531,
+      "published": 4531,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4531,
+        "scaled": 1769,
+        "slot0": 4531,
+        "slot1": 32767
+      },
+      "call": 128,
+      "service": {
+        "accepted": true,
+        "value": 1769,
+        "tag": 256
+      },
+      "driver": {
+        "value": 461,
+        "previous": 462,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2535,
+        "measured": 814,
+        "error": -352,
+        "proportional": -721,
+        "correction": -987,
+        "reset": false,
+        "accumulator": -987600,
+        "output": 827,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 2297
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4515,
+      "published": 4515,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4515,
+        "scaled": 1763,
+        "slot0": 4515,
+        "slot1": 32767
+      },
+      "call": 129,
+      "service": {
+        "accepted": true,
+        "value": 1763,
+        "tag": 256
+      },
+      "driver": {
+        "value": 461,
+        "previous": 461,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2535,
+        "measured": 814,
+        "error": -353,
+        "proportional": -723,
+        "correction": -1142,
+        "reset": false,
+        "accumulator": -1142920,
+        "output": 670,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1861
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4499,
+      "published": 4499,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4499,
+        "scaled": 1757,
+        "slot0": 4499,
+        "slot1": 32767
+      },
+      "call": 130,
+      "service": {
+        "accepted": true,
+        "value": 1757,
+        "tag": 256
+      },
+      "driver": {
+        "value": 460,
+        "previous": 461,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2530,
+        "measured": 814,
+        "error": -353,
+        "proportional": -723,
+        "correction": -1298,
+        "reset": false,
+        "accumulator": -1298240,
+        "output": 509,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 1413
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4483,
+      "published": 4483,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4483,
+        "scaled": 1751,
+        "slot0": 4483,
+        "slot1": 32767
+      },
+      "call": 131,
+      "service": {
+        "accepted": true,
+        "value": 1751,
+        "tag": 256
+      },
+      "driver": {
+        "value": 460,
+        "previous": 460,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2530,
+        "measured": 814,
+        "error": -354,
+        "proportional": -725,
+        "correction": -1454,
+        "reset": false,
+        "accumulator": -1454000,
+        "output": 351,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 974
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4467,
+      "published": 4467,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4467,
+        "scaled": 1744,
+        "slot0": 4467,
+        "slot1": 32767
+      },
+      "call": 132,
+      "service": {
+        "accepted": true,
+        "value": 1744,
+        "tag": 256
+      },
+      "driver": {
+        "value": 459,
+        "previous": 460,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2524,
+        "measured": 814,
+        "error": -354,
+        "proportional": -725,
+        "correction": -1609,
+        "reset": false,
+        "accumulator": -1609760,
+        "output": 190,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 527
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4451,
+      "published": 4451,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4451,
+        "scaled": 1738,
+        "slot0": 4451,
+        "slot1": 32767
+      },
+      "call": 133,
+      "service": {
+        "accepted": true,
+        "value": 1738,
+        "tag": 256
+      },
+      "driver": {
+        "value": 458,
+        "previous": 459,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2519,
+        "measured": 814,
+        "error": -355,
+        "proportional": -727,
+        "correction": -1765,
+        "reset": false,
+        "accumulator": -1765960,
+        "output": 27,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 74
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4435,
+      "published": 4435,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4435,
+        "scaled": 1732,
+        "slot0": 4435,
+        "slot1": 32767
+      },
+      "call": 134,
+      "service": {
+        "accepted": true,
+        "value": 1732,
+        "tag": 256
+      },
+      "driver": {
+        "value": 458,
+        "previous": 458,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2519,
+        "measured": 814,
+        "error": -356,
+        "proportional": -729,
+        "correction": -1922,
+        "reset": false,
+        "accumulator": -1922600,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6651,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1979,
+        "bonus": 0
+      },
+      "applied": 6547,
+      "published": 6547,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6547,
+        "scaled": 2557,
+        "slot0": 6547,
+        "slot1": 32767
+      },
+      "call": 135,
+      "service": {
+        "accepted": true,
+        "value": 2557,
+        "tag": 256
+      },
+      "driver": {
+        "value": 533,
+        "previous": 458,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2931,
+        "measured": 814,
+        "error": -356,
+        "proportional": -729,
+        "correction": -2079,
+        "reset": false,
+        "accumulator": -2079240,
+        "output": 123,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 341
+      }
+    },
+    {
+      "base": 6665,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 1993,
+        "bonus": 0
+      },
+      "applied": 6561,
+      "published": 6561,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6561,
+        "scaled": 2562,
+        "slot0": 6561,
+        "slot1": 32767
+      },
+      "call": 136,
+      "service": {
+        "accepted": true,
+        "value": 2562,
+        "tag": 256
+      },
+      "driver": {
+        "value": 534,
+        "previous": 533,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2937,
+        "measured": 814,
+        "error": -281,
+        "proportional": -576,
+        "correction": -2202,
+        "reset": false,
+        "accumulator": -2202880,
+        "output": 159,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 441
+      }
+    },
+    {
+      "base": 6679,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2007,
+        "bonus": 0
+      },
+      "applied": 6543,
+      "published": 6543,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6543,
+        "scaled": 2555,
+        "slot0": 6543,
+        "slot1": 32767
+      },
+      "call": 137,
+      "service": {
+        "accepted": true,
+        "value": 2555,
+        "tag": 256
+      },
+      "driver": {
+        "value": 533,
+        "previous": 534,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2931,
+        "measured": 814,
+        "error": -280,
+        "proportional": -574,
+        "correction": -2326,
+        "reset": false,
+        "accumulator": -2326080,
+        "output": 31,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 86
+      }
+    },
+    {
+      "base": 6693,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2021,
+        "bonus": 0
+      },
+      "applied": 6557,
+      "published": 6557,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6557,
+        "scaled": 2561,
+        "slot0": 6557,
+        "slot1": 32767
+      },
+      "call": 138,
+      "service": {
+        "accepted": true,
+        "value": 2561,
+        "tag": 256
+      },
+      "driver": {
+        "value": 534,
+        "previous": 533,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2937,
+        "measured": 814,
+        "error": -281,
+        "proportional": -576,
+        "correction": -2449,
+        "reset": false,
+        "accumulator": -2449720,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6707,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2035,
+        "bonus": 0
+      },
+      "applied": 6539,
+      "published": 6539,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6539,
+        "scaled": 2554,
+        "slot0": 6539,
+        "slot1": 32767
+      },
+      "call": 139,
+      "service": {
+        "accepted": true,
+        "value": 2554,
+        "tag": 256
+      },
+      "driver": {
+        "value": 533,
+        "previous": 534,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2931,
+        "measured": 814,
+        "error": -280,
+        "proportional": -574,
+        "correction": -2572,
+        "reset": false,
+        "accumulator": -2572920,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6721,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2049,
+        "bonus": 0
+      },
+      "applied": 6553,
+      "published": 6553,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6553,
+        "scaled": 2559,
+        "slot0": 6553,
+        "slot1": 32767
+      },
+      "call": 140,
+      "service": {
+        "accepted": true,
+        "value": 2559,
+        "tag": 256
+      },
+      "driver": {
+        "value": 533,
+        "previous": 533,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2931,
+        "measured": 814,
+        "error": -281,
+        "proportional": -576,
+        "correction": -2696,
+        "reset": false,
+        "accumulator": -2696560,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6735,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2063,
+        "bonus": 0
+      },
+      "applied": 6535,
+      "published": 6535,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6535,
+        "scaled": 2552,
+        "slot0": 6535,
+        "slot1": 32767
+      },
+      "call": 141,
+      "service": {
+        "accepted": true,
+        "value": 2552,
+        "tag": 256
+      },
+      "driver": {
+        "value": 533,
+        "previous": 533,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2931,
+        "measured": 814,
+        "error": -281,
+        "proportional": -576,
+        "correction": -2820,
+        "reset": false,
+        "accumulator": -2820200,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6749,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2077,
+        "bonus": 0
+      },
+      "applied": 6549,
+      "published": 6549,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6549,
+        "scaled": 2558,
+        "slot0": 6549,
+        "slot1": 32767
+      },
+      "call": 142,
+      "service": {
+        "accepted": true,
+        "value": 2558,
+        "tag": 256
+      },
+      "driver": {
+        "value": 533,
+        "previous": 533,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2931,
+        "measured": 814,
+        "error": -281,
+        "proportional": -576,
+        "correction": -2931,
+        "reset": false,
+        "accumulator": -2931000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6763,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2091,
+        "bonus": 0
+      },
+      "applied": 6531,
+      "published": 6531,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6531,
+        "scaled": 2551,
+        "slot0": 6531,
+        "slot1": 32767
+      },
+      "call": 143,
+      "service": {
+        "accepted": true,
+        "value": 2551,
+        "tag": 256
+      },
+      "driver": {
+        "value": 533,
+        "previous": 533,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2931,
+        "measured": 814,
+        "error": -281,
+        "proportional": -576,
+        "correction": -2931,
+        "reset": false,
+        "accumulator": -2931000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6777,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2105,
+        "bonus": 0
+      },
+      "applied": 6545,
+      "published": 6545,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6545,
+        "scaled": 2556,
+        "slot0": 6545,
+        "slot1": 32767
+      },
+      "call": 144,
+      "service": {
+        "accepted": true,
+        "value": 2556,
+        "tag": 256
+      },
+      "driver": {
+        "value": 533,
+        "previous": 533,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2931,
+        "measured": 814,
+        "error": -281,
+        "proportional": -576,
+        "correction": -2931,
+        "reset": false,
+        "accumulator": -2931000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6791,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2119,
+        "bonus": 0
+      },
+      "applied": 6527,
+      "published": 6527,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6527,
+        "scaled": 2549,
+        "slot0": 6527,
+        "slot1": 32767
+      },
+      "call": 145,
+      "service": {
+        "accepted": true,
+        "value": 2549,
+        "tag": 256
+      },
+      "driver": {
+        "value": 532,
+        "previous": 533,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2926,
+        "measured": 814,
+        "error": -281,
+        "proportional": -576,
+        "correction": -2926,
+        "reset": false,
+        "accumulator": -2926000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6805,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2133,
+        "bonus": 0
+      },
+      "applied": 6541,
+      "published": 6541,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6541,
+        "scaled": 2555,
+        "slot0": 6541,
+        "slot1": 32767
+      },
+      "call": 146,
+      "service": {
+        "accepted": true,
+        "value": 2555,
+        "tag": 256
+      },
+      "driver": {
+        "value": 533,
+        "previous": 532,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2931,
+        "measured": 814,
+        "error": -282,
+        "proportional": -578,
+        "correction": -2931,
+        "reset": false,
+        "accumulator": -2931000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6819,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2147,
+        "bonus": 0
+      },
+      "applied": 6523,
+      "published": 6523,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6523,
+        "scaled": 2548,
+        "slot0": 6523,
+        "slot1": 32767
+      },
+      "call": 147,
+      "service": {
+        "accepted": true,
+        "value": 2548,
+        "tag": 256
+      },
+      "driver": {
+        "value": 532,
+        "previous": 533,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2926,
+        "measured": 814,
+        "error": -281,
+        "proportional": -576,
+        "correction": -2926,
+        "reset": false,
+        "accumulator": -2926000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6833,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2161,
+        "bonus": 0
+      },
+      "applied": 6537,
+      "published": 6537,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6537,
+        "scaled": 2553,
+        "slot0": 6537,
+        "slot1": 32767
+      },
+      "call": 148,
+      "service": {
+        "accepted": true,
+        "value": 2553,
+        "tag": 256
+      },
+      "driver": {
+        "value": 533,
+        "previous": 532,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2931,
+        "measured": 814,
+        "error": -282,
+        "proportional": -578,
+        "correction": -2931,
+        "reset": false,
+        "accumulator": -2931000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 6847,
+      "detail": {
+        "mode": 0,
+        "weight": 2294,
+        "bank": 0,
+        "a": 4672,
+        "delta": 2175,
+        "bonus": 0
+      },
+      "applied": 6519,
+      "published": 6519,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 6519,
+        "scaled": 2546,
+        "slot0": 6519,
+        "slot1": 32767
+      },
+      "call": 149,
+      "service": {
+        "accepted": true,
+        "value": 2546,
+        "tag": 256
+      },
+      "driver": {
+        "value": 532,
+        "previous": 533,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2926,
+        "measured": 814,
+        "error": -281,
+        "proportional": -576,
+        "correction": -2926,
+        "reset": false,
+        "accumulator": -2926000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4179,
+      "published": 4179,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4179,
+        "scaled": 1632,
+        "slot0": 4179,
+        "slot1": 32767
+      },
+      "call": 150,
+      "service": {
+        "accepted": true,
+        "value": 1632,
+        "tag": 256
+      },
+      "driver": {
+        "value": 448,
+        "previous": 532,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2464,
+        "measured": 814,
+        "error": -282,
+        "proportional": -578,
+        "correction": -2464,
+        "reset": false,
+        "accumulator": -2464000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4163,
+      "published": 4163,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4163,
+        "scaled": 1626,
+        "slot0": 4163,
+        "slot1": 32767
+      },
+      "call": 151,
+      "service": {
+        "accepted": true,
+        "value": 1626,
+        "tag": 256
+      },
+      "driver": {
+        "value": 447,
+        "previous": 448,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2458,
+        "measured": 814,
+        "error": -366,
+        "proportional": -750,
+        "correction": -2458,
+        "reset": false,
+        "accumulator": -2458000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4147,
+      "published": 4147,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4147,
+        "scaled": 1619,
+        "slot0": 4147,
+        "slot1": 32767
+      },
+      "call": 152,
+      "service": {
+        "accepted": true,
+        "value": 1619,
+        "tag": 256
+      },
+      "driver": {
+        "value": 446,
+        "previous": 447,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2453,
+        "measured": 814,
+        "error": -367,
+        "proportional": -752,
+        "correction": -2453,
+        "reset": false,
+        "accumulator": -2453000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4131,
+      "published": 4131,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4131,
+        "scaled": 1613,
+        "slot0": 4131,
+        "slot1": 32767
+      },
+      "call": 153,
+      "service": {
+        "accepted": true,
+        "value": 1613,
+        "tag": 256
+      },
+      "driver": {
+        "value": 446,
+        "previous": 446,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2453,
+        "measured": 814,
+        "error": -368,
+        "proportional": -754,
+        "correction": -2453,
+        "reset": false,
+        "accumulator": -2453000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4115,
+      "published": 4115,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4115,
+        "scaled": 1607,
+        "slot0": 4115,
+        "slot1": 32767
+      },
+      "call": 154,
+      "service": {
+        "accepted": true,
+        "value": 1607,
+        "tag": 256
+      },
+      "driver": {
+        "value": 445,
+        "previous": 446,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2447,
+        "measured": 814,
+        "error": -368,
+        "proportional": -754,
+        "correction": -2447,
+        "reset": false,
+        "accumulator": -2447000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4099,
+      "published": 4099,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4099,
+        "scaled": 1601,
+        "slot0": 4099,
+        "slot1": 32767
+      },
+      "call": 155,
+      "service": {
+        "accepted": true,
+        "value": 1601,
+        "tag": 256
+      },
+      "driver": {
+        "value": 445,
+        "previous": 445,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2447,
+        "measured": 814,
+        "error": -369,
+        "proportional": -756,
+        "correction": -2447,
+        "reset": false,
+        "accumulator": -2447000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4083,
+      "published": 4083,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4083,
+        "scaled": 1594,
+        "slot0": 4083,
+        "slot1": 32767
+      },
+      "call": 156,
+      "service": {
+        "accepted": true,
+        "value": 1594,
+        "tag": 256
+      },
+      "driver": {
+        "value": 444,
+        "previous": 445,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2442,
+        "measured": 814,
+        "error": -369,
+        "proportional": -756,
+        "correction": -2442,
+        "reset": false,
+        "accumulator": -2442000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4067,
+      "published": 4067,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4067,
+        "scaled": 1588,
+        "slot0": 4067,
+        "slot1": 32767
+      },
+      "call": 157,
+      "service": {
+        "accepted": true,
+        "value": 1588,
+        "tag": 256
+      },
+      "driver": {
+        "value": 443,
+        "previous": 444,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2436,
+        "measured": 814,
+        "error": -370,
+        "proportional": -758,
+        "correction": -2436,
+        "reset": false,
+        "accumulator": -2436000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4051,
+      "published": 4051,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4051,
+        "scaled": 1582,
+        "slot0": 4051,
+        "slot1": 32767
+      },
+      "call": 158,
+      "service": {
+        "accepted": true,
+        "value": 1582,
+        "tag": 256
+      },
+      "driver": {
+        "value": 443,
+        "previous": 443,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2436,
+        "measured": 814,
+        "error": -371,
+        "proportional": -760,
+        "correction": -2436,
+        "reset": false,
+        "accumulator": -2436000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4035,
+      "published": 4035,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4035,
+        "scaled": 1576,
+        "slot0": 4035,
+        "slot1": 32767
+      },
+      "call": 159,
+      "service": {
+        "accepted": true,
+        "value": 1576,
+        "tag": 256
+      },
+      "driver": {
+        "value": 442,
+        "previous": 443,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2431,
+        "measured": 814,
+        "error": -371,
+        "proportional": -760,
+        "correction": -2431,
+        "reset": false,
+        "accumulator": -2431000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    },
+    {
+      "base": 3200,
+      "detail": {
+        "mode": 1,
+        "ratio": 256,
+        "a": 5120,
+        "b": 3200,
+        "deduction": 0
+      },
+      "applied": 4019,
+      "published": 4019,
+      "selected_index": 4,
+      "forced": false,
+      "output": {
+        "value": 4019,
+        "scaled": 1569,
+        "slot0": 4019,
+        "slot1": 32767
+      },
+      "call": 160,
+      "service": {
+        "accepted": true,
+        "value": 1569,
+        "tag": 256
+      },
+      "driver": {
+        "value": 441,
+        "previous": 442,
+        "sticky": 1
+      },
+      "handoff": {
+        "base": 2425,
+        "measured": 814,
+        "error": -372,
+        "proportional": -762,
+        "correction": -2425,
+        "reset": false,
+        "accumulator": -2425000,
+        "output": 0,
+        "peripheral_address": "0xfffff512",
+        "peripheral_value": 0
+      }
+    }
+  ]
+}

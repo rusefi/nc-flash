@@ -1,0 +1,156 @@
+TCU readiness through native callers and application admission — 2026-10-07
+
+Result and scope
+verify_tcu_readiness_admission.py executes three retained startup-admission
+scenarios through original foreground ADC callers, CMT0 prefixes and application
+interrupt prefixes. Sessions3150 and83286 passed. Final six-access initializer assertion rerun69137
+also passed allthree traces (terminalexit0).
+The previous goal turn was progress: capture readiness and timestamp evidence
+were added and independently archived. This turn joins those producers to the
+actual application admission path. All three broader requirements remain open.
+
+Each scenario runs 150 CMT0 interrupts and36 application interrupts. Across the
+three scenarios:450 independent CMT0 wheel/whole-RAM checks,108 application ISR
+whole-RAM differentials,168 independent foreground whole-RAM checks,93 independent
+whole-RAM capture-return checks and216 command/pin whole-RAM return checks.
+Original code reaches applicationmode3 without a harness write to ready states
+or mode3. Startup is still partial: neither reset nor the complete foreground
+main loop nor physical interrupt delivery has been reproduced.
+
+Executed sequence
+The prior application peripheral fixture starts with mode8007=0, stage84F5=0,
+phase84F4=0. Original11518..11524 calls112CC then11DD8 and initializes both ADC
+readiness producers. Independent expected whole-RAM changes are checked.
+Original122D8 initializes capture readiness; original123B0 initializes CMT0.
+Original121F8 executes126AC and its children, sets applicationmode1 and tail-
+calls16A3C timer setup. Full121F8 completion is execution coverage with selected
+state and exact timer-MMIO assertions; it does not have a complete independent
+initializer semantic model. Its six timer accesses stop bit3, zeroF442, write
+compareF454=2560, then start bit3, preserving otherF401 bits.
+
+Each foreground event executes original11534..11540, calling112E6 and11DEE.
+Finite F818 completion samples[0,128] per producer, F810/F812 count600 and
+conditional F6C0 timestamps are consumed in exact order. The existing independent
+ADC A and B models check all application RAM, callee-preserved registers, stack
+and SR outsideT/Q/M. The caller's R14 is checked as11DEE on return.
+Each CMT0 event executes16D6C..16DB6 and checks the independent software wheel,
+tick, capture elapsed counter, profiling and exact finite MMIO. Prefixes stop
+before RTE, under the existing register-preservation checks.
+Each application event executes16A58..16B00, including1220A and complete126EC.
+The existing application ISR differential and529AC/185F8 independent boundary
+models are reused. At every actual122F4 entry, a separate expected RAM/config-
+uration snapshot is built with the capture model and checked at its actual
+return12712. That includes history resets and both capture-channel enables.
+No callee is stubbed, returned early or replaced with a model in the DUT.
+
+Admission ordering proved
+1220A checks84A0,84D8 and84EC before126EC. Whilemode8007=1,126EC calls122F4.
+The invocation which sets84EC=3 therefore leaves8007=1. The NEXT application
+interrupt sees all three ready states and calls126DA, promotes8007=3 and enters
+126EC. Initialization sets84F5=1;126EC's12726 path immediately changes stage2
+andphase8. Later interrupts execute1E5F6 periodic application work.
+The verifier independently asserts this call sequence, one admission per trace,
+one capture-enable event, absence of further122F4 calls once admitted, and the
+one-extra-interrupt ordering. All three traces finish inmode3 with periodic work.
+
+Explicit timeline assumptions and measured execution results
+Time variable is conditional peripheral clock cycles (Pphi), not milliseconds.
+CMT0 period20000 and applicationperiod81920 come from earlier configuration
+proofs. Foreground periods are selected test inputs, NOT established firmware
+polling periods. At ties: CMT0, application, thenforeground. Timestamp sample is
+(epoch + floor(phi/2)) modulo2^32. Epoch is external, not derived from disputed
+TCNT10A reset writes. ISR profile end samples add50 counts, without advancing
+event scheduling: service latency is not simulated. No other interrupts or
+physical pulse captures are delivered in this bounded admission test.
+
+Foreground period / timestamp epoch / observed transition phi:
+ 50000 / 7:
+  ADC A/B ready450000;captureenabled491520(application6);
+  captureready2457600(application30);mode3 at2539520(application31).
+ 50000 / 0:
+  ADC A/B ready500000;captureenabled573440(application7);
+  captureready2539520(application31);mode3 at2621440(application32).
+ 65536 / FFFFFF00 (wraps during qualification):
+  ADC A/B ready589824;captureenabled655360(application8);
+  captureready2621440(application32);mode3 at2703360(application33).
+The zero-epoch delay follows the verified zero-as-unset timestamp convention.
+Differences are properties of these explicit schedules, not measured vehicle
+boot times. Unknown reset-word behavior, TCR10 runtime value and full mainloop
+admission remain open. See tcu-timestamp-configuration.txt for the source conflict.
+
+Reuse and regression checks
+ADC B's existing independent arithmetic/state model was extracted into model(),
+and capture's existing RAM/MMIO model into model(). Existing standalone tests
+call the same helpers. capture.tick accepts optional timestamp samples while
+preserving its old defaults. No second application/interrupt pipeline was copied.
+Reruns20950/9453 passed12544 ADC-B cases/256initializers and2816 capture cases/
+256initializers. Their complete JSON outputs remain byte-identical:
+ tcu-readiness-b-verification.json
+  1bff656977274d18c389663512f92a57fd781a14bad109cbf0520d783c1fdacd
+ tcu-capture-readiness-verification.json
+  64d2c628da44438d638b4da351d6df9677e2b773e539fedaad10db34b6312427
+Previous artifact manifests retain historical hashes for the refactored source
+files; the unchanged result JSONs remain valid. No production/ROM/shared ISA
+changes, staging, commit or push. Existing mixed index must be preserved.
+
+Reproduce
+ python research/ecu-at-can/verify_tcu_readiness_admission.py
+ python research/ecu-at-can/verify_tcu_readiness_b.py
+ python research/ecu-at-can/verify_tcu_capture_readiness.py
+Python3.14.3. ROM examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Original initialization excerpts: tcu-readiness-admission-disassembly.txt;
+foreground/capture callers: tcu-readiness-callers-disassembly.txt. GNUobjdump2.42
+setup/package provenance is in tcu-pulse-input.txt. Existing hardware-source
+identities and conditional clocks are in tcu-application-clock.txt,
+tcu-capture-clock.txt andtcu-timestamp-configuration.txt.
+
+Next concrete action
+Join this original initialized admission state to the existing retained CAN,
+capture, CMT1 and diagnostic timeline without restoring an injected mode3 or
+resetting task histories after admission. Preserve individual return oracles and
+explicit foreground/timestamp assumptions; observe which initialization changes
+affect earlier request/freshness results. Full native mainloop/reset, electrical
+CAN/actuation and counter-source conflicts remain separate requirements.
+Specific integration seams inspected: probe_tcu_initialized_requests.fixture()
+currently calls retirement.full_fixture() then writes8007=3/84F5=2/84F4=0;
+probe_tcu_captured_requests.fixture() resets20658/211C4; and
+probe_tcu_qualified_receive.fixture() calls1267C thenwrites8006=3. These must
+be reconciled with original121F8/126DA readiness initialization rather than
+applied after it. Do not transplant only the three ready bytes or reset histories
+after admission. Preserve the full initialized RAM, latches and clock context.
+Native diagnostic initializer1217C/admission1218E is the next small join before
+the larger CAN/capture trajectory. Do not infer equivalence between original
+1DFF8 and retirement.full_fixture's62-group setup without checking their effects.
+Traction: executed queued task/preemption evidence remains valid; EC62 identity,
+physical IRQ admission, CAN211/21A sender/units and remote DSC actuation remain.
+Roof: factory evidence/candidate maps do not establish OEM execution; applicable
+edition/VIN reversal, numerical CAN timeout, L/R synchronization and recovery
+remain for BOTH folding and unfolding. User has no extra dumps/captures/bench
+results. CHECKPOINT owns the separate next actions and current Ghidra archive.
+
+Ghidra and final local verification
+Fournew/fourupdated annotations saved inbothprograms,1991total(865ECU/1126TCU).
+Apply86504/liveverify36712/snapshot1932/restoredverify25977 allterminalexit0;
+logschecked for bothREADBACK_OK andabsenceofERROR/Exception/incompleteexports.
+Archive11,022,614bytes SHA256
+b160692bb82a8d557701164d2bd47655b8f75b473fc984e8499ed01bd5953fd0.
+Fresh extractrestore-check/readiness-admission-20261007 hadall11projecthashes
+verifiedbefore/after readOnlyreopening. verify_restore.py --write-reportPASS:
+1028completeidenticalexports, archive/live/restored hashesandannotationrows match.
+No liveprocess orunsavedproject changes. Ghidra12.1.3PUBLIC/Java21.0.10.
+Exact tool pattern, with ABS=/home/snow/nc-flash:
+ /home/snow/.local/bin/analyzeHeadless ABS/research/ecu-at-can/ghidra/live nc-at-can
+   -process '*' -noanalysis -scriptPath ABS/research/ecu-at-can/ghidra/scripts
+   -postScript ApplyCanEvidence.java ABS/research/ecu-at-can/ghidra/annotations.tsv
+Repeat with-readOnly andVerifyCanEvidence.java instead ofApply, arguments:
+ ABS/research/ecu-at-can/ghidra/annotations.tsv ABS/research/ecu-at-can/ghidra/decompiled 300
+ python research/ecu-at-can/ghidra/snapshot.py
+Extractarchive intoaNEWemptydirectory usingtarfile.extractall(filter='data'),
+checksnapshot.json hashes, thenrepeat readOnlyVerify onthatproject withitsown
+exportsdirectory. Final command:
+ python research/ecu-at-can/ghidra/verify_restore.py
+   research/ecu-at-can/ghidra/restore-check/readiness-admission-20261007 --write-report
+Three modified/new researchscripts compile; gitdiff--checkPASS. Allnew records
+Git-eligible. Exactcurrentartifact identities: readiness-admission-artifacts.json.
+Savedlocally; no newstage/commit/push; existingADarchive.tmp indexstate preserved.

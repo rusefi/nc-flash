@@ -1,0 +1,38 @@
+{
+  "status": "initial oracle rejected",
+  "expected_enable": 16,
+  "actual_enable": 4,
+  "accesses": [
+    [
+      "read",
+      4294964968,
+      2,
+      0
+    ],
+    [
+      "write",
+      4294964968,
+      2,
+      11
+    ],
+    [
+      "read",
+      4294964968,
+      2,
+      0
+    ],
+    [
+      "read",
+      4294964970,
+      2,
+      0
+    ],
+    [
+      "write",
+      4294964970,
+      2,
+      4
+    ]
+  ],
+  "correction": "E744 ORs maskR5=4; it does not compute1<<R5. Correct expectedbitCME10B=4, notIREG=16. Originalfirmware/interpreter unchanged."
+}

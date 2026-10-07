@@ -14,7 +14,7 @@ void Control_MapSecondGatedContribution(void)
   if (cVar1 == '\x01') {
     puVar2 = PTR_Control_SecondContributionModeOneDescriptor_00059374;
   }
-  uVar3 = (*(code *)PTR_FUN_0005936c)(PTR_DAT_00059368);
+  uVar3 = (*(code *)PTR_FUN_0005936c)(PTR_Control_RawFirstAlternate_00059368);
   uVar3 = (*(code *)PTR_Lookup_FloatCurve_00059370)(uVar3,puVar2);
   *(undefined4 *)PTR_Control_SecondGatedContributionMap_00059350 = uVar3;
   return;

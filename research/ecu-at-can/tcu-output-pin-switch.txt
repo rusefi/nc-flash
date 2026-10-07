@@ -1,0 +1,121 @@
+TCU output pin selection and command arbitration — 2026-10-06
+============================================================
+Scope: ECU/automatic-transmission CAN integration, deep traction logic and
+NC roof folding AND unfolding with interruption/resume/reversal, timeout,
+synchronization and recovery remain independently incomplete. User has no
+additional remote-controller images/captures/bench data. This record closes
+local TCU output-selection and A5A0 producer questions only.
+
+Executed original firmware
+--------------------------
+verify_tcu_output_pin_switch.py uses explicit word latches, exact MMIO trace
+and full application-RAM comparison against independent models. Original
+nested141BC/1421A/1423E/5B25C helpers run; no helper return is substituted.
+
+1574C performs, in order: wordF730 |=000F; F734 &=FFAA; F738 &=FFF0.
+1576C performs, in order: wordF738 &=FFF0; F730 |=000F; F734 |=0055.
+Unrelated bits retain; F736/PBIR is untouched. Compatible Renesas definitions
+mean PB0..3 general outputs versus TO6A..D timer function. Tested word latches
+do not reproduce input-pin read semantics, reserved bits or electrical events.
+
+185F8 reads command8A18 and previous8A19. Exact command1 always executes1574C
+and sets localflag1. Command0 with previous1 executes1576C. Other combinations
+do not switch selection. Copies current command to8A19, then141BC descriptor
+5C500 writes a separate port bit using localflag (1 only if command==1).
+185E4 clears8A18/19 and writes descriptor withflag0, without selecting PWM.
+1863C writes the low argument byte to8A18, with no normalization.
+
+Descriptor5C500 is FFFFF74E 0E 00 00 00: wordaddressF74E,bit14,polarity0,
+interruptmask0. Original141BC/1421A/1423E sets bit14 when flag&1==0, clears
+whenflag&1==1; other bits preserve. Tested SR interrupt masks0/3/15 restore.
+Only this stockdescriptor is claimed; generic nonzero descriptor-mask paths
+are not established by these cases. Compatible manual maps F74E to PFDR.
+
+52994 clearsA5A0/A5A1/A5A2 and8A18.529CE selector lowbyte0 writes lowbyteR5
+toA5A1; selector1 writesA5A2; otherselectorbytes do nothing.529AC setsA5A0
+and8A18 to1 iff eitherA5A1 orA5A2 equals exactly1, otherwise0. This closes
+A5A0's immediate numerical producer, previously a fixture in output-handoff.
+The existing18A44/529EA fallback evidence remains in tcu-output-handoff.txt;
+full scheduler order between command/task/feedback is not newly established.
+
+Original1271A task tail executes529AC then185F8 and all nestedhelpers.
+The harness supplies exactly the enclosing126EC saved-PR stack frame and
+checks restored R8..R15, MACL and SR except arithmetic flags. Preceding126EC
+work and its admission/real cadence are not executed. Original bounded slices
+115AA..115BE and115D4..115E8 set source0=1, arbitrate andswitch. Their parent
+branch admission is not included. Original14912..14916 invokes147FE portsetup.
+
+147FE writes wordsF748=4000,F74A=8000,F74C=0,F74E=0. Compatible manual:
+PFIORbit14=1,PFCRHbit12=0 selects PF14 general output, initial data0. This
+supports the programmed PF14 role, not TCU connector/driver/solenoid identity.
+No physical actuation, board voltage, enable polarity or chip-ID proof.
+
+Retained transitions and edge case
+---------------------------------
+64 retained source-pair updates use original529CE, actual1271A tail and port
+setup. Pairs include0/0,1/0,1/1,0/1,2/255,1/2,2/2. Arbitration is binary and
+releases only once both sources cease to equal1. MMIO order and unrelated
+port bits are retained/compared across calls. PBIR remains the original fixture.
+Separate direct8A18 sequence0,1,2,0,1,0 confirms1->2->0 leaves PWM selection
+cleared: at final0 previous2 fails the exact1 release gate. The later1->0
+reselects it. This nonbinary sequence is a tested direct-entry edge case, NOT
+claimed reachable through normal529AC, which only emits0/1. No vehicle fault
+or safety conclusion follows without actual writer/admission/board evidence.
+
+Verification
+------------
+Initial complete verifier passed5,446 positive checks,4 expected access
+rejections and64 retainedtasktails. Enlarged final run includes32 portsetup
+and96 caller-slice checks and PASSED; final results are in the JSON/checkpoint.
+Final counts:256 switch,768 descriptor,1024 dispatch,64 initialization,
+1024 arbitration,1286 setter,1024 actualtail,32 portsetup,96 callers =5574.
+Also6 retained direct-command transitions. Full applicationRAM/MMIO/state
+comparison and preserved registers run for each relevant body. Wrong widths
+and unknownMMIO reject. Synthetic stack belowFFFF0000 excluded from RAMoracle.
+
+Commands: python research/ecu-at-can/verify_tcu_output_pin_switch.py
+          python -m py_compile research/ecu-at-can/verify_tcu_output_pin_switch.py
+Python3.14.3. TCU examples/LFG1TF000.bin unchanged SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Disassembly artifacts use GNU SH binutils2.42 and the durable disassemble.py;
+setup/commands in tcu-timer-configuration.txt. New ranges147FE..14816,
+52994..529FC,126B0..127A4,11590..11600,1F3CE..1F440 supplement prior
+1574C..1578C,185E4..18658,1421A..14280. All saved beside this record.
+
+Factory source, distinct from executed evidence
+----------------------------------------------
+sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+PyMuPDF1.28.2 selected text in tcu-output-pin-switch-manual-excerpts.txt.
+PDFzero685 table20.2 registeraddresses;693/694/696 portB direction/function;
+710 PFIOR;711/712 PFCRH PF14mode;757 table21.11 PFDR;758 read/write semantics.
+PFDR reads pin state if configured input, registervalue if generaloutput.
+The harness's arbitrary unrelated bits are software fixtures, not physical
+samples. Compatible register mapping is not actual processor identification.
+
+Next actions / independent open scopes
+-------------------------------------
+Static source1 caller at1F3CE:23E7C exact1 with9C58bit0clear writes source1=0;
+9C58bit0set writes source1=1. Fullbody not executed here. Source0 system
+branches115AA/115D4 request1, parent admission/reset/release remains open.
+Prior126EC probe failed closed at hardware1412A. A NEW bounded probe in
+probe_tcu_output_pin_task.py, with laterADCsupport, now records12 fixtures
+in tcu-output-pin-switch-task-probe.json: inactive/stage0/1 cases return;
+all8 active stage2 phases reject at19AB6 reading FFFFE400. These are execution
+coverage/fail-closed observations, NOT fulltask semantic verification. Saved
+initial fields/modes/phase and visited instructions reproduce each case.
+E400 is the already-documentedHCAN status/control pair; existing local
+verify_hcan_recovery.py supports byte/wordreads. Next compose explicitHCAN
+fixtures with the ADC/port model, retain failclosed unknown accesses, and
+build an independent fulltask oracle. Do not describe a fixture return as
+boot/scheduler/hardware proof. Original1412A evidence remains historical. Trace sourcecommand lifecycle and
+9C58 writers/admission, then integrate productionA5A0 with actual feedback
+scheduler. Pin inversion writer/absoluteclock/CPUenable/delivery/RTE remain
+open, as do queues/ack/overlap/persistence and physical integration.
+Traction next: fulltask ordering/admission/freshness and399B0 callers; factory
+DSC docs/candidateCAN211/21A mappings are not remoteDSC actuation or unitproof.
+Roof needs new applicable source/OEMreceiver/physical evidence; factory pin/
+PID/version conflicts persist. BOTH folding andunfolding interruption/resume/
+reversal,communication timeout,L/R synchronization,faultrecovery remain open.
+No staging/commit/push; saved locally. Current paired Ghidra archive/restore
+identity is authoritative in snapshot.json,restore-verification.json,CHECKPOINT.

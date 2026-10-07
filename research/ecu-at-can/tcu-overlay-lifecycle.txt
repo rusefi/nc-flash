@@ -1,0 +1,133 @@
+2026-10-06: release-overlay history production and timer coupling
+
+VERIFIED RESULT / LIMIT
+Original45BA0 now produces9B66 for the release-overlay curves. The result is
+a nonnegative, saturated lag difference of signed input history, not a biased
+32768-centered quantity. Original1106A/12386 wheel service increments815D;
+coupled45AA4 runs show first-release reset, expiry, early accepted-state loss,
+and cancellation/restart. These are controlled instruction-level traces.
+Physical units, real task timing, input/source identity and vehicle effects
+remain unproved. All ECU/AT, deep traction and roof requirements remain active.
+
+REPRODUCTION AND IDENTITIES
+  python research/ecu-at-can/verify_tcu_overlay_lifecycle.py
+Python3.14.3 standard library, assertions enabled. Original input:
+examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Saved synthetic entry44CFE snapshot150 from tcu-fault-selection-snapshots.json:
+SHA25616d58c0427de7905b52531ef943cc01b311d1aeeda511eebf33d525362bda943.
+Output tcu-overlay-lifecycle-verification.json contains identities and results.
+No production code, ROM, prior lifecycle or shared interpreter edits.
+New isolated sh_extract.py adds one instruction for this follow-up only.
+
+VALIDATION
+100 independent XTRCT cases,392 original10FAC helper cases,1125 original
+45BA0 history cases and4 additional explicit upper-saturation endpoints.
+27 coupled timer/release traces: initial primary phase0/1/15, overlay service
+every1/3/7 wheel calls, and expiry/accepted-fall/cancel-restart scenarios.
+11 retained45BA0 ->45AA4 ->45E70 curve-build calls compare every state,
+descriptor and curve byte with independent history and prior overlay models.
+Stack preservation checked. No software arithmetic helper is stubbed.
+The main run passed after two corrections below; the four additional endpoint
+cases were run separately and added to the output, and are part of main()
+for reproducibility. Unchanged long timer traces were not rerun for them.
+
+FILTER10FAC (EXECUTED)
+Interpret inputold/current as signed16; denominator=max(signed16(r6),128).
+delta=current-old; step=saturate_signed16(truncate_zero(delta*128/denominator)).
+Ifdelta!=0 andstep==0, substitute+1 or-1 according to delta sign.
+Returnold+step, low16 used by caller. Original10D0C division executes.
+45BA0 supplies ROM7730E=4 shiftedleft7, giving denominator512.
+Thus stock normally moves approximately one quarter toward the input, with
+an enforced one-unit step near it. This does not assign physical units.
+
+HISTORY45BA0 (EXECUTED)
+RAM addresses below omit FFFF prefix. Let old[0..4] be signed words9BE0..9BE8.
+1. Shiftold[0..3] into slots1..4. The old fifth sample is discarded.
+2. Newest=10FAC(old[0],signed80EA,512), stored in9BE0.
+3. Difference=max(0,old[3]-newest).
+4. Unless92C5bit2 is set ANDnewest>=signed80EA, reset all five history words
+   to current80EA and Difference=0. Equality permits retaining shifted history.
+5.9B66=min(Difference,32767).
+Original double0.5 ->integer conversion yieldszero for the lower/reset paths.
+The software arithmetic's large constants cancel in the final lowword;
+they implement saturation, not an unsigned axis bias.
+Explicit endpoint differences32766,32767,32768,65535 yield32766,32767,
+32767,32767. Random histories include signed extremes and nonmonotone samples.
+
+RETAINED HISTORY/CURVE OBSERVATIONS
+The test begins with five10000 samples and92C5bit2. Stepped measurements
+10000,8000,6000,4000,4000,4000,5000,8000,6000,4000,3000 produce axes:
+0,500,1375,2531,3398,3548,2911,0,0,500,1125.
+The ninth sample clears92C5bit2. Raising current8000 abovefiltered history
+also resets all samples. All other overlay gates/inputs remain explicit.
+Axis0 ->500 changes lower curve0 from932 to1301 and upper0 from1211 to1493
+in this fixture; the following large axes stay on the same curve plateau.
+These are original45E70 descriptors/values, not a complete selected gear or
+actuator response. Measurement inputs are supplied, not naturally acquired.
+
+TIMER815D AND RELEASE45AA4 (EXECUTED TOGETHER)
+1106A increments the byte interval8158..8188 end-exclusive, saturatingFF;
+815D belongs to this range. The existing general wheel verifier covered it.
+12386 starting mode8009=1 admits the timer wheel and changes mode to3.
+11014 selects1106A at old phases1,5,9,13 of its16-call cycle. No millisecond
+conversion follows without clock/ISR/task evidence.
+The new fixture uses the saved RAM state, executes overlay entry, then16
+original wheel calls. Saved counter37 becomes41; first release resets it to0.
+From then on815D is never injected. Every wheel update and overlay observation
+is checked against independent phase/count expectations and prior45AA4 model.
+
+For initialphase0, elapsed wheel calls measured AFTER first-release reset:
+ serviceinterval1: threshold122 atcall486, overlay expires486 withcounter122.
+ serviceinterval3: same threshold/expiry486, counter122.
+ serviceinterval7: thresholdat486, observed expiry490 withcounter123.
+Changing accepted state downward aftercall20 instead ends the overlay at
+service20 or21, withcounter5. The threshold need not be reached.
+Cancelling release for wheelcalls20..39 leaves the overlay active; the next
+release transition resets the timer again. For serviceinterval1 it expires
+at526;interval3 at531;interval7 at532. Full phase variants are in the JSON.
+This explicitly separates counter progression from service observation.
+It does not prove the real ratio between timer interrupts and application work.
+
+CORRECTIONS / NEW INSTRUCTION
+The initial history model incorrectly added32768 to the result. Its first
+reset case failed: original returned0. The corrected model includes cancellation
+of7FFF8000 and80008000 modulo2^32 after saturating software addition.
+Next execution stopped at unsupported opcode276D at5B8AA. This is XTRCT.
+Renesas SH-2E Software Manual REJ09B0316-0200,section7.2.68,printedpage167:
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+The isolated SHExtract subclass extracts middle32bits ofRm:Rn and preserves
+SR/T. Tests use concatenated bytes as an independent oracle, multiple patterns,
+same-register operands, both T values and unchanged other registers. Original
+TCU integer/software-double bodies then run normally. No hardware FPU model
+or high-level arithmetic substitution was introduced.
+
+CALLER / NEXT ACTION
+Static1EC5A calls205FA,3BADA,45BA0,285CC then28720. This caller and the full
+application schedule still require verification relative to4530C/45AA4.
+Next optional44E14/44F5A threshold adjustments and their24584 producer,
+with exact leads in tcu-optional-threshold-leads.txt; then upstream class/source
+controls and natural overlap/composites. The timer/history local gap is narrowed,
+not the entire ECU/AT objective completed.
+Traction next preceding307EC/30BA4/3174C and input/gate provenance,399B0
+scheduling; CAN211/21A sender, DSC and physical actuation remain open.
+Roof independently retains folding ANDunfolding receiver proof, interruption,
+resume/reversal, timeout, motor synchronization and fault recovery. Factory
+evidence/contradictions are in roof-fault-recovery.txt. User has no more dumps,
+captures or bench/vehicle results available; do not repeat the artifact question.
+
+DISASSEMBLY / PERSISTENCE
+tcu-overlay-lifecycle-disassembly.txt preserves45BA0,10FAC,software saturation
+helpers10DD2/10E80 and static1EC5A caller. GNU SH objdump2.42 command is in
+prior records; disassemble.py tcu dis START STOP reproduces the ranges.
+New code and results are Git-eligible. Ghidra archive/readback identity is
+in snapshot.json/restore-verification.json and the current checkpoint.
+Saved locally; no staging, commit or push. No input firmware changed.
+
+PERSISTENCE VERIFIED
+Ghidra12.1.3 PUBLIC/Java21:613 ECU/818 TCU annotations saved and read back.
+Archive10,880,417 bytes, SHA256
+51009484f1a6541fe013e9c12e2b6e22ce70879a46cc6b2cce9c0f255cba388f.
+Independent overlay-lifecycle-20261006 restore reopened both programs;
+all11project hashes and705exports(703functions+2readbacks) matched exactly.
+No pending save job. Syntax/diff checks pass; artifacts Git-eligible.

@@ -9,7 +9,7 @@ undefined * CAN_UpdateOtherReceiptFault(void)
   uint uVar1;
   undefined *puVar2;
   
-  uVar1 = (*(code *)PTR_FUN_0003487c)(PTR_DAT_00034878);
+  uVar1 = (*(code *)PTR_FUN_0003487c)(PTR_Control_FilteredModeInput_00034878);
   puVar2 = (undefined *)(uVar1 & 0xff);
   if (puVar2 == (undefined *)0x1) {
     if ((((*PTR_DAT_00034884 == '\0') || (*PTR_DAT_00034888 == '\0')) ||

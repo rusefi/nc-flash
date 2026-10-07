@@ -1,0 +1,123 @@
+TCU independent base formula and downstream output publication
+2026-10-06
+
+Objective remains complete ECU/AT CAN integration, deep traction integration,
+and NC roof folding AND unfolding with interruption, reversal, timeouts,
+synchronization and recovery. This milestone verifies original TCU numeric
+behavior and RAM publication; it does not complete any broader scope.
+
+Reproduce: python research/ecu-at-can/verify_tcu_base_publication.py
+Python3.14.3; existing SHExtract and independent interpolation/division models.
+Original examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+No stubs, ROM patches, production edits or shared interpreter changes.
+Results: tcu-base-publication-verification.json; disassembly artifacts named
+ tcu-base-arithmetic-disassembly.txt (5B5CE,5BBEC,10D0C),
+ tcu-base-gates-disassembly.txt (31720),
+ tcu-publication-consumer-disassembly.txt (1F2AA),
+ tcu-publication-reducer-disassembly.txt (30686),
+ tcu-publication-output-disassembly.txt (53070).
+Earlier tcu-class-base[-inputs]-disassembly.txt supplies3AC70/3AF08.
+
+Independent3AC70 model
+---------------------
+Let x=s16(80EE), z=s16(993E). Lookup denotes the independently modeled
+stock byte grid1078A (two-stage interpolation, truncation towardzero),
+Curve denotes byte curve10764. Lookup axes use their low unsigned16bits.
+Both branches retain all application RAM; only stack/register work changes.
+
+If988A exactly1:
+ cap=min(s16(993C),1535).
+ divisor=s16(1536-cap), explicitly wrapping to signed16.
+ ratio=clamp(saturating_signed_word_divide((z-cap)*256,divisor),0,256).
+ y=max(0,s16(92E4)); A=Lookup(71B8C,y,x)>>2;
+ B=Lookup(71BB8,y,x)>>2.
+ C=Lookup(71BAB,x,2*s16(80FE))>>2 only if original31720 pending predicate;
+ otherwise C=0.
+ Return A-(((A-B)*ratio)>>8)-C, with arithmetic rightshift.
+Original3AF08 also copies92F6 into its second local output.
+The pending predicate is independently modeled by existing pending_model;
+new cases cover inactive/active dispatch and head phases0..3, count0. Earlier
+10336-case ring/ack verification remains tcu-transition-classification.txt.
+
+Otherwise:
+ weight=2294 if s32(9940)>=0, else655 (stock77244/77246).
+ bank=0 if92D1bit2 set OR(u16(92EE)>>7)<9, otherwise1.
+ A=Curve(71BD7+13*bank,x)>>2.
+ delta=trunc_toward_zero(s16(z+128)*weight*20/65536).
+ bonus=Lookup(71BF1,x,s16(92F6))>>2 if92D1bit3 set, else0.
+ Return max(0,A+delta+bonus).
+Stock77242=128,77248=0,7724A=9;77240=1536.
+
+The apparent +/-0.5 paths are software conversions of a constant, not
+rounding the adjacent integer!3AC70 setsr11=1; each reached5BBEC sees double
++0.5 onstack and converts it to integer0.3AEE0 likewise returns0 for this
+constant. This was verified against instructions and complete execution;
+do not infer floating-point adjustment from decompiler variable names.
+
+Failed model and correction
+---------------------------
+First independent model failed: mode1,z=-1536,cap input=-32768,pendingfalse,
+80EE=9913,80FE=10785,92E4=36146 yielded original5120 versus model3373.
+The model had used mathematical divisor34304, producingratio233.10D0C
+instruction10D0E sign-extends its denominator WORD;34304 becomes-31232,
+quotient=-256,ratio0. A=5120,B=3200 then produces5120. Corrected reference
+casts divisor to signed16. Expanded cases aroundcap=-31233/-31232/-31231
+(the denominator sign transition) and reran the complete suite. No firmware
+or interpreter change. The new reference never imports an observed base
+return, unlike the explicit limitation in earlier application tests.
+
+1F2AA downstream consumer
+------------------------
+Stock ROM5CCE4..5CCE5={1,0}: slot9108 remains; slot910A is ALWAYS overwritten
+with7FFF before selection, even if supplied a different value.
+Generic30686 selects the LAST word !=7FFF, sign-extending it; default0 here.
+If9C58bit0 set, selection is bypassed andvalue0; otherwise stockslot0 supplies
+value unless it is7FFF. Clamp[0,15232], storeword8100, scale(value*100)>>8.
+53070(index1,scaled) writesA5FA first8000, thenA602=scaled, thenA5FA=0107.
+80AC also stores scaled. All application RAM effects compared withreference.
+This establishes the staged output-record writes, NOT concurrency atomicity,
+CAN transmission, physical signal units or actuator control.
+Generic reducer tests also cover both slots nonsentinel, reversed magnitude,
+negativewords anddefault retention; it is neither min nor max selection.
+
+Integrated evidence
+-------------------
+Independentbase + earlierindependent dynamic/lower models predicts complete
+36704 output/storage; original39C90 allocation-list selection thenpublishes
+9108; original1F2AA consumes it through53070.320random chains and160retained
+conditional adjustment chains assert allapplicationRAM. Retained trace
+includes9C58 inhibit/recovery andpending-state windows. Direct36D1A updates
+remain CONDITIONAL: stock369A4 admission is impossible as proved separately.
+20 original1EC10..1EC16 call slices independently match completeconsumer
+RAM effects; enclosing task andfrequency remain unexecuted/unproved.
+No output fixtures replace the producer's computed value in integratedchains.
+
+Next evidence
+-------------
+530C8 is the output-record service lead, literalcaller12826/pool12874.
+9940 candidate readers/writers3BAB0/3BDE8/3C284 need disassembly and execution;
+refs tool reports literal-load candidates, not writes or complete xrefs.
+Saved tcu-base-publication-next-leads.txt. Trace sourcewriters993C/993E,
+92E4/92EE/92F6 and actualcaller allocation/order. Fullqueueacks/overlap,
+persistence,cadence andhardware/CANconnection remainopen.
+Traction next: ADCboard identity/actualcaller order, raw6Dxx/8F30,399B0 and
+remoteDSC/CAN211/21A sender/units/actuation evidence. Roof next: applicable
+2009technical/wiring sources0916-a/b,09-02F/G andOEMreceiver; bothdirections,
+reversal/timeout/synchronization/recovery stayopen. User has no extraartifacts.
+
+VERIFICATION RESULT
+254 gridhelper cases,26 curvehelper cases,1640 completebase calls,
+108 generic reducer cases,192 publication cases,320 integratedchains,
+20 originalconsumer-call slices and160 retainedcalls pass. py_compile passes.
+Firstcorrected run passed1400basecases; finalrun adds240 denominator-boundary
+cases andcurve/call-slice checks, thenreruns every priorcase. JSON isfinalrun.
+
+LOCAL SAVE / INDEPENDENT RESTORE
+BothGhidraprogramssaved;1616annotations(712ECU/904TCU),800byte-identicalexports,
+11matchingprojecthashes before/afterreadonlyrestore. Archive10,923,349bytes,
+SHA256 18e3171cb362cd66a7e6c92fa2dd0f0ec94ebfd73bff83885c1924028cf9f634.
+Manifests snapshot.json/restore-verification.json; paired.gpr/.rep preserved.
+No errors,incompletedecompiles,locks orpendingjob. Nine newevidenceartifacts
+Git-eligible; finalverifier,py_compile andgitdiff--check pass.
+Savedlocally; no staging,commit,push,productioncodeorROMchanges.

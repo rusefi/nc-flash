@@ -1,0 +1,90 @@
+ECU activity timer admission and independent hold —2026-10-06
+
+Full objective: ECU/automatic-transmission CAN integration; deeptraction
+logic/integration; NCroof folding ANDunfolding withinterruption/resume/
+reversal,timeout,L/Rsynchronization andfaultrecovery. All remainincomplete.
+User has no extra DSC/roof firmware,captures orbenchresults. No staging/
+commit/push. Prior goalturn madeprogress: activity-hold logic/timer traced.
+
+Reproduce (repositoryroot,Python3.14.3):
+python research/ecu-at-can/verify_control_activity_conditions.py
+python research/ecu-at-can/verify_control_conditions_retained.py
+Original ECU SHA2567604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Disassembly incontrol-activity-hold-leads.txt plusnewconditions-disassembly.
+No newISA/peripheralmodels orROM changes; finitefloat scopeonly.
+
+39,184 directchecks PASS:1296thresholds,8192admission,1024statusreader,
+28672secondhold. FullapplicationRAM/nonvolatileGPR/stack/GBR/mask comparisons;
+originalhelpers execute, includingstatusqueryorder/shortcircuit checks.
+CORRECTION:6F2C8 does NOT directlywrite8FD8; itpublishes8FE0/8FDF. Separate
+6F34C combines these into8FD8. Previouscheckpointlead conflated adjacent
+routines; originalinstruction boundaries now separated.
+
+Executed6F2C8: plainfloatgetter154BC reads6D40 and6D20; itdoesnotvalidate
+protectedfloatstorage. 6D40->8FE0,6D20->8FDF. Bothstockhighthresholds
+E0870/E0868=-777, widthsE0874/E086C=5. Sample>=-777 sets1;sample<-782
+clears0;[-782,-777) retainsoldbyte,includingnonbinary2/255. Tests include
+adjacentbinary32 values aroundbothboundaries,zero andlargefinitevalues.
+NoNaN/infinity/denormal orphysicalunitsclaim; -777maybesentinelcalibration
+but that semanticinterpretation isNOT proven.
+
+Executed6F34C:8FD8=1 iff735Abit7set,8FE0==1,8FDF==1,9125==1 andevery
+9037C(index,mode0) returns0 forindices2F,30,2D,2E inthatorder. Reader
+9037Cmode0 testsbyte9935+index ==C0,returnsboolean, noRAMwrites. FirstC0
+shortcircuitsremainingqueries. OtherstatusesincludingC1and70 doNOTblock
+thismode0query. StockE0861=FF bypassesadditionalindices1F,20,2A,2B; tested
+all256C0/0combinationsoftheseeightrecords. Calibrationalternate0 branch
+notexecuted/claimed; no inferredDTC orphysicalfaultmeaning.
+
+Executed74ED2 independenthold:
+- If735Abit7set,incrementword9158saturating65535;otherwiseholdcounter.
+- If915Eexact1,protected2444=0 (00FF),915E=0. ThisdoesNOTreset9158.
+- Else ifbit7set andupdated9158>=stockE0CBE=1,protected2444=1 (01FE).
+-915C=bit7set ANDupdated9158<sat(stock1+E0CC0=2)=3. Thusenabledupdated
+counts1/2assert;3clears. Resetrequestdoesnotindependentlyinhibit915C.
+Inactive modeclears915C butretainscounter/2444unlessresetrequest. Tests
+coverallmodebytes,reset0/1/2/255,counters0..4/65534/65535 andvalid/invalid
+old2444pairs.1529C executesoriginalpairwrites. No elapsedtimeassigned.
+
+Retainedtest PASSES:40original2BCE6event2calls withsamePFDRhigh10/
+low15/high15 fixture,originalCADEtwicepertransition. NewfullRAMoracles at
+threefunctionreturns pluspriorhold/timer/mode/edgeoracles. Itassertssamecall
+producerfreshness for74ED2->74D62,6F2C8->6F34C,6F34C->6F422. All40outercallsreturn,with64fullRAMboundaries (24new+40prior) and24
+samecallfreshnesschecks. Newentrycounts8each. No missingcallee stubs.
+Orderis74ED2 early,thenmode735Aupdate,then6F2C8/6F34C/later6F422.
+Atoutercall15,74ED2stillseesoldmode40 (915C0/count0) whilelateradmission
+seesnewmode80/enables8FD8. Atcall25,74ED2seesold80 (count2/915C1),later
+admissionseesnew40/disables8FD8 andtimerreloads640. Atcall30 independent
+hold clears915C withoutclearing9158. Thisexplainsonecontrol-call offset;
+not an elapsed-time claim.9125 becomes1 bycall10; itsproducerremainsnext. No boot/schedulerrate/plant.
+
+Next: inspectretainedresult, determinewhetheroldornew735A feedsindependent
+hold versusadmission, trace9125/counterreset inputs ifrequiredforactivity
+completion. CAN211/21A sender/units/remoteDSC/physicalactuation remainopen.
+TCUoperationalqueue/ack/overlap/provenance/cadence/persistence/board remain
+separate. Bothroofdirections interruption/reversal/timeout/LRsync/recovery
+andfactoryconflicts stillneednewapplicablesource/OEMreceiver/physicalproof.
+No newuserartifact available; do notrepeat exhaustedlistings.
+
+EightGhidraannotations saved/readbackverified. Independentarchiveextraction/
+read-onlyreopen confirms1894annotations (819ECU/1075TCU),951identicalexports
+andall11projecthashesbefore/after. Archive10989394bytes,SHA256
+e26f2328789788285da0018748566d6daa1b287957b301d92b8603f988161f10.
+Commands/identity:ghidra/README.txt,snapshot.json,restore-verification.json.
+Pythoncompilation,Git-eligibility andgit diff --check pass. No production,
+sharedISA,ROM,index changes. Allsavedlocally;notstaged/committed/pushed.
+ExistingmixedindexincludingADarchive.tmp preserved.
+Nextoriginal9125 writer at7458E (alignedliteral746BC;6F402 isreader).
+Counter9158 onlyhasdirectliteralusers in74ED2; that doesnotproveabsenceof
+indirectinitialization/reset. Traceactualproducer/initializationasneeded,
+withoutforcingstateflags orcountdowncompletion.
+
+Staticfollowup:9125 writer7459C/7459E isinsideoriginalflag-bankroutine
+744C6,whichcomparesstockROMbyteE0CCD(0) andwrites1 forzero,0 fornonzero.
+Thusitappears tobe a calibration-enableflag, nota sampled externalinput;
+fullroutine/callerexecution stillneeded. Disassembly/refs saved in
+control-activity-conditions-leads.txt. 9158 mayhaveindirectreset/initusers;
+absenceofadditionalalignedliteralusers isnot absenceproof.
+Annotationappend initially rejectedECU915C becauseTCU alreadyuses same
+RAMaddress. NoTSVwrite occurred onthatfailedguard; theguardwascorrectedto
+keyby(program,address), preservingTCUSparkRequest_ValueRecords.

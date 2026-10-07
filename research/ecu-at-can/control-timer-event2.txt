@@ -1,0 +1,156 @@
+ECU timer-driven acquisition and event1/event2 admission — 2026-10-07
+
+Objective: ECU/AT integration, deeptraction, roof foldingANDunfolding including
+interruption/reversal/timeout/synchronization/recovery. Allremainincomplete.
+No extraDSC/roof dumps/captures/bench results; no stage/commit/push authorization.
+Previousgoalturn andcurrentturn madeverifiedprogress, notblocked.
+
+OriginalECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Python3.14.3, existinglocalSH/task/RTE models; no ROM/sharedISA/productionedit.
+Reproduce:
+ python research/ecu-at-can/verify_control_timer_queue2.py
+ python research/ecu-at-can/probe_control_timer_queue2.py
+ python research/ecu-at-can/verify_control_cmt1_configuration.py
+ python research/ecu-at-can/verify_control_timer10_enable.py
+ python research/ecu-at-can/verify_control_sci4_exchange.py
+ python research/ecu-at-can/verify_control_timer_event_admission.py
+ python research/ecu-at-can/probe_control_timer_event2.py
+ python research/ecu-at-can/verify_control_timer_event2.py
+ python research/ecu-at-can/probe_control_timer_event2.py --cycles 600 --filename control-timer-event2-probe.json
+
+Timer/admission executed proof
+3584 cases PASS:counter51E0 all0..1023 withdivider0/4/255, pluscounter65534/
+65535 withall256dividers. OriginalF28C readswordF718, clearsbit80, always
+calls1062E evenifbit80 absent in suppliedsample (notan interruptadmissiongate).
+1062E callsarray1138C index0=FA68 ->35E0(task7) eachinvocation. Word51E0
+incrementsmod65536; onoddnewword, binarywheel usesfirstsetbit of(newword>>1)
+withinlow9bits, mapping11414 [1,2,4,5,6,7,8,9,10]. Matching taskindices
+8,9,10..16. Byte51E2 incrementsmod256; newvalue>=5 resets0 andtailsarray
+index13=FBE8, otherwise retained. Byte255 wraps0 withoutFBE8.
+6899actualcallbackcalls/1526FBE8 requests checked; exactcounter/MMIO/callback
+arguments/order,taskactivationarguments,savedregisters/GBR/SRmask verified.
+Alloriginalcalleesexecute; no callbackstubs. Thisisindependentselection/counter
+proof, notanindependentwholeRAMoracle forallnestedqueue/schedulerbodies.
+FBE8->DAE8 bank1/index10(row11344 selector2/zeroargs/targetE5FC) ->F5A0
+queue2/task3/DC2C. Afterdrain E5FC calls215C6 ->queue3/task4/DC80 ->2BCE6.
+
+Newperipheral boundaries needed byactualscheduledtasks
+Firstprobe stopped atcycle2 (two drainedticks) at7D1A readF6E8; saved as
+control-timer-event2-f6e8-limit.json. Task8 executes7D0C firstenablepath.
+BoundedTimer10 fixture: F6E8TSR10 low4flagsclearonlyonzeroafterread, F6EA
+TIER10 low5bitslatch. Noarrivingevents orinterruptdelivery.544registercases,
+5rejectedwrites and960original7D0C wholeapplicationRAM cases PASS. If414C=0,
+readTSR/write0B/read, original80D4 updates414B/OCR10B/TCNT10B, E744 ORs
+mask4 intoTIER10, then414C=1. Existingnonzero414C preservesRAM/peripherals.
+Initialoracle incorrectlyexpected1<<4; actualE744 usesR5as-mask4 (CME10B),
+notbitindex/IREG. Failure/correction incontrol-timer10-enable-oracle-limit.json;
+ROM/interpreter unchanged. Manual table11.3/PDF259, section11.2.26/PDF398..401.
+
+Nextprobe stoppedcycle4 (fourdrainedticks) atBC30 writeF020; savedf020-limit.
+SCI4, notSCI2: manualtable15.2/PDF509 identifiesF020..F026. F75C subsequently
+stopped atE74C; savedf75c-limit. ItisPortL invertPLIR, notdataregister;
+manualtable21.2/PDF787 andbitlayoutPDF1110, onlybits9/8/7 used (mask0380).
+Serial4 fixture acceptsbyteconfig/TDRlatches, explicitconstantSSR C0, finite
+RDRsamples (4096zeros forretainedrun); SSRwritesloggedonly, nohardwarestate
+transition/peer emulation. SDCRfixedF2/DIRbit3; PLIRwordmask0380 fixture.
+240originalBC00 two-byteexchange wholeRAM cases PASS withvaryingRX/TX/SCR/
+PFDR/PLIR; exact25SCIaccesses,8portaccesses, signed16-bitreturn, savedregisters/
+GBR/SRmask, unchangedapplicationRAM.5unsupported/exhaustedaccessrejections.
+Thisclosesboundedexecution only, notSCIpeeridentity/replies/physicalpins.
+
+Primarysourcealreadyinrepository:
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+sources/renesas-sh7058-hardware-rej09b0046-0300h.pdf (Rev3.0Sep2004),SHA256
+9c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+Newrelevantpagesexcerpted incontrol-timer10-manual-excerpts.txt and
+control-sci4-manual-excerpts.txt; doesnotidentifyECUboard'sexternaldevices.
+
+Retainednativequeuedprefix10 PASS
+Original10022/CA94/1619A,38C4/3F40 initialize fixture. EveryexplicitCMT1
+sample executesF28C/1062E, then3B8A drainsallselectedtasks toidle3D0C.
+No directtask7enqueue or event2 injection. AlltaskstacksFFFED000 andmaskF0
+areexplicit; contextstack/maskwrites remainfixtures, notfull3DD8/resetproof.
+Task7acquisition eachtick, event1 atnewtick3mod4, event2 attick0mod5.
+First10:10acquisition,2event1/2event2,11other959F2callbacks;15actualqueue3
+F6A0wholeRAM returns,6activity/2qualificationobservations,0decoder39926.
+FourSCI4TX/RXbytes. Allqueues/pendingevent2 drain; task3/4/7 availability2.
+Full600 completed (session26572 exit0); posthoc verifier PASS.600acquisition,
+150event1/120event2 callbacks,25other959F2/3other95AFC;298actualqueue3
+consumerwholeRAM returns,6decoder/121activity/26qualification observations.
+300SCI4TX/RXbytes. All600drains/passiveavailability checks PASS, exactinitial10.
+All120 event2 monitoredfields equal priorone-to-one trace; thiscomparison does
+notcoverallRAM, physicaltiming or othercontrollers. ADC28low beforecycle300,
+500<<6after; constantSCIresponses andschedulercontexts remainexplicitfixtures.
+
+ExecutedCMT1configuration andconditionalcadence
+verify_control_cmt1_configuration.py:512originalroutine cases/4rejectedMMIO
+accesses PASS. WholeapplicationRAM, savedGPR8..15/GBR/SRF0 unchanged.
+105FC: F710=0(stopboth),readF718,writeF718=C0,F71C=2499,F71A=0,F710=2.
+1061A: F710=2,F718=C0,F71C=2499, no counterreset. FinitewordMMIO logs only;
+writingCMF=1 doesnotsethardwareflag. No simulatedtimer evolution/IRQadmission.
+CompatibleSH7058 manual PDF495/497..501: CMIE1/CKS00 meansPphi/8;
+2499+1 counts =>20000peripheralclocks perCMT1,100000perfive-call event2request.
+AbsolutePphi frequency, physicalchip, realinterruptdelivery stillunproved.
+Staticalignedreferences105FC poolDE64/loadDD12;1061A poolE1B0/loadE048
+(backgroundE030); parentcontexts notexecutedbythiscomponentproof.
+Exactinstructions: control-timer-event2-peripherals-disassembly.txt.
+Primarysourceexcerpts: control-cmt1-manual-excerpts.txt; PDF/hash above.
+
+Independent intermediatequeue2 boundary
+verify_control_timer_queue2.py PASS:1488originalFBE8/DAE8/F5A0wholeRAM
+producer cases:allvalidcounts0..30,tail0/29,masks10/70/F0,eightseededstack/
+ringpatterns;48emptytask3admissions,48fullrejections,720tailwraps.186original
+F6A0wholeRAM consumer cases,including6emptyreturns3. Allsavedregisters/GBR/
+SRmask preserved. No inlinepreemption/callbackbody assumption inthisproof.
+Stockdescriptor1136C=FFFF476C00031E00: queue2base476C/task3/capacity30,
+state45D6tail/45D7head/45D8count. Row11344 selector2/zeroargs/targetE5FC.
+Fivewordrecords includeE5FC plusfourunchangedunusedcaller-stackwords; supplied
+FBE8 R4 argument isnotcopied. Theseunusedwordvalues arechecked,notignored.
+Initialoraclewronglyreusedtask4priority1. Actualtask3descriptor4100/byte4102
+priority2 meansschedulerhead12A2/tail12A4 index22,slot126C,readybit4 and
+selectedpriority2. Failure/correction incontrol-timer-queue2-oracle-limit.json.
+ROM/interpreter unchanged; correctedindependentoracle passesallcases.
+probe_control_timer_queue2.py addsactualF6A0selector2 returnchecks atDC50 and
+recordsDC66 callback. TwoactualwholeRAM checks/2E5FCcallbacks PASS in10ticks;
+completeprevious10-cycle JSON matchesbeforeaddingnewobservations. Default
+TimerEvent behavior unchanged; optionalmachine_type andreturnvalue allowreuse.
+No full600repeat withqueue2oracle; full600previouslychecksqueue3only.
+
+Remaininglimits/nextactions
+Actualinterruptentry/priority/nesting/configurationreachability,
+SCI0andSCI4physicalpeers, capture/analogtiming, fullboot remainunproved.
+SCIstatus/RDR/ADCinputs explicitlysupplied; an executedconstant-response test
+isnotremotedeviceproof. NextactualCMT1 vector/startup/admission. No forcedinternalqualification/phase/
+faultvalues. No genericDTC/NVMnewprerequisite.
+TCU applicationperiodjoin remains320PASS butphaseindex1code5pending319;
+consistentcapture/diagnostic timebases next. CAN211/21A sender/units andDSC
+actuation missing. Bothroofdirections andallrecovery cases remainopen; next
+applicableedition/VIN technicalsource orOEM/physicalevidence. Userhasnone;
+do notrepeat exhausteddownloads orartifactquestions. CHECKPOINT preservesall.
+
+Nextstaticinterruptlead (notexecuted)
+AlignedreferenceF28C:literal2F88/load2F82. Wrapper2F78 pushesR0/PR/R1,
+calls3290, loadsF28C andtailsitwithPR32D8 suppliedby3290. Alignedreference
+2F78 occursatROMFFF50 only (possiblevectortableentry; VBR/layoutnotproved).
+3290 incrementscontext12B8 undercontextmask12C0, savesR2..R7/FR0..FR11/
+FPSCR/FPUL;32D8 restoresstate/decrementsnesting, eitherRTE333E orenters
+schedulerbranch334C/33F0 dependingcontext andsavedmask. These arestatic
+interpretations; nextverify originalentry/epilogue withindependentstack/RAM,
+thenretainedtimerjoin. PreserveVBR/INTC/hardwareadmission gaps explicitly.
+Exactinstructions andsearchcommands incontrol-cmt1-interrupt-lead-disassembly.txt.
+
+DurableGhidra save/verification COMPLETE
+1953annotations (850ECU/1103TCU),1006identicalcompleteexports,11projectfiles.
+Bothprograms saved; live andindependentlyextractedreadonlyreadbacks complete,
+300seconddecompileallowance. Finalapply46443/liveverify43139/snapshot62385/
+restore38641 allEXIT0; threefinalheadlesslogs freeofERROR/Exception/incomplete.
+verify_restore.py research/ecu-at-can/ghidra/restore-check/timer-event2-20261007
+ --write-report PASS; all11hashes verifiedbefore/afterreopen andagainstlive.
+Archiveghidra/nc-at-can.tar.gz11,017,311bytes SHA256
+0949ca0090b33533cea54480131cbb0acaab2e47944e8ffc9f72da1a97eac14d.
+Ghidra12.1.3PUBLIC/Java21.0.10; annotations.tsv,snapshot.json and
+restore-verification.json retainmachine-readableidentity/evidence. Paired.gpr/.rep
+restorable; no pendingprojectedits.10researchscriptscompile,30artifactsGit-eligible,
+gitdiff --check PASS. control-timer-event2-artifacts.json ownsartifactSHA/lengths.
+Work savedlocally only; no staging/commit/push, preexistingmixedindex preserved.

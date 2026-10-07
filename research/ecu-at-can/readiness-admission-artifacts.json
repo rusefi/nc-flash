@@ -1,0 +1,156 @@
+{
+  "date": "2026-10-07",
+  "status": "PASS",
+  "artifacts": {
+    "verify_tcu_readiness_admission.py": {
+      "bytes": 11799,
+      "sha256": "c759678eee2acbed0536b823f0bea18c1e24a1d6fef08ddf05090cfe7a6fdf12"
+    },
+    "tcu-readiness-admission-verification.json": {
+      "bytes": 934669,
+      "sha256": "db4849a92f29757c856af6a683218ddddd3264f84fba2bb26c69844f45c8f363"
+    },
+    "tcu-readiness-admission.txt": {
+      "bytes": 10206,
+      "sha256": "ed8bef0db1c26e6b559be083c0093488c740ad8bbb467bc34871a3e1cba0379f"
+    },
+    "tcu-readiness-admission-disassembly.txt": {
+      "bytes": 3556,
+      "sha256": "73900912d2d97e58ba311ebb5cb5da22bd5930bbf216d51ed244664c44226d3d"
+    },
+    "verify_tcu_readiness_b.py": {
+      "bytes": 5198,
+      "sha256": "6453944d378da731bee0ff128bc9accf38b2e74e2ede15844b6bc53a317a1830"
+    },
+    "verify_tcu_capture_readiness.py": {
+      "bytes": 6534,
+      "sha256": "7da9a9591fe0242df4799700d3c9154a784de0cd8af9154d7a1cbaee289a1e25"
+    },
+    "tcu-readiness-b-verification.json": {
+      "bytes": 7687,
+      "sha256": "1bff656977274d18c389663512f92a57fd781a14bad109cbf0520d783c1fdacd"
+    },
+    "tcu-capture-readiness-verification.json": {
+      "bytes": 60781,
+      "sha256": "64d2c628da44438d638b4da351d6df9677e2b773e539fedaad10db34b6312427"
+    },
+    "verify_tcu_readiness_a.py": {
+      "bytes": 4873,
+      "sha256": "d317c38a9ea1e5bd6a92a0a6325170cce0e05667a621f296ccbc2b13cbeffee3"
+    },
+    "verify_tcu_application_interrupt.py": {
+      "bytes": 7502,
+      "sha256": "b69b1b092b3d946c1dabfde43230d8c64fe1684b0345dadddf1ff7bcddf2123b"
+    },
+    "verify_tcu_application_order.py": {
+      "bytes": 7220,
+      "sha256": "1f2677157b1259bbb4cacd6990877404cfa01b9ca830ef2f5f044c7b7fb06162"
+    },
+    "verify_tcu_cmt0_interrupt.py": {
+      "bytes": 5507,
+      "sha256": "57ae44feb335bbcf0f0f726c8292e53e77580c0a4c1439d31691e17e50bd11fc"
+    },
+    "verify_tcu_cmt0_wheel.py": {
+      "bytes": 3505,
+      "sha256": "4a6f95f10428613113c8bb0ae705934e239f8a444ed3665ac1b5f5ae09485076"
+    },
+    "verify_tcu_capture_configuration.py": {
+      "bytes": 4203,
+      "sha256": "db737df3df7602d01bd46920434f75118889d0c43f5843ca4e0f5913b9063113"
+    },
+    "ghidra/annotations.tsv": {
+      "bytes": 381340,
+      "sha256": "d145436902f1b94fcb8e7d8dc48c03501e9ffa624720e0e5215734d792f153bf"
+    },
+    "ghidra/README.txt": {
+      "bytes": 6087,
+      "sha256": "761f6dbd948cd199c9dd6044145d7ec2f6c1c8de5ba2c2e9279a115ae7ca3dc8"
+    },
+    "ghidra/snapshot.json": {
+      "bytes": 1326,
+      "sha256": "c351228ce5e020ff93814c2cfc0abfdf5fca3b980e2ac120d7c59bf341eb01bb"
+    },
+    "ghidra/restore-verification.json": {
+      "bytes": 514,
+      "sha256": "2e3027b864ebcc742b9b5fb39c75cfc0ae8907a3b511f4b31561fa97ce6b61a1"
+    }
+  },
+  "inputs": {
+    "examples/LFG1TF000.bin": {
+      "bytes": 524288,
+      "sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+    },
+    "examples/LFFEEE-stock.bin": {
+      "bytes": 1048576,
+      "sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08"
+    },
+    "research/ecu-at-can/sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf": {
+      "bytes": 5102824,
+      "sha256": "359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c"
+    }
+  },
+  "archive": {
+    "bytes": 11022614,
+    "sha256": "b160692bb82a8d557701164d2bd47655b8f75b473fc984e8499ed01bd5953fd0"
+  },
+  "restoration": {
+    "date": "2026-10-07",
+    "archive_sha256": "b160692bb82a8d557701164d2bd47655b8f75b473fc984e8499ed01bd5953fd0",
+    "restored_project_files_verified": 11,
+    "restored_annotations_verified": 1991,
+    "identical_export_files": 1028,
+    "restored_programs": [
+      "LFFEEE-stock.bin",
+      "LFG1TF000.bin"
+    ],
+    "method": "Independent Ghidra read-only reopening; verify_restore.py checks archive/live/restored hashes, complete expected export sets, no incomplete readbacks, all annotation rows and identical exports."
+  },
+  "scenarios": [
+    {
+      "poll": 50000,
+      "epoch": 7,
+      "cmt0_interrupts": 150,
+      "application_interrupts": 36,
+      "foreground_ram_checks": 61,
+      "capture_return_ram_checks": 30,
+      "command_pin_return_checks": 72,
+      "adc_ready_phi": 450000,
+      "capture_enabled_phi": 491520,
+      "capture_ready_phi": 2457600,
+      "application_admitted_phi": 2539520,
+      "application_admitted_ordinal": 31,
+      "additional_application_interrupt_required": true
+    },
+    {
+      "poll": 50000,
+      "epoch": 0,
+      "cmt0_interrupts": 150,
+      "application_interrupts": 36,
+      "foreground_ram_checks": 61,
+      "capture_return_ram_checks": 31,
+      "command_pin_return_checks": 72,
+      "adc_ready_phi": 500000,
+      "capture_enabled_phi": 573440,
+      "capture_ready_phi": 2539520,
+      "application_admitted_phi": 2621440,
+      "application_admitted_ordinal": 32,
+      "additional_application_interrupt_required": true
+    },
+    {
+      "poll": 65536,
+      "epoch": 4294967040,
+      "cmt0_interrupts": 150,
+      "application_interrupts": 36,
+      "foreground_ram_checks": 46,
+      "capture_return_ram_checks": 32,
+      "command_pin_return_checks": 72,
+      "adc_ready_phi": 589824,
+      "capture_enabled_phi": 655360,
+      "capture_ready_phi": 2621440,
+      "application_admitted_phi": 2703360,
+      "application_admitted_ordinal": 33,
+      "additional_application_interrupt_required": true
+    }
+  ],
+  "limits": "Originalcaller admission underexplicitpollperiod/epoch/peripheralinputs; no fullreset/mainloop/physicalIRQ. Allthreebroader scopesopen. Older manifests retainhistorical source/Ghidrahashes; defaultADC-B/captureJSONs remainbyte-identical. No staging/commit/push."
+}

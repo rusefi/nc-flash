@@ -1,0 +1,3338 @@
+{
+  "status": "PASS",
+  "scope": "Original capture readiness initialization/admission and native CMT0 chain.\n\nIndependent whole-RAM history/state and ordered-MMIO models. ADC/time/status\nare explicit external inputs; no full boot or hardware interrupt delivery.\n",
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "initializers": 256,
+  "independent_readiness_cases": 2816,
+  "initialized_adc_capture_chain": [
+    {
+      "adc": {
+        "before": {
+          "0x84d8": 1,
+          "0x84da": 0,
+          "0x84dc": 0,
+          "0x84e0": 0,
+          "0x84e4": 0
+        },
+        "count": 600,
+        "now": 1,
+        "time_read": true,
+        "after": {
+          "0x84d8": 1,
+          "0x84da": 13203,
+          "0x84dc": 600,
+          "0x84e0": 1,
+          "0x84e4": 0
+        },
+        "accesses": [
+          [
+            "read",
+            4294965272,
+            1,
+            0
+          ],
+          [
+            "read",
+            4294965272,
+            1,
+            128
+          ],
+          [
+            "read",
+            4294965266,
+            2,
+            38400
+          ],
+          [
+            "read",
+            4294964928,
+            4,
+            1
+          ]
+        ],
+        "whole_application_ram_checked": true
+      },
+      "capture": {
+        "before": [
+          1,
+          1,
+          255
+        ],
+        "after": [
+          1,
+          1,
+          255
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "adc": {
+        "before": {
+          "0x84d8": 1,
+          "0x84da": 13203,
+          "0x84dc": 600,
+          "0x84e0": 1,
+          "0x84e4": 0
+        },
+        "count": 600,
+        "now": 100001,
+        "time_read": true,
+        "after": {
+          "0x84d8": 2,
+          "0x84da": 13203,
+          "0x84dc": 600,
+          "0x84e0": 0,
+          "0x84e4": 0
+        },
+        "accesses": [
+          [
+            "read",
+            4294965272,
+            1,
+            0
+          ],
+          [
+            "read",
+            4294965272,
+            1,
+            128
+          ],
+          [
+            "read",
+            4294965266,
+            2,
+            38400
+          ],
+          [
+            "read",
+            4294964928,
+            4,
+            100001
+          ]
+        ],
+        "whole_application_ram_checked": true
+      },
+      "capture": {
+        "before": [
+          1,
+          2,
+          255
+        ],
+        "after": [
+          1,
+          2,
+          255
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "adc": {
+        "before": {
+          "0x84d8": 2,
+          "0x84da": 13203,
+          "0x84dc": 600,
+          "0x84e0": 0,
+          "0x84e4": 0
+        },
+        "count": 600,
+        "now": 100002,
+        "time_read": true,
+        "after": {
+          "0x84d8": 2,
+          "0x84da": 13203,
+          "0x84dc": 600,
+          "0x84e0": 0,
+          "0x84e4": 100002
+        },
+        "accesses": [
+          [
+            "read",
+            4294965272,
+            1,
+            0
+          ],
+          [
+            "read",
+            4294965272,
+            1,
+            128
+          ],
+          [
+            "read",
+            4294965266,
+            2,
+            38400
+          ],
+          [
+            "read",
+            4294964928,
+            4,
+            100002
+          ]
+        ],
+        "whole_application_ram_checked": true
+      },
+      "capture": {
+        "before": [
+          1,
+          2,
+          255
+        ],
+        "after": [
+          1,
+          2,
+          255
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "adc": {
+        "before": {
+          "0x84d8": 2,
+          "0x84da": 13203,
+          "0x84dc": 600,
+          "0x84e0": 0,
+          "0x84e4": 100002
+        },
+        "count": 600,
+        "now": 200002,
+        "time_read": true,
+        "after": {
+          "0x84d8": 3,
+          "0x84da": 13203,
+          "0x84dc": 600,
+          "0x84e0": 0,
+          "0x84e4": 0
+        },
+        "accesses": [
+          [
+            "read",
+            4294965272,
+            1,
+            0
+          ],
+          [
+            "read",
+            4294965272,
+            1,
+            128
+          ],
+          [
+            "read",
+            4294965266,
+            2,
+            38400
+          ],
+          [
+            "read",
+            4294964928,
+            4,
+            200002
+          ]
+        ],
+        "whole_application_ram_checked": true
+      },
+      "capture": {
+        "before": [
+          1,
+          3,
+          255
+        ],
+        "after": [
+          2,
+          3,
+          0
+        ],
+        "capture_enabled": true,
+        "mmio_accesses": 16,
+        "whole_application_ram_checked": true
+      }
+    }
+  ],
+  "native_cmt0_chain": [
+    {
+      "tick": 1,
+      "event": {
+        "mode": 1,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 1,
+        "elapsed": 56322
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          1
+        ],
+        "after": [
+          2,
+          3,
+          1
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 2,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 2,
+        "elapsed": 56323
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          1
+        ],
+        "after": [
+          2,
+          3,
+          1
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 3,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 3,
+        "elapsed": 56324
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          1
+        ],
+        "after": [
+          2,
+          3,
+          1
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 4,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 4,
+        "elapsed": 56325
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          1
+        ],
+        "after": [
+          2,
+          3,
+          1
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 5,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 5,
+        "elapsed": 56326
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          1
+        ],
+        "after": [
+          2,
+          3,
+          1
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 6,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 6,
+        "elapsed": 56327
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          2
+        ],
+        "after": [
+          2,
+          3,
+          2
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 7,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 7,
+        "elapsed": 56328
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          2
+        ],
+        "after": [
+          2,
+          3,
+          2
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 8,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 8,
+        "elapsed": 56329
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          2
+        ],
+        "after": [
+          2,
+          3,
+          2
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 9,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 9,
+        "elapsed": 56330
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          2
+        ],
+        "after": [
+          2,
+          3,
+          2
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 10,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 10,
+        "elapsed": 56331
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          2
+        ],
+        "after": [
+          2,
+          3,
+          2
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 11,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 11,
+        "elapsed": 56332
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          3
+        ],
+        "after": [
+          2,
+          3,
+          3
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 12,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 12,
+        "elapsed": 56333
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          3
+        ],
+        "after": [
+          2,
+          3,
+          3
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 13,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 13,
+        "elapsed": 56334
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          3
+        ],
+        "after": [
+          2,
+          3,
+          3
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 14,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 14,
+        "elapsed": 56335
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          3
+        ],
+        "after": [
+          2,
+          3,
+          3
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 15,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 15,
+        "elapsed": 56336
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          3
+        ],
+        "after": [
+          2,
+          3,
+          3
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 16,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 16,
+        "elapsed": 56337
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          4
+        ],
+        "after": [
+          2,
+          3,
+          4
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 17,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 17,
+        "elapsed": 56338
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          4
+        ],
+        "after": [
+          2,
+          3,
+          4
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 18,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 18,
+        "elapsed": 56339
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          4
+        ],
+        "after": [
+          2,
+          3,
+          4
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 19,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 19,
+        "elapsed": 56340
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          4
+        ],
+        "after": [
+          2,
+          3,
+          4
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 20,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 20,
+        "elapsed": 56341
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          4
+        ],
+        "after": [
+          2,
+          3,
+          4
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 21,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 21,
+        "elapsed": 56342
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          5
+        ],
+        "after": [
+          2,
+          3,
+          5
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 22,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 22,
+        "elapsed": 56343
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          5
+        ],
+        "after": [
+          2,
+          3,
+          5
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 23,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 23,
+        "elapsed": 56344
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          5
+        ],
+        "after": [
+          2,
+          3,
+          5
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 24,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 24,
+        "elapsed": 56345
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          5
+        ],
+        "after": [
+          2,
+          3,
+          5
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 25,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 25,
+        "elapsed": 56346
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          5
+        ],
+        "after": [
+          2,
+          3,
+          5
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 26,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 26,
+        "elapsed": 56347
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          6
+        ],
+        "after": [
+          2,
+          3,
+          6
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 27,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 27,
+        "elapsed": 56348
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          6
+        ],
+        "after": [
+          2,
+          3,
+          6
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 28,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 28,
+        "elapsed": 56349
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          6
+        ],
+        "after": [
+          2,
+          3,
+          6
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 29,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 29,
+        "elapsed": 56350
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          6
+        ],
+        "after": [
+          2,
+          3,
+          6
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 30,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 30,
+        "elapsed": 56351
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          6
+        ],
+        "after": [
+          2,
+          3,
+          6
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 31,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 31,
+        "elapsed": 56352
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          7
+        ],
+        "after": [
+          2,
+          3,
+          7
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 32,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 32,
+        "elapsed": 56353
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          7
+        ],
+        "after": [
+          2,
+          3,
+          7
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 33,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 33,
+        "elapsed": 56354
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          7
+        ],
+        "after": [
+          2,
+          3,
+          7
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 34,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 34,
+        "elapsed": 56355
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          7
+        ],
+        "after": [
+          2,
+          3,
+          7
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 35,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 35,
+        "elapsed": 56356
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          7
+        ],
+        "after": [
+          2,
+          3,
+          7
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 36,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 36,
+        "elapsed": 56357
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          8
+        ],
+        "after": [
+          2,
+          3,
+          8
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 37,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 37,
+        "elapsed": 56358
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          8
+        ],
+        "after": [
+          2,
+          3,
+          8
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 38,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 38,
+        "elapsed": 56359
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          8
+        ],
+        "after": [
+          2,
+          3,
+          8
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 39,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 39,
+        "elapsed": 56360
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          8
+        ],
+        "after": [
+          2,
+          3,
+          8
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 40,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 40,
+        "elapsed": 56361
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          8
+        ],
+        "after": [
+          2,
+          3,
+          8
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 41,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 41,
+        "elapsed": 56362
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          9
+        ],
+        "after": [
+          2,
+          3,
+          9
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 42,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 42,
+        "elapsed": 56363
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          9
+        ],
+        "after": [
+          2,
+          3,
+          9
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 43,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 43,
+        "elapsed": 56364
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          9
+        ],
+        "after": [
+          2,
+          3,
+          9
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 44,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 44,
+        "elapsed": 56365
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          9
+        ],
+        "after": [
+          2,
+          3,
+          9
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 45,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 45,
+        "elapsed": 56366
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          9
+        ],
+        "after": [
+          2,
+          3,
+          9
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 46,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 46,
+        "elapsed": 56367
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          10
+        ],
+        "after": [
+          2,
+          3,
+          10
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 47,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 47,
+        "elapsed": 56368
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          10
+        ],
+        "after": [
+          2,
+          3,
+          10
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 48,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 48,
+        "elapsed": 56369
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          10
+        ],
+        "after": [
+          2,
+          3,
+          10
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 49,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 49,
+        "elapsed": 56370
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          10
+        ],
+        "after": [
+          2,
+          3,
+          10
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 50,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 50,
+        "elapsed": 56371
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          10
+        ],
+        "after": [
+          2,
+          3,
+          10
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 51,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 51,
+        "elapsed": 56372
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          11
+        ],
+        "after": [
+          2,
+          3,
+          11
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 52,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 52,
+        "elapsed": 56373
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          11
+        ],
+        "after": [
+          2,
+          3,
+          11
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 53,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 53,
+        "elapsed": 56374
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          11
+        ],
+        "after": [
+          2,
+          3,
+          11
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 54,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 54,
+        "elapsed": 56375
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          11
+        ],
+        "after": [
+          2,
+          3,
+          11
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 55,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 55,
+        "elapsed": 56376
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          11
+        ],
+        "after": [
+          2,
+          3,
+          11
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 56,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 56,
+        "elapsed": 56377
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          12
+        ],
+        "after": [
+          2,
+          3,
+          12
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 57,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 57,
+        "elapsed": 56378
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          12
+        ],
+        "after": [
+          2,
+          3,
+          12
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 58,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 58,
+        "elapsed": 56379
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          12
+        ],
+        "after": [
+          2,
+          3,
+          12
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 59,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 59,
+        "elapsed": 56380
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          12
+        ],
+        "after": [
+          2,
+          3,
+          12
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 60,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 60,
+        "elapsed": 56381
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          12
+        ],
+        "after": [
+          2,
+          3,
+          12
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 61,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 61,
+        "elapsed": 56382
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          13
+        ],
+        "after": [
+          2,
+          3,
+          13
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 62,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 62,
+        "elapsed": 56383
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          13
+        ],
+        "after": [
+          2,
+          3,
+          13
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 63,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 63,
+        "elapsed": 56384
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          13
+        ],
+        "after": [
+          2,
+          3,
+          13
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 64,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 64,
+        "elapsed": 56385
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          13
+        ],
+        "after": [
+          2,
+          3,
+          13
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 65,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 65,
+        "elapsed": 56386
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          13
+        ],
+        "after": [
+          2,
+          3,
+          13
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 66,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 66,
+        "elapsed": 56387
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          14
+        ],
+        "after": [
+          2,
+          3,
+          14
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 67,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 67,
+        "elapsed": 56388
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          14
+        ],
+        "after": [
+          2,
+          3,
+          14
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 68,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 68,
+        "elapsed": 56389
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          14
+        ],
+        "after": [
+          2,
+          3,
+          14
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 69,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 69,
+        "elapsed": 56390
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          14
+        ],
+        "after": [
+          2,
+          3,
+          14
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 70,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 70,
+        "elapsed": 56391
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          14
+        ],
+        "after": [
+          2,
+          3,
+          14
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 71,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 71,
+        "elapsed": 56392
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          15
+        ],
+        "after": [
+          2,
+          3,
+          15
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 72,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 72,
+        "elapsed": 56393
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          15
+        ],
+        "after": [
+          2,
+          3,
+          15
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 73,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 73,
+        "elapsed": 56394
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          15
+        ],
+        "after": [
+          2,
+          3,
+          15
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 74,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 74,
+        "elapsed": 56395
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          15
+        ],
+        "after": [
+          2,
+          3,
+          15
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 75,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 75,
+        "elapsed": 56396
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          15
+        ],
+        "after": [
+          2,
+          3,
+          15
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 76,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 76,
+        "elapsed": 56397
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          16
+        ],
+        "after": [
+          2,
+          3,
+          16
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 77,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 77,
+        "elapsed": 56398
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          16
+        ],
+        "after": [
+          2,
+          3,
+          16
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 78,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 78,
+        "elapsed": 56399
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          16
+        ],
+        "after": [
+          2,
+          3,
+          16
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 79,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 79,
+        "elapsed": 56400
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          16
+        ],
+        "after": [
+          2,
+          3,
+          16
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 80,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 80,
+        "elapsed": 56401
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          16
+        ],
+        "after": [
+          2,
+          3,
+          16
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 81,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 81,
+        "elapsed": 56402
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          17
+        ],
+        "after": [
+          2,
+          3,
+          17
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 82,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 82,
+        "elapsed": 56403
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          17
+        ],
+        "after": [
+          2,
+          3,
+          17
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 83,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 83,
+        "elapsed": 56404
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          17
+        ],
+        "after": [
+          2,
+          3,
+          17
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 84,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 84,
+        "elapsed": 56405
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          17
+        ],
+        "after": [
+          2,
+          3,
+          17
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 85,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 85,
+        "elapsed": 56406
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          17
+        ],
+        "after": [
+          2,
+          3,
+          17
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 86,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 86,
+        "elapsed": 56407
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          18
+        ],
+        "after": [
+          2,
+          3,
+          18
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 87,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 87,
+        "elapsed": 56408
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          18
+        ],
+        "after": [
+          2,
+          3,
+          18
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 88,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 88,
+        "elapsed": 56409
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          18
+        ],
+        "after": [
+          2,
+          3,
+          18
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 89,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 89,
+        "elapsed": 56410
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          18
+        ],
+        "after": [
+          2,
+          3,
+          18
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 90,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 90,
+        "elapsed": 56411
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          18
+        ],
+        "after": [
+          2,
+          3,
+          18
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 91,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 91,
+        "elapsed": 56412
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          19
+        ],
+        "after": [
+          2,
+          3,
+          19
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 92,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 92,
+        "elapsed": 56413
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          19
+        ],
+        "after": [
+          2,
+          3,
+          19
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 93,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 93,
+        "elapsed": 56414
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          19
+        ],
+        "after": [
+          2,
+          3,
+          19
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 94,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 94,
+        "elapsed": 56415
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          19
+        ],
+        "after": [
+          2,
+          3,
+          19
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 95,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 95,
+        "elapsed": 56416
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          19
+        ],
+        "after": [
+          2,
+          3,
+          19
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    },
+    {
+      "tick": 96,
+      "event": {
+        "mode": 3,
+        "armed": true,
+        "active": true,
+        "entries": [
+          "0x123c2",
+          "0x128b6",
+          "0x11864",
+          "0x1e506",
+          "0x11a64"
+        ],
+        "tick": 96,
+        "elapsed": 56417
+      },
+      "capture": {
+        "before": [
+          2,
+          3,
+          20
+        ],
+        "after": [
+          3,
+          3,
+          20
+        ],
+        "capture_enabled": false,
+        "mmio_accesses": 0,
+        "whole_application_ram_checked": true
+      }
+    }
+  ],
+  "first_ready_tick": 96,
+  "conditional_phi_since_first_clock_epoch": 1920000,
+  "limits": "CMT0 epoch0/phase0 and pollingaftereachtick arefixtures; actual122F4caller/admission timing separate. No forcedreadiness/ages inchain, no fullboot/physicalIRQ."
+}

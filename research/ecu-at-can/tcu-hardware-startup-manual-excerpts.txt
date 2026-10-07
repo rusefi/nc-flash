@@ -1,0 +1,348 @@
+Source: sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf
+SHA256359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c
+Extraction: PyMuPDF1.28.2, page numbers zero based.
+
+PDFZERO 136
+Rev.2.0, 07/03, page 97 of 960 
+ 
+7.1.3 
+Pin Configuration 
+Table 7.1 shows the INTC pin configuration. 
+Table 7.1 
+Pin Configuration 
+Name 
+Abbreviation 
+I/O 
+Function 
+Non-maskable interrupt input pin 
+NMI 
+I 
+Input of non-maskable interrupt 
+request signal 
+Interrupt request input pins 
+IRQ0–IRQ7 
+I 
+Input of maskable interrupt request 
+signals 
+Interrupt request output pin 
+IRQOUT 
+O 
+Output of notification signal when an 
+interrupt has occurred 
+ 
+7.1.4 
+Register Configuration 
+The INTC has the 14 registers shown in table 7.2. These registers set the priority of the interrupts 
+and control external interrupt input signal detection. 
+Table 7.2 
+Register Configuration 
+Name 
+Abbr. 
+R/W 
+Initial Value 
+Address 
+Access Sizes 
+Interrupt priority register A 
+IPRA 
+R/W 
+H'0000 
+H'FFFF ED00 
+8, 16, 32 
+Interrupt priority register B 
+IPRB 
+R/W 
+H'0000 
+H'FFFF ED02 
+8, 16, 32 
+Interrupt priority register C 
+IPRC 
+R/W 
+H'0000 
+H'FFFF ED04 
+8, 16, 32 
+Interrupt priority register D 
+IPRD 
+R/W 
+H'0000 
+H'FFFF ED06 
+8, 16, 32 
+Interrupt priority register E 
+IPRE 
+R/W 
+H'0000 
+H'FFFF ED08 
+8, 16, 32 
+Interrupt priority register F 
+IPRF 
+R/W 
+H'0000 
+H'FFFF ED0A 
+8, 16, 32 
+Interrupt priority register G 
+IPRG 
+R/W 
+H'0000 
+H'FFFF ED0C 
+8, 16, 32 
+Interrupt priority register H 
+IPRH 
+R/W 
+H'0000 
+H'FFFF ED0E 
+8, 16, 32 
+Interrupt priority register I 
+IPRI 
+R/W 
+H'0000 
+H'FFFF ED10 
+8, 16, 32 
+Interrupt priority register J 
+IPRJ 
+R/W 
+H'0000 
+H'FFFF ED12 
+8, 16, 32 
+Interrupt priority register K 
+IPRK 
+R/W 
+H'0000 
+H'FFFF ED14 
+8, 16, 32 
+Interrupt priority register L 
+IPRL 
+R/W 
+H'0000 
+H'FFFF ED16 
+8, 16, 32 
+Interrupt control register 
+ICR 
+R/W 
+*
+1 
+H'FFFF ED18 
+8, 16, 32 
+IRQ status register 
+ISR 
+R(W)*
+2 
+H'0000 
+H'FFFF ED1A 
+8, 16, 32 
+Notes: Three access cycles are required for byte access and word access, and six cycles for 
+longword access. 
+ 
+*1. The value when the NMI pin is high is H'8000; when the NMI pin is low, it is H'0000. 
+ 
+*2. Only 0 can be written, in order to clear flags. 
+ 
+
+
+PDFZERO 149
+Rev.2.0, 07/03, page 110 of 960 
+ 
+As indicated in table 7.4, four IRQ pins or groups of 4 on-chip peripheral modules are allocated to 
+each register. Each of the corresponding interrupt priority ranks are established by setting a value 
+from H'0 (0000) to H'F (1111) in each of the four-bit groups 15–12, 11–8, 7–4, and 3–0. Interrupt 
+priority rank becomes level 0 (lowest) by setting H'0, and level 15 (highest) by setting H'F. If 
+multiple on-chip peripheral modules are assigned to the same bit (DMAC0 and DMAC1, DMAC2 
+and DMAC3, CMT0 and A/D0, and CMT1 and A/D1), those multiple modules are set to the same 
+priority rank. 
+IPRA–IPRL are initialized to H'0000 by a reset and in hardware standby mode. They are not 
+initialized in software standby mode. 
+7.3.2 
+Interrupt Control Register (ICR) 
+ICR is a 16-bit register that sets the input signal detection mode of the external interrupt input pin 
+NMI and IRQ0 –IRQ7 and indicates the input signal level at the NMI pin. A reset and hardware 
+standby mode initialize ICR but the software standby mode does not. 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+NMIL 
+— 
+— 
+— 
+— 
+— 
+— 
+NMIE 
+Initial value: 
+* 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R/W 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+IRQ0S 
+IRQ1S 
+IRQ2S 
+IRQ3S 
+IRQ4S 
+IRQ5S 
+IRQ6S 
+IRQ7S 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+Note: * When NMI input is high: 1; when NMI input is low: 0 
+ 
+• Bit 15—NMI Input Level (NMIL): Sets the level of the signal input at the NMI pin. This bit 
+can be read to determine the NMI pin level. This bit cannot be modified. 
+ 
+Bit 15: NMIL 
+Description 
+0 
+NMI input level is low 
+1 
+NMI input level is high 
+ 
+• Bits 14 to 9—Reserved: These bits always read 0. The write value should always be 0. 
+
+
+PDFZERO 150
+Rev.2.0, 07/03, page 111 of 960 
+ 
+• Bit 8—NMI Edge Select (NMIE)  
+ 
+Bit 8: NMIE 
+Description 
+0 
+Interrupt request is detected on falling edge of NMI input (Initial value) 
+1 
+Interrupt request is detected on rising edge of NMI input 
+ 
+• Bits 7 to 0—IRQ0–IRQ7 Sense Select (IRQ0S–IRQ7S): These bits set the IRQ0–IRQ7 
+interrupt request detection mode. 
+ 
+Bits 7-0: IRQ0S–IRQ7S 
+Description 
+0 
+Interrupt request is detected on low level of IRQ input 
+(Initial value) 
+1 
+Interrupt request is detected on falling edge of IRQ input 
+ 
+7.3.3 
+IRQ Status Register (ISR) 
+ISR is a 16-bit register that indicates the interrupt request status of the external interrupt input pins 
+IRQ0–IRQ7. When IRQ interrupts are set to edge detection, held interrupt requests can be 
+withdrawn by writing 0 to IRQnF after reading IRQnF = 1. 
+A reset and hardware standby mode initialize ISR but software standby mode does not. 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+IRQ0F 
+IRQ1F 
+IRQ2F 
+IRQ3F 
+IRQ4F 
+IRQ5F 
+IRQ6F 
+IRQ7F 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• Bits 15 to 8—Reserved: These bits always read 0. The write value should always be 0. 

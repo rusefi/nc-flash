@@ -1,0 +1,134 @@
+TCU threshold axis selection uses the source present at function entry
+Verified 2026-10-06
+
+Coordination update14:54UTC: the older session has paused its automatic goal,
+finished saving and released this checkout. Live status is idle/completed.
+See session-coordination.txt and session-handoff-reply.txt. Historical pending
+coordination below is resolved. The broader60-case Ghidra citation is now
+saved and independently restored with tcu-class-thresholds.txt. All three
+research goals remain incomplete.
+
+RESULT AND SCOPE
+
+Original4530C chooses its lookup axis before its configured source producers
+run. Source9B40 equal13 or14 at ENTRY selects941E; every other entry source
+selects9B3E. The newly published source does not change that captured axis
+within the same call. A subsequent call sees the new source. This is executed
+firmware evidence about call order, not a measured scheduler period or proof
+that all tested source transitions occur naturally on a vehicle.
+
+60 original4530C calls,600 independently checked108E6 word-curve lookups and
+60 original4508A proposal scans pass. All four configured producer routines
+execute in every call; none is stubbed. All resulting threshold words match
+the independent interpolation results. No44E14/44F5A adjustment was admitted
+in these fixtures. This record does not model every overlay admission path.
+
+Example: fixed9B3E=6400,941E=39936,9C7C=0, entrysource13.
+  Call1: newsource0, capturedaxis39936, proposal[1,0].
+  Call2: newsource0, capturedaxis6400, proposal[4,0].
+The measurement80EA stays4672 and oldproposal8084 stays1.4508A writes its
+candidate into synthetic scratch; the test deliberately does not publish it
+back to8084 or run48C08/transition creation. This isolates source history.
+Do not describe it as two whole naturally occurring selection cycles.
+
+Thresholds in that example:
+  Call1 [3744,7023,10395,14768,21789,2085,5212,8892,13194,17223]
+  Call2 [1211,2421,3352,4470,6053,652,1398,2328,3912,5121]
+
+Entering source13/14 with6400/39936 changes the captured axis but both axes
+saturate those stock curves; the threshold values therefore remain identical.
+The additional14/70 axis pair checks unsaturated behavior: entering source13
+changes threshold index2 from3446 to4657 on the second call. The resulting
+proposal remains[3,13] at measurement4672. A changed axis need not change a
+threshold, and a changed threshold need not change the proposed state.
+
+EVIDENCE ADDRESSES
+
+45322 loads9B3E.45344..45358 tests the entry9B40 and optionally loads941E.
+45360..45370 dispatches the configured list after axis capture.
+ROM7744E=4; ROM5DE90 holds46FA0,46200,45AA4,47240 in that order.
+46FA0 publishes base curves/source; later producers can replace entries.
+453D0..453D6 passes the already captured axis to each original108E6 lookup.
+45436..45442 stores the resulting word at9B1E+2*index.
+4508A scans those thresholds; its prior independent model is reused from
+verify_tcu_transition_classification.py. Source codes and candidate state
+numbers are not independently identified physical gears.
+
+REPRODUCTION AND INPUT IDENTITIES
+
+  python research/ecu-at-can/verify_tcu_threshold_axis_history.py
+Python3 standard library and existing bounded interpreter modules. No ROM,
+shared interpreter, application behavior or older verifier was changed for
+this check. The first30-call run passed; expanding to the second axis pair
+and proposal checks produced the final60-call/600-lookup/60-scan result.
+
+Artifacts:
+  verify_tcu_threshold_axis_history.py
+  tcu-threshold-axis-history-verification.json
+  tcu-threshold-axis-history-disassembly.txt
+  tcu-threshold-axis-history.txt (this record)
+
+Input snapshot: tcu-fault-selection-snapshots.json, entry44CFE atcall150,
+SHA25616d58c0427de7905b52531ef943cc01b311d1aeeda511eebf33d525362bda943.
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+The verifier checks all three against tcu-fault-selection-verification.json.
+The ECU binary is an inherited checked input; this new test executes the TCU.
+
+Five explicit9C7C fixtures0/1/2/4/8 cross entrysource0/13/14, axis pairs
+[6400,39936]/[14,70], and two consecutive threshold calls. Byte overrides
+8080=0,9E88=0,9B5C=0,916F=0,92D7=0,9AE9=0,92D1=0 and word80F2=0 isolate
+the path. Peripheral samples and remaining RAM come from the saved synthetic
+snapshot, not a hardware capture. Full upstream production remains open.
+
+Disassembly uses disassemble.py dis(ROMS['tcu'],start,stop,objdump) for
+4530C..454C0 and4508A..45118, joined with whitespace stripped at line ends.
+GNU SH objdump2.42, obtainable from Ubuntu binutils-sh4-linux-gnu. This host
+uses /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump with
+LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu.
+The executable is replaceable; original inputs, helper and output are retained
+in this repository, so no conclusion depends on temporary files.
+
+CORRECTIONS AND CONCURRENT WORK
+
+An initial broader verifier attempt added a strict increasing-axis assertion.
+That assertion was too strong for stock word curves; some contain repeated
+axis values. It stopped during a saved replay. The final focused checker
+uses the existing independent interpolation model and checks every returned
+word; there was no ROM or interpreter fix.
+
+Another process edited/reran verify_tcu_curve_sources.py while the initial
+attempt was running. This was detected from changed source text and separate
+process IDs170892/171124 sharing this checkout. The user was asked whether
+another session was active; no answer had arrived when this record was
+written. Work was separated into the threshold-axis-history files. Treat the
+other curve-source verifier/result as a separate ongoing result; do not
+attribute its final content or verification to this focused check.
+
+No Ghidra program/annotation/archive was modified by this focused check.
+The existing saved archive remains governed by snapshot.json and
+restore-verification.json. Incorporate the axis-history result into4530C's
+annotation once concurrent Ghidra ownership is settled, then save both
+programs and refresh/independently verify the paired.gpr/.rep archive.
+Do not overwrite another session's project or assume its save is finished.
+
+CONTINUATION: ALL THREE OBJECTIVES REMAIN OPEN
+
+ECU/AT: join this entry-source dependency to actual9C7C/9B40/941E producers
+and task cadence; independently model49B08 and remaining46200/45AA4/47240
+admission/overlap policies. Then full selection/transition creation and
+CAN216-to-ECU consequences with naturally produced source transitions.
+Traction: executed shared arbitration through CAN215/TCU input is preserved;
+next59720/8118 and72B4/72BC/gate producers, cross-task publication, sender
+attribution and physical outputs. Factory DSC documentation and candidate
+mappings do not replace missing remote-controller evidence.
+Roof: factory opening/closing/window handshake and candidate PCM/TCM inputs
+remain distinct from executed controller reception. Next PCM transmission-type
+publication and matching OEM PRHT reception. No OEM fold/unfold CAN command
+is established. Both folding and unfolding, interruption/resume, reversal,
+communication timeout, motor synchronization and fault recovery remain open.
+Authoritative broader scope/status: CHECKPOINT.txt and traction-roof.txt.
+
+Saved locally, Git-eligible. No staging, commit or push by this check.

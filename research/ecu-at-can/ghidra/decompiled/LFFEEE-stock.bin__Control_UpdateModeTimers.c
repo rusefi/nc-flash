@@ -11,7 +11,7 @@ uint Control_UpdateModeTimers(void)
   char cVar4;
   undefined2 uVar3;
   
-  uVar2 = (*(code *)PTR_FUN_0002485c)(PTR_DAT_00024858);
+  uVar2 = (*(code *)PTR_FUN_0002485c)(PTR_Control_FilteredModeInput_00024858);
   puVar1 = PTR_Control_ModeZeroTimer_00024860;
   uVar2 = uVar2 & 0xff;
   if (uVar2 == 0) {

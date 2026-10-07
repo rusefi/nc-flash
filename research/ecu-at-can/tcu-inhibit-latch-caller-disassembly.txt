@@ -1,0 +1,35 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00047b3c <.data+0x47b3c>:
+   47b3c:	2f e6       	mov.l	r14,@-r15
+   47b3e:	60 43       	mov	r4,r0
+   47b40:	4f 22       	sts.l	pr,@-r15
+   47b42:	7f f8       	add	#-8,r15
+   47b44:	80 f4       	mov.b	r0,@(4,r15)
+   47b46:	2f 50       	mov.b	r5,@r15
+   47b48:	84 f4       	mov.b	@(4,r15),r0
+   47b4a:	65 03       	mov	r0,r5
+   47b4c:	b0 11       	bsr	0x47b72
+   47b4e:	64 f0       	mov.b	@r15,r4
+   47b50:	b0 30       	bsr	0x47bb4
+   47b52:	64 03       	mov	r0,r4
+   47b54:	6e 03       	mov	r0,r14
+   47b56:	b1 27       	bsr	0x47da8
+   47b58:	64 03       	mov	r0,r4
+   47b5a:	64 03       	mov	r0,r4
+   47b5c:	62 ec       	extu.b	r14,r2
+   47b5e:	63 4c       	extu.b	r4,r3
+   47b60:	32 33       	cmp/ge	r3,r2
+   47b62:	89 00       	bt	0x47b66
+   47b64:	6e 43       	mov	r4,r14
+   47b66:	b0 99       	bsr	0x47c9c
+   47b68:	64 e3       	mov	r14,r4
+   47b6a:	7f 08       	add	#8,r15
+   47b6c:	4f 26       	lds.l	@r15+,pr
+   47b6e:	00 0b       	rts	
+   47b70:	6e f6       	mov.l	@r15+,r14
+

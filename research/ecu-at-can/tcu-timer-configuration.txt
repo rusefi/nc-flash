@@ -1,0 +1,99 @@
+TCU timer configuration and port selection — 2026-10-06
+======================================================
+Objective: close ECU/AT integration, deep traction logic/integration and both
+roof directions, including interruption/reversal/timeout/synchronization and
+recovery. This milestone closes selected TCU setup questions only. No extra
+DSC/roof images, captures or bench results are available from the user.
+
+Executed evidence
+-----------------
+verify_tcu_timer_configuration.py executes original TCU instructions with an
+independent exact MMIO-write oracle and complete application RAM comparisons.
+1447E stops timer starts at F401/F400/F402;14962 clears F484.
+1448E writes 1 to all four prescalers F404/F406/F408/F40A.
+144A2 programs 16 clock/control bytes, including F62B/F62A=0 and F521/F520=0.
+F521 is reached by register arithmetic from F4AC; lack of a direct literal
+was never evidence of no writer.1454E programs 16 timer-I/O bytes.
+14598 clears eleven word status registers, including F62C and F522.
+145C8 programs twelve word interrupt-enable registers, including F630=1 and
+F524=1.1496A writes F526=0. Exact address/size/value arrays live in the script.
+147AA writes F730=80FF,F732=00A5,F734=0055,F738=0500 (all words).
+
+Actual caller slice155C8..155F0 executes seven setup bodies (63 writes).
+14902..14906 executes port-B setup (4 writes);15650..15654 executes PWM-mode
+setup (1 write). Original168AC then contributes25 accesses (23 writes and
+2 reads), including output periods/buffers33333 and compare4166. The assembled
+sequence has93 accesses. Intervening initialization is omitted: this is NOT
+complete15574, complete148FC or complete boot execution.
+
+144 component checks,16 start checks and16 caller-sequence checks pass (176
+positive checks), plus6 expected wrong-width/unsupported-access rejections.
+Two retained scenarios seed F736=0 and15. Each executes setup,16 cycle169A4
+bodies and64 compare1692E bodies:32 cycle and128 compare bodies total. Produced
+A518=13203 from ADC count600 replaces the older fixture. All four output
+writes per cycle agree across inversion fixtures. That is expected because
+the modeled software buffer writes do not simulate physical pin inversion.
+Configuration snapshots remain historical after setup; runtime callback
+latches/output sinks are transferred explicitly, not a hardware register model.
+Complete application RAM, configured registers, exact MMIO traces and prior
+callback register-restoration assertions are checked. RTE stays unexecuted.
+
+Factory-document interpretation (conditional on compatible MCU)
+---------------------------------------------------------------
+Source: sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf, SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+Selected original text is saved in tcu-timer-configuration-manual-excerpts.txt.
+PDF zero240/266, printed201/227, identifies PSCR1..4 and value1 as Pphi/2.
+PSCR1 supplies channel2 and PSCR2 supplies channel6. PDF zero268/269 and
+271/272 defines TCR2A/B and TCR6A/B zero as direct internal prescaled clock.
+Thus the executed setup selects Pphi/2 for relevant channel2/6 counters.
+Absolute peripheral clock Pphi remains unknown; no Hz, milliseconds or real
+interrupt cadence follows from this ratio alone.
+PDF zero346/347, printed307/308, defines PMDR=0 as on-duty, non-complementary
+PWM for6A..D. This is programmed mode, not measured electrical behavior.
+PDF zero685/696/697 identifies PBIOR/PBCRH/PBCRL/PBIR and explains PBCRL=0055
+selects PB0/TO6A,PB1/TO6B,PB2/TO6C,PB3/TO6D. Prior verified buffer mapping gives:
+ application channel0 -> F510 BFR6A -> PB0/TO6A
+ application channel1 -> F512 BFR6B -> PB1/TO6B
+ application channel2 -> F516 BFR6D -> PB3/TO6D
+ application channel3 -> F514 BFR6C -> PB2/TO6C.
+This is MCU port mapping, not board connector or solenoid identity.
+PBIR F736 bit n inverts the ATU output when1. Tested setup does NOT write it;
+all arbitrary initial values remain unchanged. The manual reset context has
+exceptions (including WDT power-on), so un-inverted polarity is not established.
+Actual chip identity, reset history, pin voltages and plant response remain open.
+
+Reproduction and artifacts
+--------------------------
+python research/ecu-at-can/verify_tcu_timer_configuration.py
+python -m py_compile research/ecu-at-can/verify_tcu_timer_configuration.py
+Both pass with Python3.14.3; JSON records full setup snapshots/traces and
+retained outputs. ROM examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Disassembly inputs: tcu-timer-configuration-{timers,pwm-mode,port-b,caller,
+port-callers,boot-alternative}-disassembly.txt. GNU SH binutils2.42 was run via
+LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu
+python research/ecu-at-can/disassemble.py --objdump
+/tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis START END.
+Exact intervals:1447E..145FE,1496A..14972,147AA..147C4,155C8..15658,
+148FC..1492A,36CE..3844 respectively. Original ROMs and scripts remain durable;
+temporary disassembler installation is not sole evidence. PDF extraction used
+PyMuPDF1.28.2. Existing tool setup provenance remains in the research index.
+
+Open next actions / limits
+--------------------------
+Trace1574C/1576C runtime port-B selection and callers; locate PBIR writers
+including base-relative addressing. Determine actual clock/vector/CPU enable
+setup; execute missing15574/148FC work if relevant. Boot alternatives36CE,
+36E2,37FC,383C are STATIC leads, not application execution. EC20/EC22 are bus
+control registers, ED00 is DMA: those direct hits do not establish pin setup.
+A975/A976/A958 status writers,8AD8/89AA/89A8/89AC,rawbase/A654,queues/ack,
+overlap,persistence and physical integration remain open. Traction next work:
+full task ordering/admission/freshness and399B0 callers; CAN211/21A sender,
+units, board mapping and remote DSC missing. Roof still needs a new applicable
+source or OEM receiver/physical evidence for BOTH folding and unfolding,
+interruption/resume/reversal,communication timeout,L/R synchronization and
+fault recovery. No narrow setup result completes any broad requirement.
+
+Saved locally, no staging/commit/push. Ghidra save/archive identity is recorded
+in ghidra/snapshot.json and restore-verification.json and CHECKPOINT.txt.

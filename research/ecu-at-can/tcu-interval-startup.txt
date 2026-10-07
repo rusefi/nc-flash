@@ -1,0 +1,65 @@
+TCU interval-request startup — 2026-10-07
+
+Objective: native ECU/AT startup and recovery, within the broader still-open
+ECU/AT, traction and folding/unfolding roof investigation. No added external
+artifacts are available. No staged/committed/pushed changes authorized.
+
+Executed evidence
+verify_tcu_interval_startup.py executes original145FE through RTS/slot1460C.
+256 initial-state cases check whole application RAM, all GPRs, SR/PR and exact
+MMIO: bytezero FFFFF424, FFFFF426, FFFFF428 in that order. Original instructions
+leave R1=FFFFF428/R2=FFFFF426/R3=FFFFF424/R4=0; other registers and RAM unchanged.
+768 exhaustive byte-latch roundtrips and16 width/address rejects PASS.
+The shared configuration owner now accepts an explicit fixed width (default2),
+so interval bytes reuse the existing pipeline. Prior UBC/BSC verification and
+default fullstartup JSON reruns are byte-identical. No production/ROM edits.
+
+Primary documentation and bounded interpretation
+Retained SH7055S manual section11.2.7 names ITVRR1, ITVRR2A, ITVRR2B: byte-wide,
+all bits R/W, zero initial. Their upper nibble controls ADC activation and lower
+nibble interval interrupts on TCNT0 bit rises. A/2B select ADC0/1; ITVRR1 ADC2.
+Zero disables these triggers. The owner supplies configuration latches only;
+no counter edges, ADC conversion, physical interrupt admission or silicon
+identity is established. tcu-interval-startup-manual-excerpts.txt records exact
+ZERO-BASED PDF indices, viewer pages and primary PDF SHA256. Earlier reports
+using bare 'PDF' numbers may mean indices; use explicit labels here.
+
+Full initializer continuation
+python research/ecu-at-can/probe_tcu_hardware_startup.py --nmi-level 0
+  --irq-status-zero --ubc --wcr-initial 0 --dmaor --interval
+  --filename tcu-hardware-startup-interval-probe.json
+(join command lines). Status REJECTED at actual14978 (RTS-slot parent14976),
+wordwrite FFFFF666=0; both868C/D remain0. Table11.3 PDFindex247 identifies DSTR,
+down-count start register, section11.2.11. Original14972 confirmed by objdump. Manualindex348 says only1 can be written;
+DST bits hardware-clear on counter/terminate events. Zero is therefore not a
+generic clear-latch operation. Next verify the documented zero-write effect
+and a bounded no-event starting state before extending support. No skipped call or forced flag.
+The fixture inherits selected native timeline RAM/configuration; not power-on.
+The new trace does not yet reach14616 counter-reset routine: do not confuse
+linear ROM address order with executed call order.
+
+Separate unresolved counter-width issue
+Original1461A/1461E write words to F430/F432. Compatible manual table11.3 and
+section11.5.1 PDFindex425 specify TCNT0 requires32-bit access. Its internal
+16-bit split does not itself authorize CPU word accesses. This joins existing
+TCNT10A F6C0/F6C2 conflict (tcu-timestamp-configuration.txt). Neither is proof
+that physical hardware faults. Preserve variant uncertainty; do not guess
+word-latch behavior to bypass the boundary.
+
+Reproduce component checks
+python research/ecu-at-can/verify_tcu_interval_startup.py
+python research/ecu-at-can/verify_tcu_ubc_startup.py
+python research/ecu-at-can/verify_tcu_bsc_startup.py
+python research/ecu-at-can/probe_tcu_hardware_startup.py
+Tool versions and objdump setup: tcu-pulse-input.txt; Python3.14.3,
+PyMuPDF1.28.2, GNUobjdump2.42. Saved disassembly preserves145FE..1467E.
+Ghidra annotation145FE saved/restored; interval-startup-artifacts.json owns
+final archive and artifact identities. No live firmware probe.
+
+Separate scope status
+Traction: task4->7->4 executed preemption and acquisition evidence retained in
+control-preemption.txt. Hardware startup EC62 identity and CAN211/21A remote
+DSC sender/units/actuation unresolved; next primary silicon identity evidence.
+Roof: factory documentation/candidate signals only; no OEM controller execution.
+Next applicable edition/VIN evidence for release/reverse, numerical CAN timeout
+and LR mismatch. Both folding/unfolding interruption/recovery remain open.

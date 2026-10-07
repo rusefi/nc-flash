@@ -1,0 +1,82 @@
+LATEST: tcu-adjustment-queue.txt executesoriginalqueue/resetcallback and
+phaseproduction into49B08, plus81EB accepted-decrease behavior. Remaining
+acknowledgement/source/cadence/persistence/otherstoredsetter work staysopen.
+Previousconsumerfixturemistake correctedandrerun; see newrecord.
+
+EXECUTED FOLLOW-UP: timer service/reset andretained49B08 observation now
+verified in tcu-adjustment-timers.txt. Next originalqueue/resetcallback timing
+and81EB accepted-decrease reset; outertaskcadence/physicalreachability open.
+
+TIMER PRODUCER LOCATED (static, not yet independently executed here):
+110B4 reads ROM76CCC/76CD0 ->FFFF8188..FFFF8281 (end exclusive), calls1127E
+for each byte. This range includes81EB and822C/822D/822F. Saved instructions
+in tcu-adjustment-timer-leads-disassembly.txt. Next independently execute
+110B4/1127E boundaries/saturation, then actual11014/12386 service order and
+49B08 retained capture/abort without injecting timer values. No milliseconds
+or main-task cadence inferred from the range or dispatch table.
+
+NEW NEXT LEADS2026-10-06: original44CFE calls49B08 at44D48, then4530C
+at44D4E; local producer/consumer order explicit, actual cadence unproved.
+Timer822C/D/F references include reset stores3112C/31134/31148.81EB aligned
+references only49B90clear/49E9Eread; search base-relative/table-driven timer
+services rather than concluding no writer. Detailed new scope in
+ tcu-adjustment-lifecycle.txt; caller disassembly saved beside it.
+
+EXECUTED FOLLOW-UP:49B08 andseven helpers now verified; see
+tcu-adjustment-lifecycle.txt. Next81EB/822C-D-F producers,taskcadence,
+other2456E setters andpersistence. Older static lead descriptions below
+are superseded by the new executed evidence.
+
+2026-10-06 continuation correction: actual caller function entry is49B08,
+not49AFC. Saved disassembly shows49AFC..49B06 is literal data;49B08 has the
+register-save prologue and49BC2/49BC4 return. Static interpretation only:
+49B08 snapshots state9C98 and8081; runs49BE8,49D00,49D66 first. Admission
+result exact1 admits state-specific work. State0 runs49E10, captures8089/
+80EA/80EE into9C9E/9CA0/9C9C and3159A result into9C9A, then enters1.
+State1 runs49F66, abort predicate49EE0, completion predicate49F7A;49FE0
+executes only when abort is not exact1 and completion is exact1, thenstate0.
+Failed top admission also resetsstate0; other state bytes can persist while
+admitted. Tail updates previous8081 and outputs9CA2/9CA4 plus potential81EB
+clear. This is not yet independent execution evidence. Next model entire
+49B08 lifecycle and its admission/abort/completion helpers; do not enter the
+interpreter at49AFC. Source:tcu-stored-adjustment-leads-disassembly.txt.
+
+EXECUTED FOLLOW-UP2026-10-06: tcu-stored-adjustments.txt now verifies49FE0,
+15D04/137AC/137B4 initialization and four accessors. Historical static leads
+below are retained; next is the49B7E caller state machine and other setters.
+
+2026-10-06: stored adjustment provenance, STATIC follow-up
+No new producer execution claimed. Complete optional-consumer evidence is
+in tcu-optional-thresholds.txt. Input LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+
+137B4 copies15words into616A..6186 from the pointer table5D1C4. All15stock
+pointers equalFFFFAD4E. Trace startup15D04 and source initializer forAD4E,
+then execute the original copy with sentinels around the destination.137AC
+is a table-dispatch wrapper via5C284+40, not the copy entry itself.
+24562 and2456E both writeword616A+2*u16(index), returnzero.2457A/24584
+sign-extend indexed words. Original delay-slot reads/writes matter.
+3686E calls371EA; nonzero signedbyte andunsigned985A<FFFF increment985A,
+then24562(index3,newcount). This writes storedindex3, NOT consumerindices6/7/8;
+do not mistake it for the threshold-adjustment producer.
+
+49FE0..4A0F2 is the concrete update candidate forindices6/7/8 through75EAA.
+It reads signed9C9C,9CA0 and80EA, derives group0 or316A8 result depending
+onunsigned9C9E<=2, admits a half-open interval forlowword(80EA-9CA0), selects
+stored index via75EAA, reads24584, then updates by an original10D0C quotient
+with tables75E7F..75EAA and70000. It clamps by group-specific signed upper/
+lower limits and writes2456E.92D1bit0 changes the coefficient path.
+Exact model still needed: preserve signed lowword truncation, interval
+boundaries, quotient saturation and original table reads. Do not call it
+adaptation/learning in a physical sense until upstream meaning is established.
+Other2456E caller leads36D88/36E3C/36EBC remain to locate and model.45BA0
+history/task adjacency does not prove when these writes reach4530C consumers.
+
+NEXT: inspect49FE0 tables and316A8 getter, independently execute49FE0 across
+admission/limit edges, then137B4 initialization and paired setter/getter tests.
+Replay resulting offsets through4530C andfull44CFE without offset injection.
+Retain missing hardware/task cadence evidence. Traction preceding caller
+andinput producers, andboth roof directions/reversal/timeout/recovery remain
+separate requirements in CHECKPOINT.txt andtraction-roof.txt.
+Disassembly: tcu-stored-adjustment-leads-disassembly.txt; existingdisassemble.py
+andGNU SHobjdump2.42 reproduce ranges. Savedlocally; no commit/push.

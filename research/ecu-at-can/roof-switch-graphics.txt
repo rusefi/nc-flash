@@ -1,0 +1,60 @@
+FOLLOW-UP2026-10-06: training PDF is now saved and pages23..27 visually
+inspected; see roof-training-graphics.txt. Older pending wording below is
+historical. Actual PID polarity/motor wiring are still not established.
+
+2026-10-06: graphical NC roof switch and interruption documentation
+
+Primary Mazda document recovered from a public mirror:
+https://www.mx5frbe.com/wp-content/uploads/2026/01/NC-2007-Service-Highlights-PRHT-3422-1U-06G.pdf
+Discovery index: https://www.mx5frbe.com/documentation/
+Form3422-1U-06G, July2006,75PDFpages. The cover includes multiple Mazda
+models; this extract's body is MX-5. The old mirror's SPEED6 title alone was
+insufficient to identify content. File saved Git-eligible at
+sources/mazda-2007-service-highlights-3422-1u-06g-mx5.pdf
+6,096,527bytes, SHA256
+bb34c674718425239f9d93bf36ee23a602fb99fde450e5a2fc67d5d069277103.
+
+VERIFIED DOCUMENTATION (not firmware execution or vehicle results)
+Printed09-16-18/19, PDFpages63/64(one-based): simultaneous switches while
+stopped inhibit motion. At either endpoint, holding its ineffective direction
+and then pressing the other also inhibits motion. During opening or closing,
+pressing the opposite switch while retaining the first stops motion and
+inhibits both inputs. A subsequent operation requires release detection.
+This settles the previous flattened-table ambiguity; it does not establish
+arbitrary intermediate-position reversal after release.
+Printed09-16-8, PDFpage53: closing chart depicts switch-release pause during
+deck opening and resumption after another close press. Later ignition-off
+pauses roof closing; ignition-on followed by a new close press resumes.
+Printed09-16-4, PDFpage49: opening explicitly shares the pause behavior.
+Both charts sequence deck opening, roof movement, then deck closing, and show
+the deck-close switch OFF at the closed endpoint. Neither chart supplies a
+numerical CAN timeout, pulse mismatch limit or complete reversal matrix.
+
+REPRODUCTION / RETRIEVAL
+Web PDF text opened; web screenshot calls timed out. Python3.14.3 urllib
+successfully downloaded the same linked PDF, then Poppler24.02.0 rendered
+pages49,53,63,64; all four images were visually inspected. Use repository
+source PDF above, verify SHA256, and run e.g.:
+ pdftoppm -f 63 -l 64 -scale-to 1800 -png INPUT.pdf OUTPUT_PREFIX
+ pdftoppm -f 49 -l 49 -scale-to 2000 -png INPUT.pdf OUTPUT_PREFIX
+ pdftoppm -f 53 -l 53 -scale-to 2000 -png INPUT.pdf OUTPUT_PREFIX
+Images/logs are replaceable and ignored underghidra/restore-check/roof-docs-20261006.
+The source PDF and this record, not that cache, preserve the evidence.
+The previousManyManuals imagebg3f.png timed out again; its download page exposed
+buttons without a callable PDF link. The new mirror resolves that retrieval
+problem; do not repeat the unsuccessful route as the only next action.
+
+OPEN / NEXT
+Receiver firmware, actual frame interpretation and actuation remain missing.
+Next investigate release-then-opposite-direction admission and model the
+factory phase sequence separately from firmware verification. Do not infer
+automatic reversal from simultaneous-input stops. Roof folding AND unfolding,
+interruption/recovery, numerical CAN timeout and synchronization requirements
+remain open. User has no additional controller dumps/captures/bench results.
+A separate training lead now opens:
+https://www.mx5frbe.com/wp-content/uploads/2026/01/NC-2007-PRHT-Technical-Training-DTCs.pdf
+28pages, October2006revision, mostly mechanical job aid; graphic PID/DTC/
+terminal pages23..27 remain to inspect. Its operating guide gives9.5..16.5V,
+whereas the service highlights give8.5..16.5V: preserve scope/version ambiguity.
+No full training PDF or its graphical tables inspected/saved yet.
+Saved locally; no staging/commit/push. No roof firmware annotations invented.

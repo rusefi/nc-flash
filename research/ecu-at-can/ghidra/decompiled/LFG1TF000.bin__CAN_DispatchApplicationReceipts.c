@@ -1,7 +1,9 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Consumes pending8F4E bitmap via5C950/5C95C and callbacks5CA10. Executed complete211 callback;
-   other conversion callbacks not all executable. */
+/* Consumes8F71/pending8F4E bitmap using5C950/5C95C andcallbacks5CA10. Full126EC
+   nowexecutes4EC/215/201 callbacks inlogicalorder1/6/8 afteroriginalISRprefixes;
+   firstcomparisonusesold201.352tasks reachnumeric306/cleanup311. Not all10callbacks orhardware/RTE.
+   See tcu-receive-admission.txt. */
 
 void CAN_DispatchApplicationReceipts(void)
 

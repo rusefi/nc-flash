@@ -1,0 +1,71 @@
+Full-scope repeated-blocker audit — 2026-10-07
+
+Objective unchanged: ECU/AT CAN integration; deep traction logic/integration;
+NC roof folding AND unfolding, interruption/resume/reversal, CANtimeout,
+LRsynchronization and recovery. completion-audit.txt owns requirement evidence.
+
+Assessment1: previousgoalturn
+Newolder-manual evidence and correction of stale nextsteps were progress.
+At its end, full-scope audit established impasse: nativeTCU counter behavior,
+ECU EC62 hardware identity/admission, and missing remoteDSC/OEMroof behavior.
+No goalstatus change. No bench/controller artifacts available fromuser.
+
+Assessment2: currentautomaticcontinuation
+Previousgoalturn classifiedprogress; currentturn NO PROGRESS toward closure.
+Revalidation confirmed all8 completion-audit artifact hashes unchanged before
+memoryupdates. TCU fullstartup stillREJECTED1461A/wordF430, recovery868C/D0;
+ECU task17 still UnsupportedwriteFFFFEC62/2 atA46F6. SavedJSON evidence, not
+newfirmwareexecution. No probe/headless process found by live processcommand
+inspection; there is no live handle/job requiring a verified wait or restart.
+
+Research input inventory recursively inspected, excluding Ghidra/caches:
+only firmware/capture-shaped artifact is roof/nc_cc_1_01.hex (82069bytes).
+This is the previously inspected aftermarket1.01 converter (roof-aftermarket.txt),
+not an OEMPRHT/DSCdump. Examples contain existing ECU LFFEEE-stock.bin1048576,
+TCU LFG1TF000.bin524288, MTlf9veb.bin1048576. No new .bin/.hex/.blf/.asc/.pcap/
+.pcapng/.mf4/.s19/.srec inputs appeared in this scoped inventory. This is not
+an assertion about unrelated folders or arbitrary file extensions. User's
+explicit no-extra-artifact answer remains authoritative; do notaskagain.
+
+No safe evidence-backed continuation of native startup or remotecontroller
+proof is available. Do notskip14616, guess EC62, force recovery, import RFroof
+behavior or reinterpret DSTRzero as clear. Repeating source failures/component
+checks or lengthening completednative320 does not resolve the same blockers.
+This is secondconsecutive impasse assessment; threshold3 notyetmet. Goalactive.
+Next continuation must revalidate the same barriers; if unchanged and no new
+meaningful action exists, markgoal blocked rather than perpetually restating it.
+
+Revalidation methods
+Read current CLAUDE/notes/checkpoint/traction-roof criteria andcompletionaudit.
+SHA256 each file listed bycompletion-audit-artifacts.json using Pythonhashlib.
+Inspect status/PC/recovery inbothstartupJSONs. Path.rglob inventory of above
+extensions and examples/*.bin. ps -eo pid,comm,args, matching analyzeHeadless/
+probe_tcu_/probe_control_, excluding the inspection shell itself: no matches.
+No runtime/code/Ghidra changes; no archive refresh required. Existingpaired
+archive/17implementation artifact hashes were verified previousassessment.
+All work locallysaved; no staging/commit/push; existing mixedindex preserved.
+
+Assessment3: finalautomaticcontinuation — goal BLOCKED
+Previousgoalturn=NO PROGRESS toward closure; current revalidation likewise.
+All9 currentaudit hashes and17 implementation/archive hashes PASS unchanged.
+NativeTCU1461A/wordF430 stillrejected, bothrecoveryflags0; ECU A46F6/EC62
+stillunsupported. Scoped inventory unchanged, no new OEMDSC/PRHT/capture.
+Liveprocess inspection again found no firmware/headless process to await.
+Same genuine full-scope evidence barriers persist for thirdconsecutive audit.
+No supportednextstep can resolve them without newapplicablehardware/controller
+information or measurements. Existing tests cannot substitute for that evidence.
+update_goal(status="blocked") succeeded; returnedstatus blocked for thread
+01a111a7-d4c4-7711-a3fd-3000d21d4068. Objective preserved verbatim, notcomplete.
+
+Resume conditions (any new evidence can reopen its relevant investigation)
+ECU/AT: actualTCU silicon/revision and documented/measured TCNT0/10A CPUword
+reset semantics; nativefullstartup must then execute without guessed effects.
+Traction: applicableEC62 identity/hardwareIRQ evidence plusDSC CAN211/21A
+sender/units/decisions andphysicalactuation evidence for fullintegration.
+Roof: applicableNCedition/VIN receivertechnical/firmware/capture/bench evidence
+for bothfold/unfold, interruption/resume/reversal, numericalcommunication
+andLRmismatch thresholds, faultrecovery andexternalmodule coordination.
+No request for already-unavailable userartifacts repeated. No simulatedphysical
+claims or arbitraryextra leafchecks. All three scopes remainincomplete.
+No Ghidra/code/firmware change thisassessment. Currentpairedarchive andall
+findings savedlocally; no stage/commit/push. Existingmixedindex preserved.

@@ -1,7 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Reads u16 932C/932E; stores floor(10*x/256) to80A4/80BA and copiesA4FA toA4FC. All65536 input
-   values executed; raw932E>=7680 meets selector threshold300. */
+/* u16 932C/932E ->floor(10*x/256) to80A4/80BA, A4FA->A4FC.65536directvalues
+   plus40actualwholeRAMreturns in160 stoppedcapturetasks. 80A4 remains329 aftermeasurementzero
+   due80EA3070; activefaultretained. tcu-receive-recovery.txt. */
 
 void Diagnostic_ScaleTwoApplicationWords(void)
 

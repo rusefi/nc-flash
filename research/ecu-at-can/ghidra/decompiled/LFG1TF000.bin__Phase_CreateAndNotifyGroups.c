@@ -1,7 +1,9 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Original event1 append, eight5D3F4 callbacks,321A6 and31F64(kind0). Eight code6/7,op0/17,head0/15
-   fixtures verified. */
+/* Event1 append, eight5D3F4callbacks,321A6 and31F64(kind0). Prior144resetcases/12coupledlifecycles.
+   Natural48F20 event1 nowexecutesinside complete126EC after62initializers;
+   multiplephase/managedrecords andrealacks/retirement observed/modelchecked.
+   tcu-initialized-requests.txt. */
 
 undefined4 Phase_CreateAndNotifyGroups(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 

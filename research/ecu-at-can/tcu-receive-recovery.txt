@@ -1,0 +1,160 @@
+Native TCU receipt restoration and qualified-fault recovery — 2026-10-06
+=======================================================================
+Objective remains ECU/AT integration, deep traction integration, and NC roof
+folding AND unfolding, including interruption/resume/reversal, timeout,
+left/right synchronization and fault recovery. All remain incomplete. The
+user has no additional DSC/roof dumps, captures or bench results. No staging,
+commit or push is authorized. The previous goal turn made verified progress.
+
+Starting evidence and experiment
+--------------------------------
+tcu-qualified-receive.txt owns the160 native receive/application/diagnostic
+pairs and1280 independent diagnostic-admission cases. The wheel8 fixture
+qualifies absentCAN200 at42, applies application inhibit44 and substitution/
+cut withdrawal46; other missingframes240/420/4F1 remain relevant.
+
+Extended the same tcu_receive_fixture.py copy/admission oracle to logical
+indices0/4/5/9 (CAN4F1/420/240/200), retaining original1/6/8. All four added
+validator pointers at5C920+4*index arezero. MinimumDLC8/1/8/7, buffers
+FFFF8F05/8F23/8F24/8F40, mailbox2/6/7/11. Callback entry observation now covers
+allseven selectedindices. No duplicate pipeline or sharedISA/ROM changes.
+
+Saved original disassembly:
+ tcu-receive-recovery-callback-disassembly.txt:1C0EC..1C2A8
+ tcu-receive-recovery-can240-disassembly.txt:17F38..18158
+1C0EC marks8F82/8F88 mask03 andtails1AE0E->182A2;
+1C18A marks8F84/8F8A mask80 andtails1AD4E->17158;
+1C1E8 marks8F85/8F8B mask7F andtails1AD2E, whose producers are
+18074,17FA0,180F0,17F38,18008;
+1C286 marks8F87/8F8D mask40 andtails1ACD2->176B0.
+Original callbacks execute; these marks denote firmware receipt, not physical
+sensor validity. CAN200 byte6bit0 decodes88D0, with88D1=2; zero payloadclears
+thatbit. CAN4F1 bytes6/7 use182A2 stockconversion unlessFF. The fiveCAN240
+producers convert bytes withstocklookup tables. Payloadzeros areexplicit
+synthetic inputs, not captured OEMtraffic or a claimofphysicalhealthyvalues.
+
+probe_tcu_receive_recovery.py reuses qualified.before_task/after_task andthe
+shared160-task runner. Eightoriginal11014 calls and100original11864 ticks per
+pair remain schedulingfixtures. CAN201/215 encoderinputs andzero4EC continue.
+Atcall64 addzero4F1/420/240/200 originalISRprefix samples beforeapplication
+execution. This suppliesallseven class0 records enabledforcommunication
+qualification, notall18 records orallpossiblecontrollertraffic. No writes to
+payloadbuffers/pending/freshness/diagnosticflags. Existingmode8F6C8,868C1 and
+8006=3 setupinputs areexplicit, notexecutedfullboot. StopISRbeforeRTE asbefore.
+Observe80A4/932C recoverydependency, activegroups, A99B andphase/heapretention.
+
+Completed:6144 wholeRAMadmission cases and160-pair joinedreceipt trace. Inspect
+ tcu-receive-recovery-prefix-verification.json
+ tcu-receive-recovery-probe.json
+All160 pairs return;864 wholeRAMISRprefixes and40 actualadmissionchecks.
+Bothfreshnessbanks andwatchdogentry/exit modelPASS. First64 pairs equalprior
+wheel8 trace afterremovingnewobservations. Receiptbitsclearat64 from2785to604;
+remainingbits2/9/10 correspond torecords outside the seven enabledclass0 IDs.
+Group36 raw becomes1 at65/tick6600, confirmingproducer-before-dispatchlag.
+At116/tick11700 (strictlymorethan5000 since6600), raw81/active84 indicaterecovery
+readiness, butactivebit04 andA98E1C persistthrough159. 80A4 is752 fromoriginal
+932C19269; nonzero80A4 blocksactiveclear. No fullhealthyrecovery claim.
+A99B/A735 werealready1 at40, BEFOREgroup36 qualification42; do notattribute
+thoseaggregate/storedflags solelytoC100. Managedlistempty at159 butphaseand
+heapremainallocated; no operationalcleanup claim.
+
+Reproduce from repository root:
+ python research/ecu-at-can/verify_tcu_receive_admission.py --extended
+ python research/ecu-at-can/probe_tcu_receive_recovery.py
+Python3.14.3, GNUobjdump2.42 disassemble.py tcu dis START END; exacttoolsetup
+andROM SHA256 identities in tcu-qualified-receive.txt. UnchangedROMs are
+examples/LFG1TF000.bin andexamples/LFFEEE-stock.bin.
+
+Next inspect completedtrace; verify recordfreshness, callbackorder, policy
+qualification/clearing and application lag, plus residualphase/heapstate.
+Traction next: relevant ECU/control freshness boundaries; CAN211/21A sender,
+units, remoteDSC execution andphysicalactuation remainunproved.
+Roof next: applicable completefactorysource orOEMcontroller/physicalevidence;
+revision/connector/PID conflicts andbothdirections/interruption/reversal/
+timeout/synchronization/recovery remainopen. Do notrepeat exhaustedsource
+searches oraskagain forunavailableuserartifacts. CHECKPOINT ownscontinuation.
+
+Completed follow-up: stop both external capture callbacks fromcall120, keeping
+allseven frame receipts. Shared capture pipeline nowhasoptionalcapture_enabled
+hook; no direct age/source/gate writes. tcu-receive-recovery-stopped-captures.json
+records160 returned pairs. This representsmissingcaptureevents, notprovedzero
+physicalmotion. Existingoriginaltimerwheel mustadvanceage; originalreference
+selection mustproduce80EA,22DDC converts932C,50F26 scales80A4.
+New observer records22DDC entry andindependently checkswholeapplicationRAM at
+actual50F26 return using floor(10*u16input/256) andA4FA->A4FC copy. Earlier
+selector-threshold.txt unsupportedMULS.W limit wasolderinterpreter; current
+fulltasks executethatpath. Thisdoesnotclearactivefault; verifiedresult below.
+Reproduce: python research/ecu-at-can/probe_tcu_receive_recovery.py --stop-captures-at 120
+
+Independent recovery-predicate check: verify_tcu_receive_recovery.py executes
+original56A4A(group36) for all256 active-statebytes and80A4 values0/1/65535
+(768 cases), verifyingreturn andunchangedwholeapplicationRAM. Stockgroup36
+configurationbyte5EB78+16*36+6 hasbit0. Return1 requiresstatebit80 andeither
+(state&6)==2 OR80A4==0. Thusstate84 with80A4=752 correctlyretainsactive04;
+timerreadiness alone isinsufficient. Thisisfirmwarepolicy, notphysicalunits.
+
+Stopped-capture result and verified limits
+------------------------------------------
+All160 further pairs PASS;864 ISRprefix and40 admissionwholeRAMchecks plus40
+actual50F26 wholeRAMchecks. Thefirst120 pairs matchthecontinuouscapturetrace
+exactly afterremovingnewmotionobservations; bothtraces' first64 matchtheprior
+qualified-fault trace. Combined320pairs:1728ISRprefixes,80admissionchecks,
+40scalingchecks,16acknowledgementboundaries. Separatepredicate768cases PASS.
+
+Withnoexternalcaptures from120, original11014 incrementsboth810C/810D by4
+perpair:4 at120,16 at123,20 at124. Originalmeasurementproducer2124C returns
+80EE=0 at124. Originalreferencepath produces80EA=3070, notzero;22DDC yields
+932C=8430 and50F26 yields80A4=329. Thesevaluesholdthrough159 whileagesreach160.
+A722 remains84, A98E1C,80E820480,94540; CAN216cutbit remainsclear. Theknown
+recoverypredicate therefore correctlyretainsactive04. Thefirst5000healthy
+recovery readiness isNOTa promiseofactiveclear. Missingcaptures arenotproved
+vehiclezero-motion; physicalsensoridentity andunits remainunproved.
+
+Independent verification recomputesbothfreshnessbanks fromoriginalcallback
+maskwrites andwatchdogresults fromentrystates; checksreceiptbitmap604, rawgroup
+qualification/readiness andcontinuousapplicationpolicy; verifiesallphase0/4
+scalingboundaries andwholeRAMflags; checksno179A8/17A58 callbacks from120,
+ageincrements andobservedmeasurement/reference/scaledvalues. No injectedages,
+sourcewords, faultflags orrequests. Baselinebuildernowalsoobservesscaling if
+rerun; passiveobservations areexcludedfromhistoricalprefixcomparisons.
+
+Residualoperationalstate inbothtraces: managedlistempty, butphase0 remains
+allocated withphasebyte1, A2B9=1 andheapheader0005FF06; do NOTcallthiscleanup.
+Previous352/512task cleanup results aredifferentfixtures andremainseparate.
+Why80EA=3070 isretained isNOTyetindependentlyestablished inthisjoinedtrace.
+Candidate explanation isactive-phase cachedfallback identifiedbyearlier
+reference-policy work; distinguishthatinterpretation fromexecutedscalarvalues.
+
+NEXT concrete action: observe original209B4/20CBC/20FAC/31720 boundaries in
+thisjoinedstoppedcapturefixture. Record91A8/91C7 cache,8196 settling,9194/91A6/
+92C6 flags andactualphaseactivity; reuseverify_tcu_reference_source.py and
+verify_tcu_reference_policy.py models. Traceoriginalphase/ack cleanup and
+source-release conditions beforeanother longerreplay orchangingexternalinput
+waveforms. Do notforce80A4/80EA/phaseflagszero toclaimhealthyrecovery.
+
+Validation:
+ python research/ecu-at-can/verify_tcu_receive_recovery.py
+ python research/ecu-at-can/verify_tcu_qualified_receive.py
+BothPASS; extended6144ISRmatrixPASS. Fiveedited/new researchscripts compile;
+no applicationcode, sharedISA orROMchanges. Physical integration, remoteDSC
+andbothroofrequirements remainopen. Thisturnmadeverifiedprogress.
+
+Model reuse note for next turn: verify_tcu_reference_source.py isimportsafe;
+its900-case branchoracle currently livesinsidemain, using observation20AAC
+(afteroriginalgateproducers), RAM andregistersnapshot. Extractthatoneoracle
+intoanimportsafehelper ratherthanduplicatingit. Existing Observed saves
+(dict(ram),list(registers)) there. verify_tcu_reference_policy.py exposes
+pure discrepancy(t,active) andalternate(t,active); phase(t,active) injects
+activity andmustNOTbeused inthenativejoinedtrace. Capture actual31720 result.
+
+Durable save and verification
+-----------------------------
+Ghidra saved1923annotations (833ECU/1090TCU). Paired .gpr/.rep archive restored
+independently, all11hashes matchbefore/after readonlyreopen,978exports identical.
+Ghidra12.1.3PUBLIC/Java21.0.10. Archive11,004,066bytes SHA256
+6e408f600082ea2ae8eee4a5e73a55b34e356edbdd4258aff54dfb60dc7ceca0.
+Snapshot/restore-verification JSON owninventory/result. All12 new/updated task
+artifacts Git-eligible; five scriptscompile, targeteddiffcheck PASS. BothROM
+SHA256s rechecked unchanged. Mixedindex AD archive.tmp preserved; transientlogs
+ignored. Everything savedlocally; no staging, commit orpush. Allthreebroader
+scopes remainopen, andthisgoalturnmadeverifiedprogress.

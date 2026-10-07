@@ -1,0 +1,156 @@
+TCU class-adjustment application and uniform-update admission
+============================================================
+2026-10-06. Original instruction execution closes another local connection:
+stored values -> application arithmetic -> allocated priority-list entry ->
+selection -> word9108 publication. This does not identify a physical signal,
+prove a CAN connection or close ECU/AT, traction or either roof direction.
+
+Reproduction and evidence boundary
+----------------------------------
+ python research/ecu-at-can/verify_tcu_class_application.py
+Python3.14.3, existing SHExtract, unchanged examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Output: tcu-class-application-verification.json. No production, ROM or
+interpreter changes. All helpers execute without stubs. Test counts and
+final Ghidra archive verification are recorded below.
+
+The base producer3AC70 runs both standalone in a cloned fixture and inside
+complete36704. Its observed signed-word return is the input to an independent
+model of the surrounding application arithmetic. Therefore this verifies
+composition, storage effects and consumers, NOT an independent semantic model
+of3AC70. Both major branches (988A exactly1 versus other values) execute.
+Raw inputs and candidate stored words remain fixtures. The retained update
+trace invokes36D1A directly; stock369A4 admission remains impossible, as
+proved separately in tcu-class-admission.txt. No stock reachability claim.
+
+Uniform updater: second stock admission restriction
+---------------------------------------------------
+36948 first checks9889bit0,8080==6,8081>=4 and signed80EE in[3712,5120).
+Its final comparison is unsigned cmp/hs at36984 between the sign-extended
+985A word and stock ROM7713A=0. Every possible32-bit unsigned value is>=0;
+branch36986 always rejects. All65,536 raw985A values execute to that exact
+comparison, return0 and never reach success instruction36988. Favorable
+preceding gates are explicit. Earlier failures also return0.
+
+Complete36800 dispatches state9858:
+ 1 ->3689E: modes9870 in{2,3,4,5,6} clear state, other modes retain1.
+ 2 ->368B6: stock36948 rejects and clears state.
+ 3 ->36B26 with signed ROM77138=11, then368D6 clears state.
+ Other states are retained.
+Thus the uniform updater still executes for an EXPLICIT entry state3;
+natural state2 does not produce3 with this stock predicate. The full state
+matrix checks clamping of all three adjusted words and unchanged markers.
+No claim excludes an untraced writer or direct call elsewhere.
+
+36838 starts state1 only from zero.36848 sets nonzero state to2 when9889bit6
+is set, otherwise to0; zero stays0.3686E increments local unsigned count985A
+only when9870 is nonzero and count<65535, then stores it through24562 into
+cache index3 (word6170). At65535 it saturates.367F0 reads cache index3 back
+into985A through2457A. In40 retained original-helper sequences, state1 starts,
+bit6 moves it to2,36800 rejects it to0, and the count/cache advance to40;
+class words0..2 remain zero. Invocation order is explicit, not a scheduler.
+
+Complete application arithmetic
+-------------------------------
+3676E consumes original36A0A: fixed=sat_s16(slot2*16). Stock coefficient77130
+is UNSIGNED32768, so10C4C at shift15 gives fixed itself. Add7712E=4019 and
+clamp to[76DD2=0,76DD0=15232]. This result is the lower limit.
+
+36704 calls3AC70,36A74 and3676E. It sign-extends the base return; takes the
+already verified dynamic consumer output; multiplies it by7712A=128 and
+arithmetically shifts right7 (identity here); adds signed98DC>>1; then applies
+max(lower,total), followed by min(7712C=15206,result). This ordering means the
+final upper limit wins even if the lower limit is15232. It stores lower at
+9854, then tail-calls39C0A with byte9856 and output value.
+39C0A/30518 stores the low word at98B4+4*u8(index)+2. It changes no mode byte
+or links. Full application checks compare every supplied/written byte in
+application RAM against the model, excluding synthetic stack storage.
+
+Real allocation and selection
+-----------------------------
+Original15D04 initializes descriptorAE18=03 04 FF FF: three priority heads,
+four available entries, sentinelFFFF.39BE2 initializes the bank at98B4 through
+30454 and sets98B2=FFFF.39BF2/304C6 allocates entries4,5,6,7 for supplied
+priorities1,2,3,2. Tests check every forward/back link, use actual returned
+handles for9856, and preserve the links across application and selection.
+Priority0 head contains[4], head1 contains[5,7], head2 contains[6]; free head3
+is empty. Allocation invocation/priorities are fixtures, not caller proof.
+
+39C90 normally calls3054E. It scans higher priority first and allocation order
+within a priority: [6,5,7,4] for these lists. The first word other thanFFFF
+wins; allFFFF retains the last visited index4. Values are not ranked by
+magnitude. Selected word/index go to98D4/98D6, and the word copies to98B2.
+
+There is an override when u8(800E)>=60, signed-byte933C<4 and8081==5, AND
+92C8bit6 is set. Then98B2 becomes0, or15232 when92C8bit4 is also set. This
+bypasses selection and preserves old98D4/98D6. No physical interpretation of
+these gates is assigned.98ACbit0 records failure of the first three gates;
+bit4 records the override. Other98AC bits are preserved.
+
+For a non-FFFF result,39C90 calls1F292 with index0/value, tailing30652 to write
+word9108. FFFF instead calls1F29E and publishes7FFF. This storage is not yet
+a CAN message. Consumer1F2AA is the next static lead; its periodic caller is
+visible at1EC10 in tcu-transition-progress-disassembly.txt.
+
+The selector tail is original39B56 (not a stub). It retains word98AE unless:
+ -9924bit0 and signed98B2>=13133 ->2;
+ -any of9924bit0/9889bit4/9860bit0 and102<=signed98B2<13133 ->1;
+ -signed98B2<102 ->0, regardless of gates.
+Bounds are stock771EC=13133/771EE=102. High values without the first gate can
+retain old states, including noncanonical words. Boundary and retained-state
+cases independently verify this tail and complete39C90 RAM effects.
+
+Verification development and limitations
+---------------------------------------
+The initial arithmetic/composition run passed with raw destination indices
+2/3/4, but checking the descriptor showed2/3 are list heads rather than
+allocated entries. Those fixtures were replaced by original initialization
+and allocation. The full suite was rerun with returned handles4..7, linked-
+list checks and selection/publication. The arithmetic observation remains
+valid, but the initial fixture did not establish a valid list lifecycle.
+
+A subsequent scope review found39C90 tails into39B56. Original execution had
+already run it, but the first selection model did not assert its98AE effect.
+Added an independent tail model,400 boundary/gate/retained-word cases and a
+complete application-RAM comparison; reran the suite. Do not count the earlier
+partial assertion set as complete selector side-effect proof.
+
+Disassembly artifacts: tcu-class-application-leads-disassembly.txt,
+tcu-class-base-disassembly.txt, tcu-class-base-inputs-disassembly.txt,
+tcu-class-output-disassembly.txt, tcu-class-output-init-disassembly.txt,
+tcu-class-list-selector-disassembly.txt, tcu-class-selection-disassembly.txt,
+tcu-class-selection-tail-disassembly.txt. GNU SH binutils2.42 command/setup
+is in tcu-class-adjustments.txt; use the ranges shown in each saved excerpt.
+
+Next requirements
+-----------------
+Independently model3AC70 and its raw inputs, trace1F2AA/word9108 downstream,
+and find actual caller allocation/order. Queue acknowledgements/overlap,
+persistence, scheduler cadence and hardware integration remain open.
+Next independent traction work: five intervening187-region bodies after30202,
+raw admissions/provenance and scheduling; CAN211/21A sender/units and DSC
+actuation still need evidence. Roof folding AND unfolding need revision-
+specific reversal, timeout, synchronization and receiver evidence. The user
+has no extra dumps, captures or bench results; do not repeat that question.
+
+Verified test result
+--------------------
+Uniform:65,536 exhaustive admission cases,280 complete state-machine calls,
+53 helper cases and40 retained sequences. Application:17 lower-limit cases,
+300 complete application+selection cases,288 independent selector cases,
+400 tail cases and100 retained conditional updates through publication.
+All pass. Both major3AC70 branches execute, but its numeric formula remains
+an observed dependency as explained above. New script compiles.
+
+Local save and independent archive verification
+----------------------------------------------
+Both Ghidra programs saved. Refreshed .gpr+.rep archive independently
+restored with1,579 annotations (684ECU/895TCU),782 byte-identical exports
+and11 matching project hashes before and after reopening. No errors,
+incomplete decompiles, locks or pending headless job. Archive10,918,965 bytes,
+SHA256 7f73c5dc27c245682c11a777d66795c066f874d1d3896976a69c757633609d0f.
+Snapshot and restore-verification manifests preserve the identities/method.
+New artifacts are Git-eligible; py_compile andgit diff --check pass.
+Saved locally; no staging, commit, push, production or ROM changes. Existing
+mixed index, including the staged archive temporary entry, remains untouched.
+This turn made verified progress; the broader goal remains active.

@@ -1,0 +1,51 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0005358a <.data+0x5358a>:
+   5358a:	37 33       	cmp/ge	r3,r7
+   5358c:	89 02       	bt	0x53594
+   5358e:	6e ec       	extu.b	r14,r14
+   53590:	2e e8       	tst	r14,r14
+   53592:	8b 0a       	bf	0x535aa
+   53594:	63 4c       	extu.b	r4,r3
+   53596:	23 38       	tst	r3,r3
+   53598:	89 05       	bt	0x535a6
+   5359a:	60 4c       	extu.b	r4,r0
+   5359c:	88 02       	cmp/eq	#2,r0
+   5359e:	89 02       	bt	0x535a6
+   535a0:	84 f4       	mov.b	@(4,r15),r0
+   535a2:	20 08       	tst	r0,r0
+   535a4:	8b 01       	bf	0x535aa
+   535a6:	a0 01       	bra	0x535ac
+   535a8:	e4 01       	mov	#1,r4
+   535aa:	e4 00       	mov	#0,r4
+   535ac:	60 43       	mov	r4,r0
+   535ae:	7f 08       	add	#8,r15
+   535b0:	00 0b       	rts	
+   535b2:	6e f6       	mov.l	@r15+,r14
+   535b4:	d3 09       	mov.l	0x535dc,r3	! 23dc0
+   535b6:	43 2b       	jmp	@r3
+   535b8:	00 09       	nop	
+   535ba:	ff ff       	.word 0xffff
+   535bc:	00 05       	mov.w	r0,@(r0,r0)
+   535be:	60 4c       	extu.b	r4,r0
+   535c0:	00 00       	.word 0x0000
+   535c2:	ff 00       	fadd	fr0,fr15
+   535c4:	00 05       	mov.w	r0,@(r0,r0)
+   535c6:	41 cc       	.word 0x41cc
+   535c8:	ff ff       	.word 0xffff
+   535ca:	a4 e8       	bra	0x53f9e
+   535cc:	ff ff       	.word 0xffff
+   535ce:	a9 58       	bra	0x52882
+   535d0:	ff ff       	.word 0xffff
+   535d2:	a9 8e       	bra	0x528f2
+   535d4:	ff ff       	.word 0xffff
+   535d6:	b1 28       	bsr	0x5382a
+   535d8:	ff ff       	.word 0xffff
+   535da:	b1 2a       	bsr	0x53832
+   535dc:	00 02       	stc	sr,r0
+   535de:	3d c0       	cmp/eq	r12,r13
+

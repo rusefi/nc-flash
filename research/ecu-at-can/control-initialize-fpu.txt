@@ -1,0 +1,77 @@
+Bounded startup FPU self-test continuation —2026-10-06
+
+Fullobjective andconstraints remainCHECKPOINT.txt: allthree researchscopes
+incomplete;userhasnoadditionalartifacts;no staging/commit/push. Thisislocal
+researchharness work; originalROM andsharedinterpreters remainunchanged.
+
+Reproduce withPython3.14.3 fromrepositoryroot:
+python research/ecu-at-can/verify_control_initialize_fpu.py
+python research/ecu-at-can/probe_control_initialize_fpu.py
+ECU SHA2567604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Baseprobe/oldSETT andFDIV limits preserved incontrol-application-initialize-*.json.
+SelfTest subclassesInitialize; nofirmwarecallee skipped/replaced.
+
+Executedverification PASS:2048 FPSCR registertransfer cases,64signedzero/zero
+FDIV cases,1024quietNaN/finite comparisons,176finitearithmetic/compare/unary cause-clear
+cases,6expected unsupportedoperand/enabledtrap rejections. Architectural
+preservation checked. Original28DFC returns55555555 ineight fixtures with
+preservednonvolatileGPR/stack/GBR andwholeapplicationRAM matchingonlytwo
+writes:6418/641C both41CCCCCA. FPSCR ends40001. Thesecheckstheoriginal
+processor-self-test routineunder a boundedmodel, notthephysicalprocessor.
+InitialwholeRAMoracle incorrectly expected1.0; correctedtoROMexpectedconstant
+29054=41CCCCCA,whichoriginal28F40comparesagainstFR4. NoROM/model change was
+made to satisfy that mistakenoracle. Finaleight checks pass.
+
+Primary source: RenesasSH-2E REJ09B0316-0200 rev2.00,
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+Accessed2026-10-06. Figure4.2 printed14: writableFPSCR bits mask18C60;
+DN/RM fixed40001. Section7.3 printed168-169: quietNaN7FBFFFFF, causeclearing,
+stickyflags. Sections7.3.3/4: quietNaN equality isunordered; greater-than
+raisesinvalid; zero/zero raisesinvalid. Sections7.3.16/17: LDS/STS transfers.
+The implementation preserves fixedbits despite abbreviatedLDS pseudocode
+omittingthem. Enabledexceptions stop withdestination/T preserved; nohandler.
+
+Scope: onlysignedzero/zero extendsFDIV; finite arithmetic retainsoriginal
+boundedRTZ restrictions. OnlyquietNaN comparisons against supportedfinite/
+zero/quietNaN valuesareadded. SignalingNaN/infinity/denormalcounterparts,
+nonzero/zeroFDIV, trapdispatch, fullFPSCR/peripheral/reset behaviorremain
+unmodeled. Successfullyexecutedfinitearithmetic clearscausebits while
+retainingstickyflags; moves do not. Fullprocessorconformance isnotclaimed.
+
+Extendedoriginal1619A probe reaches95 directcallee entries. Self-testreturns
+55555555 to28CA4; flagbankreturn16610 stillpasses.42A78 enteredwithPR166F4.
+Itstopsat80F4 on unsupportedbytewriteFFFFF6D8 via3A53C (initializerJSR1670E).
+Thefollowing80F8 bytewriteFFFFF6C4 isastaticnextlead, notexecuted. Exacttail,
+registers/inputs/calls incontrol-initialize-fpu-probe.json; disassembly in
+control-initialize-fpu-next-limit.txt. Fullstartup stilldoesNOTreturn.
+ExplicitinitialFPSCR40001 isafixture;actualboot/resetstatestillunproved.
+Next: establishF6D8/F6C4 registertype,width,reservedbits andnecessarybehavior
+from applicablehardwaremanual beforeaddinganylocalfixture, thenresume1619A.
+Do not silentlyadmitallMMIO. Relevanttimer/counter initialization andfirsttask
+freshness remainopen. OperationalTCU/remoteDSC andbothroofdirections scopes
+remainindependentlyopen; no physicalcadence/actuationclaim.
+Ghidra self-testannotation savedandindependentlyrestored; detailsbelow.
+
+Next-limit source audit completed (fixture notyetimplemented):
+RetainedofficialSH7058 REJ09B0046-0300H PDF at
+sources/renesas-sh7058-hardware-rej09b0046-0300h.pdf; provenanceJSONalongside,
+SHA2569c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+https://www.renesas.com/en/document/mah/sh-2e-sh7058-f-ztat-tm-hardware-manual
+Table11.3 printed216/PDF258: F6D8=OCR10B, F6C4=TCNT10B, both8-bitR/W.
+Printed345/PDF387 describesTCNT10B eventcounter andbyte-onlyaccess;
+printed350/PDF392 describesOCR10B comparison. Resetvalues00/FFrespectively.
+Theseestablishregisteridentity/width, notphysicalNC wiring orclockprogress.
+Nextteststrictbyteconfigurationfixtures, explicitlyboundcounterprogress and
+comparison/interruptlimitations, thenretry1619A. No blanketregisteradmission.
+LocalPDF extraction: PyMuPDF 1.28.2; noadditionalsetupneeded.
+
+FinalGhidra/saveverification:1896annotations (821ECU/1075TCU),952identical
+exports,11projecthashes checkedbefore/afterreadonlyrestore. Archivecontains
+both.gpr/.rep,10,989,660bytes; SHA256:
+12aeca78c919d0d04eee36ac86d2489c01433f3ef2072e71a9387181e7ce21b0
+Restoredinignoredghidra/restore-check/control-initialize-fpu-20261006;
+control-initialize-fpu-{apply,readback,restore}.log cleanwithbothREADBACK_OK.
+Exactreproductionworkflow isghidra/README.txt/snapshot.py; manifestsarecurrent.
+SixnewFPU artifactsGit-eligible;twoscriptscompile;directedchecksPASS.
+Savedlocally; mixedindexincludingADarchive.tmp preserved. Nothing staged,
+committedorpushedbythiswork; no production/ROM/sharedinterpreter changes.

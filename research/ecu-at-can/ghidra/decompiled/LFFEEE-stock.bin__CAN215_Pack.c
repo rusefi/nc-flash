@@ -14,7 +14,7 @@ void CAN215_Pack(void)
   undefined4 uVar6;
   
   uVar6 = (*(code *)PTR_FUN_00036b18)(0x10);
-  puVar4 = PTR_DAT_00036b30;
+  puVar4 = PTR_CAN215_SelectedControlByte_00036b30;
   puVar2 = PTR_DAT_00036b24;
   puVar1 = PTR_CAN215_EncodedWord0_00036b20;
   if (((*PTR_TransmissionModeFlags_00036b1c & 0x40) != 0) ||

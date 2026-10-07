@@ -1,0 +1,1202 @@
+CompatibleSH7055S localmanual SHA256359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c
+
+PDF ZERO PAGE 685
+Rev.2.0, 07/03, page 646 of 960 
+ 
+20.2 
+Register Configuration 
+PFC registers are listed in table 20.2. 
+Table 20.2 PFC Registers 
+ 
+Name 
+ 
+Abbreviation 
+ 
+R/W 
+Initial 
+Value 
+ 
+Address 
+Access 
+Size 
+Port A IO register 
+PAIOR 
+R/W 
+H'0000 
+H'FFFFF720 
+8, 16 
+Port A control register H 
+PACRH 
+R/W 
+H'0000 
+H'FFFFF722 
+8, 16 
+Port A control register L 
+PACRL 
+R/W 
+H'0000 
+H'FFFFF724 
+8, 16 
+Port B IO register 
+PBIOR 
+R/W 
+H'0000 
+H'FFFFF730 
+8, 16 
+Port B control register H 
+PBCRH 
+R/W 
+H'0000 
+H'FFFFF732 
+8, 16 
+Port B control register L 
+PBCRL 
+R/W 
+H'0000 
+H'FFFFF734 
+8, 16 
+Port B invert register 
+PBIR 
+R/W 
+H'0000 
+H'FFFFF736 
+8, 16 
+Port C IO register 
+PCIOR 
+R/W 
+H'0000 
+H'FFFFF73A 
+8, 16 
+Port C control register 
+PCCR 
+R/W 
+H'0000 
+H'FFFFF73C 
+8, 16 
+Port D IO register 
+PDIOR 
+R/W 
+H'0000 
+H'FFFFF740 
+8, 16 
+Port D control register H 
+PDCRH 
+R/W 
+H'0000 
+H'FFFFF742 
+8, 16 
+Port D control register L 
+PDCRL 
+R/W 
+H'0000 
+H'FFFFF744 
+8, 16 
+Port E IO register 
+PEIOR 
+R/W 
+H'0000 
+H'FFFFF750 
+8, 16 
+Port E control register 
+PECR 
+R/W 
+H'0000 
+H'FFFFF752 
+8, 16 
+Port F IO register 
+PFIOR 
+R/W 
+H'0000 
+H'FFFFF748 
+8, 16 
+Port F control register H 
+PFCRH 
+R/W 
+H'0015 
+H'FFFFF74A 
+8, 16 
+Port F control register L 
+PFCRL 
+R/W 
+H'5000 
+H'FFFFF74C 
+8, 16 
+Port G IO register 
+PGIOR 
+R/W 
+H'0000 
+H'FFFFF760 
+8, 16 
+Port G control register 
+PGCR 
+R/W 
+H'0000 
+H'FFFFF762 
+8, 16 
+Port H IO register 
+PHIOR 
+R/W 
+H'0000 
+H'FFFFF728 
+8, 16 
+Port H control register 
+PHCR 
+R/W 
+H'0000 
+H'FFFFF72A 
+8, 16 
+Port J IO register 
+PJIOR 
+R/W 
+H'0000 
+H'FFFFF766 
+8, 16 
+Port J control register H 
+PJCRH 
+R/W 
+H'0000 
+H'FFFFF768 
+8, 16 
+Port J control register L 
+PJCRL 
+R/W 
+H'0000 
+H'FFFFF76A 
+8, 16 
+Port K IO register 
+PKIOR 
+R/W 
+H'0000 
+H'FFFFF770 
+8, 16 
+Port K control register H 
+PKCRH 
+R/W 
+H'0000 
+H'FFFFF772 
+8, 16 
+Port K control register L 
+PKCRL 
+R/W 
+H'0000 
+H'FFFFF774 
+8, 16 
+Port K invert register 
+PKIR 
+R/W 
+H'0000 
+H'FFFFF776 
+8, 16 
+ 
+
+PDF ZERO PAGE 693
+Rev.2.0, 07/03, page 654 of 960 
+ 
+• Bits 13 and 12—PB14 Mode Bits 1 and 0 (PB14MD1, PB14MD0): These bits select the 
+function of pin PB14/SCK1/TCLKB/T110. 
+ 
+Bit 13: PB14MD1 
+Bit 12: PB14MD0 
+Description 
+0 
+General input/output (PB14) 
+(Initial value) 
+0 
+1 
+Serial clock input/output (SCK1) 
+0 
+ATU-II clock input (TCLKB) 
+1 
+1 
+ATU-II edge input (TI10) 
+ 
+• Bit 11—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 10—PB13 Mode Bit (PB13MD): Selects the function of pin PB13/SCK0. 
+ 
+Bit 10: PB13MD 
+Description 
+0 
+General input/output (PB13) 
+(Initial value) 
+1 
+Serial clock input/output (SCK0) 
+ 
+• Bits 9 and 8—PB12 Mode Bits 1 and 0 (PB12MD1, PB12MD0): These bits select the function 
+of pin PB12/TCLKA/UBCTRG. 
+ 
+Bit 9: PB12MD1 
+Bit 8: PB12MD0 
+Description 
+0 
+General input/output (PB12) 
+(Initial value) 
+0 
+1 
+ATU-II clock input (TCLKA) 
+0 
+Trigger pulse output (UBCTRG) 
+1 
+1 
+Reserved (Do not set) 
+ 
+• Bits 7 and 6—PB11 Mode Bits 1 and 0 (PB11MD1, PB11MD0): These bits select the function 
+of pin PB11/RxD4/HRxD0/TO8H. 
+ 
+Bit 7: PB11MD1 
+Bit 6: PB11MD0 
+Description 
+0 
+General input/output (PB11) 
+(Initial value) 
+0 
+1 
+Receive data input (RxD4) 
+0 
+HCAN receive data input (HRxD0) 
+1 
+1 
+ATU-II one-shot pulse output (TO8H) 
+ 
+
+PDF ZERO PAGE 694
+Rev.2.0, 07/03, page 655 of 960 
+ 
+• Bits 5 and 4—PB10 Mode Bits 1 and 0 (PB10MD1, PB10MD0): These bits select the function 
+of pin PB10/TxD4/HTxD0/TO8G. 
+ 
+Bit 5: PB10MD1 
+Bit 4: PB10MD0 
+Description 
+0 
+General input/output (PB10) 
+(Initial value) 
+0 
+1 
+Transmit data output (TxD4) 
+0 
+HCAN transmit data output (HTxD0) 
+1 
+1 
+ATU-II one-shot pulse output (TO8G) 
+ 
+• Bits 3 and 2—PB9 Mode Bits 1 and 0 (PB9MD1, PB9MD0): These bits select the function of 
+pin PB9/RxD3/TO8F. 
+ 
+Bit 3: PB9MD1 
+Bit 2: PB9MD0 
+Description 
+0 
+General input/output (PB9) 
+(Initial value) 
+0 
+1 
+Receive data input (RxD3) 
+0 
+ATU-II one-shot pulse output (TO8F) 
+1 
+1 
+Reserved (Do not set) 
+ 
+• Bits 1 and 0—PB8 Mode Bits 1 and 0 (PB8MD1, PB8MD0): These bits select the function of 
+pin PB8/TxD3/TO8E. 
+ 
+Bit 1: PB8MD1 
+Bit 0: PB8MD0 
+Description 
+0 
+General input/output (PB8) 
+(Initial value) 
+0 
+1 
+Transmit data output (TxD3) 
+0 
+ATU-II one-shot pulse output (TO8E) 
+1 
+1 
+Reserved (Do not set) 
+ 
+Port B Control Register L (PBCRL) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+PB7MD1 PB7MD0 PB6MD1 PB6MD0 PB5MD1 PB5MD0 PB4MD1 PB4MD0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+— 
+PB3MD 
+— 
+PB2MD 
+— 
+PB1MD 
+— 
+PB0MD 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R/W 
+R 
+R/W 
+R 
+R/W 
+R 
+R/W 
+ 
+
+PDF ZERO PAGE 695
+Rev.2.0, 07/03, page 656 of 960 
+ 
+• Bits 15 and 14—PB7 Mode Bits 1 and 0 (PB7MD1, PB7MD0): These bits select the function 
+of pin PB7/TO7D/TO8D. 
+ 
+Bit 15: PB7MD1 
+Bit 14: PB7MD0 
+Description 
+0 
+General input/output (PB7) 
+(Initial value) 
+0 
+1 
+ATU-II PWM output (TO7D) 
+0 
+ATU-II one-shot pulse output (TO8D) 
+1 
+1 
+Reserved (Do not set) 
+ 
+• Bits 13 and 12—PB6 Mode Bits 1 and 0 (PB6MD1, PB6MD0): These bits select the function 
+of pin PB6/TO7C/TO8C. 
+ 
+Bit 13: PB6MD1 
+Bit 12: PB6MD0 
+Description 
+0 
+General input/output (PB6) 
+(Initial value) 
+0 
+1 
+ATU-II PWM output (TO7C) 
+0 
+ATU-II one-shot pulse output (TO8C) 
+1 
+1 
+Reserved (Do not set) 
+ 
+• Bits 11 and 10—PB5 Mode Bits 1 and 0 (PB5MD1, PB5MD0): These bits select the function 
+of pin PB5/TO7B/TO8B. 
+ 
+Bit 11: PB5MD1 
+Bit 10: PB5MD0 
+Description 
+0 
+General input/output (PB5) 
+(Initial value) 
+0 
+1 
+ATU-II PWM output (TO7B) 
+0 
+ATU-II one-shot pulse output (TO8B) 
+1 
+1 
+Reserved (Do not set) 
+ 
+• Bits 9 and 8—PB4 Mode Bits 1 and 0 (PB4MD1, PB4MD0): These bits select the function of 
+pin PB4/TO7A/TO8A. 
+ 
+Bit 9: PB4MD1 
+Bit 8: PB4MD0 
+Description 
+0 
+General input/output (PB4) 
+(Initial value) 
+0 
+1 
+ATU-II PWM output (TO7A) 
+0 
+ATU-II one-shot pulse output (TO8A) 
+1 
+1 
+Reserved (Do not set) 
+ 
+
+PDF ZERO PAGE 696
+Rev.2.0, 07/03, page 657 of 960 
+ 
+• Bit 7—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 6—PB3 Mode Bit (PB3MD): Selects the function of pin PB3/TO6D. 
+ 
+Bit 6: PB3MD 
+Description 
+0 
+General input/output (PB3) 
+(Initial value) 
+1 
+ATU-II PWM output (TO6D) 
+ 
+• Bit 5—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 4—PB2 Mode Bit (PB2MD): Selects the function of pin PB2/TO6C. 
+ 
+Bit 4: PB2MD 
+Description 
+0 
+General input/output (PB2) 
+(Initial value) 
+1 
+ATU-II PWM output (TO6C) 
+ 
+• Bit 3—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 2—PB1 Mode Bit (PB1MD): Selects the function of pin PB1/TO6B. 
+ 
+Bit 2: PB1MD 
+Description 
+0 
+General input/output (PB1) 
+(Initial value) 
+1 
+ATU-II PWM output (TO6B) 
+ 
+• Bit 1—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 0—PB0 Mode Bit (PB0MD): Selects the function of pin PB0/TO6A. 
+ 
+Bit 0: PB0MD 
+Description 
+0 
+General input/output (PB0) 
+(Initial value) 
+1 
+ATU-II PWM output (TO6A) 
+ 
+
+PDF ZERO PAGE 698
+Rev.2.0, 07/03, page 659 of 960 
+ 
+20.3.6 
+Port C IO Register (PCIOR) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+— 
+— 
+— 
+PC4IOR PC3IOR PC2IOR PC1IOR PC0IOR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+The port C IO register (PCIOR) is a 16-bit readable/writable register that selects the input/output 
+direction of the 5 pins in port C. Bits PC4IOR to PC0IOR correspond to pins PC4/IRQ0 to 
+PC0/TxD1. PCIOR is enabled when port C pins function as general input/output pins (PC4 to 
+PC0), and disabled otherwise. 
+When port C pins function as PC4 to PC0, a pin becomes an output when the corresponding bit in 
+PCIOR is set to 1, and an input when the bit is cleared to 0. 
+PCIOR is initialized to H'0000 by a power-on reset (excluding a WDT power-on reset), and in 
+hardware standby mode. It is not initialized in software standby mode or sleep mode. 
+20.3.7 
+Port C Control Register (PCCR) 
+The port C control register (PCCR) is a 16-bit readable/writable register that selects the functions 
+of the 5 multiplex pins in port C. 
+PCCR is initialized to H'0000 by a power-on reset (excluding a WDT power-on reset), and in 
+hardware standby mode. It is not initialized in software standby mode or sleep mode. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+PC4MD 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+— 
+PC3MD 
+— 
+PC2MD 
+— 
+PC1MD 
+— 
+PC0MD 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R/W 
+R 
+R/W 
+R 
+R/W 
+R 
+R/W 
+ 
+
+PDF ZERO PAGE 699
+Rev.2.0, 07/03, page 660 of 960 
+ 
+• Bits 15 to 9—Reserved: These bits are always read as 0. The write value should always be 0. 
+• Bit 8—PC4 Mode Bit (PC4MD): Selects the function of pin PC4/IRQ0. 
+ 
+ Bit 8: PC4MD 
+Description 
+0 
+General input/output (PC4) 
+(Initial value) 
+1 
+Interrupt request input (IRQ0) 
+ 
+• Bit 7—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 6—PC3 Mode Bit (PC3MD): Selects the function of pin PC3/RxD2. 
+ 
+Bit 6: PC3MD 
+Description 
+0 
+General input/output (PC3) 
+(Initial value) 
+1 
+Receive data input (RxD2) 
+ 
+• Bit 5—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 4—PC2 Mode Bit (PC2MD): Selects the function of pin PC2/TxD2. 
+ 
+Bit 4: PC2MD 
+Description 
+0 
+General input/output (PC2) 
+(Initial value) 
+1 
+Transmit data output (TxD2) 
+ 
+• Bit 3—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 2—PC1 Mode Bit (PC1MD): Selects the function of pin PC1/RxD1. 
+ 
+Bit 2: PC1MD 
+Description 
+0 
+General input/output (PC1) 
+(Initial value) 
+1 
+Receive data input (RxD1) 
+ 
+• Bit 1—Reserved: This bit is always read as 0. The write value should always be 0. 
+• Bit 0—PC0 Mode Bit (PC0MD): Selects the function of pin PC0/TxD1. 
+ 
+Bit 0: PC0MD 
+Description 
+0 
+General input/output (PC0) 
+(Initial value) 
+1 
+Transmit data output (TxD1) 
+ 
+
+PDF ZERO PAGE 745
+Rev.2.0, 07/03, page 706 of 960 
+ 
+21.2.1 
+Register Configuration 
+The port A register configuration is shown in table 21.1. 
+Table 21.1 Register Configuration 
+Name 
+Abbreviation 
+R/W 
+Initial Value 
+Address 
+Access Size 
+Port A data register 
+PADR 
+R/W 
+H'0000 
+H'FFFFF726 
+8, 16 
+Port A port register 
+PAPR 
+R 
+port A pin 
+values 
+H'FFFFF780 
+8, 16 
+Note: A register access is performed in four or five cycles regardless of the access size. 
+ 
+21.2.2 
+Port A Data Register (PADR) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+PA15 
+DR 
+PA14 
+DR 
+PA13 
+DR 
+PA12 
+DR 
+PA11 
+DR 
+PA10 
+DR 
+PA9 
+DR 
+PA8 
+DR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+PA7 
+DR 
+PA6 
+DR 
+PA5 
+DR 
+PA4 
+DR 
+PA3 
+DR 
+PA2 
+DR 
+PA1 
+DR 
+PA0 
+DR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+The port A data register (PADR) is a 16-bit readable/writable register that stores port A data. Bits 
+PA15DR to PA0DR correspond to pins PA15/RxD0 to PA0/TI0A. 
+When a pin functions as a general output, if a value is written to PADR, that value is output 
+directly from the pin, and if PADR is read, the register value is returned directly regardless of the 
+pin state.  
+When a pin functions as a general input, if PADR is read the pin state, not the register value, is 
+returned directly. If a value is written to PADR, although that value is written into PADR it does 
+not affect the pin state. Table 21.2 summarizes port A data register read/write operations. 
+PADR is initialized to H'0000 by a power-on reset (excluding a WDT power-on reset), and in 
+hardware standby mode. It is not initialized in software standby mode or sleep mode. 
+
+PDF ZERO PAGE 747
+Rev.2.0, 07/03, page 708 of 960 
+ 
+21.3 
+Port B 
+Port B is an input/output port with the 16 pins shown in figure 21.2. 
+PB15 (I/O) /PULS5 (output) /SCK2 (I/O)
+PB14 (I/O) /SCK1 (I/O) /TCLKB (input) /TI10 (input)
+PB13 (I/O) /SCK0 (I/O)
+PB12 (I/O) /TCLKA (input) /
+ (output)
+PB11 (I/O) /RxD4 (input) /HRxD0 (input) /TO8H (output)
+PB10 (I/O) /TxD4 (output) /HTxD0 (output) /TO8G (output)
+PB9 (I/O) /RxD3 (input) /TO8F (output)
+PB8 (I/O) /TxD3 (output) /TO8E (output)
+PB7 (I/O) /TO7D (output) /TO8D (output)
+PB5 (I/O) /TO7B (output) /TO8B (output)
+PB4 (I/O) /TO7A (output) /TO8A (output)
+PB3 (I/O) /TO6D (output)
+PB2 (I/O) /TO6C (output)
+PB1 (I/O) /TO6B (output)
+PB0 (I/O) /TO6A (output)
+PB6 (I/O) /TO7C (output) /TO8C (output)
+Port B
+ 
+Figure 21.2   Port B 
+21.3.1 
+Register Configuration 
+The port B register configuration is shown in table 21.3. 
+Table 21.3 Register Configuration 
+Name 
+Abbreviation 
+R/W 
+Initial Value 
+Address 
+Access Size 
+Port B data register 
+PBDR 
+R/W 
+H'0000 
+H'FFFFF738 
+8, 16 
+Port B port register 
+PBPR 
+R 
+port B pin values H'FFFFF782 
+8, 16 
+Note: A register access is performed in four or five cycles regardless of the access size. 
+ 
+
+PDF ZERO PAGE 749
+Rev.2.0, 07/03, page 710 of 960 
+ 
+21.3.3 
+Port B Port Register (PBPR) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+PB15
+PR 
+PB14
+PR 
+PB13
+PR 
+PB12
+PR 
+PB11
+PR 
+PB10
+PR 
+PB9 
+PR 
+PB8 
+PR 
+PB7 
+PR 
+PB6 
+PR 
+PB5 
+PR 
+PB4 
+PR 
+PB3 
+PR 
+PB2 
+PR 
+PB1 
+PR 
+PB0 
+PR 
+ 
+Initial value: 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+Note: * The initial value is 1 when the PB15 to PB0 pins are high, and it is 0 when the pins are low. 
+ 
+The port B port register (PBPR) is a 16-bit read-only register that always stores the value of the 
+port B pins. The CPU cannot write data to this register. Bits PB15PR to PB0PR correspond to pins 
+PB15/PULS5/SCK2 to PB0/TO6A. If PBPR is read, the corresponding pin values are returned. 
+• Bits 15 to 0: Port B15 to B0 Port Register (PB15PR to PB0PR) 
+PB15PR to PB0PR 
+Description 
+0 
+Low-level signals are output from or input to the PB15 to PB0 pins. 
+1 
+High-level signals are output from or input to the PB15 to PB0 pins. 
+ 
+21.4 
+Port C 
+Port C is an input/output port with the 5 pins shown in figure 21.3. 
+PC4 (I/O) /
+ (input)
+PC3 (I/O) /RxD2 (input)
+PC2 (I/O) /TxD2 (output)
+PC1 (I/O) /RxD1 (input)
+PC0 (I/O) /TxD1 (output)
+Port C
+ 
+Figure 21.3   Port C 
+21.4.1 
+Register Configuration 
+The port C register configuration is shown in table 21.5. 
+Table 21.5 Register Configuration 
+Name 
+Abbreviation 
+R/W 
+Initial Value 
+Address 
+Access Size 
+Port C data register 
+PCDR 
+R/W 
+H'0000 
+H'FFFFF73E 
+8, 16 
+Note: A register access is performed in four or five cycles regardless of the access size. 
+ 
+
+PDF ZERO PAGE 750
+Rev.2.0, 07/03, page 711 of 960 
+ 
+21.4.2 
+Port C Data Register (PCDR) 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+— 
+— 
+— 
+PC4 
+DR 
+PC3 
+DR 
+PC2 
+DR 
+PC1 
+DR 
+PC0 
+DR 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+The port C data register (PCDR) is a 16-bit readable/writable register that stores port C data. Bits 
+PC4DR to PC0DR correspond to pins PC4/IRQ0 to PC0/TxD1. 
+When a pin functions as a general output, if a value is written to PCDR, that value is output 
+directly from the pin, and if PCDR is read, the register value is returned directly regardless of the 
+pin state. 
+When a pin functions as a general input, if PCDR is read the pin state, not the register value, is 
+returned directly. If a value is written to PCDR, although that value is written into PCDR it does 
+not affect the pin state. Table 21.6 summarizes port C data register read/write operations. 
+PCDR is initialized to H'0000 by a power-on reset (excluding a WDT power-on reset), and in 
+hardware standby mode. It is not initialized in software standby mode or sleep mode. 
+• Bits 15 to 5—Reserved: These bits always read 0. The write value should always be 0. 
+ 
+Table 21.6 Port C Data Register (PCDR) Read/Write Operations 
+Bits 4 to 0: 
+PCIOR 
+Pin Function 
+Read 
+Write 
+General input 
+Pin state 
+Value is written to PCDR, but does not affect pin 
+state 
+0 
+Other than 
+general input 
+Pin state 
+Value is written to PCDR, but does not affect pin 
+state 
+General output 
+PCDR value 
+Write value is output from pin 
+1 
+Other than 
+general output 
+PCDR value 
+Value is written to PCDR, but does not affect pin 
+state 
+ 

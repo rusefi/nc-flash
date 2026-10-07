@@ -1,0 +1,113 @@
+TCU diagnostics on shared peripheral-clock timeline — 2026-10-07
+
+Objective and limits
+ECU/AT CAN integration, deep traction control and NC roof folding AND unfolding,
+interruption/resume/reversal/timeout/synchronization/recovery remain incomplete.
+User has no additional DSC/roof dumps, captures or bench evidence. No staging,
+commit or push authorized; this thread owns checkout. Previous goal turn made
+verified progress. No production/ROM/shared ISA changes in this turn.
+
+Implementation
+Original1682C..1688C prefix, including1218E mode gate/12682/57002/56F80,
+now delivered every500000 peripheralcycles into existing common arrival merge.
+Conditional divider/configuration proof remains in tcu-diagnostic-timer.txt.
+Timeline now owns optional extra periodic sources; deliver_arrival is an
+extension hook, preserving one copy of capture/CMT0/CMT1 delivery. Qualified
+observer finish_diagnostic_interval owns prior direct body; new timed observer
+suppresses only that scheduling hook. Actual diagnostic helpers and their
+independent/differential checks continue to execute in original instructions.
+Initializer167E4 executes with18 finite MMIO accesses, preserves wholeRAM;
+supplied TSTR1old15 becomes31. Original diagnostic initialization plus explicit
+mode8006=3 remain inherited fixtures. Current84A0/84D8/84EC all0 in fixture;
+not full boot or evidence of readiness. Do not silently promote these bytes.
+
+Explicit assumptions
+Diagnostic firstcompare500000; common epoch0, zero execution/service latency.
+Tieorder CMT0,CMT1,A,B,diagnostic,application. All diagnostic arrivals coincide
+with CMT0; CMT0 runs first. Existing pulse trajectory/loss280*81920 unchanged.
+CAN receipts remainonce/application before application. ProfileF6C0 samples
+remain synthetic counts perprefix and do not model a shared physical clock.
+No interrupt admission/RTE/preemption/clockfrequency/bus/actuator proof.
+Actual diagnostic before/after snapshots are stored on each interrupt event;
+post_application_diagnostic_state is separately named. Removed misleading old
+before_diagnostic/after_diagnostic fields from thisvariant only.
+
+Verified short run
+ python research/ecu-at-can/probe_tcu_diagnostic_timeline.py
+ python research/ecu-at-can/probe_tcu_capture_timeline.py --filename tcu-diagnostic-hook-reuse-prefix8.json
+ python research/ecu-at-can/verify_tcu_diagnostic_timeline.py
+ python research/ecu-at-can/verify_tcu_capture_timeline.py
+Sessions27604/66585 terminalPASS. Prefix8:8application/32CMT0/16CMT1/81capture/
+1diagnostic prefixes,32independentwheel/2hold/16command-pin/2admissionRAM checks.
+Defaulthook result byte-identical to previous correctedcaptureprefix8. Existing
+capture320 verifier stillPASS after optionalextensions. New closed-form full
+timeline check includes diagnostic events and7split/deepcopy boundaries.
+Initial verifier incorrectly assumed all diagnostic_boundaries were in ISR;
+actualrecords show CAN/app calls1A598 and56B06(return1E89C) outside ISR. Corrected
+verification checks exactISR boundary prefix andseparately verifies those
+application/receipt boundaries. No driver/firmware changes for this correction.
+
+Completed long run
+ python research/ecu-at-can/probe_tcu_diagnostic_timeline.py --cycles 320 --filename tcu-diagnostic-timeline-probe.json
+Session79647 terminalexit0:320 returned,2creations/16acks,no runtimefailures.
+verify_tcu_diagnostic_timeline.py PASS, exactinitial8. Totals320application/
+1310CMT0/640CMT1/2602capture(943A/1659B)/52diagnostic prefixes. Independent
+1310wheel replays,80hold/640command-pin/80diagnostic-admissionRAM boundaries;
+12diagnosticcomparewraps. All52diagnostic arrivals tieCMT0 andfollowit; closed
+formtimeline4604arrivals/7split-and-copy checks PASS. ADC/admissionboundaries
+occur inapplication code, notnecessarily inside diagnosticISR.
+
+All320 recordedpost-application request snapshots andallcreation/ack/retirement
+records equalprior once/application diagnosticfixture. This isselectedrecord
+equality, notwholeRAM/entiretrace orphysicaltiming equivalence. Actual52ISR
+before/after monitored diagnosticstate deltas areempty; unmonitoredbodyRAM
+maychange. Firstcreate45/managedempty47/phaseempty113; secondcreate297/
+managedempty299 butphaseindex1code5 stillpending319,heap0005FF06notfullyfree.
+Hold280elapsed4/ratio862/timer2;316elapsed152/ratio32768/timer20,nohistoryreset.
+No forcedphase/ages/acks/cacheflags andno importedoldrecoverydates.
+Defaulthookprefix SHA2566b8746f67a9d89bf7c74f4801a529b3db486b644632fc51af48cad693cc2a510.
+
+Readiness follow-up
+Alignedreferences locate84D8 producer11DEE andinitializer11DD8, ADCdescriptor
+5C57C ->F812, original1413C completionpollF818/14128count/16FF6conversion,
+15730 F6C0 timestamp. verify_tcu_readiness_b.py testsindependentstate/RAM model
+and initializedchains; process77418 terminalPASS(12544cases/256init/9chainsteps).
+Separate84A0 producer112E6/initializer112CC nowverified24960cases/256init/12step
+low/recovery chain,56003terminalPASS; tcu-readiness-a.txt ownsdetails.
+Capture-ready84EC producer122F4 remainsstaticlead.
+Capture-ready state1 requires84D8=3 before128F8, captureA/Benable,8450zero,
+state2; state2 requires8450>=20 before3. Not yet executed as full producer.
+No source units/fullcaller scheduling inferred from these static addresses.
+
+Other scopes
+Traction control-preemption.txt preserves actualECUpreemption/resume; next
+hardwareadmission/startupEC62identity, CAN211/21Asender/units andremoteDSCactuation
+remainopen. Roof factory evidence/candidate maps remain separate from absent
+OEM receiver/physical proof; applicableedition/VIN reversal,numericalCANtimeout,
+LRmismatch and recovery for BOTH directions remainnext. Do not repeat exhausted
+downloads or questions about unavailable inputs. CHECKPOINT owns archive/status.
+
+Next concrete firmware step
+Verify completecapture-readiness122F4 path and8450timerqualification, thenjoin
+thealreadyverified84A0/84D8 producers underactualcaller/timestampconfiguration.
+Currentmode3 initialization remainsfixture even thoughrelativeclocks aregrounded.
+Do not replacephysical/remotecontroller requirements withthisnarrow success.
+Python3.14.3; inputexamples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Scripts/default hooks/results andcurrentarchive identities in
+diagnostic-readiness-artifacts.json; earlier capturemanifest identities are
+historical for filesextendedthisturn. Their defaultbehavior stillverifiedexact.
+
+Saved analysis
+Sixnewannotations(112CC/112E6/84A0,11DD8/11DEE/84D8) andtwo diagnosticcomments
+saved; bothGhidraprograms readback andindependentlyrestored.1979annotations
+(865ECU/1114TCU),1021identicalcompleteexports,11projectfileshashverified before/
+afterreopen andagainstlive. Apply63312/liveverify71149/snapshot99723/restored
+verify61014 allterminalexit0; logs clean; verify_restore.py --write-report PASS.
+Paired .gpr/.rep archive11020772bytes SHA256
+753e4ec3213beb69264501b1c51dd6c41f0bc40fed57c01436b3604e181fc17c.
+Independentcache ghidra/restore-check/diagnostic-readiness-20261007; reproducible
+commands in ghidra/README.txt. Ghidra12.1.3PUBLIC/Java21.0.10,300secondexport
+allowance. Allprobes/headless sessions terminal; no pendingprojectedits.
+Sevenchanged/new scripts compile, gitdiff --checkPASS. Savedlocally; no new
+staging/commit/push. Existingmixedindex ADnc-at-can.tar.gz.tmp preserved.

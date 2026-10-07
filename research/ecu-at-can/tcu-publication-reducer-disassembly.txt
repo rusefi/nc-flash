@@ -1,0 +1,88 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00030686 <.data+0x30686>:
+   30686:	e7 00       	mov	#0,r7
+   30688:	91 41       	mov.w	0x3070e,r1	! 7fff
+   3068a:	60 5e       	exts.b	r5,r0
+   3068c:	2f e6       	mov.l	r14,@-r15
+   3068e:	37 4c       	add	r4,r7
+   30690:	ee 00       	mov	#0,r14
+   30692:	40 15       	cmp/pl	r0
+   30694:	8f 09       	bf.s	0x306aa
+   30696:	64 73       	mov	r7,r4
+   30698:	62 71       	mov.w	@r7,r2
+   3069a:	32 10       	cmp/eq	r1,r2
+   3069c:	8d 01       	bt.s	0x306a2
+   3069e:	7e 01       	add	#1,r14
+   306a0:	66 41       	mov.w	@r4,r6
+   306a2:	74 02       	add	#2,r4
+   306a4:	3e 03       	cmp/ge	r0,r14
+   306a6:	8f f7       	bf.s	0x30698
+   306a8:	77 02       	add	#2,r7
+   306aa:	60 63       	mov	r6,r0
+   306ac:	00 0b       	rts	
+   306ae:	6e f6       	mov.l	@r15+,r14
+   306b0:	7f fc       	add	#-4,r15
+   306b2:	e1 01       	mov	#1,r1
+   306b4:	67 41       	mov.w	@r4,r7
+   306b6:	e6 02       	mov	#2,r6
+   306b8:	36 4c       	add	r4,r6
+   306ba:	60 5e       	exts.b	r5,r0
+   306bc:	2f 62       	mov.l	r6,@r15
+   306be:	31 03       	cmp/ge	r0,r1
+   306c0:	8d 0a       	bt.s	0x306d8
+   306c2:	64 63       	mov	r6,r4
+   306c4:	63 41       	mov.w	@r4,r3
+   306c6:	62 7f       	exts.w	r7,r2
+   306c8:	32 37       	cmp/gt	r3,r2
+   306ca:	8f 01       	bf.s	0x306d0
+   306cc:	71 01       	add	#1,r1
+   306ce:	67 61       	mov.w	@r6,r7
+   306d0:	76 02       	add	#2,r6
+   306d2:	31 03       	cmp/ge	r0,r1
+   306d4:	8f f6       	bf.s	0x306c4
+   306d6:	74 02       	add	#2,r4
+   306d8:	60 73       	mov	r7,r0
+   306da:	00 0b       	rts	
+   306dc:	7f 04       	add	#4,r15
+   306de:	7f fc       	add	#-4,r15
+   306e0:	67 41       	mov.w	@r4,r7
+   306e2:	e1 01       	mov	#1,r1
+   306e4:	e6 02       	mov	#2,r6
+   306e6:	36 4c       	add	r4,r6
+   306e8:	2f 62       	mov.l	r6,@r15
+   306ea:	60 5e       	exts.b	r5,r0
+   306ec:	31 03       	cmp/ge	r0,r1
+   306ee:	8d 0a       	bt.s	0x30706
+   306f0:	64 63       	mov	r6,r4
+   306f2:	62 7f       	exts.w	r7,r2
+   306f4:	63 41       	mov.w	@r4,r3
+   306f6:	32 33       	cmp/ge	r3,r2
+   306f8:	8d 01       	bt.s	0x306fe
+   306fa:	71 01       	add	#1,r1
+   306fc:	67 61       	mov.w	@r6,r7
+   306fe:	76 02       	add	#2,r6
+   30700:	31 03       	cmp/ge	r0,r1
+   30702:	8f f6       	bf.s	0x306f2
+   30704:	74 02       	add	#2,r4
+   30706:	60 73       	mov	r7,r0
+   30708:	00 0b       	rts	
+   3070a:	7f 04       	add	#4,r15
+   3070c:	00 ff       	mac.l	@r15+,@r0+
+   3070e:	7f ff       	add	#-1,r15
+   30710:	2f e6       	mov.l	r14,@-r15
+   30712:	4f 22       	sts.l	pr,@-r15
+   30714:	9e 1d       	mov.w	0x30752,r14	! 95af
+   30716:	7f fc       	add	#-4,r15
+   30718:	2f 41       	mov.w	r4,@r15
+   3071a:	60 f1       	mov.w	@r15,r0
+   3071c:	60 0d       	extu.w	r0,r0
+   3071e:	88 07       	cmp/eq	#7,r0
+   30720:	8f 07       	bf.s	0x30732
+   30722:	64 e0       	mov.b	@r14,r4
+   30724:	24 48       	tst	r4,r4
+

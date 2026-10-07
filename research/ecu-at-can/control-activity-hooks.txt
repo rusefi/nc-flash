@@ -1,0 +1,86 @@
+ECU activity hook admission —2026-10-06
+
+Scope: continue ECU/AT CAN integration, deeptraction, and BOTH roofdirections
+including interruption/reversal/timeout/synchronization/recovery. All remain
+incomplete. User has no extra DSC/roof firmware,captures orbenchdata. No
+staging/commit/push. Previousgoalturn madeprogress:48completecontroltasks
+and31outercalls verified; this increment traces the unresolvedhook admission.
+
+Reproduction (repositoryroot,Python3.14.3):
+python research/ecu-at-can/probe_control_activity_hooks.py
+python research/ecu-at-can/verify_control_activity_hooks.py
+Original ECU SHA2567604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Disassembly commands/ranges incontrol-activity-hooks-disassembly.txt. All
+peripheral assumptions inherited fromcontrol-task-stop.txt/control-outer-event.txt.
+
+Executed observations: tenretainedoriginal2BCE6 event2 calls. Firstcall
+DAE8 bank0/index9 fromPR91282 invokes16172; bank0/index7 fromPR42C92
+invokes1616C. Subsequentnine callneither. EachdescriptorhasselectorFFFF
+andzeroargumentwords. DAE8 loadsbankbase from112E8, indexes8byterows,
+andDB32 callsdescriptor+4 directlyforselectorFFFF. F5A0queuebranch is
+not reachedbythesehook descriptors. Do not callthese periodicstart/end
+notifications; they arestate/flag-edge notifications feedingcomparedcounts.
+
+Verified firstpair admission:
+42C68: old735E==0/current735B==1 dispatchesindex7 ->1616C ->660E++;
+old735E==1/current735B==0 dispatchesindex8 ->16178 ->660F++;
+then735E=current (allbytevalues, includingnonbinary). Otherpairs noevent.
+42CBE does thesame andalso setsPFDRbit3 iffcurrent==1 (evenwithnoedge).
+Original E744criticalsection executes; pin is softwarelatch, notboardproof.
+4096cases verifyfullapplicationRAM,exactdescriptor/target,MMIO andnonvolatile/
+stack/GBR/mask preservation. Counter255wrap included.
+42B36 produces735A=80 if735C==0 OR6604==1; else40 if6536==0 OR73C4bit7set;
+else20.108cases.42BCC producesbinary735B iff735Abits5/6set OR735Cexact1
+OR(735Abit7set ANDany82A8/A433/9149 exact1).20736cases coverall256mode
+bytes andflags0/1/2, comparingallapplicationRAM. Physicalroles unresolved.
+
+Verified secondpair initialadmission:
+Original907F0 with99FC=0,9A01/otherstateflagszero dispatchesindex9 andsets
+99FC1;6610increments modulo256.81fullroutinecases overfirst/secondcounts
+0/1/255 verifyallapplicationRAM andpreservedregisters. Firstpair getters
+2C62C/2C632 provide660E/660F; no scheduler cadence is established.
+
+Verifiedfollowup:100 state6 cases go12via9110E, then transitionto12 clears
+9A01,99FA,9A02,9A03,99FD,9A05. If660E<=660F emitsindex10 ->1617E ->6611++;
+if660E>660F restartsstate1 withoutnotification. These100directcases and100repeatedfull907F0 calls pass
+fullapplicationRAM/register/GBR checks; repeat12/1 withtheseinputs emitsnoevent. Full13state machine/remoteNVM role
+isnotmodeled; do notclaimallstatesorphysicalpersistence.
+
+Finaldirectverification:25221 checks pass. No newISA/MMIO extensions.
+NineGhidraannotations added andbothprogramssaved. Independentarchive
+extraction/read-onlyreopen verified1879annotations (804 ECU/1075 TCU),944
+byte-identicalexports andall11projecthashesbefore/afterreopen. Archive
+10985705bytes,SHA256bac371843760ba158aec2044d41bc19d507d596606cdd8ffa78aee4659a24e6a.
+Seeghidra/snapshot.json,restore-verification.json andREADME.txt forcommands.
+Saved locally; no staging/commit/push. Mixedindex includingAD archive.tmp
+waspreserved.
+
+Next: verifyactualoutertaskreturn-boundary flag/
+hookstate acrossdeliberateinputtransitions. Trace735B widerinputprovenance
+onlywhere neededforintegration; retainCAN211/21A sender/units/remoteDSC/board
+gaps. TCUoperationalqueue/ack/overlap/provenance/cadence/persistence remain
+independent. Roofbothdirections interruption/resume/reversal/timeout/LRsync/
+recovery remainmissingOEMreceiver/physicalevidence anddocumentaryconflicts.
+Nextroof requiresnewapplicablefullsource orcontroller/physicalevidence;
+no newartifact isavailable, and exhaustedlistingsarenotnewproof.
+
+Active retained test: verify_control_activity_retained.py drives40 original
+2BCE6 event2 calls:PFDRbit0 highfor10,lowfor15,highfor15. On eachchange,
+originalCADE runs twice tosettleits documentedtwo-samplefilter. Itchecks
+fullapplicationRAM oracles at42B36,42BCC and42C68/CBE returnboundaries.
+Input/sampling/eventdelivery ordering isexplicit, not a clock/modelofboot.
+Firstcomplete run PASSES40outercalls/24boundaries. Onlyinitialindex9/7
+notifications occur;735B stays1 evenafter735C falls0 oncalls15/20. Thus
+input-hold expiration alone didnot causeanactivityfall. Finalrerun recordsallflaginputs: atcalls15/20 mode735A=80,735C=0,
+82A8=A433=0,9149=1. Therefore9149holds735B1, preventinga fallingedge and
+leaving660E/F=1/0. Secondstate99FC stays1 and6610/11=1/0. No broader
+physical cause is inferred. The inputtransitiondoesnot aloneclearactivity.
+Unexpectedlimits are saved withcompletedrows/PC/registers.
+
+Next concrete lead: original74D62 writes9149 at74DE6/74DEC. Alignedliteral
+refs/disassembly saved incontrol-activity-hooks-leads.txt. Ittests8FD4,925E,
+helper14450,914D,A562,900A,bitgetter15146@282C,and915C; A556/914E falling
+transition latches914D. Thesearestaticleads, notyet independentexecutedoracles.
+Verify74D62 andactualtaskinputfreshness toexplainretained9149=1, without
+patchingflags toforcecompletion. ContinueTCUandremoteDSC/roof gaps separately.
+Pythoncompilation,git diff --check andGit-eligibility checks pass.

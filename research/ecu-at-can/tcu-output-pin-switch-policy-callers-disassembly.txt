@@ -1,0 +1,65 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001f3ce <.data+0x1f3ce>:
+   1f3ce:	2f e6       	mov.l	r14,@-r15
+   1f3d0:	2f d6       	mov.l	r13,@-r15
+   1f3d2:	2f c6       	mov.l	r12,@-r15
+   1f3d4:	2f b6       	mov.l	r11,@-r15
+   1f3d6:	2f a6       	mov.l	r10,@-r15
+   1f3d8:	2f 96       	mov.l	r9,@-r15
+   1f3da:	2f 86       	mov.l	r8,@-r15
+   1f3dc:	4f 22       	sts.l	pr,@-r15
+   1f3de:	7f e4       	add	#-28,r15
+   1f3e0:	d0 28       	mov.l	0x1f484,r0	! ffff9ae8
+   1f3e2:	60 00       	mov.b	@r0,r0
+   1f3e4:	d3 28       	mov.l	0x1f488,r3	! 23e7c
+   1f3e6:	c8 40       	tst	#64,r0
+   1f3e8:	90 46       	mov.w	0x1f478,r0	! 910c
+   1f3ea:	0c 29       	movt	r12
+   1f3ec:	60 00       	mov.b	@r0,r0
+   1f3ee:	7c ff       	add	#-1,r12
+   1f3f0:	6c cb       	neg	r12,r12
+   1f3f2:	c9 01       	and	#1,r0
+   1f3f4:	43 0b       	jsr	@r3
+   1f3f6:	2f 00       	mov.b	r0,@r15
+   1f3f8:	64 03       	mov	r0,r4
+   1f3fa:	60 4c       	extu.b	r4,r0
+   1f3fc:	88 01       	cmp/eq	#1,r0
+   1f3fe:	8b 07       	bf	0x1f410
+   1f400:	d0 22       	mov.l	0x1f48c,r0	! ffff9c58
+   1f402:	60 00       	mov.b	@r0,r0
+   1f404:	c8 01       	tst	#1,r0
+   1f406:	8b 03       	bf	0x1f410
+   1f408:	d3 21       	mov.l	0x1f490,r3	! 529ce
+   1f40a:	e5 00       	mov	#0,r5
+   1f40c:	43 0b       	jsr	@r3
+   1f40e:	e4 01       	mov	#1,r4
+   1f410:	d0 1e       	mov.l	0x1f48c,r0	! ffff9c58
+   1f412:	60 00       	mov.b	@r0,r0
+   1f414:	c9 01       	and	#1,r0
+   1f416:	88 01       	cmp/eq	#1,r0
+   1f418:	8f 0d       	bf.s	0x1f436
+   1f41a:	ed 00       	mov	#0,r13
+   1f41c:	60 d3       	mov	r13,r0
+   1f41e:	6b d3       	mov	r13,r11
+   1f420:	80 fc       	mov.b	r0,@(12,r15)
+   1f422:	6a d3       	mov	r13,r10
+   1f424:	69 d3       	mov	r13,r9
+   1f426:	e0 04       	mov	#4,r0
+   1f428:	c0 87       	mov.b	r0,@(135,gbr)
+   1f42a:	e5 01       	mov	#1,r5
+   1f42c:	d3 18       	mov.l	0x1f490,r3	! 529ce
+   1f42e:	43 0b       	jsr	@r3
+   1f430:	64 53       	mov	r5,r4
+   1f432:	a0 51       	bra	0x1f4d8
+   1f434:	00 09       	nop	
+   1f436:	6e d3       	mov	r13,r14
+   1f438:	98 1d       	mov.w	0x1f476,r8	! 910d
+   1f43a:	6a f3       	mov	r15,r10
+   1f43c:	d9 15       	mov.l	0x1f494,r9	! 5cce8
+   1f43e:	7a 10       	add	#16,r10
+

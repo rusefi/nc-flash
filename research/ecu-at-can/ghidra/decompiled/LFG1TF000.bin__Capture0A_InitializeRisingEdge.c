@@ -1,7 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Sets TIOR0 bits1:0=01, TIER0 bit0 and TSTR1 bit0;256 register-fixture executions. SH7055S manual
-   identifies rising-edge input capture, not physical sensor wiring. */
+/* 256originalwholeRAM/exact8MMIOcases PASS:TIOR0bit0set/bit1clear,TIER0bit0set,TSTR1bit0set.
+   CompatibleSH7055S risingedgeICR0A onsharedTCNT0;PSCR1=1 impliesPphi/2,nosecondTCR0scale. No
+   counterreset/physicalsensor/IRQadmission. tcu-capture-clock.txt. */
 
 void Capture0A_InitializeRisingEdge(void)
 

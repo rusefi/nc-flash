@@ -1,0 +1,90 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00074df8 <.data+0x74df8>:
+   74df8:	d4 23       	mov.l	0x74e88,r4	! ffff9108
+   74dfa:	d3 24       	mov.l	0x74e8c,r3	! ffff6cb4
+   74dfc:	d5 24       	mov.l	0x74e90,r5	! ffff914b
+   74dfe:	f3 38       	fmov	@r3,fr3
+   74e00:	f4 3a       	fmov	fr3,@r4
+   74e02:	d2 24       	mov.l	0x74e94,r2	! e0cf0
+   74e04:	f2 48       	fmov	@r4,fr2
+   74e06:	f3 28       	fmov	@r2,fr3
+   74e08:	f3 25       	fcmp/gt	fr2,fr3
+   74e0a:	8f 09       	bf.s	0x74e20
+   74e0c:	00 09       	nop	
+   74e0e:	d1 22       	mov.l	0x74e98,r1	! e0cec
+   74e10:	f1 48       	fmov	@r4,fr1
+   74e12:	f2 18       	fmov	@r1,fr2
+   74e14:	f1 25       	fcmp/gt	fr2,fr1
+   74e16:	8f 03       	bf.s	0x74e20
+   74e18:	00 09       	nop	
+   74e1a:	e2 01       	mov	#1,r2
+   74e1c:	a0 02       	bra	0x74e24
+   74e1e:	25 20       	mov.b	r2,@r5
+   74e20:	e1 00       	mov	#0,r1
+   74e22:	25 10       	mov.b	r1,@r5
+   74e24:	00 0b       	rts	
+   74e26:	00 09       	nop	
+   74e28:	ff ff       	.word 0xffff
+   74e2a:	7f b1       	add	#-79,r15
+   74e2c:	ff ff       	.word 0xffff
+   74e2e:	7f b2       	add	#-78,r15
+   74e30:	ff ff       	.word 0xffff
+   74e32:	7f b3       	add	#-77,r15
+   74e34:	ff ff       	.word 0xffff
+   74e36:	7f b4       	add	#-76,r15
+   74e38:	ff ff       	.word 0xffff
+   74e3a:	91 51       	mov.w	0x74ee0,r1	! 410b
+   74e3c:	ff ff       	.word 0xffff
+   74e3e:	91 16       	mov.w	0x74e6e,r1	! 4450
+   74e40:	ff ff       	.word 0xffff
+   74e42:	91 50       	mov.w	0x74ee6,r1	! d06b
+   74e44:	ff ff       	.word 0xffff
+   74e46:	91 17       	mov.w	0x74e78,r1	! ffff
+   74e48:	ff ff       	.word 0xffff
+   74e4a:	91 53       	mov.w	0x74ef4,r1	! 60e3
+   74e4c:	ff ff       	.word 0xffff
+   74e4e:	91 18       	mov.w	0x74e82,r1	! 915c
+   74e50:	ff ff       	.word 0xffff
+   74e52:	91 52       	mov.w	0x74efa,r1	! 9
+   74e54:	ff ff       	.word 0xffff
+   74e56:	91 19       	mov.w	0x74e8c,r1	! ffff
+   74e58:	ff ff       	.word 0xffff
+   74e5a:	a5 56       	bra	0x7590a
+   74e5c:	ff ff       	.word 0xffff
+   74e5e:	91 4e       	mov.w	0x74efe,r1	! e501
+   74e60:	ff ff       	.word 0xffff
+   74e62:	91 4d       	mov.w	0x74f00,r1	! d363
+   74e64:	ff ff       	.word 0xffff
+   74e66:	8f d4       	bf.s	0x74e12
+   74e68:	ff ff       	.word 0xffff
+   74e6a:	92 5e       	mov.w	0x74f2a,r2	! 8f0b
+   74e6c:	00 01       	.word 0x0001
+   74e6e:	44 50       	.word 0x4450
+   74e70:	ff ff       	.word 0xffff
+   74e72:	a5 62       	bra	0x7593a
+   74e74:	ff ff       	.word 0xffff
+   74e76:	90 0a       	mov.w	0x74e8e,r0	! 6cb4
+   74e78:	ff ff       	.word 0xffff
+   74e7a:	28 2c       	cmp/str	r2,r8
+   74e7c:	00 01       	.word 0x0001
+   74e7e:	51 46       	mov.l	@(24,r4),r1
+   74e80:	ff ff       	.word 0xffff
+   74e82:	91 5c       	mov.w	0x74f3e,r1	! d351
+   74e84:	ff ff       	.word 0xffff
+   74e86:	91 49       	mov.w	0x74f1c,r1	! e500
+   74e88:	ff ff       	.word 0xffff
+   74e8a:	91 08       	mov.w	0x74e9e,r1	! d374
+   74e8c:	ff ff       	.word 0xffff
+   74e8e:	6c b4       	mov.b	@r11+,r12
+   74e90:	ff ff       	.word 0xffff
+   74e92:	91 4b       	mov.w	0x74f2c,r1	! 9
+   74e94:	00 0e       	mov.l	@(r0,r0),r0
+   74e96:	0c f0       	.word 0x0cf0
+   74e98:	00 0e       	mov.l	@(r0,r0),r0
+   74e9a:	0c ec       	mov.b	@(r0,r14),r12
+

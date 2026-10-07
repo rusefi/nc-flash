@@ -1,0 +1,30 @@
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000080d4 <.data+0x80d4>:
+    80d4:	d3 3b       	mov.l	0x81c4,r3	! dc3a9
+    80d6:	e5 00       	mov	#0,r5
+    80d8:	60 30       	mov.b	@r3,r0
+    80da:	60 0c       	extu.b	r0,r0
+    80dc:	88 5a       	cmp/eq	#90,r0
+    80de:	8d 08       	bt.s	0x80f2
+    80e0:	64 53       	mov	r5,r4
+    80e2:	d1 39       	mov.l	0x81c8,r1	! ffff4119
+    80e4:	d0 39       	mov.l	0x81cc,r0	! 1115d
+    80e6:	62 10       	mov.b	@r1,r2
+    80e8:	62 2c       	extu.b	r2,r2
+    80ea:	42 00       	shll	r2
+    80ec:	00 2c       	mov.b	@(r0,r2),r0
+    80ee:	c9 7f       	and	#127,r0
+    80f0:	64 03       	mov	r0,r4
+    80f2:	93 63       	mov.w	0x81bc,r3	! f6d8
+    80f4:	23 40       	mov.b	r4,@r3
+    80f6:	92 62       	mov.w	0x81be,r2	! f6c4
+    80f8:	22 50       	mov.b	r5,@r2
+    80fa:	d1 35       	mov.l	0x81d0,r1	! ffff414b
+    80fc:	00 0b       	rts	
+    80fe:	21 40       	mov.b	r4,@r1
+

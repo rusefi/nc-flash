@@ -15,7 +15,7 @@ undefined * Control_UpdateLocalSerialEnables(void)
   
   uVar1 = *(ushort *)PTR_Control_ModeOneTimer_00024f54;
   fVar6 = *(float *)PTR_Control_FilteredLocalSource_00024f44;
-  bVar4 = (*(code *)PTR_FUN_00024f5c)(PTR_DAT_00024f58);
+  bVar4 = (*(code *)PTR_FUN_00024f5c)(PTR_Control_FilteredModeInput_00024f58);
   puVar2 = PTR_DAT_00024f64;
   if ((fVar6 < *(float *)PTR_DAT_00024f64) ||
      (((*PTR_DAT_00024f68 != '\0' && ((bVar4 != 1 || (uVar1 < *(ushort *)PTR_DAT_00024f6c)))) ||

@@ -1,0 +1,82 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00010400 <.data+0x10400>:
+   10400:	4f 22       	sts.l	pr,@-r15
+   10402:	00 02       	stc	sr,r0
+   10404:	93 24       	mov.w	0x10450,r3	! ff0f
+   10406:	20 39       	and	r3,r0
+   10408:	cb f0       	or	#240,r0
+   1040a:	40 0e       	ldc	r0,sr
+   1040c:	d2 11       	mov.l	0x10454,r2	! 10000
+   1040e:	42 2e       	ldc	r2,vbr
+   10410:	d1 11       	mov.l	0x10458,r1	! 76c84
+   10412:	63 12       	mov.l	@r1,r3
+   10414:	43 1e       	ldc	r3,gbr
+
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000143dc <.data+0x143dc>:
+   143dc:	93 86       	mov.w	0x144ec,r3	! ed00
+   143de:	e4 00       	mov	#0,r4
+   143e0:	23 41       	mov.w	r4,@r3
+   143e2:	92 84       	mov.w	0x144ee,r2	! ed02
+   143e4:	22 41       	mov.w	r4,@r2
+   143e6:	e1 0d       	mov	#13,r1
+   143e8:	90 82       	mov.w	0x144f0,r0	! ed04
+   143ea:	20 11       	mov.w	r1,@r0
+   143ec:	91 81       	mov.w	0x144f2,r1	! ed06
+   143ee:	e3 30       	mov	#48,r3
+   143f0:	21 31       	mov.w	r3,@r1
+   143f2:	92 7f       	mov.w	0x144f4,r2	! c00
+   143f4:	93 7f       	mov.w	0x144f6,r3	! ed08
+   143f6:	23 21       	mov.w	r2,@r3
+   143f8:	90 7e       	mov.w	0x144f8,r0	! 2040
+   143fa:	92 7e       	mov.w	0x144fa,r2	! ed0a
+   143fc:	22 01       	mov.w	r0,@r2
+   143fe:	91 7d       	mov.w	0x144fc,r1	! 50c0
+   14400:	90 7d       	mov.w	0x144fe,r0	! ed0c
+   14402:	20 11       	mov.w	r1,@r0
+   14404:	93 7c       	mov.w	0x14500,r3	! f00
+   14406:	91 7c       	mov.w	0x14502,r1	! ed0e
+   14408:	21 31       	mov.w	r3,@r1
+   1440a:	72 06       	add	#6,r2
+   1440c:	22 41       	mov.w	r4,@r2
+   1440e:	70 06       	add	#6,r0
+   14410:	93 78       	mov.w	0x14504,r3	! 980
+   14412:	20 31       	mov.w	r3,@r0
+   14414:	93 77       	mov.w	0x14506,r3	! ed14
+   14416:	e1 06       	mov	#6,r1
+   14418:	23 11       	mov.w	r1,@r3
+   1441a:	92 75       	mov.w	0x14508,r2	! a00
+   1441c:	91 75       	mov.w	0x1450a,r1	! ed16
+   1441e:	00 0b       	rts	
+   14420:	21 21       	mov.w	r2,@r1
+
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00015574 <.data+0x15574>:
+   15574:	2f e6       	mov.l	r14,@-r15
+   15576:	ee 00       	mov	#0,r14
+   15578:	92 6e       	mov.w	0x15658,r2	! 868c
+   1557a:	2f d6       	mov.l	r13,@-r15
+   1557c:	4f 22       	sts.l	pr,@-r15
+   1557e:	d3 37       	mov.l	0x1565c,r3	! ffff6000
+   15580:	6d 32       	mov.l	@r3,r13
+   15582:	22 e0       	mov.b	r14,@r2
+   15584:	91 69       	mov.w	0x1565a,r1	! 868d
+   15586:	d3 36       	mov.l	0x15660,r3	! 143dc
+   15588:	43 0b       	jsr	@r3
+   1558a:	21 e0       	mov.b	r14,@r1
+

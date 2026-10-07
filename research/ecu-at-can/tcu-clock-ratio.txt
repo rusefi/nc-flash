@@ -1,0 +1,44 @@
+TCU ratio-only timing sensitivity — completed 2026-10-07
+
+This supersedes the live-run status in tcu-interrupt-setup.txt. It is a
+sensitivity test retaining100 CMT0 events per task, not native application
+cadence. The better grounded application-period join is in
+ tcu-application-clock.txt. All ECU/AT, traction and both roof goals remain open.
+
+Input: examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+Python3.14.3. Reproduce:
+ python research/ecu-at-can/probe_tcu_clock_ratio.py --cycles 320 --filename tcu-clock-ratio-probe.json
+ python research/ecu-at-can/verify_tcu_clock_ratio.py
+
+Completed session80017 exit0. Full320 PASS, exact first8 rows,32000 CMT0,
+15625 CMT1,560 capture ISR prefixes,80 actual20CBC whole-RAM checks,
+320 independent CMT0 wheel boundary replays and125 CMT0/CMT1 ties. Exact
+closed-form20000/40960 event enumeration checks the runtime merge separately.
+Actual CMT1 whole-RAM/profile/access checks and capture/register checks pass.
+No assertion failures. One request creation and10 acknowledgements observed,
+versus2/20 under the old100:8 fixture. Old behavior comparison is FALSE and
+all recorded differences remain in tcu-clock-ratio-verification.json.
+
+Selected observations (zero-based task pairs; not physical time):
+- Stale reference path at4, as already seen in prefix8.
+- Cut9454 becomes0 at20; reset-stateA939 changes24; active faultA722=4 and
+  summaryA98E=1C at30. Request creation33, managed list empty35, phase empty64.
+- ActiveA722 clears116, summaryA98E=11; substituted80E8=20480 returns10240
+  at122. These differ from old284/290 dates.
+- None of80 actual hold checks report held/history_reset. No old280 hold claim
+  transfers to this altered wheel/capture schedule.
+- Final phase/list empty, heap header007FFFFF; requestword915A=32767.
+
+Reason for limitation: CMT ratio matches executed compare/prescaler settings
+under the compatible SH7055S manual, but100 CMT0 per application and once/task
+capture timestamps/CAN receipts/diagnostic delivery remain supplied. Increasing
+primary age updates to about24/task exposes this fixture inconsistency. This
+is not evidence of vehicle failure or physical recovery timing. Mode/readiness,
+start offset, interrupt acceptance and peripheral clock frequency remain open.
+Next validate full320 application-period join; do not rerun this completed
+sensitivity probe or use its dates as native timing constraints.
+
+Files saved locally and Git-eligible; no staging/commit/push. No new Ghidra
+project edits for the full sensitivity result yet; isolated timer/INTC/application
+proof remains in the verified1936-annotation archive identified in CHECKPOINT.

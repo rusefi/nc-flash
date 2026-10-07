@@ -1,0 +1,59 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001421a <.data+0x1421a>:
+   1421a:	e7 01       	mov	#1,r7
+   1421c:	2f e6       	mov.l	r14,@-r15
+   1421e:	27 59       	and	r5,r7
+   14220:	4f 22       	sts.l	pr,@-r15
+   14222:	6e 43       	mov	r4,r14
+   14224:	64 e2       	mov.l	@r14,r4
+   14226:	64 41       	mov.w	@r4,r4
+   14228:	84 e5       	mov.b	@(5,r14),r0
+   1422a:	66 03       	mov	r0,r6
+   1422c:	84 e4       	mov.b	@(4,r14),r0
+   1422e:	b0 06       	bsr	0x1423e
+   14230:	65 03       	mov	r0,r5
+   14232:	64 03       	mov	r0,r4
+   14234:	62 e2       	mov.l	@r14,r2
+   14236:	22 41       	mov.w	r4,@r2
+   14238:	4f 26       	lds.l	@r15+,pr
+   1423a:	00 0b       	rts	
+   1423c:	6e f6       	mov.l	@r15+,r14
+   1423e:	67 7c       	extu.b	r7,r7
+   14240:	2f e6       	mov.l	r14,@-r15
+   14242:	27 78       	tst	r7,r7
+   14244:	4f 22       	sts.l	pr,@-r15
+   14246:	8d 02       	bt.s	0x1424e
+   14248:	ee 01       	mov	#1,r14
+   1424a:	a0 01       	bra	0x14250
+   1424c:	67 e3       	mov	r14,r7
+   1424e:	e7 00       	mov	#0,r7
+   14250:	66 6c       	extu.b	r6,r6
+   14252:	67 7c       	extu.b	r7,r7
+   14254:	36 70       	cmp/eq	r7,r6
+   14256:	8b 05       	bf	0x14264
+   14258:	d3 08       	mov.l	0x1427c,r3	! 5b25c
+   1425a:	61 5c       	extu.b	r5,r1
+   1425c:	43 0b       	jsr	@r3
+   1425e:	60 e3       	mov	r14,r0
+   14260:	a0 06       	bra	0x14270
+   14262:	24 0b       	or	r0,r4
+   14264:	d3 05       	mov.l	0x1427c,r3	! 5b25c
+   14266:	61 5c       	extu.b	r5,r1
+   14268:	43 0b       	jsr	@r3
+   1426a:	60 e3       	mov	r14,r0
+   1426c:	60 07       	not	r0,r0
+   1426e:	24 09       	and	r0,r4
+   14270:	4f 26       	lds.l	@r15+,pr
+   14272:	60 43       	mov	r4,r0
+   14274:	00 0b       	rts	
+   14276:	6e f6       	mov.l	@r15+,r14
+   14278:	ff 0f       	.word 0xff0f
+   1427a:	ff ff       	.word 0xffff
+   1427c:	00 05       	mov.w	r0,@(r0,r0)
+   1427e:	b2 5c       	bsr	0x1473a
+

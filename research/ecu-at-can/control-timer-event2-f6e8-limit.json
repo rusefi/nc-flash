@@ -1,0 +1,776 @@
+{
+  "scope": "Original F28C/1062E timer callback drives acquisition and both event queues.\n\nEach supplied CMT1 status sample executes the complete original timer callback,\nthen the scheduler drains to idle. No direct task7 enqueue or event2 injection.\nAll task stacks use explicit FFFED000 and admission maskF0. No hardware entry,\nRTE interrupt delivery, absolute frequency or remote-controller proof.\n",
+  "rom_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "rows": [
+    {
+      "cycle": 0,
+      "queued": {
+        "wheel": 1,
+        "divider": 1,
+        "selected": 7,
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-0",
+          "pc": 62092,
+          "pr": 4294967280,
+          "argument": 0,
+          "wheel": 0,
+          "divider": 0
+        },
+        {
+          "stage": "queued-event2-timer-0",
+          "pc": 67118,
+          "pr": 4294967280,
+          "argument": 0,
+          "wheel": 0,
+          "divider": 0
+        },
+        {
+          "stage": "queued-event2-timer-0",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 0,
+          "divider": 0
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 56040,
+          "pr": 589356,
+          "argument": 2,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 62880,
+          "pr": 56128,
+          "argument": 3,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 13792,
+          "pr": 62974,
+          "argument": 4,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 1,
+          "task": 7
+        },
+        {
+          "pc": 56448,
+          "pr": 58448,
+          "argument": 56448,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 63136,
+          "pr": 56484,
+          "argument": 3,
+          "pending": 0,
+          "count": 1,
+          "task": 4
+        },
+        {
+          "pc": 15544,
+          "pr": 56524,
+          "argument": 124,
+          "pending": 0,
+          "count": 0,
+          "task": 4
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        },
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 56448,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [
+        {
+          "stage": "queued-event2-timer-0",
+          "return_pc": 56484,
+          "result": 0,
+          "count": 1,
+          "head": 0
+        }
+      ],
+      "callbacks": [
+        {
+          "stage": "queued-event2-timer-0",
+          "target": 612850,
+          "words": [
+            612850,
+            124,
+            16,
+            0,
+            228012
+          ]
+        }
+      ],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    },
+    {
+      "cycle": 1,
+      "queued": {
+        "wheel": 2,
+        "divider": 2,
+        "selected": 7,
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0
+      },
+      "fields": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 1,
+        "0x99d8": 32768,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "timer": [
+        {
+          "stage": "queued-event2-timer-1",
+          "pc": 62092,
+          "pr": 4294967280,
+          "argument": 0,
+          "wheel": 1,
+          "divider": 1
+        },
+        {
+          "stage": "queued-event2-timer-1",
+          "pc": 67118,
+          "pr": 4294967280,
+          "argument": 0,
+          "wheel": 1,
+          "divider": 1
+        },
+        {
+          "stage": "queued-event2-timer-1",
+          "pc": 64104,
+          "pr": 67132,
+          "argument": 0,
+          "wheel": 1,
+          "divider": 1
+        }
+      ],
+      "entries": [
+        {
+          "pc": 13792,
+          "pr": 64112,
+          "argument": 7,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 14618,
+          "pr": 13856,
+          "argument": 4294906544,
+          "pending": 0,
+          "count": 0,
+          "task": 65535
+        },
+        {
+          "pc": 15544,
+          "pr": 58448,
+          "argument": 0,
+          "pending": 0,
+          "count": 0,
+          "task": 7
+        }
+      ],
+      "rte": [
+        {
+          "pc": 16188,
+          "sp": 4294889464,
+          "target": 57964,
+          "status": 0,
+          "restored_sr": 0
+        }
+      ],
+      "consumed": [],
+      "callbacks": [],
+      "mmio": [
+        [
+          "read",
+          4294965016,
+          2,
+          192
+        ],
+        [
+          "write",
+          4294965016,
+          2,
+          64
+        ]
+      ],
+      "final": {
+        "queue2": 0,
+        "queue3": 0,
+        "pending": 0,
+        "task3_available": 2,
+        "task4_available": 2,
+        "task7_available": 2
+      }
+    }
+  ],
+  "status": "ValueError: Unsupported read FFFFF6E8/2",
+  "stage": "queued-event2-timer-2",
+  "pc": 32026,
+  "tail": [
+    16180,
+    16182,
+    16184,
+    16186,
+    16190,
+    58456,
+    58458,
+    58460,
+    58462,
+    31350,
+    31352,
+    31354,
+    31356,
+    31358,
+    31360,
+    14464,
+    14466,
+    14468,
+    14470,
+    14472,
+    14474,
+    14476,
+    31362,
+    31364,
+    32012,
+    32014,
+    32016,
+    32018,
+    32020,
+    32022,
+    32024,
+    32026
+  ],
+  "registers": [
+    0,
+    16476,
+    4294918476,
+    0,
+    4294964968,
+    240,
+    0,
+    0,
+    0,
+    4294965062,
+    8948,
+    4294918932,
+    4294906544,
+    16720,
+    4294906344,
+    4294889456
+  ],
+  "timer_entries": [
+    {
+      "stage": "queued-event2-timer-0",
+      "pc": 62092,
+      "pr": 4294967280,
+      "argument": 0,
+      "wheel": 0,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-0",
+      "pc": 67118,
+      "pr": 4294967280,
+      "argument": 0,
+      "wheel": 0,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-0",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 0,
+      "divider": 0
+    },
+    {
+      "stage": "queued-event2-timer-1",
+      "pc": 62092,
+      "pr": 4294967280,
+      "argument": 0,
+      "wheel": 1,
+      "divider": 1
+    },
+    {
+      "stage": "queued-event2-timer-1",
+      "pc": 67118,
+      "pr": 4294967280,
+      "argument": 0,
+      "wheel": 1,
+      "divider": 1
+    },
+    {
+      "stage": "queued-event2-timer-1",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 1,
+      "divider": 1
+    },
+    {
+      "stage": "queued-event2-timer-2",
+      "pc": 62092,
+      "pr": 4294967280,
+      "argument": 0,
+      "wheel": 2,
+      "divider": 2
+    },
+    {
+      "stage": "queued-event2-timer-2",
+      "pc": 67118,
+      "pr": 4294967280,
+      "argument": 0,
+      "wheel": 2,
+      "divider": 2
+    },
+    {
+      "stage": "queued-event2-timer-2",
+      "pc": 64104,
+      "pr": 67132,
+      "argument": 0,
+      "wheel": 2,
+      "divider": 2
+    }
+  ],
+  "queue_entries": [
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 56040,
+      "pr": 589356,
+      "argument": 2,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 62880,
+      "pr": 56128,
+      "argument": 3,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 13792,
+      "pr": 62974,
+      "argument": 4,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 1,
+      "task": 7
+    },
+    {
+      "pc": 56448,
+      "pr": 58448,
+      "argument": 56448,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 63136,
+      "pr": 56484,
+      "argument": 3,
+      "pending": 0,
+      "count": 1,
+      "task": 4
+    },
+    {
+      "pc": 15544,
+      "pr": 56524,
+      "argument": 124,
+      "pending": 0,
+      "count": 0,
+      "task": 4
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 13792,
+      "pr": 64112,
+      "argument": 7,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 65535
+    },
+    {
+      "pc": 13792,
+      "pr": 64140,
+      "argument": 8,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 14618,
+      "pr": 13856,
+      "argument": 4294906544,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    },
+    {
+      "pc": 15544,
+      "pr": 58448,
+      "argument": 0,
+      "pending": 0,
+      "count": 0,
+      "task": 7
+    }
+  ],
+  "activity": [
+    {
+      "entry": 455368,
+      "return_pc": 94508,
+      "before": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 0,
+        "0x8fe0": 0,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 0,
+        "0x660f": 0,
+        "0x6610": 0,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 0,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 0
+      },
+      "stage": "initializer",
+      "after": {
+        "0x9158": 0,
+        "0x915e": 0,
+        "0x915c": 0,
+        "0x8fd4": 640,
+        "0x8fd6": 40,
+        "0x8fd7": 40,
+        "0x8fd8": 0,
+        "0x8fdf": 1,
+        "0x8fe0": 1,
+        "0x9125": 1,
+        "0x6604": 0,
+        "0x6605": 0,
+        "0x6606": 1,
+        "0x660c": 0,
+        "0x660e": 0,
+        "0x660f": 0,
+        "0x6610": 0,
+        "0x6611": 0,
+        "0x7358": 2,
+        "0x735a": 64,
+        "0x735b": 1,
+        "0x735c": 1,
+        "0x9149": 0,
+        "0x44a2": 1,
+        "0x651c": 0,
+        "0x5360": 0
+      }
+    }
+  ],
+  "decode": [],
+  "qualification": [
+    {
+      "entry": 445846,
+      "stage": "initializer",
+      "before": {
+        "0x8ef4": 0,
+        "0x8ef5": 0,
+        "0x8ef6": 0,
+        "0x8ef7": 0,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 0,
+        "0x99d8": 0,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "selected": null,
+      "reports": [],
+      "cache_oracle": false,
+      "return": 445814,
+      "after": {
+        "0x8ef4": 0,
+        "0x8ef5": 0,
+        "0x8ef6": 0,
+        "0x8ef7": 0,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 0,
+        "0x99d8": 0,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      }
+    },
+    {
+      "entry": 446214,
+      "stage": "initializer",
+      "before": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 0,
+        "0x99d8": 0,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      },
+      "selected": null,
+      "reports": [],
+      "cache_oracle": false,
+      "return": 91712,
+      "after": {
+        "0x8ef4": 50,
+        "0x8ef5": 50,
+        "0x8ef6": 3,
+        "0x8ef7": 3,
+        "0x8ef8": 0,
+        "0x8ef9": 0,
+        "0x8efa": 0,
+        "0x8efb": 0,
+        "0x8efc": 0,
+        "0x8efd": 0,
+        "0x8efe": 0,
+        "0x8eff": 0,
+        "0x8f00": 0,
+        "0x6c92": 0,
+        "0x914b": 0,
+        "0x99d5": 0,
+        "0x99d8": 0,
+        "0x9462": 0,
+        "0x9a28": 0,
+        "0x973d": 0,
+        "0x973e": 0
+      }
+    }
+  ]
+}

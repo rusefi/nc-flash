@@ -1,0 +1,145 @@
+ECU target-adjustment and ramp-rate producers (2026-10-06)
+========================================================
+Scope: ECU/AT integration, deep traction-control logic/integration, and NC
+PRHT folding AND unfolding including interruption/recovery all remain open.
+This record advances the shared ECU numeric path only. Signal names below
+are address-based descriptions, not proof of DSC identity or actuation.
+
+Inputs and reproduction
+-----------------------
+ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Python3.14.3; standard library and repository interpreters/models only:
+  python research/ecu-at-can/verify_control_target_adjustment.py
+Result: control-target-adjustment-verification.json; full run passed.
+No ROM or production application changes. Original finite single-precision
+instructions execute in the existing RTZ interpreter. Independent map and
+Fraction arithmetic models compare exact binary32 values after each body.
+This is bounded firmware execution, not hardware or a full ECU task replay.
+
+Original instructions are preserved in:
+ control-target-predecessor-leads-disassembly.txt (30DBA..30FB6),
+ control-target-rate-disassembly.txt (33BAC..33C88),
+ control-upstream-target-caller-disassembly.txt (1B558..1B588).
+Disassembler: GNU SH binutils2.42, temporary setup documented in prior task
+records; repeat using disassemble.py with the executable and library paths:
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+ python research/ecu-at-can/disassemble.py \
+ --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+ at dis 0x30DBA 0x30FB6
+Scripts, input ROMs and text disassembly are repository records; the temporary
+executable is not the sole source of this evidence.
+
+Executed firmware findings
+--------------------------
+30DBA writes byte6954 = (byte6561==1 OR byte65AA==1), else0. Raw values2/255
+are not true for this comparison. No retained output here.
+
+30DE2 always reads protected2160 via15246 (fallback DB240=95), computes
+mapA3900 ->67F8 and abs(RTZ(67F8-entry67C8)) using2578. Either checksum copy
+2164/2166 matching admits the float. Both bad select fallback and report
+FFFF2160 at534C. The helper return is observed separately so an equal map
+output cannot conceal an incorrect fallback test.
+
+Let a=6943,b=6944,flag=695Bbit3,special=(67CC==1 OR7247==1).
+Ordered selection for float67F4:
+  (a==b==0 and flag clear) OR6954==1: clear to0.
+  Otherwise,6940 nonzero: if abs(RTZ(67F8-entry67C8))>=DB2A4 (stock1),
+    new=RTZ(old+RTZ(DB2A8*RTZ(67F8-entry67C8))); else retain.
+    DB2A8 stock binary32 is0.10000000149011612. No clamp in this body.
+    FMAC rounds multiplication before addition, per existing RTZ model.
+  Otherwise,a==1 ORflag set: mapA3840(special) orA3834(other) of67E4.
+  Otherwise,b==1: mapA3858(special) orA384C(other) of67E4.
+  Otherwise retain67F4 (rawnonzero2/255 admitsouterbutnotexact1mapselection).
+Map publication occurs even when67F4 is cleared or retained. An inclusive
+threshold update at exactly +/-1 must be distinguished from the strict
+interior deadband. Repeated updates can become negative or exceed map values;
+the subsequent30FB6 cap depends on9376exact1 and doesnotclamp67F4 itself.
+
+33BAC writes both ramp steps on every call. If67CCexact1 OR7247exact1,
+6908=DB224 and690C=DB22C, stock0.029999999329447746. Otherwise6908=DB220,
+690C=DB230 if byte6956exact1 elseDB228, all three stock0.20000000298023224.
+154B0 simply returns the raw byte in its return delay slot; this is not a
+checksum-protected byte read. BecauseDB228 andDB230 coincide, the verifier
+also observes original branch PCs33BF0/33BF6; equal outputs alone cannot
+prove this selector. Neither rate is converted to a physical rate per second.
+
+Original caller slice1B55E..1B576 executes30DBA ->30DE2 ->33BAC ->30FB6.
+The preceding31E56 and following31C36/31662/31D8C are outside this slice.
+The integrated replay schedules this production before the previously
+verified downstream segment in another task region; this order is explicit
+and does not establish actual cross-task timing or priority.
+
+Harness correction during first run
+------------------------------------
+The initial direct-boundary fixture passed Fraction(1,3) to the exact-only
+RAM float writer, which rejected it before original firmware execution.
+Changed the fixture to q(old), applying binary32 RTZ before storage. This
+was a fixture construction failure, not a firmware discrepancy. No passing
+result or output JSON was claimed from that initial failed run.
+
+Outstanding work
+----------------
+Verifier andGhidra save/independent restore complete:1,514 annotations,743
+identical exports,11 matching project hashes. Final archive identity and
+verification are recorded in ghidra manifests and CHECKPOINT.txt.
+Next31C36/31662/31D8C and entry gate/rawinput
+provenance. Actual399B0 andcross-task scheduling, CAN211/21A physicalsender/
+units, DSC internal logic andactuation remain unproved. Roofbothdirections
+retainseparate documentation/receiver requirements inCHECKPOINT.txt and
+traction-roof.txt; no OEMDSC/roof dump or capture has become available.
+
+Verification result
+-------------------
+3,786 direct cases passed:36 inhibit,3072 gate combinations,129 map samples,
+45 signed deadband boundaries,64 rate selectors (with PC observations),
+4 checksum permutations,400 deterministic random cases,36 distance helpers.
+36 original four-call caller slices matched all modeled outputs and return
+stack state. The40-call retained trace covers map initialization, repeated
+positive/negative increments, strict interior deadband hold, rawgate2 hold,
+inhibit clearing and subsequent negative accumulation. Each call also runs
+the original downstream target/ramp body30FB6.
+320 explicitly scheduled retained cycles passed, including36 paired CAN
+updates and320 CAN211 latch updates through the existing chain. Aftersetup
+there is no injection of67F4,6908,690C or67FC. Raw67C8,67E4 andgate inputs
+remain deliberate fixtures; no naturalproducer/cadence claim. Calls101..140
+exercise existing descriptor substitution; calls201..220 clear67F4 via
+original30DBA inhibition. Per-stage exact assertions compare results even
+when the final CAN selection remains unchanged.
+
+Next-producer correction and stock-reachability extension
+---------------------------------------------------------------
+control-target-input-leads-disassembly.txt shows31E56 writes6940, NOT67E4.
+The earlier continuation assumption that it produced67E4 was wrong.31E56
+sets6940=1 only when (6943exact1 OR6944exact1 OR695Bbit3) AND raw7346exact1
+AND ROMbyteDB0C0exact1; otherwise0.154B0istherawbytegetter. Body ends31EB0.
+The extension executes this predecessor, replaces the6940 fixture and extends
+the original caller slice to1B558..1B576. Actual67E4 producer remains
+separate/unidentified here.
+
+Crucial stock constraint: ECU ROMbyteDB0C0 is0. Thereforetheoriginal31E56
+predecessor clears6940 on every testedstockinput combination. The earlier
+4-call/320-cycle incrementalpath tests intentionallyfixture6940 anddoNOT
+prove that thispathisreachableafter31E56inthestocktask. Their conditional
+bodybehavior remains valid. A new256-case gate sweep,36five-call slices and
+a separate320-cycle replay include31E56; complete rerun passed. Both
+replays retainexactstockROMbytes; no calibrationpatchusedtoforceadmission.
+
+Final combined verification: 4,042 direct cases, 36 four-call and 36 five-call
+caller slices, 40 retained calls, and two 320-cycle paired replays, each with
+36 paired CAN and320 CAN211 updates. The stock-gated replay asserts6940=0
+and no incremental/deadband branch at every retained observation; the body
+oracle checks every cycle. Conditional tests remain explicitly labeled.
+
+Archive verification command (after ApplyCanEvidence/VerifyCanEvidence and
+snapshot.py per ghidra/README.txt; snapshot inventory hashes checked first):
+ analyzeHeadless research/ecu-at-can/ghidra/restore-check/target-adjustment-20261006 nc-at-can \
+ -process '*' -noanalysis -readOnly -scriptPath research/ecu-at-can/ghidra/scripts \
+ -postScript VerifyCanEvidence.java /home/snow/nc-flash/research/ecu-at-can/ghidra/annotations.tsv \
+ /home/snow/nc-flash/research/ecu-at-can/ghidra/restore-check/target-adjustment-20261006/exports
+Both READBACK_OK reports661/853 matched; every export byte andall11project
+hashes matched after reopening. Noerrors/incomplete decompiles/remaininglocks.
+The restorable archive/manifests are Git-eligible; live/logs/restore scratch
+remainignored. Saved locally only; nothing staged, committed or pushed.

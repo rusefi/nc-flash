@@ -1,7 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* STATIC:84F5==1 initializes2/phase7;==2 calls1E5F6(84F4&7); always increments84F4. Full task
-   timing remains open. */
+/* Executed84F5==1 setsstage2/phase7 thenincrementsphase8;==2 invokes1E5F6(84F4&7);
+   otherstagesonlyincrementbyte84F4. Fulltaskreturns/phasewrap verified; physicalcadence open. See
+   tcu-application-order.txt. */
 
 uint Task_DispatchApplicationPhase(void)
 
@@ -9,7 +10,7 @@ uint Task_DispatchApplicationPhase(void)
   undefined *puVar1;
   uint uVar2;
   
-  puVar1 = PTR_DAT_00012764;
+  puVar1 = PTR_Task_ApplicationPhaseCounter_00012764;
   uVar2 = (uint)*(byte *)(int)DAT_00012762;
   if (uVar2 != 0) {
     if (uVar2 == 1) {
@@ -17,7 +18,8 @@ uint Task_DispatchApplicationPhase(void)
       *puVar1 = 7;
     }
     else if (uVar2 == 2) {
-      uVar2 = (*(code *)PTR_Task_ApplicationPeriodicBody_00012794)(*PTR_DAT_00012764 & 7);
+      uVar2 = (*(code *)PTR_Task_ApplicationPeriodicBody_00012794)
+                        (*PTR_Task_ApplicationPhaseCounter_00012764 & 7);
     }
   }
   *puVar1 = *puVar1 + '\x01';

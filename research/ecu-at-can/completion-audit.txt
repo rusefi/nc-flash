@@ -1,0 +1,94 @@
+Full-objective evidence audit — 2026-10-07
+
+Required outcome (unchanged)
+Close ECU/automatic-transmission CAN integration, deep traction-control logic
+and integration, and NC factory roof folding AND unfolding CAN integration,
+including interruption, resume/reversal, communication timeout, motor
+synchronization and fault recovery. Authoritative criteria: README.txt RESULT
+AND SCOPE, traction-roof.txt OBJECTIVES AND COMPLETION CRITERIA, user/AGENTS.md.
+User has no additional remote firmware, CAN captures or bench/vehicle results.
+No staging/commit/push authorization. This checkout remains owned by this thread.
+
+Audit decision: NOT COMPLETE. Passing component tests do not prove the whole.
+
+ECU/AT
+- Own message layouts/packers/consumers and selected request/fault lifecycles:
+  executed evidence in README, tcu-native-can-lifecycle.txt and saved verifier.
+  Protocol overlap is established; OEM matched software-pair compatibility,
+  all physical units and full engine/gearbox actuation are not established.
+- Native admission/timing: native320 has320application,1310CAN,1310CMT0,
+  640CMT1,52diagnostic,2541capture and960receivedframes under supplied clocks,
+  status and three-frame traffic. Only explicit scenario/prefix equivalence
+  is verified; physical clock/interrupt admission and complete traffic missing.
+- Startup/recovery: tcu-hardware-startup-connection-probe.json is REJECTED at
+ 1461A wordFFFFF430. Recovery868C/D remain0. Latest boundedDSTR/TCNR checks
+  cannot justify completing15574. Prior native320 ends with phase2/group6/code9
+  pending, heap0005FF06; not complete phase retirement/recovery.
+- Counter identity: localTCU XML labelSH7058 conflicts with HCANSH7055 map;
+  exact silicon/revision not confirmed. Both2000SH7055 and2003SH7055S manuals
+  prohibit CPUwordTCNT0/10A access. Newmanualaudit rules out the proposed
+  older-manual exception; it does not prove physicalfault or write effects.
+- Required next evidence: actual variant/reset semantics and native startup;
+  subsequently complete operational traffic/recovery and physical integration.
+  No forced recovery, skipped14616 or blind extension of completed320.
+
+Traction
+- ECU receipt/normalization/arbitration and selected output effects are executed
+  in network/freshness/can211-spark/numeric-arbitration/output-inhibition reports;
+  the broad sender/units/actuator interpretation remains incomplete. These
+  reports' historical nextsteps must be crosschecked against currentcheckpoint.
+- control-preemption-verification.json PASS covers one actual task4->7->4
+  preemption in600outer/601timer/acquisition cycles and exact saved-state return.
+  Entry frame, arrival location, peripheral samples and clock remain supplied;
+  it is not hardware admission or a general all-interrupt timing proof.
+- Original task17 startup in control-scheduler-ports-probe.json remains rejected
+  atA46F6/FFFFEC62. Current primarySH7058/58S/59 and emulator leads do not identify
+  that register; RAMER isEC26. No guessedlatch/skippedcallee authorized as proof.
+- CAN211/21A remote sender, physical request units, DSC traction-versus-stability
+  decisions/brake actuation and complete throttle/ignition/fuel physical response
+  require missing applicable controller/hardware evidence. ECU consumption
+  alone cannot establish those remote facts.
+- Required next evidence: EC62 definition/variant and hardwareIRQ admission;
+  DSC-side firmware/captures or applicable OEM signal/actuation specification.
+
+Roof (each item applies to BOTH folding and unfolding)
+- Factory descriptions support basic interlocks/sequence and selected pause,
+  communication-recovery/window/trunk/keyless/cluster coordination. Retained
+  candidate201/231 sender fields do not prove OEM PRHT reception or CANoutputs.
+- Direct switches/motors/window handshake documented; connector/PID/indicator
+  and edition conflicts remain. 2007training/2008workshop/lateD9G4 cannot be
+  merged into a universal VIN-independent implementation.
+- Release-then-reverse admission and recovery, numerical CANtimeout, numerical
+  left/right pulse mismatch thresholds, and complete fault/interruption
+  response have no OEMreceiver execution/capture/physical verification.
+- roof-revision-source-audit.txt and roof-component-inspection.txt preserve
+  sources/failedleads; verify_roof_revision_sources.py currentlyPASS for7assets
+  and originalPDF, including distinctpausedindicator rows. Integrity is not
+  behavior. Three-minute PTC reinspection is not a CAN timeout/restart rule.
+- Required next evidence: applicable edition/VIN OEMtechnical detail, receiver
+  firmware or controlled observations covering both directions and recovery.
+  Existing AllCarManuals challenge/CHARM failures are exhausted unchanged routes.
+
+What can and cannot advance now
+The newolder-manual inspection closes a concrete unresolved source lead. Current
+checkpoint also contained an obsolete NEXT ECU/AT instruction to join CANstartup
+already completed; corrected to actual remaining boundary. Neither closes an
+integration requirement. At this audit's end there is no evidence-backed way
+to advance the current native startup paths or establish remote-controller
+behavior from the supplied files. Further arbitrary leaf checks/repeated green
+runs would not settle these barriers. Reassess if a genuinely new source or
+artifact appears; do not manufacture work or change success criteria.
+This is the first explicit full-scope impasse assessment after the latest
+firmware progress. Goal remains active pending required repeated-blocker audit;
+no complete/blocked/paused status change made this turn. Previous turn=progress;
+this turn=newprimaryevidence and corrected continuation, not a verified wait.
+
+Current evidence checks performed
+Inspected latest native lifecycle verifier, both startup rejectionJSONs and
+preemption verifier/scopes; checked all17 downcount artifact hashes. Re-ran
+roof source-integrity checker, PASS. No firmwarelongrun restarted. No live
+firmware/headless process remains from preceding terminal sessions. No Ghidra
+edits this turn; archive remains80d11cbe96e90dcf2588b9457667d89be8b22d7adb3d8dca6a56bedc69988e0d,
+2015annotations/1049exports/11files, independently restored lastturn.
+Auditartifact hashes in completion-audit-artifacts.json. Local saved only;
+preexisting mixed index including ADarchive.tmp preserved.

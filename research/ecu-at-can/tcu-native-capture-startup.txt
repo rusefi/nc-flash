@@ -1,0 +1,97 @@
+Native startup with capture and primary timing — 2026-10-07
+
+Verified execution
+verify_tcu_native_capture_startup.py extends the existing readiness event loop
+and diagnostic startup machine. Corrected session84690 terminalPASS for allthree
+scenarios. Totals:600 CMT0,291 CMT1,144 application,24 diagnostic and1293 capture
+ISR prefixes.423 captureA/870 captureB. Existing224 foreground/93 capture-ready
+return/288 command-pin checks pass. CMT1 has independent whole-RAM wheel/profile
+oracle; captures use originalcallback differential wholeRAM plus independent
+profile/MMIO/register checks. No ISR executes RTE or proves hardware acceptance.
+Original12374 initializer checks wholeapplicationRAM andexact3MMIO: mode8009=1,
+primary phases8494/8498/849C=0, compareF71C=1279,F710 sample1->3. It runs after
+existing diagnostic initialization before events, notfull1168A nativeordering.
+No nativeRAM/history reset after readiness or application admission.
+
+Scenarios: foregroundperiod / externalprofileepoch / CMT1 / A / B / skippededges
+ 50000 / 7        / 97 / 144 / 297 / 61
+ 50000 / 0        / 97 / 141 / 290 / 71
+ 65536 / FFFFFF00 / 97 / 138 / 283 / 81
+Applicationadmission remains2539520/2621440/2703360phi. Diagnosticadmission remains
+3000000phi inallthree, then3500000/4000000 continue mode3. Originalcaptureenable
+at491520/573440/655360 controls whether external edges deliver interruptprefixes.
+Exact deliveredphi list for eachchannel is checked against allschedulededges
+afterthe observedoriginalenable. No capturesdelivered beforeenable. Finalmeasured
+80EA=7017,80EE=10865,9198=21888,9238=14136;915A=7FFF inallthree. These are
+observedfirmware fields, notphysicalunits or evidence ofCANrequest creation.
+
+Input assumptions
+CMT0period20000,CMT1period40960,application81920,diagnostic500000phi. Shared
+conditionalclock withzero service latency; foregroundperiods areselectedinputs.
+Tieorder CMT0,diagnostic,CMT1,A,B,application,foreground. Pulse schedule reuses
+probe_tcu_capture_timeline.edges():A24320phi;B11780 beforeapplication48 then
+12980/8860/18240 latersegments. Currentend4000000phi reachesonlythefirstchange;
+itdoesnotexercise laterloss/recovery. CaptureTCNT0epoch0,profileTCNT10A samples
+external(epoch+phi/2)mod32,end+50. Capture gating checksTSTR1.F401bit0,
+TIER0.F42E bit0/1 andTIOR0.F42A channel2-bitmode1. Conditionalclock evidence in
+tcu-capture-clock.txt/tcu-cmt-configuration.txt. Physicalclock/pinidentity open.
+
+Preserved fixture defect and correction
+Firstsession85489 ranallscenarios but itsdeliverygate incorrectly usedTSRmask
+againstTIOR0, allowingonlyA andsuppressingallB. RawJSON retained as
+ tcu-native-capture-startup-a-only-fixture-defect.json
+ItsPASS means itsownexecutedchecks passed, NOT complete two-channelcoverage.
+CorrectionusesTIER0 bits andTIOR0 two-bitfields perverified16C5C/16B24 enable
+routines/manual; added exactper-channel deliverededge assertions. Corrected
+session84690 PASS is authoritative. ROM/ISA/production code unchanged.
+
+Native CAN startup next boundary
+probe_tcu_native_can_startup.py executesoriginal11FA0->124F8->19EC4->19AD0/
+1A056/1B060. Initialstrictprobe stops1AC72 readF732; preserved
+ tcu-native-can-startup-f732-stop.json
+F732 is alreadyverifiedPBCRH wordlatch inverify_tcu_timer_configuration.py,
+original147AA initializesA5. Probe now routesonlythatknownregister through the
+existingConfigurationRegisters owner;256 original1AC70 cases verifywholeRAM,
+callee registers/SR, exactread/write andold|A0 acrossvaried16bitinputs.
+Currentprobe stopsoriginal1AED4 writeFFFFE402; no guessedHCAN reset behavior.
+NativeCANtask8003 andreceive8F6C remain0. Resultin tcu-native-can-startup-probe.json
+isREJECTED bythefixture, notfirmwarefailure. RetainedmanualPDFzero568 section16.2.3 identifiesE402 as16-bit read/write
+BCR forCANbit timing/prescaler; addressconfirmedzero948. Savedsource excerpts
+intcu-native-can-startup-manual-excerpts.txt (pages32/562/564/568/948). Next
+useexactBCR/mailboxconfiguration widths andresetconstraints toextendboundedinputs tocompleteoriginal11FA0 andenableCANreception withoutwritingmode8.
+Disassembly tcu-native-can-startup-disassembly.txt; noCANreceipts inthese traces.
+
+Reproduce
+ python research/ecu-at-can/verify_tcu_native_group_initialization.py
+ python research/ecu-at-can/verify_tcu_native_capture_startup.py
+ python research/ecu-at-can/probe_tcu_native_can_startup.py
+Python3.14.3/GNUobjdump2.42; setup in tcu-pulse-input.txt.
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Source manual sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+Port-source pages685/696/697 zeroindexed/excerpts intcu-timer-configuration.txt.
+
+Broader requirements
+Native groupcomparison proves209 RAM-byte differences versusoldfixture; retain
+native1DFF8 effects. Fullreset/mainloop/TCNT10A resetwidth/TCR10identity/physical
+CANandactuation stayopen. Traction execution/preemption remains established,
+startupEC62 identity/hardwareadmission/CAN211/21Asender/units/remoteDSC missing.
+Roof hasfactorydocumentation/candidates, noOEMcontrollerexecution; applicable
+edition/VIN reversal,numericalCANtimeout/LRsynchronization/recovery remain for
+BOTH folding andunfolding includinginterruptions. No extra userartifacts.
+Allthreebroader goals remainincomplete. No staging/commit/push.
+CHECKPOINT owns currentGhidra/nextactions; no newgenericDTC/NVM prerequisite.
+
+Ghidra save and local verification
+1996annotations/1033completeidenticalexports/11projectfiles, independentrestore
+PASS. Fournew/threeupdatedannotations; apply14426/liveverify13333/snapshot25447/
+restoredverify51052 terminalexit0, cleanlogs. Archive11,023,527bytes SHA256
+54911f68c849722694e17632903603a7f5ba5ca84330588efe4cda91c42fc228.
+Freshrestore-check/native-capture-startup-20261007 checkedall11hashes before/after
+read-onlyreopen. verify_restore.py --write-reportPASS. Ghidra12.1.3PUBLIC/
+Java21.0.10. Apply/liveverify/snapshot/extract/reopen commands usepattern in
+ tcu-readiness-admission.txt
+withthisrestore-directory. Three scriptscompile/gitdiff--checkPASS; no liveprocess.
+Savedlocally only; no staging/commit/push. Currentidentities:
+ native-capture-startup-artifacts.json

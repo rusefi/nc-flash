@@ -1,0 +1,81 @@
+ECU activity-hold producer and task freshness —2026-10-06
+
+Full objective/constraints remain CHECKPOINT.txt: ECU/AT integration, deep
+traction and BOTHroof folding/unfolding including interruption/reversal/
+timeout/LRsync/recovery. All remain incomplete. No extra userDSC/roof firmware,
+captures orbenchdata; no staging/commit/push. Prior goalturn madeprogress
+through25,221 hookchecks/40outercalls; this increment follows observed9149.
+
+Reproduce fromrepositoryroot,Python3.14.3:
+python research/ecu-at-can/verify_control_activity_hold.py
+python research/ecu-at-can/verify_control_activity_hold_retained.py
+Original ECU SHA2567604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+Disassemblyranges/commands incontrol-activity-hold-disassembly.txt. No new
+ISA/peripheralmodel changes; inheritedfixtures described incontrol-task-stop.txt.
+
+11,008 independentchecks pass:1024 helper14450,7680 Boolean-gate combinations
+and2304 fullbyte sweeps. Gateoutcomes7049set/631clear;12 invalidprotected
+reads. FullapplicationRAM,nonvolatile/stack/GBR andinterruptmask compared;
+actualhelperentryorder checked, no callee stubs. Helpers14450/15146/157F0
+execute normally; nohardwareinterrupt orphysicalrole inferred.
+
+Executed74D62 model, RAMaddressesFFFF-prefixed:
+1. If old914E!=0 andcurrentA556==0, set914D=1; otherwise retain914D.
+2. 9149=1 ifword8FD4!=0 OR925Eexact1 OR915Cexact1.
+3. Also set9149 when14450 returns1 ANDupdated914D/A562/900A allzero
+   ANDprotected282C read(default0) iszero. Otherwise9149=0.
+   14450 returns1 iffA55C!=1 AND2B84==1; both areplainbytechecks.
+4. Always914E=A556. Thereisno clear914D inthisroutine.
+Shortcircuiting matters:8FD4!=0 or925E==1 skips14450 andprotectedread.
+15146 executesonlywhenpredicate/latch/gates allow. A valid282C/282D byte
+complement returns282C. Invalidpair returns0, writesFFFF282C to534C and
+sets5354=1 via157F0. Thiscanassert9149 whilealso recordinginvalidRAM; a
+zero-RAM fixture isnotvalidinitialization. 15146 isnotabitgetter: correction
+to thepreviousstaticlead wording. The readerbehavior wasalreadyverified in
+control-timers.txt; thisincrement verifiesits74D62 admission andeffects.
+
+Activeactualtaskverification: originalCA94/PFDRhigh,40 original2BCE6 event2
+calls, high10/low15/high15. OriginalCADE twiceperinputtransition. Independent
+74D62 fullRAMoracle atactualreturn; recordsallinputs and42BCC consumer
+producercount/freshness. Initialretainedrunpasses40outercalls,8producerreturns and24 mode/flag/edge
+boundaries.42BCC readsproduced9149 eachsamecontroltask; firstvalue0,then1.
+Observed8FD4inputs atcalls0/5/10/15/20/25/30/35 are0/640/640/640/639/638/
+640/640. Thusnonzero8FD4 explainslaterassertion;915C addsanindependenthold
+oncalls20/25. Protectedreadisnotadmittedinthisfixture (2B84=0).
+All6144 timerchecks andeightactual6F422 boundarychecks nowPASS. Total
+17152directchecks,40completeoutercalls and40fullRAMreturnboundaries
+(8hold+8timer+24mode/flag/edge). Freshnessassertsconsumerreadsproducedflag
+inthesamecontrolcall;hold consumespreviouscounterbefore6F422updatesit.
+6F422 executesreload640=stock480+120+40 when735Abit7clear; else
+8FD8zero clearscounter,otherwise saturatingdecrement. No millisecondsclaim.
+Tracewrites alsoexposeordering:915Cproducerbefore74D62,then8FD4update
+laterinthecontroltask; 74D62 therefore consumesprior8FD4. Finaltrace
+recordsactualdelay-slotwritePC separatelyfromouterbranchPC. Earliertrace
+self.pc identifiedtheparentbranch fordelay-slotwrites; itwasnot thewrite
+opcodeaddress. No firmwarechange inferred; correctedobserver rerunpasses. VerifiedwriterPCs:74DEC/74DE6 ->9149,
+6F44A/6F46A ->8FD4,74F62/74F5E ->915C. Logalso preservesparentbranchPC.
+Untruncatedwriteoperand mayexceedwordwidth (e.g.66175); recordedaftervalue
+is639. Typedwrite truncation isfirmwarewordstore behavior,notcounteroverflow. No realcadence,boot,pin orplant claim.
+
+Next: inspectretainedresult, establishactualdominant9149condition andits
+source whereintegrationneedsit; preserveinputfreshness. KeepTCUoperational
+queue/ack/overlap/provenance/cadence/persistence andphysicalboard open.
+TractionCAN211/21A sender/units andremoteDSC/actuation remainmissing. Roof
+bothdirections/interruptions/reversal/timeout/LRsync/recovery anddocumentary
+conflicts neednewapplicablesource/OEMreceiver/physicalevidence; no newartifact.
+
+SevenGhidraannotations added; bothprogramssaved/readbackverified. Independent
+archiveextraction/read-onlyreopen verifies1886annotations (811ECU/1075TCU),
+947byte-identicalexports andall11projecthashesbefore/after. Archive10986791
+bytes,SHA2562bc32c04118d917066ea36215f6dbce0b7afc992e9b18574374373b1b6b6fbdb.
+Commands/identities in ghidra/README.txt,snapshot.json,restore-verification.json.
+AllartifactsGit-eligible;Pythoncompilation andgit diff --check pass. Saved
+locally,notstaged/committed/pushed. Mixedindex/ADarchive.tmp preserved. Next leads incontrol-activity-hold-leads.txt: original6F2C8
+produces8FD8;915C writernear74F44 belongs toentry74ED2 (prologueconfirmed). Neitherinputpredicateisnewlymodeled. Other
+8FD4 candidateAA1D8 andinitializer6F29C remainstaticleads. No broadstartup
+orresetcoverageclaim.
+
+Finalsavedtraceaudit: all8controlcalls havewriteraddressorder915C ->9149
+->8FD4; other32outercalls have none. Each42BCC consumerflag equalsits
+samecall74D62 oracleoutput. Consumerfirst0,remainingseven1. No additional
+9149 writer isneededtoexplain thisfixture.

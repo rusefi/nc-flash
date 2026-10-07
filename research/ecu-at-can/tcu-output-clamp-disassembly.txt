@@ -1,0 +1,84 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0005ac50 <.data+0x5ac50>:
+   5ac50:	63 5f       	exts.w	r5,r3
+   5ac52:	62 6f       	exts.w	r6,r2
+   5ac54:	33 27       	cmp/gt	r2,r3
+   5ac56:	8b 02       	bf	0x5ac5e
+   5ac58:	67 53       	mov	r5,r7
+   5ac5a:	65 63       	mov	r6,r5
+   5ac5c:	66 73       	mov	r7,r6
+   5ac5e:	67 4f       	exts.w	r4,r7
+   5ac60:	62 5f       	exts.w	r5,r2
+   5ac62:	37 27       	cmp/gt	r2,r7
+   5ac64:	89 01       	bt	0x5ac6a
+   5ac66:	00 0b       	rts	
+   5ac68:	60 53       	mov	r5,r0
+   5ac6a:	62 6f       	exts.w	r6,r2
+   5ac6c:	37 27       	cmp/gt	r2,r7
+   5ac6e:	8b 01       	bf	0x5ac74
+   5ac70:	00 0b       	rts	
+   5ac72:	60 63       	mov	r6,r0
+
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0005ac9c <.data+0x5ac9c>:
+   5ac9c:	63 5d       	extu.w	r5,r3
+   5ac9e:	62 6d       	extu.w	r6,r2
+   5aca0:	33 27       	cmp/gt	r2,r3
+   5aca2:	8b 02       	bf	0x5acaa
+   5aca4:	67 53       	mov	r5,r7
+   5aca6:	65 63       	mov	r6,r5
+   5aca8:	66 73       	mov	r7,r6
+   5acaa:	67 4d       	extu.w	r4,r7
+   5acac:	62 5d       	extu.w	r5,r2
+   5acae:	37 27       	cmp/gt	r2,r7
+   5acb0:	89 01       	bt	0x5acb6
+   5acb2:	00 0b       	rts	
+   5acb4:	60 53       	mov	r5,r0
+   5acb6:	62 6d       	extu.w	r6,r2
+   5acb8:	37 27       	cmp/gt	r2,r7
+   5acba:	8b 01       	bf	0x5acc0
+   5acbc:	00 0b       	rts	
+   5acbe:	60 63       	mov	r6,r0
+   5acc0:	60 43       	mov	r4,r0
+   5acc2:	00 0b       	rts	
+   5acc4:	00 09       	nop	
+   5acc6:	ff ff       	.word 0xffff
+   5acc8:	35 66       	cmp/hi	r6,r5
+   5acca:	8b 02       	bf	0x5acd2
+   5accc:	67 53       	mov	r5,r7
+   5acce:	65 63       	mov	r6,r5
+
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0005aa64 <.data+0x5aa64>:
+   5aa64:	65 4f       	exts.w	r4,r5
+   5aa66:	45 11       	cmp/pz	r5
+   5aa68:	8b 01       	bf	0x5aa6e
+   5aa6a:	00 0b       	rts	
+   5aa6c:	60 53       	mov	r5,r0
+   5aa6e:	60 5b       	neg	r5,r0
+   5aa70:	00 0b       	rts	
+   5aa72:	00 09       	nop	
+   5aa74:	66 4f       	exts.w	r4,r6
+   5aa76:	67 5f       	exts.w	r5,r7
+   5aa78:	36 77       	cmp/gt	r7,r6
+   5aa7a:	8b 01       	bf	0x5aa80
+   5aa7c:	00 0b       	rts	
+   5aa7e:	60 63       	mov	r6,r0
+   5aa80:	60 73       	mov	r7,r0
+   5aa82:	00 0b       	rts	
+

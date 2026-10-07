@@ -1,0 +1,30 @@
+Task SCI0/ISA extension sources — 2026-10-06
+
+Primary CPU source: Renesas REJ09B0316-0200 rev2.00,2006-05-31.
+https://www.renesas.com/en/document/mah/sh-2e-software-manual
+Browser PDF text:7.2.3 ADDV,printed59/PDFzero72;7.2.21 DT,93/106.
+ADDV writes modulo32 sum and T for signed overflow. DT decrements modulo32,
+sets T iff result zero. Other SR bits remain unchanged. Existing tested
+SHExtract supplies XTRCT (7.2.68,printed167); this increment composes it.
+Independent new tests use bytes/unbounded signed-range checks, including
+register aliasing, all16 DT destination registers and both incomingT values.
+Original2034 saturated signed addition also executes against a clamp oracle.
+CPU manual was inspected online; prior full-file retrieval403 remains recorded
+in control-task-isa-source.txt. No local full CPU manual claimed.
+
+Local official hardware PDF/provenance: sources/
+renesas-sh7058-hardware-rej09b0046-0300h.pdf and matching JSON;
+SHA2569c17aecfbe143d5c3f69efc536923e557c5c867fa2a50d917908643c5e58d137.
+PDFzero508/table15.2 maps SCI0 F000..F006 toSMR,BRR,SCR,TDR,SSR,RDR,SDCR.
+RDR is read-only; SSR has qualified writes. Fixture supports byte access only.
+PDFzero861/table22.13/section22.8.2 mapsF764 PGDR; only low4bits implemented,
+reserved bits readzero. Fixture masks writes to low4bits, word access only.
+The new model is NOT complete SCI0/port emulation: constantSSR is an explicit
+sample; writes are logged without changing it. RDR consumes supplied bytes.
+No implicit peer, shifting, wire, direction, pin, interrupt or baud-rate clock.
+PGDR latch reflects software writes, not external inputs/POD/alternatefunction.
+Hardware identities do not establish board connection or remote chip identity.
+
+Existing local-inputs.txt already executed76B4/786E in a narrower harness.
+This work tests their integration into complete18DC8 tasks with the richer
+FPU/integer harness. It must not be presented as newly discovered routines.

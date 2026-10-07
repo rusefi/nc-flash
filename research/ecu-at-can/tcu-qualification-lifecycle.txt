@@ -1,0 +1,150 @@
+Selector reset and timed CAN215 qualification lifecycle
+=====================================================
+2026-10-06. Continues tcu-qualification-limit.txt, selector-inputs.txt and
+tcu-request-timing.txt. Final direct and retained verification passed.
+
+Verified outcome
+----------------
+1,715 direct cases and960 retained manager cycles pass. Each retained cycle
+checks original selector encoding, progress and timer production;963 complete
+23544 prefix/tail calls also pass (three preparations plus960 cycles). Three
+profiles produce15 paired ECU snapshots from active-ring/output changes plus
+6 legacy first-record snapshots retained by the shared lifecycle helper.
+Legacy snapshots can describe freed record RAM; active-ring rows establish
+actual pending records. All snapshots retain withdrawn numeric CAN216 and
+zero AT spark correction under the explicit ECU coefficient/gate fixture.
+
+A third profile changes ECU CAN215 primary25->100 at call100 while code6 is
+in phase1, then100->25 at170 after retirement. The independently verified tail
+holds80F8 at7984 while939E rises12736. At100,9C52 still uses the previous limit
+9600; at101 it uses12736. Phase1->2 at130 does not release the live input.
+The ring retires162 after that cycle's qualification publication; next cycle
+163 sees no pending work and publishes80F8=12736. The170 change publishes both
+939E and80F8=7984 immediately within the producer, while9C52 follows on171.
+
+  call  phase after manager 939E 80F8 9C52 during selection
+    99             1       7984 7984  9600
+   100             1      12736 7984  9600
+   101             1      12736 7984 12736
+   130             2      12736 7984 12736
+   162          retired   12736 7984 12736
+   163          no work   12736 12736 12736
+   170          no work    7984 7984 12736
+   171          no work    7984 7984  9600
+
+The source_rows phase byte is sampled BEFORE that cycle's manager service;
+when the ring is empty it is an unused head-slot byte, not an active phase.
+Use checkpoint records/count for active work. This distinguishes a one-call
+publication delay from a multi-cycle retained value. Neither delay is assigned
+milliseconds, and these supplied task orders are not a whole scheduler proof.
+
+New connections
+---------------
+22416 publishes9315 as a one-hot encoding of its produced class8080:
+  classFF ->01;0 ->02;1 ->80;2 ->40;3 ->20;4 ->10;5 ->08;other ->04.
+The low two bits consumed by32348 therefore reset progress/rates for
+classesFF and0. These are not independent arbitrary inhibit flags. The
+encoding is produced at226BC..227D0 after22D08/22DB0 class processing;
+15A46/15A30 bound its writes with the original SR handling.
+
+Known input filtering17250 ->174A0 ->22416 connects sample channels0/2 to
+class0, channel1 toFF and channel3 to6 under the explicit startup fixtures.
+Physical P/R/N/D names remain hypotheses; see selector-inputs.txt. This
+observation supplies the previous9315 gate's producer, without proving that
+the earlier explicit reset-between-progress-calls fixture occurs in a car.
+
+Qualification timers8159/815A/815B are all in the existing primary timer
+wheel's8158..8188 byte range. Original11014 dispatches1106A at old primary
+phases1/5/9/13 and1127E increments each byte unless alreadyFF. From reset,
+these timers increment on calls2,6,10,...; no physical tick duration is
+assigned.2378A additionally clears/captures them as described in the prior
+report. The timer-wheel interval is a producer, not just a coincidental
+nearby address or a manually incremented test value.
+
+The new retained test includes original sampled selector publication,
+32348 progress,44CFE proposal and the original48C08 ->23544 caller segment,
+then the shared timer/phase/request service lifecycle. Cached1 startup uses
+original48BC0 ->32140; whole23544 runs before first creation and each cycle.
+No progress/reset/qualification-limit/live-input output is assigned after
+initialization. CAN215 comes from the original ECU packer and TCU receiver
+and converters with explicit healthy diagnostic admission. Measurement,
+reference, ADC/GPIO and relative scheduling remain fixture inputs.
+
+Initial retained probes with primary25 and100 both createcode1 then replace
+it withcode6/operation8. Original progress startsA=25600, which explicitly
+satisfies qualification bit0 regardless of the CAN-derived7984/12736 limit.
+This explains why the previous partial-progress8400 probes select different
+codes while the cached1 fixtures do not. Neither result supersedes
+the other's stated input/scheduling scope. Code1 retires at replacement;
+code6 reaches phase1 at80,phase2 at130 and retires162 in both initial probes.
+
+Next producer lead (static only)
+-------------------------------
+A halfword scan of application10000..5B000 forC14E (MOV.W R0,@(156,GBR))
+finds23122. Inspection puts it in230F0: shift four history words at934E,
+call23380, publish its returned low16 to809C in the delay slot of50AC8 call.
+23380 statically selects ROM76DF8 when92D5 bit7 or3 is set; otherwise reads
+unsigned89B0, shifts8 and divides by10 through10D0C. It then clamps through
+5BBEC-converted floating constants. Neither230F0 nor23380 is executed by
+this turn's new verifier; physical meaning, upper-bound conversion and input
+89B0 producer remain next actions. This opcode scan is a lead, not proof of
+exclusive writes (indirect pointers and startup clearing can also write).
+Original excerpts are preserved in tcu-qualification-lifecycle-disassembly.txt.
+
+Direct verification
+-------------------
+1,715 direct cases pass:1,024 class-encoding cases (all256 class bytes and
+four preceding flag values),432 original timer steps across all16 phases,
+256 filtered four-channel input transitions and3 ADC hold/recovery traces.
+Every class is independently mapped; every full22416 call in the retained
+traces also checks the resulting9315. The class block initially started at
+226CC during test development, leaving the prior register temporaries live;
+that assertion failed. Final entry226BC includes their original initialization
+and stops before227D2 after all flag writes. This was a harness entry-boundary
+correction; no firmware instruction or outcome was modified.
+
+The256 input transitions run two samples to establish an old mask, then
+observe both samples of the new mask. Seeded progress/rates in these DIRECT
+reset tests make clearing versus retention visible; they are not produced
+progress. Original32348 arithmetic is independently checked in every case.
+
+Three ADC traces switch from channel0,1 or2 to channel3 while ADC count374
+rejects input acquisition. Filtered input/class/reset persist for two rejected
+samples and the first healthy500 sample; the second healthy sample produces
+class6 and releases reset. Diagnostic fault promotion is outside these tests.
+The whole manager traces use produced progress, with no direct reset injection.
+
+Reproduction and artifacts
+--------------------------
+  python research/ecu-at-can/verify_tcu_qualification_lifecycle.py
+Writes tcu-qualification-lifecycle-verification.json with direct counts,
+ADC traces, retained source/ring/CAN/ECU snapshots, original-body check counts
+and both ROM hashes. It reuses the existing lifecycle and read-only observers;
+no shared verifier or instruction-emulation change was made this turn.
+Disassembly is in tcu-qualification-lifecycle-disassembly.txt. Sampled inputs
+are constants at the previously documented five MMIO read addresses; no
+physical GPIO, ADC, CAN hardware or interrupt frequency is simulated.
+
+TCU examples/LFG1TF000.bin SHA256:
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+ECU examples/LFFEEE-stock.bin SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+All RAM addresses have FFFF prefix. Numeric values in examples are decimal.
+
+The next action is to execute230F0/23380 and trace89B0/92D5, then replace the
+explicit809C input in a retained fixture. Also retain80E8/80EE provenance,
+relative task scheduling, overlapping/composite transitions and numeric spark
+request behavior. Independent traction and roof next actions remain at the
+top of CHECKPOINT.txt; nothing here identifies a DSC sender or OEM PRHT CAN
+receiver. The full ECU/AT, traction and both roof-direction goals remain open.
+
+Persistence
+-----------
+Two new Ghidra annotations plus producer/timer comments are saved. Closed
+archive SHA256424be8e6f1dfebaf298038dac09f42d203dbd6b7ce5cf89efbfa3a454e321d3d,
+10,856,542 bytes, independently extracted and reopened:11 project files,
+1,279 annotations(570 ECU/709 TCU),648 matching exports(646 functions and2
+readbacks). Apply/readback/restore each completed for both programs without
+ERROR/Exception or incomplete decompilation. Archive manifests and scripts
+are in ghidra/. New artifacts are Git-eligible; tracked whitespace check passes.
+Saved locally, no staging/commit/push; existing mixed index remains untouched.

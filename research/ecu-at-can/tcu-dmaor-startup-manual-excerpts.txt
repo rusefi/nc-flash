@@ -1,0 +1,236 @@
+Source sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf
+SHA256359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c
+PyMuPDF1.28.2; zero-based pages
+PDFZERO199
+Rev.2.0, 07/03, page 160 of 960 
+ 
+Table 10.1 DMAC Registers (cont) 
+ 
+Channel 
+ 
+Name 
+ 
+Abbr. 
+ 
+R/W 
+Initial  
+Value 
+ 
+Address 
+Register 
+Size 
+Access 
+Size 
+DMA source 
+address register 3 
+SAR3 
+R/W 
+Undefined 
+H'FFFFECF0 32 bits 
+16, 32*
+2 
+DMA destination 
+address register 3 
+DAR3 
+R/W 
+Undefined 
+H'FFFFECF4 32 bits 
+16, 32*
+2 
+DMA transfer  
+count register 3 
+DMATCR3 R/W 
+Undefined 
+H'FFFFECF8 32 bits 
+16, 32*
+3 
+3 
+DMA channel 
+control register 3 
+CHCR3 
+R/W*
+1 H'00000000 H'FFFFECFC 32 bits 
+16, 32*
+2 
+Shared 
+DMA operation 
+register 
+DMAOR 
+R/W*
+1 H'0000 
+H'FFFFECB0 16 bits 
+16*
+4 
+Notes: Word access to a register takes 3 cycles, and longword access 6 cycles. 
+ 
+Do not attempt to access an empty address, as operation canot be guaranteed if this is 
+ 
+done. 
+ 
+*1 Write 0 after reading 1 in bit 1 of CHCR0–CHCR3 and in bits 1 and 2 of DMAOR to 
+clear flags. No other writes are allowed. 
+ 
+*2 For 16-bit access of SAR0–SAR3, DAR0–DAR3, and CHCR0–CHCR3, the 16-bit value 
+on the side not accessed is held. 
+ 
+*3 DMATCR has a 24-bit configuration: bits 0–23. Writing to the upper 8 bits (bits 24–31) 
+is invalid, and these bits always read 0. 
+ 
+*4 Do not use 32-bit access on DMAOR. 
+ 
+10.2 
+Register Descriptions 
+10.2.1 
+DMA Source Address Registers 0–3 (SAR0–SAR3) 
+DMA source address registers 0–3 (SAR0–SAR3) are 32-bit readable/writable registers that 
+specify the source address of a DMA transfer. These registers have a count function, and during a 
+DMA transfer, they indicate the next source address.  
+Specify a 16-bit boundary when performing 16-bit data transfers, and a 32-bit boundary when 
+performing 32-bit data transfers. Operation cannot be guaranteed if any other addresses are set. 
+The initial value after a power-on reset and in standby mode is undefined. 
+
+
+PDFZERO206
+Rev.2.0, 07/03, page 167 of 960 
+ 
+10.2.5 
+DMAC Operation Register (DMAOR) 
+DMAOR is a 16-bit readable/writable register that controls the overall operation of the DMAC.  
+Register values are initialized to H'0000 by a power-on reset and in standby mode. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+ 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+— 
+— 
+— 
+— 
+AE 
+NMIF 
+DME 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R/(W)* 
+R/(W)* 
+R/W 
+Note: * 0 write only is valid after 1 is read at the AE and NMIF bits. 
+ 
+• Bits 15–3—Reserved: These bits are always read 0 and should always be written with 0. 
+• Bit 2—Address Error Flag (AE): Indicates that an address error has occurred during DMA 
+transfer. If this bit is set during a data transfer, transfers on all channels are suspended. The 
+CPU cannot write a 1 to the AE bit. Clearing is effected by a 0 write after a 1 read. 
+ 
+Bit 2: AE 
+Description 
+0 
+No address error, DMA transfer enabled 
+(Initial value) 
+[Clearing condition] 
+Write AE = 0 after reading AE = 1 
+1 
+Address error, DMA transfer disabled 
+[Setting condition] 
+Address error due to DMAC 
+ 
+
+
+PDFZERO207
+Rev.2.0, 07/03, page 168 of 960 
+ 
+• Bit 1—NMI Flag (NMIF): Indicates input of an NMI. This bit is set irrespective of whether the 
+DMAC is operating or suspended. If this bit is set during a data transfer, transfers on all 
+channels are suspended. The CPU is unable to write a 1 to the NMIF. Clearing is effected by a 
+0 write after a 1 read. 
+ 
+Bit 1: NMIF 
+Description 
+0 
+No NMI interrupt, DMA transfer enabled 
+(Initial value) 
+[Clearing condition] 
+Write NMIF = 0 after reading NMIF = 1 
+1 
+NMI has occurred, DMC transfer disabled 
+[Setting condition] 
+NMI interrupt occurrence 
+ 
+• Bit 0—DMAC Master Enable (DME): This bit enables activation of the entire DMAC. When 
+the DME bit and DE bit of the CHCR register for the corresponding channel are set to 1, that 
+channel is transfer-enabled. If this bit is cleared during a data transfer, transfers on all channels 
+are suspended. 
+Even when the DME bit is set, when the TE bit of CHCR is 1, or its DE bit is 0, transfer is 
+disabled if the NMIF or AE bit in DMAOR is set to 1. 
+ 
+Bit 0: DME 
+Description 
+0 
+Operation disabled on all channels 
+(Initial value) 
+1 
+Operation enabled on all channels 
+ 

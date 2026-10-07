@@ -1,0 +1,80 @@
+2026-10-06: original stored adjustment producer and consumer bridge
+
+VERIFIED EXECUTION, stock LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Snapshot input tcu-fault-selection-snapshots.json SHA256
+16d58c0427de7905b52531ef943cc01b311d1aeeda511eebf33d525362bda943.
+Reproduce: python research/ecu-at-can/verify_tcu_stored_adjustments.py
+Python3.14.3, standard library, assertions enabled. Existing SHRotate and
+independent quotient model; no interpreter, production code or ROM changes.
+Disassembly: tcu-stored-adjustment-leads-disassembly.txt, GNU SHobjdump2.42;
+setup/path conventions in tcu-overlay-lifecycle.txt and disassemble.py.
+
+13,246 direct cases pass:3startup,5initializer,140pairedaccessors,
+12,348producer boundary cases,750seeded random cases.18retained traces of
+64original updates and24coupled replays(12threshold/scan,12full44CFE plus
+selection_then_limit) pass. JSON contains retained inputs/outputs and replays.
+
+INITIALIZATION AND ACCESSORS
+15D04 copies992bytes ROM5F220..5F5FF intoFFFFAD4C..FFFFB12B, including
+AD4E=word5F222=0. Three sentinel-filled destination cases compare every byte
+and both external guards. Original137AC table dispatch reaches137B4; all15
+pointers5D1C4..5D1FC equalFFFFAD4E. It fills616A..6186 with15copies of the
+source word. Five source patterns and adjacent sentinels pass. Coupled runs
+use original startup, not a synthetic source value. This proves local stock
+initialization, not full boot sequencing or nonvolatile persistence.
+24562/2456E both write low16(R5) at616A+2*u16(R4), returning0;2457A/24584
+read signed16 there in the return delay slot. Index0x10006 verifies lowword
+index truncation; indices0,3,6,7,8,14 covered. All other15-word slots checked.
+
+PRODUCER49FE0..4A0F2
+Group=unsigned9C9E when0..2, otherwise0. For0..2 original316A8 maps directly.
+Index=ROM75EAA[group], stock[6,7,8]. Delta=signed16(80EA-9CA0). Admission
+is half-open [320,1024),[192,512),[128,448) for group0,1,2. Outside it there
+is no getter, division or write, even if an old offset exceeds stock limits.
+Measurement=signed16(9C9C). Error=signed16(measurement-15616), including wrap.
+If measurement>=16128 OR92D1bit0, choose coefficients[205,154,154]. Otherwise
+use154 only outside group deadband[-230,230),[-179,179),[-128,128).
+Inside deadband skip division, but STILL clamp and write the old adjustment.
+Change=clamp_signed16(truncate_toward_zero(error*coefficient*16/divisor));
+divisors are signed ROM70000 words[14492,8438,5755]. Subtract change from
+signed old adjustment, clamp to lower-512 and upper[192,256,320], write2456E.
+The subtraction is32-bit before clamps, not a prematurely wrapped signedword.
+All helper calls and omission paths are checked through instruction visits;
+nonselected array words, callee-saved registers, stack and MACL are preserved.
+M/Q/T are allowed to change: the initial test wrongly expected Q/M preservation;
+original division changed Q (SR0x100). Harness corrected to mask0x301, with no
+arithmetic/model change. This was a test-contract error, not firmware failure.
+
+RETAINED AND COUPLED CONSEQUENCES
+18traces cover three groups,flags0/1,measurement15000/15616/17000,64updates.
+Starting from the executed zero initializer, final arrays across the three
+groups reach[192,256,320], stay[0,0,0], or reach[-512,-512,-512], respectively.
+Coupled tests repeat all three groups before4530C or44CFE; current80EA=640,
+9CA0 is set per group so delta equals the lower admission boundary. Mode3,
+comparison809C=23040 and the optional80F2 admission gate are explicit inputs.
+These upstream values/order are fixtures; no direct offset writes occur after
+initialization or between updates. Test guards are restored before consumers.
+With the optional gate admitted, first three thresholds become respectively
+[4196,7798,11494], [4004,7542,11174], or[3492,7030,10662]. Original consumers
+and independent descriptor/adjustment models agree. Local scans remain[0,0].
+All call150 full replays propose0/accept0/create[5,1,0]; call211 proposes0,
+accepts1/creates[6,8,0]. Therefore these produced offsets change thresholds,
+not the final selection in this input family. Do not compare causally against
+older offset-only replays: startup and upstream input fixtures also differ.
+No physical-learning/adaptation label, real period, EEPROM or road result.
+
+NEXT, STATIC LEADS ONLY
+Direct BSR49B7E calls49FE0 inside the49AFC-region state machine.49B42 captures
+8089->9C9E,80EA->9CA0 and80EE->9C9C, then3159A->9C9A. State1 calls49F66,
+49EE0 and49F7A before conditional update; full admission/reset/capture state
+machine remains unexecuted. Locate exact entry and model these predicates.
+Other stored setters near36D88/36E3C/36EBC remain open;3686E writesindex3,
+not thresholdindices6/7/8. Task cadence and persistence still unproved.
+Traction307EC/30BA4/3174C and input provenance remain a distinct next action;
+roof graphical reversal/timeout/receiver evidence remains independently open.
+Allthree objectives remain incomplete. Saved locally; no staging/commit/push.
+
+Ghidra saved/independently restored2026-10-06:1445annotations(613ECU/832TCU),
+714identical exports,11matching project hashes. Archive10,882,383bytes,
+SHA256 7b3c91ab092b197abb0927234b3f75f651831ded4946e8346f0a56b6d6fee098.

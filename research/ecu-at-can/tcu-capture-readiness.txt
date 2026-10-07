@@ -1,0 +1,110 @@
+TCU capture readiness and startup callers — 2026-10-07
+
+Executed capture-readiness evidence
+verify_tcu_capture_readiness.py passed session79065 (terminal exit0):
+256 original122D8 initializer cases,2816 independent122F4 whole-application-
+RAM/register/ordered-MMIO cases, four retained ADC-B/capture steps, and96
+original CMT0 prefixes with independent wheel/whole-RAM checks followed by
+original122F4. No forced readiness or timer-age writes in the retained chain.
+This is component execution with explicit ADC, timestamp and interrupt inputs;
+it is not a full reset, native foreground schedule or hardware experiment.
+
+122D8 calls128F4 and16E6C (stock empty leaves), initializes84EC=1 and8450=FF.
+122F4 state1 waits for84D8 exactly3. When admitted it executes128F8, clears
+8450, enables captureA via16C5C andB via16B24, then sets84EC=2. State2 sets
+84EC=3 when unsigned8450>=20. Other states are unchanged; state2 does not
+recheck84D8. The common tail12912 is empty in this image. All RAM addresses
+in this report abbreviate FFFFxxxx.
+
+128F8 resets histories through17A40,17990,20658,211C4. Independent expected
+writes: words88F0/88F2/88F4/8900/8902/8904 zero; longs88F8/88FC/8908/890C zero;
+bytes810D/8196/9195/810C/9244 FF;18longs at91CC set14<<12 and24longs at9248
+set18<<12; heads91B4/800D zero;9198/919C FFFFFFFF and9238 7FFFFFFF. ROM
+length/reset inputs77444=18,77448=24,76E46=14,76DE0=18 are asserted. Original
+SR save/mask/restore leaves execute. The independent oracle also requires
+exact16 MMIO accesses from the two existing capture-configuration models.
+
+Cases: all256 capture states x two ADC-B states(0,3) x four ages(0,19,20,255),
+all256 ADC-B states at capturestate1, all256 ages at state2, plus256 admitted
+cases varying every TIOR0/start byte. Initial RAM is patterned, whole-RAM
+comparison excludes the established synthetic stack region. Callee-saved
+R8..R15 and SR outsideT are checked; no unrelated application-RAM changes.
+
+Retained chain executes11DD8,122D8,123B0 initialization. Original11DEE samples
+ADC count600 at timestamps1,100001,100002,200002; capture states become
+1,1,1,2. Original CMT0 mode initialization starts the wheel atphase0. Its bank1
+increments8450 when old84D4 is0 or5: ticks1,6,...,96. Polling122F4 after each
+interrupt reaches20 andstate3 on tick96, not100. Conditional CMT0 period20000
+Pphi gives1920000phi from this chosen clock epoch. ADC timestamps, CMT0 epoch
+and polling schedule are separate fixtures; this is NOT measured boot delay.
+No physical pulses, ADC conversion latency or interrupt acceptance is modeled.
+
+Static caller findings (not yet executed as a complete startup path)
+11500 initializes mainmode8000=1, R13=3 andR10=11EF2, then calls11EE4,11EF2,
+11480,112CC(ADC A initialization),11DD8(ADC B initialization),11768. The loop
+at11528 calls1178A, records profile index14, then112E6 at11534 and11DEE at1153A.
+The ADC readiness producers therefore run in the foreground loop; no fixed
+polling interval is established. Mainmode1 calls12054 and may call1168A if
+long6000==1; mode2 calls1168A when8005>=3 unless84A0==4. Mode3 and84A0==4
+calls529CE(0,1),529AC,185F8 and sets mainmode4. Other shutdown/recovery branches
+remain static leads; no comprehensive shutdown semantics claimed.
+1168A calls11F38,1217C,123B0,12374,11F6C,1226C,11FA0,121F8,122D8, then12018.
+126EC calls11EF2/5329A and dispatches on8007: state1 calls122F4, state3 calls
+12726, other states skip both; all paths subsequently call529AC and185F8.
+Existing operational126EC probes use established fixture modes and do not
+prove native boot reaches capture-readiness admission.
+
+Timestamp lead requiring its own verification
+Original15730 reads longFFFFF6C0. Compatible Renesas SH7055S manual PDF page
+zero248/printed209 identifies F6C0 as combined TCNT10AH/AL, not captureTCNT0.
+Page266/printed227 maps channel10 toPSCR4; existing1448E execution writes1
+toF40A along with the other three prescalers. Additional channel10 mode/start/
+reset configuration must be traced before converting ADC100000 counts to
+Pphi or joining foreground qualification to a shared startup clock.
+
+Reproduce
+ python research/ecu-at-can/verify_tcu_capture_readiness.py
+Python3.14.3. ROM examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Original excerpts: tcu-capture-readiness-lead-disassembly.txt122D8..12374;
+caller excerpts saved in tcu-readiness-callers-disassembly.txt. GNUobjdump2.42
+setup/provenance is in tcu-pulse-input.txt. Independent models import the
+existing capture configuration and CMT0 wheel models; one execution pipeline.
+Renesas manual: sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf,
+SHA256359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c,
+https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual .
+
+Timestamp follow-up now executed: tcu-timestamp-configuration.txt verifies
+start/read and preserves a reset-word-width conflict with the compatible manual.
+Next: resolve that source conflict separately, then execute the actual
+readiness caller/admission path with native initialization and explicit clock
+inputs. Full ECU/TCU integration, deep traction and both roof directions with
+interruption/recovery remain incomplete. User has no further remote-controller
+or hardware inputs. CHECKPOINT owns separate traction/roof actions and current
+Ghidra archive status. Saved locally; no staging, commit or push.
+
+Ghidra save/restore for this increment
+8new/3updated annotations;1987 total(865ECU/1122TCU),1026 completeidentical
+exports. Apply86992, liveverify44847, snapshot87952 andrestoredverify95635 all
+terminalexit0; logs checkedforREADBACK_OK anderrors. Archive11,021,729bytes SHA256
+477437571f09eb6a955236ff59ba7b9b28716203ef5375a48f86f782daa2cda3.
+Bothprograms independentlyreopened fromrestore-check/capture-readiness-20261007;
+all11filehashes verifiedbefore/after, archive/live/restored match. No liveprocess.
+Commands (all paths relative to repository root unless indicated):
+ /home/snow/.local/bin/analyzeHeadless research/ecu-at-can/ghidra/live nc-at-can
+   -process '*' -noanalysis -scriptPath research/ecu-at-can/ghidra/scripts
+   -postScript ApplyCanEvidence.java ABS/research/ecu-at-can/ghidra/annotations.tsv
+ /home/snow/.local/bin/analyzeHeadless research/ecu-at-can/ghidra/live nc-at-can
+   -process '*' -readOnly -noanalysis -scriptPath research/ecu-at-can/ghidra/scripts
+   -postScript VerifyCanEvidence.java ABS/research/ecu-at-can/ghidra/annotations.tsv
+   ABS/research/ecu-at-can/ghidra/decompiled 300
+ python research/ecu-at-can/ghidra/snapshot.py
+Extractarchive intoaNEWemptydirectory withPython tarfile.extractall(filter='data'),
+checkeachsnapshot.json hash BEFORE reopening, thenrepeatread-only Verify onthe
+extractedproject, outputtoits exports directory. Finally:
+ python research/ecu-at-can/ghidra/verify_restore.py
+   research/ecu-at-can/ghidra/restore-check/capture-readiness-20261007 --write-report
+ABS=/home/snow/nc-flash. Ghidra12.1.3PUBLIC/Java21.0.10. Two scriptscompile,
+gitdiff--checkPASS, allnew artifactsGit-eligible. Currentartifact identities in
+capture-readiness-artifacts.json; previous manifestsretainolderGhidraidentities.
+ExistingmixedindexincludingADnc-at-can.tar.gz.tmp preserved. No newstage/commit/push.

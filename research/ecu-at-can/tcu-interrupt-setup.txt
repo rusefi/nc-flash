@@ -1,0 +1,134 @@
+CURRENT STATUS: Full320 ratio-only sensitivity is complete; see
+ tcu-clock-ratio.txt and tcu-clock-ratio-verification.json. Application ISR
+is now independently verified and joined; tcu-application-interrupt.txt and
+ tcu-application-clock.txt supersede the static/next-step status below.
+CHECKPOINT.txt owns current processes and archive identity.
+
+TCU vector base, priorities and exact relative clock schedule — 2026-10-07
+=========================================================================
+Fullobjective: ECU/AT integration, deeptraction control/integration, NC roof
+folding AND unfolding, interruption, resume/reversal, timeout, synchronization
+and recovery. Allincomplete. UserhasnoextraDSC/roof dumps/captures/benchresults.
+Localworkonly; no staging/commit/push. Otherresearchthread remainspaused.
+
+Executed setup
+--------------
+verify_tcu_interrupt_setup.py PASS:512 localLDCregister instruction cases,
+256 bootprefix cases (all documentedSR combinations),64 INTCleaf and64 actual
+callerprefix cases,6 wrongwidth/address rejections. OriginalTCU ROM
+examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+10400..10416 executes PRpush, interruptmask15, VBR10000 andGBRFFFF8000 from
+stock76C84. AllapplicationRAM preserved; stackdelta4/PRsaved independently
+checked. Localextension handles onlyregisterLDCGBR/VBR; no sharedISA changes.
+Initial exploratory1024 SRinputs includedreservedbits; finalsuite restricts
+256 documentedSRvalues becauseexistingLDC SR doesnot maskreservedbits. No
+reserved-bit hardwarebehavior claim. ReportJSON regenerated aftercorrection.
+
+143DC completeleaf writes12 wordpriority registersED00..ED16 with independent
+expected sequence:0,0,000D,0030,0C00,2040,50C0,0F00,0,0980,0006,0A00.
+15574..1558C actualcallerprefix alsoexecutesprologue andclears868C/868D;
+wholeapplicationRAM, SPdelta12 andSR verified. ED12 reached viaED0C+6;
+literalED12 searchalone missesit.64 distinctinitialregister/RAM states each.
+VBR-relative immutableROM words102F0=16D6C and10300=16CF4 asserted.
+Originalinstruction excerpts are tcu-cmt-configuration-disassembly.txt;
+15574prefix additionally reproducible with existing disassemble.py.
+
+Sources and distinction
+-----------------------
+Renesas SH-2E softwaremanual RJJ09B0344-0200 Rev2,2006-05-30,
+section7.2.26 printed7-42/PDFzero93, rechecked2026-10-07:
+https://www.renesas.com/ja/document/mah/sh-2e-software-manual
+LDC registerGBR/VBR transfers the register value, preservingT; instruction and
+following instruction cannotaccept interrupts. Ourisolatedextension models
+registertransfer only, not interruptacceptance suppression or instructiontime.
+Renesas SH7055S hardwareREJ09B0045-0200H Rev2 July2003 table7.3,
+printed108/PDFzero146, rechecked2026-10-07:
+https://www.renesas.com/en/document/mah/sh-2e-sh7055s-hardware-manual
+RepositoryPDF sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf SHA256
+359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c.
+Compatiblemanual mapsCMT0 vector188 toIPRJ11..8 andCMT1 vector192 to7..4;
+executed0980 thereforeinterpreted aspriorities9 and8. Notphysicalchipidentity.
+Startupmask15 blocksboth untilunmasking; reset-to-main admission, laterpriority
+writes, unmasking, hardwareexception entry/RTE/nesting remainunproved.
+
+Relative clock integration in progress
+-------------------------------------
+probe_tcu_clock_ratio.py uses priorindependentCMT1 anddifferentialCMT0 prefixes,
+with exactmatchtimes20000*n /40960*n fromexecuted configuration andcompatible
+manual. Commonstart epoch0 is anexplicitassumption; CMT0first onties follows
+configuredpriority.100 CMT0matches perapplication/diagnosticpair remainsa
+fixture. No actualtask/capture/CAN frequencies or startoffset established.
+Suppressesold8 primarywheel requests anddeliversoriginalCMT1 whereeventtimes
+fall. Sharedprimary deliverygainstwooptionalsettings (defaultspreserved): no
+reset-of-observations every8 andstatusC1 ->clear41. CMT0status128 samples and
+capture/profileinputs remain explicit; nohardwareenable/clock simulation.
+Prefix8 completed:800CMT0/390CMT1/16capture/2actualhold checks PASS;
+three simultaneousmatch times verifiedCMT0first. Exactpriorlegacy prefix8 rerun
+PASS andbyte-identical, verifyingunchangeddefaultpath. JSONresult recorded.
+Recordedbehavior differs fromold100:8 at94paths. Primaryages riseabout24
+perpair instead of4; atpair4 selectedreference branch isstale insteadofhistory,
+zero reference/scaledmotion. Captures stillonceperpair, so thisreveals a
+fixturetiming inconsistency ratherthan vehiclefailure. Full320 sensitivityrun
+started; nofullresult claimed. Itsoutcome mustnotbe treatedasnativecadence
+untilcapture/task scheduling aregrounded. Nextprioritizeoriginaltask/capture
+admission andtimebases, not merelylongerrepetition ofthisschedule.
+
+Next and remaining scopes
+-------------------------
+Verifyeveryrecordedscheduleevent andactualmodelreturn, thenrunlongenough to
+observe alteredqualification/retirement/recovery withoutforcingoldmilestones.
+Trace11528 modeproducers/11586 or115C6->1168A andinterruptunmasking inparallel
+withappropriatefirmwarework; nofullbootclaim fromisolatedslices.
+Traction: originalevent2 producer/admission/order vsqueuedtask7 next; CAN211/
+21A sender/units andremoteDSC internals/actuation missing. Roof: applicable
+revision/VIN source forrelease/reverse, CANtimeout andL/Rmismatch thresholds
+orOEM/physicalevidence next. FoldingANDunfolding/interruption/recovery open.
+Python3.14.3. Reproduce: python research/ecu-at-can/verify_tcu_interrupt_setup.py
+and python research/ecu-at-can/probe_tcu_clock_ratio.py.
+Ghidra annotation/save/independentarchive refresh complete below.
+
+Legacy8pair byte-identical SHA256
+ab3a9274515591d545c1d00598b0399060dd3833c420bfba51abb273d8d5348b.
+Newratio verification is tcu-clock-ratio-verification.json; includes exact
+independentlyenumerated eventorder, allCMT1phases/MMIO, independentCMT0
+boundary replays, actualholdmodels, transitions andall94changedpaths.
+
+More useful native application-clock lead — static, not executed yet
+-----------------------------------------------------------------
+126EC caller1220A reachedfromISR16A58 via16ADE literal16B1C. Original16A3C
+clearsF401bit3, zeroeswordF442, setswordF454=0A00, re-enablesF401bit3.
+ISR16A58 testsF460bit0, clearsit, adds0A00 toF454 then calls1220A.
+1220A promotes8007=1->3 onlywhen84A0/84D8/84EC areall3 (via126DA), then
+tails126EC. Prior directtask fixture supplies8007=3, so admissionstillopen.
+Originalinstructions saved in tcu-application-clock-lead-disassembly.txt.
+
+Compatiblemanual table11.3 printed203/PDFzero241: F442=TCNT1B, F454=OCR1;
+F45C=TCR1B, F460=TSR1B. Existingexecuted144A2 writesF45C=4 and1448E sets
+allPSCR1..4=1. Table11.2.3 printed229..230/PDFzero268..269 selectsphi'/16
+forCKSEL4; prescaler1 isPphi/2 (priorverifiedsource). ConditionalTCNT1B
+rate thereforePphi/32. SteadyOCRincrement2560 implies81920peripheralclocks
+perapplicationinterrupt, i.e.2CMT1matches and4.096CMT0matches onaverage.
+Thisis a STATIC nexttiminginterpretation, not executed16A3C/ISR/nativecadence
+proof. Firstmatch/startoffset, interruptadmission, latency/missedmatch and
+actualcapturecount scheduling stillopen. Do not confuseCMT'scompare+1 cycle
+withthisfree-runningcounter'srepeatedOCRincrement.
+Nextverify16A3C initialization and16A58 status/compare/admission withfinite
+MMIO andoriginaltaskbody, thenreplace100ticks/taskfixture usingactualrelative
+applicationperiod. Capturetimestamps also needconsistentcountertimebase.
+Thelive320run remains a sensitivitytest ofthepreviousartificialtaskspacing.
+
+Persistence and validation — 2026-10-07
+-------------------------------------
+1936annotations(833ECU/1103TCU),989 identicalcompleteexports,11projectfiles
+verified before/afterindependentGhidrareopening andagainstliveproject.
+Pairedarchive11,012,338bytes SHA256
+c835d8aa36cc0db1847662ddaee7791210ac6594180c152c7ed2a17f35ccfa8a.
+Bothprograms saved; Ghidra12.1.3 PUBLIC/Java21.0.10,300-second exports.
+NoERROR/Exception/DECOMPILE_INCOMPLETE inapply/live/restore. verify_restore.py
+PASS forindependent intc-setup-20261007 extraction; JSONmanifests authoritative.
+Four scripts compile,gitdiff --check PASS,11newartifacts checkedGit-eligible.
+No stage/commit/push; preexistingmixedindex/ADarchive.tmp preserved.
+Full320clock-ratio sensitivityrun remainslive:session80017/PID394730, latest
+32pairs/3200CMT0prefixes. Nextpollsamehandle, verify_tcu_clock_ratio.py when
+complete. No meaningfulresult dependssolelyonoutside-repository memory.

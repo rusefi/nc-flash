@@ -1,8 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* 80E8 and lookup703C0 hysteresis1280 plus timers/flags ->9454; falling edges reset82A5/A6/A7.800
-   mixed control cases plus30 axis-producer cases; all65536 stock lookup inputs independently
-   verified. Full paired engine command path tested. */
+/* 80E8/703C0 curve, hysteresis1280, selector/timer gates ->9454.800 directcases plus160
+   nativewholeRAM returns: communicationinhibit clears beforecall290, but828B/82A7=146>=61 forces0.
+   Executes everyevenpair, return1E7AE, notonlyphase2/6. tcu-recovery-cut.txt. */
 
 void CAN216_UpdateCylinderCutRequest(void)
 

@@ -1,0 +1,84 @@
+Stock TCU class-adjustment admission restriction
+================================================
+2026-10-06. Executed original instructions; this qualifies, but does not
+invalidate, conditional behavior in tcu-class-adjustments.txt.
+
+Reproduce:
+ python research/ecu-at-can/verify_tcu_class_admission.py
+Python 3.14.3 and existing SHExtract; unchanged examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Disassembly: tcu-class-admission-leads-disassembly.txt and
+tcu-class-admission-getters-disassembly.txt; enclosing caller in
+tcu-class-application-leads-disassembly.txt.
+Result: tcu-class-admission-verification.json. All 65,536 signed-word inputs,
+480 complete original callers and 120 retained calls pass. No firmware patch,
+helper stub or interpreter change. Inputs and test are Git-eligible.
+
+Decisive stock restriction
+-------------------------
+Original 36BDA loads signed word 80F2. At 36C2E/36C30 it rejects values below
+signed ROM word 77142. At 36C38/36C3A it rejects values at or above signed
+ROM word 77144. Both stock words equal 12800 (bytes 32 00 32 00), so the
+required half-open interval [12800,12800) is empty.
+
+The exhaustive test supplies favorable preceding gates: 9922=1, 9870=1,
+9390=11000, 98E0=0. It also supplies favorable later gates, although execution
+cannot reach them: 98DE=0, 92C5=0, 92D1=4, 993E=0. Original getters 371EA
+(9870) and 39F8E (9922) execute. Every raw 16-bit 80F2 value returns zero
+and clears timer 821E. Trace checks distinguish 45,568 rejections below the
+signed lower bound from 19,968 at/above the signed upper bound. No test
+reaches 36C3C after the upper comparison. Earlier gate failures also return
+zero, so this restriction is not limited to the favorable fixture.
+
+Complete caller and retained state
+----------------------------------
+369A4 handles state 985C before its counter/update slice. For states 1/2 it
+calls 36B52/36BAC. Both execute 36CEC (mode abort predicate) and 36BDA.
+State 1 also calls 36CD8 (821E timer threshold). Mode 9870 in {2,3,4,6}
+clears state 1/2 to zero. Otherwise failed admission leaves state 1 at 1,
+and changes state 2 to 1. Other entry states are unchanged. Since resulting
+state cannot be 2, 369A4 clears counter 985D and never calls updater 36D1A.
+
+The 480 whole-body cases cross five entry states, four entry counters,
+eight mode bytes and three inputs around 12800. They check complete returns,
+state/counter, preserved stored words/markers/update input and absence of
+36D1A execution. State 1/2 cases must clear timer 821E. Preserved registers,
+MACL and SR outside M/Q/T are checked through the existing execute wrapper.
+
+The retained trace calls original 369EC to start state 1 from zero, then
+runs original 369A4 120 times, alternating inputs 12799/12800/12801. Even
+with an externally supplied favorable timer of 61 before each call, admission
+clears the timer, leaves state 1, clears counter and never updates storage.
+Timer supply is a fixture, not an executed scheduler or period claim.
+
+Scope correction
+----------------
+Earlier 4,513 direct cases, 96 caller slices, 100 retained direct updates
+and 45 scheduled slices remain valid CONDITIONAL behavior. Those slices
+start at 369C4 AFTER admission and explicitly fixture 985C=2; they must not
+be described as stock 369A4 reachability. Their [103,91,80] spreading result
+establishes updater semantics when invoked, not natural operation of this
+stock admission path. This corrects interpretation, not a failing test.
+
+Other direct callers, state writers, alternate calibration/images and actual
+scheduler/hardware operation are not globally excluded. Static 36948 has a
+separate apparent stock-zero count restriction, recorded in
+ tcu-class-application-leads.txt; execute it next. Consumer application
+36704/3676E/39C0A and natural 98DC/80EE production also remain open.
+
+All three broader scopes stay incomplete: ECU/AT queue acknowledgements,
+overlap, persistence and physical integration; deep traction/CAN211/21A,
+DSC identity and actuation; NC roof folding AND unfolding, reversal,
+timeouts, synchronization and recovery/receiver evidence. The user has no
+additional remote-controller dumps, captures or bench results.
+
+Saved locally (not staged, committed or pushed)
+---------------------------------------------
+Both Ghidra programs saved; refreshed .gpr+.rep archive independently
+restored: 1,559 annotations (684 ECU/875 TCU), 768 byte-identical exports,
+11 matching project hashes before and after reopening; no incomplete
+decompiles, errors or locks. Archive 10,915,794 bytes; SHA256
+b552cfea230d60167e5a6765efc7c38a308eca1af076f89eb33bcb59f92c942e.
+Manifests in ghidra/snapshot.json and ghidra/restore-verification.json.
+New scripts compile; git diff --check passes and artifacts are Git-eligible.
+Existing mixed index, including staged archive temporary entry, untouched.

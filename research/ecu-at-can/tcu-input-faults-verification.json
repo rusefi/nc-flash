@@ -1,0 +1,8667 @@
+{
+  "scope": "Produced CAN201/CAN215 validity faults through all three TCU inputs.\n\nOriginal encoder, receive, diagnostic and application routines execute.\nTick order, diagnostic admission and numeric ECU sources are fixtures.\nSeparate invalid flags model independent received-message histories; shared\ninvalidity is also covered. No physical time or whole-task claim.\n",
+  "ecu_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "direct_cases": {
+    "group3d_producer": 3072,
+    "group_to_three_inputs": 292
+  },
+  "packets": [
+    {
+      "invalid201": false,
+      "invalid215": false,
+      "can201": "3e 80 00 00 00 00 9c 00",
+      "can215": "02 19 02 1e 02 00 78 02"
+    },
+    {
+      "invalid201": false,
+      "invalid215": true,
+      "can201": "3e 80 00 00 00 00 9c 00",
+      "can215": "02 19 02 1e 02 00 ff 02"
+    },
+    {
+      "invalid201": true,
+      "invalid215": false,
+      "can201": "3e 80 00 00 00 00 ff 00",
+      "can215": "02 19 02 1e 02 00 78 02"
+    },
+    {
+      "invalid201": true,
+      "invalid215": true,
+      "can201": "3e 80 00 00 00 00 ff 00",
+      "can215": "02 19 02 1e 02 00 ff 02"
+    }
+  ],
+  "profiles": [
+    {
+      "invalid201": false,
+      "invalid215": true,
+      "recovery_gate": 0,
+      "rows": [
+        {
+          "tick": 0,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 100,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            1
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            2,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            1
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            2,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            5
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            1
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1100,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            129
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            17
+          ],
+          "aggregates": [
+            1,
+            17
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1102,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            17
+          ],
+          "aggregates": [
+            1,
+            17
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        }
+      ]
+    },
+    {
+      "invalid201": false,
+      "invalid215": true,
+      "recovery_gate": 1,
+      "rows": [
+        {
+          "tick": 0,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 100,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            1
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            2,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            1
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            2,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            5
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            1
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1100,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            129
+          ],
+          "active_groups": [
+            0,
+            196
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1102,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            129
+          ],
+          "active_groups": [
+            0,
+            196
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        }
+      ]
+    },
+    {
+      "invalid201": true,
+      "invalid215": false,
+      "recovery_gate": 0,
+      "rows": [
+        {
+          "tick": 0,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 100,
+          "invalid201": true,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            1,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            1
+          ],
+          "active_groups": [
+            1,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            2,
+            1,
+            2
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "invalid201": true,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            1,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            1
+          ],
+          "active_groups": [
+            1,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            2,
+            1,
+            2
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "invalid201": true,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            1,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            1
+          ],
+          "active_groups": [
+            5,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            1,
+            0
+          ],
+          "mapped": [
+            28,
+            1
+          ],
+          "aggregates": [
+            28,
+            1
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            1
+          ],
+          "aggregates": [
+            28,
+            1
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1100,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            1
+          ],
+          "aggregates": [
+            28,
+            1
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            1
+          ],
+          "aggregates": [
+            28,
+            1
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            129,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            17,
+            1
+          ],
+          "aggregates": [
+            17,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1102,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            17,
+            1
+          ],
+          "aggregates": [
+            17,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        }
+      ]
+    },
+    {
+      "invalid201": true,
+      "invalid215": false,
+      "recovery_gate": 1,
+      "rows": [
+        {
+          "tick": 0,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 100,
+          "invalid201": true,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            1,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            1
+          ],
+          "active_groups": [
+            1,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            2,
+            1,
+            2
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "invalid201": true,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            1,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            1
+          ],
+          "active_groups": [
+            1,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            2,
+            1,
+            2
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "invalid201": true,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            1,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            1
+          ],
+          "active_groups": [
+            5,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            1,
+            0
+          ],
+          "mapped": [
+            28,
+            1
+          ],
+          "aggregates": [
+            28,
+            1
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            1
+          ],
+          "aggregates": [
+            28,
+            1
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1100,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            1
+          ],
+          "aggregates": [
+            28,
+            1
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            1
+          ],
+          "aggregates": [
+            28,
+            1
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            129,
+            1
+          ],
+          "active_groups": [
+            196,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            1
+          ],
+          "aggregates": [
+            28,
+            1
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1102,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            129,
+            1
+          ],
+          "active_groups": [
+            196,
+            0
+          ],
+          "deadlines": [
+            600,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            1
+          ],
+          "aggregates": [
+            28,
+            1
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        }
+      ]
+    },
+    {
+      "invalid201": true,
+      "invalid215": true,
+      "recovery_gate": 0,
+      "rows": [
+        {
+          "tick": 0,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 100,
+          "invalid201": true,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            1,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            3
+          ],
+          "active_groups": [
+            1,
+            1
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            2,
+            2,
+            2
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "invalid201": true,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            1,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            3
+          ],
+          "active_groups": [
+            1,
+            1
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            2,
+            2,
+            2
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "invalid201": true,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            1,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            3
+          ],
+          "active_groups": [
+            5,
+            5
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            1,
+            1
+          ],
+          "mapped": [
+            28,
+            28
+          ],
+          "aggregates": [
+            28,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            68
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            28
+          ],
+          "aggregates": [
+            28,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1100,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            68
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            28
+          ],
+          "aggregates": [
+            28,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            68
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            28
+          ],
+          "aggregates": [
+            28,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            129,
+            129
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            17,
+            17
+          ],
+          "aggregates": [
+            17,
+            17
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1102,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            17,
+            17
+          ],
+          "aggregates": [
+            17,
+            17
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        }
+      ]
+    },
+    {
+      "invalid201": true,
+      "invalid215": true,
+      "recovery_gate": 1,
+      "rows": [
+        {
+          "tick": 0,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 100,
+          "invalid201": true,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            1,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            3
+          ],
+          "active_groups": [
+            1,
+            1
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            2,
+            2,
+            2
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 599,
+          "invalid201": true,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            1,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            3
+          ],
+          "active_groups": [
+            1,
+            1
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            2,
+            2,
+            2
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "invalid201": true,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            1,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            3,
+            3
+          ],
+          "active_groups": [
+            5,
+            5
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            1,
+            1
+          ],
+          "mapped": [
+            28,
+            28
+          ],
+          "aggregates": [
+            28,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            68
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            28
+          ],
+          "aggregates": [
+            28,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1100,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            68
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            28
+          ],
+          "aggregates": [
+            28,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            68,
+            68
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            28
+          ],
+          "aggregates": [
+            28,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            129,
+            129
+          ],
+          "active_groups": [
+            196,
+            196
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            28
+          ],
+          "aggregates": [
+            28,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1102,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            129,
+            129
+          ],
+          "active_groups": [
+            196,
+            196
+          ],
+          "deadlines": [
+            600,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            28,
+            28
+          ],
+          "aggregates": [
+            28,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        }
+      ]
+    }
+  ],
+  "switched_sources": [
+    {
+      "tick": 0,
+      "invalid201": false,
+      "invalid215": false,
+      "unready": false,
+      "validity": [
+        2,
+        2
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        1
+      ],
+      "active_groups": [
+        0,
+        0
+      ],
+      "deadlines": [
+        0,
+        0
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        1,
+        1
+      ],
+      "aggregates": [
+        1,
+        1
+      ],
+      "fault": false,
+      "flags92d5": 0,
+      "inputs": [
+        19968,
+        15360,
+        19968
+      ],
+      "statuses": [
+        1,
+        1,
+        1
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 100,
+      "invalid201": false,
+      "invalid215": true,
+      "unready": false,
+      "validity": [
+        2,
+        1
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        3
+      ],
+      "active_groups": [
+        0,
+        1
+      ],
+      "deadlines": [
+        0,
+        600
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        1,
+        1
+      ],
+      "aggregates": [
+        1,
+        1
+      ],
+      "fault": false,
+      "flags92d5": 0,
+      "inputs": [
+        19968,
+        15360,
+        19968
+      ],
+      "statuses": [
+        1,
+        2,
+        1
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 600,
+      "invalid201": false,
+      "invalid215": true,
+      "unready": false,
+      "validity": [
+        2,
+        1
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        3
+      ],
+      "active_groups": [
+        0,
+        5
+      ],
+      "deadlines": [
+        0,
+        600
+      ],
+      "counts": [
+        0,
+        1
+      ],
+      "mapped": [
+        1,
+        28
+      ],
+      "aggregates": [
+        1,
+        28
+      ],
+      "fault": true,
+      "flags92d5": 136,
+      "inputs": [
+        0,
+        25600,
+        3200
+      ],
+      "statuses": [
+        4,
+        4,
+        4
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 601,
+      "invalid201": true,
+      "invalid215": false,
+      "unready": false,
+      "validity": [
+        1,
+        2
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        3,
+        1
+      ],
+      "active_groups": [
+        1,
+        68
+      ],
+      "deadlines": [
+        1101,
+        600
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        1,
+        28
+      ],
+      "aggregates": [
+        1,
+        28
+      ],
+      "fault": true,
+      "flags92d5": 136,
+      "inputs": [
+        0,
+        25600,
+        3200
+      ],
+      "statuses": [
+        4,
+        4,
+        4
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 1100,
+      "invalid201": true,
+      "invalid215": false,
+      "unready": false,
+      "validity": [
+        1,
+        2
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        3,
+        1
+      ],
+      "active_groups": [
+        1,
+        68
+      ],
+      "deadlines": [
+        1101,
+        600
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        1,
+        28
+      ],
+      "aggregates": [
+        1,
+        28
+      ],
+      "fault": true,
+      "flags92d5": 136,
+      "inputs": [
+        0,
+        25600,
+        3200
+      ],
+      "statuses": [
+        4,
+        4,
+        4
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 1101,
+      "invalid201": true,
+      "invalid215": false,
+      "unready": false,
+      "validity": [
+        1,
+        2
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        3,
+        1
+      ],
+      "active_groups": [
+        5,
+        68
+      ],
+      "deadlines": [
+        1101,
+        600
+      ],
+      "counts": [
+        1,
+        0
+      ],
+      "mapped": [
+        28,
+        28
+      ],
+      "aggregates": [
+        28,
+        28
+      ],
+      "fault": true,
+      "flags92d5": 136,
+      "inputs": [
+        0,
+        25600,
+        3200
+      ],
+      "statuses": [
+        4,
+        4,
+        4
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 1101,
+      "invalid201": true,
+      "invalid215": false,
+      "unready": false,
+      "validity": [
+        1,
+        2
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        3,
+        129
+      ],
+      "active_groups": [
+        5,
+        0
+      ],
+      "deadlines": [
+        1101,
+        600
+      ],
+      "counts": [
+        1,
+        0
+      ],
+      "mapped": [
+        28,
+        17
+      ],
+      "aggregates": [
+        28,
+        17
+      ],
+      "fault": true,
+      "flags92d5": 136,
+      "inputs": [
+        0,
+        25600,
+        3200
+      ],
+      "statuses": [
+        4,
+        4,
+        4
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 1102,
+      "invalid201": false,
+      "invalid215": false,
+      "unready": false,
+      "validity": [
+        2,
+        2
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        1
+      ],
+      "active_groups": [
+        68,
+        0
+      ],
+      "deadlines": [
+        1101,
+        600
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        28,
+        17
+      ],
+      "aggregates": [
+        28,
+        17
+      ],
+      "fault": true,
+      "flags92d5": 136,
+      "inputs": [
+        0,
+        25600,
+        3200
+      ],
+      "statuses": [
+        4,
+        4,
+        4
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 1602,
+      "invalid201": false,
+      "invalid215": false,
+      "unready": false,
+      "validity": [
+        2,
+        2
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        1
+      ],
+      "active_groups": [
+        68,
+        0
+      ],
+      "deadlines": [
+        1101,
+        600
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        28,
+        17
+      ],
+      "aggregates": [
+        28,
+        17
+      ],
+      "fault": true,
+      "flags92d5": 136,
+      "inputs": [
+        0,
+        25600,
+        3200
+      ],
+      "statuses": [
+        4,
+        4,
+        4
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 1602,
+      "invalid201": false,
+      "invalid215": false,
+      "unready": false,
+      "validity": [
+        2,
+        2
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        129,
+        1
+      ],
+      "active_groups": [
+        0,
+        0
+      ],
+      "deadlines": [
+        1101,
+        600
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        17,
+        17
+      ],
+      "aggregates": [
+        17,
+        17
+      ],
+      "fault": false,
+      "flags92d5": 0,
+      "inputs": [
+        19968,
+        15360,
+        19968
+      ],
+      "statuses": [
+        1,
+        1,
+        1
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    }
+  ],
+  "interrupted_recovery": [
+    {
+      "unready": false,
+      "rows": [
+        {
+          "tick": 0,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 100,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            1
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            2,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            5
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            1
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1100,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            5
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            129
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            17
+          ],
+          "aggregates": [
+            1,
+            17
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        }
+      ]
+    },
+    {
+      "unready": true,
+      "rows": [
+        {
+          "tick": 0,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            0
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 100,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            1
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            1
+          ],
+          "aggregates": [
+            1,
+            1
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            2,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 600,
+          "invalid201": false,
+          "invalid215": true,
+          "unready": false,
+          "validity": [
+            2,
+            1
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            3
+          ],
+          "active_groups": [
+            0,
+            5
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            1
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1100,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": true,
+          "validity": [
+            2,
+            3
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1101,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            1
+          ],
+          "active_groups": [
+            0,
+            68
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            28
+          ],
+          "aggregates": [
+            1,
+            28
+          ],
+          "fault": true,
+          "flags92d5": 136,
+          "inputs": [
+            0,
+            25600,
+            3200
+          ],
+          "statuses": [
+            4,
+            4,
+            4
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        },
+        {
+          "tick": 1601,
+          "invalid201": false,
+          "invalid215": false,
+          "unready": false,
+          "validity": [
+            2,
+            2
+          ],
+          "decoded": [
+            780,
+            600
+          ],
+          "raw_groups": [
+            1,
+            129
+          ],
+          "active_groups": [
+            0,
+            0
+          ],
+          "deadlines": [
+            0,
+            600
+          ],
+          "counts": [
+            0,
+            0
+          ],
+          "mapped": [
+            1,
+            17
+          ],
+          "aggregates": [
+            1,
+            17
+          ],
+          "fault": false,
+          "flags92d5": 0,
+          "inputs": [
+            19968,
+            15360,
+            19968
+          ],
+          "statuses": [
+            1,
+            1,
+            1
+          ],
+          "primary_fault_timer": 0,
+          "stored_report": ""
+        }
+      ]
+    }
+  ],
+  "interrupted_qualification": [
+    {
+      "tick": 0,
+      "invalid201": false,
+      "invalid215": false,
+      "unready": false,
+      "validity": [
+        2,
+        2
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        1
+      ],
+      "active_groups": [
+        0,
+        0
+      ],
+      "deadlines": [
+        0,
+        0
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        1,
+        1
+      ],
+      "aggregates": [
+        1,
+        1
+      ],
+      "fault": false,
+      "flags92d5": 0,
+      "inputs": [
+        19968,
+        15360,
+        19968
+      ],
+      "statuses": [
+        1,
+        1,
+        1
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 100,
+      "invalid201": false,
+      "invalid215": true,
+      "unready": false,
+      "validity": [
+        2,
+        1
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        3
+      ],
+      "active_groups": [
+        0,
+        1
+      ],
+      "deadlines": [
+        0,
+        600
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        1,
+        1
+      ],
+      "aggregates": [
+        1,
+        1
+      ],
+      "fault": false,
+      "flags92d5": 0,
+      "inputs": [
+        19968,
+        15360,
+        19968
+      ],
+      "statuses": [
+        1,
+        2,
+        1
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 598,
+      "invalid201": false,
+      "invalid215": true,
+      "unready": false,
+      "validity": [
+        2,
+        1
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        3
+      ],
+      "active_groups": [
+        0,
+        1
+      ],
+      "deadlines": [
+        0,
+        600
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        1,
+        1
+      ],
+      "aggregates": [
+        1,
+        1
+      ],
+      "fault": false,
+      "flags92d5": 0,
+      "inputs": [
+        19968,
+        15360,
+        19968
+      ],
+      "statuses": [
+        1,
+        2,
+        1
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 599,
+      "invalid201": false,
+      "invalid215": false,
+      "unready": false,
+      "validity": [
+        2,
+        2
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        1
+      ],
+      "active_groups": [
+        0,
+        0
+      ],
+      "deadlines": [
+        0,
+        600
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        1,
+        1
+      ],
+      "aggregates": [
+        1,
+        1
+      ],
+      "fault": false,
+      "flags92d5": 0,
+      "inputs": [
+        19968,
+        15360,
+        19968
+      ],
+      "statuses": [
+        1,
+        1,
+        1
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 600,
+      "invalid201": false,
+      "invalid215": true,
+      "unready": false,
+      "validity": [
+        2,
+        1
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        3
+      ],
+      "active_groups": [
+        0,
+        1
+      ],
+      "deadlines": [
+        0,
+        1100
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        1,
+        1
+      ],
+      "aggregates": [
+        1,
+        1
+      ],
+      "fault": false,
+      "flags92d5": 0,
+      "inputs": [
+        19968,
+        15360,
+        19968
+      ],
+      "statuses": [
+        1,
+        2,
+        1
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 1099,
+      "invalid201": false,
+      "invalid215": true,
+      "unready": false,
+      "validity": [
+        2,
+        1
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        3
+      ],
+      "active_groups": [
+        0,
+        1
+      ],
+      "deadlines": [
+        0,
+        1100
+      ],
+      "counts": [
+        0,
+        0
+      ],
+      "mapped": [
+        1,
+        1
+      ],
+      "aggregates": [
+        1,
+        1
+      ],
+      "fault": false,
+      "flags92d5": 0,
+      "inputs": [
+        19968,
+        15360,
+        19968
+      ],
+      "statuses": [
+        1,
+        2,
+        1
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    },
+    {
+      "tick": 1100,
+      "invalid201": false,
+      "invalid215": true,
+      "unready": false,
+      "validity": [
+        2,
+        1
+      ],
+      "decoded": [
+        780,
+        600
+      ],
+      "raw_groups": [
+        1,
+        3
+      ],
+      "active_groups": [
+        0,
+        5
+      ],
+      "deadlines": [
+        0,
+        1100
+      ],
+      "counts": [
+        0,
+        1
+      ],
+      "mapped": [
+        1,
+        28
+      ],
+      "aggregates": [
+        1,
+        28
+      ],
+      "fault": true,
+      "flags92d5": 136,
+      "inputs": [
+        0,
+        25600,
+        3200
+      ],
+      "statuses": [
+        4,
+        4,
+        4
+      ],
+      "primary_fault_timer": 0,
+      "stored_report": ""
+    }
+  ],
+  "dependency_gates": [
+    {
+      "address": "0xa977",
+      "rows": [
+        {
+          "tick": 100,
+          "gate": 0,
+          "raw": 3,
+          "active": 1,
+          "deadline": 600
+        },
+        {
+          "tick": 599,
+          "gate": 8,
+          "raw": 0,
+          "active": 0,
+          "deadline": 600
+        },
+        {
+          "tick": 600,
+          "gate": 0,
+          "raw": 3,
+          "active": 1,
+          "deadline": 1100
+        },
+        {
+          "tick": 1099,
+          "gate": 0,
+          "raw": 3,
+          "active": 1,
+          "deadline": 1100
+        },
+        {
+          "tick": 1100,
+          "gate": 0,
+          "raw": 3,
+          "active": 5,
+          "deadline": 1100
+        }
+      ]
+    },
+    {
+      "address": "0xa978",
+      "rows": [
+        {
+          "tick": 100,
+          "gate": 0,
+          "raw": 3,
+          "active": 1,
+          "deadline": 600
+        },
+        {
+          "tick": 599,
+          "gate": 8,
+          "raw": 0,
+          "active": 0,
+          "deadline": 600
+        },
+        {
+          "tick": 600,
+          "gate": 0,
+          "raw": 3,
+          "active": 1,
+          "deadline": 1100
+        },
+        {
+          "tick": 1099,
+          "gate": 0,
+          "raw": 3,
+          "active": 1,
+          "deadline": 1100
+        },
+        {
+          "tick": 1100,
+          "gate": 0,
+          "raw": 3,
+          "active": 5,
+          "deadline": 1100
+        }
+      ]
+    }
+  ],
+  "default_lifecycle_regression": "320-call primary25 profile exactly matches prior saved JSON",
+  "retained_profile": {
+    "scope": "Each manager call advances the supplied diagnostic tick by10; not a physical cadence.",
+    "fault_enabled": true,
+    "rows": [
+      {
+        "call": 0,
+        "tick": 0,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 24960
+      },
+      {
+        "call": 99,
+        "tick": 990,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 100,
+        "tick": 1000,
+        "active": 1,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 149,
+        "tick": 1490,
+        "active": 1,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 150,
+        "tick": 1500,
+        "active": 5,
+        "summary": 28,
+        "flags": 136,
+        "inputs": [
+          0,
+          25600,
+          3200
+        ],
+        "history_change": 640
+      },
+      {
+        "call": 151,
+        "tick": 1510,
+        "active": 5,
+        "summary": 28,
+        "flags": 136,
+        "inputs": [
+          0,
+          25600,
+          3200
+        ],
+        "history_change": 640
+      },
+      {
+        "call": 159,
+        "tick": 1590,
+        "active": 5,
+        "summary": 28,
+        "flags": 136,
+        "inputs": [
+          0,
+          25600,
+          3200
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 160,
+        "tick": 1600,
+        "active": 68,
+        "summary": 28,
+        "flags": 136,
+        "inputs": [
+          0,
+          25600,
+          3200
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 162,
+        "tick": 1620,
+        "active": 68,
+        "summary": 28,
+        "flags": 136,
+        "inputs": [
+          0,
+          25600,
+          3200
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 163,
+        "tick": 1630,
+        "active": 68,
+        "summary": 28,
+        "flags": 136,
+        "inputs": [
+          0,
+          25600,
+          3200
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 170,
+        "tick": 1700,
+        "active": 68,
+        "summary": 28,
+        "flags": 136,
+        "inputs": [
+          0,
+          25600,
+          3200
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 209,
+        "tick": 2090,
+        "active": 68,
+        "summary": 28,
+        "flags": 136,
+        "inputs": [
+          0,
+          25600,
+          3200
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 210,
+        "tick": 2100,
+        "active": 68,
+        "summary": 28,
+        "flags": 136,
+        "inputs": [
+          0,
+          25600,
+          3200
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 211,
+        "tick": 2110,
+        "active": 0,
+        "summary": 17,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 64896
+      },
+      {
+        "call": 212,
+        "tick": 2120,
+        "active": 0,
+        "summary": 17,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 64896
+      },
+      {
+        "call": 320,
+        "tick": 3200,
+        "active": 0,
+        "summary": 17,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      }
+    ],
+    "trace": {
+      "primary": 25,
+      "input25": 0,
+      "changed_inputs": [],
+      "source_rows": [
+        {
+          "call": 1,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            105
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            0,
+            0,
+            255
+          ]
+        },
+        {
+          "call": 2,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            0,
+            0,
+            255
+          ]
+        },
+        {
+          "call": 79,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            20,
+            20,
+            255
+          ]
+        },
+        {
+          "call": 80,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            20,
+            20,
+            255
+          ]
+        },
+        {
+          "call": 81,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 1,
+          "timers": [
+            20,
+            20,
+            255
+          ]
+        },
+        {
+          "call": 99,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 1,
+          "timers": [
+            25,
+            25,
+            255
+          ]
+        },
+        {
+          "call": 100,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 1,
+          "timers": [
+            25,
+            25,
+            255
+          ]
+        },
+        {
+          "call": 101,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 7984,
+          "classification_limit": 12736,
+          "phase": 1,
+          "timers": [
+            25,
+            25,
+            255
+          ]
+        },
+        {
+          "call": 130,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 7984,
+          "classification_limit": 12736,
+          "phase": 1,
+          "timers": [
+            32,
+            32,
+            255
+          ]
+        },
+        {
+          "call": 150,
+          "accepted": 2,
+          "code": 1,
+          "operation": 1,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 12736,
+          "classification_limit": 12736,
+          "phase": 0,
+          "timers": [
+            37,
+            37,
+            255
+          ]
+        },
+        {
+          "call": 162,
+          "accepted": 2,
+          "code": 1,
+          "operation": 2,
+          "progress": [
+            25600,
+            0,
+            1260
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 12736,
+          "classification_limit": 12736,
+          "phase": 0,
+          "timers": [
+            40,
+            40,
+            255
+          ]
+        },
+        {
+          "call": 163,
+          "accepted": 2,
+          "code": 1,
+          "operation": 2,
+          "progress": [
+            25600,
+            0,
+            1365
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 12736,
+          "classification_limit": 12736,
+          "phase": 0,
+          "timers": [
+            41,
+            41,
+            255
+          ]
+        },
+        {
+          "call": 169,
+          "accepted": 2,
+          "code": 1,
+          "operation": 2,
+          "progress": [
+            25600,
+            0,
+            1995
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 12736,
+          "classification_limit": 12736,
+          "phase": 0,
+          "timers": [
+            42,
+            42,
+            255
+          ]
+        },
+        {
+          "call": 170,
+          "accepted": 2,
+          "code": 1,
+          "operation": 2,
+          "progress": [
+            25600,
+            0,
+            2100
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 12736,
+          "phase": 0,
+          "timers": [
+            42,
+            42,
+            255
+          ]
+        },
+        {
+          "call": 171,
+          "accepted": 2,
+          "code": 1,
+          "operation": 2,
+          "progress": [
+            25600,
+            0,
+            2205
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            43,
+            43,
+            255
+          ]
+        },
+        {
+          "call": 200,
+          "accepted": 2,
+          "code": 1,
+          "operation": 2,
+          "progress": [
+            25600,
+            0,
+            5250
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            50,
+            50,
+            255
+          ]
+        },
+        {
+          "call": 320,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            80,
+            80,
+            255
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "call": 1,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 0
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 7984,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 1
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 7984,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 100,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 1
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 12736,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 130,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 2
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 12736,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 150,
+          "subcall": 0,
+          "head": 2,
+          "count": 1,
+          "records": [
+            {
+              "index": 2,
+              "code": 1,
+              "phase": 0
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 12736,
+          "limit": 12736,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 170,
+          "subcall": 0,
+          "head": 2,
+          "count": 1,
+          "records": [
+            {
+              "index": 2,
+              "code": 1,
+              "phase": 0
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 7984,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 211,
+          "subcall": 0,
+          "head": 3,
+          "count": 1,
+          "records": [
+            {
+              "index": 3,
+              "code": 6,
+              "phase": 1
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 7984,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 261,
+          "subcall": 0,
+          "head": 3,
+          "count": 1,
+          "records": [
+            {
+              "index": 3,
+              "code": 6,
+              "phase": 2
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 7984,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 290,
+          "subcall": 0,
+          "head": 4,
+          "count": 0,
+          "records": [],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 7984,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "legacy_record_trace": {
+        "measured_a": 25000,
+        "numeric_entry": null,
+        "independently_calculated_candidate": null,
+        "checkpoints": [
+          {
+            "call": 1,
+            "subcall": 0,
+            "state": 2,
+            "flags": 3,
+            "request": 65282,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 150,
+            "subcall": 0,
+            "state": 2,
+            "flags": 0,
+            "request": 0,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 211,
+            "subcall": 1,
+            "state": 0,
+            "flags": 0,
+            "request": 0,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      },
+      "creation_calls": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          6,
+          8,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          6,
+          8,
+          0
+        ]
+      ],
+      "retired": [
+        [
+          199554,
+          1
+        ],
+        [
+          199326,
+          1
+        ],
+        [
+          201064,
+          1
+        ],
+        [
+          199554,
+          6
+        ],
+        [
+          199326,
+          6
+        ],
+        [
+          201064,
+          6
+        ],
+        [
+          199554,
+          1
+        ],
+        [
+          199326,
+          1
+        ],
+        [
+          201064,
+          1
+        ],
+        [
+          199554,
+          6
+        ],
+        [
+          199326,
+          6
+        ],
+        [
+          201064,
+          6
+        ]
+      ],
+      "classification_rows": [
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 0,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            105
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            105
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            105
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            210
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            315
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            420
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            525
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            630
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            735
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            840
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            945
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1050
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1155
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1260
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1365
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1470
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1575
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1680
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1785
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1890
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1995
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2100
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2205
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2310
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2415
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2520
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2625
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2730
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2835
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2940
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3045
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3150
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3255
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3360
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3465
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3570
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3675
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3780
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3885
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3990
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4095
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4200
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4305
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4410
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4515
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4620
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4725
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4830
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4935
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5040
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5145
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5250
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5355
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5460
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5565
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5670
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5775
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5880
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5985
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            6090
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            6195
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 2,
+          "proposed": 3,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            6300
+          ],
+          "code": 2,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            6405
+          ],
+          "code": 6,
+          "history": 1,
+          "limit": 9600,
+          "flags": 5
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            6228
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            6051
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5874
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5697
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5520
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5343
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            5166
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4989
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4812
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4635
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4458
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4281
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            4104
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3927
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3750
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3573
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3396
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3219
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            3042
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2865
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2688
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2511
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2334
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            2157
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1980
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1803
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1626
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1449
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1272
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            1095
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            918
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            741
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            564
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            387
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            210
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            33
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        }
+      ],
+      "group_calls": [
+        {
+          "code": 1,
+          "operation": 0,
+          "group": 7
+        },
+        {
+          "code": 6,
+          "operation": 8,
+          "group": 65535
+        },
+        {
+          "code": 1,
+          "operation": 1,
+          "group": 7
+        },
+        {
+          "code": 6,
+          "operation": 8,
+          "group": 65535
+        }
+      ],
+      "limit_checks": 321,
+      "tail_checks": 321,
+      "progress_checks": 320,
+      "class_checks": 320,
+      "timer_checks": 320
+    },
+    "primary_checks": 321,
+    "comparison_checks": 321,
+    "source_checks": 321
+  },
+  "healthy_control": {
+    "scope": "Each manager call advances the supplied diagnostic tick by10; not a physical cadence.",
+    "fault_enabled": false,
+    "rows": [
+      {
+        "call": 0,
+        "tick": 0,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 24960
+      },
+      {
+        "call": 99,
+        "tick": 990,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 100,
+        "tick": 1000,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 149,
+        "tick": 1490,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 150,
+        "tick": 1500,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 151,
+        "tick": 1510,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 159,
+        "tick": 1590,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 160,
+        "tick": 1600,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 162,
+        "tick": 1620,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 163,
+        "tick": 1630,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 170,
+        "tick": 1700,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 209,
+        "tick": 2090,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 210,
+        "tick": 2100,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 211,
+        "tick": 2110,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 212,
+        "tick": 2120,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      },
+      {
+        "call": 320,
+        "tick": 3200,
+        "active": 0,
+        "summary": 1,
+        "flags": 0,
+        "inputs": [
+          19968,
+          24960,
+          19968
+        ],
+        "history_change": 0
+      }
+    ],
+    "trace": {
+      "primary": 25,
+      "input25": 0,
+      "changed_inputs": [],
+      "source_rows": [
+        {
+          "call": 1,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            105
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            0,
+            0,
+            255
+          ]
+        },
+        {
+          "call": 2,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            0,
+            0,
+            255
+          ]
+        },
+        {
+          "call": 79,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            20,
+            20,
+            255
+          ]
+        },
+        {
+          "call": 80,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            20,
+            20,
+            255
+          ]
+        },
+        {
+          "call": 81,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 1,
+          "timers": [
+            20,
+            20,
+            255
+          ]
+        },
+        {
+          "call": 99,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 1,
+          "timers": [
+            25,
+            25,
+            255
+          ]
+        },
+        {
+          "call": 100,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 1,
+          "timers": [
+            25,
+            25,
+            255
+          ]
+        },
+        {
+          "call": 101,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 7984,
+          "classification_limit": 12736,
+          "phase": 1,
+          "timers": [
+            25,
+            25,
+            255
+          ]
+        },
+        {
+          "call": 130,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 7984,
+          "classification_limit": 12736,
+          "phase": 1,
+          "timers": [
+            32,
+            32,
+            255
+          ]
+        },
+        {
+          "call": 150,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 7984,
+          "classification_limit": 12736,
+          "phase": 2,
+          "timers": [
+            37,
+            37,
+            255
+          ]
+        },
+        {
+          "call": 162,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 7984,
+          "classification_limit": 12736,
+          "phase": 2,
+          "timers": [
+            40,
+            40,
+            255
+          ]
+        },
+        {
+          "call": 163,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 12736,
+          "classification_limit": 12736,
+          "phase": 0,
+          "timers": [
+            41,
+            41,
+            255
+          ]
+        },
+        {
+          "call": 169,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 12736,
+          "live_input": 12736,
+          "classification_limit": 12736,
+          "phase": 0,
+          "timers": [
+            42,
+            42,
+            255
+          ]
+        },
+        {
+          "call": 170,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 12736,
+          "phase": 0,
+          "timers": [
+            42,
+            42,
+            255
+          ]
+        },
+        {
+          "call": 171,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            43,
+            43,
+            255
+          ]
+        },
+        {
+          "call": 200,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            50,
+            50,
+            255
+          ]
+        },
+        {
+          "call": 320,
+          "accepted": 1,
+          "code": 6,
+          "operation": 8,
+          "progress": [
+            25600,
+            0,
+            0
+          ],
+          "gate": 4,
+          "limit": 7984,
+          "live_input": 7984,
+          "classification_limit": 9600,
+          "phase": 0,
+          "timers": [
+            80,
+            80,
+            255
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "call": 1,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 0
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 7984,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 80,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 1
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 7984,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 100,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 1
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 12736,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 130,
+          "subcall": 0,
+          "head": 1,
+          "count": 1,
+          "records": [
+            {
+              "index": 1,
+              "code": 6,
+              "phase": 2
+            }
+          ],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 12736,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 162,
+          "subcall": 0,
+          "head": 2,
+          "count": 0,
+          "records": [],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 12736,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 163,
+          "subcall": 0,
+          "head": 2,
+          "count": 0,
+          "records": [],
+          "source915a": 32767,
+          "live_input": 12736,
+          "limit": 12736,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "call": 170,
+          "subcall": 0,
+          "head": 2,
+          "count": 0,
+          "records": [],
+          "source915a": 32767,
+          "live_input": 7984,
+          "limit": 7984,
+          "tcu_source915a": 32767,
+          "can216": "ff fe 02 00 ff 27 10 00",
+          "can211_word0": 20016,
+          "enabled_at": true,
+          "enabled_211": true,
+          "cut": 0,
+          "at_network_fault": false,
+          "at_numeric": 65022,
+          "at_correction": 0.0,
+          "traction_correction": 0.0,
+          "spark": [
+            26.0,
+            26.0,
+            26.0,
+            26.0
+          ],
+          "other_cylinder_commands": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "legacy_record_trace": {
+        "measured_a": 25000,
+        "numeric_entry": null,
+        "independently_calculated_candidate": null,
+        "checkpoints": [
+          {
+            "call": 1,
+            "subcall": 0,
+            "state": 2,
+            "flags": 3,
+            "request": 65282,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "call": 162,
+            "subcall": 0,
+            "state": 0,
+            "flags": 0,
+            "request": 0,
+            "phase": 0,
+            "permission": 7,
+            "tcu_source915a": 32767,
+            "can216": "ff fe 02 00 ff 27 10 00",
+            "can211_word0": 20016,
+            "enabled_at": true,
+            "enabled_211": true,
+            "cut": 0,
+            "at_network_fault": false,
+            "at_numeric": 65022,
+            "at_correction": 0.0,
+            "traction_correction": 0.0,
+            "spark": [
+              26.0,
+              26.0,
+              26.0,
+              26.0
+            ],
+            "other_cylinder_commands": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      },
+      "creation_calls": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          6,
+          8,
+          0
+        ]
+      ],
+      "retired": [
+        [
+          199554,
+          1
+        ],
+        [
+          199326,
+          1
+        ],
+        [
+          201064,
+          1
+        ],
+        [
+          199554,
+          6
+        ],
+        [
+          199326,
+          6
+        ],
+        [
+          201064,
+          6
+        ]
+      ],
+      "classification_rows": [
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 0,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            105
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            105
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 2,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 1,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 12736,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 1,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 255,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        }
+      ],
+      "group_calls": [
+        {
+          "code": 1,
+          "operation": 0,
+          "group": 7
+        },
+        {
+          "code": 6,
+          "operation": 8,
+          "group": 65535
+        }
+      ],
+      "limit_checks": 321,
+      "tail_checks": 321,
+      "progress_checks": 320,
+      "class_checks": 320,
+      "timer_checks": 320
+    },
+    "primary_checks": 321,
+    "comparison_checks": 321,
+    "source_checks": 321
+  }
+}

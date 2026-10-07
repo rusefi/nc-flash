@@ -1,0 +1,167 @@
+{
+  "date": "2026-10-07",
+  "status": "PASS",
+  "artifacts": {
+    "verify_tcu_native_group_initialization.py": {
+      "bytes": 4148,
+      "sha256": "844df499090dd694678ed704cecd55d5bf1735d2a565cb855108a571879a52f4"
+    },
+    "tcu-native-group-initialization-verification.json": {
+      "bytes": 335200,
+      "sha256": "e8e05ee245e59f91b1d30ddc4f0bd4a4a55f5886aad050ea1ce8c48e19bb7d13"
+    },
+    "tcu-native-group-initialization.txt": {
+      "bytes": 3088,
+      "sha256": "a9d4c2c5f039cb3493f3a25d4e2f41d1efd76c730b7786874afd5563a0b15c33"
+    },
+    "tcu-native-group-initialization-disassembly.txt": {
+      "bytes": 18066,
+      "sha256": "29532ee3b3c51e626fd161a4ebb1e2686c6e02d562c57193548a7cffe16bca2c"
+    },
+    "verify_tcu_native_capture_startup.py": {
+      "bytes": 6825,
+      "sha256": "b3ca21af27a62b09450965e88fc3538c50c95ec971d4b3b3913896a974d9c6e3"
+    },
+    "tcu-native-capture-startup-verification.json": {
+      "bytes": 7406011,
+      "sha256": "4a8742a5488f53e8de5dfa0c30c6930d9db99a15843b032348727c7cd50e8619"
+    },
+    "tcu-native-capture-startup-a-only-fixture-defect.json": {
+      "bytes": 6502023,
+      "sha256": "28189f9f015067722a9d3316824405832749940d7b6b59867eb933c28643144f"
+    },
+    "tcu-native-capture-startup.txt": {
+      "bytes": 6254,
+      "sha256": "74b3dc905f057308121063aa3233490b000ed5cef062a31a3dbe105b8ba1b86e"
+    },
+    "probe_tcu_native_can_startup.py": {
+      "bytes": 3404,
+      "sha256": "93429d60576c49c97f77732d6305f020a668bea14364edd7cada6ababba2e6ac"
+    },
+    "tcu-native-can-startup-probe.json": {
+      "bytes": 1411,
+      "sha256": "76d2f9df4b007d6178f0cdacb792cdf78fafd3da9f3077f4eff4febc94954fa1"
+    },
+    "tcu-native-can-startup-f732-stop.json": {
+      "bytes": 1265,
+      "sha256": "1163f27713ee4107b902320d0f3d99e6c56f6b83d4bbfb32d5bde1284749c68b"
+    },
+    "tcu-native-can-startup-disassembly.txt": {
+      "bytes": 15913,
+      "sha256": "c1d3fdc91415048ca51ab6acec72053c531e342499ca4357c30fa59a5d43af06"
+    },
+    "tcu-native-can-startup-manual-excerpts.txt": {
+      "bytes": 11863,
+      "sha256": "0be522cebfc69a305c0ee879def66c2ba7545f8aa16304565bfe694cdef03e43"
+    },
+    "ghidra/annotations.tsv": {
+      "bytes": 383511,
+      "sha256": "fcb55c4471191bdd8634ea33363676ee9e39f759c1dc98d1eb4f9bd43e1a3c3c"
+    },
+    "ghidra/README.txt": {
+      "bytes": 6090,
+      "sha256": "6c326d847b8096b77da020419b3a63b914b38bbacdb27df3767894fc61673b98"
+    },
+    "ghidra/snapshot.json": {
+      "bytes": 1326,
+      "sha256": "03e4a406a0752cf9e7875083b723590dc8f13e1649c9e8ff9ba168efb7c5b024"
+    },
+    "ghidra/restore-verification.json": {
+      "bytes": 514,
+      "sha256": "6db8bb1d7d2475bae6913a44a766a487e74e5cc435981932a521277a3ef6cfb8"
+    }
+  },
+  "inputs": {
+    "examples/LFG1TF000.bin": {
+      "bytes": 524288,
+      "sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+    },
+    "examples/LFFEEE-stock.bin": {
+      "bytes": 1048576,
+      "sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08"
+    },
+    "research/ecu-at-can/sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf": {
+      "bytes": 5102824,
+      "sha256": "359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c"
+    }
+  },
+  "archive": {
+    "bytes": 11023527,
+    "sha256": "54911f68c849722694e17632903603a7f5ba5ca84330588efe4cda91c42fc228"
+  },
+  "restoration": {
+    "date": "2026-10-07",
+    "archive_sha256": "54911f68c849722694e17632903603a7f5ba5ca84330588efe4cda91c42fc228",
+    "restored_project_files_verified": 11,
+    "restored_annotations_verified": 1996,
+    "identical_export_files": 1033,
+    "restored_programs": [
+      "LFFEEE-stock.bin",
+      "LFG1TF000.bin"
+    ],
+    "method": "Independent Ghidra read-only reopening; verify_restore.py checks archive/live/restored hashes, complete expected export sets, no incomplete readbacks, all annotation rows and identical exports."
+  },
+  "scenarios": [
+    {
+      "poll": 50000,
+      "epoch": 7,
+      "cmt0_interrupts": 200,
+      "application_interrupts": 48,
+      "foreground_ram_checks": 81,
+      "capture_return_ram_checks": 30,
+      "command_pin_return_checks": 96,
+      "adc_ready_phi": 450000,
+      "capture_enabled_phi": 491520,
+      "capture_ready_phi": 2457600,
+      "application_admitted_phi": 2539520,
+      "application_admitted_ordinal": 31,
+      "additional_application_interrupt_required": true,
+      "cmt1_interrupts": 97,
+      "capture_interrupts": 441,
+      "skipped_capture_edges": 61,
+      "capture_A_interrupts": 144,
+      "capture_B_interrupts": 297
+    },
+    {
+      "poll": 50000,
+      "epoch": 0,
+      "cmt0_interrupts": 200,
+      "application_interrupts": 48,
+      "foreground_ram_checks": 81,
+      "capture_return_ram_checks": 31,
+      "command_pin_return_checks": 96,
+      "adc_ready_phi": 500000,
+      "capture_enabled_phi": 573440,
+      "capture_ready_phi": 2539520,
+      "application_admitted_phi": 2621440,
+      "application_admitted_ordinal": 32,
+      "additional_application_interrupt_required": true,
+      "cmt1_interrupts": 97,
+      "capture_interrupts": 431,
+      "skipped_capture_edges": 71,
+      "capture_A_interrupts": 141,
+      "capture_B_interrupts": 290
+    },
+    {
+      "poll": 65536,
+      "epoch": 4294967040,
+      "cmt0_interrupts": 200,
+      "application_interrupts": 48,
+      "foreground_ram_checks": 62,
+      "capture_return_ram_checks": 32,
+      "command_pin_return_checks": 96,
+      "adc_ready_phi": 589824,
+      "capture_enabled_phi": 655360,
+      "capture_ready_phi": 2621440,
+      "application_admitted_phi": 2703360,
+      "application_admitted_ordinal": 33,
+      "additional_application_interrupt_required": true,
+      "cmt1_interrupts": 97,
+      "capture_interrupts": 421,
+      "skipped_capture_edges": 81,
+      "capture_A_interrupts": 138,
+      "capture_B_interrupts": 283
+    }
+  ],
+  "limits": "Corrected A+B capture startup verified; first A-only fixture defect retained. NativeCANprobe remains REJECTED atE402, notcomplete. No fullreset/mainloop/physicalIRQ/remoteDSC/roofproof. Allthreebroader scopesopen; no staging/commit/push."
+}

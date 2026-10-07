@@ -16,7 +16,7 @@ uint Control_UpdateBaselineSourceAverage(void)
   undefined4 extraout_fr0;
   float extraout_fr0_00;
   
-  puVar5 = PTR_DAT_00059150;
+  puVar5 = PTR_Control_RawFirstPublished_00059150;
   puVar4 = PTR_Control_BaselineAverageRemaining_0005914c;
   puVar3 = PTR_Control_BaselineAverageSum_00059148;
   iVar2 = DAT_00059144;
@@ -32,7 +32,7 @@ uint Control_UpdateBaselineSourceAverage(void)
   else if (*(short *)PTR_Control_BaselineAverageRemaining_0005914c != 0) {
     *(short *)PTR_Control_BaselineAverageRemaining_0005914c =
          *(short *)PTR_Control_BaselineAverageRemaining_0005914c + (short)DAT_00059144;
-    uVar6 = (*(code *)puVar1)(PTR_DAT_00059150);
+    uVar6 = (*(code *)puVar1)(PTR_Control_RawFirstPublished_00059150);
     *(float *)puVar3 = *(float *)puVar3 + extraout_fr0_00;
     *(float *)PTR_Control_RetainedBaselineAverage_00059134 =
          *(float *)puVar3 / (float)(int)(iVar2 - (uint)*(ushort *)puVar4);

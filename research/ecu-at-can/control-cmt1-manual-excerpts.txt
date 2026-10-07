@@ -1,0 +1,414 @@
+PDF page 495
+Rev. 3.0, 09/04, page 453 of 1086
+14.1.3
+Register Configuration
+ Table 14.1 summarizes the CMT register configuration.
+Table 14.1
+Register Configuration
+ 
+Channel
+ 
+Name
+ 
+Abbreviation
+ 
+R/W
+ Initial
+Value
+ 
+Address
+ Access Size
+(Bits)
+ Shared
+ Compare match timer
+start register
+ CMSTR
+ R/W
+ H'0000
+ H'FFFFF710 8, 16, 32
+ Compare match timer
+control/status register 0
+ CMCSR0
+ R/(W)*
+ H'0000
+ H'FFFFF712 8, 16, 32
+ Compare match timer
+counter 0
+ CMCNT0
+ R/W
+ H'0000
+ H'FFFFF714 8, 16, 32
+ 0
+ Compare match timer
+constant register 0
+ CMCOR0
+ R/W
+ H'FFFF
+ H'FFFFF716 8, 16, 32
+ Compare match timer
+control/status register 1
+ CMCSR1
+ R/(W)*
+ H'0000
+ H'FFFFF718 8, 16, 32
+ Compare match timer
+counter 1
+ CMCNT1
+ R/W
+ H'0000
+ H'FFFFF71A 8, 16, 32
+ 1
+ Compare match timer
+constant register 1
+ CMCOR1
+ R/W
+ H'FFFF
+ H'FFFFF71C 8, 16, 32
+Notes: Register access with an internal clock multiplication ratio of 4 requires four or five internal
+clock (φ) cycles for byte access and word access, and eight or nine internal clock (φ) cycles
+for longword access.
+*
+Only 0 can be written to the CMCSR0 and CMCSR1 CMF bits to clear the flags.
+ 
+
+PDF page 497
+Rev. 3.0, 09/04, page 455 of 1086
+14.2.2
+Compare Match Timer Control/Status Register (CMCSR)
+ The compare match timer control/status register (CMCSR) is a 16-bit register that indicates the
+occurrence of compare matches, sets the enable/disable status of interrupts, and establishes the
+clock used for incrementation. It is initialized to H'0000 by a power-on reset and in the standby
+modes.
+ 
+Bit:
+ 15
+ 14
+ 13
+ 12
+ 11
+ 10
+ 9
+ 8
+ 
+ –
+ –
+ –
+ –
+ –
+ –
+ –
+ –
+ 
+Initial value:
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 
+R/W:
+ R
+ R
+ R
+ R
+ R
+ R
+ R
+ R
+ 
+ 
+Bit:
+ 7
+ 6
+ 5
+ 4
+ 3
+ 2
+ 1
+ 0
+ 
+ CMF
+ CMIE
+ –
+ –
+ –
+ –
+ CKS1
+ CKS0
+ 
+Initial value:
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 
+R/W:
+ R/(W)*
+ R/W
+ R
+ R
+ R
+ R
+ R/W
+ R/W
+Note: * Only 0 can be written to clear the flag.
+ 
+• Bits 15–8 and 5–2—Reserved: These bits are always read as 0. The write value should always
+be 0.
+• Bit 7—Compare Match Flag (CMF): This flag indicates whether or not the CMCNT and
+CMCOR values have matched.
+ Bit 7: CMF
+ Description
+ 0
+ CMCNT and CMCOR values have not matched
+(Initial value)
+ [Clearing condition]
+ Write 0 to CMF after reading 1 from it
+ 1
+ CMCNT and CMCOR values have matched
+ 
+• Bit 6—Compare Match Interrupt Enable (CMIE): Selects whether to enable or disable a
+compare match interrupt (CMI) when the CMCNT and CMCOR values have matched (CMF =
+1).
+ Bit 6: CMIE
+ Description
+ 0
+ Compare match interrupt (CMI) disabled
+(Initial value)
+ 1
+ Compare match interrupt (CMI) enabled
+ 
+
+PDF page 498
+Rev. 3.0, 09/04, page 456 of 1086
+• Bits 1 and 0—Clock Select 1 and 0 (CKS1, CKS0): These bits select the clock input to
+CMCNT from among the four internal clocks obtained by dividing the peripheral clock (Pφ).
+When the STR bit of CMSTR is set to 1, CMCNT begins incrementing with the clock selected
+by CKS1 and CKS0.
+Bit 1: CKS1
+Bit 0: CKS0
+Description
+0
+Pφ/8
+(Initial value)
+0
+1
+Pφ/32
+0
+Pφ/128
+1
+1
+Pφ/512
+14.2.3
+Compare Match Timer Counter (CMCNT)
+The compare match timer counter (CMCNT) is a 16-bit register used as an up-counter for
+generating interrupt requests.
+When an internal clock is selected with the CKS1 and CKS0 bits of the CMCSR register and the
+STR bit of CMSTR is set to 1, CMCNT begins incrementing with that clock. When the CMCNT
+value matches that of the compare match timer constant register (CMCOR), CMCNT is cleared to
+H'0000 and the CMF flag of CMCSR is set to 1. If the CMIE bit of CMCSR is set to 1 at this time,
+a compare match interrupt (CMI) is requested.
+CMCNT is initialized to H'0000 by a power-on reset and in the standby modes. It is not initialized
+by a manual reset.
+Bit:
+15
+14
+13
+12
+11
+10
+9
+8
+Initial value:
+0
+0
+0
+0
+0
+0
+0
+0
+R/W:
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+Bit:
+7
+6
+5
+4
+3
+2
+1
+0
+Initial value:
+0
+0
+0
+0
+0
+0
+0
+0
+R/W:
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+
+PDF page 499
+Rev. 3.0, 09/04, page 457 of 1086
+14.2.4
+Compare Match Timer Constant Register (CMCOR)
+The compare match timer constant register (CMCOR) is a 16-bit register that sets the period for
+compare match with CMCNT.
+CMCOR is initialized to H'FFFF by a power-on reset and in the standby modes. It is not initialized
+by a manual reset.
+Bit:
+15
+14
+13
+12
+11
+10
+9
+8
+Initial value:
+1
+1
+1
+1
+1
+1
+1
+1
+R/W:
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+Bit:
+7
+6
+5
+4
+3
+2
+1
+0
+Initial value:
+1
+1
+1
+1
+1
+1
+1
+1
+R/W:
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+14.3
+Operation
+14.3.1
+Cyclic Count Operation
+When an internal clock is selected with the CKS1, CKS0 bits of the CMCSR register and the STR
+bit of CMSTR is set to 1, CMCNT begins incrementing with the selected clock. When the
+CMCNT counter value matches that of the compare match constant register (CMCOR), the
+CMCNT counter is cleared to H'0000 and the CMF flag of the CMCSR register is set to 1. If the
+CMIE bit of the CMCSR register is set to 1 at this time, a compare match interrupt (CMI) is
+requested. The CMCNT counter begins counting up again from H'0000.
+Figure 14.2 shows the compare match counter operation.
+CMCOR
+H'0000
+CMCNT value
+Time
+Counter cleared by
+CMCOR compare match
+Figure 14.2   Counter Operation
+
+PDF page 500
+Rev. 3.0, 09/04, page 458 of 1086
+14.3.2
+CMCNT Count Timing
+One of four clocks (Pφ/8, Pφ/32, Pφ/128, Pφ/512) obtained by dividing the peripheral clock (Pφ)
+can be selected by the CKS1 and CKS0 bits of CMCSR. Figure 14.3 shows the timing.
+Pφ
+N – 1
+N
+N + 1
+Internal clock
+CMCNT input
+clock
+CMCNT
+Figure 14.3   Count Timing
+14.4
+Interrupts
+14.4.1
+Interrupt Sources and DTC Activation
+The CMT has a compare match interrupt for each channel, with independent vector addresses
+allocated to each of them. The corresponding interrupt request is output when interrupt request
+flag CMF is set to 1 and interrupt enable bit CMIE has also been set to 1.
+When activating CPU interrupts by interrupt request, the priority between the channels can be
+changed by means of interrupt controller settings. See section 7, Interrupt Controller (INTC), for
+details.
+14.4.2
+Compare Match Flag Set Timing
+The CMF bit of the CMCSR register is set to 1 by the compare match signal generated when the
+CMCOR register and the CMCNT counter match. The compare match signal is generated upon
+the final state of the match (timing at which the CMCNT counter matching count value is
+updated). Consequently, after the CMCOR register and the CMCNT counter match, a compare
+match signal will not be generated until a CMCNT counter input clock occurs. Figure 14.4 shows
+the CMF bit set timing.
+
+PDF page 501
+Rev. 3.0, 09/04, page 459 of 1086
+Pφ
+CMCNT
+input clock
+CMCNT
+CMCOR
+Compare 
+match signal
+CMF
+CMI
+N
+N
+0
+Figure 14.4   CMF Set Timing
+14.4.3
+Compare Match Flag Clear Timing
+The CMF bit of the CMCSR register is cleared by writing a 0 to it after reading a 1. Figure 14.5
+shows the timing when the CMF bit is cleared by the CPU.
+T2
+T1
+Pφ
+CMF
+CMCSR write cycle
+Figure 14.5   Timing of CMF Clear by the CPU

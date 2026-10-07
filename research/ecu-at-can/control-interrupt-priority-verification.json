@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "scope": "Original ECU AA4A priority setup and AA94 branch caller; strict word writes.\n\nExisting INTC write-log fixture extended only to ICR ED18. Latches/logs do not\nmodel pins, priority arbitration, reserved bits or acceptance side effects.\n",
+  "rom_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "original_cases": 256,
+  "ordered_word_writes": [
+    [
+      "write",
+      4294962432,
+      2,
+      2457
+    ],
+    [
+      "write",
+      4294962434,
+      2,
+      36864
+    ],
+    [
+      "write",
+      4294962436,
+      2,
+      36875
+    ],
+    [
+      "write",
+      4294962438,
+      2,
+      37017
+    ],
+    [
+      "write",
+      4294962440,
+      2,
+      2448
+    ],
+    [
+      "write",
+      4294962442,
+      2,
+      37008
+    ],
+    [
+      "write",
+      4294962444,
+      2,
+      37017
+    ],
+    [
+      "write",
+      4294962446,
+      2,
+      39321
+    ],
+    [
+      "write",
+      4294962448,
+      2,
+      39344
+    ],
+    [
+      "write",
+      4294962450,
+      2,
+      2457
+    ],
+    [
+      "write",
+      4294962452,
+      2,
+      39177
+    ],
+    [
+      "write",
+      4294962454,
+      2,
+      39177
+    ],
+    [
+      "write",
+      4294962456,
+      2,
+      255
+    ]
+  ],
+  "cmt1_compatible_priority": 9,
+  "source": "SH7058 table7.2 PDFzero145:ED12=IPRJ,ED18=ICR; table7.3 PDFzero155:CMTI1=IPRJbits7..4",
+  "limits": "No fullstartup reachability, physicalchip, ICRpinbehavior, interrupt arbitration or entrySR."
+}

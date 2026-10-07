@@ -1,0 +1,101 @@
+Qualification report selection and freshness — 2026-10-06
+========================================================
+Objective: close ECU/AT integration, deep traction integration, and NC roof
+folding AND unfolding including interruption/reversal, timeout, synchronization
+and fault recovery. This local ECU milestone does not close those objectives.
+No extra user controller dumps/captures/bench evidence are available. No
+staging, commit or push is authorized.
+
+Inputs and reproduction
+-----------------------
+Original examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+python research/ecu-at-can/verify_control_qualification_report.py
+python research/ecu-at-can/verify_control_qualification_freshness.py
+Original6CFD8 body is in control-qualification-report-leads.txt; original
+8FAC8/8FB52 in control-qualification-report-disassembly.txt. GNU objdump2.42
+setup/provenance remains in control-task.txt; disassemble.py command:
+LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu \
+ python research/ecu-at-can/disassemble.py \
+ --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump \
+ at dis 0x8fac8 0x8fc94
+Local research harness only; no ROM, production or shared ISA changes.
+
+Executed report selection (PASS)
+--------------------------------
+Original6CFD8 at6CFE4 tests8EFF exactly1. If true it calls original8FAC8
+with(index1F,mode2), then(index20,mode2). Otherwise8EFB exactly1 emits
+(index1F,mode1), and independently8EFC exactly1 emits(index20,mode1).
+Other byte values are not true for these decisions. GPR8..15,GBR and SR
+interrupt mask are preserved; original return includes R14 delay-slot restore.
+
+Original8FAC8 setsR6=0 and branches into8FB52. Group mapping ROM E12C6/E12C8
+is001F/0020. Original cache helper8FC94 writes971E+group:973D/973E.
+Protected9462 exactly1 or9A28 exactly1 suppresses that write. Untouched cache
+values persist; a missing report does not implicitly clear an earlier mode.
+Tests seed both cache bytes and adjacent guards, then compare ALL application
+RAM rather than only named outputs. Protected9462 fixtures have valid
+complements; corrupt-pair fault handling is outside this new test scope.
+
+9216 cross-product whole-RAM cases +768 full-byte selection sweeps PASS.
+131072 original9034E executions exhaust all65536 runtime masks for each group.
+Stock ROM AC046/AC048 masks are8000, unlike earlier groups43/44 masks0000.
+9034E returns zero (mask admits) exactly when runtime99D8 has bit8000.
+99D5 must separately equal1 before this check executes. Full report cases
+here cover global gate0/1/2 and runtime masks0000/0001/7FFF (plus global0
+withFFFF in byte sweeps). All return without8FCB8/8FE4E/DAE8. Enabled bit8000
+paths require separate downstream evidence; no generic stored-DTC assertion.
+Result: control-qualification-report-verification.json.
+
+Retained task experiment
+------------------------
+Qualification observer reuses verify_control_clear_startup.run_sequence with
+an optional machine class; default prior experiments remain unchanged.
+Original10022 RAM-test/clear ->CA94 filtered sample ->1619A initializer,
+then40 explicit event2 deliveries, PFDR bit0 high10/low15/high15, original
+CADE twice at each transition. It records6CD96->6CE24->6CF06->6CFD8 and
+checks that each preceding return's full qualification-input/cache snapshot
+matches the next entry. Report boundaries use the independent whole-RAM cache
+oracle only if downstream admission is off; admitted paths are observations
+until separately verified. Existing41 activity-boundary oracles also execute.
+PASS40 outer returns,41 pre-existing whole-RAM activity boundaries and10
+qualification boundaries (two initializer, thenfour each at outer5 and25).
+At both periodic calls,99D5=1 and99D8=8000: downstream gate IS enabled.
+However6C92=0,914B=0,8EFF/8EFB/8EFC=0, so no report is selected and both
+cache bytes remain0. The report whole-RAM no-op oracle passes twice. The
+qualifier/countdown/latch/report entry order and matching adjacent snapshots
+are verified; these all-zero selected flags do not demonstrate changing raw
+samples reaching an admitted report. This is a concrete remaining test gap,
+not grounds to force flags or declare operational reporting complete.
+Return addresses1B16C/1B172/1B178/1B17E establish the exact caller boundaries.
+Result: control-qualification-freshness-verification.json.
+
+Limits and next action
+----------------------
+No physical cadence/boot, electrical signal identity, analog units, remote DSC
+execution, stored-DTC persistence or vehicle behavior is inferred. Next target actual raw acquisition freshness in this initialized sequence:
+reuse prior strict ADC result fixtures and4CE2 schedule/scaler models from
+verify_control_acquisition_schedule.py and verify_control_raw_enable.py.
+Observe whether the actual outer dispatcher invokes acquisition, and trace
+channel28raw>>6 ->6C92 and channel1
+400A->6718->40E8->1DF14/1DF32->6CB4->914B before the qualification group at outer5/25.
+Supply explicit changing ADC samples only at the documented input boundary;
+do not write internal qualification flags to fabricate a transition. Groups1F/
+20 downstream reporting must be bounded when a nonempty selected report occurs.
+Keep ECU/TCU operational queue/ack/overlap/persistence and both roof directions
+open independently, as CHECKPOINT.txt and traction-roof.txt require. Roof's next
+step still needs new applicable source or remote-controller/physical evidence;
+do not repeat exhausted listings or ask for already unavailable artifacts.
+
+Ghidra milestone saved and independently restored:1904 annotations
+(829ECU/1075TCU),960 identical exports,11 matching project hashes before and
+after readonly reopen. Archive10,990,424bytes SHA256
+17a3ddaca7a44f68c144d3a2b1948c1316beee6da340cf3edb5d23ced6301f2b.
+Ghidra12.1.3PUBLIC/Java21.0.10; both LFFEEE-stock.bin andLFG1TF000.bin.
+Exact project inventory/restore result in ghidra/snapshot.json and
+restore-verification.json. Nine changed/new scripts compile; targeted diff
+whitespace check passes. Nineteen new artifacts are Git-eligible. Mixed index
+AD archive.tmp preserved. Saved locally; no staging, commit or push.
+
+Continuation helper: control-acquisition-retained-leads.json records the actual
+fixture inheritance and next probe addresses; planning leads only.

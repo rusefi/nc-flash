@@ -1,7 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Executed with explicit peripheral samples: PGDR bit0 strobe, TDR write, unbounded SSR bit40 poll,
-   RDR read, strobe release. Not a full peripheral model. */
+/* Executed2048 new cases andcomplete18DC8 tasks:PGDR bit0 strobe,TDR byte,SSR bit40 poll,RDR byte
+   signextended,strobe release. ExactMMIOtrace; missingready boundedloop. Explicit samples
+   notphysicalpeer. control-task-serial.txt. */
 
 int Input_TransferSerialByte(undefined1 param_1)
 

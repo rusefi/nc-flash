@@ -1,0 +1,152 @@
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x1d22a 0x1d280
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001d22a <.data+0x1d22a>:
+   1d22a:	4f 22       	sts.l	pr,@-r15
+   1d22c:	d3 39       	mov.l	0x1d314,r3	! ffff90a7
+   1d22e:	62 30       	mov.b	@r3,r2
+   1d230:	d1 3b       	mov.l	0x1d320,r1	! ffff90ac
+   1d232:	62 2c       	extu.b	r2,r2
+   1d234:	d3 3b       	mov.l	0x1d324,r3	! 5ae4c
+   1d236:	42 00       	shll	r2
+   1d238:	32 1c       	add	r1,r2
+   1d23a:	91 67       	mov.w	0x1d30c,r1	! 302
+   1d23c:	43 0b       	jsr	@r3
+   1d23e:	00 09       	nop	
+   1d240:	4f 26       	lds.l	@r15+,pr
+   1d242:	00 0b       	rts	
+   1d244:	00 09       	nop	
+   1d246:	d3 38       	mov.l	0x1d328,r3	! ffff90b6
+   1d248:	00 0b       	rts	
+   1d24a:	60 30       	mov.b	@r3,r0
+   1d24c:	4f 22       	sts.l	pr,@-r15
+   1d24e:	7f fc       	add	#-4,r15
+   1d250:	d3 36       	mov.l	0x1d32c,r3	! 1b9f6
+   1d252:	43 0b       	jsr	@r3
+   1d254:	2f 40       	mov.b	r4,@r15
+   1d256:	62 f0       	mov.b	@r15,r2
+   1d258:	d3 31       	mov.l	0x1d320,r3	! ffff90ac
+   1d25a:	62 2c       	extu.b	r2,r2
+   1d25c:	42 00       	shll	r2
+   1d25e:	33 2c       	add	r2,r3
+   1d260:	60 30       	mov.b	@r3,r0
+   1d262:	c9 fd       	and	#253,r0
+   1d264:	23 00       	mov.b	r0,@r3
+   1d266:	7f 04       	add	#4,r15
+   1d268:	d2 31       	mov.l	0x1d330,r2	! 1ba24
+   1d26a:	42 2b       	jmp	@r2
+   1d26c:	4f 26       	lds.l	@r15+,pr
+   1d26e:	66 4c       	extu.b	r4,r6
+   1d270:	d3 30       	mov.l	0x1d334,r3	! ffff90b4
+   1d272:	36 3c       	add	r3,r6
+   1d274:	62 60       	mov.b	@r6,r2
+   1d276:	22 28       	tst	r2,r2
+   1d278:	8b 00       	bf	0x1d27c
+   1d27a:	26 50       	mov.b	r5,@r6
+   1d27c:	00 0b       	rts	
+   1d27e:	00 09       	nop	
+
+
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x1b9f6 0x1ba54
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0001b9f6 <.data+0x1b9f6>:
+   1b9f6:	7f fc       	add	#-4,r15
+   1b9f8:	94 29       	mov.w	0x1ba4e,r4	! 8f66
+   1b9fa:	63 40       	mov.b	@r4,r3
+   1b9fc:	23 38       	tst	r3,r3
+   1b9fe:	8b 0c       	bf	0x1ba1a
+   1ba00:	93 26       	mov.w	0x1ba50,r3	! ff0f
+   1ba02:	00 02       	stc	sr,r0
+   1ba04:	40 09       	shlr2	r0
+   1ba06:	40 09       	shlr2	r0
+   1ba08:	c9 0f       	and	#15,r0
+   1ba0a:	2f 00       	mov.b	r0,@r15
+   1ba0c:	00 02       	stc	sr,r0
+   1ba0e:	20 39       	and	r3,r0
+   1ba10:	cb a0       	or	#160,r0
+   1ba12:	40 0e       	ldc	r0,sr
+   1ba14:	62 f0       	mov.b	@r15,r2
+   1ba16:	91 1c       	mov.w	0x1ba52,r1	! 8f65
+   1ba18:	21 20       	mov.b	r2,@r1
+   1ba1a:	63 40       	mov.b	@r4,r3
+   1ba1c:	73 01       	add	#1,r3
+   1ba1e:	24 30       	mov.b	r3,@r4
+   1ba20:	00 0b       	rts	
+   1ba22:	7f 04       	add	#4,r15
+   1ba24:	94 13       	mov.w	0x1ba4e,r4	! 8f66
+   1ba26:	63 40       	mov.b	@r4,r3
+   1ba28:	73 ff       	add	#-1,r3
+   1ba2a:	24 30       	mov.b	r3,@r4
+   1ba2c:	62 40       	mov.b	@r4,r2
+   1ba2e:	22 28       	tst	r2,r2
+   1ba30:	8b 0a       	bf	0x1ba48
+   1ba32:	02 02       	stc	sr,r2
+   1ba34:	91 0c       	mov.w	0x1ba50,r1	! ff0f
+   1ba36:	93 0c       	mov.w	0x1ba52,r3	! 8f65
+   1ba38:	60 30       	mov.b	@r3,r0
+   1ba3a:	22 19       	and	r1,r2
+   1ba3c:	60 0c       	extu.b	r0,r0
+   1ba3e:	c9 0f       	and	#15,r0
+   1ba40:	40 08       	shll2	r0
+   1ba42:	40 08       	shll2	r0
+   1ba44:	20 2b       	or	r2,r0
+   1ba46:	40 0e       	ldc	r0,sr
+   1ba48:	00 0b       	rts	
+   1ba4a:	00 09       	nop	
+   1ba4c:	8f 5d       	bf.s	0x1bb0a
+   1ba4e:	8f 66       	bf.s	0x1bb1e
+   1ba50:	ff 0f       	.word 0xff0f
+   1ba52:	8f 65       	bf.s	0x1bb20
+
+
+COMMAND: python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x5ae4c 0x5ae8e
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0005ae4c <.data+0x5ae4c>:
+   5ae4c:	60 18       	swap.b	r1,r0
+   5ae4e:	2f 16       	mov.l	r1,@-r15
+   5ae50:	61 1c       	extu.b	r1,r1
+   5ae52:	2f 26       	mov.l	r2,@-r15
+   5ae54:	60 0c       	extu.b	r0,r0
+   5ae56:	62 20       	mov.b	@r2,r2
+   5ae58:	20 08       	tst	r0,r0
+   5ae5a:	89 07       	bt	0x5ae6c
+   5ae5c:	42 00       	shll	r2
+   5ae5e:	70 ff       	add	#-1,r0
+   5ae60:	20 08       	tst	r0,r0
+   5ae62:	89 03       	bt	0x5ae6c
+   5ae64:	42 00       	shll	r2
+   5ae66:	70 ff       	add	#-1,r0
+   5ae68:	20 08       	tst	r0,r0
+   5ae6a:	8b f7       	bf	0x5ae5c
+   5ae6c:	e0 08       	mov	#8,r0
+   5ae6e:	30 18       	sub	r1,r0
+   5ae70:	20 08       	tst	r0,r0
+   5ae72:	89 08       	bt	0x5ae86
+   5ae74:	62 2c       	extu.b	r2,r2
+   5ae76:	42 01       	shlr	r2
+   5ae78:	70 ff       	add	#-1,r0
+   5ae7a:	20 08       	tst	r0,r0
+   5ae7c:	89 03       	bt	0x5ae86
+   5ae7e:	42 01       	shlr	r2
+   5ae80:	70 ff       	add	#-1,r0
+   5ae82:	20 08       	tst	r0,r0
+   5ae84:	8b f7       	bf	0x5ae76
+   5ae86:	60 2c       	extu.b	r2,r0
+   5ae88:	62 f6       	mov.l	@r15+,r2
+   5ae8a:	00 0b       	rts	
+   5ae8c:	61 f6       	mov.l	@r15+,r1
+

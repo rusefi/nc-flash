@@ -1,7 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* Executed all992 bytes5F220..5F5FF ->FFFFAD4C..FFFFB12B; supplies stock list descriptorsB028/B02C.
-   Full boot hardware not simulated. */
+/* Executed all992 bytes5F220..5F5FF ->FFFFAD4C..FFFFB12B; supplies stock list descriptorsB028/B02C
+   andAD4E=0 for137B4 stored array initialization. Three sentinel copies checked in
+   tcu-stored-adjustments.txt; full boot hardware not simulated. */
 
 undefined4 Startup_CopyInitializedData(void)
 

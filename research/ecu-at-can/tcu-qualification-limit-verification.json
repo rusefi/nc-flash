@@ -1,0 +1,617 @@
+{
+  "scope": "CAN215-derived qualification limit, history publication and original caller order.\n\nWhole23544 executes, including fall-through2378A and all arithmetic helpers.\nExplicit inputs/admission and bounded scheduling are not physical units/timing.\n",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "ecu_sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08",
+  "direct_cases": {
+    "correction": 252,
+    "slew": 200,
+    "prefix": 1800,
+    "tail": 4536,
+    "capture": 72
+  },
+  "total_direct_cases": 6860,
+  "can_classification_probes": [
+    {
+      "primary": 25,
+      "replacement": null,
+      "can215": "02 19 02 1e 02 00 00 02",
+      "changed_can215": null,
+      "previous_limit": 7984,
+      "base92e2": 800,
+      "limit939e": 7984,
+      "limit9c52": 9600,
+      "candidate_delay_ticks": 0,
+      "progress": [
+        8400,
+        0,
+        8400
+      ],
+      "accepted": 1,
+      "code": 6,
+      "operation": 8,
+      "creation_calls": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          6,
+          8,
+          0
+        ]
+      ],
+      "retired_callbacks": [
+        [
+          199554,
+          1
+        ],
+        [
+          199326,
+          1
+        ],
+        [
+          201064,
+          1
+        ]
+      ],
+      "phase_codes": [
+        6
+      ],
+      "classifications": [
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 0,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            8400,
+            0,
+            8400
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 5
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            8400,
+            0,
+            8400
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 5
+        }
+      ],
+      "group_calls": [
+        {
+          "code": 1,
+          "operation": 0,
+          "group": 7
+        },
+        {
+          "code": 6,
+          "operation": 8,
+          "group": 65535
+        }
+      ],
+      "order": [
+        "selection",
+        "limit",
+        "selection",
+        "limit"
+      ],
+      "limit_checks": 2,
+      "tail_checks": 2,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary": 100,
+      "replacement": null,
+      "can215": "02 64 02 1e 02 00 00 02",
+      "changed_can215": null,
+      "previous_limit": 12736,
+      "base92e2": 3200,
+      "limit939e": 12736,
+      "limit9c52": 12736,
+      "candidate_delay_ticks": 0,
+      "progress": [
+        8400,
+        0,
+        8400
+      ],
+      "accepted": 1,
+      "code": 0,
+      "operation": 8,
+      "creation_calls": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          8,
+          0
+        ]
+      ],
+      "retired_callbacks": [],
+      "phase_codes": [
+        1,
+        0
+      ],
+      "classifications": [
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 0,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            8400,
+            0,
+            8400
+          ],
+          "code": 0,
+          "history": 2,
+          "limit": 12736,
+          "flags": 0
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            8400,
+            0,
+            8400
+          ],
+          "code": 0,
+          "history": 2,
+          "limit": 12736,
+          "flags": 0
+        }
+      ],
+      "group_calls": [
+        {
+          "code": 1,
+          "operation": 0,
+          "group": 7
+        },
+        {
+          "code": 0,
+          "operation": 8,
+          "group": 7
+        }
+      ],
+      "order": [
+        "selection",
+        "limit",
+        "selection",
+        "limit"
+      ],
+      "limit_checks": 2,
+      "tail_checks": 2,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "publication_lag_probes": [
+    {
+      "primary": 25,
+      "replacement": 100,
+      "can215": "02 19 02 1e 02 00 00 02",
+      "changed_can215": "02 64 02 1e 02 00 00 02",
+      "previous_limit": 7984,
+      "base92e2": 3200,
+      "limit939e": 12736,
+      "limit9c52": 9600,
+      "candidate_delay_ticks": 0,
+      "progress": [
+        8400,
+        0,
+        8400
+      ],
+      "accepted": 1,
+      "code": 6,
+      "operation": 8,
+      "creation_calls": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          6,
+          8,
+          0
+        ]
+      ],
+      "retired_callbacks": [
+        [
+          199554,
+          1
+        ],
+        [
+          199326,
+          1
+        ],
+        [
+          201064,
+          1
+        ]
+      ],
+      "phase_codes": [
+        6
+      ],
+      "classifications": [
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 0,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            8400,
+            0,
+            8400
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 5
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            8400,
+            0,
+            8400
+          ],
+          "code": 6,
+          "history": 2,
+          "limit": 9600,
+          "flags": 5
+        }
+      ],
+      "group_calls": [
+        {
+          "code": 1,
+          "operation": 0,
+          "group": 7
+        },
+        {
+          "code": 6,
+          "operation": 8,
+          "group": 65535
+        }
+      ],
+      "order": [
+        "selection",
+        "limit",
+        "selection",
+        "limit"
+      ],
+      "limit_checks": 2,
+      "tail_checks": 2,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primary": 100,
+      "replacement": 25,
+      "can215": "02 64 02 1e 02 00 00 02",
+      "changed_can215": "02 19 02 1e 02 00 00 02",
+      "previous_limit": 12736,
+      "base92e2": 800,
+      "limit939e": 7984,
+      "limit9c52": 12736,
+      "candidate_delay_ticks": 0,
+      "progress": [
+        8400,
+        0,
+        8400
+      ],
+      "accepted": 1,
+      "code": 0,
+      "operation": 8,
+      "creation_calls": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          8,
+          0
+        ]
+      ],
+      "retired_callbacks": [],
+      "phase_codes": [
+        1,
+        0
+      ],
+      "classifications": [
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 0,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 0,
+          "proposed": 2,
+          "accepted": 1,
+          "old_history": 1,
+          "pending": 0,
+          "axes": [
+            25600,
+            0,
+            0
+          ],
+          "code": 1,
+          "history": 1,
+          "limit": 9600,
+          "flags": 1
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 1,
+          "pending": 1,
+          "axes": [
+            8400,
+            0,
+            8400
+          ],
+          "code": 0,
+          "history": 2,
+          "limit": 12736,
+          "flags": 0
+        },
+        {
+          "operation": 8,
+          "proposed": 1,
+          "accepted": 2,
+          "old_history": 2,
+          "pending": 1,
+          "axes": [
+            8400,
+            0,
+            8400
+          ],
+          "code": 0,
+          "history": 2,
+          "limit": 12736,
+          "flags": 0
+        }
+      ],
+      "group_calls": [
+        {
+          "code": 1,
+          "operation": 0,
+          "group": 7
+        },
+        {
+          "code": 0,
+          "operation": 8,
+          "group": 7
+        }
+      ],
+      "order": [
+        "selection",
+        "limit",
+        "selection",
+        "limit"
+      ],
+      "limit_checks": 2,
+      "tail_checks": 2,
+      "tcu_source915a": 32767,
+      "can216": "ff fe 02 00 ff 27 10 00",
+      "can211_word0": 20016,
+      "enabled_at": true,
+      "enabled_211": true,
+      "cut": 0,
+      "at_network_fault": false,
+      "at_numeric": 65022,
+      "at_correction": 0.0,
+      "traction_correction": 0.0,
+      "spark": [
+        26.0,
+        26.0,
+        26.0,
+        26.0
+      ],
+      "other_cylinder_commands": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ]
+}

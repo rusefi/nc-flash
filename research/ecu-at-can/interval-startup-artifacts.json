@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-07",
+  "files": {
+    "tcu_startup_configuration_words.py": {
+      "bytes": 1272,
+      "sha256": "49da041b8929fcd5b0af8e68fbf20f8d998ae341567d07d1287c8bb5f6820b73"
+    },
+    "tcu_startup_interval.py": {
+      "bytes": 557,
+      "sha256": "bb12df330311e8a4bb289ca3c72e4620a4e0476f81e66f9df6a2e54557f4638f"
+    },
+    "verify_tcu_interval_startup.py": {
+      "bytes": 2776,
+      "sha256": "01f3deaa7a2b60b325be003e7fae9bf32383a87f82a93b7ae9466d03a439cefa"
+    },
+    "probe_tcu_hardware_startup.py": {
+      "bytes": 6502,
+      "sha256": "f5efe0a3eeff855ab1642a3598bb67a0601aeebbba43ff11d6be0a9ca8f13a40"
+    },
+    "tcu-interval-startup.txt": {
+      "bytes": 4027,
+      "sha256": "1afb322e09b76041d6fa828dff3a77c803d8c7fc79467eaebd0338b05094ec9b"
+    },
+    "tcu-interval-startup-manual-excerpts.txt": {
+      "bytes": 19525,
+      "sha256": "e0211690975ef97b52750dfed5af7cf8ce6b2a7830a6d94912f7f6b9e93cb0c4"
+    },
+    "tcu-interval-startup-disassembly.txt": {
+      "bytes": 2909,
+      "sha256": "b9d908ca93e493fab4cd4b55f16d4a41074494553c47f7c24de7e4d8d6990d18"
+    },
+    "tcu-interval-startup-verification.json": {
+      "bytes": 388,
+      "sha256": "d55613a8ece0a39c3efa4f8ac5947fac0df5e5a5b4eabe8c5a34ef6ce2652c9b"
+    },
+    "tcu-interval-startup-regressions.json": {
+      "bytes": 890,
+      "sha256": "354b120e397d27b37327e1ae117159f546c0e71cab865cec19230cd1b669bbeb"
+    },
+    "tcu-hardware-startup-interval-probe.json": {
+      "bytes": 8509,
+      "sha256": "8d83d6a4bbe2706710a4ed0ec15d2c3143b43d7b7cbe53baee5349f8c3a39d0c"
+    },
+    "ghidra/annotations.tsv": {
+      "bytes": 388860,
+      "sha256": "2b41778ef532289afdcfd298788b19a814a788befb62c555ec44890c083b5df0"
+    },
+    "ghidra/snapshot.json": {
+      "bytes": 1326,
+      "sha256": "22ffaed8b9fe4b72c79c27eb207a708b9d5f2baa25d0911b5e5bc8412d42f44c"
+    },
+    "ghidra/restore-verification.json": {
+      "bytes": 514,
+      "sha256": "b8543a04dc94cb9e80f8712130aa93351bc71c815b0ccdb2e7b9f414a1efebde"
+    },
+    "ghidra/nc-at-can.tar.gz": {
+      "bytes": 11028971,
+      "sha256": "bcdbe0be90283b9fcc491c630bb8d0f12af006202f159bd31120c547d3d3e2d6"
+    },
+    "ghidra/decompiled/LFG1TF000.bin__Startup_DisableIntervalRequests.c": {
+      "bytes": 603,
+      "sha256": "e0e5a9fc4967fb27e772f0b93d197fb6d4930691c79ef3886280f0348d99b328"
+    }
+  },
+  "restore": {
+    "date": "2026-10-07",
+    "archive_sha256": "bcdbe0be90283b9fcc491c630bb8d0f12af006202f159bd31120c547d3d3e2d6",
+    "restored_project_files_verified": 11,
+    "restored_annotations_verified": 2013,
+    "identical_export_files": 1047,
+    "restored_programs": [
+      "LFFEEE-stock.bin",
+      "LFG1TF000.bin"
+    ],
+    "method": "Independent Ghidra read-only reopening; verify_restore.py checks archive/live/restored hashes, complete expected export sets, no incomplete readbacks, all annotation rows and identical exports."
+  },
+  "checks": {
+    "original_cases": 256,
+    "roundtrips": 768,
+    "rejected_accesses": 16,
+    "full15574_returned": false,
+    "current_stop": "14978 wordwrite FFFFF666=0",
+    "recovery_flags": [
+      0,
+      0
+    ]
+  },
+  "limits": "Bounded ITVRR configuration only; no counter/ADC events or physical proof. All three broader goals remain open. Locally saved; no staging/commit/push."
+}

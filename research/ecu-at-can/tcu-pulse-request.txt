@@ -1,0 +1,139 @@
+TCU pulse-request admission, response and repeated requests — 2026-10-06
+
+Objective and status
+All three user requirements remain: ECU/automatic-transmission CAN integration,
+deep traction logic/integration, and NC roof folding AND unfolding including
+interruption/resume/reversal, communication timeout, motor synchronization and
+fault recovery. This verifies the TCU software request path leading to9418.
+It does not close received-CAN dispatch, response transmission, physical timing
+or controller integration. User has no additional dumps/captures/bench results.
+No staging/commit/push authorization; all work saved locally.
+
+Reproduction and coverage
+  python research/ecu-at-can/verify_tcu_pulse_request.py
+  python -m py_compile research/ecu-at-can/verify_tcu_pulse_request.py
+Python3.14.3; unchangedTCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+5,360 direct checks pass:1536 permission,2048 predicate,1536 response,
+240 complete request entries.48 retained complete126EC application tasks,
+five additional full requests and384 original11014 timerwheel calls pass.
+All applicationRAM and admittedperipheral traces compared to independent
+models; returns andABI registers/stack/SRmask checked. Originalhelpers execute,
+including1D246/5607A/560AC/535B4/23DC0/1D22A/5AE4C/1D24C/1D26E and critical
+section1B9F6/1BA24. NoROM/ISA/sharedverifier/production changes or helperstubs.
+No failing verification preceded the passing run.
+
+Verified permission5604C
+1D246 reads90B6.5607A searches22 two-byte rows at5EB28 forargumentlowbyte.
+Unknown service orstate otherthan1/2/4 ->0x11. For a knownservice/state,
+560AC returns0 ifrowmask&state; otherwise0x22 ifanyothermaskbit, else0x11.
+All256servicebytes crossedwithstates0/1/2/3/4/255 execute. The fixed request
+service4 hasmask1: only90B6==1 permits;2/4 reject0x22;otherstates reject0x11.
+The fullstockpermissiontable is preserved in verificationJSON.
+These are numeric softwarestates; actual session/transport semantics notproved.
+
+Verified predicate53520
+Both samples and thresholds are unsigned16bit values, despite SH signextended
+word loads. Let:
+ A = (80A4>=B128) AND (A962bit0)
+ B = (809E>=B12A) AND (A98Ebit0)
+ C = (A4E8 not0or2) AND (A964bit0)
+The returned permission is NOT(A OR(B AND C)). This is a logical simplification
+of the executed duplicated comparisons with stable RAM during the function;
+no interrupt-driven concurrent RAM mutation is modeled. Inclusive boundaries,
+sign-bit crossings and65535 are tested; upperdiagnosticbits donotchange result.
+This turn fixtures the inputs/thresholds rather than executing their producers.
+Prior can201-cut-loop.txt already executes2055C/50C9A, with809E equal to
+floor(80E8*100/256), tracing back toECU CAN201word0. can201-fault-policy.txt
+executes57258 aggregation ofgroups35/36/3A intoA98E; itsbit0 isclear foractive
+mask02/04 contributors andset otherwise. ThusB usesa previouslyverified
+CAN-derived value plusdiagnosticqualification. speed-fault.txt ownsA962's
+group13/P0722 provenance. This is composition of separatelyverified paths,
+NOT a new receivedCAN-to-pulse end-to-end run. Otherinputs/thresholdwriters
+andphysicalunits are not established here.
+
+Verified complete request54AFC
+ArgumentR4 points to a requestrecord; word atoffset8 is checked.
+1.5604C(service4) nonzero ->thaterror; latergates bypassed.
+2.Nonzero requestword+8 ->0x12.
+3.53520 false ->0x22.
+4.Otherwise535B4 tailcalls23DC0, setting9418=1, andreturns0.
+Errorbranches call541CC(error,0), returnitsresult andleave9418unchanged.
+Only requestword+8 is read on the allowedstatepath; no payload interpretation
+or actualreceivedmessage is established by this handler execution.
+
+Verified response541CC and whyreturn0doesnotproveacceptance
+Index90A7 is tested with0/1.1D22A/5AE4C extractsbits3..4 ofbyte90AC+2*index.
+Ifextractedstate==2 anderrorlowbyte!=0x22,541CC uses1D24C toclearbit1 inthat
+statusbyte andreturns0. Otherwise1D26E storeserrorlowbyte at90B4+index ONLY
+whenoldbyte==0, and541CC returns2. Existingnonzeroerror ispreserved.
+For541CC alternateargumentlowbyte==1,targetindexbecomes0; otherwisecurrent
+index. Extractedstatealwayscomesfromcurrentindex, evenwhentargetoverridden.
+All256statusbytes crossedwitherrors11/12/22hex andalternate0/1 aretested.
+
+1D24C executesoriginalcritical-section pair. Nestcount8F66 restored; ifinitial
+nestcount0,8F65 capturesentryinterruptmasknibble. Tests varyinitialnestcount
+0/1/254/255, SRinterruptmask0..15; maskrestorationandallRAMsideeffectschecked.
+No hardwareinterruptdelivery/concurrentmutation model is implied.
+
+Retainedrequest-to-task overlap and rejection
+The complete126EC application task andallpreviouspulse/latch/source/output
+oracles remainactive. Eightoriginaltimerwheelcalls precede each application
+call, an explicit fixture ratio, not real elapsedtime. Admissioninputs are
+set only at the five requestpoints to isolate exactrequestbehavior.
+-Calls9 and10 bothaccept,set9418=1. Neitherincrementsacount: pendingrequests
+ coalesce inonebyte. Producerphase0atcall12 consumeslatch,starts9415=1,
+ resets82B9=0. This is a one-bit pendingrequest, not a multi-entry queue.
+-Call24 acceptswhilepulseactive; samephaseproducer consumesit/resetstimer0.
+-Call25 rejects nonzero requestword with0x12, response-state2 clearsstatus
+ byte0x12->0x10, returns0, andDOESNOTset9418.
+-Call26 rejects sameword inresponse-state0, storeserror0x12, returns2 and
+ DOESNOTset9418. Thepulsealreadyactivefrom24 remainsindependent ofrejection.
+Thus testingreturnalonewouldmisclassifycall25 asaccepted. Existingpulse/state,
+requestlatch andresponseflags must be distinguished.
+No timerexpiry claim added here; prior tcu-inhibit-writers.txt owns expiry.
+
+Next exact leads, still static/unexecuted
+Literalreference54AFC at53C9C isusedby53B60, insidewrapper53B5C:
+itwritesR4 twice toA688/A68C, R5lowwordtoA690, calls54AFC(A688), storesreturned
+wordatA694 andtailcalls1D94C(current90A7,result). Therefore+8wordlikelycounts
+inputlength, but this record intentionally doesnotrequirethatunprovedmeaning.
+1D94C switches90A7 tooldindexXOR1 undercriticalsection, clears90B7bit7, then
+branches onstatusbit1 to1D85E versus1D9F2. This is a concrete response-
+publication/double-buffer lead; receivedCAN dispatcher andtransportstillopen.
+1D85E uses5CC20 bufferpointers, writesnegative-response prefix7F/originalfirst
+byte/error withlength3 whenpendingerrornonzero; otherwisepositiveheader from
+5CA3C andlengthargument+1.1D9F2 takesadifferentcleanup path. These areSTATIC
+interpretations; no wrapper/packet/transport execution claimed thisturn.
+Saved tcu-pulse-request-dispatch-leads-disassembly.txt containsoriginalbytes.
+NextTCU: independentlymodel/execute53B5C->1D94C->1D85E/1D9F2, thenitsactual
+incomingdispatcher andtransmit/acknowledgement path. Keep other queue/overlap,
+persistence, boot/clock andboardrequirements open. Currentmode90B6 andpredicate
+input/thresholdwriters remainseparate provenance needs.
+
+Independent traction and roof continuation
+Nexttraction: fullECU task around1B14E..1B190 withinterveningcalls, admission/
+freshness and399B0 callers; CAN211/21A sender/units andremoteDSC remainmissing.
+Nextroof: newapplicablefactorysource orreceiver/physicalevidence; exhausted
+AllCarManualsroute/knownsnippetsdonotadvance timeout/reversal/sync proof.
+BOTHdirectionsandallinterruption/recoveryrequirements remainopen, including
+pin/PID/source-applicabilityconflicts. No additional userartifacts; do notaskagain.
+
+Artifact provenance
+This script/resultJSON/report, response-disassembly anddispatch-leads-disassembly
+areGiteligible. Prior tcu-pulse-trigger-disassembly.txt and
+ tcu-pulse-request-gates-disassembly.txt provide54AFC/53520/5604C/541CC.
+Everynewdisassemblycontainscommandandranges. ToolchainGNU SHobjdump2.42 and
+reconstructionpackagehash/LD_LIBRARY_PATH instructions in tcu-pulse-input.txt.
+
+Ghidra and durable-memory verification
+16 newannotations (11functions,5labels),1,840total (776ECU/1064TCU).
+Bothprograms saved, live/read-only independentlyrestored readback passed.
+All920exports byte-identical;all11projecthashesmatchbefore/afterreopen.
+Archive10,980,414bytes SHA256
+d36f27435543b0f9bd8a54984d1886436cedd71d41c32a8215e7b07ab9d889ed.
+Restored underghidra/restore-check/pulse-request-20261006; durablepaired.gpr/
+.rep archive, annotations, exports andmanifests residein ghidra/. Noerrors,
+incomplete decompiles orlocks. Five newresearchartifacts notignored; Python
+compilation andfinalfirmwareverification pass. Existingmixedindex including
+AD ghidra/nc-at-can.tar.gz.tmp preserved; nostaging/commit/push.

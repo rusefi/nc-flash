@@ -1,0 +1,96 @@
+2026-10-06: original queue/reset/phase path into stored adjustments
+
+EXECUTED EVIDENCE
+verify_tcu_adjustment_queue.py uses unchanged TCU instructions and the
+62-function initialized fixture from phase-retirement work. This is not full
+boot or peripheral execution. No callback or phase result is stubbed.
+TCU LFG1TF000 SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a144085c4a808d6.
+Python3.14.3 standardlibrary/assertions; SHRotate-derived observer.
+Reproduce: python research/ecu-at-can/verify_tcu_adjustment_queue.py
+144 full event1 creation/reset checks;12 coupled create/capture/phasecomplete/
+retire/recreate traces;2 accepted-decrease traces pass. Qualifier andinitial
+phase-delay oracles reused from independently verified ascending-phase work.
+Original49B08 updates checked against the independent lifecycle model.
+
+CREATION / RESET / RETIREMENT
+Original initialization includes310F0, setting95D0=1. Event1 through31524/
+319BC invokes310F8 among the eight realcreationcallbacks.144 cases cover
+transitioncodes0..11, prior95D0=0/1/2/255, counterseeds0/200/255. Observer
+compares thecounterwrites and95D0 at310F8's actual return, beforeothercallbacks
+could conceal them. Nonzero95D0 admits resets andbecomes2; it is NOT a
+one-shot disarm at2. Detailedcode/countermapping in tcu-adjustment-timers.txt.
+
+Coupled traces use codes0/1/2, queuehead0/15, measurement15000/17000.122calls
+to original110B4 build81EB=122 andtheabortcounters; event1 then resets only
+the selected abortcounter to0 while81EB remains122. Noqueuephase byte or
+aborttimer is injected in these coupled runs. Original49B08 captures the
+new queue's group/reference/measurement/phase.
+
+Aftercapture, an explicit source change sets80EA to capturedreference plus
+thestock lower admissiondelta. An explicit targetreference equalsmeasurement.
+Each iteration calls original11014 timerwheel,31524 event2,then49B08. Original
+phasequalification advancesqueuephase0->1 after20calls forcodes0/1 and30calls
+forcode2. Those are fixturecallcounts, not milliseconds. Qualifier/counter/
+crossingflag andinitial-delay outputs are independentlychecked duringexecution.
+Queuephase1 then completes49B08 and49FE0 updatesstoredindex6/7/8.
+
+Single-completion offsets frominitial0:
+ measurement15000: code0=>104,code1=>179,code2=>263;
+ measurement17000: code0=>-313,code1=>-404,code2=>-512(clamped).
+Otherstoredindices remain0; head0/15 results agree. Initial probe calling
+threeevent2 services withunqualified targetreference didnotadvancephase0;
+creation alone isnotcompletion. Finaltargetinput and20/30call qualification
+are explicit, not a forced phasebyte.
+
+Ten external groupacknowledgements are then delivered throughoriginalevent3;
+originalqueue retirement drainsrecord andcalls30B82/30A9E/31168.95D0 returns1.
+A secondoriginalevent1 recreation returns95D0=2 andresets the selectedtimer.
+Acknowledgement contents arefixtures here, not naturallygeneratedallgroup
+completion; earlier phase-retirement work separately covers fullgroupservice.
+
+ACCEPTED-STATE DECREASE
+Previousaccepted9C99=2 is produced byoriginal49B08 tail beforecreation, not
+written immediately beforethetesteddecision. Original110B4 builds81EB=130.
+Aftercreation, accepted/proposed inputs drop2->1. Ifalreadycaptured/state1,
+49EE0 aborts,then49B08 tail resets81EB=0. Ifidle/state0 withfreshpending,
+49B08 firstcaptures usingtheentry130 timer, THEN resets81EB=0 in its tail.
+Both subsequentlyexecute121and122 originaltimerincrements andholdtheir
+respective states. This disproves a blanketclaim that accepteddecrease
+necessarilyprevents capture earlier in thesameinvocation. Reachability under
+fullinput producers remains open; no physical transmissionfault claim.
+
+CONSUMER-REPLAY CORRECTION
+Review found old verify_tcu_adjustment_lifecycle.replays calledconfigure()
+afterproduce_offsets(), resettingindices6/7/8 to0. Correctedconfigure order
+andassertedactualconsumed_offsets==produced_offsets. All8replays rerun and
+JSONcorrected. Direct8988/retained13 evidence unaffected. Thresholdslots0..2
+now demonstrably[4196,7798,11494] for[192,256,320], versus[3492,7030,10662]
+for[-512,-512,-512]. Finalproposal/accepted outcomes stayed0/0; unchanged
+finaloutputs werenot sufficient validation anddidnotdetect theoldmistake.
+These8replays use repeated49B08events; current12queue tracesproveoriginal
+creation/phaseproduction into storedvalues. No newfullvehicleclaim follows.
+
+NEXT / LIMITS
+Originalqueueproducer/eventorder now replacesanotherrawfixture. Next connect
+external acknowledgement production andoverlappingevents to49B08, traceother
+storedsetters36D88/36E3C/36EBC,persistence andactualtaskcadence. Tractionraw
+inputs/tasklinks andNCroofbothdirections/reversal/timeout/synchronization/
+recovery remain independentlyopen; noextrauserdumps/captures/benchresults.
+Savedlocally; no staging/commit/push orproductioncode/ROM changes.
+
+Coverageextension: code11 is aknowntransitionfromearlierphasepolicywork.
+Its12additionalcallbackcases pass; table5D451 mapsit togroup3/822F reset.
+Thefinalmain includesall12knowncodes; olderdirectresetreport0..10 stays
+accurateforitsownscope. No arbitraryout-of-domain codeclaim.
+
+DURABLE SAVE VERIFIED
+Bothprograms saved andindependently restored:1503 annotations(650ECU/853TCU),
+739 identicalexports/reports,11 projecthashes. Paired.gpr/.rep archive:
+10,902,373 bytes, SHA256
+001b5607ba4e6ca79e4a7ab31f43c5d017959aeb5dd21e215c918600838ac152.
+Read-only reopen/readbackpassed; noerrors,incompleteexports orlivelocks.
+Commands/inventory in ghidra/README.txt,snapshot.json,restore-verification.json.
+Allnewfiles Git-eligible; Python syntax andgit diff --check pass. Savedlocally;
+no staging/commit/push orproduction/sourceROM edits. Olderpre-existingindex
+including stagedarchive.tmp discrepancy untouched.

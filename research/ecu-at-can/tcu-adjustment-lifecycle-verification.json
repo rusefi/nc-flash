@@ -1,0 +1,1814 @@
+{
+  "scope": "Original TCU49B08 stored-adjustment admission/capture/abort/completion.\n\nIndependent integer/state models, actual queue readers and update body.\nRaw inputs and invocation cadence are fixtures; no physical learning claim.\n",
+  "tcu_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "counts": {
+    "events": 4096,
+    "transition": 162,
+    "admission": 1550,
+    "capture": 1080,
+    "peak": 36,
+    "abort": 720,
+    "completion": 144,
+    "lifecycle": 1200
+  },
+  "outcomes": {
+    "hold": 697,
+    "abort": 187,
+    "complete": 14,
+    "inhibited": 297,
+    "capture": 5
+  },
+  "retained": [
+    {
+      "group": 0,
+      "measurement": 15000,
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        },
+        {
+          "outcome": "hold",
+          "state": 1,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        },
+        {
+          "outcome": "complete",
+          "state": 0,
+          "flags": 0,
+          "peak": 15000,
+          "update": {
+            "group": 0,
+            "index": 6,
+            "delta": 320,
+            "old": 0,
+            "admitted": true,
+            "new": 104,
+            "divide": true,
+            "quotient": -104,
+            "coefficient": 154
+          }
+        },
+        {
+          "outcome": "hold",
+          "state": 0,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        }
+      ],
+      "offsets": [
+        104,
+        0,
+        0
+      ]
+    },
+    {
+      "group": 0,
+      "measurement": 15600,
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 15600,
+          "update": null
+        },
+        {
+          "outcome": "hold",
+          "state": 1,
+          "flags": 0,
+          "peak": 15600,
+          "update": null
+        },
+        {
+          "outcome": "complete",
+          "state": 0,
+          "flags": 0,
+          "peak": 15600,
+          "update": {
+            "group": 0,
+            "index": 6,
+            "delta": 320,
+            "old": 0,
+            "admitted": true,
+            "new": 0,
+            "divide": false,
+            "quotient": 0,
+            "coefficient": null
+          }
+        },
+        {
+          "outcome": "hold",
+          "state": 0,
+          "flags": 0,
+          "peak": 15600,
+          "update": null
+        }
+      ],
+      "offsets": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "group": 0,
+      "measurement": 17000,
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 17000,
+          "update": null
+        },
+        {
+          "outcome": "hold",
+          "state": 1,
+          "flags": 0,
+          "peak": 17000,
+          "update": null
+        },
+        {
+          "outcome": "complete",
+          "state": 0,
+          "flags": 0,
+          "peak": 17000,
+          "update": {
+            "group": 0,
+            "index": 6,
+            "delta": 320,
+            "old": 0,
+            "admitted": true,
+            "new": -313,
+            "divide": true,
+            "quotient": 313,
+            "coefficient": 205
+          }
+        },
+        {
+          "outcome": "hold",
+          "state": 0,
+          "flags": 0,
+          "peak": 17000,
+          "update": null
+        }
+      ],
+      "offsets": [
+        -313,
+        0,
+        0
+      ]
+    },
+    {
+      "group": 1,
+      "measurement": 15000,
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        },
+        {
+          "outcome": "hold",
+          "state": 1,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        },
+        {
+          "outcome": "complete",
+          "state": 0,
+          "flags": 0,
+          "peak": 15000,
+          "update": {
+            "group": 1,
+            "index": 7,
+            "delta": 192,
+            "old": 0,
+            "admitted": true,
+            "new": 179,
+            "divide": true,
+            "quotient": -179,
+            "coefficient": 154
+          }
+        },
+        {
+          "outcome": "hold",
+          "state": 0,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        }
+      ],
+      "offsets": [
+        0,
+        179,
+        0
+      ]
+    },
+    {
+      "group": 1,
+      "measurement": 15600,
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 15600,
+          "update": null
+        },
+        {
+          "outcome": "hold",
+          "state": 1,
+          "flags": 0,
+          "peak": 15600,
+          "update": null
+        },
+        {
+          "outcome": "complete",
+          "state": 0,
+          "flags": 0,
+          "peak": 15600,
+          "update": {
+            "group": 1,
+            "index": 7,
+            "delta": 192,
+            "old": 0,
+            "admitted": true,
+            "new": 0,
+            "divide": false,
+            "quotient": 0,
+            "coefficient": null
+          }
+        },
+        {
+          "outcome": "hold",
+          "state": 0,
+          "flags": 0,
+          "peak": 15600,
+          "update": null
+        }
+      ],
+      "offsets": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "group": 1,
+      "measurement": 17000,
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 17000,
+          "update": null
+        },
+        {
+          "outcome": "hold",
+          "state": 1,
+          "flags": 0,
+          "peak": 17000,
+          "update": null
+        },
+        {
+          "outcome": "complete",
+          "state": 0,
+          "flags": 0,
+          "peak": 17000,
+          "update": {
+            "group": 1,
+            "index": 7,
+            "delta": 192,
+            "old": 0,
+            "admitted": true,
+            "new": -404,
+            "divide": true,
+            "quotient": 404,
+            "coefficient": 154
+          }
+        },
+        {
+          "outcome": "hold",
+          "state": 0,
+          "flags": 0,
+          "peak": 17000,
+          "update": null
+        }
+      ],
+      "offsets": [
+        0,
+        -404,
+        0
+      ]
+    },
+    {
+      "group": 2,
+      "measurement": 15000,
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        },
+        {
+          "outcome": "hold",
+          "state": 1,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        },
+        {
+          "outcome": "complete",
+          "state": 0,
+          "flags": 0,
+          "peak": 15000,
+          "update": {
+            "group": 2,
+            "index": 8,
+            "delta": 128,
+            "old": 0,
+            "admitted": true,
+            "new": 263,
+            "divide": true,
+            "quotient": -263,
+            "coefficient": 154
+          }
+        },
+        {
+          "outcome": "hold",
+          "state": 0,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        }
+      ],
+      "offsets": [
+        0,
+        0,
+        263
+      ]
+    },
+    {
+      "group": 2,
+      "measurement": 15600,
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 15600,
+          "update": null
+        },
+        {
+          "outcome": "hold",
+          "state": 1,
+          "flags": 0,
+          "peak": 15600,
+          "update": null
+        },
+        {
+          "outcome": "complete",
+          "state": 0,
+          "flags": 0,
+          "peak": 15600,
+          "update": {
+            "group": 2,
+            "index": 8,
+            "delta": 128,
+            "old": 0,
+            "admitted": true,
+            "new": 0,
+            "divide": false,
+            "quotient": 0,
+            "coefficient": null
+          }
+        },
+        {
+          "outcome": "hold",
+          "state": 0,
+          "flags": 0,
+          "peak": 15600,
+          "update": null
+        }
+      ],
+      "offsets": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "group": 2,
+      "measurement": 17000,
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 17000,
+          "update": null
+        },
+        {
+          "outcome": "hold",
+          "state": 1,
+          "flags": 0,
+          "peak": 17000,
+          "update": null
+        },
+        {
+          "outcome": "complete",
+          "state": 0,
+          "flags": 0,
+          "peak": 17000,
+          "update": {
+            "group": 2,
+            "index": 8,
+            "delta": 128,
+            "old": 0,
+            "admitted": true,
+            "new": -512,
+            "divide": true,
+            "quotient": 592,
+            "coefficient": 154
+          }
+        },
+        {
+          "outcome": "hold",
+          "state": 0,
+          "flags": 0,
+          "peak": 17000,
+          "update": null
+        }
+      ],
+      "offsets": [
+        0,
+        0,
+        -512
+      ]
+    },
+    {
+      "cause": "accepted_change",
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        },
+        {
+          "outcome": "abort",
+          "state": 0,
+          "flags": 128,
+          "peak": 15000,
+          "update": null
+        }
+      ]
+    },
+    {
+      "cause": "queue_expiry",
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        },
+        {
+          "outcome": "abort",
+          "state": 0,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        }
+      ]
+    },
+    {
+      "cause": "inhibit",
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        },
+        {
+          "outcome": "inhibited",
+          "state": 0,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        }
+      ]
+    },
+    {
+      "cause": "flag_completion",
+      "trace": [
+        {
+          "outcome": "capture",
+          "state": 1,
+          "flags": 0,
+          "peak": 15000,
+          "update": null
+        },
+        {
+          "outcome": "complete",
+          "state": 0,
+          "flags": 1,
+          "peak": 15000,
+          "update": {
+            "group": 0,
+            "index": 6,
+            "delta": 320,
+            "old": 0,
+            "admitted": true,
+            "new": 139,
+            "divide": true,
+            "quotient": -139,
+            "coefficient": 205
+          }
+        }
+      ]
+    }
+  ],
+  "snapshots_sha256": "16d58c0427de7905b52531ef943cc01b311d1aeeda511eebf33d525362bda943",
+  "replays": [
+    {
+      "call": 150,
+      "measurement": 15000,
+      "full": false,
+      "offsets": [
+        192,
+        256,
+        320
+      ],
+      "consumed_offsets": [
+        192,
+        256,
+        320
+      ],
+      "events": [
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete"
+      ],
+      "thresholds": [
+        {
+          "slot": 0,
+          "expected": 4196,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 1,
+          "expected": 7798,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 2,
+          "expected": 11494,
+          "adjust": true,
+          "floor": true
+        },
+        {
+          "slot": 3,
+          "expected": 65535,
+          "adjust": false,
+          "floor": true
+        },
+        {
+          "slot": 4,
+          "expected": 65535,
+          "adjust": false,
+          "floor": true
+        },
+        {
+          "slot": 5,
+          "expected": 652,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 6,
+          "expected": 1398,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 7,
+          "expected": 2328,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 8,
+          "expected": 16013,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 9,
+          "expected": 21788,
+          "adjust": false,
+          "floor": false
+        }
+      ],
+      "scan": [
+        1,
+        0
+      ]
+    },
+    {
+      "call": 150,
+      "measurement": 15000,
+      "full": true,
+      "offsets": [
+        192,
+        256,
+        320
+      ],
+      "consumed_offsets": [
+        192,
+        256,
+        320
+      ],
+      "events": [
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete"
+      ],
+      "thresholds": [
+        {
+          "slot": 0,
+          "expected": 4196,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 1,
+          "expected": 7798,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 2,
+          "expected": 11494,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 3,
+          "expected": 65535,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 4,
+          "expected": 65535,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 5,
+          "expected": 2793,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 6,
+          "expected": 6239,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 7,
+          "expected": 10243,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 8,
+          "expected": 16013,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 9,
+          "expected": 21788,
+          "adjust": false,
+          "floor": false
+        }
+      ],
+      "proposed": 0,
+      "accepted": 0,
+      "creations": [
+        [
+          5,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "call": 150,
+      "measurement": 17000,
+      "full": false,
+      "offsets": [
+        -512,
+        -512,
+        -512
+      ],
+      "consumed_offsets": [
+        -512,
+        -512,
+        -512
+      ],
+      "events": [
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete"
+      ],
+      "thresholds": [
+        {
+          "slot": 0,
+          "expected": 3492,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 1,
+          "expected": 7030,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 2,
+          "expected": 10662,
+          "adjust": true,
+          "floor": true
+        },
+        {
+          "slot": 3,
+          "expected": 65535,
+          "adjust": false,
+          "floor": true
+        },
+        {
+          "slot": 4,
+          "expected": 65535,
+          "adjust": false,
+          "floor": true
+        },
+        {
+          "slot": 5,
+          "expected": 652,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 6,
+          "expected": 1398,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 7,
+          "expected": 2328,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 8,
+          "expected": 16013,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 9,
+          "expected": 21788,
+          "adjust": false,
+          "floor": false
+        }
+      ],
+      "scan": [
+        1,
+        0
+      ]
+    },
+    {
+      "call": 150,
+      "measurement": 17000,
+      "full": true,
+      "offsets": [
+        -512,
+        -512,
+        -512
+      ],
+      "consumed_offsets": [
+        -512,
+        -512,
+        -512
+      ],
+      "events": [
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete"
+      ],
+      "thresholds": [
+        {
+          "slot": 0,
+          "expected": 3492,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 1,
+          "expected": 7030,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 2,
+          "expected": 10662,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 3,
+          "expected": 65535,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 4,
+          "expected": 65535,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 5,
+          "expected": 2793,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 6,
+          "expected": 6239,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 7,
+          "expected": 10150,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 8,
+          "expected": 16013,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 9,
+          "expected": 21788,
+          "adjust": false,
+          "floor": false
+        }
+      ],
+      "proposed": 0,
+      "accepted": 0,
+      "creations": [
+        [
+          5,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "call": 211,
+      "measurement": 15000,
+      "full": false,
+      "offsets": [
+        192,
+        256,
+        320
+      ],
+      "consumed_offsets": [
+        192,
+        256,
+        320
+      ],
+      "events": [
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete"
+      ],
+      "thresholds": [
+        {
+          "slot": 0,
+          "expected": 4196,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 1,
+          "expected": 7798,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 2,
+          "expected": 11494,
+          "adjust": true,
+          "floor": true
+        },
+        {
+          "slot": 3,
+          "expected": 65535,
+          "adjust": false,
+          "floor": true
+        },
+        {
+          "slot": 4,
+          "expected": 65535,
+          "adjust": false,
+          "floor": true
+        },
+        {
+          "slot": 5,
+          "expected": 652,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 6,
+          "expected": 1398,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 7,
+          "expected": 2328,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 8,
+          "expected": 16013,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 9,
+          "expected": 21788,
+          "adjust": false,
+          "floor": false
+        }
+      ],
+      "scan": [
+        1,
+        0
+      ]
+    },
+    {
+      "call": 211,
+      "measurement": 15000,
+      "full": true,
+      "offsets": [
+        192,
+        256,
+        320
+      ],
+      "consumed_offsets": [
+        192,
+        256,
+        320
+      ],
+      "events": [
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete"
+      ],
+      "thresholds": [
+        {
+          "slot": 0,
+          "expected": 4196,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 1,
+          "expected": 7798,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 2,
+          "expected": 11494,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 3,
+          "expected": 65535,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 4,
+          "expected": 65535,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 5,
+          "expected": 2793,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 6,
+          "expected": 6239,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 7,
+          "expected": 10243,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 8,
+          "expected": 16013,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 9,
+          "expected": 21788,
+          "adjust": false,
+          "floor": false
+        }
+      ],
+      "proposed": 0,
+      "accepted": 0,
+      "creations": [
+        [
+          5,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "call": 211,
+      "measurement": 17000,
+      "full": false,
+      "offsets": [
+        -512,
+        -512,
+        -512
+      ],
+      "consumed_offsets": [
+        -512,
+        -512,
+        -512
+      ],
+      "events": [
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete"
+      ],
+      "thresholds": [
+        {
+          "slot": 0,
+          "expected": 3492,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 1,
+          "expected": 7030,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 2,
+          "expected": 10662,
+          "adjust": true,
+          "floor": true
+        },
+        {
+          "slot": 3,
+          "expected": 65535,
+          "adjust": false,
+          "floor": true
+        },
+        {
+          "slot": 4,
+          "expected": 65535,
+          "adjust": false,
+          "floor": true
+        },
+        {
+          "slot": 5,
+          "expected": 652,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 6,
+          "expected": 1398,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 7,
+          "expected": 2328,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 8,
+          "expected": 16013,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 9,
+          "expected": 21788,
+          "adjust": false,
+          "floor": false
+        }
+      ],
+      "scan": [
+        1,
+        0
+      ]
+    },
+    {
+      "call": 211,
+      "measurement": 17000,
+      "full": true,
+      "offsets": [
+        -512,
+        -512,
+        -512
+      ],
+      "consumed_offsets": [
+        -512,
+        -512,
+        -512
+      ],
+      "events": [
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete",
+        "hold",
+        "capture",
+        "complete"
+      ],
+      "thresholds": [
+        {
+          "slot": 0,
+          "expected": 3492,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 1,
+          "expected": 7030,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 2,
+          "expected": 10662,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 3,
+          "expected": 65535,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 4,
+          "expected": 65535,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 5,
+          "expected": 2793,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 6,
+          "expected": 6239,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 7,
+          "expected": 10150,
+          "adjust": true,
+          "floor": false
+        },
+        {
+          "slot": 8,
+          "expected": 16013,
+          "adjust": false,
+          "floor": false
+        },
+        {
+          "slot": 9,
+          "expected": 21788,
+          "adjust": false,
+          "floor": false
+        }
+      ],
+      "proposed": 0,
+      "accepted": 0,
+      "creations": [
+        [
+          5,
+          1,
+          0
+        ]
+      ]
+    }
+  ],
+  "verification_correction": "Consumer configure previously reset produced offsets. Moved configure before production and asserted actual consumed offsets equal produced. All8 corrected replays rerun."
+}

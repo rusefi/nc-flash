@@ -1,0 +1,161 @@
+TCU class-dependent threshold overlays and retained operation tags
+Evidence checkpoint2026-10-06
+
+Objective: continue ECU/automatic-transmission CAN integration by independently
+checking the last4530C threshold producer47240, beyond the preceding primary
+curve-bank result. Deep traction and NC PRHT folding/unfolding, interruption
+and recovery remain separate incomplete requirements in CHECKPOINT.txt and
+traction-roof.txt. No commit/push authorization. No application/ROM changes.
+
+VERIFIED RESULT
+
+580 complete47240 cases,125 arbitrary-word472A6 curve-builder cases,12
+retained4530C/4508A calls,24 proposal boundary scans and56 full44CFE plus
+original1EAC6 selection-before-limit segment replays pass. The original
+class producer has an independent oracle; all observed4530C curve lookups
+use the existing independent unsigned interpolation oracle. No instruction,
+callback or produced output is stubbed. Inputs and scheduling remain fixtures.
+
+4726A always loads five words into9C08/0A/0C/0E/10 from ROM addresses
+75138/34/30/2C/3C, plus2 when916Fbit2 is set. Values are4004,7542,11267,
+16013,21788. Both stock branches have equal values. Read-address auditing
+checks the actual chosen branch, so equal calibration values cannot conceal
+an incorrect selector. Other bits are ignored in this routine.
+
+For positive signed class8080,472A6 constructs five constant two-point curves
+at9C14+12*i. Each has six words[2,0,0,65535,value,value]. Direct builder cases
+check preservation of arbitrary unsigned16-bit values, including32768/65535.
+For class<=0 as a signed byte, curve bytes and descriptor arrays are retained;
+calibration words and previous-class9C12 are still updated.
+
+47334 for classc in1..5 changes indices i=c-1..4:
+  pointer9AEC[i]=5DEAC, a constant65535 curve;
+  pointer9AEC[i+5]=FFFF9C14+12*i, the calibrated constant curve;
+  operation9B14 and kind9B32 for both slots become4 and7.
+It does not replace pointers for class6. Other slots and source9B40 survive.
+
+473A8 is separate: if previous9C12 and current8080 are positive signed bytes
+and previous<current, it sets operation4/kind7 at upper indices
+previous-1..current-2 WITHOUT replacing their pointers. It can therefore tag
+base curves after an increase toclass6, although47334 itself replaces none.
+47240 finally writes the raw current class byte into9C12.
+
+Verified current/previous class domain0..6 and inactive128/255. Positive
+out-of-domain values7..127 are not covered or declared safe. These numerical
+classes are not assigned independently verified physical gear labels here.
+
+INTEGRATED ORDER AND HISTORY
+
+12 retained calls execute original4530C with class sequence
+0,1,2,3,4,5,6,6,3,0,128,0, followed by original4508A proposal scans. Other
+primary-bank flags are explicit fixtures.4530C rebuilds the primary bank
+before47240 on each call. This matters:47240 alone does not undo earlier
+pointer replacements when a class stops selecting them.
+
+For the retained fault-derived axis6400, measurement4672 and oldproposal1:
+  class0: thresholds remain stock, proposal[4,0].
+  class1: all upper thresholds65535, proposal[1,0].
+  class2->3: upperindex1 is a restored base curve but taggedoperation4;
+             proposal[2,4].
+  class3->4: proposal[3,4].
+  class4->5: proposal[4,4].
+  class5->6: only upperindex4 tagged4; proposal[4,0] in this measurement.
+  class6->6: the earlier one-call tag is gone after primary-bank rebuild.
+  class6->3: same class3 numeric thresholds, proposal[2,0] (no rising tag).
+The scan outputs use synthetic scratch and are NOT published to8084 in this
+12-call fixture; these are isolated threshold/scan cycles, not whole vehicle
+state evolution. The56 separate full-pipeline replays do execute publication,
+selection, classification/creation and the following limit producer.
+
+65535 IS A BOUNDARY, NOT AN UNCONDITIONAL DISABLE
+
+Original4508A uses unsigned measured>=upper comparison. With class1,
+oldproposal1 and measurement65534 it returns[1,0]; at65535 it returns[5,4].
+The constant maximum curve therefore suppresses upward scanning only below
+that endpoint. No claim is made that65535 is a naturally produced measurement.
+24 scans cover oldproposals0/1/4/5 and measurements0/4003/4004/4005/65534/65535.
+
+FULL SAVED-STATE REPLAYS
+
+Restore original entry44CFE snapshots150(fault) and211(recovery); override
+only8080 with0..6 and previous9C12 with0/1/3/6. Execute whole44CFE, then the
+original1EAC6 segment calling48C08 before23544. Stacks and all inherited
+proposal/classification/progress/qualification oracles are checked.
+For each snapshot, class0 thresholds and creations match the earlier saved
+fault-selection observations. No unchanged320-cycle fault trace was rerun.
+
+Snapshot150:
+  class0/5/6: accepted2, creation[1,1,0].
+  class1/2: proposal1, accepted1, no creation.
+  class3: proposal2, accepted1, no creation.
+  class4: proposal3, accepted1, no creation.
+Previousclass can change the scan operation to4; later policy/selection can
+preserve the final outcome. Do not equate scanoperation4 to finaloperation4.
+Snapshot211: all tested classes end proposal1,accepted1,creation[6,8,0],
+although class1/2 scans useoperation4. These are bounded counterfactual states,
+not evidence the upstream selector naturally follows this sequence.
+
+REPRODUCTION AND INPUTS
+
+  python research/ecu-at-can/verify_tcu_class_thresholds.py
+Python3.14.3 standard library, existing bounded SHRotate and ObservedCurves chain.
+Artifacts: verify_tcu_class_thresholds.py, tcu-class-thresholds-verification.json,
+tcu-class-thresholds-disassembly.txt and this record. Deterministic seed47240.
+Original words5DEAC=[2,0,0,65535,65535,65535]. No shared interpreter edits.
+
+TCU examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6
+ECU examples/LFFEEE-stock.bin SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+Snapshots tcu-fault-selection-snapshots.json SHA256
+16d58c0427de7905b52531ef943cc01b311d1aeeda511eebf33d525362bda943
+All checked against prior tcu-fault-selection-verification.json. New tests
+execute TCU instructions; this addition does not claim a new pairedECU replay.
+
+Disassembly command: python research/ecu-at-can/disassemble.py tcu dis 47240 4740c,
+GNU SH objdump2.42; binutils-sh4-linux-gnu package. This host's executable is
+/tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump, with library path
+/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu. Exact text is retained
+in the repository and regenerable with any compatible SH objdump. Original
+inputs/scripts/results do not rely on that temporary install as sole memory.
+
+NEXT ACTIONS AND LIMITS
+
+ECU/AT: independently model46200 and45AA4 overlays, upstream9C7C/941E/8080
+production and actual task/transport cadence. Follow class3/4 acceptance
+suppression into the later full policy, then naturally produced overlap/
+composite transitions.49B08 remains an unmodeled monitor lead;44E14/44F5A
+numeric adjustments, physical source identities and final actuator effects
+remain open. This result does not complete ECU/TCU integration.
+Traction: executed arbitration/CAN215/input bridge preserved; next59720/8118,
+72B4/72BC and gate producers, cross-task timing, CAN211/21A sender attribution
+and physical outputs. Factory documentation/candidate mappings are distinct
+from missing remote-controller firmware and hardware confirmation.
+Roof: factory open/close/window-handshake evidence and candidate speed/neutral/
+selector mappings remain distinct from OEM receiver proof. Next PCM type
+publication plus matching PRHT reception. Both folding and unfolding, pause/
+resume, reversal, communication timeout, synchronization and fault recovery
+remain unresolved; no OEM CAN motion command follows from this result.
+
+PERSISTENCE AND VERIFICATION
+
+Ghidra12.1.3/Java21 saved both original programs after applying annotations.
+The update also integrates the earlier60-call/600-lookup/60-scan axis-history
+citation into4530C. New class-helper exports agree with the instruction model.
+A closed archive with BOTH.gpr/.rep was refreshed byghidra/snapshot.py,
+extracted separately, checked against all11 file hashes, and reopened
+read-only usingVerifyCanEvidence.java.1353 annotations(572ECU/781TCU) and
+670 exports(668functions+2readbacks) match the live project byte-for-byte.
+Archive10,873,260bytes;SHA256
+4aabfa3407d395934a845ccaefff61c9975996f5899507e1027d0abdd141c36d.
+Current inventories:ghidra/snapshot.json andghidra/restore-verification.json.
+Commands followghidra/README.txt; logsapply-class-thresholds.log,
+readback-class-thresholds.log,restore-class-thresholds.log are ignored caches.
+Both success markers were checked in each applicable log, with noERROR or
+Exception; no incomplete decompilation reports. Restoration scratch is
+restore-check/class-thresholds-20261006, replaceable from the saved archive.
+
+New research verifier compiles; git diff--check passes. All new evidence,
+scripts, disassembly and manifests are Git-eligible. No production app/ROM/
+shared interpreter changes; no redundant application test-suite run. Saving
+research did not authorize staging, committing or pushing; none was done.

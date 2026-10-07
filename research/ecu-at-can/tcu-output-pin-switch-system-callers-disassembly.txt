@@ -1,0 +1,64 @@
+
+examples/LFG1TF000.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00011590 <.data+0x11590>:
+   11590:	00 09       	nop	
+   11592:	4c 0b       	jsr	@r12
+   11594:	00 09       	nop	
+   11596:	4b 0b       	jsr	@r11
+   11598:	6c 03       	mov	r0,r12
+   1159a:	4e 0b       	jsr	@r14
+   1159c:	64 c3       	mov	r12,r4
+   1159e:	e4 02       	mov	#2,r4
+   115a0:	a0 58       	bra	0x11654
+   115a2:	6e 43       	mov	r4,r14
+   115a4:	60 b3       	mov	r11,r0
+   115a6:	88 04       	cmp/eq	#4,r0
+   115a8:	8b 0b       	bf	0x115c2
+   115aa:	e5 01       	mov	#1,r5
+   115ac:	d2 57       	mov.l	0x1170c,r2	! 529ce
+   115ae:	42 0b       	jsr	@r2
+   115b0:	e4 00       	mov	#0,r4
+   115b2:	d3 57       	mov.l	0x11710,r3	! 529ac
+   115b4:	43 0b       	jsr	@r3
+   115b6:	00 09       	nop	
+   115b8:	d2 56       	mov.l	0x11714,r2	! 185f8
+   115ba:	42 0b       	jsr	@r2
+   115bc:	00 09       	nop	
+   115be:	a0 23       	bra	0x11608
+   115c0:	00 09       	nop	
+   115c2:	33 d3       	cmp/ge	r13,r3
+   115c4:	8b 46       	bf	0x11654
+   115c6:	b0 60       	bsr	0x1168a
+   115c8:	00 09       	nop	
+   115ca:	a0 43       	bra	0x11654
+   115cc:	6e d3       	mov	r13,r14
+   115ce:	60 b3       	mov	r11,r0
+   115d0:	88 04       	cmp/eq	#4,r0
+   115d2:	8b 3f       	bf	0x11654
+   115d4:	d2 4d       	mov.l	0x1170c,r2	! 529ce
+   115d6:	e5 01       	mov	#1,r5
+   115d8:	42 0b       	jsr	@r2
+   115da:	e4 00       	mov	#0,r4
+   115dc:	d3 4c       	mov.l	0x11710,r3	! 529ac
+   115de:	43 0b       	jsr	@r3
+   115e0:	00 09       	nop	
+   115e2:	d2 4c       	mov.l	0x11714,r2	! 185f8
+   115e4:	42 0b       	jsr	@r2
+   115e6:	00 09       	nop	
+   115e8:	a0 14       	bra	0x11614
+   115ea:	00 09       	nop	
+   115ec:	b0 6c       	bsr	0x116c8
+   115ee:	00 09       	nop	
+   115f0:	64 03       	mov	r0,r4
+   115f2:	60 b3       	mov	r11,r0
+   115f4:	88 02       	cmp/eq	#2,r0
+   115f6:	89 02       	bt	0x115fe
+   115f8:	60 b3       	mov	r11,r0
+   115fa:	88 03       	cmp/eq	#3,r0
+   115fc:	8b 01       	bf	0x11602
+   115fe:	a0 0a       	bra	0x11616
+

@@ -28,7 +28,7 @@ void SourcePolicy_AdjustProposal(undefined1 *param_1,undefined1 *param_2)
   uVar8 = *param_1;
   auStack_2c[0] = 0;
   bVar9 = *PTR_Selector_ApplicationFlags16_000496dc;
-  *(short *)(int)DAT_000496d0 = DAT_ffff809c << 1;
+  *(short *)(int)DAT_000496d0 = Comparison_ApplicationInput << 1;
   uStack_20 = DAT_ffff80ea;
   puStack_28 = param_1;
   puStack_24 = param_2;

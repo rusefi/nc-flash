@@ -1,0 +1,94 @@
+2026-10-06: original secondary684C production and descriptor substitution
+
+EXECUTED EVIDENCE
+verify_control_secondary_path.py uses original stock ECU/TCU and unchanged
+finite-RTZ interpreters. ECU LFFEEE SHA256
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08;
+TCU LFG1TF000 SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Reproduce: python research/ecu-at-can/verify_control_secondary_path.py
+Python3.14.3 standardlibrary/assertions; rational models round toward zero to
+binary32 after each arithmetic operation, nonfused multiply/add. Disassembly
+control-secondary-path-disassembly.txt; GNU SHobjdump2.42/disassemble.py setup
+in control-normalized-contribution.txt. No ROM/interpreter/production changes.
+
+5681direct cases pass:8B960helper1408,318E4target755,31964filter36,
+31986extrapolation36,307C0gate9,31A4Cscale28,31A9Cpublish3409.
+72six-call and72twenty-call original instruction segments pass, plus320serial
+cycles/36pairedCAN/320CAN211latch updates. First execution ran direct/six-call/
+lifecycle; caller_cases(full=True) separatelyreturned72 after extending the
+harness, thencheck_lifecycle validated retained consequences from savedJSON.
+main now reproduces all checks together. No failed model assertions.
+
+LOCAL PRODUCTION, VERIFIED FOR FINITE TEST INPUTS
+318E4 chooses683C:69BBexact1 AND69BAexact1 gives calibratedcap*DB1FC(stock0).
+Otherwise6938zero gives0;6808within +/-ROM319F4(.48828125)of6814 givescap;
+otherwise mapA3A10(67DC,6808). Cap=DB784[(u8(E2636)-1)&255], stock3.75.
+Boundary/rawflag and allmap knots/midpoints/endpoints are checked.
+31964 filters683C into6840 via original2508, stockretentionDB1A8~.84,
+snap tolerance31A2C=2^-14*1.25. Exact RTZ cancellation and per-operation
+rounding modeled; see script for expression, not a decimal approximation.
+31986 computes(6840-DB1AC*old6974)/(1-DB1AC), clamps0..3.75 into6844,
+then6974=entry6840. DB1AC~.9591100; denominator admitted understock calibration.
+No altered-ROM denominator-zero branch test claimed.
+307C0 sets6937 if67D4>=DB170(~18.4711) OR67D0>=DB174(15.9375), else0.
+31A4C nominally scales6844 using6DB4 over400..500; stock clamp1..1 means
+6848=6844 for every testedfiniteinput. Stock difference100 exceeds31.25guard.
+31A9C sets69A0zero unlessabs(6808)>.48828125,6937!=1,695Bbit1clear.
+Allowed path maps6848 throughA38E8 and6DB4 throughA38F4 into6968/696C;
+69A0=min(clamp(firstmap,0,100),secondmap). Inhibited path leaves map caches
+unchanged. Then8B960 processes69A0 and15522protected-writes684C/checksum.
+
+DESCRIPTOR-CONTROLLED SUBSTITUTION
+8B960 descriptorAD48C hasmask0x40 at+8 andcontrolpointerFFFF960E at+12.
+If966Cbit6clear, originalcode clears960E. Mode0 records963C big-endianword:
+clamp(truncate(RTZ(RTZ(value/.0030517578125)+.5)),0,65535), then returns
+ORIGINAL value, not the quantized/dequantized record. Negative andupper-range
+values plus half-step points tested; FTRC inputs remain within signed32.
+Modes5/7 retain963C and returnRTZ(raw*.0030517578125); other nonzero modes
+retainraw and returninput. This is a descriptor override; diagnostic/service
+use and authorization are interpretations still requiring their own caller
+proof. No vehicle command or operational access mechanism is established.
+Crucially, substituted684C can be nonzero when69A0 was zeroed by an earlier
+gate. Naming69A0zero a final physical inhibit would be unsupported.
+
+CALLER AND RETAINED EFFECTS
+Original187EC..18810 six-call order:318E4,31964,31986,307C0,31A4C,31A9C.
+Combined18798..18810 executes twentycalls including the14input/limit calls
+from control-input-gates.txt. Models compare floatbits, rawgates, control,
+encodedword, protectedchecksum, exactcallorder andstack restoration.
+This remains a segment, not fulltask scheduling or peripheral execution.
+
+320cycle replay uses the existing original gates/limits/countdown and paired
+chain. No684Cfixture write after setup: allcycles produce684C via31A9C.
+Raw67FC/6DB4/6D20/7020/mode inputs and scheduling remain explicitfixtures.
+Atcall21,6840~.2293 and extrapolation hits3.75, so684C=100; bycall60 it
+settles~38.2471. Inhibit61..70zeroes69A0/684C and published6CC8.
+Atcall101 explicitlyselectedmode5/raw30000 gives684C91.552734375 while
+69A0and6CC8 are0. Bycall120,filtered8120~89.4837 andhysteresis812A=1,
+normalized8118~.00880973. Atcall141 clearing966Cbit6 lets originalhelper
+clear960E and684C to0; retained8120~77.7516 and8118~.00161654 persist.
+Bycall160,812Aclears. These are executed numeric/history effects, not proof
+of DSC sourceidentity, traction intervention or mechanical actuation.
+
+NEXT
+Trace30FB6/8BB20 to replace67FC fixture; trace descriptor mode960E and
+966C producers if operational substitution meaning is needed.6DB4/6D20/7020,
+67D0/67D4/695B/69BB/69BA origins, precedingcaller bodies and399B0publication
+schedule remain open. ECU/AT49B7E caller/persistence separate; roof folding
+ANDunfolding/reversal/timeouts/synchronization/recovery still lack receiver
+andhardware evidence. User has noadditional dumps/captures/benchresults.
+SeeCHECKPOINT.txt,traction-roof.txt,roof-training-graphics.txt. No completion
+claim; savedlocally with no staging/commit/push.
+
+DURABLE SAVE / RESTORE VERIFIED
+Both Ghidra programs saved after17 new annotations, total1474 (642 ECU,
+832 TCU). Archive nc-at-can.tar.gz contains both.gpr and.rep,11 files,
+10,898,183 bytes, SHA256
+606a63128d89082e8769fabdb29521f32eaf72679732afe347260136be55020d.
+Independent extraction checked all11 hashes, read-only reopening verified
+all1474 annotations, and727 export/report files matched byte-for-byte.
+No DECOMPILE_INCOMPLETE or ERROR; no live project locks remain. Reproduction
+commands and inventory are in ghidra/README.txt, snapshot.py/snapshot.json
+and restore-verification.json. Python syntax and git diff --check pass.
+New evidence files are Git-eligible; no staging, commit or push performed.

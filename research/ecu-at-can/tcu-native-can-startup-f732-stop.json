@@ -1,0 +1,64 @@
+{
+  "scope": "Run original11FA0 CAN-task initialization with existing strict peripherals.\n\nCoverage probe only; preserve the first unsupported access instead of guessing\nhardware behavior or writing receive mode8. No full boot or physical proof.\n",
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "status": "REJECTED",
+  "error": "ValueError: Unmapped read FFFFF732",
+  "last_instruction": "0x1ac72",
+  "entries": [
+    "0x11fa0",
+    "0x124f8",
+    "0x19ec4",
+    "0x19ad0",
+    "0x1a056",
+    "0x1b060"
+  ],
+  "before": {
+    "task_mode": 0,
+    "receive_mode": 0
+  },
+  "after": {
+    "task_mode": 0,
+    "receive_mode": 0
+  },
+  "hcan_trace": [
+    [
+      "read",
+      4294960128,
+      1,
+      0
+    ],
+    [
+      "write",
+      4294960128,
+      1,
+      1
+    ],
+    [
+      "read",
+      4294960129,
+      1,
+      0
+    ],
+    [
+      "write",
+      4294960146,
+      2,
+      256
+    ]
+  ],
+  "configuration_trace": [
+    [
+      "read",
+      63310,
+      2,
+      0
+    ],
+    [
+      "write",
+      63310,
+      2,
+      16384
+    ]
+  ],
+  "limits": "Originalpartialstartup afterexisting readiness/diagnostic/CMT1initializers, beforeevents. Unsupportedaccess means fixture boundary, notfirmware defect."
+}

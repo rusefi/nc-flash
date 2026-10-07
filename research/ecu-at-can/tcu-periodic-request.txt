@@ -1,0 +1,143 @@
+TCU complete-task request gates, cancellation and acknowledgement — 2026-10-06
+============================================================================
+Objective remains ECU/AT CAN integration, deep traction integration and NC roof
+folding AND unfolding with interruption/resume/reversal, communication timeout,
+L/R synchronization and recovery. All three remain incomplete. User has no
+additional DSC/roof firmware, captures or bench evidence. No staging/commit/push.
+
+Correction to preceding next-action wording
+------------------------------------------
+23BF0 is the zero-argument entry to23BF6 enable hysteresis. It updates9410;
+it does NOT create a request. The previous continuation's phrase
+"1FD24/23BF0 cancellation/creation" was inaccurate. 1FD24 aggregates source
+conditions including cancellation916Fbit0. Actual request creation uses31524
+event1, including transition-policy48F20's call returning48FAC. Existing
+selection-creation.txt already executes bounded descending acceptance/allocation.
+Do not repeat its direct-helper result as a new complete-task proof.
+
+Scripts, fixture and evidence boundaries
+----------------------------------------
+probe_tcu_periodic_request.py extends verify_tcu_application_order.ObservedTask.
+It reuses the unchanged complete126EC/1E5F6 task runner and HCAN/ADC/GPIO/port
+fixtures, and existing original529AC/185F8 wholeRAM command checks. It observes
+31524 event arguments, creation callback31A14, managed request callbacks,
+and two selected-field oracles at actual returns:
+  1FD24 ->1E98C: compare916Fbit0 with existing independent cancelled() model;
+  23BF0 ->1E9A4: compare whole9410 byte with existing gate_model().
+These are NOT a complete applicationRAM oracle for the source aggregate.
+No task body, queue service or callback is skipped or stubbed.
+
+verify_tcu_request_dispatch.fixture now optionally initializes an existing
+machine through the SAME original initializers. verify_tcu_request_admission.
+upstream optionally uses that machine for its original31524 event0/event1
+creation sequence. Default existing behavior is retained. The new observer
+supplies creation_callbacks; eight old code6/7, operation0/17, head0/15 cases
+pass. No duplicated initialization pipeline or RAM-copy substitution in the
+new composed machine. Creation still begins with explicit event1/code7/op17
+and synthetic input words, rather than a naturally admitted transition.
+
+Baseline experiment
+--------------------
+Two retained24-call runs completed: prior application fixture alone, and that
+fixture with original initialized/created group8 request. Twelve visits to each
+phase0/4 routine across both runs pass24 selected-field checks. All48 tasks
+retain the two prior wholeRAM command-boundary checks (96 total).
+Event4 occurs at1E6A8 every task; event2 at1E7A2 in even phases. Phase0/4
+aggregation and enable update occur AFTER this task's event4 and event2.
+With a created request, original group5 periodic service is admitted on odd
+zero-based call indices. State2/count1 persists; enable9410 goes6->0 on first
+phase0 and stays0. No cancellation or reduction is implied by allocation.
+
+The prior uninitialized-manager fixture also emits event1 at calls1/5/9/13
+through48FAC, but manager state/count remain0. This is transition-message
+coverage, NOT proof of successful managed creation. Its input payloads and
+manager initialization need the next experiment. Original full initialization
+of62 group functions is already available in verify_tcu_phase_retirement.py;
+reuse it instead of assuming zero manager RAM is a valid running system.
+The current ApplicationRegisters inheritance already includes SHRotate; no
+new rotate-ISA implementation is needed for those62 initializers.
+
+Fault/recovery through the complete task
+----------------------------------------
+Four12-call runs start at phases0,1,4,7 with the same created group8 request.
+Explicit mapped diagnostic summaryA962bit2=1 is seeded ONCE before tasks,
+then cleared before call8. This is a diagnostic-status input fixture, not a
+sensor fault, full diagnostic lifecycle or physical CAN observation. No916F,
+9410 or request-state injection occurs. Original21C1C publishes92C6bit2 in
+the phase0/4 body, followed by1FD24 aggregation. Subsequent original event4
+service runs4CC90/4CCA4, releases the request, drains cleanup and calls31524
+event3 through the queue-dispatch return4C372. No acknowledgement is injected.
+
+Zero-based task indices:
+ initialphase   publish/aggregate   cancellation+ack   recovery aggregate
+      0                 0                 1                   8
+      1                 3                 5                  11
+      4                 0                 1                   8
+      7                 1                 3                   9
+
+For phase1, call3's service precedes new fault publication/aggregation; it
+still sees the old cancellation flag. Request state can advance before call5
+cancels it. This ordering is why a source write does not imply same-call
+release. No absolute period or physical elapsed time is inferred.
+
+Each cancellation checks ring countA2BA=0, first-list countA202=0, queue count
+A1AC=0, free heap9F3C=007FFFFF and cleared20-byte request record9F40. Exactly
+one event3 is observed at cancellation, with caller4C372. Clearing diagnostic
+input only takes effect at the next phase0/4 publication/aggregation. Remaining
+tasks leave the request absent; recovery alone does not recreate it.
+The separate application phase record is not asserted retired; other groups
+are not fully initialized in this bounded fixture. No full ten-group ack or
+overlap claim follows from this single managed-request cleanup.
+
+Verification and corrected exploratory assumptions
+---------------------------------------------------
+python research/ecu-at-can/probe_tcu_periodic_request.py
+ 48/48 complete task returns; saved tcu-periodic-request-probe.json.
+python research/ecu-at-can/verify_tcu_periodic_request.py
+ 48 more complete fault/recovery task returns;24+24 selected-field checks;
+ 192 existing wholeRAM command boundaries across96 tasks;
+ eight original creation regression cases. Result tcu-periodic-request-
+ verification.json. Final rerun including explicit event3 assertions: PASS.
+Python3.14.3; TCU unchanged examples/LFG1TF000.bin SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+No production/ROM/sharedISA change. Original byte references/decompilation
+already in disassembly.txt and Ghidra Request_AggregateSourceConditions /
+Request_UpdateEnableFlagsEntry; comments refreshed for these real boundaries.
+
+Initial verifier assumptions were corrected from observed results: (1) only
+2/4 events occur was false: uninitialized baseline emits transition event1;
+(2)92C6 diagnostic publication is not every task; it follows phase0/4;
+(3) cancellation produces original event3, so expecting only2/4 is also false.
+These were oracle assumptions, not firmware failures. Original code/fixtures
+were retained, observations preserved in JSON, and assertions now check the
+actual event1/event3 paths rather than suppressing them.
+
+Next concrete action and independently open scopes
+--------------------------------------------------
+ECU/TCU: reuse62 original initializer entries1E2B4..1E3A8 from
+verify_tcu_phase_retirement.full_fixture in the existing ApplicationRegisters
+machine. Record natural31524 event1 payload words and31C18 acknowledgement
+arguments during complete126EC tasks; distinguish healthy policy admission,
+initialized managed groups, partial admission/overlap and full retirement.
+Reuse existing selection-creation/phase-retirement models rather than replacing
+natural event production with new direct calls. The starting application inputs,
+cadence, interrupt delivery, persistence and physical integration remain open.
+
+Traction: control-acquired-qualification.txt now owns120 acquired-input/event2
+pairs, six wholeRAM slow-bank publications and121 activity checks. CAN211/21A
+sender/units, actual cadence, remote DSC internals and physical actuation remain
+unproved. Next relevant existing CAN/control integration where local firmware
+permits; do not turn generic downstream DTC persistence into a new requirement.
+Roof: factory sources and candidate mappings remain distinct from missing OEM
+controller evidence. Both folding and unfolding, interruption/resume/reversal,
+timeout, L/R sync and fault recovery remain open. Next applicable full factory
+source or OEM controller/capture/bench evidence; do not repeat exhausted source
+searches or ask again for unavailable user artifacts.
+
+Ghidra save/restore at this milestone (superseded by tcu-initialized-requests.txt): 1908 annotations (833ECU/1075TCU),964 identical
+exports and11 hashes verified before/after independent read-only reopening.
+Both LFFEEE-stock.bin and LFG1TF000.bin; Ghidra12.1.3PUBLIC/Java21.0.10.
+Archive 10,999,499 bytes SHA256
+c9f7e23b97f00b4e8a265c70f3cde2dfea2527f0e7609bbfa38b4ab34d68e8eb.
+Exact inventory/restore result: ghidra/snapshot.json and restore-verification.json.
+Saved locally only; no staging, commit or push; pre-existing mixed index intact.

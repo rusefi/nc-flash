@@ -1,0 +1,735 @@
+Renesas REJ09B0045-0200H, Rev2.0 2003-07. Local source SHA256 in report.
+
+PDF zero-based page 248
+Rev.2.0, 07/03, page 209 of 960 
+ 
+Table 11.3 ATU-II Registers (cont) 
+ 
+Channel 
+ 
+Name 
+Abbrevia-
+tion 
+ 
+R/W 
+Initial  
+Value 
+ 
+Address 
+Access 
+Size (Bits) 
+Section 
+No. 
+Free-running counter 
+10AH 
+TCNT10AH R/W 
+H'0000 
+Free-running counter 
+10AL 
+TCNT10AL R/W 
+H'0001 
+H'FFFFF6C0 32 
+Event counter 10B 
+TCNT10B 
+R/W 
+H'00 
+H'FFFFF6C4 8 
+Reload counter 10C 
+TCNT10C R/W 
+H'0001 H'FFFFF6C6 16 
+Correction counter  
+10D 
+TCNT10D R/W 
+H'00 
+H'FFFFF6C8 8 
+Correction angle 
+counter 10E 
+TCNT10E 
+R/W 
+H'0000 H'FFFFF6CA 
+Correction angle 
+counter 10F 
+TCNT10F 
+R/W 
+H'0001 H'FFFFF6CC 
+Free-running counter 
+10G 
+TCNT10G R/W 
+H'0000 H'FFFFF6CE 
+16 
+Input capture register 
+10AH 
+ICR10AH 
+R 
+H'0000 
+Input capture register 
+10AL 
+ICR10AL 
+R 
+H'0000 
+H'FFFFF6D0 
+Output compare  
+register 10AH 
+OCR10AH R/W 
+H'FFFF 
+Output compare  
+register 10AL 
+OCR10AL R/W 
+H'FFFF 
+H'FFFFF6D4 
+32 
+Output compare  
+register 10B 
+OCR10B 
+R/W 
+H'FF 
+H'FFFFF6D8 8 
+Reload register 10C 
+RLD10C 
+R/W 
+H'0000 H'FFFFF6DA 
+General register 10G 
+GR10G 
+R/W 
+H'FFFF H'FFFFF6DC 
+16 
+Noise canceler  
+counter 10H 
+TCNT10H R/W 
+H'00 
+H'FFFFF6DE 
+Noise canceler  
+register 10 
+NCR10 
+R/W 
+H'FF 
+H'FFFFF6E0 
+Timer I/O control 
+register 10 
+TIOR10 
+R/W 
+H'00 
+H'FFFFF6E2 
+10 
+Timer control register  
+10 
+TCR10 
+R/W 
+H'00 
+H'FFFFF6E4 
+8 
+11.2.26 
+ 
+
+PDF zero-based page 262
+Rev.2.0, 07/03, page 223 of 960 
+ 
+11.2 
+Register Descriptions 
+11.2.1 
+Timer Start Registers (TSTR) 
+The timer start registers (TSTR) are 8-bit registers. The ATU-II has three TSTR registers. 
+Channel 
+Abbreviation 
+Function 
+0, 1, 2, 3, 4, 5, 10 
+TSTR1 
+6, 7 
+TSTR2 
+11 
+TSTR3 
+Free-running counter operation/stop setting 
+ 
+Timer Start Register 1 (TSTR1) 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+STR10 
+STR5 
+STR4 
+STR3 
+STR1B, 
+2B 
+STR2A 
+STR1A 
+STR0 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+TSTR1 is an 8-bit readable/writable register that starts and stops the free-running counter (TCNT) 
+in channels 0 to 5 and 10. 
+TSTR1 is initialized to H'00 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+• Bit 7—Counter Start 10 (STR10): Starts and stops channel 10 counters (TCNT10A, 10C, 10D, 
+10E, 10F, and 10G). TCNT10B and 10H are not stopped. 
+ 
+Bit 7: STR10 
+Description 
+0 
+TCNT10 is halted 
+(Initial value) 
+1 
+TCNT10 counts 
+ 
+• Bit 6—Counter Start 5 (STR5): Starts and stops free-running counter 5 (TCNT5). 
+ 
+Bit 6: STR5 
+Description 
+0 
+TCNT5 is halted 
+(Initial value) 
+1 
+TCNT5 counts 
+ 
+
+PDF zero-based page 266
+Rev.2.0, 07/03, page 227 of 960 
+ 
+• Bits 7 to 1—Reserved: These bits are always read as 0. The write value should always be 0. 
+• Bit 0—Counter Start 11 (STR11): Starts and stops free-running counter 11 (TCNT11). 
+ 
+Bit 0: STR11 
+Description 
+0 
+TCNT11 is halted 
+(Initial value) 
+1 
+TCNT11 counts 
+ 
+11.2.2 
+Prescaler Registers (PSCR) 
+The prescaler registers (PSCR) are 8-bit registers. The ATU-II has four PSCR registers. 
+Channel 
+Abbreviation 
+Function 
+0, 1, 2, 3, 4, 5, 8, 11 
+PSCR1 
+6 
+PSCR2 
+7 
+PSCR3 
+10 
+PSCR4 
+Prescaler setting for respective channels 
+ 
+PSCRx is an 8-bit writable register that enables the first-stage counter clock φ' input to each 
+channel to be set to any value from Pφ/1 to Pφ/32. 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+— 
+— 
+PSCxE 
+PSCxD 
+PSCxC 
+PSCxB 
+PSCxA 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+x = 1 to 4 
+ 
+Input counter clock φ' is determined by setting PSCxA to PSCxE: φ' is Pφ/1 when the set value is 
+H'00, and Pφ/32 when H'1F. 
+PSCRx is initialized to H'00 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+The internal clock φ' set with this register can undergo further second-stage scaling to create clock 
+φ" for channels 1 to 8 and 11, the setting being made in the timer control register (TCR). 
+• Bits 7 to 5—Reserved: These bits cannot be modified. 
+• Bits 4 to 0—Prescaler (PSCxE, PSCxD, PSCxC, PSCxB, PSCxA): These bits specify 
+frequency division of first-stage counter clock ø' input to the corresponding channel. 
+ 
+
+PDF zero-based page 377
+Rev.2.0, 07/03, page 338 of 960 
+ 
+Free-Running Counter 10AH, AL (TCNT10AH, TCNT10AL): Free-running counter 10AH, 
+AL (comprising TCNT10AH and TCNT10AL) is a 32-bit readable/writable register that counts on 
+an input clock and is cleared to the initial value by input capture input (TI10) (AGCK).  
+ 
+Bit: 
+31 
+30 
+29 
+28 
+27 
+26 
+25 
+24 
+23 
+22 
+21 
+20 
+19 
+18 
+17 
+16 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W R/W 
+ 
+TCNT10A can only be accessed by a longword read or write. Word reads or writes cannot be 
+used. 
+TCNT10A is initialized to H'00000001 by a power-on reset, and in hardware standby mode and 
+software standby mode. 
+Event Counter 10B (TCNT10B): Event counter 10B (TCNT10B) is an 8-bit readable/writable 
+register that counts on external clock input (TI10) (AGCK). For this operation, TI10 input must be 
+set with bits CKEG1 and CKEG0 in TCR10.  TI10 input will be counted even if halting of the 
+count operation is specified by bit STR10 in TSTR1. 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+TCNT10B can only be accessed by a byte read or write. 
+TCNT10B is initialized to H'00 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+
+PDF zero-based page 386
+Rev.2.0, 07/03, page 347 of 960 
+ 
+• Bit 3—Reserved: This bit always reads 0. The write value should always be 0. 
+• Bits 2 to 0—I/O Control 10G2 to 10G0 (IO10G2 to IO10G0): These bits select the function of 
+general register 10G (GR10G). 
+ 
+Bit 2: 
+IO10G2 
+Bit 1: 
+IO10G1 
+Bit 0: 
+IO10G0 
+ 
+Description 
+ 
+0 
+Compare-match disabled (Initial value) 
+0 
+1 
+GR10G = TCNT10G compare-match 
+0 
+1 
+* 
+GR is an output 
+compare register 
+Cannot be used 
+1 
+* 
+* 
+Cannot be used 
+*: Donít care 
+ 
+Timer Control Register 10 (TCR10): TCR10 is an 8-bit readable/writable register that selects 
+the correction counter clear register (TCCLR10) compare-match counter clear source, enables or 
+disables the noise canceler function, and selects the external input (TI10) edge. 
+TCR10 is initialized to H'00 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ TRG2BEN TRG1BEN TRG2AEN TRG1AEN TRG0DEN 
+NCE 
+CKEG1 
+CKEG0 
+ Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+• Bit 7—Trigger 2B Enable (TRG2BEN): Enables or disables counter clearing for channel 2 
+TCNT2B. When clearing is enabled, set the correction angle clock (AGCKM) as the TCNT2B 
+count clock. If TCNT2B counts while clearing is enabled, TCNT2B will be cleared. 
+ 
+Bit 7: TRG2BEN 
+Description 
+0 
+Channel 2 counter B (TCNT2B) clearing when correction counter clear 
+register (TCCLR10) = correction counter (TCNT10F) is disabled (Initial value) 
+1 
+Channel 2 counter B (TCNT2B) clearing when correction counter clear 
+register (TCCLR10) = correction counter (TCNT10F) is enabled 
+ 
+
+PDF zero-based page 388
+Rev.2.0, 07/03, page 349 of 960 
+ 
+• Bit 2—Noise Canceler Enable (NCE): Enables or disables the noise canceler function. 
+ 
+Bit 2: NCE 
+Description 
+0 
+Noise canceler function is disabled 
+(Initial value) 
+1 
+Noise canceler function is enabled 
+ 
+• Bits 1 and 0—Clock Edge 1 and 0 (CKEG1, CKEG0): These bits select the channel 10 
+external input (TI10) edge(s). The clock (AGCK) is generated by the detected edge(s). 
+ 
+Bit 1: CKEG1 
+Bit 0: CKEG0 
+Description 
+0 
+TI10 input disabled 
+(Initial value) 
+0 
+1 
+TI10 input rising edges detected 
+0 
+TI10 input falling edges detected 
+1 
+1 
+TI10 input rising and falling edges both detected 
+ 
+ 
+Timer Status Register 10 (TSR10): TSR10 is a 16-bit readable/writable register that indicates 
+the occurrence of channel 10 input capture or compare-match. 
+Each flag is an interrupt source, and issues an interrupt request to the CPU if the interrupt is 
+enabled by the corresponding bit in timer interrupt enable register 10 (TIER10). 
+TSR10 is initialized to H'0000 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+ 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+— 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+R 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+ 
+— 
+— 
+— 
+— 
+CMF10G CMF10B ICF10A CMF10A 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R 
+R 
+R 
+R 
+R/(W)* 
+R/(W)* 
+R/(W)* 
+R/(W)* 
+Note: * Only 0 can be written to clear the flag. 
+ 
+
+PDF zero-based page 395
+Rev.2.0, 07/03, page 356 of 960 
+ 
+Channel 9: Channel 9 has six 8-bit event counters (ECNT9A to ECNT9F) and six 8-bit general 
+registers (GR9A to GR9F). The event counters are up-counters, each with a corresponding 
+external input pin (ECNT9A to ECNT9F). The event counter value is incremented by input from 
+the corresponding external input pin. Incrementing on the rising edge, falling edge, or both edges 
+can be selected by means of settings in the timer control registers (TCR9A to TCR9C). An event 
+counter is cleared by edge input after a match with the corresponding general register. An interrupt 
+can requested when an event counter is cleared. 
+Timer control register (TCR9A, TCR9B) settings can be made to enable event counters ECNT9A 
+to ECNT9D to send a compare-match signal to channel 3 when the count matches the 
+corresponding general register (GR9A to GR9D), allowing input capture to be performed on 
+channel 3. This enables the pulse input interval to be measured. 
+Channel 10: Channel 10 generates a multiplied clock based on external input, and supplies this to 
+channels 1 to 5. Channel 10 is divided into three blocks: (1) an inter-edge measurement block, (2) 
+a multiplied clock generation block, and (3) a multiplied clock correction block. 
+(1) Inter-edge measurement block 
+This block has a 32-bit free-running counter (TCNT10A), 32-bit input capture register 
+(ICR10A), 32-bit output compare register (OCR10A), 8-bit event counter (TCNT10B), 8-bit 
+output compare register (OCR10B), 8-bit noise canceler counter (TCNT10H), and 8-bit noise 
+canceler compare-match register (NCR10). 
+The 32-bit free-running counter (TCNT10A) is an up-counter that performs free-running 
+operations. When input capture is performed by means of TI10 input, this counter is cleared to 
+H'00000001. When free-running counter (TCNT10A) reaches the value set in the output 
+compare register (OCR10A), a compare-match interrupt can be requested. 
+The input capture register (ICR10A) has an external signal input pin (TI10), and the free-
+running counter (TCNT10A) value can be captured by means of input from TI10. Rising edge, 
+falling edge, or both edges can be selected by making a setting in bits CKEG1 and CKEG0 in 
+the timer control register (TCR10). The TI10 input has a noise canceler function, which can be 
+enabled by setting the NCE bit in the timer control register (TCR10). When the counter value 
+is captured, TCNT10A is cleared to 0 and an interrupt can be requested. The captured value 
+can be transferred to the multiplied clock generation block reload register (RLD10C). 
+The 8-bit event counter (TCNT10B) is an up-counter that is incremented by TI10 input. When 
+the event counter (TCNT10B) value reaches the value set in the output compare register 
+(OCR10B), a compare-match interrupt can be requested. By setting the TRG0DEN bit in the 
+timer control register (TCR10), a capture request can also be issued for the channel 0 input 
+capture register 0D (ICR0D) when compare-match occurs. 
+The 16-bit noise canceler counter (TCNT10H) and 16-bit noise canceler compare-match 
+register (NCR10) are used to set the period for which the noise canceler functions. By setting a 

@@ -3,7 +3,9 @@
 /* 20DF8->91A2; full209B4 selects80EC and return->80EA, shiftedcap800B;
    historydelta91A0,207DE(60)->919C,20EAA->91A4,tail50EA4.450 full-caller branch fixtures and3
    both-capture shift lifecycles. Other outputs not all independently asserted. See
-   tcu-reference-source.txt. */
+   tcu-reference-source.txt. Full126EC callback/frame experiment observes2124C everytask
+   before2086C->2117C oncalls0mod4; reference settles7017. Selected outputs, not whole function RAM
+   oracle. See tcu-captured-requests.txt. */
 
 void Reference_UpdateSourceAndDerivedValues(void)
 

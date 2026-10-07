@@ -1,0 +1,560 @@
+Primary: Renesas SH7055S REJ09B0045-0200H, SHA256359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c. ZERO-BASED indices; extracted PyMuPDF1.28.2.
+
+PDF index247/viewerpage248
+Rev.2.0, 07/03, page 208 of 960 
+ 
+Table 11.3 ATU-II Registers (cont) 
+ 
+Channel 
+ 
+Name 
+Abbrevia-
+tion 
+ 
+R/W 
+Initial  
+Value 
+ 
+Address 
+Access 
+Size (Bits) 
+Section 
+No. 
+Reload register 8 
+RLDR8 
+R/W 
+H'0000 H'FFFFF660 
+11.2.25 
+Timer connection 
+register 
+TCNR 
+R/W 
+H'0000 H'FFFFF662 
+11.2.12 
+One-shot pulse 
+terminate register 
+OTR 
+R/W 
+H'0000 H'FFFFF664 
+11.2.13 
+Down-count start 
+register 
+DSTR 
+R/W 
+H'0000 H'FFFFF666 
+16 
+11.2.11 
+Timer control register 8 TCR8 
+R/W 
+H'00 
+H'FFFFF668 8 
+11.2.3 
+Timer status register 8 TSR8 
+R/(W)* H'0000 H'FFFFF66A 
+11.2.5 
+Timer interrupt enable  
+register 8 
+TIER8 
+R/W 
+H'0000 H'FFFFF66C 
+16 
+11.2.6 
+8 
+Reload enable register RLDENR 
+R/W 
+H'00 
+H'FFFFF66E 8 
+11.2.14 
+Event counter 9A 
+ECNT9A 
+R/W 
+H'00 
+H'FFFFF680 
+Event counter 9B 
+ECNT9B 
+R/W 
+H'00 
+H'FFFFF682 
+Event counter 9C 
+ECNT9C 
+R/W 
+H'00 
+H'FFFFF684 
+Event counter 9D 
+ECNT9D 
+R/W 
+H'00 
+H'FFFFF686 
+Event counter 9E 
+ECNT9E 
+R/W 
+H'00 
+H'FFFFF688 
+Event counter 9F 
+ECNT9F 
+R/W 
+H'00 
+H'FFFFF68A 
+11.2.17 
+General register 9A 
+GR9A 
+R/W 
+H'FF 
+H'FFFFF68C 
+General register 9B 
+GR9B 
+R/W 
+H'FF 
+H'FFFFF68E 
+General register 9C 
+GR9C 
+R/W 
+H'FF 
+H'FFFFF690 
+General register 9D 
+GR9D 
+R/W 
+H'FF 
+H'FFFFF692 
+General register 9E 
+GR9E 
+R/W 
+H'FF 
+H'FFFFF694 
+General register 9F 
+GR9F 
+R/W 
+H'FF 
+H'FFFFF696 
+11.2.20 
+Timer control register 
+9A 
+TCR9A 
+R/W 
+H'00 
+H'FFFFF698 
+Timer control register 
+9B 
+TCR9B 
+R/W 
+H'00 
+H'FFFFF69A 
+Timer control register 
+9C 
+TCR9C 
+R/W 
+H'00 
+H'FFFFF69C 
+8 
+11.2.3 
+Timer status register 9 TSR9 
+R/(W)* H'0000 H'FFFFF69E 
+11.2.5 
+9 
+Timer interrupt enable  
+register 9 
+TIER9 
+R/W 
+H'0000 H'FFFFF6A0 
+16 
+11.2.6 
+ 
+
+PDF index348/viewerpage349
+Rev.2.0, 07/03, page 309 of 960 
+ 
+11.2.11 Down-Count Start Register (DSTR) 
+The down-count start register (DSTR) is a 16-bit register. The ATU-II has one DSTR register in 
+channel 8. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+DST8P 
+DST8O 
+DST8N DST8M 
+DST8L 
+DST8K 
+DST8J 
+DST8I 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+DST8H 
+DST8G 
+DST8F 
+DST8E 
+DST8D 
+DST8C 
+DST8B 
+DST8A 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+R/W* 
+Note: * Only 1 can be written. 
+ 
+DSTR is a 16-bit readable/writable register that starts the channel 8 down-counter (DCNT). 
+When the one-shot pulse function is used, a value of 1 can be set in a DST8x bit at any time by the 
+user program, except when the corresponding DCNT8x value is H'0000. The DST8x bits are 
+cleared to 0 automatically when the DCNT value overflows. 
+When the offset one-shot pulse function is used, DST8x is automatically set to 1 (except when the 
+DCNT8x value is H'0000) when a compare-match occurs between the channel 1 or 2 free-running 
+counter (TCNT) and a general register (GR) or the output compare register (OCR1) while the 
+corresponding timer connection register (TCNR) bit is set to 1. As regards DST8I to DST8P, if the 
+RLDEN bit in the reload enable register (RLDENR) is set to 1 and the reload register (RLDR8) 
+value is not H'0000, a reload is performed into the corresponding DCNT8x, and the DST8x bit is 
+set to 1. DST8x is automatically cleared to 0 when the DCNT8x vaue underflows, or by input of a 
+channel 1 or 2 one-shot terminate trigger signal set in the trigger mode register (TRGMDR) while 
+the corresponding one-shot pulse terminate register (OTR) bit is set to 1, whichever occurs first.  
+DCNT8x is cleared to H'0000 when underflow occurs. 
+DSTR is initialized to H'0000 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+For details, see sections 11.3.5, One-Shot Pulse Function, and 11.3.6, Offset One-Shot Pulse 
+Function and Output Cutoff Function. 
+
+PDF index349/viewerpage350
+Rev.2.0, 07/03, page 310 of 960 
+ 
+• Bit 15—Down-Count Start 8P (DST8P): Starts down-counter 8P (DCNT8P). 
+ 
+Bit 15: DST8P 
+Description 
+0 
+DCNT8P is halted 
+(Initial value) 
+[Clearing conditions] 
+When the DCNT8P value underflows, or on channel 2 (GR2H) compare-
+match 
+1 
+DCNT8P counts 
+[Setting conditions] 
+• 
+One-shot pulse function: Set by user program (DCNT8P ≠ H'0000) 
+• 
+Offset one-shot pulse function: Set on OCR2H compare-match (DCNT8P 
+≠ H'0000 or reload possible) or by user program (DCNT8P ≠ H'0000) 
+ 
+• Bit 14—Down-Count Start 8O (DST8O): Starts down-counter 8O (DCNT8O). 
+ 
+Bit 14: DST8O 
+Description 
+0 
+DCNT8O is halted 
+(Initial value) 
+[Clearing conditions] 
+When the DCNT8O value underflows, or on channel 2 (GR2G) compare-
+match 
+1 
+DCNT8O counts 
+[Setting conditions] 
+• 
+One-shot pulse function: Set by user program (DCNT8O ≠ H'0000) 
+• 
+Offset one-shot pulse function: Set on OCR2G compare-match (DCNT8O 
+≠ H'0000 or reload possible) or by user program (DCNT8O ≠ H'0000) 
+ 
+• Bit 13—Down-Count Start 8N (DST8N): Starts down-counter 8N (DCNT8N). 
+ 
+Bit 13: DST8N 
+Description 
+0 
+DCNT8N is halted 
+(Initial value) 
+[Clearing conditions] 
+When the DCNT8N value underflows, or on channel 2 (GR2F) compare-
+match 
+1 
+DCNT8N counts 
+[Setting conditions] 
+• 
+One-shot pulse function: Set by user program (DCNT8N ≠ H'0000) 
+• 
+Offset one-shot pulse function: Set on OCR2F compare-match (DCNT8N 
+≠ H'0000 or reload possible) or by user program (DCNT8N ≠ H'0000) 
+ 
+
+PDF index354/viewerpage355
+Rev.2.0, 07/03, page 315 of 960 
+ 
+• Bit 0—Down-Count Start 8A (DST8A): Starts down-counter 8A (DCNT8A). 
+ 
+Bit 0: DST8A 
+Description 
+0 
+DCNT8A is halted 
+(Initial value) 
+[Clearing conditions] 
+When the DCNT8A value underflows, or on channel 1 (GR1A or OCR1) 
+compare-match 
+1 
+DCNT8A counts 
+[Setting conditions] 
+• 
+One-shot pulse function: Set by user program (DCNT8A ≠ H'0000) 
+• 
+Offset one-shot pulse function: Set on OCR1 compare-match or GR1A 
+compare-match, or by user program (DCNT8A ≠ H'0000) 
+ 
+11.2.12 Timer Connection Register (TCNR) 
+The timer connection register (TCNR) is a 16-bit register. The ATU-II has one TCNR register in 
+channel 8. 
+ 
+Bit: 
+15 
+14 
+13 
+12 
+11 
+10 
+9 
+8 
+ 
+CN8P 
+CN8O 
+CN8N 
+CN8M 
+CN8L 
+CN8K 
+CN8J 
+CN8I 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit: 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+CN8H 
+CN8G 
+CN8F 
+CN8E 
+CN8D 
+CN8C 
+CN8B 
+CN8A 
+ 
+Initial value: 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+R/W: 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+R/W 
+ 
+TCNR is a 16-bit readable/writable register that enables or disables connection between the 
+channel 8 down-count start register (DSTR) and channel 1 and 2 compare-match signals (down-
+count start triggers). Channel 1 down-count start triggers A to H are channel 1 OCR1 compare-
+match signals or GR1x compare-match signals (set in TRGMDR). Channel 2 down-count start 
+triggers A to H are channel 2 OCR2x compare-match signals. When GR1x compare-matches are 
+used, set TIOR1A to TIOR1D to allow compare-matches. 
+TCNR is initialized to H'0000 by a power-on reset, and in hardware standby mode and software 
+standby mode. 
+For details, see sections 11.3.5, One-Shot Pulse Function, and 11.3.6, Offset One-Shot Pulse 
+Function and Output Cutoff Function. 
+
+PDF index425/viewerpage426
+Rev.2.0, 07/03, page 386 of 960 
+ 
+11.5 
+CPU Interface 
+11.5.1 
+Registers Requiring 32-Bit Access  
+Free-running counters 0 and 10A (TCNT0, TCNT10A), input capture registers 0A to 0D and 10A 
+(ICR0A to ICR0D, ICR10A), and output compare register 10A (OCR10A) are 32-bit registers.  As 
+these registers are connected to the CPU via an internal 16-bit data bus, a read or write (read only, 
+in the case of ICR0A to ICR0D and ICR10A) is automatically divided into two 16-bit accesses. 
+Figure 11.44 shows a read from TCNT0, and figure 11.45 a write to TCNT0. 
+When reading TCNT0, in the first read the TCNT0H (upper 16-bit) value is output to the internal 
+data bus, and at the same time, the TCNT0L (lower 16-bit) value is output to an internal buffer 
+register. Then, in the second read, the TCNT0L (lower 16-bit) value held in the internal buffer 
+register is output to the internal data bus. 
+When writing to TCNT0, in the first write the upper 16 bits are output to an internal buffer 
+register. Then, in the second write, the lower 16 bits are output to TCNT0L, and at the same time, 
+the upper 16 bits held in the internal buffer register are output to TCNT0H to complete the write. 
+The above method performs simultaneous reading and simultaneous writing of 32-bit data, 
+preventing contention with an up-count. 
+1st read operation
+2nd read operation
+CPU
+CPU
+Internal data bus
+H
+H
+Internal data bus
+L
+L
+L
+Bus
+interface
+Internal
+buffer register
+TCNT0H
+TCNT0L
+TCNT0H
+TCNT0L
+Module data bus
+Bus
+interface
+Internal
+buffer register
+Module data
+bus
+Module data
+bus
+ 
+Figure 11.44   Read from TCNT0 
+
+PDF index428/viewerpage429
+Rev.2.0, 07/03, page 389 of 960 
+ 
+1st write operation
+2nd write operation
+CPU
+Internal data bus
+H
+H
+L
+Bus
+interface
+TSTR2
+TSTR1
+TSTR3
+TSTR2
+TSTR1
+TSTR3
+Module data 
+bus
+CPU
+Internal data bus
+L
+Bus
+interface
+Module data bus
+ 
+Figure 11.47   Write to TSTR1, TSTR2, and TSTR3 
+11.5.3 
+Registers Requiring 16-Bit Access  
+The free-running counters (TCNT; but excluding TCNT0, TCNT10A, TCNT10B, TCNT10D, and 
+TCNT10H), the general registers (GR; but excluding GR9A to GR9D), down-counters (DCNT), 
+offset base register (OSBR), cycle registers (CYLR), buffer registers (BFR), duty registers (DTR), 
+timer connection register (TCNR), one-shot pulse terminate register (OTR), down-count start 
+register (DSTR), output compare registers (OCR: but excluding OCR10B), reload registers 
+(RLDR8, RLD10C), correction counter clear register (TCCLR10), timer interrupt enable register 
+(TIER), and timer status register (TSR) are 16-bit registers. These registers are connected to the 
+CPU via an internal 16-bit data bus, and can be read or written (read only, in the case of OSBR) a 
+word at a time. 
+Figure 11.48 shows the operation when performing a word read or write access to TCNT1A. 
+CPU
+Internal data bus
+TCNT1A
+Module data bus
+Bus
+interface
+ 
+Figure 11.48   TCNT1A Read/Write Operation 

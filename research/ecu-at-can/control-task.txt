@@ -1,0 +1,123 @@
+ECU complete-task exploration and activity qualification — 2026-10-06
+
+Objective and limits
+Continue all open ECU/automatic-transmission CAN, deep traction control and
+NC roof folding AND unfolding requirements. User has no additional DSC/roof
+firmware, captures or bench results. Do not ask again. This increment addresses
+ECU task ordering; neither physical integration nor either remote controller
+is established. No production code or ROM changes, staging, commit or push.
+
+Verified results
+verify_control_task_arithmetic.py passes3736 arithmetic checks:1800 SUBV,
+100 original2560 saturated-subtract cases,900 DMULS.L,120 MACH/MACL transfers,
+252 rotations,356 original2488 fixed-point multiply cases,208 FSTS bit copies.
+16 expected unsupported peripheral accesses are rejected. Added typed-latch
+positive checks also pass. Original helpers execute; no function stubs.
+Independent oracles use Python unbounded signed integers/bytes and bitstrings.
+Helper2488 computes saturated signed(a*b)>>16 and restoresMACH/MACL;
+helper2560 saturates signed(a-b). FSTS bitcopy tests do not expand arithmetic
+NaN/Inf/subnormal or FPSCR exception support.
+
+verify_control_task_activity.py passes7424 independent full-application-RAM
+checks:2304 hysteresis,4096 countdown,1024 publication; preserved registers
+and stack checked. Stock E0CF8=10,E0CFC=1,E0CF6byte=10.
+- 77F62: finite6CB0>=10 sets91E6=1; below9 clears; [9,10) retains oldbyte,
+  including nonbinary values. Exact9 holds; exact10 sets.
+- 77F12:70F0 exact1 OR91E6 zero reloads91E4=10; otherwise positive unsigned
+  byte decrements to0, which then holds. Reset2/255 is not reset1.
+- 77F46:91E5=(unsigned91E4>0), overwrites oldbyte with0/1.
+These are call counts, not milliseconds or physical-unit identification.
+
+Eight independent zero-RAM mode0 attempts enter original18DC8; all callees
+execute normally until return or the exact recorded bounded-model failure.
+No scheduler/body replacement. Initial5360 phaseincrements before gating:
+initial0/2/4/6 -> final1/3/5/7 return with729 direct JSR sites logged;
+initial7 -> final8 returns with786. Five complete task executions total.
+Initial1/5 -> final2/6 reach399B0,74DF8,77F62,77F12,77F46,6CD96,6CE24,
+6CF06,6CFD8,6D876,6D904,6D9E6 in that order, then later fail on unsupported
+SCI0 SMR0 write F000/1 at76FA (970 direct JSR sites). At all six77Fx return
+boundaries, independent pre-call oracles match all application RAM and stack.
+This verifies their semantics within the original task despite a later halt;
+it is not a successful whole-task test for those two phases. The 6CFD8 call
+is observed, but arbitrary-input diagnostic reporting semantics remain open.
+Initial3 -> final4 stops47F0 on unsupported201D (XTRCT) after731 directJSRs.
+These are exploratory startup fixtures; actual initialization/admission,
+retained freshness, full scheduler, interrupts and physical cadence remainopen.
+Direct JSR trace is address-range filtered18DC8..1CAE8; it is not a count of
+all nested calls or BSRs. See raw JSON for exact PCs/registers/MMIO accesses.
+
+Mode535C=1 with phases0..7 remains bounded at one million instructions.
+All reach repeated2580(arg2000,PR=F920), before399B0/qualification. Static
+F948..F952 waits for unsigned TCNT0 difference>=0x3E80. FrozenTCNT0 means
+this elapsed-count condition cannot become true; do not call this a firmware
+hang or arithmetic defect.2580 itself loops8*R4 increments, seen21 entries
+per failed probe. Dynamic timer fixture/real startup admission are next leads.
+Mode1 is an arbitrary nonzero test;1619A statically writes535C=-1 or0.
+No equivalence of every nonzero mode or physical clock period is claimed.
+
+Harness scope and failed leads
+sh_control_task.py composes existing FPU/integer/rotate implementations and
+adds tested SUBV,DMULS.L,MACH/MACL transfers,FSTS. New peripheral fixtures
+are PBDR/PFDR/PHDR/PJDR and PWM buffers as word latches, frozen32bitTCNT0,
+and byteSCR0. No pin state/direction, PWM transfer, clocks, serial peer or
+conversion/interrupt delivery modeled. Unknown addresses/widths fail closed.
+Hardware legal byte/word accesses may intentionally remain unsupported.
+control-task-isa-source.txt gives exact official sources/pages and assumptions.
+
+Historical probe JSON files preserve earlier failures: initial/peripheral,
+arithmetic/FSTS, portf, portb-pwm, portj-tcnt, porth. Some earlier probes lack
+register/MMIO/delay details added to the final script. Progress encountered
+missingLDS MACL, writablePFDR initially treated readonly, PBDR/PWM/PJDR/PHDR,
+TCNT0, SUBV andSCR0. Original first default objdump invocation failed because
+SH objdump is outsidePATH; documented explicit toolchain below succeeds.
+Renesas CPU manual urllib download403; browser text verified; no full local
+CPU manual claimed. Hardware PDF and hash are already retained in sources/.
+
+Readonly Ghidra containment inspection:1693E is inside noncontiguous1619A;
+199BC and1B14E have no containing function in current analysis. Original code
+and prologue identify18DC8..1CAE6 task. NONE is an analysis limitation, not
+absence of firmware code.399B0 body was already executed in prior evidence;
+new observations establish its presence before qualification in these fixtures.
+Static1619A initialization is not newly executed. Full disassembly evidence:
+control-task-entry-leads-disassembly.txt,control-task-intervening-leads-disassembly.txt,
+control-task-probe-limit-disassembly.txt; containment TSV and Java script kept.
+
+Reproduce from repository root
+python research/ecu-at-can/verify_control_task_arithmetic.py
+python research/ecu-at-can/probe_control_task.py
+python research/ecu-at-can/verify_control_task_activity.py
+python -m py_compile research/ecu-at-can/sh_control_task.py research/ecu-at-can/probe_control_task.py research/ecu-at-can/verify_control_task_arithmetic.py research/ecu-at-can/verify_control_task_activity.py
+Python3.14.3. No new package installation. Hardware PDF text:PyMuPDF1.28.2.
+GNU SH objdump uses existing toolchain/setup recorded in README.txt:
+LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu
+python research/ecu-at-can/disassemble.py --objdump
+/tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis START END
+Those two lines form one shell command; all useful outputs/inputs are durable
+here, not only at that temporary tool path. ROM ECU SHA256:
+7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08
+
+Next concrete actions
+Traction: support/test XTRCT and explicit SCI0 initialization/transfer fixtures
+from documented registers, then complete mode0 phases1/3/5. Do not add generic
+zero-valued MMIO fallback. Resolve original startup/TCNT0 progress for nonzero
+mode; do not merely raise instruction limit with a frozen timer. Extend task
+boundary oracles through both qualifiers and6CFD8, then retained acquisition/
+publication freshness. CAN211/21A sender/units, DSC actuation and board identity
+remain separate missing evidence.
+ECU/AT: operationalqueue/ack/overlap, cadence/inputprovenance/persistence and
+physical integration remain open; diagnosticservice4 is not shiftqueue proof.
+Roof: both folding/unfolding interruption/resume/reversal, CANtimeout, L/R sync
+and fault recovery remain open. Factory sources have known PID/pin/version
+conflicts; ECU/TCU state outputs are only candidate mappings. No OEMreceiver
+firmware/capture/physical proof. Next needs a new applicable full source or
+external controller evidence; exhausted archive listing must not be repeated.
+
+Ghidra saved and restored:1857 annotations (782ECU/1075TCU),928 byte-identical
+exports,11 matching project hashes before/after readonly independent reopen.
+Archive nc-at-can.tar.gz:10,981,551bytes,SHA256
+481a62009d54b784fe88475716b3684aae4a62cdc0ea6cf21517ad67a0b89824
+Bothprogram saves/readbacks/restore passed; no errors,incompletedecompiles or
+locks. Ghidra12.1.3PUBLIC,Java21.0.10. Restore scratch control-task-20261006
+is ignored; archive/manifests/scripts/exports are durable. Existing mixedindex
+including AD nc-at-can.tar.gz.tmp preserved; no files staged/committed/pushed.
+

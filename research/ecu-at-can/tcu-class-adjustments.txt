@@ -1,0 +1,158 @@
+TCU class 0..2 stored adjustments, spreading and consumers
+=========================================================
+2026-10-06. ECU/AT integration, deep traction/DSC integration and NC roof
+folding AND unfolding remain open. This verifies local RAM/cache routines,
+not EEPROM persistence, scheduler period, physical units or remote actuation.
+
+IMPORTANT stock reachability correction: tcu-class-admission.txt exhaustively
+verifies that 36BDA requires signed 80F2 in [12800,12800), so original 369A4
+cannot admit these updates. The direct updates and post-admission slices
+below prove conditional semantics with explicit admission fixtures.
+
+Inputs and reproduction
+-----------------------
+ python research/ecu-at-can/verify_tcu_class_adjustments.py
+Python 3.14.3; existing SHExtract interpreter and independent signed-integer
+and interpolation models. Input: examples/LFG1TF000.bin, SHA256
+8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6.
+Output: tcu-class-adjustments-verification.json. All 4,513 direct cases,
+96 caller segments, 100 retained update/consumer calls and 45 scheduled caller
+slices pass. Original 992-byte startup copy 15D04 and stored initializer 137AC
+execute in each fixture; this is not a full boot. Initial classification
+markers are explicit fixtures. No ROM, production or interpreter changes.
+
+Disassembly artifacts:
+ tcu-other-stored-setter-leads-disassembly.txt (36C80..36F30)
+ tcu-stored-spread-disassembly.txt (36E90..36FB8)
+ tcu-stored-error-tail-disassembly.txt (39F94..3A014)
+ tcu-stored-class-update-caller-disassembly.txt
+ tcu-stored-class-consumer-disassembly.txt (36A0A..36B52)
+GNU SH binutils 2.42 reproduction (substitute the desired range):
+ LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump tcu dis 0x36C80 0x36F30
+Inputs, scripts and text results are Git-eligible; that temporary tool
+installation is not the sole record. Ghidra save status is recorded below.
+
+Executed classification, update and tail
+---------------------------------------
+RAM suffixes below mean FFFFxxxx. 36DBC reads signed word 80EE and shifts it
+arithmetically right 7 through original helper 5B5D0. Quotients 24..31 select
+class 0, 32..39 class 1, 40..48 class 2; all others return 127. Positive raw
+ranges are 3072..4095, 4096..5119 and 5120..6271. Negative values are excluded.
+Boundary samples cover both sides of all 512 shift bins. Units are unknown.
+
+36D1A calls 36DBC; class 127 skips updates. Signed word 98DC is the update
+input (model variable 'error' does not establish a physical identity).
+Stock center 77150=-614, half-width 7714E=87 and step 77152=1 give:
+ input > -527: +1; input < -701: -1; inclusive [-701,-527]: no update.
+For a nonzero step, it reads the selected stored word through 24584, adds
+the step, clamps to [-80,80] using 77156/77154, writes through 2456E, calls
+36E90 with class/new value, then tail-calls 39F94. Table 5D7F8 maps valid
+classes to indices [0,1,2], RAM 616A/616C/616E. These differ from the earlier
+49FE0 indices 6/7/8. Slots 3..14 stay unchanged in every check. An inactive
+classification or dead band does not repair an out-of-range stored word.
+
+Tail 39F94 executes original 10C1C with stock arguments: 7715C=24576 times
+step 1 divided by 2^10 gives 24. It subtracts 24 if entry 98DC > -527, or adds
+24 if entry 98DC < -701, clamps to +/-2*76DD0 (76DD0=15232), and stores 98DC.
+Both comparisons use entry input. The tail is not stubbed; every whole-body
+call checks 98DC. Software arithmetic executes, and R8..R15, MACL and SR bits
+outside the arithmetic M/Q/T bits must be preserved.
+
+Spreading and markers: 36E90
+---------------------------
+State-cache indices 109/10A/10B map through 24532/244FA to bytes 6165/6166/6167.
+The function reads all three entry flags, then marks the selected class 1.
+For each OTHER class whose entry flag is zero, it overwrites that class word
+using original 10C4C: signed-32 product/128, truncation toward zero, signed-32
+saturation, then 2456E low-word storage. Weights are:
+ source 0 -> target 1: 109; target 2: 90
+ source 1 -> target 0: 147; target 2: 109
+ source 2 -> target 0: 166; target 1: 147
+Any nonzero other flag, including 2/255, protects its word. Propagated targets
+are not marked; only the selected source is. Standalone helper tests show
+argument low byte 0/1 chooses those classes; every other byte uses class 2.
+Primary 36D1A supplies only 0..2; other helper inputs are not claimed reachable.
+
+Propagated targets have NO +/-80 clamp. Starting all words at zero, the
+100-call retained trace reaches [103,91,80], flags [0,0,1], after 80 positive
+class-2 updates. A later class-0 update clamps its 103 to 80 and marks flag 0.
+Subsequent negative class-2 updates preserve class 0 at 80 while still
+spreading into unmarked class 1. Original instruction execution confirms
+this; it is not overflow inferred solely from decompilation. No EEPROM or
+physical pressure/torque interpretation is assigned to these adjustments.
+
+Accessors, uniform update and consumers
+--------------------------------------
+36DFE gets a valid class through 24584 and sign-extends the stored word.
+36E16 takes signed-32 value R4/class R5, clamps +/-80 and writes via 2456E;
+markers stay unchanged. 36B26 applies its signed LOW-WORD R4 offset to all
+three old words through 36DFE/36E16. Flags remain unchanged; original code
+performs all updates.
+
+36A74 builds a three-point byte map with axes 28/36/44, the midpoints of the
+class thresholds. Each signed stored word becomes ((word+136)>>1)&255.
+Original 10764/10922 uses u16(2*80EE), axes/values scaled by 256, endpoint
+clamping and integer-truncated linear interpolation. The encoded u16 result
+is shifted right 7, reduced by 136, clamped +/-80, then multiplied by 16.
+Thus it quantizes and clamps even a stored word of 103. At encoded knots,
+odd stored values lose one unit. Extreme-word tests cover byte wrapping,
+without claiming those values naturally reachable. Output range is +/-1280.
+
+36A0A instead reads stock class 77173=2, multiplies its word by 16 and
+saturates to signed 16 bits through original 10DD2/10E80. It does NOT apply
+the +/-80 consumer clamp. Both complete returns are independently checked;
+neither consumer may change stored words or markers.
+
+Verification and retained scheduling
+------------------------------------
+Direct 4,513 cases comprise 1,536 classification, 1,701 spreading/raw-flag/
+arithmetic extremes, 882 complete updaters, 30 setter/getter, 64 uniform
+updates and 300 randomized complete consumers.
+
+The 96 original 369C4..369E6 slices check byte 985D increment/wrap and state
+985C admission. State exactly 2 with UPDATED counter == ROM 7713C (15) calls
+36D1A and resets the counter. Any other state resets it; state 2 with any
+other updated count retains that count. The slice ends before the enclosing
+epilogue and does not execute the preceding state machine.
+
+The 45 retained slices with state 2 produce updates at calls 15/30/45, with
+consumers between them. The 100 retained direct updates also feed originally
+produced words through both consumers. Raw 80EE/98DC and state 985C remain
+fixtures; there is no hardware-period claim.
+
+Initial failed run and correction
+--------------------------------
+With SHRotate, earlier checks passed but fixed consumer 36A0A reached
+unsupported XTRCT opcode 276D at 5B8AA. Only this new fixture was switched to
+existing SHExtract, already verified by 100 instruction cases in
+verify_tcu_overlay_lifecycle.py/tcu-overlay-lifecycle.txt. No ISA changes or
+stubs were added. The full rerun passed. This was missing interpreter
+coverage, not a firmware/model disagreement.
+
+Next integration and remaining requirements
+------------------------------------------
+Immediate consumers are verified. Their application callers and natural
+985C/98DC/80EE production remain open. Literal-reference leads:
+ 36A0A: caller loads 36772/37128/37932/379A8/379E0
+ 36A74: caller loads 36714/3782E
+ 36B26: caller load 36828
+Validate containing bodies next. Relative BSRs identify 36D1A from 369DE,
+36DFE from 36ACA/36B34, 36E16 from 36B3E and 36E90 from 36D92. Literal-only
+searches miss these calls; no literal match does not mean no callers.
+
+TCU queue acknowledgements, overlap, persistence and physical receivers stay
+open. Traction still needs five intervening 187-region bodies, raw admissions,
+scheduling, DSC identity and actuation. Roof folding AND unfolding, reversal,
+timeouts, synchronization and receiver evidence remain in CHECKPOINT.txt.
+The user has no additional controller dumps, captures or bench results.
+
+Saved locally (not staged, committed or pushed)
+---------------------------------------------
+Both Ghidra programs saved; refreshed .gpr+.rep archive independently
+restored: 1,559 annotations (684 ECU/875 TCU), 768 byte-identical exports,
+11 matching project hashes before and after reopening; no incomplete
+decompiles, errors or locks. Archive 10,915,794 bytes; SHA256
+b552cfea230d60167e5a6765efc7c38a308eca1af076f89eb33bcb59f92c942e.
+Manifests in ghidra/snapshot.json and ghidra/restore-verification.json.
+New scripts compile; git diff --check passes and artifacts are Git-eligible.
+Existing mixed index, including staged archive temporary entry, untouched.

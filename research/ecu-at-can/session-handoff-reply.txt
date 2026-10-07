@@ -1,0 +1,87 @@
+2026-10-06 14:52 UTC: ownership handoff acknowledged; this session stands down
+
+Reply from thread01a10e81-61f6-7013-a9d4-10f2f3acdb21 to coordination from
+thread01a111a7-d4c4-7711-a3fd-3000d21d4068.
+
+The user explicitly requested that this session finish saving, preserve its
+curve-source work, and stop further research/editing in this checkout.
+Acknowledged. The receiving session may now take ownership of shared research
+files and Ghidra. This session will perform no further research or edits after
+this administrative handoff and its read-only verification, unless explicitly
+resumed. No shared app-server or other project session was terminated.
+
+Automatic continuation
+----------------------
+The active goal for THIS thread was explicitly set to PAUSED; update_goal
+returned status "paused" at handoff. It is not complete and is not blocked.
+Automatic goal continuation is paused; an explicit resume can reactivate it.
+Other sessions' goals and processes were not modified. Do not resume this
+thread into the shared checkout without coordinating ownership again.
+
+Actual saved Ghidra state, revalidated at handoff
+-----------------------------------------------
+Archive: ghidra/nc-at-can.tar.gz
+SHA256: 04677479ded251318bfef0d4b508929e06e32838ece76e5d8e2c6b1e97969fb4
+Size: 10,871,408 bytes.
+11 project files, including BOTH nc-at-can.gpr and nc-at-can.rep contents.
+1344 annotations (572 ECU,772 TCU);665 exports (663 functions,2 readbacks).
+
+The prior apply/readback/independent-reopen processes all finished successfully.
+At handoff, archive hash/inventory, all live project hashes, all independently
+restored project hashes, and all665 export hashes were checked again and match.
+The saved logs each contain both expected success markers and no ERROR or
+Exception. No live project locks remain; process inspection found no running
+analyzeHeadless or research verify_tcu process. There is no pending save job.
+Manifest evidence: ghidra/snapshot.json and ghidra/restore-verification.json.
+Independent restore directory: ghidra/restore-check/04677479ded2 (ignored).
+Logs: apply-curve-sources.log,readback-curve-sources.log,restore-curve-sources.log
+inside ghidra/ (ignored; successful result is preserved in the manifests).
+
+Curve-source work preserved
+---------------------------
+Authoritative record: tcu-curve-sources.txt.
+Reproducer: verify_tcu_curve_sources.py.
+Evidence: tcu-curve-sources-verification.json and
+tcu-curve-sources-disassembly.txt.
+
+Verified2560 primary-bank cases (769 early holds,891 full dynamic-copy checks),
+2934 interpolation cases,3 saved-state full44CFE replays and4 retained4530C
+bank-switch calls. Fault/recovery snapshots retain bank7404C; changed axes
+explain their changed thresholds.4530C captures entry-source axis before bank
+production; source changes can retain the prior axis selection for one call.
+Ghidra includes46FA0/4A634 labels,5DE90 dispatch,curve-bank data and4530C's
+entry-source timing annotation. All of this is in the verified archive above.
+Relevant indexes: CHECKPOINT.txt,README.txt,.claude/notes.md,traction-roof.txt.
+
+Receiving session's separate work
+--------------------------------
+Preserved verify_tcu_threshold_axis_history.py and associated evidence without
+editing or rerunning it. Its record reports60 calls,600 lookups and60 scans,
+including unsaturated axes and isolated proposal effects. This session read
+the script/report but does not claim to have independently rerun those checks.
+Its broader axis-history coverage is not yet cited in the current Ghidra
+annotation. Receiving session can integrate that evidence and refresh/restore
+the archive now that ownership has been released. Preserve its distinction
+between isolated scans and complete naturally produced transition cycles.
+
+Pending work
+------------
+- Primary-bank control producers9C7C/9B40/941E and real task/transport order.
+- Independently model nondefault46200/45AA4/47240 overrides. This turn began
+  read-only inspection; no override verifier/report or Ghidra edit was started.
+-49B08 remains a static monitor lead, not an established curve-bank selector.
+-44E14/44F5A adjustments, overlapping/composite transition behavior and complete
+  ECU/TCU consequences with naturally produced source transitions remain open.
+- Keep deep traction integration and both roof directions independently open.
+  Their distinct evidence, next steps, interruption and recovery requirements
+  remain in CHECKPOINT.txt and traction-roof.txt.
+
+Repository status
+-----------------
+Saved locally in Git-eligible files. No staging, commit or push by this session.
+Pre-existing mixed staged/unstaged/untracked work remains untouched in the
+index. In particular, the older staged nc-at-can.tar.gz.tmp entry is absent in
+the working tree; do not treat the existing index as the current saved state.
+No cleanup, reset or ownership changes to unrelated project work were made.
+
+Handoff complete. This session relinquishes the shared checkout.

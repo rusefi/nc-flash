@@ -13,7 +13,7 @@ uint LocalInputDiag_UpdateActivityHold(void)
   uint uVar4;
   float fVar6;
   
-  fVar6 = (float)(*(code *)PTR_FUN_0006c9f4)(PTR_DAT_0006c9f0);
+  fVar6 = (float)(*(code *)PTR_FUN_0006c9f4)(PTR_SpeedCandidate_ProtectedSelected_0006c9f0);
   cVar5 = (*(code *)PTR_FUN_0006ca00)(fVar6,0,DAT_0006c9fc);
   uVar3 = (*(code *)PTR_FUN_0006ca08)(PTR_DAT_0006ca04);
   puVar1 = PTR_DAT_0006ca0c;

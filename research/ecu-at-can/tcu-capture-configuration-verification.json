@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "scope": "Original capture A/B enable and caller slice, using strict existing latches.\n\nIndependent whole-RAM and exact ordered-MMIO models. Compatible SH7055S\nclock interpretation is separate; no counter progression, pin or IRQ model.\n",
+  "original_enable_cases": 512,
+  "original_caller_cases": 256,
+  "original_prescaler_cases": 256,
+  "rejected_accesses": 6,
+  "caller_accesses": 16,
+  "rom_sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6",
+  "clock_interpretation": "Compatible PSCR1=1 and channel0 direct phi-prime imply Pphi/2; ICR0A/B capture same32-bit TCNT0.",
+  "source_pages_zero": [
+    240,
+    241,
+    262,
+    266,
+    267,
+    277,
+    278,
+    318,
+    370
+  ],
+  "limits": "Caller12324..12330 only; no readiness gates/fullreset/clockprogress/physicaledges/hardwareIRQ."
+}

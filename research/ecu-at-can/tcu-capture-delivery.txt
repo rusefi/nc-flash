@@ -1,0 +1,105 @@
+TCU capture ISR delivery inside the recovery task — 2026-10-06
+=============================================================
+Full objective: ECU/AT CAN integration, deep traction logic/integration, and
+NC roof folding AND unfolding with interruption/resume/reversal, timeout,
+left/right synchronization and recovery. All remain incomplete. User has no
+additional DSC/roof images, captures or bench results; no stage/commit/push.
+Previous goal turn made verified progress through cut eligibility and ISR
+prefix testing. This thread owns the checkout; other thread stays paused.
+
+Implementation / evidence scope
+-------------------------------
+Extracted CaptureSamples owned register fixture and execute_prefix(t,...) from
+verify_tcu_capture_interrupts.py so isolated tests and full-task delivery use
+the same strict MMIO/prefix path. Existing512 differentialRAM cases and6 access
+rejections rerun PASS. This is original-callback equivalence plus independent
+profiling equations, not an independent replacement capture-history oracle.
+No sharedISA/ROM orproduction changes. Originalcallback/history independent
+models remain in tcu-reference-source.txt andtcu-measurement.txt.
+
+probe_tcu_captured_requests.before_task now accepts an optional external
+capture_delivery(entry,captured) hook. Default remains the existing direct
+callback andsentinel cleanup. Hook path requires originalnestedcallback
+observations toclose at actualPRreturn, leaving no source_pending entry.
+probe_tcu_capture_delivery.py subclasses the existingcut observer and uses
+that hook toexecute16C7C/16B44 prefixes throughregisterrestore, beforeRTE.
+All inheritedreference, measurement, phase, receive, cut anddiagnostic checks
+remain. No forced ages/cache/timers/phase/ack flags or skipped firmware calls.
+
+Externalinputs: same320-paircutfixture, referenceinterval12160; measurement
+5890 before48,6490 before80,4430 before128,9120 thereafter; captureabsencefrom
+280. Per-eventTSR0 first/second samples arethechannelmask1or2. Capture-register
+sample isthat event's timestamp. ProfilingF6C0 samples are1000*event_number
+andstart+100, withsequential1-basedevents; these areexplicitfixtures, not a
+clockperiod claim. CaptureA thenB beforeeachapplication/diagnostic pair.
+SyntheticstackFFFED000, stopbeforeRTE; actualinterruptadmission/return/timing,
+physicaltimer effects, sensorwiring andphysicalunits remainunproved.
+
+Commands / current state
+-------------------------
+ python research/ecu-at-can/verify_tcu_capture_interrupts.py
+ python research/ecu-at-can/probe_tcu_capture_delivery.py --cycles 8 --filename tcu-capture-delivery-prefix8.json
+Prefix8 integration PASS: all8 return,16prefixevents andunchanged
+prior8 rows afterONLY newcapture_interrupts andactualcallbackreturnPC changes
+areaccounted for. Investigateanyadditionaldifferences; do notbroadlystripstate.
+Complete320 pairs PASS: two creations,20 acknowledgements, no failures.
+verify_tcu_capture_delivery.py checks560 originalcaptureprefixes (A/B forpairs
+0..279), exactfirst8, timestamps, orderedMMIO andregister/RAM check markers.
+All320 rows equal tcu-recovery-cut-probe.json afterremovingONLY
+extra.capture_interrupts andnormalizingactualcallbackreturnPC16CB2/16B7A
+totheoldsyntheticFFFFFFF0. No otherstate isremoved. Inheritedcut/reference/
+phase/receive/diagnostic models remainactive. Code2retirement194, faultclear284,
+inhibitclear288 andnormalinput290 arepreserved; finalphase/listempty and
+heap007FFFFF. NewprofilingRAM writes areexplicitlychecked ineachprefix.
+Commands:
+ python research/ecu-at-can/probe_tcu_capture_delivery.py
+ python research/ecu-at-can/verify_tcu_capture_delivery.py
+Expected profilingwrites arepartofthedifferentialwholeRAM assertion; omitted
+fromoldpublicsnapshots butmustnotbecalled absent effects. Recordactualcounts.
+
+Traction: ECUinput/freshness evidence remainsseparatefrommissingCAN211/21A
+sender/units, remoteDSC logic/actuation. Next relevantlocalCAN/controlboundary.
+Roof: factorydocs/candidatemaps/revisionconflicts distinctfrommissingOEMreceiver
+proof. Bothdirections/interruption/reversal/timeout/sync/recovery remainopen;
+nextnewapplicablesource orOEM/physicalevidence. Do notrepeat unavailableartifact
+questions or exhausteddownloads. Ghidra comments updatedforjoinedcapture and
+five CMT0functions; save/archive/independentrestore inprogress. Exact final
+identity belongs inCHECKPOINT andGhidramanifests.
+
+Independent clock-admission result
+----------------------------------
+tcu-cmt0-interrupt.txt owns512 init/516 ISRprefix cases. NativeCMT0 path
+conditionallypromotesmode1->3 andcalls11864,1E506->2094E and11A64. Directtick
+replacement willalsoadvancereferenceelapsed andcountdownwheel; do notskipthose
+effects orassumeunchangedtrace. Thisis the nextintegrationboundary afterthe
+current320 capture-deliveryrun, withrealcadence stilloutsidefixtureproof.
+
+Correction (joinedclock follow-up):11A64 handles BOTHincrement/decrement
+rangebanks; theearlier countdown-only wording istoo narrow. See
+tcu-cmt0-delivery.txt andindependent8000-case tcu-cmt0-wheel-verification.json.
+
+Ghidra correction: both programs saved and archived; independent extraction
+reopened,11 filehashes checked, but export comparison failed. Investigating
+counts/filenames/content before declaring restoration complete. The immediately
+preceding automated completion wording was premature and is superseded here.
+
+FINAL ARCHIVE STATUS — 2026-10-07
+--------------------------------
+The300-second ECU retries succeeded on both live and independently restored
+programs. Both TCU readbacks also passed. verify_restore.py nowPASS:
+1929 annotations (833 ECU/1096 TCU),984 identical complete exports,11 project
+file hashes checked before/after reopening and againsttheliveproject.
+Archive nc-at-can.tar.gz is11,010,442 bytes; SHA256
+6889fecc740512bfeac28e63330ea643954628d0ef7f5ed4ba132b6eb15f13d3.
+Both .gpr and.rep areincluded. snapshot.json/restore-verification.json own
+inventories. Ghidra12.1.3 PUBLIC, Java21.0.10, Python3.14.3. The earlier timeout
+andpremature completion attempts remain documented above; thissuccess follows
+complete fresh exports, not copied/stale output. The fresh614-line ECUstartup
+export SHA256 is5d4c35b91e520f7d351031cedc602fd95c2e0e6b664850185e65e10cc7a2a818,
+identical to the prior successfully verified capture-delivery export.
+
+Reproduce fromrepositoryroot after independent Ghidra reopening:
+ python research/ecu-at-can/ghidra/verify_restore.py research/ecu-at-can/ghidra/restore-check/cmt0-delivery-20261006 --write-report
+The ignoredrestore path isonlya reproducible extraction, nottheonlyevidence.
+Archive, annotations, exports, scripts, reports andresults areGit-eligible.
+No staging, commit orpush. PreexistingAD ghidra/nc-at-can.tar.gz.tmp unchanged.

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "scenarios": 3,
+  "totals": {
+    "cmt0_interrupts": 600,
+    "application_interrupts": 144,
+    "foreground_ram_checks": 224,
+    "capture_return_ram_checks": 93,
+    "command_pin_return_checks": 288,
+    "diagnostic_interrupts": 24,
+    "diagnostic_actual_return_ram_checks": 13
+  },
+  "byte_identical_regressions": {
+    "tcu-readiness-admission-verification.json": "db4849a92f29757c856af6a683218ddddd3264f84fba2bb26c69844f45c8f363",
+    "tcu-diagnostic-timer-verification.json": "ea2c938791fec667402fdaf93fc6d6a862766fac7dc20b6ff0ae894b5df0cc8f",
+    "tcu-diagnostic-timeline-prefix8.json": "08b0c7be5580e563eafb610e27f7ad4b6486b35e216e7d60dbd78dd3ce8b5308",
+    "tcu-diagnostic-observer-reuse-prefix8.json": "08b0c7be5580e563eafb610e27f7ad4b6486b35e216e7d60dbd78dd3ce8b5308"
+  },
+  "unchanged_prior_row_fields": [
+    "phi",
+    "rank",
+    "kind",
+    "ordinal",
+    "state"
+  ],
+  "limits": "Recorded-output validation; not firmware reexecution or whole-RAM equivalence."
+}

@@ -3,6 +3,7 @@
 Whole23544 executes, including fall-through2378A and all arithmetic helpers.
 Explicit inputs/admission and bounded scheduling are not physical units/timing.
 """
+import hashlib
 import itertools
 import json
 import random
@@ -216,26 +217,40 @@ def direct_cases():
     return counts
 
 
-def can_classification_probe(primary):
+def can_classification_probe(primary, replacement=None):
     t=ObservedLimit();t.ram=dict(full_fixture().ram)
-    w(t,0x606F,0);initialize_segment(t)
-    for a,v in [(0x8080,6),(0x8084,1),(0x92D0,4),(0xA93A,1)]:w(t,a,v)
+    w(t,0x606F,1);initialize_segment(t)
+    for a,v in [(0x8080,6),(0x8084,2),(0x92D0,4),(0xA93A,1)]:w(t,a,v)
     for a,v in [(0x80EA,4672),(0x80E8,1000),(0x80EE,1000),(0x80F6,4224),(0x809C,20000),(0x809A,25000)]:w(t,a,v,2)
     for a in [0x921C,0x9220]:w(t,a,5000,4)
     t.run(0x48C08,limit=1000000)
-    assert r(t,0x8081)==1
+    assert r(t,0x8081)==2
+    # Explicit upstream reset gate, then 80 original progress services without
+    # phase/timer service. This is a bounded scheduling/gate experiment.
+    w(t,0x9315,1);t.run(0x32348)
+    w(t,0x9315,0)
     for _ in range(80):t.run(0x32348)
     assert r(t,0x96C8,2)==8400
     payload=can_inputs(t,primary)
-    # Publish the CAN-derived limit while still accepted1, before the next proposal.
     t.run(0x23544,limit=1000000)
-    w(t,0x80EA,8000,2);w(t,0x8084,2);selection_then_limit(t)
-    assert r(t,0x8081)==2,(r(t,0x8081),t.classification_rows,t.proposal_rows)
-    w(t,0x80EA,4672,2);w(t,0x8084,1);selection_then_limit(t)
-    return dict(primary=primary,can215=payload,base92e2=r(t,0x92E2,2),
-                limit939e=r(t,0x939E,2),limit9c52=r(t,0x9C52,2),
+    published=r(t,0x939E,2)
+    changed_payload=can_inputs(t,replacement) if replacement is not None else None
+    # The changed CAN input, if any, has not yet reached23544. Original caller
+    # classifies with the preceding939E, then publishes the changed limit.
+    w(t,0x8084,1)
+    for call in range(300):
+        selection_then_limit(t)
+        if r(t,0x8081)==1:break
+        t.run(0x11014)
+    else:raise AssertionError((primary,t.classification_rows,t.creation_calls))
+    return dict(primary=primary,replacement=replacement,can215=payload,
+                changed_can215=changed_payload,previous_limit=published,
+                base92e2=r(t,0x92E2,2),limit939e=r(t,0x939E,2),
+                limit9c52=r(t,0x9C52,2),candidate_delay_ticks=call,
                 progress=[r(t,a,2) for a in [0x96C8,0x96CA,0x96CC]],
                 accepted=r(t,0x8081),code=r(t,0x9C87),operation=r(t,0x9C88),
+                creation_calls=t.creation_calls,retired_callbacks=t.retired,
+                phase_codes=[r(t,0x95DE+15*((r(t,0x96C4)+i)%16)) for i in range(r(t,0x96C5))],
                 classifications=t.classification_rows,group_calls=t.group_calls,
                 order=t.order,limit_checks=t.limit_checks,tail_checks=t.tail_checks,
                 **paired_snapshot(t))
@@ -245,7 +260,19 @@ def main():
     counts=direct_cases();print('Direct checks:',counts,flush=True)
     probes=[can_classification_probe(x) for x in [25,100]]
     assert [p['code'] for p in probes]==[6,0],probes
-    result=dict(scope=__doc__,direct_cases=counts,can_classification_probes=probes)
+    lag=[can_classification_probe(a,b) for a,b in [(25,100),(100,25)]]
+    assert [p['code'] for p in lag]==[6,0]
+    assert [p['limit939e'] for p in lag]==[12736,7984]
+    assert [p['limit9c52'] for p in lag]==[9600,12736]
+    for p in probes+lag:
+        assert p['candidate_delay_ticks']==0
+        assert p['phase_codes']==([6] if p['code']==6 else [1,0])
+        assert p['can216'].startswith('ff fe') and p['at_correction']==0
+    from verify_can215_feedback import ECU
+    result=dict(scope=__doc__,tcu_sha256=hashlib.sha256(TCU).hexdigest(),
+                ecu_sha256=hashlib.sha256(ECU).hexdigest(),
+                direct_cases=counts,total_direct_cases=sum(counts.values()),
+                can_classification_probes=probes,publication_lag_probes=lag)
     path='research/ecu-at-can/tcu-qualification-limit-verification.json'
     with open(path,'w') as f:json.dump(result,f,indent=2);f.write('\n')
     print(path,flush=True)

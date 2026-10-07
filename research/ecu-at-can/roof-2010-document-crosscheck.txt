@@ -1,0 +1,24 @@
+2026-10-06: later NC owner-document cross-check
+
+Factory documentation, not receiver execution. Mazda Canada hosts the2010
+MX-5 owner manual (444 PDF pages):
+https://www.mazda.ca/globalassets/mazda-canada/en/pdf/manuals/vehicles/mx-5/2010_mx-5_manual_en_optimized.pdf
+Web PDF text inspected, zero-based pages110/111 (printed3-51/3-52).
+It states release stops opening or closing, and pressing that direction again
+resumes. Thus same-direction pause/resume is documented for later NC as well
+as the previously saved2007 material. These passages do not establish an
+arbitrary release-then-opposite transition matrix or resolve DECK_CL polarity.
+No numerical CANtimeout or motor synchronization threshold follows.
+
+Search results prominently included2017/2018 RF owner manuals. Those areND,
+excluded fromNC evidence. Keyword "opposite" in2010 fulltext led to unrelated
+tire-changing guidance; it supplies no roof reversal proof. Do not reinterpret
+that keyword result as an admission table.
+
+Direct Python urllib retrieval of the2010 PDF returned HTTP403; no local
+sourcePDF or hash is claimed. Reproduce through web open/find for the URL
+above, pattern "released while", or fetch when origin permits. Conclusions
+and exact page/source identities are preserved here, so the failed download
+is not the sole record. This cross-check narrows documentation uncertainty
+only; OEM PRHT firmware/CANcaptures/benchresults remain unavailable.
+See traction-roof.txt,roof-switch-graphics.txt,roof-training-graphics.txt.

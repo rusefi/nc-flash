@@ -10,7 +10,7 @@ undefined4 Control_SelectBaselineExtra(void)
   float extraout_fr0;
   undefined4 extraout_fr0_00;
   
-  uVar1 = (*(code *)PTR_FUN_00059120)(PTR_DAT_0005911c);
+  uVar1 = (*(code *)PTR_FUN_00059120)(PTR_Control_RawFirstSnapshot_0005911c);
   if (*(float *)PTR_DAT_00059130 <= extraout_fr0) {
     *(undefined4 *)PTR_Control_OptionalBaselineExtra_00059110 = 0;
   }

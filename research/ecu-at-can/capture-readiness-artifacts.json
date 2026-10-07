@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-07",
+  "status": "PASS",
+  "artifacts": {
+    "verify_tcu_capture_readiness.py": {
+      "bytes": 6129,
+      "sha256": "5c1675ec3c14200bce1b86be6885439399f3a2857090636cdf9e665f655f1e30"
+    },
+    "tcu-capture-readiness-verification.json": {
+      "bytes": 60781,
+      "sha256": "64d2c628da44438d638b4da351d6df9677e2b773e539fedaad10db34b6312427"
+    },
+    "tcu-capture-readiness.txt": {
+      "bytes": 7264,
+      "sha256": "6e1fb38cbf0cb8ad0aadbfbe41469716269cc21636a0733073c71103b721c8f5"
+    },
+    "tcu-capture-readiness-lead-disassembly.txt": {
+      "bytes": 3040,
+      "sha256": "597582a448997cd67a0d119df73b046199ab0e065a9aced6ab7479352e82b02c"
+    },
+    "tcu-readiness-callers-disassembly.txt": {
+      "bytes": 15197,
+      "sha256": "940ccbf6dc9d9c6c2be7a6743b175288525affe2ddca4a64368ca1797d9e9250"
+    },
+    "verify_tcu_timestamp_configuration.py": {
+      "bytes": 4995,
+      "sha256": "d6794a6f6acfe6bb5e94b88278ec2c2ed32213092145982a74d75ef443db61da"
+    },
+    "tcu-timestamp-configuration-verification.json": {
+      "bytes": 1724,
+      "sha256": "3349e6f03e74fe0551d2f772261469d5e31603d1915d05436c87fa21f81eaf73"
+    },
+    "tcu-timestamp-configuration.txt": {
+      "bytes": 5592,
+      "sha256": "2f6e0847272b9f6caf9d32016538a643941e11a4f00cba6446617ea736ee8282"
+    },
+    "tcu-timestamp-configuration-disassembly.txt": {
+      "bytes": 5174,
+      "sha256": "b6da37b05e644b1a81927f45e9dccf861c3f0befbdf903b8c1b3b6b64e7aac6a"
+    },
+    "tcu-timestamp-manual-excerpts.txt": {
+      "bytes": 12343,
+      "sha256": "7165670439d55fb72aa8cbe131a8fcd011077f4a0debaede7bbb1e83ab15c27d"
+    },
+    "verify_tcu_capture_configuration.py": {
+      "bytes": 4203,
+      "sha256": "db737df3df7602d01bd46920434f75118889d0c43f5843ca4e0f5913b9063113"
+    },
+    "verify_tcu_timer_configuration.py": {
+      "bytes": 7968,
+      "sha256": "cefdcc33c6208e0aab76943417c03ff9259ced6e367e472c013a48ec768e9819"
+    },
+    "verify_tcu_readiness_b.py": {
+      "bytes": 5032,
+      "sha256": "b8432734759e2616c97e6529b791591ba45374e9a5a61d0b475f9636010c4ca0"
+    },
+    "verify_tcu_cmt0_interrupt.py": {
+      "bytes": 5507,
+      "sha256": "57ae44feb335bbcf0f0f726c8292e53e77580c0a4c1439d31691e17e50bd11fc"
+    },
+    "verify_tcu_cmt0_wheel.py": {
+      "bytes": 3505,
+      "sha256": "4a6f95f10428613113c8bb0ae705934e239f8a444ed3665ac1b5f5ae09485076"
+    },
+    "ghidra/annotations.tsv": {
+      "bytes": 380204,
+      "sha256": "9c7a6861c93df3adc18b49076183b582c5f5a2ea05c2abe189bd9d740086de5d"
+    },
+    "ghidra/README.txt": {
+      "bytes": 6082,
+      "sha256": "5f493992ee0a5684096e24d190643881437bad4ace5f177ac8f09420e1cc6f92"
+    },
+    "ghidra/snapshot.json": {
+      "bytes": 1326,
+      "sha256": "fa8f7f7010a7acb6ede4b51d468dc4a35611b822e43b210f31f86c4df2071b2d"
+    },
+    "ghidra/restore-verification.json": {
+      "bytes": 514,
+      "sha256": "6baf085ec6eeaf0b5ba1b7048b6d1d2d24fd6bd56a1710df4789c3179330d4b4"
+    }
+  },
+  "inputs": {
+    "examples/LFG1TF000.bin": {
+      "bytes": 524288,
+      "sha256": "8fb064e91dd2590a30189d70874f5607350812e6c8f98f6e4a132085c4a808d6"
+    },
+    "examples/LFFEEE-stock.bin": {
+      "bytes": 1048576,
+      "sha256": "7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08"
+    },
+    "research/ecu-at-can/sources/renesas-sh7055s-hardware-rej09b0045-0200h.pdf": {
+      "bytes": 5102824,
+      "sha256": "359963cd6e34a2544a30b992d171681fb5cd953b51cd7610f3d6fd30b7f6497c"
+    }
+  },
+  "archive": {
+    "bytes": 11021729,
+    "sha256": "477437571f09eb6a955236ff59ba7b9b28716203ef5375a48f86f782daa2cda3"
+  },
+  "verification": {
+    "date": "2026-10-07",
+    "archive_sha256": "477437571f09eb6a955236ff59ba7b9b28716203ef5375a48f86f782daa2cda3",
+    "restored_project_files_verified": 11,
+    "restored_annotations_verified": 1987,
+    "identical_export_files": 1026,
+    "restored_programs": [
+      "LFFEEE-stock.bin",
+      "LFG1TF000.bin"
+    ],
+    "method": "Independent Ghidra read-only reopening; verify_restore.py checks archive/live/restored hashes, complete expected export sets, no incomplete readbacks, all annotation rows and identical exports."
+  },
+  "tests": {
+    "capture_initializers": 256,
+    "capture_readiness_cases": 2816,
+    "retained_adc_steps": 4,
+    "retained_cmt0_steps": 96,
+    "timestamp_starts": 256,
+    "timestamp_reads": 1024,
+    "rejected_counter_widths": 6,
+    "expected_reset_width_conflict": "preserved"
+  },
+  "limits": "Native readiness caller/clock join and reset-width hardware semantics remain open. All ECU/AT, traction and both-direction roof scopes incomplete. No staging/commit/push. Prior manifests preserve historical Ghidra hashes."
+}

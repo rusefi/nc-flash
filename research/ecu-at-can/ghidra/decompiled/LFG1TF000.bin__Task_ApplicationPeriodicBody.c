@@ -1,7 +1,8 @@
 /* Ghidra analysis output; verify against original SH instructions. */
 
-/* STATIC: long application sequence includes31524(event4,0) at1E6A0; full task unexecuted. No
-   proved ratio to timer wheel. */
+/* Originalfullbody executes:90CC++ byte,30commoncalls incl31524(4,0),threephase-table
+   calls,threefinalcalls. Exact36-targetorder verified across8phases. Notfullnestedsemantic
+   orhardwareproof. See tcu-application-order.txt. */
 
 void Task_ApplicationPeriodicBody(char param_1)
 
@@ -42,12 +43,12 @@ void Task_ApplicationPeriodicBody(char param_1)
   (*(code *)PTR_FUN_0001e760)();
   (*(code *)PTR_FUN_0001e764)();
   iVar2 = param_1 * 4;
-  (**(code **)(PTR_PTR_0001e768 + iVar2))();
-  (**(code **)(PTR_PTR_0001e76c + iVar2))();
-  (**(code **)(PTR_PTR_0001e770 + iVar2))();
-  (*(code *)PTR_FUN_0001e774)();
-  (*(code *)PTR_FUN_0001e778)();
-  (*(code *)PTR_FUN_0001e77c)();
+  (**(code **)(PTR_Task_FirstPhaseDispatchTable_0001e768 + iVar2))();
+  (**(code **)(PTR_Task_SecondPhaseDispatchTable_0001e76c + iVar2))();
+  (**(code **)(PTR_Task_ThirdPhaseDispatchTable_0001e770 + iVar2))();
+  (*(code *)PTR_DiscreteOutput_PublishCommands_0001e774)();
+  (*(code *)PTR_DiscreteOutput_WriteGPIO_0001e778)();
+  (*(code *)PTR_DiscreteOutput_ReadFeedback_0001e77c)();
   return;
 }
 

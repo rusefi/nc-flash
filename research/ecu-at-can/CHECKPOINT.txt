@@ -1,4 +1,1279 @@
+CURRENT CONTINUATION (2026-10-07)
+User instruction: keep working until everything open is closed.
+The active goal covers ECU/automatic-transmission CAN integration, deep
+traction-control logic/integration, and NC roof folding AND unfolding,
+including interruption, resume/reversal, communication timeout, motor
+synchronization and fault recovery. All three remain incomplete.
+This thread owns the checkout; the previous research thread remains paused.
+User has no additional roof/DSC dumps, CAN captures or bench/vehicle results.
+Do not ask again. No staging, commit or push is authorized. Work is local.
+
+CURRENT GOAL STATUS: BLOCKED — impasse-audit.txt
+Third consecutive full-scope impasse audit completed; update_goal returned
+blocked. Prior andcurrentcontinuations supplied no new closureevidence.
+Audit9 +implementation17 hashes unchanged; TCU1461A/F430(recovery0), ECU
+A46F6/EC62 andmissingOEMDSC/PRHT/physicalevidence remain. Scopedinventory
+unchanged; liveprocess inspection no firmware/headless work to await.
+Allthree scopes remainincomplete. Resume on genuinelynew applicablevariant/
+registerbehavior orremotecontroller/physicalevidence; conditions inimpasseaudit.
+No skippedinitializer/guessedlatch/forcedrecovery orblindrerun can close gaps.
+Fullobjective retained. Savedlocally, no staging/commit/push; mixedindexpreserved.
+
+CURRENT FULL-SCOPE AUDIT — completion-audit.txt
+Older2000 SH7055 primarymanual now inspected beyondtable: explicitTCNT0/10A
+word-access prohibition, corroborated by retainedSH7055S registerdescriptions.
+tcu-counter-width-manual-audit.txt closes older-manual exception lead; no width
+resolution. CurrentnativeTCU1461A/F430 andECU A46F6/EC62 remain blocked boundaries.
+RemoteDSC andboth-direction PRHT evidence remainmissing. Fullcriteria audit:
+allthree scopes NOTCOMPLETE. First explicit full-scope impasse assessment after
+latestfirmware progress; goalactive, repeated-blocker audit notyet satisfied.
+Thisturn adds primarysourceevidence/corrects stale nextaction, not hardwareproof.
+Next revalidate for new applicablevariant/remotecontroller evidence; do not
+repeatcompleted320 runs, exhaustedsources orinvent latches/forcedflags.
+
+CURRENT DOWN-COUNT STARTUP — tcu-downcount-startup.txt
+512 originalDSTR/TCNR wholeRAM/register returns,65536DSTRpreservation states,
+256TCNRroundtrips/20rejections PASS. Full15574 now reaches1461A wordF4300:
+TCNT0 CPUword access conflicts with compatible32-bit rule. Both868C/D0.
+Intermediate14614/F662 stop retained. Prior default/interval/downcount outputs
+rerun byte-identical. Older1999 SH7055 application note also declares TCNT0/10A
+unsignedlong; does notresolve splitword behavior. Directdownload403/webreader
+success; sourcefinding saved in tcu-counter-width-source-followup.txt.
+Next actualsilicon/revision/primaryerratum for splitword stores; no guessed
+resetepoch/skipped14616/forcedrecovery. Separate traction/roof actions retained.
+Previous andcurrent turns made verifiedprogress; allthree goals remainopen.
+
+CURRENT INTERVAL STARTUP — tcu-interval-startup.txt
+256 original145FE wholeRAM/register/MMIO cases,768roundtrips/16rejects PASS.
+Strict byte ITVRR1/2A/2B owner shares existing configuration pipeline; UBC/BSC
+and defaultstartup outputs rerun byte-identical. Full15574 now stops14978
+wordwriteFFFFF666=0 (DSTR per manualindex247), both868C/D0. Next section11.2.11
+and original14972 command semantics, then sameprobe. Manualindex348 says only1
+can be written: zero must not be modeled as an ordinary clearing latch. Counterreset14616 not yet
+reached; TCNT0 wordwritesF430/F432 also conflict with compatible32-bit access
+rule, joining priorTCNT10A issue. No skippedcalls/forcedflags. All scopes open.
+
+CURRENT BASIC HARDWARE STARTUP — tcu-basic-hardware-startup.txt
+UBC512 originalwholeRAM/register/MMIO cases/93roundtrips/29rejects PASS; BSC256
+functionpairs(512returns)/16rejects PASS; DMAOR64original/32flagsequences/18rejects
+PASS. Shared bounded configuration-word owner avoids duplicate UBC/BSC pipeline.
+WCR reset7777(table176) vsFFFF(section184) conflict retained; explicitstarting
+values only. Unread DMAOR errorflags not cleared by initializer. Full15574 now
+stops14602 bytewriteF4240, after UBC/BSC/DMA and known timer setup; both868C/D0.
+All earlier noICR/IRQzero/UBC/BSC probes preserved/byte-identical on rerun.
+Next bounded original145FE/ITVRR1 setup beforecontinuingfull15574; preserveknown
+TCNT10A reset-width conflict, no skipped calls/forced recovery flags.
+Six new Ghidra functions saved/independently restored. No firmware probe live. Previous
+and current goal turns made progress; all three broader requirements remain open.
+
+PREVIOUS ICR/IRQ-STATUS CONTINUATION — tcu-icr-startup.txt
+2048 ICR register/1024 original14422 wholeRAM/register cases and14 rejects PASS.
+64 original1442A zero-status cases/6 rejects PASS. Optional bounded behavior in
+existing INTC owner; default INTC/no-ICR probe PASS and byte-identical.
+Full15574 --nmi-level0 --irq-status-zero now stops14436 wordwriteEC00=0 (UBARH,
+compatiblemanualtable8.1/PDF160). Prior ED18/ED1A stops retained. Both recovery
+flags remain0. Next bounded UBC semantics/original configuration verification,
+then same15574 probe without skipped calls or forced flags. No firmware live.
+Ghidra2new/2updated annotations saved/independently restored; identity below.
+Previous and current goal turns made progress; all three broader scopes open.
+
+CURRENT NATIVE CAN LIFECYCLE — tcu-native-can-lifecycle.txt
+78093 completed320 application periods without runtime rejection:1310CAN/
+1310CMT0/640CMT1/52diagnostic/2541capture,960frames;27ack wholeRAM boundaries.
+Initial record comparison failed live-tuple vsJSON-array types after raw data
+was saved; corrected --verify-only compares decoded records, PASS1184complete
+oldprefix rows plusinitializers. Raw execution retained, no rerun/firmware fix.
+Native creations33/133/297; managedempty41/135/299; firstphase retires100,
+second297. Thirdphaseindex2/group6/code9 remains at320,heap0005FF06. No full
+cleanup claim. All320same-ordinal snapshots differ from priorforced-readiness
+fixture; no timing-normalized equivalence implied. Native CAN recovery0 reflects
+omittedfull15574 prerequisite, not healthy reset. Next fullhardware initializer
+above, not more lengthening/forcedflags. No live probe; source/results saved.
+Regression32/25ack oldfields exact withfive historical snapshotadditions.
+
+PREVIOUS HARDWARE STARTUP — tcu-hardware-startup.txt
+256 independent wholeRAM tail cases PASS:15710/15714 set868C/868D=1.
+Full15574 probe rejects first unprovided ICRwordwriteED18=00FF at14428 (RTS
+slot; pc14426). CompatiblemanualPDF136/149/150 identifies ICR; next bounded
+ICR model/14422 tests, then same fullprobe. Current native-task timeline omits
+full15574 and keeps868C0; do not infer complete native recovery or force flag1.
+Ghidra three new annotations saved/independently restored; identity below.
+control-ec62-source-followup.txt preserves newer
+SH7058S/7059 manual failed identification: noEC62/64 text; download403.
+Traction EC62 identity remains unresolved; roof evidence status unchanged.
+
+PREVIOUS CAN TASK INTERRUPT — tcu-can-task-interrupt.txt
+3072 independent gate/20 prefix cases PASS. Native CAN gate admits ADC states
+2 or3. TXPR commands recorded without physical delivery; first reference-only
+stop retained. Diagnostic default PASS/JSON byte-identical. Receive default
+PASS2816prefix/6chains; prior byte identity claim withdrawn (no baseline hash).
+Native run77435 terminal PASS:600 CAN interrupts/432 admitted frames across
+three scenarios, no forced readiness/modes/history reset. CAN admission at
+220000/260000/280000phi, before application admission31/32/33. Final receive
+faults10117: not healthy all-frame traffic. All three broader scopes remain open.
+Next ECU/AT: extend native timeline to320 periods for pulse changes/loss and
+request lifecycle; compare old fixture results without resetting native state.
+Ghidra saved/independently restored:2001 annotations/1038 exports/11 hashes.
+can-task-artifacts.json owns current identities; prior manifests are historical.
+No live firmware probe. No staging/commit/push. Current turn made progress.
+
+PREVIOUS NATIVE HCAN STARTUP — tcu-hcan-startup.txt
+Original11FA0 returns:8003=1/8F6C0A producednatively; fullHCAN/timer registertrace
+saved. 4897 PASS256HCANwholeRAM/MMIO+256timer+10rejects. 344HCANaccesses/case;
+18timeraccesses/case. GSR8/0 externallysupplied; nohardware reset/physicalproof.
+91518 diagnosticdefaultPASS/byteidentical; priorstrictstartupE402 JSONunchanged.
+Intermediate16652 timerstop retained; currentcompletedprobe supersedesit.
+Next joinnativeCANtask1669A/11FB2 timing/receipts intoexistingnativepipeline,
+withoutforcedmode3/8/historyreset. Previousandcurrentgoalturn madeprogress.
+Ghidra saved/independentlyrestoredPASS:1999annotations/1036exports/11hashes;
+currentidentity below. No livefirmwareprobe orheadlesssession.
+Allthreebroader scopesopen; separate traction/roof actions remainbelow.
+
+PREVIOUS NATIVE CAPTURE STARTUP — tcu-native-capture-startup.txt
+Corrected84690 terminalPASS:600CMT0/291CMT1/144application/24diagnostic/1293capture
+prefixes (423A/870B),224foreground/93capture-ready/288command-pin checks. Original
+enable gatesallpulses; exactbothchannelarrivals checked. First85489 A-onlyfixture
+mistake preserved separately; wrongTIORmask corrected usingTIER0 and2bitTIOR.
+Nativegroup comparison3cases PASS, fullvslegacy209RAMbytesdifferent. CANnative
+11FA0 probe: firstF732stop retained;256knownPBCRHleafcases PASS, nowstops1AED4
+writeE402. No injectedreceive mode8. Next boundedHCANsetup fromretainedmanual.
+Ghidra4new/3updated annotations saved/independentlyrestoredPASS;1996annotations/
+1033exports/11hashes; currentidentity below.
+No livefirmwareprobe. Allthreebroader scopesremainopen; previous/currentprogress.
+
+PREVIOUS NATIVE GROUP INITIALIZATION — tcu-native-group-initialization.txt
+Three direct1DFF8 cases PASS:62-call native segment differential wholeRAM exact,
+but fullnative versuslegacyfixture differs209bytes. Preservefullnative state.
+Next addCMT1/capture/CAN delivery to native readiness; no reset afteradmission.
+Previousgoalturn madeverifiedprogress (diagnosticstartup/archive); currentturn
+also madeverifiedprogress. Allthree scopesopen; no blockedconditionaudit.
+HistoricalGhidra1992 archive supersededbycurrentHCANsave below.
+
+PREVIOUS DIAGNOSTIC STARTUP — tcu-diagnostic-startup.txt
+Three original1217C/1218E initialized traces PASS37167:600CMT0/144application/
+224foreground/93capture-return/288command-pin/24diagnostic checks;13 actual56B06
+RAMreturns (including application calls). Native diagnosticmode3 at3000000phi,
+after applicationmode3; two furtherdiagnosticinterrupts each. No forcedreadyflags.
+Defaultreadiness27621, diagnostictimer15309, oldtimelineprefix8 14314 PASS and
+byte-identicalJSONs. Next nativeinitializedCAN/capture/CMT1 join; compare1DFF8
+with62-group fixture andpreservehistories. Allthreebroader scopes stillopen.
+Ghidra refreshed and independentlyrestoredPASS:1992annotations/1029exports/11hashes.
+Currentidentity below. No activefirmwareprobe; no staging/commit/push.
+
+PREVIOUS NATIVE READINESS ADMISSION — tcu-readiness-admission.txt
+Three scenarios3150/83286/69137 terminalPASS: originalforeground callers and
+initializers plus450CMT0/108application prefixes reachmode3 withoutforcedready
+flags/mode3.168foreground/93capture-return/216command-pin wholeRAM checks.
+AnadditionalapplicationIRQ neededaftercapture3; externalepochs0/7/wrap produce
+fixtureadmissioninterrupts32/31/33 respectively. ADC-B/capture model extraction
+20950/9453 PASS; oldJSONs byte-identical. Ghidra4new/4updated annotations saved
+andindependentlyrestoredPASS:1991annotations/1028completeidenticalexports/11hashes.
+Apply86504/liveverify36712/snapshot1932/restoredverify25977 allterminalexit0,
+logs clean; no liveprocess. Next native1217C/1218E diagnosticadmission, then
+existingCAN/capture/CMT1 timeline withoutoverwritingnativeinitialization.
+Fullreset/mainloop/physicalproof andallthreebroader scopes stillopen. Previous
+andcurrentturnmadeverifiedprogress; no blockedconditionaudit applies.
+
+PREVIOUS CAPTURE READINESS — tcu-capture-readiness.txt (authoritative)
+Session79065 terminalPASS:256init/2816wholeRAM/MMIO cases; initialized ADC-B
+chain reaches84EC2 without injected readiness, then96originalCMT0 prefixes
+and122F4 polls reach3. Tick96 depends onphase0/polling after each tick; not
+physical startup delay. Original11500 foregroundADC/capture caller leads saved.
+tcu-timestamp-configuration.txt verifies256 original15544 starts/1024 original
+15730 reads/6 wrong-width rejections. F6C0 is compatibleTCNT10AH/AL, separate
+fromcaptureTCNT0. Original1465E/14662 resetwordwrites conflict with retained
+manual's longword-only requirement. Strictslice rejects; no guessed reset/epoch.
+Older-manual search/failures andnextleads preserved. No native fullboot claim.
+Eight new/three updated Ghidraannotations saved andindependentlyrestoredPASS:
+1987annotations/1026completeidenticalexports/11projecthashes. Apply86992/live
+verify44847/snapshot87952/restoredverify95635 allterminalexit0; logs clean.
+All three broader requirements remain open; currentturn madeverifiedprogress.
+
+PREVIOUS TCU DIAGNOSTIC TIMELINE — tcu-diagnostic-timeline.txt (authoritative)
+Prefix8 anddefault-hookbyteidentity PASS;1actualdiagnosticISR at500000phi,
+8application/32CMT0/16CMT1/81capture,2admissionRAM/2hold/16command-pin checks.
+Full320 session79647terminalPASS:52diagnostic/320application/1310CMT0/640CMT1/
+2602capture prefixes,80admissionRAM/80hold/640command-pin/1310wheelchecks;
+12diagnosticcomparewraps,exactinitial8. All320post-apprequestsnapshots and
+creation/ack/retirementrecords equalprioronce/appdiagnostics; notentireRAM/trace.
+Firstphase retires113; secondcode5phase stillpending319/heap0005FF06.
+Qualifiedafter_taskoptionalhook andextraTimelineperiod preserveonepipeline.
+Readiness84D8 producer11DEE/11DD8 independentmodeltest77418 PASS12544cases/
+256init/9chainsteps.84A0 producer112E6/112CC PASS24960cases/256init/12steplow/
+recoverychain,56003terminal.84EC full122F4admission andcallerclockremainnext.
+SixnewGhidraannotations/twoupdatedcomments applied63312PASS,liveverify71149PASS,
+snapshot99723PASS. Independentrestore61014terminalPASS/verify_restorePASS;
+1979annotations/1021identicalexports/11hashes. No readyflagsforcedinretainedchains. Nextcapture122F4
+fulladmission/timerqualification, thenactualreadinesscaller/timestampconfiguration.
+Allthreebroadergoalsopen; prior/currentturnprogress, no blockedconditionaudit.
+
+PREVIOUS TCU CAPTURE TIMELINE — tcu-capture-timeline.txt (authoritative)
+Full320 session31291terminalPASS:320application/1310CMT0/640CMT1/2602capture
+prefixes(943A/1659B),1310independentwheelreplays,80hold/640command-pin checks.
+Sharedtimestamp=time/2,explicit segmentedphase/loss280*81920/zero latency.
+Firstcreation45/managedempty47/phaseempty113 (old57/59/125); second297/299,
+phaseindex1code5stillpending319,heap0005FF06. Hold280..316 unchanged,notreset.
+Rawfull retained: observerlist alias appendsnextintervalcapture boundaries to
+previousrow. Fixedlistcopy; corrected8/9 sessions68915/4070PASS. Verifierchecks
+everyduplicatedtailagainstnextcaptureevents,removesonlyforcomparison; fullfirst9
+exactcorrected9. Rawoldprefix8 retained. Allfirmware/oraclechecksPASS; full320
+notrerunafterlogger-onlyfix. Detailedprovenance inauthoritativereport.
+tcu-diagnostic-timer.txt:256 startup/3072 admission/20 originalISRprefix cases
+PASS. ExistingTCR3=4/PSCR1=1 plusGR3A+15625 implyconditional500000phi; current
+once/application diagnostic cadence remainsfixture. Next joinoriginal1682C
+atthatperiod withoutcopyingtaskpipeline/forcingages. Three Ghidraannotations
+savedandindependentlyrestored1973annotations/1017exports/11hashes. Apply58746/
+liveverify77972/snapshot3783/restoredverify69796 allterminalPASS; currentidentity
+below. No liveprobe/headlesssessions/projectedits. Broader three goals open.
+
+PREVIOUS SAVED-TASK RESUME — control-preemption.txt (authoritative)
+512original3D10/hook/table/restore wholeRAM/fullregister cases PASS.
+Optionalafter_restore hook added; defaultresult byte-identical34673PASS.
+Firstpreemption31789PASS buttarget2BCE6 sharedselector1; rawresultretained.
+Correctedselector2 85817/71132PASS:oneactualtask4->task7->task4 preemption at
+DCBAcycle4,originalsavewholeRAM andallresumedregisters exact.10outerIRQs+
+1extranonidlearrival,11acquisitions/3event1/2event2,16queue3/2queue2RAMreturns.
+verify_control_preemption.py PASS, exactunaffectedfirst4/optionrefactor output.
+Full600outer-cycle8831terminalPASS:601timer/acquisitions,150event1/120event2,
+298queue3/120queue2wholeRAMreturns;6decode/121activity/26qualification,300SCI4TX/RX.
+verify_control_preemption.py PASS, exactinitial10 andall120event2/finalmonitored
+fields equalprior600. ADCswitchstillouter300/one-timeroffset; no physicaltimeclaim.
+Ghidra3new/4updatedannotations savedandrestoredPASS:1970annotations,1014
+completeidenticalexports. Apply42119/liveverify18957/snapshot+restore59354 all
+terminalexit0; currentidentitybelow. No liveprobe/headless/projectedits.
+Previous/currentturnprogress.
+
+PREVIOUS SCHEDULER STARTUP — control-scheduler-start.txt (authoritative)
+128original3DD8 initialization-to-task17 wholeapplicationRAM cases PASS:
+queues0/17,selects17priority4,nativeROMstackFFFF11A8,originalRTEtoDCF8/SR0.
+3A38 admission:4acceptedlowbyte0/1020rejectedmodes,96STCSRcases/2rejects PASS.
+Originaltask17 reaches105FC timerinit; firstprobe preservedF710stopat10600.
+526boundedCMTlatchcases/6rejects PASS. Probe34654terminal5m-instructionlimit
+at4B68 ADCcompletionwait. Preserved; oldlatches don'traiseADF, notfirmwaredefect.
+96original4ACC RAM/MMIOcases PASS withfiniteexternalreadiness/results; probe
+96826advancedthrough4ACC/CA94 toDD64F4CBreadstop,141calls. Preserved.
+192originalDD56timer4/5/9configcases/3rejects PASS,18accesses. Strictdocumented
+portlatches added; fullprobe44306terminalexit0: unsupportedwordwriteFFFFEC62
+atA46F6 after388indirectcalls. JSONretained; identifyregisterfromprimarymanual
+beforeextendingfixture. No liveprobe/headlessprocess.
+No genericclockadvance/readyflag/callee substitution. EC62notfoundinretained
+manual; RAMERisEC26, notEC62. No guessedfixture. Static/sourcefailedleads saved.
+control-interrupt-nonidle.txt:512original334Csave/512direct3EB4restore PASS,
+wholeRAM/allregisters,156byteframes across16stocktasks/all16entrymasks.
+This earlier isolatedresult isnowjoinedthroughactual3D10/task7/task4resume;
+control-preemption.txt ownsfull600retainedtest andlimits.
+Earlierstartup/nonidlearchive1967 wasrestoredPASS. It is supersededby current
+1970archivebelow; no liveprobe/headlessprocess orpendingGhidrachanges.
+Previous/currentturn verifiedprogress, allthreeopen.
+
+LATEST INTERRUPT-DRIVEN TRACTION — control-interrupt-timer.txt (authoritative)
+Full600 COMPLETE session89133exit0; verify_control_interrupt_timer.py PASS.
+600original2F78/3290/F28C/32D8/33F0->3D10 idleIRQcycles,600acquisition/
+150event1/120event2;298queue3/120queue2actualwholeRAMreturns.6decode/121activity/
+26qualification,300SCI4TX/RX; all600priorrows exactafteronlyentryR4/PR
+accounting, exactinitial10. All120event2monitoredfields equalpriorone-to-one.
+NativeROMidleSPFFFF11A8 andnest80000000; explicitexceptionframePC3D0C/SR0,
+entrySRF0 andtaskcontextstackFFFED000 remainfixtures. NohardwareIRQclaim.
+4096FPUstack/96LDSRnPR+8rejects PASS;576entry/576returngatewholeRAMcases,
+549directRTE/3nonidle334Cboundaries/24idle33F0handoffs. All16entrymasks tested.
+24actual33F0..3D10 wholeRAMcases PASS. Nonidleexcludedfromthis earliercomponent;
+512save/directrestorecases nowPASS separatelyincontrol-interrupt-nonidle.txt.
+256F758prefix/256AA4Aprioritycases PASS:VBRFFC50+CMTI1offset300->FFF50=2F78,
+IPRJED12=0999 meanscompatiblepriority9. Physicaladmission/startupunproved.
+Default-hook10cyclererun88642PASS, byte-identicalpriorrecord. No pendingprobe.
+Ghidra6newannotationssaved andindependentlyrestored(1959total/856ECU/1103TCU).
+Currentarchiveidentitybelow. Reportownscommands/limitations/failure/sourceprovenance.
+Nextstaticparents:A944BSR AA94;3A5E loads3DD8from3A74;F758pointerFFFF8.
+Sources/commands incontrol-interrupt-setup-disassembly.txt; notexecutedparents.
+
+PREVIOUS DIRECT TIMER TRACTION — control-timer-event2.txt (authoritative)
+Full600 originalF28C/1062E timer/scheduler drains COMPLETE, session26572 exit0.
+verify_control_timer_event2.py PASS:600acquisition/150event1/120event2,
+298actualqueue3wholeRAM returns;6decode/121activity/26qualification;300SCI4TX/RX.
+All120monitoredfields exactpriorone-to-one, exactinitial10. No directevent2
+injection. ExplicitalltaskstacksFFFED000,maskF0,ADC28lowbeforecycle300/highafter,
+constantSCIstatus/finitezeroRX. No remoteDSC/absoluteclock/hardwareIRQproof.
+3584timerselection/admission cases PASS:6899callbacks/1526upstreamrequests.
+512CMT1configurationcases/4rejects PASS:105FC initializescompare2499/counter0/
+C0/start2;1061Are-enableswithoutcounterreset. CompatibleSH7058Pphi/8 =>20000phi
+percallback and100000phi perevent2request. Actualelapsedtime remainsunproved.
+Peripheralproof:544Timer10latch/9607D0CwholeRAM/5rejects,240BC00SCI4wholeRAM/
+5rejects PASS. SCI4F020..26,PLIRF75Cmask0380. Failedaccesses/oraclecorrections
+saved. No physicalserialpeer/interruptbehavior suppliedbyboundedfixtures.
+Queue2:1488producer/186consumerwholeRAM cases PASS;48emptyadmissions/48full
+rejections,720tailwraps. Task3priority2 (initialpriority1oracle corrected and
+preserved). TwoactualDC50wholeRAM returns/2E5FCcallbacks in10ticks PASS, full
+previous10-cycle JSON exactbeforeaddingnewobservations. Full600hasqueue3oracle
+only; no claimof120actualqueue2RAMchecks. No ROM/sharedISA/productionchanges.
+Allcommands/sourceaddresses/toolversions/limitations incontrol-timer-event2.txt.
+
+NEW ECU/TCU CAPTURE CLOCK — tcu-capture-clock.txt (authoritative)
+512A/B enableleaves/256actualcaller12324..12330/256prescaler leaves+6rejects
+PASS. CompatibleSH7055S:PSCR1=1/channel0direct =>TCNT0 Pphi/2;ICR0A/Bshare
+counter. TIOR0 A/B01rising, TIER0bits0/1enabled,TSTR1bit0set; no counterreset.
+Oneapplication81920phi =>40960capturecounts. Oldonce/task arrivalswithdeltas
+12160/5890/etc areinconsistentwithsamecontinuouscounter. Preservedasstimulus,
+notphysicaltiming. Next mergecaptureedge periods24320(A),11780/12980/8860/
+18240(B) intointegerclocktimeline with explicitphase/change/loss/tiefixtures.
+Do notblindlyextendTCUpendingphase orclaimdiagnosticonce/task cadence native.
+
+LATEST ECU/TCU — tcu-application-clock.txt (authoritative)
+Full320 complete:320actual16A58/1310CMT0/640CMT1/560capture/80hold/
+640command-pin checks,320wheelreplays/12comparewraps; exactinitial8.
+Two creations16acks. Firstphaseempty125; secondgroup8code5created297,
+managedempty299 butphaseindex1pending319, heap0005FF06 notallfree.
+Hold280elapsed4/ratio862/timer2;316elapsed152/ratio32768/timer20,noreset.
+A939/A722stay0,9454stays1,80E8stays10240. Oldfault/recoverydates DO NOTtransfer.
+Commonstart0/zerolatency/CAN,capture,diagnosticper-task andcapturetimestamp
+intervals remainfixtures. Ratio-only320 earlierexperiment is sensitivity, not
+vehiclecadence. Completedprobesmustnotbe restartedwithoutnewverificationneed.
+
+NEXT CONCRETE ACTIONS BY SCOPE — current (historical entries above superseded)
+ECU/AT: CANstartup/admission/native320 alreadyjoined; do not repeat the oldjoin.
+Full15574 rejects1461A wordF430; both868C/D0. Exactchip/reset-width behavior
+requires newapplicableevidence; olderSH7055 andSH7055S bothprohibitwordaccess.
+Pendingnativephase2 remains; completehealthytraffic/physicalcompatibility open.
+Traction: task4->7->4 preemption verified; native task17 stillstopsA46F6/EC62.
+Need applicableEC62 identity/hardwareadmission, remoteCAN211/21A sender/units/
+DSC tractionvsstability andphysicalactuation evidence. No guessedlatch.
+Roof: applicableedition/VIN receiver/reversal/numericaltimeout/LRpulsemismatch
+for BOTHfold/unfold withinterruption/resume/recovery. Factory/candidates retained;
+no OEMreceiverexecution. Noextrauserartifacts; don'taskagain/repeatfailedroutes.
+completion-audit.txt maps fullcriteria to evidenceandgaps. Nothingcomplete;
+newfirmwareleaf tests alone cannot discharge remote/hardware requirements.
+
+GHIDRA CURRENT SAVE — independent restore COMPLETE
+2015 annotations (865ECU/1150TCU),1049 complete identical exports,11 project files.
+Original14972/1460E functions saved. Apply35758/liveverify80288/snapshot27488/
+restoredverify5335 terminal exit0; logs clean, both programs READBACK_OK.
+Archive11,029,213 bytes SHA256
+80d11cbe96e90dcf2588b9457667d89be8b22d7adb3d8dca6a56bedc69988e0d.
+Fresh restore-check/downcount-startup-20261007: all11 hashes before/after read-only
+reopen and againstlive; verify_restore.py --write-report PASS. No live probe or
+headless session, no unsaved Ghidra changes. Four changed/new scripts compile.
+512originalRAM/register/MMIO,65536DSTRstates/256TCNRroundtrips/20rejects PASS;
+default/interval/intermediate downcount JSON rerun byte-identical.
+Next ECU/AT: actual silicon/revision/erratum covering TCNT0/10A splitword stores;
+full15574 nowstops1461A wordF4300, bothrecoveryflags0. Older1999 SH7055 appnote
+stilldeclareslong; officialqueryfollowup noapplicablecorrection. See sourcefollowup.
+No guessed counterepoch/skipped14616/forcedrecovery to claim nativecompletion.
+Separate traction/roof status/next actions above remain current.
+downcount-startup-artifacts.json owns current identities; older manifests historical.
+All new records Git-eligible. No staging/commit/push; existing mixed index including
+AD archive.tmp preserved. All three broader requirements remain incomplete.
+
+HISTORICAL EVIDENCE CHRONOLOGY
+All older running statuses/archive identities/nextsteps below are superseded by
+the current continuation above. Keep for provenance; authoritative reports own
+individual fixtures and their limits. Do not restart an old process from here.
+
+Latest completed ECU/AT boundary: tcu-capture-delivery.txt.320 task pairs,
+560 original A/B capture ISR prefixes, two creations and20 acknowledgements
+PASS. After only new observations and callback return PCs are accounted for,
+all320 recorded rows equal the prior cut/recovery trace.512 isolated capture
+prefix cases and6 rejected register accesses pass. Retirement194, active fault
+clear284, application inhibit clear288 and normal input290 are preserved.
+tcu-cmt0-interrupt.txt:512 init/516 ISR-prefix cases PASS; extracted reusable
+helper produces a byte-identical verification result. No physical cadence proof.
+
+LATEST VERIFIED: tcu-cmt0-delivery.txt. Full320/32000 nativeCMT0 prefixes
+PASS;560 capture prefixes,320 independent clock/wheel boundary replays,
+2creations/20acks. Initial8 exact; phase/listcleanup194, faultclear284,
+inhibitclear288 andnormalinput290 preserved. Timer8464 reaches3200.
+Fullprior comparison after only8464/newclock accounting isFALSE:91A6 holdbit0
+sets at280 andpersists.209B4 useshold at280, thenfallback priority284onward;
+allotherchangedpaths arepropagatedflags. Differences saved inJSON/report.
+Raw20CBC entryhistory/head/8158 were notserialized; steady1216/21888 and
+ratio21557 werecomponent/static inference, now closed byfullCMT1join below.
+Independentholdmodel andactualentry/return checks PASS; no unexplainedstate
+stripped. CMT0-only probe finished. Independent8000 mixedwheel cases PASS.
+CMT1 primarymodel extracted fromexistingtimer suite; rerunbyte-identical
+SHA2561b1a611036e7acdf8f26bbfeece5f5e1b02975c99faa3c89944aac06ec77f5f2.
+
+Ghidra currentidentity isabove; earlier1936-annotation application-isr snapshot
+hasbeen superseded by1944 queued-event2 snapshot withbothprogramsverified.
+
+PREVIOUS WORK: tcu-clock-hold.txt.2048 independentwholeRAM20CBC cases PASS.
+Short32pairs/3200CMT0/40capture/8actual20CBC wholeRAM returns PASS; exactprior20.
+At20 actualhistory18*1216/head1/elapsed100/timer8 yieldsratio21557 andhold.
+Selectedreference holds1145/period134144, provingcurrentring denominator is
+notselectedperiod. Thisisearlyloss, notlate280 raw-entry proof.
+tcu-cmt1-delivery.txt:512 init/1024 independentwholeRAMISRprefix cases+6
+rejections PASS. Existingprimarymodel extracted/rerun byte-identical; shared
+preRTE loop also reruns capture/CMT0 byte-identically. Newoptionalprimaryhook
+coversall8 calls withoutdoubleexecution. Joinedprefix8 PASS:64CMT1/800CMT0/2actualholdchecks, exactprior8 afteronly
+newobservationsremoved. Full320 completed(session96504 exited0):2560 CMT1/32000 CMT0/560 capture
+prefixes,80 actualhold wholeRAM checks,2creations/20acks PASS. Exactprior320
+andinitial8. At280 actualhead9/history18*1216/elapsed100/timer8 gives21557;
+through316 head9/history retained,timer80. Noresettimeout. No liveprobe remains.
+verify_tcu_cmt1_delivery.py PASS. Ghidra archive above refreshed andindependentlyrestored forfull320
+andnewconfiguration. No pendingproject edits.
+
+LATEST CONFIGURATION: tcu-cmt-configuration.txt.96 component/32 actualcaller
+slice/32 compare-startchain/32 actualstartcaller cases+6 rejections PASS. Original15608..15614
+stopsbothCMT, zeros counters thenwrites0x41 toF712/F718. CompatibleSH7055S
+manualsections14.2.2/14.4.2: bothPphi/32, compare624/1279 ->period20000/40960
+peripheralclocks ->eventratio256:125, DIFFERENTfromfixture100:8. Absoluteclock,
+physicalchip, startphase/priority/hardwareacceptance/taskcadence stillunproved.
+No revision ofpriorfixture outputs; their scope remains explicit.
+Original11698..116A4 executes123B0 then12374, withindependentRAM/MMIO checks.
+Nexttraceparent1168A admission/vector/priority andbuildperipheralclock schedule
+with256:125 exactratio, explicitoffset/ties/task/CAN/capture scheduling.
+Do not replace8 byrounded49 or claimoldlifecycle timing survivesnewcadence.
+Savedstaticleads:1040E setsVBR10000;143DC writesED12=0980 viaED0C+6,
+manualtable7.3 suggestsCMT0priority9/CMT1priority8 atvectors188/192.
+Next execute10400..10416 and143DC+caller withstrictINTClatches, thenfollow
+11586/115C6->1168A admission. Alternate15D3C setsVBR0; contextopen.
+Originalinstructions/provenance in tcu-cmt-configuration.txt/disassembly.
+
+LATEST: tcu-interrupt-setup.txt.512 localLDC/256 validSRbootprefix/64priority
+leaf/64caller cases+6rejections PASS.10400..10416 setsVBR10000/GBRFFFF8000/
+mask15;143DC/15574..1558C writesIPRJ0980, compatiblepriorities9/8. Resetpath,
+unmasking/hardwareentry/RTE/nesting stillopen. InitialreservedSRinputs removed
+fromproof; sharedLDC SR doesnotmaskreservedbits. No sharedISAchanges.
+probe_tcu_clock_ratio.py exact20000/40960 schedule implemented; commonstart0,
+100CMT0/taskpair explicitfixtures, CMT0firstonties. Prefix8 session80377 finishedPASS:800CMT0/390CMT1/16capture/2holdchecks,
+3tiesCMT0first.94changedpaths vsold100:8: at4 referencebecomesstale, ages
+about24instead4 becausecapture/task cadence remainsonceperpair fixture.
+Full320 sensitivityrun session80017/PID394730 islive, latest160pairs/16000CMT0
+prefixes,noassertionfailure. Notphysicalcadence proof.
+Legacyrerun18599 finished, byte-identicalprior8. Do notrestartliveprobe.
+Nextprioritizeactualcapture/task admission/timebases; newratioalone exposes
+fixtureinconsistency. Do notinfervehiclefailure fromitsstale-input path.
+Ghidra1936annotation refresh saved andindependentlyrestored; archiveabove.
+No pendingheadlessprocess. Nextpoll80017, thenverify_tcu_clock_ratio.py after
+completion. Do not restart based onelapsedobservationtime.
+IMPORTANT nextnativeclocklead:16A3C initF442=0/F454=0A00/startF401bit3;
+16A58 ISRstatusF460bit0 clears/adds0A00/calls1220A->126EC. ExistingTCR1B4
+andPSCR1 conditionalPphi/32 ->application81920peripheralclocks, i.e.2CMT1
+and4.096CMT0 average, NOT100CMT0/task. Theseinit/ISR/admission boundaries are nowverified below; retainednative
+clock integration remainsnext. New tcu-application-clock-lead-disassembly.txt
+and tcu-interrupt-setup.txt ownaddresses/sources. Capturetimebase alsoremains.
+Full320 ratioonly experiment is explicitlysensitivity, not vehiclecadence.
+
+LATEST APPLICATION: tcu-application-interrupt.txt.256init/2816independentgate/
+26originalISRprefixes+3rejectedwrites PASS.16A3C initMMIO;16A58 through16B00
+checksstatus/compare+2560/1220A->complete126EC, differentialwholeRAM against
+originaltask+independentprofile, existingcommand/pin oracles. All8profiles,
+wrap/clamp/zero, mode1allready executes126DA initialization/promotes3/stage2/
+phase8. No fullboot/unmask/readinessproducer/hardwareRTE proof.
+Conditionalapplication81920phi cycles supportsnextjoin withCMT020000 and
+CMT140960 exacttimes. Keepdiagnostic/CAN/capture/commonstartassumptions explicit.
+Next addactualapplicationdelivery hook andjoin16A58 into retainedfixture;
+verifyclock/application/capture/hold/ack behavior, notoldrecoverydates.
+Ghidrathreeexistingfunctionannotations refreshed; bothsaved/archiveindependent
+restore PASS (identityabove). Fullratioonly320 probe80017/PID394730 continues,
+latest160pairs/16000CMT0. Nextpollsamehandle, thenverify_tcu_clock_ratio.py.
+No pendingheadlessprocess/project edits. Currentgoalturn madeverifiedprogress.
+
+Traction status: control-queued-event2.txt verifies120queuedacquisition/event2
+pairs with140independentconsumerRAM returns andallmonitoredfields exactprior120.
+6original39926decodes/121activitychecks; ADC28low/recoveryandqualification
+preserved. Actualqueueproducer/consumer/task4 nowexecuted with explicitstack,
+maskandinterleave; nextupstreamF28C/1062E->FBE8/queue2/task3 inleadabove.
+CAN211/21A sender/units andremoteDSC internals/physicalactuation remainmissing.
+Executedfirmware evidence doesnotestablishremotecontrolleridentity/units.
+GenericdownstreamDTC/NVM reporting isnotanewprerequisite.
+Roof status: factory documentation and candidate mappings remain separate from
+missing OEM receiver execution and physical evidence. Revision conflicts in
+roof-revision-source-audit.txt remain open. Folding AND unfolding, interruption,
+resume/reversal, timeout, L/R synchronization and recovery are unverified.
+Next: seek an applicable edition/VIN technical ordiagnostic source for
+release-then-reverse, numericalCANtimeout andL/Rpulse-mismatch thresholds,
+orOEMreceiver/physical evidence. Current sources do not provide these values;
+do not repeat exhausted downloads or unavailable-artifact questions. traction-roof.txt owns
+completion criteria. Current and preceding goal turns made verified progress.
+
+Historical reference milestone (supersedednextaction): tcu-recovery-reference.txt.736 nativepairs PASS
+(160 baseline,256 firstapproach,320 secondapproach). Exact160/80/128prefixes;
+4384ISRprefix/184admission/184scale wholeRAM checks,184 selectedreference/
+discrepancy/cache/conversion boundaries,46ackchecks.512 complete22DDC wholeRAM
+cases verify stock703/256 conversion with0..32767 inputs; no physicalunits.
+Pendingphase retains10865/index0 ->fallback3070/scaled329 aftercaptureloss.
+Firstphase retires108, newcode2 at113 blockssettling. Secondinterval9120 from128
+enters7017 band;32614 count20 qualifies190; code2retires194. Phase/listempty,
+heap007FFFFF for126pairs through319. Idlecache refresh7017/index3 at204.
+Stopcaptures280 ->zero cache/reference/scaledinput284; originalcommunication
+activefaultA722 clears284, summaryA98E11, appinhibitclears288,80E8normal290.
+Storedsummaryhistory remains; no newNVM/serializedDTCproof, A99B/A735remain1.
+9454/CAN216cutbit remains0 after46 despitecommunicationrecovery. Independent
+24FA0 eligibility stillunobserved; do notclaimrequestreassertion orallfaults0.
+NEXT: extract existing nestedreference(t) fromverify_can201_cut_loop.py,
+rerunbyte-identical prior800-case model, thenobserveactual24FA0/2513E entries/
+returns in same320pairs with timer828B/82A5..A7,9316/17,94F4,9334,800E and
+9454/55. Compare unchanged320trace afteronlynewobservationsremoved. Static
+828B>=61 AND82A7>=61 forces0, butactualentryvaluesmissing here; hypothesisonly.
+No phase/ack/source/timer/permissioninjection. Afterthis, originalcaptureISR/
+CMT0 admission remainsactionable; actualcadence/physicalintegration stillopen.
+Traction: acquiredinput execution verified; CAN211/21A sender/units, remoteDSC
+logic/actuation missing. Next relevantlocalCAN/control boundaries, no pinclaims.
+Roof: factoryevidence/candidate mappings/revision conflicts remain distinct;
+no OEMcontrollerexecution/capture. Bothfolding/unfolding, interruption/reversal,
+timeout,L/Rsync/recovery remainopen. Next newapplicablefactory orOEM/physical
+source; userhasnothingelse, do notaskagain/repeat exhaustedsourcefetches.
+CurrentGhidra archive isverified below; allwork savedlocally, no staging/commit/
+push. Goalactive, thisturnmadeprogress. Historical records below retain their
+then-currentnextactions; the CURRENT/NEXT blockabove supersedes those actions.
+
+LATEST ECU/TCU: tcu-receive-recovery.txt.6144ISRcases,768recoverypredicate
+cases and320nativepairs PASS;1728prefix/80admission/40scale wholeRAMchecks.
+All7 enabledclass0 IDs restored64 ->bitmap604; rawhealthy65;ready116 after5000
+healthy ticks. 80A4=752 retainsactive84. Stop externalcaptures120: ages20at124,
+measurement0 butreference3070 ->932C8430 ->80A4329 stillretainsfaultthrough159.
+No source/age/phase/faultinjection. Exact64/120prefixes; nativefreshnessbanks/
+watchdogverified. Managedlistempty butphase/heapremainallocated; no activeclear
+oroperationalcleanup claim. A99B alreadyset40, notsoleC100 attribution.
+NEXT: actual209B4/20CBC/20FAC/31720 boundaries, cache91A8/91C7,8196 andflags
+9194/91A6/92C6. Reuseexistingreference-source/policy models toexplain3070 and
+joinoriginalphase/ack cleanup/source-release. Do notforcezero orblindlyextend.
+Both recovery/qualified verifiers PASS; five scripts compile. Physicalcadence,
+inputunits/fullboot/CAN/RTE unproved. Traction andbothroof statuses belowremain.
+
+PREVIOUS ECU/TCU: tcu-qualified-receive.txt.1280 direct56B06 wholeRAMcases PASS.
+64 baseline +96 wheel8 native receive/application/diagnostic pairs PASS;
+480originalISRprefix and40actual56B06wholeRAM checks. OriginalinitsetsA936;
+A939sets24/tick2500. Baseline9415 retainedreset preventsfaultqualification.
+Wheel8 fixtureclears9415 at36;producerfirstadmits37/tick3800, absentCAN200
+qualifies42/tick4300 ->A7224/A98E1C. Appinhibit44;80E820480/94540/wirecutclear46.
+Nativegate/producer/aggregation/tasklag executed withoutfaultflag injection.
+Three scripts compile; verify_tcu_diagnostic_admission.py and
+verify_tcu_qualified_receive.py PASS. Fullqualification RAMoracle notclaimed.
+Explicit100ticks/task and1or8timerwheelcalls, ADC/ports/HCANsamples; notactual
+cadence/fullboot/physicalCAN. Wheel8 residualphase/heap stillactive; no global
+operationalcleanup orhealthyrecovery claim. Otherabsentframes240/420/4F1 matter.
+NEXT: inspectremainingCAN200/240/420/4F1 nativeISR validators/callbacks, extend
+strictreceivefixture, thenjoinedhealthyreceipt/qualifiedfaultrecovery; verify
+80A4 andresidualphase/heap. Do notmanuallyclearfaults orclaimallframeshealthy.
+Traction andbothroof statuses/nextactions belowremainopen. Userhasnoextra
+artifacts; do notaskagain. Thisgoalturnmadeverifiedprogress; goalremainsactive.
+
+LATEST VERIFIED: tcu-receive-admission.txt.2816 originalISRprefix wholeRAMcases
+and6 receipt/expiry/recoverychains PASS.352fulltasks nowuseactualISRcopy/admission/
+pending ->native1BD10dispatch ->19AF0watchdog.1056prefixesPASS; exact32prefix.
+Naturalnumeric306 at167/168,phasequalification280,retirement311,40idle/freeheap.
+192tickedtasks omit201calls96..111:expiry105/tick106, recovery112/tick113 with
+868C1.560prefixesPASS; comparison/gatehold throughshortloss. Initialcomparison
+usesold201 untilproducer4. Otherunreceivedframebits2785 honestlyretained.
+No directreceivebuffers/pending/freshness/callback injection; explicitHCANsamples,
+mode8/timerinterleave andpreRTEstop.11014 alone doesNOTadvance84D0;11864 does.
+Both verify_tcu_receive_admission.py / verify_tcu_admitted_requests.py PASS.
+NEXT: verifyactual56F80 diagnostic-task coverage/admission andjoinqualified
+communicationloss/recovery withnative receive/clock/application task. Existing
+can201-fault-policy.txt:500-tick group36 qualification,5000healthy recovery;
+initialexpiry aloneisnotfallback. Reusemodels; avoidnewunrelatedDTCrequirements.
+AllbroaderTCU/traction/bothroof gaps remain. Previousgoalturnwasprogress.
+
+LATEST ECU/TCU: tcu-captured-requests.txt: joined originalECU201/215 encoded
+frames + captures + complete126EC nowexecutes one naturalrequestthroughcleanup.
+Created93,phase1at166,map494/base800 ->915A306 at167/168 ->CAN2160209 ->ECU9;
+withdrawn169. Interval4430 from256 changesmeasurementthroughoriginalhistory;
+14446at279, crossing/phase2at280,phase3at310,ack/retirement311. Rings/queues
+empty,freeheap007FFFFF,200furtheridle tasks through511. No internalrequest/
+phase/gate/age/measurement/reference injection. All512tasks pass; phase/map/
+release/source-selection actualreturn models pass. Both256traceprefixes match.
+verify_tcu_captured_requests.py and verify_tcu_captured_phase.py PASS. Detailed
+counts, addresses, reproduction and fixtures are in the authoritative report.
+COMPLETED NEXT (latestabove): trace actual CAN201/215 receiveadmission/freshness and caller/context
+of1C10E->1ADD0 before replacing supplied1ACD8/1ACF0/1ADD0 calls. 1C10E static
+flag writes alone do not prove fresh-frame admission. Keep operationaloverlap/
+cadence/persistence/physical integration open. PairedECU onlydecodes/normalizes;
+no fullECU/spark/physicalbusclaim. Generic DTC services are not new requirements.
+
+LATEST ECU/TCU: tcu-initialized-requests.txt.32 initialized126EC calls create
+three concurrentgroup7 requests via natural48F20/event1 at1/5/9. Separate352
+explicit11014->126EC pairs create sixphase records, overlapgroup7/8, retire
+codes0/1/2at29,7at102,6at149,5at321. No injectedcreation/ack/phase/measurement.
+4132 directwholeRAM cases;85 actualackwholeRAM checks;768 priorcommandRAM
+boundaries;192 selectedgate checks PASS. Predictedcode5 duration85 verified:
+timerreset151,expiry320,nextmanager release+ack321. Rings/list/queue empty,
+freeheap007FFFFF restored,30furthertasks idle. First160/256 traceprefixes match.
+All915A outputssampled7FFF; no nonzero numericrequest orphysicalcadenceclaim.
+COMPLETED NEXT STEP (see latestabove): original20658/211C4 input-historyinit then179A8/17A58 timestamp
+capture callbacks inthisfulltaskfixture. Observe2124C/2086C/2117C actualorder;
+reuse reference-source/measurement/policy models. Begin12160 reference and
+5890/6490 measurementinterval fixtures; no direct80EA/80EE/9218 writes.
+Olddirectcapture tests overrodeages810C/810D; do not silentlycarry those into
+fullcallback/task evidence. Then actualCAN216/ECU numericresponse. Realcadence,
+physical identities/units, persistence and generalcapacity/overlap remainopen.
+Ghidra fiveexistingTCU comments refreshed; pairedsave/restore verifiedbelow.
+
+PRECEDING ECU/TCU: tcu-periodic-request.txt:96 complete126EC task returns;
+48 selected916Fbit0/9410byte checks;192 existing wholeRAM command boundaries.
+Four diagnosticA962bit2 fault/recovery traces: initialphases0/1/4/7 aggregate
+at0/3/0/1, cancel+originalevent3 ack at1/5/1/3; recovery aggregate8/11/8/9.
+Original queue cleanup checks pass; request remains absent after recovery.
+Final rerun including event3 assertions PASS. No injected ack/event4/internal
+gate. Diagnostic summary, initial creation and peripheral/cadence are fixtures.
+CORRECTION:23BF0 updates enable hysteresis, NOT creation. Baseline uninitialized
+manager emits48FAC event1 at1/5/9/13 but count stays0; not allocation proof.
+Historical next action, now completed above: compose62 original group initializers
+(verify_tcu_phase_retirement.full_fixture, entries1E2B4..1E3A8) with current
+ApplicationRegisters task machine. Observe natural event1 payloads,31C18 ack
+arguments, initialized group lifecycles/overlap/retirement inside126EC. Reuse
+existing selection-creation and phase-retirement oracles. Queue/overlap,
+cadence, persistence and physical integration remain open. Do not substitute
+diagnostic Mode04 or generic DTC modeling for operational request integration.
+TRACTION STATUS/NEXT: local acquired-input freshness now executed as above.
+CAN211/21A sender/units, actual producer cadence, remote DSC internals and
+physical actuation remain unproved. Next connect relevant existing CAN/control
+boundaries where firmware permits; remote-controller evidence is unavailable.
+ROOF STATUS/NEXT: factory evidence in roof-revision-source-audit.txt and
+roof-component-inspection.txt; candidate mappings and revision/connector/PID
+conflicts unresolved. Both folding and unfolding, interruption/resume/reversal,
+timeout, L/R sync and recovery remain open. Next new applicable complete
+factory source or OEM controller/capture/bench evidence; do not repeat exhausted
+sources or ask again for user artifacts (answer: nothing).
+
+Current Ghidra save/restore:1924 annotations (833ECU/1091TCU),979 identical
+exports and11 projecthashes verified before/after independent read-only reopen.
+BothLFFEEE-stock.bin/LFG1TF000.bin; Ghidra12.1.3PUBLIC/Java21.0.10.
+Archive11,005,867bytes SHA256
+f020215807412ae804edcb54e573af019158089f7533334a3e729204785a0a15.
+Exactinventory/result in ghidra/snapshot.json andrestore-verification.json.
+Currentcut/capture artifacts Git-eligible; four scripts compile; exact320trace/
+320nativecut-admission RAMchecks/512captureprefixcases PASS. Targeteddiffcheck passes. BothROM
+hashes unchanged. Pre-existingmixedindex AD archive.tmp preserved. Savedlocally;
+no stage/commit/push. Allthreegoals remainopen; thisturnmadeverifiedprogress.
+
+Traction — preceding control-task-dispatch.txt:64wholeRAM original3D10 index7
+prefix cases and456boundedRTE checks/7rejections PASS. Originaldescriptor/frame
+installation verified, callback45CC andT oraclecorrections retained. Selected-
+indexonly probeentersE26C then39E2 failsqueuepointer00000BFA; failurepreserved.
+Original38C4 queueinit +391A index7/priority3 request +3B8A/RTE dispatch now
+reaches3D0C scheduleridle TWENTYtimes. No callee/yieldskip. Low-levelrequests,
+notinterruptproducer/cadenceproof. QueuewholeRAM cases32init/352enqueue/
+352consumePASS includingfullsix/drain/wrap; emptyconsumeloadscontextSRmaskB0.
+Cycle1 ADC1=32768 ->40E8/6CB4 float10;cycle16 ADC28=32000 ->4040.
+Full3976C and74DF8 absent,6C92/914B stay0. OrderedADCreads/RTE/idle context
+checked. CORRECTION: index8/E458 is NOTfull-decoder lead (215BA->17FF6).
+NextPRIMARYACTION: actualfull-decoder chain FA56->E24C->2154C(calls16194,
+tails178C0)->3976C at178CA. E030 backgroundloop callsFA0A atE044. Static
+only; seecontrol-full-decoder-task-leads.txt, includingfailedindex8 lead.
+Execute actualFA0A/full-decode admission usingacquisitionoutputs, thenchanging
+inputs/event2 qualification. No taskfrequencyratio/physicalproof. Allthreeopen.
+Ghidra saved and independently restored:1907 annotations (832ECU/1075TCU),
+963 identical exports and11 project hashes checked before/after readonly reopen.
+Archive10,998,354bytes SHA256
+bc582d288cc999dd265c2a0c854935ed8a10a033d64301b54a288160fff5310a.
+Bothprograms/Ghidra12.1.3PUBLIC/Java21.0.10. Exactinventory andrestore result
+in ghidra/snapshot.json andrestore-verification.json. Sevenscripts compile;
+targeted diff-check passes. All17 newartifacts Git-eligible. Mixedindex AD
+archive.tmp preserved. Allsavedlocally; no staging, commit or push.
+
+
+Traction — preceding control-acquisition-retained.txt:40 initialized event2
+returns/41activity checks; onlypartial39894 decoder eachcall. No4CE2/6718/
+3976C/1DF32 inthese40calls. SeparateE26C afterstartup reaches4CE2/6718/1DF32
+then3CB8 schedulerhandoff;3CD4 rejectswrite00000003 becauseFFFF12C4 descriptor
+iszero. ZEROtaskreturns, noADCreadsfirstcall (priorcountszero). No fakecontext.
+158reusedADC interface checks/6rejections/15original4CE2 modelcomparisonsPASS.
+NextPRIMARYACTION: inspect3B8A/3F34 andoriginal3D10 index7 dispatch/install:
+ROM40D0+16*7=4140,descriptorFFFF11E0 at4144,entryE26C at4148;3D28 stores
+context+20.3DD8 startupcontext candidate. Staticleads saved incontrol-
+acquisition-scheduler-leads.txt. Verifynecessary context/dispatch, notallOS.
+Static3F34 setsSP=R5,pushesSR0/entryR4,RTE3F3C; normalfunctioncall doesnot
+installtaskcontext. Verify3D10 prefix/thisboundary beforeaddingRTE support.
+Then actual changingADC samples tofull decode/publication/qualification.
+No cadence/physicalproof; allTCU/remoteDSC/bothroof requirementsopen below.
+Ghidra saved and independently restored:1905 annotations (830ECU/1075TCU),
+961 identical exports and11 project hashes checked before/after readonly reopen.
+Archive10,990,502bytes SHA256
+263487cd1b42cbe5aedf171845c490a9d4d4d880515e4927799a1d5bb7f66c41.
+Ghidra12.1.3PUBLIC/Java21.0.10; both LFFEEE-stock.bin andLFG1TF000.bin.
+Manifest/restore evidence in ghidra/snapshot.json andrestore-verification.json.
+Three scripts compile; targeted diff-check passes. All9 new artifacts are
+Git-eligible. Pre-existing AD archive.tmp index preserved. Saved locally only;
+no staging, commit or push. Allthree broader research requirements remainopen.
+
+
+Traction — preceding control-qualification-report.txt:9984wholeRAM report/cache
+cases and131072 runtime mask checks PASS.1F/20 stockmasks8000, notzero.
+Initialized40events PASS41activity boundaries and10qualification observations.
+Original6CD96->6CE24->6CF06->6CFD8 atouter5/25, matchingadjacent snapshots;
+99D5=1/99D8=8000 but6C92=0/914B=0/selectedflags0, so no reports. These
+no-op report oracles do not prove changed-input/admitted-report integration.
+NextPRIMARYACTION: trace actual acquisition in this initialized outersequence;
+reuse strictADC sample fixtures/4CE2scaler models. Trace channel28raw>>6 ->6C92 and
+channel1 400A->6718->40E8->1DF14/1DF32->6CB4->914B beforeouter5/25. Change externalADC fixture, neverinternalflags.
+Bound downstream1F/20 effects once nonemptyreportoccurs. No newISA/ROMchange.
+Ghidra milestone saved and independently restored:1904 annotations
+(829ECU/1075TCU),960 identical exports,11 matching project hashes before and
+after readonly reopen. Archive10,990,424bytes SHA256
+17a3ddaca7a44f68c144d3a2b1948c1316beee6da340cf3edb5d23ced6301f2b.
+Ghidra12.1.3PUBLIC/Java21.0.10; both LFFEEE-stock.bin andLFG1TF000.bin.
+Exact project inventory/restore result in ghidra/snapshot.json and
+restore-verification.json. Nine changed/new scripts compile; targeted diff
+whitespace check passes. Nineteen new artifacts are Git-eligible. Mixed index
+AD archive.tmp preserved. Saved locally; no staging, commit or push.
+Next probe inheritance/addresses: control-acquisition-retained-leads.json.
+AllTCU/remoteDSC/bothroof requirements remainopen independently below.
+
+Traction — preceding control-initialize-syscr.txt:1024SYSCR2write/1024original
+E7B6writer/64originalF52Cclassifier cases +14rejectionsPASS. Parent10022
+THREEseededwholeRAM casesPASS:0000..3FFF preserved,4000..BF9Fzero,guards/
+nonvolatileGPR/GBR/SP preserved. Clock/TAP samplesexplicit;RAMfaultbranches
+unmodeled. Parent->CA94->1619A->40event2 transitions PASS41wholeRAM activity
+boundaries. Timer640fromfirstcall;mode40->80 at15/20->40at25;9158ends2,
+915C only20/25;9149holds1,bothhookpairs1/0. No physicalreset/cadenceproof.
+NextPRIMARYACTION:6CFD8 qualificationreporting andsame-taskfreshness using
+thisinitializedfixture. Static8EFF1->8FAC8mode2 indices1F/20;else8EFB/8EFC1
+->mode1 correspondingindex. Bodyincontrol-qualification-report-leads.txt;
+reuseothergroup8FAC8model cautiously. Retainedacquisitionfreshness thereafter.
+Ghidra saved and independently restored:1903 annotations (828ECU/1075TCU),
+959 identical exports and11 project hashes before/after readonly reopen.
+Archive10,990,060bytes SHA256 a75aacf82ffe4f6ba2d87edfee85d2d362d7d3e19948b63becd1fa19d95ea25c.
+Restore method and identities in ghidra/snapshot.json and restore-verification.json.
+All findings saved locally; no staging, commit or push.
+AllTCU/remoteDSC/bothroof requirements remainopen independently below.
+
+Traction — preceding DMA milestone: eightoriginal100D8 wholeRAM
+clears verifyFFFF4000..FFFFBF9F,8168longwords,sourcefixed/destincrement,
+TEpoll/clear.16register/4status/32gate/30fillchecks and24rejectionsPASS.
+WithheldDMA serviceleavesoriginalwaiting. Clear->CA94->1619A->10event2
+returns PASS11activityboundaries;9158/915E/915C nowzero fromexecutedclear,
+notjustinitialfixture. Wholejoiningbootchain/physicaltiming remainsunproved.
+StaticF8A6 calls10022,100A2 BSR100D8; DD46CA94 precedesDF66application.
+Parent10022 probe stopsF534 onF70B read. CORRECTION:notwatchdog;SYSCR2
+(table5.2/PDF116,appendix1108). ReadbyteF70B/writewordF70A keyed3C;prose
+allocatedaddress wordingambiguous. NextPRIMARYACTION: strictSYSCR2 fixture
+withclock/FPUstandbylimitations, thenparent10022 RAM-test/clear/restore.
+No skippedhelpers. Ghidra1900annotations/956identicalexports/11hashes saved
+andindependentlyrestored; exactidentityinDMAreport/manifests. Ninenew
+artifactsGit-eligible;sixscriptscompile;no staging/commit/push.
+
+Traction — preceding timer/application milestone: original1619A RETURNED after
+507directcallee entries underexplicitfixtures.520bytechecks/12rejections,
+256original80D4 and64original6F29C wholeRAMcasesPASS.6F29C reloads8FD4=640,
+8FD6/7=40 thenFALLSTHROUGH6F2C8,PR1712C. Nofullreset/physicalbootclaim.
+Twozero/seededinitializedruns plus10 event2returns PASS12wholeRAM activity
+boundaries/postconditions. Initnever writes9158/915E/915C intheseexecutedpaths;
+A55A/5A/A5 seedsremain. Firsttask mode40 leaves9158/resetbyte,clears915C;
+priorinitializedtimer640sets9149=1. InitdoesnotcallCA94;44A2 staysfixture0.
+NextPRIMARYACTION: earlierRAM/filteredinputsetup before21540->1619A. Static
+DF66JSR21540,21542tailjump1619A; prerequisitelead disassemblysaved. Keep
+executedapplicationinit distinctfromphysicalreset/clock/fullboot semantics.
+Staticnextlead:DD46 callsCA94 beforeDF66; ROM11444/48 givesFFFF4000..
+FFFFBF9F. Candidate100D8 zeroesfirstword/configuresECC0/ECC4/ECC8/ECCC
+andwaits; possiblehardware-assistedRAMclear,notexecutedproof. Nextverify
+entry/callers/DMACsemantics andboundedclear includingwait. FA4C isRTS/NOP,
+failedRAMclearlead. Ghidra1899annotations/955identicalexports/11hashes
+savedandindependentlyrestored;exactidentityin timerreport/manifests. Eightnew
+artifactsGit-eligible;four scriptscompile;no staging/commit/push.
+
+Traction — preceding FPU milestone (timer probe supersedes its limit): boundedlocalFPSCR/FDIV0/0/
+quietNaN supportpasses3312instructioncases plus6expectedrejections and8
+original28DFC wholeRAM returns55555555. Extended1619A reaches95directcallees;
+selftestreturns55555555 to28CA4,bankreturn16610passes,42A78 reachedPR166F4.
+Nextlimit80F4 bytewriteFFFFF6D8 via3A53C/JSR1670E; followingF6C4 staticonly.
+Manualsourceaudited:SH7058 table11.3 PDF258/printed216 namesOCR10B F6D8
+andTCNT10B F6C4,byteR/W; detailPDF387/392. NextPRIMARYACTION: independently
+teststrictbyteconfigurationfixtures,explicitcounter/comparisonlimits, then
+resumeinitializer. No blanketMMIO/stubs; sourceidentityinFPUreport.
+Fullstartup/counterinitialization/firsttaskfreshness remainunproved.
+Self-testGhidra saved/restored:1896annotations,952identicalexports,11hashes;
+archiveidentityinFPUreport/manifests. Baseprobe/oldlimitsremainpreserved.
+SixnewartifactsGit-eligible;twoscriptscompile;no staging/commit/push.
+
+Traction — preceding flag-bank milestone (extended startup supersedes its limit): 64 direct wholeRAM checks verify
+all38 stock flags911A..913F;9125 is local ROM E0CCDzero ->1. Retained40
+outercalls PASS66 fullRAM boundaries: publications outer5/25 follow that
+call's6F34C consumer; next controlcall sees1. Original1619A prefix also
+passes bank wholeRAM return at16610. Full startup does NOT return: after55
+directcallee entries,28F7A FDIV0/0 exceeds harness support. Staticfollowing
+NaN/FPSCR checks support intentional self-test, not firmware fault. Rawinputs
+anddisassembly saved. LocalSETT support passes1024 preservation cases.
+Next primary action: source-backed invalid/FPSCR modeling and independent
+checks before continuing1619A, or direct neededcounter initialization trace.
+Ghidra saved/restored:1895annotations (820ECU/1075TCU),951identicalexports,
+11hashes before/afterreadonly reopen; exactidentity incontrol-flag-bank.txt
+andghidra manifests.13artifactsGit-eligible;4scriptscompile;ADarchive.tmp
+preserved. Allsavedlocally; no staging/commit/push.
+
+ECU/AT — operationalqueue/ack/overlap/cadence/persistence/physicalintegration
+remainopen; tcu-pulse-response.txt is diagnosticMode04, notshiftqueue.
+Next: follow actual operational handshake/output lifecycle with retained input
+provenance; do not infer physicaltiming from modeledcalls.
+Traction — CAN211/21A sender/units, remoteDSC execution and actuation remain
+unproved. Current executed evidence concerns localECU calibration/publication;
+factorydocuments/candidate mappings do not replace missing remotecontroller.
+Roof — factory sources remain roof-revision-source-audit.txt and
+roof-component-inspection.txt; candidate connector/PID mappings conflict.
+BOTHfold/unfold interruption/resume/reversal, timeout, LRsync and faultrecovery
+remainunproved by OEMreceiver execution/captures/bench. Next needs newapplicable
+source/accesschange or OEMcontroller/physical evidence; userhasnone. Do not
+repeat exhausted listings. Allthree broader objectives remain incomplete.
+
+Traction — activecontrol-activity-conditions.txt:39184directchecksPASS
+(1296floatthreshold,8192admission,1024status,28672independenthold).
+CORRECTION6F2C8 produces8FE0/8FDF,not8FD8;6F34C separatelyproduces8FD8.
+Stockhysteresis>=-777set/<-782clear;mode128/flags1/statusC0absence/9125=1
+admit8FD8.74ED2 increments9158onlymodebit7,saturates;915C iffactiveupdated
+count<3.915E1 clears2444anditselfbutNOT9158. No elapsedtime/pinroleclaim.
+Retained40outercallsPASS64fullRAMboundaries/24freshnesschecks.74ED2uses
+prior735A;later6F34Cusesnewmode. Call15 old40/new80;call25 old80/new40.
+Counter9158retains2whenmodeinactive;915Cclears.9125 is1bycall10.
+NEXTPRIMARYACTION:execute744C6 flag-bank/caller; its7459C/E writes9125
+fromROM E0CCD==0 (stock0->1),notasampledexternalinput. Staticleadonly.
+Seecontrol-activity-conditions-leads.txt; neededcounterinitialization open.
+EightGhidraannotations savedandindependentlyrestored:1894annotations,951
+identicalexports,11matchingprojecthashes. Identityinconditionsreport/Ghidra
+manifests. Savedlocally;nostaging/commit/push;ADarchive.tmp preserved.
+TCUoperationalqueue/ack/overlap/cadence/persistence,remoteDSC/CAN211/21A
+units/board,andbothroofdirections interruption/resume/reversal/timeout/
+LRsync/recovery remainopen. Nextroof needsnewapplicablesource/OEMcontroller/
+physicalevidence; noextrauserartifacts.
+
+Traction — currentcontrol-activity-hold.txt: original74D62 passes11008checks
+(1024predicate,7680gate,2304bytesweeps).9149 assertedby8FD4nonzero,925E1,
+915C1 oreligibleprotected282Czero/default. Invalidpairrecords534C/5354.
+14450=(A55C!=1 AND2B84==1). A556fall latches914D;always914E=A556.
+Correctpreviouslead:15146 isvalue/complementbyte reader, notbitgetter.
+Retained40outercalls/8holdreturns/24modeflagboundaries pass;42BCC sees
+new9149 eachtask.8FD4values0/640/640/640/639/638/640/640 explainhold;
+915C isalso1 oncalls20/25.6144timerchecks/eightactualboundariesPASS:
+17152directchecks and40outercalls/40fullRAMboundaries total. Timerupdate
+AFTERhold testspriorcounter;consumer42BCC readsnewhold inthesamecall.
+Finaldelay-slotPC correctedtracepasses. SevenGhidraannotations savedand
+readbackverified; independentrestorepasses1886annotations/947exports/11hashes.
+Archiveidentity/control-activity-hold.txt andghidra manifests. Alllocalsaved;
+no staging/commit/push; mixedindex preserved.
+NEXTPRIMARYACTION:6F2C8 produces8FD8;74ED2 produces915C. Verifybothwith
+actualtaskinputfreshness; retainallTCU/remoteDSC/bothroof gaps.
+Allthree scopesremainopen; no extraartifacts, no stage/commit/push.
+
+Traction — active control-activity-hooks.txt: tenoutercalls locateDAE8
+bank0/index9 PR91282 (907F0 state0->1) andindex7 PR42C92 (735B rise).
+42C68/42CBE old735E0/current735B1 emits7->660E++;1->0 emits8->660F++;
+735Ealwaysupdates. Theseareedge/state notifications, noteverytaskstart/end.
+25221checks pass:108mode,20736flag,4096edges,81state0,100state6+100retained.
+State6 emitsendindex10 iff660E<=660F,else restarts1/noevent. Otherstatepaths
+notmodeled. NineGhidraannotations saved/restored:1879annotations,944exports,
+11hashes; archiveidentity incontrol-activity-hooks.txt/ghidra manifests.
+Fortyoutertransitioncalls PASS24boundaryoracles.735C drops0 oncalls15/20
+but735B stays1: finalboundaryinputs prove9149=1 holdsflagwhile82A8/A433=0
+and735A=80. Countersremain1/0 inbothpairs;99FCstays1. NEXTPRIMARYACTION:
+verifyoriginal74D62 producer9149/actualtaskfreshness; candidatesanddisassembly
+incontrol-activity-hooks-leads.txt. Do notforceflags tofakecompletion.
+Otherstatepaths,remoteDSC/CAN211/21A units andphysicalboard remainopen.
+TCUoperationalqueue/ack/overlap/provenance/cadence/persistence remainsopen;
+roofbothdirections interruption/resume/reversal/timeout/LRsync/recovery and
+factoryconflicts neednewapplicablesource/OEMreceiver/physicalevidence.
+No extrauserartifacts. Allthree scopesremainincomplete.
+
+Traction — active continuation: control-outer-event.txt /probe_control_outer_event.py.
+Seven eventLONGWORD2/phase0..5,255 fixtures reach18282 first, thenhitE75E
+PLDR F75E write rejectedbypriorread-only fixture. Manualtable22.21 proves
+PLDR isR/W; local14bitwordlatch added/tested. Allsevenprobe casesreturn;
+18282 then16172(DB32indirectcall),thenphase0..4 selectedtask;phase0also
+1616C. Phase5/255selectnone/reset0;pending2->1. First31-case oracle passed21freshcases butretainedphase1 lacks16172;
+failedexpectation saved incontrol-outer-event-oracle-limit.json. Revised
+verify_control_outer_event.py checksdispatch/phase/decrement andfreshhooks;
+retainedhookadmission remainsopen. NexttraceDB32 hookproducer/conditions.
+Finalrerun PASSES31 completeoutercalls (21fresh/10retained):majororder,phase,
+pendingdecrement,preservedregs/GBR; freshhookcounterwrap verified. Retained
+hooks observedonly, firstcall only. Followcontrol-outer-event.txt fornextstep.
+No hardwarepin/direction/clock proof. No newGhidra edits.
+
+Traction — current stop-condition work: verify_control_task_stop.py passes4996
+cases:512publisher,1024counterhooks,1024holdproducer,256initializer,
+900monitor(508return/392terminalentry),1280gate(765return/515terminalentry).
+Coremonitorfields independentlymodeled; AA590auxeffects executeoutsideoracle.
+4105C publishes44A2bit0 ->722Abyte/complement;CA94 samplesPFDR F74Einto44A2.
+42AA2 reloads7358=2 iff722A==1,elsecountsdown;735C=nonzero.154B0doesnotcheck
+complement. Thuszero-RAMtask omittedfilteredinput initialization. Physicalpin
+identity remainsunproved. Retainedcomparison nowpasses48completetasks/49
+monitorboundaries:uninitializedfilteredinput returns16thenF8D6;originalCA94
+withPFDRbit0=1 returns32. ExplicitSCI0/TCNT0/timeroutput fixtures, notrealboot.
+768GBR/1800MUL.L cases,6widthrejections and16original977A2 initialization
+fullRAM checks pass. Prior98360unsupportedMUL.L limit is superseded.
+BothGhidraprograms saved/restored:1870 annotations,938 identicalexports,11
+hashes; details incontrol-task-stop.txt.
+Staticcounterhooks1616C/72/78/7E at114A4..114C0 notyetexecutedbyscheduler.
+Actualouter2BCE6 event2 calls18282beforechoosing18DC8 when651C0,thenmodulo5.
+Nextoriginalouteradmission/lifecyclehooks, samplingcadence/initialization;
+TCU,remoteDSC andbothroof scopes remainindependentlyopen.
+
+Traction — latest milestone: control-task-serial.txt. All8 isolatedmode0 phases
+nowreturnwithboundedXTRCT/ADDV/DT andexplicitSCI0samples.6212directchecks,
+9expectedaccessrejections andmissingreadyboundedloop pass.35complete tasks
+(11isolated,16retainedprefix,8wrap) and90qualificationreturnboundaries pass.
+Postincrementphase%4==2 qualifiesbothbanks; oldSCI0/XTRCTlimits superseded.
+Original76B4/786E exactMMIOorder checked; peerbytes areexplicitfixtures.
+Retainedcall16(initial16/final17) firstwaitsB810withfrozenTCNT0. Explicit+1/read
+samples passthatwait thenenterF8D6 via2C5CE/PR2C5D2. Nonzero-modefixture
+enterssamebody via2C620/PR2C624; coarse+16000/read samplesstilldonotreturn.
+CORRECTION: F96E unconditionallybranchesbackF902; F972alsoinfinite. Advancing
+counteralonecannotmakethisbodyreturn. Boundedlimitsarepreserved,notstubbed.
+Nextprimaryaction: verify2C4FC/2C5DE counter/flag/conditionprovenance and
+original1619A initialization;660C/6608,660E/F/6610/11,735C,protected722A/2110,
+3FF9 andB7xxpeer areleads. Do notfabricatevalidpeer/startuptoforcereturn.
+6CFD8 semantics,retainedacquisitionfreshness,CAN211/21A sender/units/remoteDSC
+andNCboardremainopen. No realcadence orphysicalactuation established.
+TCUoperationalqueue/ack/overlap/persistence andbothroofdirections remainopen
+below,withindependentnextactions. Userhasnoadditionalartifacts.
+Ghidra one newfunctionannotation/two revisedcomments saved; archive/refreshed
+independentrestore details in ghidra/restore-verification.json.
+
+Traction — current milestone: control-task.txt / control-task-activity-verification.json.
+Original18DC8 mode0: five ofeight initialphasefixtures return; phases1/5 reach
+399B0 then74DF8,77F62/12/46 andbothqualifiers with6CFD8 inoriginalorder, but
+later halt on unsupportedSCI0 SMR0 F000write. Phase3 halts47F0/XTRCT201D.
+7424 activity checks andsixactualtaskreturnboundaries pass;77F62 sets>=10,
+clears<9,holds[9,10);77F12 reset70F0==1 or91E6==0 reloads10,elsedecrements;
+77F46 publishesnonzero.3736 arithmeticchecks+16expectedperipheralrejections
+pass. ZeroRAM andtypedMMIOlatches areexploratoryfixtures, notrealstartup.
+Mode1 phases0..7 hitlimit in2580delay; F948waitsTCNT0difference>=3E80 and
+ourcounterisfrozen. Thisisnotfirmwarehangproof. FinalprobeJSONrecordsstate,
+MMIO,delayarguments andcalls; priorfailurestages preserved. No callee stubs.
+NEXTPRIMARYACTION: implement/testboundedXTRCT andexplicitSCI0init/transfer
+fixtures, complete mode0 phases1/3/5, extendqualification/reportingoracles;
+resolve actualstartup/nonzero-modeTCNT0progress, thenretainedfreshness.
+CAN211/21A sender/units,remoteDSC/board/actuation remainmissing. Physicaltime
+cannotbeinferredfromcalls. TCUoperationalqueue/ack/overlap andbothroof scopes
+below remain independentlyopen. Latestreport supersedes older next-action leads.
+Six Ghidra annotations added; savedbothprograms and archive refreshed; independent
+restore verification is recorded in ghidra/restore-verification.json.
+
+Traction — newest milestone: control-raw-enable.txt executes74DF8 writer,
+6CD70/96/6CE24/6CF06 first qualification, actual bounded caller sequences,
+and selectiveADC-to-publisher/target/ATspark admission.21,580 component checks
+and320 retained cycles pass.914B iff8<6CB4<200; stockADC1 count>=410 enables.
+Firstqualification inclusive40..939 recovery, counters50/3. Disabledenable
+holds counters/latchedfallback; original3AEEC admission blocks when either
+produced8EF8/8F30 is set. Real startup/cadence/units remain unproved.
+Prior control-raw-provenance.txt owns channel28/29 maps and secondqualifier.
+Next traction: full task caller ordering/admission/freshness,399B0 callers
+(body already executed), CAN211/21A sender/units, remoteDSC and board identity.
+Intervening1B154/15A/160/178 routines omitted;6CFD8 diagnostic publication
+remains a separate lead. Actualscheduler and physicalintegration remainopen.
+TCU and bothroof directions below remain independently open.
+
+Traction — executed ECU evidence: control-acquisition-completion.txt extends
+periodic acquisition with4DFE/5CF4/5E38, original531E/5D62 helpers andF29C
+completion acknowledgement. All256 capture cases,96 arming calls,42 timer
+cases,5120 alternate updates,192 followup+callback pairs,256 acknowledgement
+status bytes,320 retained schedules and7 injected callbacks pass;4 expected
+access rejections. All RAM and exact ADC/timer access traces are compared.
+404B is an alternate-operation armed marker, NOT hardware completion. F29C
+clearsADCSR1 ADF then4DFE captures ifarmed, else conditionallyarms alternate
+sampling.40A2 wraps/increments/reset2;40A0 retains within(1000,1050]. Captures
+initial and followupADC11/23 pairs, not tractionchannel1/8 identity. Distinct
+old/new samplepairs verified. Duplicate timer writes execute original11070.
+Static startupVBRFFC50, vectoroffset308->2FA8->F29C plus Renesas table7.3
+identify ADI1. Fullboot/contextwrapper/interruptdelivery remain unexecuted.
+Factory17.2.2 defines completionADF/enableADIE;17.2.3/5 define externaltrigger;
+table11.3 identifies timerregisters. DurableSH7058 PDF/provenance retained.
+
+Retained schedule startszero counters:ADIE1 enabledat64/128/192/256/320;
+explicit successfulcompletion callbacks injected onlythen. Alternatearming
+at128/256 receives an additional explicitcallback andchanged11/23samples.
+Conversion success/delivery is a harness assumption. Softwarelatches do not
+model analogconversion, reservedbits, interrupt timing, counters or pins.
+No callcount-to-time, actual cadence, board/sensor/units or plant claim.
+Initial harness failed because sharedrun resetR4 todefaultzero; localadapter
+nowpasses argument explicitly. Full finalrerun and Pythoncompilation pass.
+No ROM,sharedISA/sharedverifier orproduction changes. Prior4CE2 selective
+copy/scaling/publication evidence remains in control-acquisition-schedule.txt;
+6CAC=channel8_count>>2 and6CB4 channel1 numeric scale, withoutsensoridentity.
+Next traction: raw6Dxx/8F30 and399B0 controlprovenance; actual conversion/task
+cadence andNCboard/channel1/8 wiring.11/23consumer5Axx andindirect40A1writers
+remain separateleads. CAN211/21A sender/physicalunits andremoteDSC actuation
+remain incomplete; no remoteDSCfirmware/capture/physicaltest is available.
+
+ECU/AT — newest milestone: tcu-pulse-response.txt verifies53B5C wrapper,
+1D94C handoff,1D85E responsebuild,1D9F2 cleanup and1D83A timer.3848direct
+checks,24full126EC tasks/sixadditionalwrappers pass. Stockbuffers8FA8/90B8;
+oldindex selectsbuild/cleanup,new90A7=indexXOR1. Positiveheader44/length1;
+negative7F/oldrequest/error/length3. Suppressedrejectionreturns0 butcleanup
+leavesbuffer/length withoutreadybit7. Trailingbytesretain; lengthisessential.
+Criticalsectionnest/SRmask andasymmetricrecord0/1 cleanup arechecked.500timer
+reload isconditional, notmilliseconds. Incomingrecordpreparation remainsfixture.
+SAE J1979_199709 publicsummaryMode04 corroboratesdiagnostic-clear interpretation
+ofservice4/row3header44/53B5C. Sourceexcerpt saved; fullstandardnotretrieved.
+Thisone-bitdiagnosticrequest isnotproof ofanoperationalshiftcommandqueue.
+Separate startupedge andpulseconsumers remain; resetcoverage/persistenceopen.
+Remainingdiagnosticfollowup:1D40A incomingservice selection,1D210/1D2B0/1D3B4
+bufferuse and1D51E/1D716/1DADE lengthconsumers/actualtransmit. Staticleadsonly.
+Do notexpandall diagnosticservices intoanewimplicitcompletionrequirement.
+NEXTPRIMARYACTION: traction fulltask1B14E..1B190 withinterveningcalls and399B0
+callers, closingactualadmission/order/freshness. OperationalTCUqueue/ack/overlap,
+provenance/cadence/persistence/physicalboard remainseparate; remoteDSC andboth
+roofdirections retainallgaps. Noextrauserinputs; allthreerequirements incomplete.
+
+ECU/AT — newest milestone: tcu-pulse-request.txt verifies54AFC request,
+53520 predicate,5604C permissions and541CC response withoriginalhelpers.
+5360directchecks (1536permission/2048predicate/1536response/240request),
+48full126EC tasks/fiveadditionalrequests and384originaltimerwheelcalls pass.
+Service4 requires90B6==1,wordrequest+8==0 and53520permission. PredicateNOT
+(A OR(B AND C)):A=u16(80A4)>=u16(B128)&&A962bit0;B=u16(809E)>=u16(B12A)&&
+A98Ebit0;C=A4E8not0/2&&A964bit0. Priorcan201-cut-loop/fault-policy already
+prove809E CANconversion andA98E aggregate; thisturnusesfixtures, notnew
+CAN-to-pulse run. Otherinputs/thresholdwriters/physicalunitsremainopen.
+Responsemodebits3..4==2 anderror!=22hex clearsstatusbit1/returns0 without
+setting9418; othererrorsretainfirstnonzero90B4+index/return2. Index0/1tested;
+criticalsectionnest/SRmask preserved. Return0doesnotbyitselfproveadmission.
+Calls9/10 acceptedrequestscoalesce in9418,producerconsumes12. Call24accepted
+restartsactivepulsetimer;25rejectssuppressedreturn0;26rejectserror12/return2.
+Explicit8:1wheel/taskratio remainsfixture, notrealcadence.
+NextTCU: originalwrapper53B5C constructsA688/A68C/A690,storesresultA694,
+then1D94C togglesrecordindex andselects1D85E/1D9F2 responsepublication/cleanup.
+Wrapper/handoff/build/cleanup are nowexecutedabove; actualtransportisnot.
+Incomingdispatcher,actualCANtransmit/ack/persistence/physicalproof
+remainopen, alongside raw8F33/A991 andA735/92C7/92C8/80EA provenance.
+Nextindependenttraction: fulltask1B14E..1B190/399B0 admissionandfreshness.
+RemoteDSC andbothroofdirections retainallgapsabove/below; noextrauserinputs.
+
+ECU/AT — newest milestone: tcu-pulse-input.txt executes17664/17670 and
+51308/51314:2576 directchecks,80 complete126EC tasks/20 newpublication
+boundaries,48 separatelyinvoked rawreader calls pass. 17670 extractsTCU8F33
+bit1 into88CC/status88CD=2.51314 copies whenrawstatus2+A991bit0; elsemask4
+publishesstock0/status4; elsemask2 holds/status3; elseholds/status2.
+Completephase0/4 task calls23DD0 BEFORE51314: pulseusespriorpublication.
+Two24-call scenarios publish1 at0,consumeedge4; holdat8,clear12,observe0at16,
+newedge20. Counterheld91 permits,92 blocks. Rawreader timing/heldcounter are
+explicitfixtures; real8F33 acquisition/A991 production/cadence remainopen.
+Prior requestentry54AFC andgate53520/5604C/response541CC are now executed
+as recordedabove; saveddisassembly
+in tcu-pulse-request-gates-disassembly.txt andtcu-pulse-trigger-disassembly.txt.
+Static54AFC rejectsnonzero requestword+8 with12hex,53520false with22hex;
+otherwise535B4->23DC0 sets9418; thispreviousstaticlead nowhasexecutionproof.
+8F33 reader17670 calledat1AD1E; rawdispatcher/realscheduler remainsfollowup.
+AllotherTCU queue/ack/overlap/persistence/physicalintegration, independent
+traction andbothroofdirection requirements remainopen as detailedabove/below.
+
+ECU/AT — newestmilestone: tcu-inhibit-writers.txt verifiescomplete47C9C
+latchwriter,23DD0 pulseproducer andrequest/inithelpers.3920directchecks,
+96fulltasks/48newwriterboundaries and512originaltimerwheelcalls pass.
+Existingoracles total552semanticboundaries inthosetasks. Main9C58bit0 and
+aux9C60bit2 areseparate; signed80EA thresholds7424/16640, exact9415==1
+releasewithA735==0. Returnedproposal3 andupperbitpreservation verified.
+9415pulse from9418requestorA520startupedge(counter8280<92), expireswhen
+82B9>=15 atproducerinvocation;9416 separate9419request/82BA. Actual11014
+wheelproducescounters; imposed8:1 wheel/taskratioisnotphysicaltiming.
+Retainedcall5mainlatch,7source1/aggregateinhibit,24request->pulse,25mainclear,
+27sourceclear,56pulseexpiry. No direct9C58/9415/timerstateinjection.
+Prior nextlead A520 producer is now executed above; request54AFC->535B4->
+23DC0 andA991 upstream production remainopen, asdoA735/92C7/92C8/80EA
+sourceadmission/parent47B3C.
+Prior tcu-source-inhibit.txt ownscompletefiveGPIO/feedback andslotselection;
+validslotdomain/phase0/4 requestqueue/ack/overlap remainopen. Macroorder and
+cycle/compareintegration in tcu-application-order.txt. Othernestedsemantics,
+clock/PBIR/boot/RTE/persistence/physicalboard/output proof remainsincomplete.
+Allthreegoals independent; Ghidraarchive/restore verified below.
+
+ECU/AT — executed TCU evidence: tcu-output-handoff.txt extends the verified
+record service/driver through18A44 correction and14280 peripheral write.
+All40 initializers,800 arbitrary handoffs,980 conversions,375 accumulators,
+1152 fallback cases,1088 acquisitions,20 original12826 caller tails,
+160 retained chains and7 expected access rejections pass. Full RAM, ADC read
+order and exact output writes are independently compared; helpers execute.
+188FC accumulates10bit samples with16bit wrap;18816 resets the serviced sum.
+Four acquisitions per selected-channel service are an explicit harness cadence,
+not real task timing. Correction feeds the next driver sign/sticky calculation.
+Recovery retains one extra reset call after fallback clears. Signed/unsigned
+word behavior and exact1 flags matter; physical units remain unproved.
+Factory evidence: SH7055S-compatible table11.3 identifies write destinations
+F510/F512/F516/F514 as PWM buffers BFR6A/B/D/C. Section11.2.23 transfers them
+at cycle compare; buffer writes alone do not prove immediate pin output.
+Official manual PDF/hash/provenance saved beside the task; no chip-ID claim.
+Prior stock class/uniform admission restrictions remain; conditional36D1A
+updates must not be described as naturally admitted. No ROM/ISA/shared-verifier
+or production changes. Initialization/calibration execution proves no EEPROM
+persistence. Queues/acknowledgements, overlap, cadence and physical integration
+remain open. Next TCU: timer configuration,18830/18C38 adaptation,18E76 offset,
+A518/8AD8/8A60 andA654/rawbase writers; complete127BA/127FC task scheduling.
+Traction and both roof directions remain independent requirements.
+
+Roof — newest source audit: roof-revision-source-audit.txt records actual
+AllCarManuals403 challenge/no ZIP retrieval, repeated known2009 one-page
+extracts and another CHARM2009..2012 timeout. These are access/source limits,
+not proof of missing specifications. New7 Git-eligible D9G4 mirror assets
+(function/PID/warning HTML and4 originalgraphics) are saved with hashes.
+Embeddedsource D9G4-1A-22C_Ver17 is cataloged09/2012..04/2015; VIN match
+unverified. Never relabel it as2009. No account/purchase/bypass attempted.
+Original2007 PDFzero56 clears pausedindicator on switch-on/toplock-afterclose;
+D9G4 mirror row instead lists opening/closing completion. Originalgraphic
+and four-cell HTML row verified; this is a documentary discrepancy, not a
+proven controller revision. DECK_CL truth table/pin conflicts remain unresolved.
+Existing fault/recovery descriptions corroborated, no new CANtimeout or pulse
+threshold. Source-integrity verifier checks7 assets+originalPDF and exact row.
+No OEM roofcontroller, capture or hardware evidence. BOTHfolding ANDunfolding
+interruption/resume/reversal/timeout/synchronization/recovery remain open.
+Next roof needs a new applicable full source or OEMreceiver/physical evidence;
+this environment's AllCarManuals route is exhausted. Do not repeat same listing
+as if retrieved. Continue independent traction/TCU firmware work below.
+
+Roof — new documentary evidence: roof-component-inspection.txt retains
+original2008 component diagrams and continuity chart plus a5page2007crosscheck.
+Deck-close A/B contacts open when rodpressed; deck-open C/D close whenpressed.
+Roof anddeck motors have distinctconnectorlayouts, oppositeA/E openingpolarity
+and different sensor supply/output pins. Both proceduresdescribe PTC thermal
+blocking andapproximately3minutescooling before reinspection. This is a
+componentretest interval, NOT CANtimeout/controllerrestart/auto-resumeproof.
+ComponentF-ground references conflict withstopdiagnosticF-signal references;
+physicalpinmapping remainsunverified.12 HTML/image sources+2PDF artifacts
+arehashverified; selectedexcerpt reproducesbyte-for-byte.18newfilesGiteligible.
+Theexisting3O-high/DECK_CL-On workshopreference wasalreadyknown, nowretained
+withoriginalgraphics.2006training DECK_CL-Off-at-closed discrepancy remains;
+contactstate,terminalvoltage andPIDdisplay aredistinct. Do notclaimresolved.
+Motor drivevoltagetables corroborateopposingmodulelegs butnoactualactuation.
+
+Search:2009multiplex09-02F index recovered, notitsdiagnosticpages; remotePDF
+linksomitCDNassetIDs. OriginalSquarespacesite404; CHARMinternalerror;
+LEMONredirectloop. Downloaded2006-2009namedcompilation actuallylabels inspected
+roofpages2007;2008supplementtextscan hasno targetmultiplexheading. Preserve
+sourceapplicability andfailedretrievallimits. No new numericalCANtimeout,
+synchronizationthreshold,release-reversal matrix orOEMreceiverexecution.
+Sources/provenance in sources/mazda-2008-prht-inspection.json and
+sources/mazda-prht-inspection-crosscheck.json; relevant evidence durable.
+2008wiringa/b/c and2009c remaininroof-wiring-swf.txt andrelatedrecords.
+
+Executedfirmware: ECU/TCU vehicle-state paths onlycandidate roofinputs;
+missing OEMroofcontrollerfirmware,capture,bench/vehicle evidence persists.
+BOTH folding ANDunfolding, interruption/resume/reversal, communicationloss/
+timeout,left/right synchronization andfaultrecovery remainindependentlyopen.
+Previous roof archive lead is now dispositioned above:403/no ZIP retrieval.
+A new source/access change is needed before that route can advance; no actual
+2009section contents were obtained from the advertised2005-2015 archive.
+DECK_CLversion andcomponentpin conflicts remain distinct validationneeds.
+No additional userartifacts; no reason torepeatthatquestion.
+
+Ghidra: bothprograms saved with11 newannotations (5functions,6data).
+Live/restoredreadback776ECU/1075TCU pass. Fresharchive10,981,106bytes SHA256
+0ead5825a94027c7a7ae3604bbfa97dab2e40130d791767fad614b21a5c7d59f.
+All1,851annotations,925byte-identicalexports and11projecthashes checked
+before/after readonlyreopen. No errors/incomplete decompiles/locks/jobs.
+Manifests:ghidra/snapshot.json andghidra/restore-verification.json.
+Restore directory:ghidra/restore-check/inhibit-writers-20261006.
+
+This inhibit-writers milestone adds9 Git-eligible evidence/script artifacts
+and6newexports. Finalexpandedverifier3920directchecks,96fulltasks/48newwriter
+boundaries,512fullRAMtimerwheelchecks passes. Existingtask/source/output
+oracles total552semanticboundaries. Pythoncompile,source/ROMhash andfocused
+Gitdiffchecks pass. NoROM/sharedISA/oldverifier/production edits; localnew
+script importsunchangedtimerRANGES. No staging/commit/push performed;
+existingmixedindex/AD archive.tmp preserved. Allfindings savedlocally.
+
+NextconcreteTCUaction: traceactual9418 requestadmission at54B32 (pool54B60),
+whichcalls535B4 tailthunkto23DC0. ExecuteA520 producer51314 (initializer51308):
+static88CD==2/A991bit0 accepts88CC; faultbit4 selects5FD38 fallback; others
+holdoldvalue/status. Savedrequest-caller/input-leads disassembly retainsthis.
+Parent47B3C/A735/92C7/92C8/80EA admission andslot1F3B6 callerkeydomain stayopen.
+Phase0/4 1FD24/23BF0 queue/ack/overlap lifecycle remainsdistinctnextwork.
+Numerical9C58 and9415 writers nowverified; no longerunexplored. Absoluteclock/
+interruptentry/RTE/PBIR/fullboot,persistence/physicalboard/load/feedback open.
+Traction: independentlocalECU evidence remainscontrol-raw-enable.txt.
+Nextfulltask ordering/admission/freshness and399B0 callers. ExecutedADC/
+qualification/publication/ATspark distinctfromfactoryDSC docs,candidateCAN211/
+21A sender/units,missingremoteDSC/board/physicalproof. TCUprogressdoesnotcloseit.
+Roof: factoryrevision/pin/PID conflicts persist; ECU/TCU statemappings only
+candidateinputs,not OEMreceiverexecution. Nextnewapplicablesource orOEM
+receiver/capture/physicalproof. BOTHfolding ANDunfolding interruption/resume/
+reversal,communicationtimeout,L/Rsynchronization/faultrecovery remainopen.
+Userhasnoadditionalartifacts; do notaskagain. Allthreegoals incomplete;
+previousgoalturn andthisturn madeverifiedprogress; no globalimpasse.
+
+Previous milestone history follows and does not supersede this current block.
+
+Latest milestone2026-10-06: limit producers now execute, with accumulator
+retaining updates during an inhibit that clears6CC8; normalized8118 can stay
+nonzero through its other history terms. Full physical control identity open.
+Roof recovered No.5 stops page via body-index navigation; new documentation
+corroborates deck-close PID/pin polarity and preserves inconsistent diagnostic
+pin references. Hall-supply fault qualification depends on motion conditions;
+receiver proof remains absent. Sources and limitations in roof-fault-recovery.txt.
+Latest ECU/AT milestone: tcu-overlay-lifecycle.txt closes the local45BA0
+history and coupled815D/45AA4 timer proof. First model incorrectly biased9B66
+by32768; execution disproved it, final axis is0..32767. Isolated sh_extract.py
+adds XTRCT from Renesas ISA after original software arithmetic reached5B8AA;
+100 independent instruction cases pass. Existing interpreters unchanged.
+Timer service every7calls can observe expiry at123 ratherthan122 increments.
+No conversion to milliseconds or full application scheduler claim.
+Previous goal turn and this turn both made verified progress; no blocker audit
+threshold applies while these independent firmware leads remain actionable.
+
+User replied "nothing" on2026-10-06: no additional OEM roof/DSC dumps, CAN
+captures, or bench/vehicle test results are available from their project
+folders. Continue existing ROM and public-documentation research. This is an
+external evidence constraint, not permission to declare receiver/hardware
+requirements complete. No reason to repeat the artifact question.
+
+Continuation index maintenance2026-10-06: historical ECU/AT entries moved
+from.claude/notes.md into continuation-index-history-20261006.txt. No evidence
+deleted; short index now points here. The artifact question has since been answered: none available from the user.
+Independent work continues; no dependency on a reply for available traces.
+
+2026-10-06 roof documentation update: roof-fault-recovery.txt records new
+primary documentation and remaining receiver/reversal gaps. This advances
+only the documentation status; no OEMPRHT firmware or CANcapture added.
+Next graphical switch tables andPCMtype/receiver evidence. Folding AND
+unfolding andtheir interruption/recovery scopes remain independentlyopen.
+
+2026-10-06: control-normalized-contribution.txt advances traction/shared ECU
+8118 production:10034 direct cases,12 originalcaller segments,320 serialcycles,
+36 pairedCAN/320CAN211latch updates pass. Seven local producers modeled;
+physicalsignal/sender/actuation stillopen. Next684C/6818/6CC8/7020 provenance,
+72B4/72BC/gate writers; roofdocs/receiver independent. Allthreegoalsopen.
+Ghidra independently restored:1405 annotations/693 exports/11 hashes.
+Saved locally; no staging/commit/push.
+
+2026-10-06: tcu-release-thresholds.txt verifies45AA4 active/release overlay:
+5531 direct cases,10 retained calls,36 full selection replays. Faultclass6
+retainedactive can suppress transition creation; recovery replays unchanged.
+Allfourconfiguredthresholdproducers now modeled; upstream/taskorder remain
+open. Next independent traction59720/8118 androoftransmissiontype/receiver
+leads, then45BA0/815D andoptionalthresholdadjustments. Allthreegoalsopen.
+Ghidra independently restored:1386 annotations/686 exports/11 hashes.
+Saved locally; no staging/commit/push.
+
+2026-10-06: tcu-retained-thresholds.txt verifies46200 hysteresis/capture,
+admission and latched curve replacement:3906 direct cases,11 retained
+calls and24 full proposal/selection replays pass. Previous captured inputs
+control activation; source6 can publish with no descriptor replacement.
+Next45AA4, upstream inputs and task order; then advance independent
+traction/roof leads below. Allthree goals active/incomplete. Ghidra
+independent restoration verifies1367 annotations/677 exports/11 hashes.
+Saved locally; no staging/commit/push.
+
+2026-10-06 ongoing authorization: user requested "keep working till everything
+open is closed". This thread now has an active unbudgeted goal covering all
+three objectives below; the former competing thread remains paused. Continue
+autonomously, preserve evidence and archives, and do not equate missing remote
+controller/hardware evidence with completion. No staging/commit/push authority.
+Current work:traction input provenance and roof graphical/receiver leads. After the TCU
+threshold-producer milestone, advance the independent traction and roof leads
+so neither scope is silently displaced. Verified closure requires their
+separate completion criteria in traction-roof.txt; allthree remain open.
+
+2026-10-06: tcu-class-thresholds.txt verifies original47240 class overlays
+and rising-class operation tags:580 whole-body cases,125 curve builders,
+12 retained threshold/scan calls,24 endpoint scans and56 full proposal/
+selection replays pass.65535 is not an unconditional upper disable.
+Next46200/45AA4 admission, upstream class/source producers and task order;
+traction and roof retain distinct status/actions below. Broader60-case
+axis-history citation is saved in Ghidra. Independent restoration verifies
+1353 annotations,670 identical exports and11 project hashes; archive identity
+is in the manifests and latest save block. Saved locally; no staging/commit/push.
+
+2026-10-06 14:52 UTC: ownership handoff. Thread01a10e81-61f6-7013-a9d4-10f2f3acdb21
+has PAUSED its automatic goal and stands down from this checkout. Receiving
+thread01a111a7-d4c4-7711-a3fd-3000d21d4068 may take shared research/Ghidra
+ownership. Closed project/archive/independent restore revalidated; no save job
+pending. See session-handoff-reply.txt for actual saved state and pending work.
+This changes session ownership, not the incomplete research requirements.
+
 2026-10-06: persistence and continuation checkpoint
+
+2026-10-06: tcu-threshold-axis-history.txt verifies entry-source axis capture
+in4530C:60 calls,600 independent word lookups and60 proposal scans pass.
+Leaving source13/14 for0 can change the next call proposal1->4 at fixed
+measurement. Explicit upstream fixtures; task cadence remains unproved.
+Next natural9C7C/9B40/941E producers and full transition consequences.
+Traction/roof retain their separate status/actions below. Focused artifacts
+saved locally; no staging/commit/push. Concurrent curve-source work was
+detected and resolved by the14:54UTC idle/completed handoff. Broader60-case
+Ghidra citation integration is complete with the class-threshold checkpoint.
+See session-coordination.txt and session-handoff-reply.txt.
 
 Current scope: retain ECU/automatic-transmission integration, deep traction
 control logic/integration, and NC PRHT folding/unfolding CAN integration.
@@ -9,7 +1284,10 @@ Current added-goal status and next actions:
 - Traction: executed evidence now connects shared CAN arbitration through
   candidate throttle-angle conversion, command packing, serial transport and
   application reply handling, feedback override and full24910 priority policy.
-  Next59720/8118,72B4/72BC indirect writers,67AC/7242/7012/7016/A3A4
+  The six-step tcu-paired-input.txt bridge also executes publication viaCAN215
+  byte6 intoTCU809A and distinguishes later local command overrides.
+  Next684C/6818/6CC8/7020 provenance (59720 local group verified),
+  72B4/72BC indirect writers,67AC/7242/7012/7016/A3A4
   gate producers
   and cross-task publication order,
   nonzero2310 origin, stage/enable240xx,
@@ -18,12 +1296,89 @@ Current added-goal status and next actions:
   20A8 reset/57CD consumers,fulltask order and A720 history with binding limits.
   Retain CAN211/21A sender attribution, 7978 consumers, fuel paths and physical
   actuator confirmation as open requirements.
-- Roof: factory opening/closing sequence and window handshake are documented;
+- Roof: factory opening/closing, user interruption and selected fault recovery
+  are documented in roof-fault-recovery.txt; OEM receiver execution is missing.
+  Window handshake is documented;
   ECU/TCU speed, MT-neutral and AT-selector sender candidates are preserved.
   Next establish PCM transmission-type publication and matching OEM PRHT
   reception. No OEM CAN fold/unfold command is demonstrated. Pause/resume,
   reversal, communication timeout, motor synchronization and fault recovery
   remain separate open requirements; aftermarket evidence is not OEM proof.
+
+2026-10-06: tcu-curve-sources.txt verifies primary threshold-bank priority,
+2560 producer cases and2934 interpolation calls. Three saved-state replays
+keep bank7404C throughout fault/recovery; four retained calls prove axis
+selection precedes bank update (one-call lag). Dynamic copies checked in891
+cases. Next model nondefault46200/45AA4/47240 overrides and bank-control
+producers;49B08 is a separate, still-static monitor lead. Traction and roof
+retain their independent requirements/actions above. Saved locally, no staging,
+commit or push. Ghidra independently restored:1344 annotations,665 identical
+exports,11 project hashes. Identity is in the snapshot/restore manifests.
+
+2026-10-06: tcu-fault-selection.txt locates the fault-driven transition
+change in809C ->44FCE/9B3E ->4530C thresholds ->4508A.2520 axis cases and32
+saved-state counterfactual replays pass;320-call observed fault trace matches
+priorJSON exactly, with215 stage events. Restoring809C alone reverses the
+proposal/creation in both fault/recovery snapshots. Healthy proposal1 versus
+faultproposal4 yields accepted2/code1; recoveryproposal1 yields code6.
+Ghidra independently restored:1339 annotations,663 exports,11 project hashes.
+Next49B08/configured5DE90 threshold producers and curve/source provenance,
+nondefault source admission, task/transport order and overlap/composites.
+Traction/roof remain independently required with next steps in CHECKPOINT.txt.
+Saved locally; no staging/commit/push.
+
+2026-10-06: tcu-input-faults.txt verifies produced CAN215 group3D and
+CAN201 group3C faults through allthree TCU inputs:3364 direct cases and97
+diagnostic checkpoints pass.640 new retained cycles/16 active-ring paired
+ECU checkpoints compare fault and matched healthy control. Fault qualification
+at150 replaces code6 withcode1; recovery211 createscode6, retiring290.
+Healthy control retires162; prior320-cycle baseline remains identical.
+The duplicate-delivery harness lead is rejected and documented. Ghidra
+independently restored:1335 annotations,661 exports,11 project hashes.
+Next explain fault-driven reclassification through source/selection flags,
+then transport/task order and overlap/composite transitions. Traction and
+roof retain independent next steps above. Saved locally; no staging/commit/push.
+
+2026-10-06: tcu-paired-input.txt verifies CAN215 byte6 through both original
+transition-input producers:18,216 direct cases,640 retained cycles and14
+active-ring paired ECU checkpoints pass. Six additional traction bridge
+steps connect shared CAN arbitration to CAN215/TCU809A; later local command
+overrides can change output while CAN215 remains unchanged. Primary changes
+reset815A but do not cancel captured phase retention in these profiles.
+Next92D5bit7/group3D fault production, both-input recovery and actual task
+order. Allthree research goals remain open; independent traction/roof next
+actions remain in CHECKPOINT.txt. Ghidra restored:1327 annotations,661
+matching exports and11 project hashes. Saved locally; no staging/commit/push.
+
+Latest comparison input: tcu-comparison-input.txt executesCAN201/CAN4EC
+arbitration17E74 and whole230F0 ->809C/history/retention.13,888 direct cases
+pass;640 new retained cycles/642 source+producer checks and18 paired ECU
+checkpoints pass. CAN4EC increase releases held liveinput at110 whilephase1
+remainsactive. Prior320-cycle default trace matches savedJSON exactly.
+Ghidra independently restored:1,304 annotations,654 exports,11 project hashes.
+Next: paired caller22F3C ->22F46/23406 ->809A/933E,880C/92D5bit7,
+CAN4EC sender/transport admission and actual task order. Retain overlap and
+composite transitions; traction/roof status and next actions remain above.
+
+Latest qualification lifecycle: tcu-qualification-lifecycle.txt connects
+sampled selectors through22416 class encoding to32348 reset and original
+11014 quarter-wheel timers8159/A/B.1,715 direct cases,960 retained manager
+cycles,963 limit/tail checks and21 paired ECU snapshots pass. CAN215 changes
+939E at100 while captured80F8 holds until retirement162 and publication163.
+Ghidra independently restored:1,279 annotations,648 exports,11 project hashes.
+Next concrete input lead:230F0 ->23380 ->809C store23122 (static only),
+89B0/92D5 provenance and full task order; retain overlapping/composite work.
+Traction and roof retain their independent evidence and next actions above.
+
+Latest qualification limit: tcu-qualification-limit.txt verifies whole23544,
+fall-through2378A, correction/capture/slew and CAN215-derived939E.6,860 direct
+cases plus4 paired creation/order probes pass. Ghidra independently restored:
+1,277 annotations,648 identical exports and11 project hashes. Produced7984/12736 limits lead
+to code6/code0, respectively, under the documented upstream reset fixture.
+Original1EAC6 segment selects with previous939E, then publishes new939E.
+Next:80E8/80EE/809C and9315 gate/task provenance,8159/A/B timer producers,
+retained overlap/composite transitions with actual limit production. Traction
+and roof retain the distinct status/actions above; all three goals remain open.
 
 Latest transition progress: tcu-transition-progress.txt executes the original
 48BC0 ->32140 startup order, complete32348 progress production and4C880
@@ -1049,6 +2404,14 @@ and calibrations must be rechecked against the AT ROM before transferring
 conclusions. Its AGENTS.md applies if making changes in that repository.
 
 Latest save verification:
+  Class thresholds: python research/ecu-at-can/verify_tcu_class_thresholds.py
+  passes580 whole47240 cases,125 arbitrary-word curve builders,12 retained
+  threshold/scan calls,24 endpoint scans and56 full proposal/selection replays.
+  Prior class0 fault/recovery thresholds and creation events match savedJSON.
+  Earlier60-call axis-history evidence is now incorporated in Ghidra.
+  Next concrete ECU/AT action:46200 ->46580/46372/463CC/46402 admission
+  and descriptor overrides, then45AA4. Distinct traction/roof actions stay
+  at the top of this checkpoint; allthree objectives remain incomplete.
   Transition progress passed24785 direct cases,640 producer/646 classifier
   checks, two completed replacement lifecycles and12 paired ECU snapshots.
   Older map/phase-policy JSON stays byte-identical; classification regression
@@ -1139,9 +2502,9 @@ Latest save verification:
   CAN201 fault-policy verifier passed146 group mappings,512 paired summary
   cases and14 loss/recovery lifecycles. Import-safe round-trip verifier output
   matches its preceding saved JSON exactly; no shared interpreter change.
-  Ghidra archive d5ac1fe64ded79c5230ab89ec24b4ffe68868b58af2aaf4990f0a5e49a0224d7,
-  10,845,055 bytes;11 project hashes,1247 annotations(570 ECU/677 TCU),
-  643 identical restored exports(641 functions+2 readbacks). Both headless
+  Ghidra archive 0589a5f7db1a89a26cd0c026e4149aec7c28557bff85036f19844ded6a1d3936,
+  10,877,642 bytes;11 project hashes,1405 annotations(591 ECU/814 TCU),
+  693 identical restored exports(691 functions+2 readbacks). Both headless
   sessions ended and restore-verification.json was refreshed.
   New integer arithmetic verifier passed1200 ISA cases,576 unsigned32,
   65536 signed16/96 and41 signed-sign divisions. TCU speed verifier passed

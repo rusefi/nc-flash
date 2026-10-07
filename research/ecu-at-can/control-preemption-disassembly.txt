@@ -1,0 +1,225 @@
+Original ECU LFFEEE-stock.bin SHA256 7604cb21aefe7b7484da236aaead82cebaf94df2a6e1915f5ea8a087dae5cb08.
+GNUobjdump2.42. Staticdisassembly only; literals may decode as instructions.
+Setup/packageidentity/apt download/dpkg-deb extraction: tcu-pulse-input.txt.
+Command: env LD_LIBRARY_PATH=/tmp/nc-ecu-analysis/extracted/usr/lib/x86_64-linux-gnu python research/ecu-at-can/disassemble.py --objdump /tmp/nc-ecu-analysis/extracted/usr/bin/sh4-linux-gnu-objdump at dis START END
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00003d10 <.data+0x3d10>:
+    3d10:	4f 22       	sts.l	pr,@-r15
+    3d12:	6c 43       	mov	r4,r12
+    3d14:	d3 13       	mov.l	0x3d64,r3	! 40d0
+    3d16:	60 53       	mov	r5,r0
+    3d18:	d1 13       	mov.l	0x3d68,r1	! 405c
+    3d1a:	6d 5f       	exts.w	r5,r13
+    3d1c:	4d 08       	shll2	r13
+    3d1e:	4d 08       	shll2	r13
+    3d20:	3d 3c       	add	r3,r13
+    3d22:	5e d1       	mov.l	@(4,r13),r14
+    3d24:	81 c2       	mov.w	r0,@(4,r12)
+    3d26:	1c d6       	mov.l	r13,@(24,r12)
+    3d28:	1c e5       	mov.l	r14,@(20,r12)
+    3d2a:	62 12       	mov.l	@r1,r2
+    3d2c:	22 28       	tst	r2,r2
+    3d2e:	89 02       	bt	0x3d36
+    3d30:	d2 0e       	mov.l	0x3d6c,r2	! 36f0
+    3d32:	42 0b       	jsr	@r2
+    3d34:	00 09       	nop	
+    3d36:	e3 00       	mov	#0,r3
+    3d38:	1c 32       	mov.l	r3,@(8,r12)
+    3d3a:	62 e0       	mov.b	@r14,r2
+    3d3c:	22 28       	tst	r2,r2
+    3d3e:	8b 08       	bf	0x3d52
+    3d40:	84 d2       	mov.b	@(2,r13),r0
+    3d42:	80 e1       	mov.b	r0,@(1,r14)
+    3d44:	53 c3       	mov.l	@(12,r12),r3
+    3d46:	1e 31       	mov.l	r3,@(4,r14)
+    3d48:	54 d2       	mov.l	@(8,r13),r4
+    3d4a:	65 33       	mov	r3,r5
+    3d4c:	d2 08       	mov.l	0x3d70,r2	! 3f34
+    3d4e:	42 2b       	jmp	@r2
+    3d50:	4f 26       	lds.l	@r15+,pr
+    3d52:	d3 08       	mov.l	0x3d74,r3	! 423c
+    3d54:	61 d0       	mov.b	@r13,r1
+    3d56:	32 3c       	add	r3,r2
+    3d58:	54 c3       	mov.l	@(12,r12),r4
+    3d5a:	61 1c       	extu.b	r1,r1
+    3d5c:	32 18       	sub	r1,r2
+    3d5e:	60 22       	mov.l	@r2,r0
+    3d60:	40 2b       	jmp	@r0
+    3d62:	4f 26       	lds.l	@r15+,pr
+    3d64:	00 00       	.word 0x0000
+    3d66:	40 d0       	.word 0x40d0
+    3d68:	00 00       	.word 0x0000
+    3d6a:	40 5c       	.word 0x405c
+    3d6c:	00 00       	.word 0x0000
+    3d6e:	36 f0       	cmp/eq	r15,r6
+    3d70:	00 00       	.word 0x0000
+    3d72:	3f 34       	div1	r3,r15
+    3d74:	00 00       	.word 0x0000
+    3d76:	42 3c       	.word 0x423c
+
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000036f0 <.data+0x36f0>:
+    36f0:	4f 22       	sts.l	pr,@-r15
+    36f2:	d3 29       	mov.l	0x3798,r3	! ffff12b8
+    36f4:	92 4b       	mov.w	0x378e,r2	! 4000
+    36f6:	60 32       	mov.l	@r3,r0
+    36f8:	20 2b       	or	r2,r0
+    36fa:	23 02       	mov.l	r0,@r3
+    36fc:	d1 2d       	mov.l	0x37b4,r1	! 405c
+    36fe:	63 12       	mov.l	@r1,r3
+    3700:	43 0b       	jsr	@r3
+    3702:	00 09       	nop	
+    3704:	d3 24       	mov.l	0x3798,r3	! ffff12b8
+    3706:	92 43       	mov.w	0x3790,r2	! bfff
+    3708:	60 32       	mov.l	@r3,r0
+    370a:	20 29       	and	r2,r0
+    370c:	4f 26       	lds.l	@r15+,pr
+    370e:	00 0b       	rts	
+    3710:	23 02       	mov.l	r0,@r3
+
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+000038b4 <.data+0x38b4>:
+    38b4:	d2 02       	mov.l	0x38c0,r2	! ffff12b4
+    38b6:	63 21       	mov.w	@r2,r3
+    38b8:	24 31       	mov.w	r3,@r4
+    38ba:	00 0b       	rts	
+    38bc:	e0 00       	mov	#0,r0
+    38be:	00 00       	.word 0x0000
+    38c0:	ff ff       	.word 0xffff
+    38c2:	12 b4       	mov.l	r11,@(16,r2)
+
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000e7d4 <.data+0xe7d4>:
+    e7d4:	d4 01       	mov.l	0xe7dc,r4	! ffff45cc
+    e7d6:	d3 02       	mov.l	0xe7e0,r3	! 38b4
+    e7d8:	43 2b       	jmp	@r3
+    e7da:	00 09       	nop	
+    e7dc:	ff ff       	.word 0xffff
+    e7de:	45 cc       	.word 0x45cc
+    e7e0:	00 00       	.word 0x0000
+    e7e2:	38 b4       	div1	r11,r8
+
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00003eb4 <.data+0x3eb4>:
+    3eb4:	6f 43       	mov	r4,r15
+    3eb6:	4f 26       	lds.l	@r15+,pr
+    3eb8:	67 f6       	mov.l	@r15+,r7
+    3eba:	66 f6       	mov.l	@r15+,r6
+    3ebc:	65 f6       	mov.l	@r15+,r5
+    3ebe:	64 f6       	mov.l	@r15+,r4
+    3ec0:	63 f6       	mov.l	@r15+,r3
+    3ec2:	62 f6       	mov.l	@r15+,r2
+    3ec4:	61 f6       	mov.l	@r15+,r1
+    3ec6:	4f 56       	lds.l	@r15+,fpul
+    3ec8:	fb f9       	fmov	@r15+,fr11
+    3eca:	4f 66       	lds.l	@r15+,fpscr
+    3ecc:	fa f9       	fmov	@r15+,fr10
+    3ece:	f9 f9       	fmov	@r15+,fr9
+    3ed0:	f8 f9       	fmov	@r15+,fr8
+    3ed2:	f7 f9       	fmov	@r15+,fr7
+    3ed4:	f6 f9       	fmov	@r15+,fr6
+    3ed6:	f5 f9       	fmov	@r15+,fr5
+    3ed8:	f4 f9       	fmov	@r15+,fr4
+    3eda:	f3 f9       	fmov	@r15+,fr3
+    3edc:	f2 f9       	fmov	@r15+,fr2
+    3ede:	f1 f9       	fmov	@r15+,fr1
+    3ee0:	f0 f9       	fmov	@r15+,fr0
+    3ee2:	ff f9       	fmov	@r15+,fr15
+    3ee4:	fe f9       	fmov	@r15+,fr14
+    3ee6:	fd f9       	fmov	@r15+,fr13
+    3ee8:	fc f9       	fmov	@r15+,fr12
+    3eea:	4f 16       	lds.l	@r15+,macl
+    3eec:	6e f6       	mov.l	@r15+,r14
+    3eee:	4f 06       	lds.l	@r15+,mach
+    3ef0:	6d f6       	mov.l	@r15+,r13
+    3ef2:	4f 17       	ldc.l	@r15+,gbr
+    3ef4:	6c f6       	mov.l	@r15+,r12
+    3ef6:	6b f6       	mov.l	@r15+,r11
+    3ef8:	6a f6       	mov.l	@r15+,r10
+    3efa:	69 f6       	mov.l	@r15+,r9
+    3efc:	68 f6       	mov.l	@r15+,r8
+    3efe:	60 f6       	mov.l	@r15+,r0
+    3f00:	00 2b       	rte	
+    3f02:	00 09       	nop	
+
+
+
+examples/LFFEEE-stock.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000dc80 <.data+0xdc80>:
+    dc80:	4f 22       	sts.l	pr,@-r15
+    dc82:	7f f8       	add	#-8,r15
+    dc84:	da 1a       	mov.l	0xdcf0,r10	! ffff45d9
+    dc86:	db 1b       	mov.l	0xdcf4,r11	! ffff45b8
+    dc88:	d8 15       	mov.l	0xdce0,r8	! 22e4
+    dc8a:	64 b3       	mov	r11,r4
+    dc8c:	9e 22       	mov.w	0xdcd4,r14	! e0
+    dc8e:	63 b3       	mov	r11,r3
+    dc90:	1f 31       	mov.l	r3,@(4,r15)
+    dc92:	69 33       	mov	r3,r9
+    dc94:	79 04       	add	#4,r9
+    dc96:	65 e3       	mov	r14,r5
+    dc98:	48 0b       	jsr	@r8
+    dc9a:	64 f3       	mov	r15,r4
+    dc9c:	d3 11       	mov.l	0xdce4,r3	! f6a0
+    dc9e:	65 b3       	mov	r11,r5
+    dca0:	43 0b       	jsr	@r3
+    dca2:	e4 03       	mov	#3,r4
+    dca4:	d3 10       	mov.l	0xdce8,r3	! 22f4
+    dca6:	6c 03       	mov	r0,r12
+    dca8:	84 a2       	mov.b	@(2,r10),r0
+    dcaa:	6d 03       	mov	r0,r13
+    dcac:	43 0b       	jsr	@r3
+    dcae:	64 f2       	mov.l	@r15,r4
+    dcb0:	2c c8       	tst	r12,r12
+    dcb2:	8f 04       	bf.s	0xdcbe
+    dcb4:	00 09       	nop	
+    dcb6:	53 f1       	mov.l	@(4,r15),r3
+    dcb8:	62 32       	mov.l	@r3,r2
+    dcba:	42 0b       	jsr	@r2
+    dcbc:	64 93       	mov	r9,r4
+    dcbe:	6d dc       	extu.b	r13,r13
+    dcc0:	2d d8       	tst	r13,r13
+    dcc2:	8f e8       	bf.s	0xdc96
+    dcc4:	00 09       	nop	
+    dcc6:	d2 09       	mov.l	0xdcec,r2	! 3cb8
+    dcc8:	42 0b       	jsr	@r2
+    dcca:	00 09       	nop	
+    dccc:	7f 08       	add	#8,r15
+    dcce:	4f 26       	lds.l	@r15+,pr
+    dcd0:	00 0b       	rts	
+    dcd2:	00 09       	nop	
+

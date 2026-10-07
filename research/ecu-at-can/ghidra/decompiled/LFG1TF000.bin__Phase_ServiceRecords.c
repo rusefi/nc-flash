@@ -2,9 +2,9 @@
 
 /* WARNING: Removing unreachable block (ram,0x00031b94) */
 /* WARNING: Removing unreachable block (ram,0x00031bca) */
-/* Event2 phase service; code7/8/9 operation0 and code0/1 initialized-group lifecycles verified.
-   Completion notifications can drain all groups and retire ring through nested event3; return-1
-   preserves resulting dispatcher state1. See tcu-phase-retirement.txt. */
+/* Event2 phase service; completion can drain groups/retire ring through nested event3. Original
+   native code0 targetqualification104, groups02/25 ack andretirement108/freeheap; newnaturalcode2
+   at113 prevents durableidle. See tcu-phase-retirement.txt andtcu-recovery-reference.txt. */
 
 undefined4 Phase_ServiceRecords(void)
 
